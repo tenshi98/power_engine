@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>jQuery Fengyuan Chen Countdown Plugin Demos</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="prettify.css">
+        <link rel="stylesheet" href="docs.css">
+    </head>
+<body>
+<!-- content -->
+        <div class="container">
+            <h1 class="page-header" id="getting-started">jQuery Fengyuan Chen Countdown Plugin Demos</h1>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+            <!-- Installation --><!-- Initialize with "countdown" attribute -->
+          <h2 class="page-header">Usage</h2>
+            <h3>Initialize with <code>countdown</code> attribute</h3>
+            <h4>Basic</h4>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p countdown&gt;Dec 31 2015 23:59:59&lt;/p&gt;</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p countdown>Dec 31 2015 23:59:59</p>
+            </div>
+
+            <h4>Add options with <code>data-*</code> attribute</h4>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p countdown data-fast=&quot;true&quot;&gt;Dec 31 2015 23:59:59&lt;/p&gt;</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p countdown data-fast="true">Dec 31 2015 23:59:59</p>
+            </div>
+
+            <!-- Initialize with "$.fn.countdown" method -->
+            <h3>Initialize with <code>$.fn.countdown</code> method</h3>
+            <h4>Basic</h4>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p class=&quot;countdown&quot;&gt;Dec 31 2015 23:59:59&lt;/p&gt;</pre>
+            <p>Javascript:</p>
+            <pre class="prettyprint">$(&quot;.countdown&quot;).countdown();</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p class="countdown">Dec 31 2015 23:59:59</p>
+            </div>
+
+            <h4>Add options</h4>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p id=&quot;countdown-add-options&quot;&gt;&lt;/p&gt;</pre>
+            <p>Javascript:</p>
+            <pre class="prettyprint">$(&quot;#countdown-add-options&quot;).countdown({
+    date: new Date(2015, 11, 31)
+});</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p id="countdown-add-options"></p>
+            </div>
+
+            <!-- Options --><!-- Methods -->
+          <h2 class="page-header">Methods</h2>
+            <h3>Methods</h3>
+            <ul>
+                <li><strong>start</strong> - <em>Start the countdown</em></li>
+                <li><strong>stop</strong> - <em>Stop the countdown</em></li>
+                <li><strong>end</strong> - <em>End the countdown</em></li>
+                <li><strong>destroy</strong> - <em>Destroy the countdown</em></li>
+            </ul>
+            <h3>Usage</h3>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p id=&quot;countdown-methods&quot;&gt;Jan 1 2015 00:00:00&lt;/p&gt;
+&lt;button id=&quot;countdown-start&quot;&gt;Start&lt;/button&gt;
+&lt;button id=&quot;countdown-stop&quot;&gt;Stop&lt;/button&gt;
+&lt;button id=&quot;countdown-end&quot; class=&quot;btn btn-success&quot;&gt;End&lt;/button&gt;
+&lt;button id=&quot;countdown-destroy&quot; class=&quot;btn btn-danger&quot;&gt;Destroy&lt;/button&gt;</pre>
+            <p>JavaScript:</p>
+            <pre class="prettyprint">var $countdownMethods = $(&quot;#countdown-methods&quot;);
+
+$countdownMethods.countdown({
+    autoStart: false
+});
+
+$(&quot;#countdown-start&quot;).click(function() {
+    $countdownMethods.countdown(&quot;start&quot;);
+});
+
+$(&quot;#countdown-stop&quot;).click(function() {
+    $countdownMethods.countdown(&quot;stop&quot;);
+});
+
+$(&quot;#countdown-end&quot;).click(function() {
+    $countdownMethods.countdown(&quot;end&quot;);
+});
+
+$(&quot;#countdown-destroy&quot;).click(function() {
+    $countdownMethods.countdown(&quot;destroy&quot;);
+});</pre>
+            <p>Demo:</p>
+            <div>
+                <p id="countdown-methods" class="alert alert-info">Jan 1 2015 00:00:00</p>
+                <button id="countdown-start" class="btn btn-success">Start</button>
+                <button id="countdown-stop" class="btn btn-danger">Stop</button>
+                <button id="countdown-end" class="btn btn-success">End</button>
+                <button id="countdown-destroy" class="btn btn-danger">Destroy</button>
+            </div>
+
+            <!-- Customize -->
+            <h2 class="page-header">Customize</h2>
+
+            <p>Customize content, layout, style by add <code>data-*</code> attribute to the children of countdown container. For example:</p>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;div class=&quot;countdown&quot; countdown data-date=&quot;Jan 1 2015 00:00:00&quot;&gt;
+    &lt;span data-heading&gt;New Year Countdown&lt;/span&gt;
+    &lt;span data-days&gt;0&lt;/span&gt;days
+    &lt;span data-hours&gt;0&lt;/span&gt;hours
+    &lt;span data-minutes&gt;0&lt;/span&gt;minutes
+    &lt;span data-seconds&gt;0&lt;/span&gt;seconds
+&lt;/div&gt;</pre>
+            <p>Demo:</p>
+            <div class="countdown" countdown data-date="Jan 1 2015 00:00:00">
+                <span data-heading>New Year Countdown</span>
+                <span data-days>0</span>days
+                <span data-hours>0</span>hours
+                <span data-minutes>0</span>minutes
+                <span data-seconds>0</span>seconds
+            </div>
+
+            <!-- More Demos -->
+            <h2 class="page-header">More demos</h2>
+
+            <h3>Customize text</h3>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p countdown data-text=&quot;Christmas Day Countdown: %s Days / %s Hours / %s Minutes / %s Seconds&quot;&gt;Dec 25 2015 00:00:00&lt;/p&gt;</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p countdown data-text="Christmas Day Countdown: %s Days / %s Hours / %s Minutes / %s Seconds">Dec 25 2015 00:00:00</p>
+            </div>
+
+            <h3>I18n<small> - zh-CN</small></h3>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p countdown data-date=&quot;Dec 25 2015&quot; data-text=&quot;圣诞节倒计时：%s 天 %s 时 %s 分 %s 秒&quot;&gt;&lt;/p&gt;</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p countdown data-date="Dec 25 2015" data-text="圣诞节倒计时：%s 天 %s 时 %s 分 %s 秒"></p>
+            </div>
+
+            <h3>Change view with <code>end</code> function</h3>
+            <p>HTML:</p>
+            <pre class="prettyprint">&lt;p id=&quot;countdown-option-end&quot;&gt;&lt;/p&gt;</pre>
+            <p>JavaScript:</p>
+            <pre class="prettyprint">var $countdownOptionEnd = $(&quot;#countdown-option-end&quot;);
+
+$countdownOptionEnd.countdown({
+    date: (new Date()).getTime() + 60 * 1000, // 1 minute later
+    fast: true,
+    end: function() {
+        $countdownOptionEnd.text("Countdown end!");
+    }
+});</pre>
+            <p>Demo:</p>
+            <div class="alert alert-info">
+                <p id="countdown-option-end"></p>
+            </div>
+        </div><!-- content end -->
+
+        
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="prettify.js"></script>
+        <script src="main.js"></script>
+        <script src="dist/countdown.min.js"></script>
+        <script>
+            $(function() {
+                $(".countdown").countdown();
+
+                $("#countdown-add-options").countdown({
+                    date: new Date(2015, 11, 31)
+                });
+
+                // Methods
+                var $countdownMethods = $("#countdown-methods");
+
+                $countdownMethods.countdown({
+                    autoStart: false
+                });
+
+                $("#countdown-start").click(function() {
+                    $countdownMethods.countdown("start");
+                });
+
+                $("#countdown-stop").click(function() {
+                    $countdownMethods.countdown("stop");
+                });
+
+                $("#countdown-end").click(function() {
+                    $countdownMethods.countdown("end");
+                });
+
+                $("#countdown-destroy").click(function() {
+                    $countdownMethods.countdown("destroy");
+                });
+
+                // Options: end
+                var $countdownOptionEnd = $("#countdown-option-end");
+
+                $countdownOptionEnd.countdown({
+                    date: (new Date()).getTime() + 60 * 1000, // 1 minute later
+                    fast: true,
+                    end: function() {
+                        $countdownOptionEnd.text("Countdown end!");
+                    }
+                });
+            });
+        </script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
