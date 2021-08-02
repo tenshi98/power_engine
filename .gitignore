@@ -1,9 +1,7 @@
-
-Legacy/*
-LIBS_files/*
-sistema_intranet*
-sistema_web*
-web_apk/*
-web_app/*
+### Archivos Temporales
 desktop.ini
-ShedkoFolderico4*.ico
+Thumbs.db
+*.ico
+.gitignore
+### Archivos Especificos
+

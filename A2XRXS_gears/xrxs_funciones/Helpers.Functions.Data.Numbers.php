@@ -7,6 +7,12 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
+/*                                        Control de numero de funciones                                           */
+/*                                                                                                                 */
+/*******************************************************************************************************************/
+$n_funct_datanumbers = 0;
+/*******************************************************************************************************************/
+/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -29,22 +35,30 @@ if( ! defined('XMBCXRXSKGC')) {
 * Integer     $n_decimales   Numero de decimales deseados
 * @return     String
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function Cantidades($valor, $n_decimales){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)&&is_numeric($n_decimales)){ 
-		//Verifica si el numero recibido es un entero
-		if (validaEntero($n_decimales)){ 
-			//valido los valores en 0
-			if($valor!=0){
-				return number_format($valor,$n_decimales,',','.');
-			}else{
-				return 0;
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)&&validarNumero($n_decimales)){ 
+			//Verifica si el numero recibido es un entero
+			if (validaEntero($n_decimales)){ 
+				//valido los valores en 0
+				if($valor!=0){
+					return number_format($valor,$n_decimales,',','.');
+				}else{
+					return 0;
+				}
+			} else { 
+				return 'El dato ingresado no es un numero entero';
 			}
 		} else { 
-			return 'El dato ingresado no es un numero entero';
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,17 +79,25 @@ function Cantidades($valor, $n_decimales){
 * Integer     $n_ceros       Numero de ceros a la izquierda del valor
 * @return     String
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function n_doc($valor, $n_ceros){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)&&is_numeric($n_ceros)){ 
-		//Verifica si el numero recibido es un entero
-		if (validaEntero($valor)&&validaEntero($n_ceros)){ 
-			return str_pad($valor, $n_ceros, "0", STR_PAD_LEFT);
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)&&validarNumero($n_ceros)){ 
+			//Verifica si el numero recibido es un entero
+			if (validaEntero($valor)&&validaEntero($n_ceros)){ 
+				return str_pad($valor, $n_ceros, "0", STR_PAD_LEFT);
+			} else { 
+				return 'El dato ingresado no es un numero entero';
+			}
 		} else { 
-			return 'El dato ingresado no es un numero entero';
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,25 +111,32 @@ function n_doc($valor, $n_ceros){
 *===========================    Modo de uso  ===========================
 * 	
 * 	//se formatea numero
-* 	Valores(1500.85,2);
+* 	Valores(1500.85565,2);
 * 
 *===========================    Parametros   ===========================
 * Decimal     $valor         Numero a formatear
 * Integer     $n_decimales   Numero de decimales deseados
 * @return     String
 ************************************************************************/ 
-//Agrega un separador de valoresjunto con dos decimales
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function Valores($valor, $n_decimales){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)&&is_numeric($n_decimales)){ 
-		//Verifica si el numero recibido es un entero
-		if (validaEntero($n_decimales)){ 
-			return '$ '.number_format($valor,$n_decimales,',','.');
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)&&validarNumero($n_decimales)){ 
+			//Verifica si el numero recibido es un entero
+			if (validaEntero($n_decimales)){ 
+				return '$ '.number_format($valor,$n_decimales,',','.');
+			} else { 
+				return 'El dato ingresado no es un numero entero';
+			}
 		} else { 
-			return 'El dato ingresado no es un numero entero';
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '$ 0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,18 +153,62 @@ function Valores($valor, $n_decimales){
 * 
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
-* @return  String
+* @return  Integer
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function valores_enteros($valor){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)){ 
-		if($valor==0){
-			return 0;
-		}else{
-			return floatval(number_format($valor, 0, '.', ''));
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)){ 
+			if($valor==0){
+				return 0;
+			}else{
+				return floatval(number_format($valor, 0, '.', ''));
+			}
+		} else { 
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Devolver enteros para comparar valores
+* 
+*===========================     Detalles    ===========================
+* Transforma el valor ingresado a un entero, aproximandolo al entero 
+* mas cercano
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se formatea numero
+* 	valores_comparables(1500.85);
+* 
+*===========================    Parametros   ===========================
+* Decimal  $valor   Numero a comparar
+* @return  Integer
+************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
+function valores_comparables($valor){	
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)){ 
+			if($valor==0){
+				return 0;
+			}else{
+				return ceil($valor);
+			}
+		} else { 
+			return 'El dato ingresado no es un numero';
+		}
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,16 +228,24 @@ function valores_enteros($valor){
 * Decimal  $valor   Numero a formatear
 * @return  Integer
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function valores_truncados($valor){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)){ 
-		if($valor==0){
-			return 0;
-		}else{
-			return floor($valor);
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)){ 
+			if($valor==0){
+				return 0;
+			}else{
+				return floor($valor);
+			}
+		} else { 
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,11 +253,11 @@ function valores_truncados($valor){
 * Devuelve el valor con los decimales reales que tiene
 * 
 *===========================     Detalles    ===========================
-* * Formatea el valor entregado de forma variable, esto quiere decir 
+* Formatea el valor entregado de forma variable, esto quiere decir 
 * que solo mostrara la cantidad de decimales reales que tenga un 
 * valor decimal, si solo tiene 3 solo mostrara 3, si solo tiene 1 
 * solo mostrara 1, no rellena los decimales necesarios con 0, en el 
-* caso de ser un decimal infinito periodico, sno limita la cantidad 
+* caso de ser un decimal infinito periodico, sino limita la cantidad 
 * de decimales (tener cuidado con este punto, si no se tiene 
 * seguridad respecto a este punto, utilizar la version alternativa)
 *===========================    Modo de uso  ===========================
@@ -188,22 +269,30 @@ function valores_truncados($valor){
 * Decimal  $valor   Numero a formatear
 * @return  Decimal
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function Cantidades_decimales_justos($valor){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)){ 
-		if($valor==0){
-			return 0;
-		}else{
-			//valido si es un numero entero para eliminar el punto despues del valor
-			if (ctype_digit($valor)) {
-				return floatval(number_format($valor, 0, '.', ''));
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)){ 
+			if($valor==0){
+				return 0;
 			}else{
-				$dec = strlen($valor) - strrpos($valor, '.') - 1;
-				return floatval(number_format($valor, $dec, '.', ''));
-			}	
+				//valido si es un numero entero para eliminar el punto despues del valor
+				if (ctype_digit($valor)) {
+					return floatval(number_format($valor, 0, '.', ''));
+				}else{
+					$dec = strlen($valor) - strrpos($valor, '.') - 1;
+					return floatval(number_format($valor, $dec, '.', ''));
+				}	
+			}
+		} else { 
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,22 +315,29 @@ function Cantidades_decimales_justos($valor){
 * Decimal  $valor   Numero a formatear
 * @return  Decimal
 ************************************************************************/ 
-//Agrega un separador de valores
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function Cantidades_decimales_justos_alt($valor){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)){ 
-		if($valor==0){
-			return 0;
-		}else{
-			//valido si es un numero entero para eliminar el punto despues del valor
-			if (ctype_digit($valor)) {
-				return floatval(number_format($valor, 0, '.', ''));
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)){ 
+			if($valor==0){
+				return 0;
 			}else{
-				return rtrim(number_format($valor,6,'.',','), ',0');
-			}	
+				//valido si es un numero entero para eliminar el punto despues del valor
+				if (ctype_digit($valor)) {
+					return floatval(number_format($valor, 0, '.', ''));
+				}else{
+					return rtrim(number_format($valor,6,'.',','), ',0');
+				}	
+			}
+		} else { 
+			return 'El dato ingresado no es un numero';
 		}
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -259,12 +355,15 @@ function Cantidades_decimales_justos_alt($valor){
 * Decimal   $valor   Numero a formatear
 * @return   Decimal
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function cantidades_excel($valor){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)){ 
+	//Se verifica que se recibe algo
+	if($valor!=''){
 		return str_replace('.', ',', $valor);
-	} else { 
-		return 'El dato ingresado no es un numero';
+	}else{
+		return '0';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,12 +381,24 @@ function cantidades_excel($valor){
 * Decimal   $valor   Numero a formatear
 * @return   Decimal
 ************************************************************************/ 
+//control numero funciones
+$n_funct_datanumbers++;
+//Funcion
 function cantidades_google($valor){	
-	//se verifica si es un numero lo que se recibe
-	if (is_numeric($valor)){ 
-		 return str_replace(',', '.', $valor);
-	} else { 
-		return 'El dato ingresado no es un numero';
+	//Se verifica que se recibe algo
+	if($valor!=''){
+		//se verifica si es un numero lo que se recibe
+		if (validarNumero($valor)){ 
+			if($valor==0){
+				return 0;
+			}else{
+				return str_replace(',', '.', $valor);	
+			}
+		} else { 
+			return 'El dato ingresado no es un numero';
+		}
+	}else{
+		return '0';
 	}
 }
 

@@ -10,6 +10,10 @@ if( ! defined('XMBCXRXSKGC')) {
 /*******************************************************************************************************************/
 // obtengo puntero de conexion con la db
 $dbConn = conectar();
+
+//Se elimina la restriccion del sql 5.7
+mysqli_query($dbConn, "SET SESSION sql_mode = ''");
+
 /***************************************************************/
 //Se revisa siel usuario cerro voluntariamente la sesion
 if ( !empty($_GET['salir']) ) {

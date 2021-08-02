@@ -2,95 +2,113 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>elFinder</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+		<title>elFinder 2.1.x source version with PHP connector</title>
 
 		<!-- Require JS (REQUIRED) -->
 		<!-- Rename "main.default.js" to "main.js" and edit it if you need configure elFInder options or any things -->
-		<script data-main="./main.default.js" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.min.js"></script>
+		<?php
+		$Url_conector  = $_GET['conector'].'.php';       //conector con la configuracion
+		$Url_conector .= '?emp_path='.$_GET['emp_path']; //carpeta base de la plataforma (DB_SITE_MAIN_PATH)
+		$Url_conector .= '&id_emp='.$_GET['id_emp'];     //comodin indicar la carpeta dentro de la carpeta maestra
+		$Url_conector .= '&prm='.$_GET['prm'];           //Nivel del permiso
+		//$Url_conector .= '';
+		//$Url_conector .= '';
+		?>
+		<script data-main="./main.default.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 		<script>
 			define('elFinderConfig', {
 				// elFinder options (REQUIRED)
 				// Documentation for client options:
 				// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
 				defaultOpts : {
-					url : 'php/<?php echo $_GET['conector']; ?>.php?emp_path=<?php echo $_GET['emp_path']; ?>&id_emp=<?php echo $_GET['id_emp']; ?>&prm=<?php echo $_GET['prm']; ?>' // connector URL (REQUIRED)
-					,cssAutoLoad  : [
-						'./themes/Material/css/theme-gray.css'
-					]
-					,lang : 'es'
-					,height: '650'
-					,defaultView : 'list'
-					<?php if($_GET['type']==1){ ?>
-					,uiOptions : {
-						// toolbar configuration
-						toolbar : [
-							['back', 'forward'],
-							['reload'],
-							['open', 'download', 'getfile'],
-							['info'],
-							['quicklook'],
-							['search']
-						],
-					}
-					,contextmenu : {
-						// navbarfolder menu
-						navbar : ['open', 'info'],
-						// current directory menu
-						cwd    : ['reload', 'back', '|', 'info'],
-						// current directory file menu
-						files  : [
-							'open', 'quicklook', '|', 'download', '|', 'info'
-						]
-					}
-					<?php }elseif($_GET['type']==2){ ?>
-					,uiOptions : {
-						// toolbar configuration
-						toolbar : [
-							['back', 'forward'],
-							['reload'],
-							['home', 'up'],
-							['mkdir', 'mkfile', 'upload'],
-							['open', 'download', 'getfile'],
-							['info'],
-							['quicklook'],
-							['copy', 'cut', 'paste'],
-							['rm'],
-							['duplicate', 'rename', 'edit', 'resize'],
-							['extract', 'archive'],
-							['search'],
-							['view']
-						],
-					}	
-					,contextmenu : {
-						// navbarfolder menu
-						navbar : ['open', '|', 'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|', 'info'],
+					url : 'php/<?php  echo $Url_conector; ?>', // or connector.maximal.php : connector URL (REQUIRED)
+					cssAutoLoad  : ['./themes/Material/css/theme-gray.css'],
+					lang : 'es',
+					height: '650',
+					defaultView : 'list',
+					
+					<?php if(isset($_GET['type'])&&$_GET['type']==1){ ?>
+						uiOptions : {
+							// toolbar configuration
+							toolbar : [
+								['back', 'forward'],
+								['reload'],
+								['open', 'download', 'getfile'],
+								['info'],
+								['quicklook'],
+								['search']
+							],
+						},
+						contextmenu : {
+							// navbarfolder menu
+							navbar : ['open', 'info'],
+							// current directory menu
+							cwd    : ['reload', 'back', '|', 'info'],
+							// current directory file menu
+							files  : [
+								'open', 'quicklook', '|', 'download', '|', 'info'
+							]
+						},
+					<?php }elseif(isset($_GET['type'])&&$_GET['type']==2){ ?>
+						uiOptions : {
+							// toolbar configuration
+							toolbar : [
+								['back', 'forward'],
+								['reload'],
+								['home', 'up'],
+								['mkdir', 'mkfile', 'upload'],
+								['open', 'download', 'getfile'],
+								['info'],
+								['quicklook'],
+								['copy', 'cut', 'paste'],
+								['rm'],
+								['duplicate', 'rename', 'edit', 'resize'],
+								['extract', 'archive'],
+								['search'],
+								['view']
+							],
+						},	
+						contextmenu : {
+							// navbarfolder menu
+							navbar : ['open', '|', 'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|', 'info'],
 
-						// current directory menu
-						cwd    : ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', 'paste', '|', 'info'],
+							// current directory menu
+							cwd    : ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', 'paste', '|', 'info'],
 
-						// current directory file menu
-						files  : [
-							'getfile', '|','open', 'quicklook', '|', 'download', '|', 'copy', 'cut', 'paste', 'duplicate', '|',
-							'rm', '|', 'edit', 'rename', 'resize', '|', 'archive', 'extract', '|', 'info'
-						]
-					}	
+							// current directory file menu
+							files  : [
+								'getfile', '|','open', 'quicklook', '|', 'download', '|', 'copy', 'cut', 'paste', 'duplicate', '|',
+								'rm', '|', 'edit', 'rename', 'resize', '|', 'archive', 'extract', '|', 'info'
+							]
+						},	
 						
 					<?php } ?>
-						
-					,commandsOptions : {
+					
+					commandsOptions : {
+						/*edit : {
+							extraOptions : {
+								// set API key to enable Creative Cloud image editor
+								// see https://console.adobe.io/
+								creativeCloudApiKey : '',
+								// browsing manager URL for CKEditor, TinyMCE
+								// uses self location with the empty value
+								managerUrl : ''
+							}
+						},*/
 						quicklook : {
-							width : 640,  // Set default width/height voor quicklook
-							height : 480,
+							// to enable CAD-Files and 3D-Models preview with sharecad.org
+							sharecadMimes : ['image/vnd.dwg', 'image/vnd.dxf', 'model/vnd.dwf', 'application/vnd.hp-hpgl', 'application/plt', 'application/step', 'model/iges', 'application/vnd.ms-pki.stl', 'application/sat', 'image/cgm', 'application/x-msmetafile'],
 							// to enable preview with Google Docs Viewer
-							googleDocsMimes : ['application/pdf', 'image/tiff', 'application/vnd.ms-office', 'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
-						},
-						rm : {
-							shortcuts : []
+							googleDocsMimes : ['application/pdf', 'image/tiff', 'application/vnd.ms-office', 'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/postscript', 'application/rtf'],
+							// to enable preview with Microsoft Office Online Viewer
+							// these MIME types override "googleDocsMimes"
+							officeOnlineMimes : ['application/vnd.ms-office', 'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.oasis.opendocument.presentation']
 						}
-					}
+					},
 					// bootCalback calls at before elFinder boot up 
-					,bootCallback : function(fm, extraObj) {
+					bootCallback : function(fm, extraObj) {
 						/* any bind functions etc. */
 						fm.bind('init', function() {
 							// any your code
@@ -108,19 +126,6 @@
 							document.title = title;
 						});
 					}
-					
-					,handlers : {
-						dblclick : function(event, elfinderInstance) {
-						  event.preventDefault();
-						  elfinderInstance.exec('getfile')
-							.done(function() { elfinderInstance.exec('quicklook'); })
-							.fail(function() { elfinderInstance.exec('open'); });
-						}
-					}
-
-					,getFileCallback : function(files, fm) {
-						return false;
-					}
 				},
 				managers : {
 					// 'DOM Element ID': { /* elFinder options of this DOM Element */ }
@@ -136,5 +141,3 @@
 
 	</body>
 </html>
-
-

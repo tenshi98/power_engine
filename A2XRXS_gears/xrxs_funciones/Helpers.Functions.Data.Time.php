@@ -7,27 +7,105 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
+/*                                        Control de numero de funciones                                           */
+/*                                                                                                                 */
+/*******************************************************************************************************************/
+$n_funct_datatime = 0;
+/*******************************************************************************************************************/
+/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
-/*******************************************************************************************************************/
-// Muestra la hora
-function Hora_estandar($Hora){	
-	if($Hora!='00:00:00'){
-		$date = date_create($Hora);
-		return date_format($date, 'H:i');
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Hora Estandar
+* 
+*===========================     Detalles    ===========================
+* Transforma la hora ingresada al formato estandar
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se formatea la hora
+* 	Hora_estandar('1:1');
+* 
+*===========================    Parametros   ===========================
+* Time     $Hora   Hora a formatear
+* @return  Time
+************************************************************************/
+//control numero funciones
+$n_funct_datatime++;
+//Funcion
+function Hora_estandar($Hora){
+	//valido la hora
+	if(validaHora($Hora)){
+		if($Hora!='00:00:00'){
+			$date = date_create($Hora);
+			return date_format($date, 'H:i');
+		}else{
+			return 'Sin Hora';
+		}
 	}else{
-		return 'Sin Hora';
-	}
-}
-/*******************************************************************************************************************/
-//Devuelve la hora programada
-function Hora_prog($Hora){	
-	if($Hora!='00:00:00'){
-		return date("H:i", strtotime($Hora));
-	}else{
-		return 'Sin Hora';
+		return 'El dato ingresado no es una hora ('.$Hora.')';
 	}	
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Devuelve la hora programada
+* 
+*===========================     Detalles    ===========================
+* Transforma la hora ingresada al formato de hora programada
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se formatea la hora
+* 	Hora_prog('1:1');
+* 
+*===========================    Parametros   ===========================
+* Time     $Hora   Hora a formatear
+* @return  Time
+************************************************************************/
+//control numero funciones
+$n_funct_datatime++;
+//Funcion
+function Hora_prog($Hora){	
+	//valido la hora
+	//if(validaHora($Hora)){
+		if($Hora!='00:00:00'){
+			return date("H:i:s", strtotime($Hora));
+		}else{
+			return 'Sin Hora';
+		}
+	/*}else{
+		return 'El dato ingresado no es una hora ('.$Hora.')';
+	}*/	
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Devuelve la hora programada
+* 
+*===========================     Detalles    ===========================
+* Transforma la hora ingresada al formato de hora programada
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se formatea la hora
+* 	Hora_archivos('1:1');
+* 
+*===========================    Parametros   ===========================
+* Time     $Hora   Hora a formatear
+* @return  Time
+************************************************************************/
+//control numero funciones
+$n_funct_datatime++;
+//Funcion
+function Hora_archivos($Hora){	
+	//valido la hora
+	//if(validaHora($Hora)){
+		if($Hora!='00:00:00'){
+			return date("His", strtotime($Hora));
+		}else{
+			return 'Sin Hora';
+		}
+	/*}else{
+		return 'El dato ingresado no es una hora ('.$Hora.')';
+	}*/	
 }
 
 ?>

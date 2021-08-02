@@ -7,15 +7,55 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
+/*                                        Control de numero de funciones                                           */
+/*                                                                                                                 */
+/*******************************************************************************************************************/
+$n_funct_convertions = 0;
+/*******************************************************************************************************************/
+/*                                                                                                                 */
 /*                                              Funciones  Horas                                                   */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
+* Transforma numeros (decimales) a horas
+* 
+*===========================     Detalles    ===========================
+* Permite ingresar un numero (decimales, representando las horas) y 
+* transformarlo en formato hora
+*===========================    Modo de uso  ===========================
+* 	
+* 	//transformar minutos	
+* 	numero2horas(1.5);
+* 
+*===========================    Parametros   ===========================
+* Integer    $mins   Numero de minutos a transformar
+* @return    Time
+************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
+function numero2horas($in) {
+	//se verifica si es un numero lo que se recibe
+	if (validarNumero($in)){ 
+		$h = intval($in);
+		$m = round((((($in - $h) / 100.0) * 60.0) * 100), 0);
+		if ($m == 60){
+           $h++;
+           $m = 0;
+		}
+		$retval = sprintf("%02d:%02d:%02d", $h, $m, '00');
+		return $retval;
+	} else { 
+		return 'El dato ingresado no es un numero';
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
 * Transforma minutos a horas
 * 
 *===========================     Detalles    ===========================
-* Permite ingresar el numero de minutos y transformarlos en formato hora
+* Permite ingresar un numero (de minutos) y transformarlo en formato hora
 *===========================    Modo de uso  ===========================
 * 	
 * 	//transformar minutos	
@@ -25,32 +65,31 @@ if( ! defined('XMBCXRXSKGC')) {
 * Integer    $mins   Numero de minutos a transformar
 * @return    Time
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function minutos2horas($mins) {
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
-		if ($mins < 0){
-			$min = abs($mins);
-		}else{
-			$min = $mins;
-		} 
-		$h = floor($min / 60);
-		$m = ($min - ($h * 60)) / 100;
-		$horas = $h + $m;
-		 
-		if ($mins < 0){
-			$horas *= -1;
-		}
+	if (validarNumero($mins)){ 
+		//if(validaEntero($mins)){
+			$extraIntH = intval($mins/60);
+			$extraIntHs = ($mins/60);            
+			$whole = floor($extraIntHs);      
+			$fraction = $extraIntHs - $whole; 
+			$extraIntHss =  round($fraction*60); 
+			//Se agrega el 0
+			if (strlen($extraIntHss) < 2){
+				$extraIntHss = '0'.$extraIntHss;
+			}
+			//Se agrega el 0
+			if (strlen($extraIntH) < 2){
+				$extraIntH = '0'.$extraIntH;
+			}
 
-		$sep = explode('.', $horas);
-		$h = $sep[0];
-		if (empty($sep[1])){
-			$sep[1] = 00;
-			$m = $sep[1];
-		} 
-		if (strlen($m) < 2){
-			$m = $m . 0;
-		}
-		return $h.':'.$m.':00';
+			return $extraIntH.':'.$extraIntHss.':00';
+		//}else { 
+		//	return 'El dato ingresado no es un numero entero';
+		//}
 	} else { 
 		return 'El dato ingresado no es un numero';
 	}
@@ -60,19 +99,22 @@ function minutos2horas($mins) {
 * Transforma segundos a horas
 * 
 *===========================     Detalles    ===========================
-* Permite ingresar el numero de segundos y transformarlos en formato hora
+* Permite ingresar un numero (de segundos) y transformarlo en formato hora
 *===========================    Modo de uso  ===========================
 * 	
 * 	//transformar segundos	
-* 	minutos2horas(3600);
+* 	segundos2horas(3600);
 * 
 *===========================    Parametros   ===========================
 * Integer    $segundos   Numero de segundos a transformar
 * @return    Time
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function segundos2horas($segundos) {
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
+	if (validarNumero($segundos)){ 
 		$t = round($segundos);
 		return sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60);
 	} else { 
@@ -84,7 +126,7 @@ function segundos2horas($segundos) {
 * Transforma horas a minutos
 * 
 *===========================     Detalles    ===========================
-* transforma las horas a minutos, esta debe ser ingresada en formato texto
+* Transforma las horas a minutos, esta debe ser ingresada en formato texto
 * para que la funcion la reconozca correctamente
 *===========================    Modo de uso  ===========================
 * 	
@@ -92,9 +134,12 @@ function segundos2horas($segundos) {
 * 	horas2minutos('01:05:00');
 * 
 *===========================    Parametros   ===========================
-* String     $horas   La hora en formato texto
+* Time       $horas   La hora en formato texto
 * @return    Integer
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function horas2minutos($horas) { 
 	//valido la hora
 	if(validaHora($horas)){
@@ -108,7 +153,7 @@ function horas2minutos($horas) {
 		$mm = ($h * 60)+$m; 
 		return $mm;
 	}else{
-		return 'El dato ingresado no es una hora';
+		return 'El dato ingresado no es una hora ('.$horas.')';
 	} 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,16 +161,20 @@ function horas2minutos($horas) {
 * Transforma a segundos una hora 
 * 
 *===========================     Detalles    ===========================
-* Permite transformar a segundos una hora ingresada
+* Transforma las horas a segundos, esta debe ser ingresada en formato texto
+* para que la funcion la reconozca correctamente
 *===========================    Modo de uso  ===========================
 * 	
 * 	//se transforma la hora		
 * 	horas2segundos('14:30:00');
 * 
 *===========================    Parametros   ===========================
-* Time     $horas   Hora a transformar
+* Time     $horas   La hora en formato texto
 * @return  Integer
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function horas2segundos($horas){
 	//valido la hora
 	if(validaHora($horas)){
@@ -135,10 +184,38 @@ function horas2segundos($horas){
 		}
 		return $timeExploded[0] * 3600 + $timeExploded[1] * 60;
 	}else{
-		return 'El dato ingresado no es una hora';
+		return 'El dato ingresado no es una hora ('.$horas.')';
 	}
 	
     
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Transforma a numero decimal una hora 
+* 
+*===========================     Detalles    ===========================
+* Transforma las horas ingresadas a numeros con decimales, por 
+* ejemplo 1:30 pasaria a 1.5 horas
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se transforma la hora		
+* 	horas2decimales('14:30:00');
+* 
+*===========================    Parametros   ===========================
+* Time     $horas   La hora en formato texto
+* @return  Decimal
+************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
+function horas2decimales($horas){
+	//valido la hora
+	if(validaHora($horas)){
+		$hms = explode(":", $horas);
+		return ($hms[0] + ($hms[1]/60) + ($hms[2]/3600));
+	}else{
+		return 'El dato ingresado no es una hora ('.$horas.')';
+	}
 }
 
 
@@ -164,6 +241,9 @@ function horas2segundos($horas){
 * String    $mes    Mes con 3 letras
 * @return   String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function Devolver_mes($mes){
 	//Paso a minusculas los datos recibidos
 	$mes = strtolower($mes);
@@ -209,9 +289,12 @@ function Devolver_mes($mes){
 * Integer    $numero   Numero a transformar (de 1 a 12)
 * @return    String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function numero_mes($numero){
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
+	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<13){
 			switch ($numero) {
@@ -252,9 +335,12 @@ function numero_mes($numero){
 * Integer    $numero   Numero a transformar (de 1 a 12)
 * @return    String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function numero_a_mes($numero){	
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
+	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<13){
 			switch ($numero) {
@@ -296,9 +382,12 @@ function numero_a_mes($numero){
 * Integer    $numero   Numero a transformar (de 1 a 12)
 * @return    String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function numero_a_mes_corto($numero){	
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
+	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<13){
 			switch ($numero) {
@@ -328,19 +417,22 @@ function numero_a_mes_corto($numero){
 * Devuelve el nombre del dia
 * 
 *===========================     Detalles    ===========================
-* Devuelve el nombre del dia en base a un numero (lunes a domingo)
+* Devuelve el nombre del dia en base a un numero (1-7 : lunes a domingo)
 *===========================    Modo de uso  ===========================
 * 	
-* 	//dato a transformar
+* 	//se convierten los datos	
 * 	numero_nombreDia(3);
 * 
 *===========================    Parametros   ===========================
-* Integer   $numero   Numero a transformar
+* Integer   $numero   Numero a transformar (de 1 a 7)
 * @return   String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function numero_nombreDia($numero){
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
+	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<8){
 			switch ($numero) {
@@ -387,9 +479,12 @@ function numero_nombreDia($numero){
 * Decimal    $valor   Decimal a transformar
 * @return    String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function porcentaje($valor){
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($numero)){ 
+	if (validarNumero($valor)){ 
 		$porcentaje = $valor *100;
 		return number_format($porcentaje,0,',','.').' %';
 	} else { 
@@ -409,7 +504,7 @@ function porcentaje($valor){
 * Devuelve el monto ingresado en palabras
 * 
 *===========================     Detalles    ===========================
-* Permite mostrar los valores ingresados en palabras
+* Transforma los numeros ingresados a su equivalente en palabras
 *===========================    Modo de uso  ===========================
 * 	
 * 	//se transforma los datos		
@@ -419,9 +514,12 @@ function porcentaje($valor){
 * Integer  $monto   Valor a transformar en palabras
 * @return  String
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function numtoletras($monto){
 	//se verifica si es un numero lo que se recibe
-	if (is_numeric($monto)){ 
+	if (validarNumero($monto)){ 
 		$xarray = array(0 => "Cero",
 			1 => "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE",
 			"DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE",
@@ -607,6 +705,9 @@ function subfijo($xx)
 * Object    $object   Objeto a Transformar
 * @return   Array
 ************************************************************************/
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function objectToArray($object){
     if (is_object($object)) {
         return json_decode(json_encode($object), true);
@@ -629,6 +730,9 @@ function objectToArray($object){
 * Array     $array   Arreglo a Transformar
 * @return   Object
 ************************************************************************/   
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function arrayToObject(array $array = []){
     if (!is_array($array)) {
         throw new \Exception('Not an array');
@@ -651,7 +755,7 @@ function arrayToObject(array $array = []){
 * Transforma un arreglo a un texto
 * 
 *===========================     Detalles    ===========================
-* Transforma un arreglo a un objeto
+* Transforma un arreglo a un texto
 *===========================    Modo de uso  ===========================
 * 	
 * 	//se transforman los datos		
@@ -661,6 +765,9 @@ function arrayToObject(array $array = []){
 * Array     $array   Arreglo a Transformar
 * @return   String
 ************************************************************************/      
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
 function arrayToString(array $array = [], $delimiter = ' '){
     $pairs = [];
     foreach ($array as $key => $value) {
@@ -683,7 +790,8 @@ function arrayToString(array $array = [], $delimiter = ' '){
 * Codifica un texto
 * 
 *===========================     Detalles    ===========================
-* Permite codificar un texto para que quede ilegible a la lectura normal
+* Permite codificar un texto para que quede ilegible a la lectura normal,
+* con la opcion de la utilizacion de una palabra clave para su codificacion
 *===========================    Modo de uso  ===========================
 * 	
 * 	//se codifica texto
@@ -694,31 +802,46 @@ function arrayToString(array $array = [], $delimiter = ' '){
 * String   $passkey  (Opcional)Palabra clave de codificacion
 * @return  String
 ************************************************************************/ 
-function simpleEncode($string, $passkey = null){
-    $key = $passkey;
-    if (!isset($passkey) || empty($passkey)) {
-        $key = generateServerSpecificHash();
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
+function simpleEncode($value, $passkey) {
+    if (!$value) {
+        return false;
+    }
+    if (!isset($passkey) OR empty($passkey) OR $passkey=='') {
+        $key = sha1('EnCRypT10nK#Y!RiSRNn');
+    }else{
+		$key = $passkey;
+	}
+    $strLen = strlen($value);
+    $keyLen = strlen($key);
+    $j = 0;
+    $crypttext = '';
+
+    for ($i = 0; $i < $strLen; $i++) {
+        $ordStr = ord(substr($value, $i, 1));
+        if ($j == $keyLen) {
+            $j = 0;
+        }
+        $ordKey = ord(substr($key, $j, 1));
+        $j++;
+        $crypttext .= strrev(base_convert(dechex($ordStr + $ordKey), 16, 36));
     }
 
-    $result = '';
-    for ($i = 0; $i < strlen($string); $i++) {
-        $char = substr($string, $i, 1);
-        $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-        $char = chr(ord($char) + ord($keychar));
-        $result .= $char;
-    }
-
-    return base64_encode($result);
+    return $crypttext;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Decodifica un texto
 * 
 *===========================     Detalles    ===========================
-* Permite decodificar un texto para que quede ilegible a la lectura normal
+* Permite decodificar un texto para que quede legible a la lectura normal,
+* con la opcion de la utilizacion de una palabra clave para su 
+* decodificacion
 *===========================    Modo de uso  ===========================
 * 	
-* 	//se codifica texto
+* 	//se decodifica texto
 * 	simpleDecode("qcnVhqjKxpuilw==");
 * 
 *===========================    Parametros   ===========================
@@ -726,25 +849,42 @@ function simpleEncode($string, $passkey = null){
 * String   $passkey  (Opcional)Palabra clave de codificacion
 * @return  String
 ************************************************************************/ 
-function simpleDecode($string, $passkey = null){
-    $key = $passkey;
-    if (!isset($passkey) || empty($passkey)) {
-        $key = generateServerSpecificHash();
+//control numero funciones
+$n_funct_convertions++;
+//Funcion
+function simpleDecode($value, $passkey) {
+    if (!$value) {
+        return false;
+    }
+    if (!isset($passkey) OR empty($passkey) OR $passkey=='') {
+        $key = sha1('EnCRypT10nK#Y!RiSRNn');
+    }else{
+		$key = $passkey;
+	}
+    $strLen = strlen($value);
+    $keyLen = strlen($key);
+    $j = 0;
+    $decrypttext = '';
+
+    for ($i = 0; $i < $strLen; $i += 2) {
+        $ordStr = hexdec(base_convert(strrev(substr($value, $i, 2)), 36, 16));
+        if ($j == $keyLen) {
+            $j = 0;
+        }
+        $ordKey = ord(substr($key, $j, 1));
+        $j++;
+        $decrypttext .= chr($ordStr - $ordKey);
     }
 
-    $result = '';
-    $string = base64_decode($string);
-    for ($i = 0; $i < strlen($string); $i++) {
-        $char = substr($string, $i, 1);
-        $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-        $char = chr(ord($char) - ord($keychar));
-        $result .= $char;
-    }
-
-    return $result;
+    return $decrypttext;
 }
 
-
+//Codificacion pripia por cada servidor, esto impide el copiado de informacion entre servidores
+function generateServerSpecificHash(){
+	return (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME']))
+            ? md5($_SERVER['SERVER_NAME'])
+            : md5(pathinfo(__FILE__, PATHINFO_FILENAME));
+}
 
 
 ?>

@@ -2,7 +2,9 @@
 //variables
 $idUsuario   = $_SESSION['usuario']['basic_data']['idUsuario'];
 $NombreUsr   = $_SESSION['usuario']['basic_data']['Nombre'];
+$idSistema   = $_SESSION['usuario']['basic_data']['idSistema'];
 $Fecha       = fecha_actual();
+$Hora        = hora_actual();
 $Transaccion = $original;
 $email       = DB_ERROR_MAIL;
 $MailBody    = '';
@@ -30,9 +32,12 @@ if($err_count!=0){
 		$Consulta    = $producto['query'];
 		
 		/***************************************/
-		//imprimo los errores
-		echo '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>'; 
-		echo '<pre>'.$Consulta.'</pre>';
+		//solo si es administrador
+		if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
+			//imprimo los errores
+			echo '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>'; 
+			echo '<pre>'.$Consulta.'</pre>';
+		}
 		
 		/***************************************/
 		//guardo errores en el log
@@ -41,25 +46,30 @@ if($err_count!=0){
 		error_log("Error query: ". $Consulta, 0);
 		error_log("-------------------------------------------------------------------", 0);
 		
-		
-		/***************************************/
-		//inserto en la tabla de errores
-		if(isset($idUsuario) && $idUsuario != ''){  $a  = "'".$idUsuario."'" ;   }else{$a  = "''";}
-		if(isset($Fecha) && $Fecha != ''){          $a .= ",'".$Fecha."'" ;      }else{$a .= ",''";}
-		if(isset($ErrorCode) && $ErrorCode != ''){  $a .= ",'".$ErrorCode."'" ;  }else{$a .= ",''";}
-		if(isset($Mensaje) && $Mensaje != ''){      $a .= ",'".$Mensaje."'" ;    }else{$a .= ",''";}
-		if(isset($Consulta) && $Consulta != ''){    $a .= ",'".$Consulta."'" ;   }else{$a .= ",''";}
-		
-		// inserto los datos de registro en la db
-		$query  = "INSERT INTO `error_log` (idUsuario, Fecha, ErrorCode, Mensaje, Consulta) 
-		VALUES ({$a} )";
-		$result = mysqli_query($dbConn, $query);
-		
 		/***************************************/
 		//Genero el cuerpo del mensaje
 		$MailBody.= '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>'; 
 		$MailBody.= '<pre>'.$Consulta.'</pre>';
 		$MailBody.= '<br/><br/>';
+		
+		/***************************************/
+		//se limpia la cadena antes de guardarla
+		$Consulta = preg_replace("/[\r\n|\n|\r]+/", " ", $Consulta);
+		
+		//Cuerpo del log
+		$rmail         = '';
+		$sesion_texto  = '';
+		$sesion_texto .= fecha_estandar($Fecha);
+		$sesion_texto .= ' /\ '.$Hora;
+		$sesion_texto .= ' /\ '.$NombreUsr;
+		$sesion_texto .= ' /\ '.$Transaccion;
+		$sesion_texto .= ' /\ '.'Helper utils error';
+		$sesion_texto .= ' /\ '.$ErrorCode;
+		$sesion_texto .= ' /\ '.$Mensaje;
+		$sesion_texto .= ' /\ '.$Consulta;
+				
+		//se guarda el log
+		log_response(3, $rmail, $sesion_texto);	
 		
 		//Cuento los errores generados
 		$CountError++;
@@ -71,43 +81,26 @@ if($err_count!=0){
 if(isset($MailBody)&&$MailBody!=''&&$CountError!=0){
 	
 	/*********************************/
-	//Si se necesita se envia correo
-	require_once '../LIBS_php/PHPMailer/PHPMailerAutoload.php';
-		
-	/*********************************/
 	//Busco al usuario en el sistema
-	$query = "SELECT 
-	core_sistemas.Nombre AS RazonSocial,
-	core_sistemas.email_principal AS email_principal
-	FROM `usuarios_listado` 
-	LEFT JOIN `core_sistemas` ON core_sistemas.idSistema = usuarios_listado.idSistema
-	WHERE usuarios_listado.idUsuario = '".$idUsuario."'";
+	$query = "SELECT Nombre AS RazonSocial, email_principal,Config_Gmail_Usuario, Config_Gmail_Password
+	FROM `core_sistemas` 
+	WHERE idSistema = '".$idSistema."'";
 	$resultado = mysqli_query($dbConn, $query);
 	$rowUser = mysqli_fetch_array($resultado);
 
 	/*********************************/
 	//compruebo que exista correo
 	if(isset($rowUser['email_principal'])&&$rowUser['email_principal']!=''){
-		//Instanciacion
-		$mail = new PHPMailer;
-		//Quien envia el correo
-		$mail->setFrom($rowUser['email_principal'], $rowUser['RazonSocial']);
-		//A quien responder el correo
-		$mail->addReplyTo($rowUser['email_principal'], $rowUser['RazonSocial']);
-		//Destinatarios
-		$mail->addAddress($email, 'Receptor');
-		//Asunto
-		$mail->Subject = 'Error Sistema '.$rowUser['RazonSocial'];
-		//Cuerpo del mensaje
-		$mail->msgHTML($MailBody);
-		//Datos Adjuntos
-		//$mail->addAttachment('images/phpmailer_mini.png');
-		//Envio del mensaje
-		if (!$mail->send()) {
-			error_log("Error envio correo: ".$mail->ErrorInfo, 0);
-		} else {
-			error_log("Correo enviado", 0);
-		}
+		//Envio de correo
+		$rmail = tareas_envio_correo($rowUser['email_principal'], $rowUser['RazonSocial'], 
+                                     $email, 'Receptor', 
+                                     '', '', 
+                                     'Error Sistema '.$rowUser['RazonSocial'], 
+                                     $MailBody,'', 
+                                     '', 
+                                     1, 
+                                     $rowUser['Config_Gmail_Usuario'], 
+                                     $rowUser['Config_Gmail_Password']);
 	}else{
 		error_log("No esta configurado el correo para el envio de errores", 0);
 	}

@@ -12,6 +12,7 @@ if( ! defined('XMBCXRXSKGC')) {
 if(isset($_SESSION['usuario']['Permisos'][$original]['level']) && $_SESSION['usuario']['Permisos'][$original]['level']!=''){
 	//Si no tiene el nivel necesario para ver la transaccion
 	if($_SESSION['usuario']['Permisos'][$original]['level'] <= 0) {
+		//redirijo a la pagina principal
 		header( 'Location: principal.php' );
 		die;		
 	//Si lo tiene traspaso el nivel de permiso a una variable
@@ -20,6 +21,7 @@ if(isset($_SESSION['usuario']['Permisos'][$original]['level']) && $_SESSION['usu
 	}
 //Si el permiso no existe
 }else{
+	//redirijo a la pagina principal
 	header( 'Location: principal.php' );
 	die;
 }

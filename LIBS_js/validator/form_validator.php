@@ -1,4 +1,4 @@
-<script src="<?php echo DB_SITE ?>/LIBS_js/validator/validator.js"></script>
+<script src="<?php echo DB_SITE_REPO ?>/LIBS_js/validator/validator.js"></script>
 <script>
 	
 		
