@@ -6,10 +6,23 @@ function isPlaceholder(part) {
 
 function getTags(postParsed) {
 	return postParsed.filter(isPlaceholder).reduce(function (tags, part) {
+		if (part.cellParsed) {
+			part.cellParsed.forEach(function (cp) {
+				if (
+					cp.type === "placeholder" &&
+					cp.module !== "pro-xml-templating/xls-module-loop"
+				) {
+					tags[cp.value] = tags[cp.value] || {};
+				}
+			});
+			return tags;
+		}
 		tags[part.value] = tags[part.value] || {};
+
 		if (part.subparsed) {
 			tags[part.value] = merge(tags[part.value], getTags(part.subparsed));
 		}
+
 		return tags;
 	}, {});
 }
@@ -56,7 +69,8 @@ class InspectModule {
 			if (obj.inspect.filePath) {
 				this.filePath = obj.inspect.filePath;
 				this.inspect = this.fullInspected[this.filePath] || {};
-			} else if (obj.inspect.content) {
+			}
+			if (obj.inspect.content) {
 				this.inspect.content = obj.inspect.content;
 			} else if (obj.inspect.postparsed) {
 				this.inspect.postparsed = cloneDeep(obj.inspect.postparsed);
@@ -66,7 +80,8 @@ class InspectModule {
 				this.inspect.lexed = cloneDeep(obj.inspect.lexed);
 			} else if (obj.inspect.xmllexed) {
 				this.inspect.xmllexed = cloneDeep(obj.inspect.xmllexed);
-			} else if (obj.inspect.resolved) {
+			}
+			if (obj.inspect.resolved) {
 				this.inspect.resolved = obj.inspect.resolved;
 			}
 			this.fullInspected[this.filePath] = this.inspect;

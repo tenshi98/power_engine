@@ -1,6 +1,7 @@
 "use strict";
-const { getScopeParserExecutionError } = require("./errors");
-const { last } = require("./utils");
+const { getScopeParserExecutionError } = require("./errors.js");
+const { last } = require("./utils.js");
+const { concatArrays } = require("./doc-utils.js");
 
 function find(list, fn) {
 	const length = list.length >>> 0;
@@ -17,9 +18,9 @@ function find(list, fn) {
 
 function getValue(tag, meta, num) {
 	const scope = this.scopeList[num];
-	if (this.resolved) {
+	if (this.root.finishedResolving) {
 		let w = this.resolved;
-		this.scopePath.forEach((p, index) => {
+		this.scopePath.slice(this.resolveOffset).forEach((p, index) => {
 			const lIndex = this.scopeLindex[index];
 			w = find(w, function (r) {
 				return r.lIndex === lIndex;
@@ -35,7 +36,19 @@ function getValue(tag, meta, num) {
 	}
 	// search in the scopes (in reverse order) and keep the first defined value
 	let result;
-	const parser = this.parser(tag, { scopePath: this.scopePath });
+
+	let parser;
+	if (!this.cachedParsers || !meta.part) {
+		parser = this.parser(tag, {
+			scopePath: this.scopePath,
+		});
+	} else if (this.cachedParsers[meta.part.lIndex]) {
+		parser = this.cachedParsers[meta.part.lIndex];
+	} else {
+		parser = this.cachedParsers[meta.part.lIndex] = this.parser(tag, {
+			scopePath: this.scopePath,
+		});
+	}
 	try {
 		result = parser.get(scope, this.getContext(meta, num));
 	} catch (error) {
@@ -55,7 +68,19 @@ function getValue(tag, meta, num) {
 function getValueAsync(tag, meta, num) {
 	const scope = this.scopeList[num];
 	// search in the scopes (in reverse order) and keep the first defined value
-	const parser = this.parser(tag, { scopePath: this.scopePath });
+	let parser;
+	if (!this.cachedParsers || !meta.part) {
+		parser = this.parser(tag, {
+			scopePath: this.scopePath,
+		});
+	} else if (this.cachedParsers[meta.part.lIndex]) {
+		parser = this.cachedParsers[meta.part.lIndex];
+	} else {
+		parser = this.cachedParsers[meta.part.lIndex] = this.parser(tag, {
+			scopePath: this.scopePath,
+		});
+	}
+
 	return Promise.resolve()
 		.then(() => {
 			return parser.get(scope, this.getContext(meta, num));
@@ -79,6 +104,8 @@ function getValueAsync(tag, meta, num) {
 // This class responsibility is to manage the scope
 const ScopeManager = class ScopeManager {
 	constructor(options) {
+		this.root = options.root || this;
+		this.resolveOffset = options.resolveOffset || 0;
 		this.scopePath = options.scopePath;
 		this.scopePathItem = options.scopePathItem;
 		this.scopePathLength = options.scopePathLength;
@@ -86,6 +113,7 @@ const ScopeManager = class ScopeManager {
 		this.scopeLindex = options.scopeLindex;
 		this.parser = options.parser;
 		this.resolved = options.resolved;
+		this.cachedParsers = options.cachedParsers;
 	}
 	loopOver(tag, functor, inverted, meta) {
 		return this.loopOverValue(this.getValue(tag, meta), functor, inverted);
@@ -104,7 +132,7 @@ const ScopeManager = class ScopeManager {
 		);
 	}
 	loopOverValue(value, functor, inverted) {
-		if (this.resolved) {
+		if (this.root.finishedResolving) {
 			inverted = false;
 		}
 		const type = Object.prototype.toString.call(value);
@@ -160,13 +188,16 @@ const ScopeManager = class ScopeManager {
 	}
 	createSubScopeManager(scope, tag, i, part, length) {
 		return new ScopeManager({
+			root: this.root,
+			resolveOffset: this.resolveOffset,
 			resolved: this.resolved,
 			parser: this.parser,
-			scopeList: this.scopeList.concat(scope),
-			scopePath: this.scopePath.concat(tag),
-			scopePathItem: this.scopePathItem.concat(i),
-			scopePathLength: this.scopePathLength.concat(length),
-			scopeLindex: this.scopeLindex.concat(part.lIndex),
+			cachedParsers: this.cachedParsers,
+			scopeList: concatArrays([this.scopeList, [scope]]),
+			scopePath: concatArrays([this.scopePath, [tag]]),
+			scopePathItem: concatArrays([this.scopePathItem, [i]]),
+			scopePathLength: concatArrays([this.scopePathLength, [length]]),
+			scopeLindex: concatArrays([this.scopeLindex, [part.lIndex]]),
 		});
 	}
 };

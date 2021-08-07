@@ -1,5 +1,5 @@
-const { wordToUtf8, concatArrays } = require("./doc-utils");
-const { match, getValue, getValues } = require("./prefix-matcher");
+const { concatArrays } = require("./doc-utils.js");
+const { match, getValue, getValues } = require("./prefix-matcher.js");
 
 function moduleParse(placeHolderContent, options) {
 	const modules = options.modules;
@@ -7,7 +7,6 @@ function moduleParse(placeHolderContent, options) {
 	const endLindex = options.lIndex;
 	let moduleParsed;
 	options.offset = startOffset;
-	options.lIndex = endLindex;
 	options.match = match;
 	options.getValue = getValue;
 	options.getValues = getValues;
@@ -79,7 +78,6 @@ const parser = {
 			if (token.type === "delimiter") {
 				inPlaceHolder = token.position === "start";
 				if (token.position === "end") {
-					placeHolderContent = wordToUtf8(placeHolderContent);
 					options.parse = (placeHolderContent) =>
 						moduleParse(placeHolderContent, {
 							...options,

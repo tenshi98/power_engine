@@ -10,6 +10,7 @@ const {
 	SAUCE_USERNAME,
 	SAUCE_ACCESS_KEY,
 } = process.env;
+const chalk = require("chalk");
 function exit(message) {
 	console.log(message);
 	/* eslint-disable-next-line no-process-exit */
@@ -17,6 +18,7 @@ function exit(message) {
 }
 
 let fullBrowserName = null;
+const url = require("url");
 const finalhandler = require("finalhandler");
 const webdriverio = require("webdriverio");
 const { expect } = require("chai");
@@ -69,7 +71,7 @@ const minute = 60 * second;
 
 const commonOptions = {
 	automationProtocol: "webdriver",
-	// logLevel: "warn",
+	logLevel: "warn",
 	connectionRetryTimeout: 5 * minute,
 };
 
@@ -128,7 +130,12 @@ const failuresRegex = /.*failures: ([0-9]+).*/;
 const passesRegex = /.*passes: ([0-9]+).*/;
 const startTime = +new Date();
 server.listen(port, async function () {
-	const client = await webdriverio.remote(options);
+	let client;
+	try {
+		client = await webdriverio.remote(options);
+	} catch (e) {
+		exit(e);
+	}
 	async function waitForText(selector, timeout) {
 		return await client.waitUntil(
 			async function getText() {
@@ -162,22 +169,58 @@ server.listen(port, async function () {
 		);
 	}
 	async function test() {
+		let interval;
 		try {
 			if (+new Date() - startTime > timeoutConnection * second) {
 				exit(
 					`Aborting connection to webdriver after ${timeoutConnection} seconds`
 				);
 			}
-			const postfix = process.env.filter
-				? `?grep=${process.env.filter}&invert=true`
-				: "";
-			const url = `http://localhost:${port}/test/mocha.html${postfix}`;
-			await client.url(url);
 
+			const mochaUrl = url.parse(
+				`http://localhost:${port}/test/mocha.html`,
+				true
+			);
+			delete mochaUrl.search;
+			if (process.env.filter) {
+				mochaUrl.query.grep = process.env.filter;
+				mochaUrl.query.invert = "true";
+			}
+			mochaUrl.query.browser = fullBrowserName;
+			await client.url(url.format(mochaUrl));
+
+			await waitForExist("li.test", 120000);
+			let index = 0;
+			let running = false;
+			interval = setInterval(async function () {
+				if (interval === null || running) {
+					return;
+				}
+				running = true;
+				const texts = await client.$$("li.test");
+				if (index === texts.length) {
+					return;
+				}
+				for (let i = index, len = texts.length; i < len; i++) {
+					if (interval === null) {
+						return;
+					}
+					const text = await texts[i].getText();
+					console.log(
+						text
+							.replace(/^(.*)\n(.*)$/g, "$2 $1")
+							.replace(/^(.*[^0-9])([0-9]+ms)$/g, "$1 $2")
+					);
+				}
+				index = texts.length;
+				running = false;
+			}, 100);
 			await waitForText("#status", 120000);
 			await client.pause(5000);
 			await waitForExist("li.failures a", 5000);
 			const text = await (await client.$("#mocha-stats")).getText();
+			clearInterval(interval);
+			interval = null;
 			const passes = parseInt(text.replace(passesRegex, "$1"), 10);
 			const failures = parseInt(text.replace(failuresRegex, "$1"), 10);
 			if (failures > 0) {
@@ -196,16 +239,19 @@ server.listen(port, async function () {
 						return ret;
 					}, titleElement);
 					const error = await (await failedSuites[i].$("pre.error")).getText();
+					console.log(title.replace(/./g, "="));
 					console.log(title);
 					console.log(title.replace(/./g, "="));
 					console.log(error);
 					console.log();
 				}
-				throw new Error("Failures happened");
+				throw new Error(`Failures happened on ${fullBrowserName}`);
 			}
 			expect(passes).to.be.above(0);
 			console.log(
-				`browser tests successful (${passes} passes) on ${fullBrowserName}`
+				chalk.green(
+					`browser tests successful (${passes} passes) on ${fullBrowserName}`
+				)
 			);
 			if (BROWSER === "SAUCELABS") {
 				updateSaucelabsStatus(client, true, (e) => {
@@ -219,6 +265,8 @@ server.listen(port, async function () {
 			}
 			client.deleteSession();
 		} catch (e) {
+			clearInterval(interval);
+			interval = null;
 			if (e.message.indexOf("ECONNREFUSED") !== -1) {
 				return test();
 			}

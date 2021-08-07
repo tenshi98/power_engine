@@ -1,7 +1,7 @@
 const PizZip = require("pizzip");
 const { assign } = require("lodash");
 
-const angularParser = require("./angular-parser");
+const angularParser = require("./angular-parser.js");
 const Docxtemplater = require("../docxtemplater.js");
 const Errors = require("../errors.js");
 const { last } = require("../utils.js");
@@ -13,7 +13,7 @@ const {
 	getContent,
 	createDocV4,
 	getZip,
-} = require("./utils");
+} = require("./utils.js");
 const inspectModule = require("../inspect-module.js");
 
 function getLength(obj) {
@@ -100,7 +100,7 @@ describe("Api versioning", function () {
 				name: "APIVersionError",
 				properties: {
 					id: "api_version_error",
-					currentModuleApiVersion: [3, 24, 0],
+					currentModuleApiVersion: [3, 26, 0],
 					neededVersion: [5, 6, 0],
 				},
 			}
@@ -115,14 +115,14 @@ describe("Api versioning", function () {
 				name: "APIVersionError",
 				properties: {
 					id: "api_version_error",
-					currentModuleApiVersion: [3, 24, 0],
+					currentModuleApiVersion: [3, 26, 0],
 					neededVersion: [3, 44, 0],
 				},
 			}
 		);
 
 		expectToThrow(
-			doc.verifyApiVersion.bind(null, "3.24.100"),
+			doc.verifyApiVersion.bind(null, "3.26.100"),
 			Errors.XTAPIVersionError,
 			{
 				message:
@@ -130,8 +130,8 @@ describe("Api versioning", function () {
 				name: "APIVersionError",
 				properties: {
 					id: "api_version_error",
-					currentModuleApiVersion: [3, 24, 0],
-					neededVersion: [3, 24, 100],
+					currentModuleApiVersion: [3, 26, 0],
+					neededVersion: [3, 26, 100],
 				},
 			}
 		);
@@ -156,9 +156,8 @@ describe("Inspect module", function () {
 		const data = { offre: [{}], prenom: "John" };
 		doc.setData(data);
 		doc.render();
-		const { summary, detail } = iModule.fullInspected[
-			"word/document.xml"
-		].nullValues;
+		const { summary, detail } =
+			iModule.fullInspected["word/document.xml"].nullValues;
 
 		expect(iModule.inspect.tags).to.be.deep.equal(data);
 		expect(detail).to.be.an("array");
@@ -301,7 +300,7 @@ describe("Docxtemplater loops", function () {
 			telephone: "0652455478",
 			description: "New Website",
 			offre: [
-				{ titre: "titre1", prix: "1250" },
+				{ titre: "titre1", prix: "1260" },
 				{ titre: "titre2", prix: "2000" },
 				{ titre: "titre3", prix: "1400", nom: "Offre" },
 			],
@@ -310,7 +309,7 @@ describe("Docxtemplater loops", function () {
 		doc.setData(tags);
 		doc.render();
 		expect(doc.getFullText()).to.be.equal(
-			"Votre proposition commercialeHippPrix: 1250Titre titre1HippPrix: 2000Titre titre2OffrePrix: 1400Titre titre3HippEdgar"
+			"Votre proposition commercialeHippPrix: 1260Titre titre1HippPrix: 2000Titre titre2OffrePrix: 1400Titre titre3HippEdgar"
 		);
 	});
 	it("should work with loops inside loops", function () {
@@ -402,6 +401,19 @@ describe("Docxtemplater loops", function () {
 		const expectedContent = `<w:t xml:space="preserve">No Todos</w:t>
 		<w:t/>`;
 		const scope = { todos: [] };
+		const xmlTemplater = createXmlTemplaterDocx(content, {
+			tags: scope,
+			parser: angularParser,
+		});
+		const c = getContent(xmlTemplater);
+		expect(c).to.be.deep.equal(expectedContent);
+	});
+
+	it("should be possible to have conditions with $index with angular-parser", function () {
+		const content = "<w:t>{#todos}{#$index==0}FIRST {/}{text} {/todos}</w:t>";
+		const expectedContent =
+			'<w:t xml:space="preserve">FIRST Hello Other todo </w:t>';
+		const scope = { todos: [{ text: "Hello" }, { text: "Other todo" }] };
 		const xmlTemplater = createXmlTemplaterDocx(content, {
 			tags: scope,
 			parser: angularParser,
@@ -964,7 +976,7 @@ describe("Raw Xml Insertion", function () {
 		};
 		const doc = createDoc("one-raw-xml-tag.docx");
 		doc.setOptions({
-			fileTypeConfig: assign({}, Docxtemplater.FileTypeConfig.docx, {
+			fileTypeConfig: assign({}, Docxtemplater.FileTypeConfig.docx(), {
 				tagRawXml: "w:r",
 			}),
 		});
@@ -1016,9 +1028,11 @@ describe("Constructor v4", function () {
 			"The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)"
 		);
 
-		expect(() => new Docxtemplater(Buffer.from("content"))).to.throw(
-			"The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)"
-		);
+		if (typeof Buffer !== "undefined") {
+			expect(() => new Docxtemplater(Buffer.from("content"))).to.throw(
+				"The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)"
+			);
+		}
 	});
 
 	it("should work when the delimiters are passed", function () {
@@ -1073,7 +1087,7 @@ describe("Constructor v4", function () {
 		expect(fullText).to.be.equal("Hello John from Acme");
 	});
 
-	it("should throw if using new constructor and setOptions", function () {
+	it("should throw if using v4 constructor and setOptions", function () {
 		const doc = createDocV4("tag-multiline.docx");
 		doc.setData({
 			description: "a\nb\nc",
@@ -1083,7 +1097,7 @@ describe("Constructor v4", function () {
 		);
 	});
 
-	it("should throw if using new constructor and attachModule", function () {
+	it("should throw if using v4 constructor and attachModule", function () {
 		const doc = createDocV4("tag-multiline.docx");
 		doc.setData({
 			description: "a\nb\nc",
@@ -1127,6 +1141,20 @@ describe("Constructor v4", function () {
 		};
 		expect(() => new Docxtemplater(zip, { modules: [module] })).to.throw(
 			"The supportedFileTypes field of the module must be an array"
+		);
+	});
+
+	it("should fail with readable error when using new Docxtemplater(null)", function () {
+		expect(() => new Docxtemplater(null, {})).to.throw(
+			"The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)"
+		);
+	});
+
+	it("should fail with readable error when using new Docxtemplater(null, {modules: [inspectModule()]})", function () {
+		expect(
+			() => new Docxtemplater(null, { modules: [inspectModule()] })
+		).to.throw(
+			"The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)"
 		);
 	});
 });

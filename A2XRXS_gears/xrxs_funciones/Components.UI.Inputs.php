@@ -13,168 +13,8 @@ class Basic_Inputs{
     /////////////////////////////        PRIVADAS        /////////////////////////////
     /****************************************************************************************/
 	//imprime el script que impide el tipeo de teclas raras
-	private function solo_letras($name){
-		$input = '
-		<script>
-			function soloLetras_'.$name.'(e){
-				key = e.keyCode || e.which;
-				tecla = String.fromCharCode(key).toLowerCase();
-				letras = " áéíóúabcdefghijklmnñopqrstuvwxyz1234567890-_?¿°()=/+-,.<>:;*@";
-				especiales = [8,37,38,39,40,46];
-
-				tecla_especial = false
-				for(var i in especiales){
-					if(key == especiales[i]){
-						tecla_especial = true;
-						break;
-					} 
-				}		 
-				if(letras.indexOf(tecla)==-1 && !tecla_especial)
-				return false;
-			}
-		</script>';
-		
-		echo $input;
-	}
+	private function test($data){
 	
-	/****************************************************************************************/
-	//imprime el script que impide el tipeo de teclas raras
-	private function solo_letras_textarea($name){
-		$input = '
-		<script>
-			function soloLetrasTextArea_'.$name.'(e){
-				key = e.keyCode || e.which;
-				tecla = String.fromCharCode(key).toLowerCase();
-				letras = " áéíóúabcdefghijklmnñopqrstuvwxyz1234567890-_?¿°()=/+-,.<>:;*@";
-				especiales = [8,13,37,38,39,40,46];
-
-				tecla_especial = false
-				for(var i in especiales){
-					if(key == especiales[i]){
-						tecla_especial = true;
-						break;
-					} 
-				}		 
-				if(letras.indexOf(tecla)==-1 && !tecla_especial)
-				return false;
-			}
-		</script>';
-		
-		echo $input;
-	}
-	
-	/****************************************************************************************/
-	//imprime el script que solo permite el tipeo de numeros
-	private function solo_numeros_naturales($name){
-		$input = '
-		<script>
-			<!--
-				function soloNumerosNaturales_'.$name.'(evt){
-					var charCode = (evt.which) ? evt.which : event.keyCode
-					if (charCode > 31 && (charCode < 48 || charCode > 57)){
-						//verifico si presiono el punto
-						if (charCode == 46) {
-							return true;
-						//valor negativo
-						}else if(charCode == 45){
-							return true;
-						}else{
-							return false;
-						}
-					}else{
-						return true;
-					}
-				}
-			//-->
-	 
-		</script>';
-		
-		echo $input;
-	}
-	
-	/****************************************************************************************/
-	//imprime el script que solo permite el tipeo de numeros
-	private function solo_numeros_naturales_enteros($name){
-		$input = '
-		<script>
-			<!--
-				function soloNumerosEnteros_'.$name.'(evt){
-					var charCode = (evt.which) ? evt.which : event.keyCode
-					if (charCode > 31 && (charCode < 48 || charCode > 57)){
-						//verifico si presiono el punto
-						if (charCode == 46) {
-							return false;
-						//valor negativo
-						}else if(charCode == 45){
-							return true;
-						}else{
-							return false;
-						}
-					}else{
-						return true;
-					}	
-				}
-			//-->
-	 
-		</script>';
-		
-		echo $input;
-	}
-	
-	/****************************************************************************************/
-	//imprime el script que solo permite el tipeo de numeros
-	private function solo_numeros_naturales_enteros_positivos($name){
-		$input = '
-		<script>
-			<!--
-				function soloNumerosEnterosPositivos_'.$name.'(evt){
-					var charCode = (evt.which) ? evt.which : event.keyCode
-					if (charCode > 31 && (charCode < 48 || charCode > 57)){
-						//verifico si presiono el punto
-						if (charCode == 46) {
-							return false;
-						//valor negativo
-						}else if(charCode == 45){
-							return false;
-						}else{
-							return false;
-						}
-					}else{
-						return true;
-					}	
-				}
-			//-->
-	 
-		</script>';
-		
-		echo $input;
-	}
-	
-	/****************************************************************************************/
-	//imprime el script que impide el tipeo de teclas raras
-	private function solo_rut($name){
-		$input = '
-		<script>
-			function soloRut_'.$name.'(e){
-				key = e.keyCode || e.which;
-				tecla = String.fromCharCode(key).toLowerCase();
-				letras = "kK1234567890-.";
-				especiales = [8,37,38,39,40,46];
-
-				tecla_especial = false
-				for(var i in especiales){
-					if(key == especiales[i]){
-						tecla_especial = true;
-						break;
-					} 
-				}
-						 
-				if(letras.indexOf(tecla)==-1 && !tecla_especial)
-				return false;
-			}
-		</script>';
-		
-		echo $input;
 	}
 	
 	
@@ -217,24 +57,12 @@ class Basic_Inputs{
 		if($errorn==0){
 			//Selecciono el tipo de mensaje
 			switch ($type) {
-				case 1:
-					$tipo = 'h1';
-					break;
-				case 2:
-					$tipo = 'h2';
-					break;
-				case 3:
-					$tipo = 'h3';
-					break;
-				case 4:
-					$tipo = 'h4';
-					break;
-				case 5:
-					$tipo = 'h5';
-					break;
-				case 6:
-					$tipo = 'p';
-					break;
+				case 1: $tipo = 'h1'; break;
+				case 2: $tipo = 'h2'; break;
+				case 3: $tipo = 'h3'; break;
+				case 4: $tipo = 'h4'; break;
+				case 5: $tipo = 'h5'; break;
+				case 6: $tipo = 'p';  break;
 			}
 
 			//generacion del mensaje
@@ -313,13 +141,10 @@ class Basic_Inputs{
 			$x='required';
 			$_SESSION['form_require'].=','.$name;
 			
-			//filtrado de teclas
-			$input = $this->solo_letras($name);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="text" placeholder="'.$placeholder.'" class="form-control top" name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$name.'(event)">
+					<input type="text" placeholder="'.$placeholder.'" class="form-control top" name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
 				</div>
 			';
 			
@@ -358,13 +183,10 @@ class Basic_Inputs{
 			$x='required';
 			$_SESSION['form_require'].=','.$name;
 			
-			//filtrado de teclas
-			$input = $this->solo_rut($name);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="text"     placeholder="'.$placeholder.'"    class="form-control top"  id="'.$name.'"  name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloRut_'.$name.'(event)">
+					<input type="text"     placeholder="'.$placeholder.'"    class="form-control top"  id="'.$name.'"  name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloRut(event)">
 				</div>';
 					
 			//Validacion Script		
@@ -411,14 +233,11 @@ class Basic_Inputs{
 			$x='required';
 			$_SESSION['form_require'].=','.$name;
 			
-			//filtrado de teclas
-			$input = $this->solo_letras($name);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="field" id="div_'.$name.'">
 					<div class="input-group col-sm-12 bootstrap-timepicker">
-						<input type="password" placeholder="'.$placeholder.'" class="form-control bottom border_fix" name="'.$name.'" id="'.$name.'" autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$name.'(event)">
+						<input type="password" placeholder="'.$placeholder.'" class="form-control bottom border_fix" name="'.$name.'" id="'.$name.'" autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
 						<span class="pass_view_log" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
 					</div>
 				</div>';
@@ -470,13 +289,10 @@ class Basic_Inputs{
 			if($value==0){$w='';}elseif($value!=0){$w=$value;}
 			$x='required';
 				
-			//filtrado de teclas
-			$input = $this->solo_letras($name);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="email"  placeholder="'.$placeholder.'"    class="form-control"    name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$name.'(event)">
+					<input type="email"  placeholder="'.$placeholder.'"    class="form-control"    name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
 				</div>
 			';	
 			
@@ -529,13 +345,10 @@ class Basic_Inputs{
 			//if($value==0){$w='';echo $value;}else{$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 				
-			//filtrado de teclas
-			$input = $this->solo_letras($EXname);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="field">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$EXname.'(event)">
+					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
 				</div>
 			';	
 			
@@ -586,13 +399,10 @@ class Basic_Inputs{
 			if($value==0){$w='';}elseif($value!=0){$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 				
-			//filtrado de teclas
-			$input = $this->solo_letras($EXname);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="field">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$EXname.'(event)">
+					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
 				</div>';	
 			
 			//Imprimir dato	
@@ -695,13 +505,10 @@ class Basic_Inputs{
 			if($value==''){$w='';}else{$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 			
-			//filtrado de teclas
-			$input = $this->solo_numeros_naturales_enteros($name);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$name.'"  '.$x.' onkeypress="return soloNumeros_'.$name.'(event)" value="'.$w.'" >
+				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$name.'"  '.$x.' onkeypress="return soloNumeroNaturalReal(event)" value="'.$w.'" >
 			</div>';
 			
 			//Imprimir dato	
@@ -751,13 +558,10 @@ class Basic_Inputs{
 			if($value==''){    $w = '';  }else{   $w = $value;}
 			if($required==1){  $x = '';  }elseif( $required==2){ $x='required';$_SESSION['form_require'].=','.$name;}
 			
-			//filtrado de teclas
-			$input = $this->solo_letras_textarea($EXname);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
-				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$x.' onkeypress="return soloLetrasTextArea_'.$EXname.'(event)" >'.$w.'</textarea>
+				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$x.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
 			</div>';
 			
 			//Ejecucion Javascript
@@ -815,13 +619,10 @@ class Basic_Inputs{
 			//Validacion de variables
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 			
-			//filtrado de teclas
-			$input = $this->solo_letras($EXname);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
-				<input class="form-control '.$extra_class.'" style="'.$style.'" "type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'"  '.$x.' onkeypress="return soloLetras_'.$EXname.'(event)">
+				<input class="form-control '.$extra_class.'" style="'.$style.'" "type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'"  '.$x.' onkeypress="return soloLetras(event)">
 			</div>';	
 			
 			//Imprimir dato	
@@ -873,13 +674,10 @@ class Basic_Inputs{
 			if($value==''){   $w = ''; }else{   $w=$value;}
 			if($required==1){ $x = ''; }elseif( $required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 			
-			//filtrado de teclas
-			$input = $this->solo_letras($EXname);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
-				<input class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$EXname.'(event)">
+				<input class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
 			</div>';	
 			
 			//Imprimir dato	
@@ -931,11 +729,8 @@ class Basic_Inputs{
 			if($value==''){$w='0';}else{$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 			
-			//filtrado de teclas
-			$input = $this->solo_numeros_naturales($EXname);
-				
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
 				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$x.' onkeypress="return soloNumeros_'.$EXname.'(event)" value="'.$w.'" >
 			</div>';
@@ -1390,7 +1185,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input .='
 			<div class="field">
-				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumerosNaturales_'.$EXname.'(event)">
+				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroRealRacional(event)">
 			</div>';
 					
 			//script activacion
@@ -1407,9 +1202,6 @@ class Basic_Inputs{
 					});
 				</script>';
 				
-			//filtrado de teclas
-			$input .= $this->solo_numeros_naturales($EXname);
-			
 			//Imprimir dato	
 			echo $input;
 		}
@@ -1467,14 +1259,11 @@ class Basic_Inputs{
 			if($value==0){$w='';}elseif($value!=0){$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 					
-			//filtrado de teclas
-			$input = $this->solo_numeros_naturales_enteros_positivos($EXname);
-						
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumerosEnterosPositivos_'.$EXname.'(event)"  >
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroNatural(event)"  >
 					<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span> 
 				</div>
 			</div>';
@@ -1536,14 +1325,11 @@ class Basic_Inputs{
 			if($value==0){$w='';}elseif($value!=0){$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 					
-			//filtrado de teclas
-			$input = $this->solo_numeros_naturales_enteros_positivos($EXname);
-						
 			//generacion del input
-			$input .= '
+			$input = '
 			<div class="field">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumerosEnterosPositivos_'.$EXname.'(event)"  >
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroNatural(event)"  >
 					<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span> 
 				</div>
 			</div>';
@@ -1603,14 +1389,11 @@ class Basic_Inputs{
 			//generacion del input
 			$input ='<div class="field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumerosNaturales_'.$EXname.'(event)"  >
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroRealRacional(event)"  >
 							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span> 		
 						</div>
 					</div>';
 					
-			//filtrado de teclas
-			$input .= $this->solo_numeros_naturales($EXname);
-			
 			//Imprimir dato	
 			echo $input;
 		}
@@ -1705,13 +1488,10 @@ class Basic_Inputs{
 			if($value==''){$w='';}else{$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}			
 			
-			//filtrado de teclas
-			$input = $this->solo_rut($EXname);
-				
 			//generacion del input
-			$input .= '<div class="field">
+			$input = '<div class="field">
 							<div class="input-group bootstrap-timepicker">
-								<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloRut_'.$EXname.'(event)"  >
+								<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloRut(event)"  >
 								<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span> 
 							</div>
 						</div>';
@@ -1774,13 +1554,10 @@ class Basic_Inputs{
 			if($value==''){$w='';}else{$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}			
 			
-			//filtrado de teclas
-			$input = $this->solo_letras($EXname);
-				
 			//generacion del input
-			$input .= '<div class="field">
+			$input = '<div class="field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="'.$type.'" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras_'.$EXname.'(event)"  >
+							<input type="'.$type.'" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)"  >
 							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
 						</div>
 					</div>';		

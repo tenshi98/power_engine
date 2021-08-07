@@ -4,12 +4,13 @@ const { expect } = chai;
 const PizZip = require("pizzip");
 const fs = require("fs");
 const { get, unset, omit, uniq } = require("lodash");
+const errorLogger = require("../error-logger.js");
 const diff = require("diff");
 const AssertionModule = require("./assertion-module.js");
 
 const Docxtemplater = require("../docxtemplater.js");
 const { first } = require("../utils.js");
-const xmlPrettify = require("./xml-prettify");
+const xmlPrettify = require("./xml-prettify.js");
 let countFiles = 1;
 let allStarted = false;
 let examplesDirectory;
@@ -50,8 +51,13 @@ function unifiedDiff(actual, expected) {
 	);
 }
 
-function isNode12() {
-	return process && process.version && process.version.indexOf("v12") === 0;
+function isNode14() {
+	return (
+		typeof process !== "undefined" &&
+		process &&
+		process.version &&
+		process.version.indexOf("v14") === 0
+	);
 }
 
 function walk(dir) {
@@ -88,26 +94,28 @@ function createXmlTemplaterDocx(content, options = {}) {
 }
 
 function writeFile(expectedName, zip) {
-	const writeFile = path.resolve(examplesDirectory, "..", expectedName);
-	if (fs.writeFileSync) {
-		fs.writeFileSync(
-			writeFile,
-			zip.generate({ type: "nodebuffer", compression: "DEFLATE" })
-		);
-	}
-	if (typeof window !== "undefined" && window.saveAs) {
-		const out = zip.generate({
-			type: "blob",
-			mimeType:
-				"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-			compression: "DEFLATE",
-		});
-		saveAs(out, expectedName); // comment to see the error
+	if (path.resolve) {
+		const writeFile = path.resolve(examplesDirectory, "..", expectedName);
+		if (fs.writeFileSync) {
+			fs.writeFileSync(
+				writeFile,
+				zip.generate({ type: "nodebuffer", compression: "DEFLATE" })
+			);
+		}
+		if (typeof window !== "undefined" && window.saveAs) {
+			const out = zip.generate({
+				type: "blob",
+				mimeType:
+					"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+				compression: "DEFLATE",
+			});
+			saveAs(out, expectedName); // comment to see the error
+		}
 	}
 }
 function unlinkFile(expectedName) {
-	const writeFile = path.resolve(examplesDirectory, "..", expectedName);
-	if (fs.unlinkSync) {
+	if (path.resolve) {
+		const writeFile = path.resolve(examplesDirectory, "..", expectedName);
 		try {
 			fs.unlinkSync(writeFile);
 		} catch (e) {
@@ -117,78 +125,98 @@ function unlinkFile(expectedName) {
 		}
 	}
 }
+function getText(file) {
+	return file.asText().replace(/\n|\t/g, "");
+}
 
 /* eslint-disable no-console */
-function shouldBeSame(options) {
-	const zip = options.doc.getZip();
-	const { expectedName } = options;
-	let expectedZip;
+function shouldBeSame({ doc, expectedName }) {
+	const zip = doc.getZip();
 
-	try {
-		expectedZip = documentCache[expectedName].zip;
-	} catch (e) {
+	if (!documentCache[expectedName]) {
 		writeFile(expectedName, zip);
 		console.log(
 			JSON.stringify({ msg: "Expected file does not exists", expectedName })
 		);
-		throw e;
+		throw new Error(
+			`File ${expectedName} does not exist in examples directory`
+		);
 	}
+	const expectedZip = documentCache[expectedName].zip;
 
 	try {
 		uniq(Object.keys(zip.files).concat(Object.keys(expectedZip.files))).map(
 			function (filePath) {
 				const suffix = `for "${filePath}"`;
-				expect(expectedZip.files[filePath]).to.be.an(
+				const file = zip.files[filePath];
+				const expectedFile = expectedZip.files[filePath];
+				expect(expectedFile).to.be.an(
+					"object",
+					`The file ${filePath} doesn't exist on examples/${expectedName}`
+				);
+				expect(file).to.be.an(
 					"object",
 					`The file ${filePath} doesn't exist on ${expectedName}`
 				);
-				expect(zip.files[filePath]).to.be.an(
-					"object",
-					`The file ${filePath} doesn't exist on generated file`
-				);
-				expect(zip.files[filePath].name).to.be.equal(
-					expectedZip.files[filePath].name,
+				expect(file.name).to.be.equal(
+					expectedFile.name,
 					`Name differs ${suffix}`
 				);
-				expect(zip.files[filePath].options.dir).to.be.equal(
-					expectedZip.files[filePath].options.dir,
+				expect(file.options.dir).to.be.equal(
+					expectedFile.options.dir,
 					`IsDir differs ${suffix}`
 				);
-				const text1 = zip.files[filePath].asText().replace(/\n|\t/g, "");
-				const text2 = expectedZip.files[filePath]
-					.asText()
-					.replace(/\n|\t/g, "");
-				if (endsWith(filePath, "/")) {
+
+				if (file.options.dir) {
 					return;
 				}
-				if (filePath.indexOf(".png") !== -1) {
-					expect(text1.length).to.be.equal(
-						text2.length,
-						`Content differs ${suffix}`
-					);
-					expect(text1).to.be.equal(text2, `Content differs ${suffix}`);
-				} else {
-					expect(text1).to.not.match(
-						emptyNamespace,
-						`The file ${filePath} has empty namespaces`
-					);
-					expect(text2).to.not.match(
-						emptyNamespace,
-						`The file ${filePath} has empty namespaces`
-					);
-					if (text1 === text2) {
-						return;
-					}
-					const pText1 = xmlPrettify(text1, options);
-					const pText2 = xmlPrettify(text2, options);
 
-					if (pText1 !== pText2) {
-						const pd = unifiedDiff(pText1, pText2);
-						expect(pText1).to.be.equal(
-							pText2,
-							"Content differs \n" + suffix + "\n" + pd
+				const isBinary =
+					filePath.indexOf(".xml") === -1 &&
+					(file.options.binary || expectedFile.options.binary);
+
+				if (isBinary) {
+					const actualHash = file._data.crc32;
+					if (actualHash) {
+						const expectedHash = expectedFile._data.crc32;
+						expect(actualHash).to.be.a("number");
+						expect(actualHash).to.be.equal(
+							expectedHash,
+							"Content differs for " + suffix
+						);
+					} else {
+						const actualLength = file._data.length;
+						const expectedLength = expectedFile._data.uncompressedSize;
+						expect(actualLength).to.be.a("number");
+						expect(actualLength).to.be.equal(
+							expectedLength,
+							"Content differs for " + suffix
 						);
 					}
+					return;
+				}
+				const actualText = getText(file);
+				const expectedText = getText(expectedFile);
+				expect(actualText).to.not.match(
+					emptyNamespace,
+					`The file ${filePath} has empty namespaces`
+				);
+				expect(expectedText).to.not.match(
+					emptyNamespace,
+					`The file ${filePath} has empty namespaces`
+				);
+				if (actualText === expectedText) {
+					return;
+				}
+				const prettyActualText = xmlPrettify(actualText);
+				const prettyExpectedText = xmlPrettify(expectedText);
+
+				if (prettyActualText !== prettyExpectedText) {
+					const prettyDiff = unifiedDiff(prettyActualText, prettyExpectedText);
+					expect(prettyActualText).to.be.equal(
+						prettyExpectedText,
+						"Content differs \n" + suffix + "\n" + prettyDiff
+					);
 				}
 			}
 		);
@@ -244,15 +272,6 @@ function cleanError(e, expectedError) {
 	e = omit(e, ["line", "sourceURL", "stack"]);
 	e.message = message;
 	if (expectedError.properties && e.properties) {
-		if (expectedError.properties.offset != null) {
-			const o1 = e.properties.offset;
-			const o2 = expectedError.properties.offset;
-			// offset can be arrays, so deep compare
-			expect(o1).to.be.deep.equal(
-				o2,
-				`Offset differ ${o1} != ${o2}: for ${JSON.stringify(expectedError)}`
-			);
-		}
 		if (expectedError.properties.explanation != null) {
 			const e1 = e.properties.explanation;
 			const e2 = expectedError.properties.explanation;
@@ -264,8 +283,6 @@ function cleanError(e, expectedError) {
 			);
 		}
 		delete e.properties.explanation;
-		delete e.properties.offset;
-		delete expectedError.properties.offset;
 		delete expectedError.properties.explanation;
 		if (e.properties.postparsed) {
 			e.properties.postparsed.forEach(function (p) {
@@ -278,7 +295,7 @@ function cleanError(e, expectedError) {
 			expect(
 				e.properties.rootError,
 				JSON.stringify(e.properties)
-			).to.be.instanceOf(Error);
+			).to.be.instanceOf(Error, "rootError doesn't have correct type");
 			expect(
 				expectedError.properties.rootError,
 				JSON.stringify(expectedError.properties)
@@ -292,6 +309,17 @@ function cleanError(e, expectedError) {
 			delete e.properties.rootError;
 			delete expectedError.properties.rootError;
 		}
+		if (expectedError.properties.offset != null) {
+			const o1 = e.properties.offset;
+			const o2 = expectedError.properties.offset;
+			// offset can be arrays, so deep compare
+			expect(o1).to.be.deep.equal(
+				o2,
+				`Offset differ ${o1} != ${o2}: for ${JSON.stringify(expectedError)}`
+			);
+		}
+		delete expectedError.properties.offset;
+		delete e.properties.offset;
 		checkLength(e, expectedError, "properties.paragraphParts");
 		checkLength(e, expectedError, "properties.postparsed");
 		checkLength(e, expectedError, "properties.parsed");
@@ -336,16 +364,24 @@ function jsonifyError(e) {
 function errorVerifier(e, type, expectedError) {
 	expect(e, "No error has been thrown").not.to.be.equal(null);
 	const toShowOnFail = e.stack;
-	expect(e, toShowOnFail).to.be.instanceOf(Error);
-	expect(e, toShowOnFail).to.be.instanceOf(type);
+	expect(e, toShowOnFail).to.be.instanceOf(
+		Error,
+		"error is not a Javascript error"
+	);
+	expect(e, toShowOnFail).to.be.instanceOf(
+		type,
+		"error doesn't have the correct type"
+	);
 	expect(e, toShowOnFail).to.be.an("object");
 	expect(e, toShowOnFail).to.have.property("properties");
 	expect(e.properties, toShowOnFail).to.be.an("object");
-	expect(e.properties, toShowOnFail).to.have.property("explanation");
-	expect(e.properties.explanation, toShowOnFail).to.be.a("string");
+	if (type.name && type.name !== "XTInternalError") {
+		expect(e.properties, toShowOnFail).to.have.property("explanation");
+		expect(e.properties.explanation, toShowOnFail).to.be.a("string");
+		expect(e.properties.explanation, toShowOnFail).to.be.a("string");
+	}
 	expect(e.properties, toShowOnFail).to.have.property("id");
 	expect(e.properties.id, toShowOnFail).to.be.a("string");
-	expect(e.properties.explanation, toShowOnFail).to.be.a("string");
 	e = cleanError(e, expectedError);
 	if (e.properties.errors) {
 		const msg =
@@ -354,6 +390,7 @@ function errorVerifier(e, type, expectedError) {
 			"\nactual : \n" +
 			JSON.stringify(e.properties.errors);
 		expect(expectedError.properties.errors).to.be.an("array", msg);
+
 		const l1 = e.properties.errors.length;
 		const l2 = expectedError.properties.errors.length;
 		expect(l1).to.equal(
@@ -429,15 +466,15 @@ function loadFile(name, callback) {
 		);
 		return callback(null, name, buffer);
 	}
-	return PizZipUtils.getBinaryContent("../examples/" + name, function (
-		err,
-		data
-	) {
-		if (err) {
-			return callback(err);
+	return PizZipUtils.getBinaryContent(
+		"../examples/" + name,
+		function (err, data) {
+			if (err) {
+				return callback(err);
+			}
+			return callback(null, name, data);
 		}
-		return callback(null, name, data);
-	});
+	);
 }
 
 function unhandledRejectionHandler(reason) {
@@ -487,6 +524,14 @@ function startsWith(str, suffix) {
 
 /* eslint-disable no-console */
 function start() {
+	afterEach(function () {
+		if (
+			this.currentTest.state === "failed" &&
+			this.currentTest.err.properties
+		) {
+			errorLogger(this.currentTest.err);
+		}
+	});
 	/* eslint-disable import/no-unresolved */
 	const fileNames = require("./filenames.js");
 	/* eslint-enable import/no-unresolved */
@@ -608,6 +653,31 @@ function rejectSoon(data) {
 	});
 }
 
+function getParameterByName(name) {
+	if (typeof window === "undefined") {
+		return null;
+	}
+	const url = window.location.href;
+	name = name.replace(/[\[\]]/g, "\\$&");
+	const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		results = regex.exec(url);
+	if (!results) {
+		return null;
+	}
+	if (!results[2]) {
+		return "";
+	}
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function browserMatches(regex) {
+	const currentBrowser = getParameterByName("browser");
+	if (currentBrowser === null) {
+		return false;
+	}
+	return regex.test(currentBrowser);
+}
+
 module.exports = {
 	chai,
 	cleanError,
@@ -633,7 +703,10 @@ module.exports = {
 	rejectSoon,
 	start,
 	wrapMultiError,
-	isNode12,
+	isNode14,
 	createDocV4,
 	getZip,
+	getParameterByName,
+	browserMatches,
+	errorVerifier,
 };

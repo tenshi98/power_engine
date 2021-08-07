@@ -2,12 +2,12 @@ const {
 	expectToThrow,
 	createDoc,
 	shouldBeSame,
-	isNode12,
+	isNode14,
 	createDocV4,
-} = require("./utils");
+} = require("./utils.js");
 const Errors = require("../errors.js");
 const { expect } = require("chai");
-const { xml2str, traits } = require("../doc-utils");
+const { xml2str, traits } = require("../doc-utils.js");
 
 describe("Verify apiversion", function () {
 	it("should work with valid api version", function () {
@@ -36,7 +36,7 @@ describe("Verify apiversion", function () {
 			name: "APIVersionError",
 			properties: {
 				id: "api_version_error",
-				currentModuleApiVersion: [3, 24, 0],
+				currentModuleApiVersion: [3, 26, 0],
 				neededVersion: [3, 92, 0],
 			},
 		});
@@ -113,13 +113,14 @@ describe("Module xml parse", function () {
 
 		const xmlKeys = Object.keys(xmlDocuments);
 		expect(xmlKeys).to.deep.equal(["word/_rels/document.xml.rels"]);
-		const rels = xmlDocuments[
-			"word/_rels/document.xml.rels"
-		].getElementsByTagName("Relationship");
+		const rels =
+			xmlDocuments["word/_rels/document.xml.rels"].getElementsByTagName(
+				"Relationship"
+			);
 		expect(rels.length).to.equal(10);
 
 		const str = xml2str(xmlDocuments["word/_rels/document.xml.rels"]);
-		if (isNode12()) {
+		if (isNode14()) {
 			expect(str).to
 				.equal(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId8" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/><Relationship Id="rId7" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/><Relationship Id="rId2" Type="http://schemas.microsoft.com/office/2007/relationships/stylesWithEffects" Target="stylesWithEffects.xml"/><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/endnotes" Target="endnotes.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes" Target="footnotes.xml"/><Relationship Id="rId10" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings" Target="webSettings.xml"/><Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/></Relationships>`);
@@ -212,19 +213,17 @@ describe("Module errors", function () {
 			name: "Error module",
 			requiredAPIVersion: "3.0.0",
 			parse(placeHolderContent) {
-				if (placeHolderContent === "first_name") {
-					const type = "placeholder";
-					return {
-						type,
-						value: placeHolderContent.substr(1),
-						module: moduleName,
-					};
-				}
+				const type = "placeholder";
+				return {
+					type,
+					value: placeHolderContent,
+					module: moduleName,
+				};
 			},
 			render(part) {
-				if (part.type === "placeholder") {
+				if (part.module === moduleName) {
 					return {
-						errors: [new Error("foobar")],
+						errors: [new Error(`foobar ${part.value}`)],
 					};
 				}
 			},
@@ -241,8 +240,10 @@ describe("Module errors", function () {
 		}
 		expect(error).to.be.an("object");
 		expect(error.message).to.equal("Multi error");
-		expect(error.properties.errors.length).to.equal(1);
-		expect(error.properties.errors[0].message).to.equal("foobar");
+		expect(error.properties.errors.length).to.equal(9);
+		expect(error.properties.errors[0].message).to.equal("foobar last_name");
+		expect(error.properties.errors[1].message).to.equal("foobar first_name");
+		expect(error.properties.errors[2].message).to.equal("foobar phone");
 	});
 });
 

@@ -1,4 +1,4 @@
-const { loadFile, loadDocument, rejectSoon } = require("./utils");
+const { loadFile, loadDocument, rejectSoon } = require("./utils.js");
 const Errors = require("../errors.js");
 const { expect } = require("chai");
 const {
@@ -7,9 +7,9 @@ const {
 	wrapMultiError,
 	expectToThrow,
 	expectToThrowAsync,
-} = require("./utils");
+} = require("./utils.js");
 
-const angularParser = require("./angular-parser");
+const angularParser = require("./angular-parser.js");
 
 describe("Compilation errors", function () {
 	it("should fail when parsing invalid xml (1)", function () {
@@ -164,6 +164,40 @@ describe("Compilation errors", function () {
 			Errors.XTTemplateError,
 			wrapMultiError(expectedError)
 		);
+	});
+
+	it("should fail early when a loop closes the wrong loop", function () {
+		const content =
+			"<w:t>{#loop1}{#loop2}{/loop3}{/loop3}{/loop2}{/loop1}</w:t>";
+		const expectedError = {
+			name: "TemplateError",
+			message: "Multi error",
+			properties: {
+				errors: [
+					{
+						name: "TemplateError",
+						message: "Unopened loop",
+						properties: {
+							file: "word/document.xml",
+							xtag: "loop3",
+							id: "unopened_loop",
+						},
+					},
+					{
+						name: "TemplateError",
+						message: "Unopened loop",
+						properties: {
+							file: "word/document.xml",
+							xtag: "loop3",
+							id: "unopened_loop",
+						},
+					},
+				],
+				id: "multi_error",
+			},
+		};
+		const create = createXmlTemplaterDocx.bind(null, content);
+		expectToThrow(create, Errors.XTTemplateError, expectedError);
 	});
 
 	it("should fail when rawtag is not in paragraph", function () {
@@ -701,6 +735,44 @@ describe("Multi errors", function () {
 			},
 		};
 
+		const create = createXmlTemplaterDocx.bind(null, content);
+		expectToThrow(create, Errors.XTTemplateError, expectedError);
+	});
+
+	it("should work with wrongly nested loops", function () {
+		const content = `
+		<w:t>
+			{#users}.........{/companies}
+			{#companies}.....{/users}
+		</w:t>
+		`;
+		const expectedError = {
+			name: "TemplateError",
+			message: "Multi error",
+			properties: {
+				errors: [
+					{
+						name: "TemplateError",
+						message: "Unopened loop",
+						properties: {
+							file: "word/document.xml",
+							id: "unopened_loop",
+							xtag: "companies",
+						},
+					},
+					{
+						name: "TemplateError",
+						message: "Unclosed loop",
+						properties: {
+							file: "word/document.xml",
+							id: "unclosed_loop",
+							xtag: "companies",
+						},
+					},
+				],
+				id: "multi_error",
+			},
+		};
 		const create = createXmlTemplaterDocx.bind(null, content);
 		expectToThrow(create, Errors.XTTemplateError, expectedError);
 	});
@@ -1375,6 +1447,22 @@ describe("Async errors", function () {
 		return expectToThrowAsync(create, Errors.XTTemplateError, expectedError);
 	});
 
+	it("should show error when running resolveData before compile", function () {
+		const content = "<w:t>{#users}{user}{/}</w:t>";
+		const expectedError = {
+			name: "InternalError",
+			message: "You must run `.compile()` before running `.resolveData()`",
+			properties: {
+				id: "resolve_before_compile",
+			},
+		};
+		const doc = createXmlTemplaterDocxNoRender(content);
+		function create() {
+			return doc.resolveData({});
+		}
+		return expectToThrowAsync(create, Errors.XTInternalError, expectedError);
+	});
+
 	it("should fail when customparser fails to execute on multiple tags", function () {
 		const content =
 			"<w:t>{#name|istrue}Name{/} {name|upper} {othername|upper}</w:t>";
@@ -1399,18 +1487,6 @@ describe("Async errors", function () {
 							id: "scopeparser_execution_failed",
 							file: "word/document.xml",
 							scope: {},
-							tag: "name|istrue",
-							rootError: { message: "foo 1" },
-							offset: 0,
-						},
-					},
-					{
-						name: "ScopeParserError",
-						message: "Scope parser execution failed",
-						properties: {
-							id: "scopeparser_execution_failed",
-							file: "word/document.xml",
-							scope: {},
 							tag: "name|upper",
 							rootError: { message: "foo 2" },
 							offset: 22,
@@ -1426,6 +1502,18 @@ describe("Async errors", function () {
 							tag: "othername|upper",
 							rootError: { message: "foo 3" },
 							offset: 35,
+						},
+					},
+					{
+						name: "ScopeParserError",
+						message: "Scope parser execution failed",
+						properties: {
+							id: "scopeparser_execution_failed",
+							file: "word/document.xml",
+							scope: {},
+							tag: "name|istrue",
+							rootError: { message: "foo 1" },
+							offset: 0,
 						},
 					},
 				],
@@ -1458,6 +1546,7 @@ describe("Async errors", function () {
 				},
 			};
 		}
+
 		const expectedError = {
 			name: "TemplateError",
 			message: "Multi error",
@@ -1469,7 +1558,7 @@ describe("Async errors", function () {
 						properties: {
 							id: "scopeparser_execution_failed",
 							file: "word/document.xml",
-							scope: {},
+							scope: { abc: true },
 							tag: "raw|isfalse",
 							rootError: { message: "foo 1" },
 							offset: 0,
@@ -1481,7 +1570,7 @@ describe("Async errors", function () {
 						properties: {
 							id: "scopeparser_execution_failed",
 							file: "word/document.xml",
-							scope: {},
+							scope: { abc: true },
 							tag: "raw|istrue",
 							rootError: { message: "foo 2" },
 							offset: 14,
@@ -1496,7 +1585,7 @@ describe("Async errors", function () {
 		});
 		doc.compile();
 		function create() {
-			return doc.resolveData().then(function () {
+			return doc.resolveData({ abc: true }).then(function () {
 				return doc.render();
 			});
 		}

@@ -1,32 +1,30 @@
 "use strict";
 
-const DocUtils = require("./doc-utils");
-DocUtils.traits = require("./traits");
-DocUtils.moduleWrapper = require("./module-wrapper");
-const { throwMultiError } = require("./errors");
-
-const collectContentTypes = require("./collect-content-types");
-const ctXML = "[Content_Types].xml";
-const commonModule = require("./modules/common");
-
-const Lexer = require("./lexer");
+const DocUtils = require("./doc-utils.js");
+DocUtils.traits = require("./traits.js");
+DocUtils.moduleWrapper = require("./module-wrapper.js");
+const createScope = require("./scope-manager.js");
 const {
-	defaults,
-	str2xml,
-	xml2str,
-	moduleWrapper,
-	utf8ToWord,
-	concatArrays,
-	unique,
-} = DocUtils;
+	throwMultiError,
+	throwResolveBeforeCompile,
+	throwRenderInvalidTemplate,
+} = require("./errors.js");
+
+const collectContentTypes = require("./collect-content-types.js");
+const ctXML = "[Content_Types].xml";
+const commonModule = require("./modules/common.js");
+
+const Lexer = require("./lexer.js");
+const { defaults, str2xml, xml2str, moduleWrapper, concatArrays, uniq } =
+	DocUtils;
 const {
 	XTInternalError,
 	throwFileTypeNotIdentified,
 	throwFileTypeNotHandled,
 	throwApiVersionError,
-} = require("./errors");
+} = require("./errors.js");
 
-const currentModuleApiVersion = [3, 24, 0];
+const currentModuleApiVersion = [3, 26, 0];
 
 const Docxtemplater = class Docxtemplater {
 	constructor(zip, { modules = [], ...options } = {}) {
@@ -35,14 +33,15 @@ const Docxtemplater = class Docxtemplater {
 				"The modules argument of docxtemplater's constructor must be an array"
 			);
 		}
+		this.scopeManagers = {};
 		this.compiled = {};
 		this.modules = [commonModule()];
 		this.setOptions(options);
 		modules.forEach((module) => {
 			this.attachModule(module);
 		});
-		if (zip) {
-			if (!zip.files || typeof zip.file !== "function") {
+		if (arguments.length > 0) {
+			if (!zip || !zip.files || typeof zip.file !== "function") {
 				throw new Error(
 					"The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)"
 				);
@@ -168,10 +167,6 @@ const Docxtemplater = class Docxtemplater {
 				"setOptions should be called with an object as first parameter"
 			);
 		}
-		if (options.delimiters) {
-			options.delimiters.start = utf8ToWord(options.delimiters.start);
-			options.delimiters.end = utf8ToWord(options.delimiters.end);
-		}
 		this.options = {};
 		Object.keys(defaults).forEach((key) => {
 			const defaultValue = defaults[key];
@@ -184,6 +179,11 @@ const Docxtemplater = class Docxtemplater {
 		return this;
 	}
 	loadZip(zip) {
+		if (this.v4Constructor) {
+			throw new Error(
+				"loadZip() should not be called manually when using the v4 constructor"
+			);
+		}
 		if (zip.loadAsync) {
 			throw new XTInternalError(
 				"Docxtemplater doesn't handle JSZip version >=3, please use pizzip"
@@ -200,33 +200,68 @@ const Docxtemplater = class Docxtemplater {
 		]);
 		return this;
 	}
-	compileFile(fileName) {
-		this.compiled[fileName].parse();
-	}
 	precompileFile(fileName) {
 		const currentFile = this.createTemplateClass(fileName);
 		currentFile.preparse();
 		this.compiled[fileName] = currentFile;
 	}
+	compileFile(fileName) {
+		this.compiled[fileName].parse();
+	}
+	getScopeManager(to, currentFile, tags) {
+		if (!this.scopeManagers[to]) {
+			this.scopeManagers[to] = createScope({
+				tags: tags || {},
+				parser: this.parser,
+				cachedParsers: currentFile.cachedParsers,
+			});
+		}
+		return this.scopeManagers[to];
+	}
 	resolveData(data) {
 		let errors = [];
-		return Promise.resolve(data)
-			.then((data) => {
-				return Promise.all(
-					Object.keys(this.compiled).map((from) => {
+		if (!Object.keys(this.compiled).length) {
+			throwResolveBeforeCompile();
+		}
+		return Promise.resolve(data).then((data) => {
+			this.setData(data);
+			this.setModules({
+				data: this.data,
+				Lexer,
+			});
+			this.mapper = this.modules.reduce(function (value, module) {
+				return module.getRenderedMap(value);
+			}, {});
+			return Promise.all(
+				Object.keys(this.mapper).map((to) => {
+					const { from, data } = this.mapper[to];
+					return Promise.resolve(data).then((data) => {
 						const currentFile = this.compiled[from];
-						return currentFile.resolveTags(data).catch(function (errs) {
-							errors = errors.concat(errs);
-						});
-					})
-				);
-			})
-			.then((resolved) => {
+						currentFile.filePath = to;
+						currentFile.scopeManager = this.getScopeManager(
+							to,
+							currentFile,
+							data
+						);
+						currentFile.scopeManager.resolved = [];
+						return currentFile.resolveTags(data).then(
+							function (result) {
+								currentFile.scopeManager.finishedResolving = true;
+								return result;
+							},
+							function (errs) {
+								errors = errors.concat(errs);
+							}
+						);
+					});
+				})
+			).then((resolved) => {
 				if (errors.length !== 0) {
 					throwMultiError(errors);
 				}
 				return concatArrays(resolved);
 			});
+		});
 	}
 	compile() {
 		if (Object.keys(this.compiled).length) {
@@ -235,7 +270,7 @@ const Docxtemplater = class Docxtemplater {
 		this.options = this.modules.reduce((options, module) => {
 			return module.optionsTransformer(options, this);
 		}, this.options);
-		this.options.xmlFileNames = unique(this.options.xmlFileNames);
+		this.options.xmlFileNames = uniq(this.options.xmlFileNames);
 		this.xmlDocuments = this.options.xmlFileNames.reduce(
 			(xmlDocuments, fileName) => {
 				const content = this.zip.files[fileName].asText();
@@ -249,7 +284,6 @@ const Docxtemplater = class Docxtemplater {
 			xmlDocuments: this.xmlDocuments,
 		});
 		this.getTemplatedFiles();
-		this.setModules({ compiled: this.compiled });
 		// Loop inside all templatedFiles (ie xml files with content).
 		// Sometimes they don't exist (footer.xml for example)
 		this.templatedFiles.forEach((fileName) => {
@@ -262,6 +296,8 @@ const Docxtemplater = class Docxtemplater {
 				this.compileFile(fileName);
 			}
 		});
+		this.setModules({ compiled: this.compiled });
+		verifyErrors(this);
 		return this;
 	}
 	updateFileTypeConfig() {
@@ -313,23 +349,28 @@ const Docxtemplater = class Docxtemplater {
 		this.fileTypeConfig =
 			this.options.fileTypeConfig ||
 			this.fileTypeConfig ||
-			Docxtemplater.FileTypeConfig[this.fileType];
+			Docxtemplater.FileTypeConfig[this.fileType]();
 		return this;
 	}
 	render() {
 		this.compile();
+		if (this.errors.length > 0) {
+			throwRenderInvalidTemplate();
+		}
 		this.setModules({
 			data: this.data,
 			Lexer,
 		});
-		this.mapper = this.modules.reduce(function (value, module) {
-			return module.getRenderedMap(value);
-		}, {});
+		this.mapper =
+			this.mapper ||
+			this.modules.reduce(function (value, module) {
+				return module.getRenderedMap(value);
+			}, {});
 
-		this.fileTypeConfig.tagsXmlLexedArray = unique(
+		this.fileTypeConfig.tagsXmlLexedArray = uniq(
 			this.fileTypeConfig.tagsXmlLexedArray
 		);
-		this.fileTypeConfig.tagsXmlTextArray = unique(
+		this.fileTypeConfig.tagsXmlTextArray = uniq(
 			this.fileTypeConfig.tagsXmlTextArray
 		);
 
@@ -337,9 +378,12 @@ const Docxtemplater = class Docxtemplater {
 			const { from, data } = this.mapper[to];
 			const currentFile = this.compiled[from];
 			currentFile.setTags(data);
+			currentFile.scopeManager = this.getScopeManager(to, currentFile, data);
 			currentFile.render(to);
 			this.zip.file(to, currentFile.content, { createFolders: true });
 		});
+
+		verifyErrors(this);
 		this.sendEvent("syncing-zip");
 		this.syncZip();
 		return this;
@@ -388,9 +432,23 @@ const Docxtemplater = class Docxtemplater {
 	}
 };
 
+function verifyErrors(doc) {
+	const compiled = doc.compiled;
+	let allErrors = [];
+	Object.keys(compiled).forEach((name) => {
+		const templatePart = compiled[name];
+		allErrors = concatArrays([allErrors, templatePart.allErrors]);
+	});
+	doc.errors = allErrors;
+
+	if (allErrors.length !== 0) {
+		throwMultiError(allErrors);
+	}
+}
+
 Docxtemplater.DocUtils = DocUtils;
-Docxtemplater.Errors = require("./errors");
-Docxtemplater.XmlTemplater = require("./xml-templater");
-Docxtemplater.FileTypeConfig = require("./file-type-config");
-Docxtemplater.XmlMatcher = require("./xml-matcher");
+Docxtemplater.Errors = require("./errors.js");
+Docxtemplater.XmlTemplater = require("./xml-templater.js");
+Docxtemplater.FileTypeConfig = require("./file-type-config.js");
+Docxtemplater.XmlMatcher = require("./xml-matcher.js");
 module.exports = Docxtemplater;

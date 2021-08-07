@@ -1,3 +1,216 @@
+### 3.22.5
+
+Bugfix to avoid dropping section when having a loop right before a section break
+
+### 3.22.4
+
+When having a loop containing a page section break, the generated document had continuous section breaks in the output.
+
+With this version, the page section break should be rendered as page section breaks, and create as many pages as there are items in the loop.
+
+### 3.22.3
+
+Update InspectModule to make getTags function work well with XLSXModule
+
+### 3.22.2
+
+Disallow calling loadZip if using v4 constructor
+
+### 3.22.1
+
+Correctly handle `<<tag>>` delimiters when saved in word as `&lt;&lt;tag>>` Fixes #606
+
+### 3.22.0
+
+- Add resolveOffset internal property on scope managers to be able to handle the slides loop case correctly.
+- Update moduleApiVersion to 3.26.0.
+
+### 3.21.2
+
+Internal change to allow to match tags with non-breaking space.
+
+When entering `Ctrl+Shift+Space`, a "non-breaking" space is created.
+
+When using a non-breaking space in the tag `{:subtemplate doc}`, or `{:table data}, the tag would not be replaced correctly. You need to upgrade the PRO modules as well to their latest version in order to fix the bug.
+
+### 3.21.1
+
+Bugfix issue with spaces that would disappear after rendering :
+
+Correctly add xml:space="preserve" to all relevant w:t tags, ie all `<w:t>` tags that contain a placeholder.
+
+### 3.21.0
+
+Update algorithm for loops to have more chance to show the underlying error.
+
+For example, with the following template :
+
+```
+{#a}
+	{#b}
+		{#c}
+		{/d}
+		{/d}
+		{/c}
+	{/b}
+{/a}
+```
+
+The algorithm will now show that the {/d} tags are involved in the issue.
+
+### 3.20.1
+
+Automatically add empty paragraph after table if the table is the last element in a document.
+
+### 3.20.0
+
+Change how the resolve algorithm works internally.
+
+This fixes a bug in the slides module and image module, when used together, in async mode, where all image tags coming after a condition or loop would not be shown.
+
+Because this induces an internal incompatible change, if you use the footnotes module, you have to upgrade the footnotes module to the version 3.2.0
+
+Update moduleApiVersion to 3.25.0.
+
+### 3.19.10
+
+When having a document that has breaks to change the amount of columns, and loops surrounding the breaks, some pagebreaks could appear in the document.
+
+Now, the section breaks should no more be transformed into page breaks.
+
+### 3.19.9
+
+When having a document containing a table like this :
+
+```
+================================
+| {#users} abc                 |
+--------------------------------
+| {/users}{#cond} def {/cond}  |
+================================
+```
+
+Docxtemplater will now throw an error : `id: "unbalanced_loop_tags"`,
+and explanation: `Unbalanced loop tags {#users}{/users}{#cond}{/cond}`,
+
+In previous versions, this would most likely lead to a corrupt document.
+
+The reason is that when a loop tag is spanning across multiple cells of a table, it will automatically expand to "row-mode", eg it will create 2 rows for each user in the users iterable.
+
+However, the {#cond} loop tag is in one single cell, hence it will not expand to "row-mode".
+
+Instead, the template should be written like this if the cond loop should be part of the users loop :
+
+```
+================================
+| {#users} abc                 |
+--------------------------------
+| {#cond} def {/cond}{/users}  |
+================================
+```
+
+or like this if the loops are to be kept separate
+
+```
+===========================
+| {#users} abc {/users}   |
+---------------------------
+| {#cond} def {/cond}     |
+===========================
+```
+
+### 3.19.8
+
+Don't override global configuration for docx/pptx when using a module, instead, a new fresh configuration is passed to a docxtemplater instance.
+
+### 3.19.7
+
+Fail with a clear error message when instantiating Docxtemplater with a null value, like this :
+
+```
+new Docxtemplater(null);
+```
+
+This will now throw :
+
+```
+The first argument of docxtemplater's constructor must be a valid zip file (jszip v2 or pizzip v3)
+```
+
+### 3.19.6
+
+Fix speed regression when having big document with many rawxml tag.
+
+This was caused by the fact that expandToOne was a recursive function.
+
+Now that the function uses simple for loop, the rendering is way faster.
+
+If you use the PRO word-run module, you should update the word-run-module to version 3.1.1
+
+### 3.19.5
+
+Bugfix when data contains double array, the scope parser would not do the right thing.
+
+With the following template + data :
+
+```
+{#a}{.}{/a}
+```
+
+and the following data :
+
+```
+{ a: [[ "b", "c"]] }
+```
+
+This would render just the "c", but it should render the array `[ "b", "c" ]` which will render as `b,c`
+
+### 3.19.4
+
+Avoid corruption when having self closing `<w:sdtContent/>` in the document.
+
+### 3.19.3
+
+Throw an error when calling render on an invalid template.
+
+Before this version, it was possible to do the following on an invalid template :
+
+```
+try {
+    doc.compile();
+}
+catch (e) {
+    doc.render();
+}
+```
+
+And, this would produce, most of the times, a generated document that is corrupted.
+
+Now, `doc.render()` will also throw in this case the error "You should not call .render on a document that had compilation errors"
+
+### 3.19.2
+
+Update typescript bindings to be able to write `doc.resolveData()`
+
+### 3.19.1
+
+[Internal Only, for tests] : Rewrite xml-prettify to handle canonicalization of `<w:t>Hello></w:t>`
+
+### 3.19.0
+
+When there are errors both in the header and the footer, all errors are shown up instead of seeing only the errors of the first parsed file. This helps to find errors more quickly.
+
+Huge performance improvements when using resolveData with loops with many iterations or with huge content inside the loop. On a document with loops of 8000 iterations, a total of 130000 Promises were created, now only about 8000 are created, (This is a 16x improvement in this case). This will produce noticeable improvements in particular in browser environments, where creating many promises costs more than in Node JS.
+
+Some other improvements to call the `parser()` function only when needed, and using some internal caching.
+
+If you're using the PRO xlsx module, you should upgrade the module to version 3.3.4 or higher, or you might see some rendered values duplicated at multiple points in the generated spreadsheet.
+
+### 3.18.0
+
+- Throw error if calling `.resolveData(data)` before `.compile()`
+- Add TypeScript typings
+
 ### 3.17.9
 
 Bugfix corruption when having loops containing one section.
@@ -59,7 +272,7 @@ You should instead write :
 
 ```
 const doc = new Docxtemplater(zip, {
-	modules: [new ImageModule()],
+    modules: [new ImageModule()],
     delimiters: {
       start: "<",
       end: ">",
@@ -382,12 +595,12 @@ For example with the template :
 
 ```
 {#loop}
-	{#cond2}
-		{label}
-	{/cond2}
-	{#cond3}
-		{label}
-	{/cond3}
+    {#cond2}
+        {label}
+    {/cond2}
+    {#cond3}
+        {label}
+    {/cond3}
 {/loop}
 ```
 
@@ -395,13 +608,13 @@ and the data :
 
 ```
 {
-	label: "outer",
-	loop: [
-		{
-			cond2: true,
-			label: "inner",
-		},
-	],
+    label: "outer",
+    loop: [
+        {
+            cond2: true,
+            label: "inner",
+        },
+    ],
 }
 ```
 
@@ -870,7 +1083,7 @@ The **JSZip version that you use should be 2.x**, the 3.x is now exclusively asy
 
 ### 2.0.0
 
-- **Breaking** : To choose between docx or pptx, you now have to pass docx.setOptions({fileType:'docx'}) where the fileTypes are one of 'pptx', 'docx' (default is 'docx')
+- **Breaking** : To choose between docx or pptx, you now have to pass doc.setOptions({fileType:'docx'}) where the fileTypes are one of 'pptx', 'docx' (default is 'docx')
 - Using es6 instead of coffeescript to code (code is still compiled to es5, to be usable with node v0.{10,12} or in the browser)
 - Add finalize step in render function to throw an error if a tag is unclosed
 - Module API has been updated, notably the tagXml property doesn't exist anymore, you should use the properties in `fileTypeConfig`
@@ -954,7 +1167,7 @@ Upgrade guide :
 
 ### 1.0.3
 
-- docx.setOptions({delimiters:{start:”[“,end:”]”}}) now works e2d06dedd88860d2dac3d598b590bf81e2d113a6
+- doc.setOptions({delimiters:{start:”[“,end:”]”}}) now works e2d06dedd88860d2dac3d598b590bf81e2d113a6
 
 ### 1.0.2
 

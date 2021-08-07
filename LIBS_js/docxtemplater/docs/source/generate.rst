@@ -38,22 +38,22 @@ Node
                 return error.properties.explanation;
             }).join("\n");
             console.log('errorMessages', errorMessages);
-            // errorMessages is a humanly readable message looking like this :
+            // errorMessages is a humanly readable message looking like this:
             // 'The tag beginning with "foobar" is unopened'
         }
         throw error;
     }
 
-    //Load the docx file as a binary
+    // Load the docx file as binary content
     var content = fs
         .readFileSync(path.resolve(__dirname, 'input.docx'), 'binary');
 
     var zip = new PizZip(content);
     var doc;
     try {
-        doc = new Docxtemplater(zip);
+        doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
     } catch(error) {
-        // Catch compilation errors (errors caused by the compilation of the template : misplaced tags)
+        // Catch compilation errors (errors caused by the compilation of the template: misplaced tags)
         errorHandler(error);
     }
 
@@ -70,7 +70,7 @@ Node
         doc.render()
     }
     catch (error) {
-        // Catch rendering errors (errors relating to the rendering of the template : angularParser throws an error)
+        // Catch rendering errors (errors relating to the rendering of the template: angularParser throws an error)
         errorHandler(error);
     }
 
@@ -93,7 +93,7 @@ Browser
         <body>
             <button onclick="generate()">Generate document</button>
         </body>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.17.9/docxtemplater.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.22.5/docxtemplater.js"></script>
         <script src="https://unpkg.com/pizzip@3.0.6/dist/pizzip.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
         <script src="https://unpkg.com/pizzip@3.0.6/dist/pizzip-utils.js"></script>
@@ -130,7 +130,7 @@ Browser
                             return error.properties.explanation;
                         }).join("\n");
                         console.log('errorMessages', errorMessages);
-                        // errorMessages is a humanly readable message looking like this :
+                        // errorMessages is a humanly readable message looking like this:
                         // 'The tag beginning with "foobar" is unopened'
                     }
                     throw error;
@@ -139,9 +139,9 @@ Browser
                 var zip = new PizZip(content);
                 var doc;
                 try {
-                    doc=new window.docxtemplater(zip);
+                    doc = new window.docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
                 } catch(error) {
-                    // Catch compilation errors (errors caused by the compilation of the template : misplaced tags)
+                    // Catch compilation errors (errors caused by the compilation of the template: misplaced tags)
                     errorHandler(error);
                 }
 
@@ -156,15 +156,16 @@ Browser
                     doc.render();
                 }
                 catch (error) {
-                    // Catch rendering errors (errors relating to the rendering of the template : angularParser throws an error)
+                    // Catch rendering errors (errors relating to the rendering of the template: angularParser throws an error)
                     errorHandler(error);
                 }
 
                 var out=doc.getZip().generate({
                     type:"blob",
                     mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                }) //Output the document using Data-URI
-                saveAs(out,"output.docx")
+                });
+                // Output the document using Data-URI
+                saveAs(out, "output.docx");
             })
         }
         </script>
@@ -174,7 +175,7 @@ Please note that if you want to load a docx from your filesystem, you will need 
 
 :ref:`cors`
 
-It is also possible to read the docx from an `<input type="file" id="doc">`, by using the following :
+It is also possible to read the docx from an `<input type="file" id="doc">`, by using the following:
 
 .. code-block:: javascript
 
@@ -197,3 +198,13 @@ It is also possible to read the docx from an `<input type="file" id="doc">`, by 
         }
     }
 
+
+React, Angular, Vue, Next.JS
+----------------------------
+
+There are examples of usage to generate a document in the FAQ for the following libraries:
+
+- `React <faq.html#docxtemplater-in-a-react-project>`_
+- `Angular <faq.html#docxtemplater-in-an-angular-project>`_
+- `Vue <faq.html#docxtemplater-in-a-vuejs-project>`_
+- `Next.js <faq.html#docxtemplater-in-a-next-js-project>`_

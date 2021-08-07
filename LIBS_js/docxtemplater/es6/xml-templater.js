@@ -1,13 +1,12 @@
-const { wordToUtf8, convertSpaces, defaults } = require("./doc-utils");
-const createScope = require("./scope-manager");
-const xmlMatcher = require("./xml-matcher");
-const { throwMultiError, throwContentMustBeString } = require("./errors");
-const Lexer = require("./lexer");
+const { wordToUtf8, convertSpaces, defaults } = require("./doc-utils.js");
+const xmlMatcher = require("./xml-matcher.js");
+const { throwContentMustBeString } = require("./errors.js");
+const Lexer = require("./lexer.js");
 const Parser = require("./parser.js");
 const render = require("./render.js");
 const postrender = require("./postrender.js");
 const resolve = require("./resolve.js");
-const joinUncorrupt = require("./join-uncorrupt");
+const joinUncorrupt = require("./join-uncorrupt.js");
 
 function getFullText(content, tagsXmlArray) {
 	const matcher = xmlMatcher(content, tagsXmlArray);
@@ -20,6 +19,7 @@ function getFullText(content, tagsXmlArray) {
 module.exports = class XmlTemplater {
 	constructor(content, options) {
 		this.filePath = options.filePath;
+		this.cachedParsers = {};
 		this.modules = options.modules;
 		this.fileTypeConfig = options.fileTypeConfig;
 		this.contentType = options.contentType;
@@ -37,33 +37,30 @@ module.exports = class XmlTemplater {
 	}
 	setTags(tags) {
 		this.tags = tags != null ? tags : {};
-		this.scopeManager = createScope({ tags: this.tags, parser: this.parser });
 		return this;
 	}
 	resolveTags(tags) {
 		this.tags = tags != null ? tags : {};
-		this.scopeManager = createScope({ tags: this.tags, parser: this.parser });
 		const options = this.getOptions();
-		options.scopeManager = createScope(options);
+		const filePath = this.filePath;
+		options.scopeManager = this.scopeManager;
 		options.resolve = resolve;
 		return resolve(options).then(({ resolved, errors }) => {
 			errors.forEach((error) => {
-				// error properties might not be defined if some foreign
-				// (unhandled error not throw by docxtemplater willingly) is
+				// error properties might not be defined if some foreign error
+				// (unhandled error not thrown by docxtemplater willingly) is
 				// thrown.
 				error.properties = error.properties || {};
-				error.properties.file = this.filePath;
+				error.properties.file = filePath;
 			});
 			if (errors.length !== 0) {
 				throw errors;
 			}
-			return Promise.all(
-				resolved.map(function (r) {
-					return Promise.resolve(r);
-				})
-			).then((resolved) => {
-				this.setModules({ inspect: { resolved } });
-				return (this.resolved = resolved);
+			return Promise.all(resolved).then((resolved) => {
+				options.scopeManager.root.finishedResolving = true;
+				options.scopeManager.resolved = resolved;
+				this.setModules({ inspect: { resolved, filePath } });
+				return resolved;
 			});
 		});
 	}
@@ -110,17 +107,16 @@ module.exports = class XmlTemplater {
 	}
 	errorChecker(errors) {
 		if (errors.length) {
-			this.modules.forEach(function (module) {
-				errors = module.errorsTransformer(errors);
-			});
 			errors.forEach((error) => {
 				// error properties might not be defined if some foreign
-				// (unhandled error not throw by docxtemplater willingly) is
+				// (unhandled error not thrown by docxtemplater willingly) is
 				// thrown.
 				error.properties = error.properties || {};
 				error.properties.file = this.filePath;
 			});
-			throwMultiError(errors);
+			this.modules.forEach(function (module) {
+				errors = module.errorsTransformer(errors);
+			});
 		}
 	}
 	baseNullGetter(part, sm) {
@@ -138,6 +134,7 @@ module.exports = class XmlTemplater {
 	getOptions() {
 		return {
 			compiled: this.postparsed,
+			cachedParsers: this.cachedParsers,
 			tags: this.tags,
 			modules: this.modules,
 			parser: this.parser,
@@ -151,12 +148,16 @@ module.exports = class XmlTemplater {
 	render(to) {
 		this.filePath = to;
 		const options = this.getOptions();
-		options.resolved = this.resolved;
-		options.scopeManager = createScope(options);
+		options.resolved = this.scopeManager.resolved;
+		options.scopeManager = this.scopeManager;
 		options.render = render;
 		options.joinUncorrupt = joinUncorrupt;
 		const { errors, parts } = render(options);
+		this.allErrors = errors;
 		this.errorChecker(errors);
+		if (errors.length > 0) {
+			return this;
+		}
 
 		this.content = postrender(parts, options);
 		this.setModules({ inspect: { content: this.content } });

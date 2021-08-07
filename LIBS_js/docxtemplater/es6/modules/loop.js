@@ -6,8 +6,8 @@ const {
 	isParagraphEnd,
 	isContent,
 	startsWith,
-} = require("../doc-utils");
-const wrapper = require("../module-wrapper");
+} = require("../doc-utils.js");
+const wrapper = require("../module-wrapper.js");
 
 const moduleName = "loop";
 
@@ -72,6 +72,36 @@ function addPageBreakAtBeginning(subRendered) {
 	subRendered.parts.unshift('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
 }
 
+function isContinuous(parts) {
+	return parts.some(function (part) {
+		return (
+			part.type === "tag" &&
+			part.tag === "w:type" &&
+			part.value.indexOf("continuous") !== -1
+		);
+	});
+}
+
+function addContinuousType(parts) {
+	let stop = false;
+	let inSectPr = false;
+	return parts.reduce(function (result, part) {
+		if (stop === false && startsWith(part, "<w:sectPr")) {
+			inSectPr = true;
+		}
+		if (inSectPr) {
+			if (startsWith(part, "<w:type")) {
+				stop = true;
+			}
+			if (stop === false && startsWith(part, "</w:sectPr")) {
+				result.push('<w:type w:val="continuous"/>');
+			}
+		}
+		result.push(part);
+		return result;
+	}, []);
+}
+
 function dropHeaderFooterRefs(parts) {
 	return parts.filter(function (text) {
 		if (
@@ -90,6 +120,24 @@ function hasPageBreak(chunk) {
 			return true;
 		}
 	});
+}
+
+function getSectPr(chunks) {
+	let collectSectPr = false;
+	const sectPrs = [];
+	chunks.forEach(function (part) {
+		if (part.tag === "w:sectPr" && part.position === "start") {
+			sectPrs.push([]);
+			collectSectPr = true;
+		}
+		if (collectSectPr) {
+			sectPrs[sectPrs.length - 1].push(part);
+		}
+		if (part.tag === "w:sectPr" && part.position === "end") {
+			collectSectPr = false;
+		}
+	});
+	return sectPrs;
 }
 
 function getSectPrHeaderFooterChangeCount(chunks) {
@@ -115,9 +163,36 @@ function getSectPrHeaderFooterChangeCount(chunks) {
 	return sectPrCount;
 }
 
+function getLastSectPr(parsed) {
+	const sectPr = [];
+	let inSectPr = false;
+	for (let i = parsed.length - 1; i >= 0; i--) {
+		const part = parsed[i];
+		if (part.type === "tag" && part.tag === "w:sectPr") {
+			if (part.position === "end") {
+				inSectPr = true;
+			}
+			if (part.position === "start") {
+				sectPr.unshift(part);
+				inSectPr = false;
+			}
+		}
+		if (inSectPr) {
+			sectPr.unshift(part);
+		}
+		if (isParagraphStart(part)) {
+			if (sectPr.length > 0) {
+				return sectPr;
+			}
+			break;
+		}
+	}
+}
+
 class LoopModule {
 	constructor() {
 		this.name = "LoopModule";
+		this.totalSectPr = 0;
 		this.prefix = {
 			start: "#",
 			end: "/",
@@ -186,9 +261,31 @@ class LoopModule {
 			return tags;
 		}, []);
 	}
+	preparse(parsed) {
+		this.sects = getSectPr(parsed);
+	}
 	postparse(parsed, { basePart }) {
 		if (basePart) {
 			basePart.sectPrCount = getSectPrHeaderFooterChangeCount(parsed);
+			this.totalSectPr += basePart.sectPrCount;
+
+			const sects = this.sects;
+			sects.some(function (sect, index) {
+				if (sect[0].lIndex > basePart.lIndex) {
+					if (index + 1 < sects.length && isContinuous(sects[index + 1])) {
+						basePart.addContinuousType = true;
+					}
+					return true;
+				}
+			});
+			const lastSectPr = getLastSectPr(parsed);
+			if (lastSectPr) {
+				basePart.lastParagrapSectPr = lastSectPr
+					.map(function ({ value }) {
+						return value;
+					})
+					.join("");
+			}
 		}
 		if (
 			!basePart ||
@@ -225,6 +322,7 @@ class LoopModule {
 
 		basePart.hasPageBreak = hasPageBreak(lastChunk);
 		basePart.hasPageBreakBeginning = hasPageBreak(firstChunk);
+		basePart.paragraphLoop = true;
 
 		if (firstOffset === 0 || lastOffset === 0) {
 			return parsed;
@@ -259,14 +357,15 @@ class LoopModule {
 			) {
 				addPageBreakAtEnd(subRendered);
 			}
-			if (part.sectPrCount === 1) {
-				if (
-					i !== 0 ||
-					scopeManager.scopePathItem.some(function (i) {
-						return i !== 0;
-					})
-				) {
+			const isNotFirst = scopeManager.scopePathItem.some(function (i) {
+				return i !== 0;
+			});
+			if (isNotFirst) {
+				if (part.sectPrCount === 1) {
 					subRendered.parts = dropHeaderFooterRefs(subRendered.parts);
+				}
+				if (part.addContinuousType) {
+					subRendered.parts = addContinuousType(subRendered.parts);
 				}
 			}
 			if (part.hasPageBreakBeginning && isInsideParagraphLoop(part)) {
@@ -291,14 +390,25 @@ class LoopModule {
 		}
 		// if the loop is showing empty content
 		if (result === false) {
+			if (part.lastParagrapSectPr) {
+				if (part.paragraphLoop) {
+					return {
+						value: `<w:p><w:pPr>${part.lastParagrapSectPr}</w:pPr></w:p>`,
+					};
+				}
+				return {
+					value: `</w:t></w:r></w:p><w:p><w:pPr>${part.lastParagrapSectPr}</w:pPr><w:r><w:t>`,
+				};
+			}
 			return {
 				value: getPageBreakIfApplies(part) || "",
 				errors,
 			};
 		}
-		const contains = options.fileTypeConfig.tagShouldContain || [];
-
-		return { value: options.joinUncorrupt(totalValue, contains), errors };
+		return {
+			value: options.joinUncorrupt(totalValue, { ...options, basePart: part }),
+			errors,
+		};
 	}
 	resolve(part, options) {
 		if (part.type !== "placeholder" || part.module !== moduleName) {
@@ -306,9 +416,7 @@ class LoopModule {
 		}
 
 		const sm = options.scopeManager;
-		const promisedValue = Promise.resolve().then(function () {
-			return sm.getValue(part.value, { part });
-		});
+		const promisedValue = sm.getValueAsync(part.value, { part });
 		const promises = [];
 		function loopOver(scope, i, length) {
 			const scopeManager = sm.createSubScopeManager(

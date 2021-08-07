@@ -1,5 +1,5 @@
 "use strict";
-const { last, first } = require("./utils");
+const { last, first } = require("./utils.js");
 
 function XTError(message) {
 	this.name = "GenericError";
@@ -173,9 +173,8 @@ function throwExpandNotFound(options) {
 		message = "Raw tag not in paragraph",
 	} = options;
 	const { part } = options;
-	let {
-		explanation = `The tag "${value}" is not inside a paragraph`,
-	} = options;
+	let { explanation = `The tag "${value}" is not inside a paragraph` } =
+		options;
 	if (typeof explanation === "function") {
 		explanation = explanation(part);
 	}
@@ -208,18 +207,40 @@ function throwRawTagShouldBeOnlyTextInParagraph(options) {
 	throw err;
 }
 
-function getUnmatchedLoopException(options) {
-	const { location } = options;
+function getUnmatchedLoopException(part) {
+	const { location, offset } = part;
 	const t = location === "start" ? "unclosed" : "unopened";
 	const T = location === "start" ? "Unclosed" : "Unopened";
 
 	const err = new XTTemplateError(`${T} loop`);
-	const tag = options.part.value;
+	const tag = part.value;
 	err.properties = {
 		id: `${t}_loop`,
 		explanation: `The loop with tag "${tag}" is ${t}`,
 		xtag: tag,
-		offset: options.part.offset,
+		offset,
+	};
+	return err;
+}
+
+function getUnbalancedLoopException(pair, lastPair) {
+	const err = new XTTemplateError("Unbalanced loop tag");
+	const lastL = lastPair[0].part.value;
+	const lastR = lastPair[1].part.value;
+	const l = pair[0].part.value;
+	const r = pair[1].part.value;
+	err.properties = {
+		id: "unbalanced_loop_tags",
+		explanation: `Unbalanced loop tags {#${lastL}}{/${lastR}}{#${l}}{/${r}}`,
+		offset: [lastPair[0].part.offset, pair[1].part.offset],
+		lastPair: {
+			left: lastPair[0].part.value,
+			right: lastPair[1].part.value,
+		},
+		pair: {
+			left: pair[0].part.value,
+			right: pair[1].part.value,
+		},
 	};
 	return err;
 }
@@ -303,14 +324,22 @@ function throwLocationInvalid(part) {
 	);
 }
 
-function throwFileTypeNotHandled(fileType) {
+function throwResolveBeforeCompile() {
 	const err = new XTInternalError(
-		`The filetype "${fileType}" is not handled by docxtemplater`
+		"You must run `.compile()` before running `.resolveData()`"
 	);
 	err.properties = {
-		id: "filetype_not_handled",
-		explanation: `The file you are trying to generate is of type "${fileType}", but only docx and pptx formats are handled`,
-		fileType,
+		id: "resolve_before_compile",
+	};
+	throw err;
+}
+
+function throwRenderInvalidTemplate() {
+	const err = new XTInternalError(
+		"You should not call .render on a document that had compilation errors"
+	);
+	err.properties = {
+		id: "render_on_invalid_template",
 	};
 	throw err;
 }
@@ -336,6 +365,18 @@ function throwXmlInvalid(content, offset) {
 	throw err;
 }
 
+function throwFileTypeNotHandled(fileType) {
+	const err = new XTInternalError(
+		`The filetype "${fileType}" is not handled by docxtemplater`
+	);
+	err.properties = {
+		id: "filetype_not_handled",
+		explanation: `The file you are trying to generate is of type "${fileType}", but only docx and pptx formats are handled`,
+		fileType,
+	};
+	throw err;
+}
+
 module.exports = {
 	XTError,
 	XTTemplateError,
@@ -356,6 +397,7 @@ module.exports = {
 	getDuplicateCloseTagException,
 	getDuplicateOpenTagException,
 	getCorruptCharactersException,
+	getUnbalancedLoopException,
 
 	throwApiVersionError,
 	throwContentMustBeString,
@@ -369,4 +411,6 @@ module.exports = {
 	throwUnimplementedTagType,
 	throwXmlTagNotFound,
 	throwXmlInvalid,
+	throwResolveBeforeCompile,
+	throwRenderInvalidTemplate,
 };

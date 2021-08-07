@@ -1,5 +1,7 @@
 const { clone, assign } = require("lodash");
-const angularParser = require("./angular-parser");
+const angularParser = require("./angular-parser.js");
+const Errors = require("../errors.js");
+const { wrapMultiError } = require("./utils.js");
 
 const xmlSpacePreserveTag = {
 	type: "tag",
@@ -421,6 +423,7 @@ const fixtures = {
 				type: "placeholder",
 				value: "users",
 				module: "loop",
+				paragraphLoop: true,
 				sectPrCount: 0,
 				hasPageBreak: false,
 				hasPageBreakBeginning: false,
@@ -1065,8 +1068,21 @@ const fixtures = {
 		postparsed: null,
 		resolved: null,
 	},
+	inversed_loop_simple: {
+		it: "should work well with inversed loop simple",
+		content: "<w:t>{^b}{label}{/}</w:t>",
+		result: '<w:t xml:space="preserve">hi</w:t>',
+		scope: {
+			b: false,
+			label: "hi",
+		},
+		lexed: null,
+		parsed: null,
+		postparsed: null,
+		resolved: null,
+	},
 	inversed_loop: {
-		it: "should work well with inversed loop",
+		it: "should work well with nested inversed loop",
 		content: "<w:t>{#a}{^b}{label}{/}{/}</w:t>",
 		result: '<w:t xml:space="preserve">hi</w:t>',
 		scope: {
@@ -1078,23 +1094,10 @@ const fixtures = {
 		resolved: null,
 	},
 	inversed_loop_nested: {
-		it: "should work well with inversed loop nested",
+		it: "should work well with deeply nested inversed loop nested",
 		content: "<w:t>{#a}{^b}{^c}{label}{/}{/}{/}</w:t>",
 		result: '<w:t xml:space="preserve">hi</w:t>',
 		scope: {
-			a: [{ b: false, label: "hi" }],
-		},
-		lexed: null,
-		parsed: null,
-		postparsed: null,
-		resolved: null,
-	},
-	inversed_loop_nested_resolved: {
-		it: "should work well with inversed loop nested",
-		content: "<w:t>{#a}{^b}{^c}{label}{/}{/}{/}</w:t>",
-		result: '<w:t xml:space="preserve">hi</w:t>',
-		scope: {
-			label: "outer",
 			a: [{ b: false, label: "hi" }],
 		},
 		lexed: null,
@@ -1199,8 +1202,7 @@ const fixtures = {
 		resolved: null,
 	},
 	condition_w_tr: {
-		it:
-			"should work well with -w:tr conditions inside table inside paragraphLoop condition",
+		it: "should work well with -w:tr conditions inside table inside paragraphLoop condition",
 		content:
 			"<w:p><w:r><w:t>{#cond}</w:t></w:r></w:p><w:tbl><w:tr><w:tc><w:p><w:r><w:t>{-w:tc cond}{val}{/}</w:t></w:r></w:p></w:tc></w:tr></w:tbl><w:p><w:r><w:t>{/}</w:t></w:r></w:p>",
 		result:
@@ -1266,6 +1268,114 @@ const fixtures = {
 		parsed: null,
 		postparsed: null,
 		resolved: null,
+	},
+	double_nested_array: {
+		it: "should work when using double nested arrays",
+		content: "<w:t>{#a}</w:t><w:t>{this}</w:t><w:t>{/}</w:t>",
+		result: '<w:t/><w:t xml:space="preserve">first-part,other-part</w:t><w:t/>',
+		scope: { a: [["first-part", "other-part"]] },
+		options: {
+			parser: angularParser,
+		},
+		lexed: null,
+		parsed: null,
+		postparsed: null,
+		resolved: null,
+	},
+	table_with_nested_loops: {
+		it: "should work for table with nested loops",
+		lexed: null,
+		content: `<w:tbl>
+		<w:tr><w:tc><w:p><w:r><w:t>{#c1}A</w:t></w:r></w:p></w:tc></w:tr>
+		<w:tr><w:tc><w:p><w:r><w:t>{/}{#c2}B</w:t></w:r><w:r><w:t>{/}</w:t></w:r></w:p></w:tc></w:tr>
+</w:tbl>`,
+		errorType: Errors.XTTemplateError,
+		error: wrapMultiError({
+			name: "TemplateError",
+			message: "Unbalanced loop tag",
+			properties: {
+				explanation: "Unbalanced loop tags {#c1}{/}{#c2}{/}",
+				file: "word/document.xml",
+				id: "unbalanced_loop_tags",
+				lastPair: {
+					left: "c1",
+					right: "",
+				},
+				offset: [0, 15],
+				pair: {
+					left: "c2",
+					right: "",
+				},
+			},
+		}),
+	},
+	spacepreserve: {
+		it: "should add space=preserve to last tag",
+		lexed: null,
+		parsed: null,
+		postparsed: null,
+		content: `<w:p>
+      <w:r>
+        <w:t>Hello {firstName} {</w:t>
+      </w:r>
+      <w:r>
+        <w:t>lastName</w:t>
+      </w:r>
+      <w:r>
+        <w:t>} world</w:t>
+      </w:r>
+    </w:p>`,
+		result: `<w:p>
+      <w:r>
+        <w:t xml:space="preserve">Hello undefined undefined</w:t>
+      </w:r>
+      <w:r>
+        <w:t></w:t>
+      </w:r>
+      <w:r>
+        <w:t xml:space="preserve"> world</w:t>
+      </w:r>
+    </w:p>`,
+	},
+	spacepreserve2: {
+		it: "should add space=preserve to last tag when having middle tag",
+		lexed: null,
+		parsed: null,
+		postparsed: null,
+		content: `<w:p>
+		<w:r>
+			<w:t>Hello {</w:t>
+		</w:r>
+		<w:r>
+			<w:t>last_name</w:t>
+		</w:r>
+		<w:r>
+			<w:t>} {</w:t>
+		</w:r>
+		<w:r>
+			<w:t>first_name</w:t>
+		</w:r>
+		<w:r>
+			<w:t>} what's up ?</w:t>
+		</w:r>
+    </w:p>`,
+		result: `<w:p>
+		<w:r>
+			<w:t xml:space="preserve">Hello undefined</w:t>
+		</w:r>
+		<w:r>
+			<w:t></w:t>
+		</w:r>
+		<w:r>
+			<w:t xml:space="preserve"> undefined</w:t>
+		</w:r>
+		<w:r>
+			<w:t></w:t>
+		</w:r>
+		<w:r>
+			<w:t xml:space="preserve"> what&apos;s up ?</w:t>
+		</w:r>
+    </w:p>`,
 	},
 };
 

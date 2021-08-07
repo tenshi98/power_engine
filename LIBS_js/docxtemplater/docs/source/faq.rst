@@ -11,7 +11,7 @@ Inserting new lines
 
 .. code-block:: javascript
 
-    const doc = new Docxtemplater(zip, {linebreaks: true});
+    const doc = new Docxtemplater(zip, { linebreaks: true });
 
 then in your data, if a string contains a newline, it will be translated to a linebreak in the document.
 
@@ -36,7 +36,7 @@ This is because the zip will not be compressed in that case. To force the compre
 
 .. code-block:: javascript
 
-    var zip = doc.getZip().generate({
+    const zip = doc.getZip().generate({
             type: "nodebuffer",
             compression: "DEFLATE"
     });
@@ -69,7 +69,7 @@ Using data filters
 
 You might want to be able to show data a bit differently for each template. For this, you can use the angular parser and the filters functionality.
 
-For example, if a user wants to put something in uppercase, you could write in your template :
+For example, if a user wants to put something in uppercase, you could write in your template:
 
 
 .. code-block:: text
@@ -104,7 +104,7 @@ The default behavior is to return "undefined" for empty values.
 
     Hello undefined, your hobby is football.
 
-You can customize this to either return another string, or return the name of the tag itself, so that it will show :
+You can customize this to either return another string, or return the name of the tag itself, so that it will show:
 
 .. code-block:: text
 
@@ -115,9 +115,21 @@ It is possible to customize the value that will be shown for {name} by using the
 .. code-block:: javascript
 
     function nullGetter(part, scopeManager) {
-        // part.module can be "loop", "rawxml", or empty, (or any other module name that you use)
+        /*
+            If the template is {#users}{name}{/} and a value is undefined on the
+            name property:
+
+            - part.value will be the string "name"
+            - scopeManager.scopePath will be ["users"] (for nested loops, you would have multiple values in this array, for example one could have ["companies", "users"])
+            - scopeManager.scopePathItem will be equal to the array [2] if
+              this happens for the third user in the array.
+            - part.module would be empty in this case, but it could be "loop",
+              "rawxml", or or any other module name that you use.
+        */
+
         if (!part.module) {
             // part.value contains the content of the tag, eg "name" in our example
+            // By returning '{' and part.value and '}', it will actually do no replacement in reality. You could also return the empty string if you prefered.
             return '{' + part.value + '}';
         }
         if (part.module === "rawxml") {
@@ -132,12 +144,12 @@ Performance
 
 Docxtemplater is quite fast, for a pretty complex 50 page document, it can generate 250 output of those documents in 44 seconds, which is about 180ms per document.
 
-There is also an interesting blog article https://javascript-ninja.fr/ at https://javascript-ninja.fr/optimizing-speed-in-node-js/ that explains how I optimized loops in docxtemplater.
+There is also an interesting blog article at https://javascript-ninja.fr/optimizing-speed-in-node-js/ that explains how I optimized loops in docxtemplater.
 
 Support for IE9 and lower
 -------------------------
 
-docxtemplater should work on almost all browsers as of version 1 : IE7 + . Safari, Chrome, Opera, Firefox.
+docxtemplater should work on almost all browsers: IE7+, Safari, Chrome, Opera, Firefox.
 
 The only 'problem' is to load the binary file into the browser. This is not in docxtemplater's scope, but here is the recommended code to load the zip from the browser:
 
@@ -152,7 +164,7 @@ The following code should load the binary content on all browsers:
         throw err; // or handle err
       }
 
-      var zip = new PizZip(data);
+      const zip = new PizZip(data);
     });
 
 Get list of placeholders
@@ -167,20 +179,22 @@ the variables and list them in a JSON object.
 
 With the simple inspection module, it is possible to get this compiled form and
 show the list of tags.
-suite :
+suite:
 
 .. _`AST`: https://en.wikipedia.org/wiki/Abstract_syntax_tree
 
 .. code-block:: javascript
 
-    var InspectModule = require("docxtemplater/js/inspect-module");
-    var iModule = InspectModule();
+    const InspectModule = require("docxtemplater/js/inspect-module");
+    const iModule = InspectModule();
     const doc = new Docxtemplater(zip, { modules: [iModule] });
-    doc.render();
-    var tags = iModule.getAllTags();
+    const tags = iModule.getAllTags();
     console.log(tags);
+    // After getting the tags, you can optionally set some data and render the document like this:
+    // doc.setData(data);
+    // doc.render();
 
-With the following template :
+With the following template:
 
 .. code-block:: text
 
@@ -191,7 +205,7 @@ With the following template :
     {age}
     {/users}
 
-It will log this object :
+It will log this object:
 
 .. code-block:: json
 
@@ -203,13 +217,13 @@ It will log this object :
         },
     }
 
-You can also get a more detailled tree by using :
+You can also get a more detailled tree by using:
 
 .. code-block:: javascript
 
     console.log(iModule.fullInspected["word/document.xml"]);
 
-The code of the inspect-module is very simple, and can be found here : https://github.com/open-xml-templating/docxtemplater/blob/master/es6/inspect-module.js
+The code of the inspect-module is very simple, and can be found here: https://github.com/open-xml-templating/docxtemplater/blob/master/es6/inspect-module.js
 
 Convert to PDF
 --------------
@@ -218,9 +232,9 @@ It is not possible to convert docx to PDF with docxtemplater, because docxtempla
 tools to do this conversion.
 
 The first one is to use `libreoffice headless`, which permits you to generate a
-PDF from a docx document :
+PDF from a docx document:
 
-You just have to run :
+You just have to run:
 
 .. code-block:: bash
 
@@ -249,11 +263,11 @@ It does so by looking at the content of the "[Content_Types].xml" file and by lo
 My document is corrupted, what should I do ?
 --------------------------------------------
 
-If you are inserting multiple images inside a loop, it is possible that word cannot handle the docPr attributes correctly. You can try to add the following code in your constructor.
+If you are inserting multiple images inside a loop, it is possible that word cannot handle the docPr attributes correctly. You can try to add the following code before instantiating the Docxtemplater instance.
 
 .. code-block:: javascript
 
-    const myModule = {
+    const fixDocPrCorruptionModule = {
         set(options) {
             if (options.Lexer) {
                 this.Lexer = options.Lexer;
@@ -263,6 +277,9 @@ If you are inserting multiple images inside a loop, it is possible that word can
             }
         },
         on(event) {
+            if (eventName === "attached") {
+                this.attached = false;
+            }
             if (event !== "syncing-zip") {
                 return;
             }
@@ -280,39 +297,45 @@ If you are inserting multiple images inside a loop, it is possible that word can
                 }
                 return (
                     partValue.substr(0, end) +
-                        ` ${attr}="${attrValue}"` +
-                        partValue.substr(end)
+                    ` ${attr}="${attrValue}"` +
+                    partValue.substr(end)
                 );
             }
-            zip.file(/\.xml$/).forEach(function(f) {
+            zip.file(/\.xml$/).forEach(function (f) {
                 let text = f.asText();
                 const xmllexed = Lexer.xmlparse(text, {
                     text: [],
                     other: ["wp:docPr"],
                 });
                 if (xmllexed.length > 1) {
-                    text = xmllexed.reduce(function(fullText, part) {
-                        if (part.tag === "wp:docPr") {
-                            return fullText + setSingleAttribute(part.value, "id", prId++);
+                    text = xmllexed.reduce(function (fullText, part) {
+                        if (
+                            part.tag === "wp:docPr" &&
+                            ["start", "selfclosing"].indexOf(part.position) !== -1
+                        ) {
+                            return (
+                                fullText +
+                                setSingleAttribute(part.value, "id", prId++)
+                            );
                         }
                         return fullText + part.value;
                     }, "");
                 }
                 zip.file(f.name, text);
             });
-        }
-    });
-    const doc = new Docxtemplater(zip, { modules: [myModule]});
+        },
+    };
+    const doc = new Docxtemplater(zip, { modules: [fixDocPrCorruptionModule] });
 
 Attaching modules for extra functionality
 -----------------------------------------
 
-If you have created or have access to docxtemplater PRO modules, you can attach them with the following code :
+If you have created or have access to docxtemplater PRO modules, you can attach them with the following code:
 
 
 .. code-block:: javascript
 
-    const doc = new Docxtemplater(zip, {modules: [...]});
+    const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true, modules: [...] });
     doc.setData(data);
 
 Ternaries are not working well with angular-parser
@@ -320,7 +343,7 @@ Ternaries are not working well with angular-parser
 
 There is a common issue which is to use ternary on scopes that are not the current scope, which makes the ternary appear as if it always showed the second option.
 
-For example, with following data :
+For example, with following data:
 
 .. code-block:: javascript
 
@@ -336,7 +359,7 @@ For example, with following data :
       }
    })
 
-And by using the following template :
+And by using the following template:
 
 .. code-block:: text
 
@@ -348,7 +371,7 @@ And by using the following template :
    {/hobbies}
    {/}
 
-This will print :
+This will print:
 
 
 .. code-block:: text
@@ -364,7 +387,7 @@ The reason for this behavior is that the {gender == 'F' : "She" : "He"} expressi
 
 We can instead write a custom filter that will return "She" if the input is "F", "He" if the input is "M", and null if the input is anything else.
 
-The code would look like this :
+The code would look like this:
 
 .. code-block:: javascript
 
@@ -378,7 +401,7 @@ The code would look like this :
       return null;
     }
 
-And use the following in your template :
+And use the following in your template:
 
 .. code-block:: text
 
@@ -394,9 +417,9 @@ And use the following in your template :
 Multi scope expressions do not work with the angularParser
 ----------------------------------------------------------
 
-If you would like to have multi-scope expressions with the angularparser, for example :
+If you would like to have multi-scope expressions with the angularparser, for example:
 
-You would like to do : `{#users}{ date - age }{/users}`, where date is in the "global scope", and age in the subscope `users`, as in the following data :
+You would like to do: `{#users}{ date - age }{/users}`, where date is in the "global scope", and age in the subscope `users`, as in the following data:
 
 .. code-block:: json
 
@@ -418,10 +441,10 @@ You can make use of a feature of the angularParser and the fact that docxtemplat
 
 .. code-block:: javascript
 
-   // Please make sure to use angular-expressions 1.0.1 or later
-   // More detail at https://github.com/open-xml-templating/docxtemplater/issues/488
-   var expressions = require("angular-expressions");
-   var assign = require("lodash/assign");
+   // Please make sure to use angular-expressions 1.1.2 or later
+   // More detail at https://github.com/open-xml-templating/docxtemplater/issues/589
+   const expressions = require("angular-expressions");
+   const assign = require("lodash/assign");
    function angularParser(tag) {
       if (tag === ".") {
          return {
@@ -461,15 +484,107 @@ For security reasons, the browsers don't let you load files from the local file 
 
 To do this, you have to setup a small web server.
 
-The simplest way of starting a webserver is to run following command :
+The simplest way of starting a webserver is to run following command:
 
 .. code-block:: bash
 
    npx http-server
-   # if you don't have npx, you can also do :
+   # if you don't have npx, you can also do:
    # npm install -g http-server && http-server .
 
 On your production server, you should probably use a more robust webserver such as nginx, or any webserver that you are currently using for static files.
+
+Docxtemplater in a React project
+--------------------------------
+
+There is an `online react demo`_ available on stackblitz.
+
+.. _`online react demo`: https://stackblitz.com/edit/react-docxtemplater-example?file=app.js
+
+You can use the following code:
+
+.. code-block:: javascript
+
+    import React, { Component } from 'react';
+    import React from 'react';
+    import Docxtemplater from 'docxtemplater';
+    import PizZip from 'pizzip';
+    import PizZipUtils from 'pizzip/utils/index.js';
+    import { saveAs } from 'file-saver';
+
+    function loadFile(url, callback) {
+      PizZipUtils.getBinaryContent(url, callback);
+    }
+
+    export const App = class App extends React.Component {
+      render() {
+        const generateDocument = () => {
+          loadFile('https://docxtemplater.com/tag-example.docx', function(
+            error,
+            content
+          ) {
+            if (error) {
+              throw error;
+            }
+            const zip = new PizZip(content);
+            const doc = new Docxtemplater(zip, {
+              paragraphLoop: true,
+              linebreaks: true
+            });
+            doc.setData({
+              first_name: 'John',
+              last_name: 'Doe',
+              phone: '0652455478',
+              description: 'New Website'
+            });
+            try {
+              // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+              doc.render();
+            } catch (error) {
+              // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+              function replaceErrors(key, value) {
+                if (value instanceof Error) {
+                  return Object.getOwnPropertyNames(value).reduce(function(
+                    error,
+                    key
+                  ) {
+                    error[key] = value[key];
+                    return error;
+                  },
+                  {});
+                }
+                return value;
+              }
+              console.log(JSON.stringify({ error: error }, replaceErrors));
+
+              if (error.properties && error.properties.errors instanceof Array) {
+                const errorMessages = error.properties.errors
+                  .map(function(error) {
+                    return error.properties.explanation;
+                  })
+                  .join('\n');
+                console.log('errorMessages', errorMessages);
+                // errorMessages is a humanly readable message looking like this:
+                // 'The tag beginning with "foobar" is unopened'
+              }
+              throw error;
+            }
+            const out = doc.getZip().generate({
+              type: 'blob',
+              mimeType:
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            }); //Output the document using Data-URI
+            saveAs(out, 'output.docx');
+          });
+        };
+
+        return (
+          <div className="p-2">
+            <button onClick={generateDocument}>Generate document</button>
+          </div>
+        );
+      }
+    };
 
 Docxtemplater in an angular project
 -----------------------------------
@@ -478,7 +593,7 @@ There is an `online angular demo`_ available on stackblitz.
 
 .. _`online angular demo`: https://stackblitz.com/edit/angular-docxtemplater-example?file=src%2Fapp%2Fproduct-list%2Fproduct-list.component.ts
 
-If you are using an angular version that supports the `import` keyword, you can use the following code :
+If you are using an angular version that supports the `import` keyword, you can use the following code:
 
 .. code-block:: javascript
 
@@ -506,8 +621,8 @@ If you are using an angular version that supports the `import` keyword, you can 
           if (error) {
             throw error;
           }
-          var zip = new PizZip(content);
-          var doc = new Docxtemplater(zip);
+          const zip = new PizZip(content);
+          const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
           doc.setData({
             first_name: "John",
             last_name: "Doe",
@@ -541,29 +656,30 @@ If you are using an angular version that supports the `import` keyword, you can 
                 })
                 .join("\n");
               console.log("errorMessages", errorMessages);
-              // errorMessages is a humanly readable message looking like this :
+              // errorMessages is a humanly readable message looking like this:
               // 'The tag beginning with "foobar" is unopened'
             }
             throw error;
           }
-          var out = doc.getZip().generate({
+          const out = doc.getZip().generate({
             type: "blob",
             mimeType:
               "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-          }); //Output the document using Data-URI
+          });
+          // Output the document using Data-URI
           saveAs(out, "output.docx");
         });
       }
     }
 
-Docxtemplater in a vuejs project
+Docxtemplater in a Vuejs project
 --------------------------------
 
 There is an `online vuejs demo`_ available on stackblitz.
 
 .. _`online vuejs demo`: https://stackblitz.com/edit/vuejs-docxtemplater-example?file=button.component.js
 
-If you are using vuejs 2.0 version that supports the `import` keyword, you can use the following code :
+If you are using vuejs 2.0 version that supports the `import` keyword, you can use the following code:
 
 .. code-block:: javascript
 
@@ -586,8 +702,8 @@ If you are using vuejs 2.0 version that supports the `import` keyword, you can u
             if (error) {
               throw error;
             }
-            var zip = new PizZip(content);
-            var doc = new Docxtemplater(zip);
+            const zip = new PizZip(content);
+            const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
             doc.setData({
               first_name: "John",
               last_name: "Doe",
@@ -621,16 +737,17 @@ If you are using vuejs 2.0 version that supports the `import` keyword, you can u
                   })
                   .join("\n");
                 console.log("errorMessages", errorMessages);
-                // errorMessages is a humanly readable message looking like this :
+                // errorMessages is a humanly readable message looking like this:
                 // 'The tag beginning with "foobar" is unopened'
               }
               throw error;
             }
-            var out = doc.getZip().generate({
+            const out = doc.getZip().generate({
               type: "blob",
               mimeType:
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            }); //Output the document using Data-URI
+            });
+            // Output the document using Data-URI
             saveAs(out, "output.docx");
           });
         }
@@ -643,6 +760,116 @@ If you are using vuejs 2.0 version that supports the `import` keyword, you can u
       `
     };
 
+Docxtemplater in a Next.js project
+----------------------------------
+
+There is an `online nextjs demo`_ available on codesandbox.
+
+.. _`online nextjs demo`: https://codesandbox.io/s/docxtemplater-with-nextjs-o1nqo
+
+You can use the following code:
+
+.. code-block:: javascript
+
+    import SiteLayout from "../components/SiteLayout";
+    import React from "react";
+    import Docxtemplater from "docxtemplater";
+    import PizZip from "pizzip";
+    import { saveAs } from "file-saver";
+    let PizZipUtils = null;
+    if (typeof window !== "undefined") {
+      import("pizzip/utils/index.js").then(function (r) {
+        PizZipUtils = r;
+      });
+    }
+
+    function loadFile(url, callback) {
+      PizZipUtils.getBinaryContent(url, callback);
+    }
+
+    const generateDocument = () => {
+      loadFile("https://docxtemplater.com/tag-example.docx", function (
+        error,
+        content
+      ) {
+        if (error) {
+          throw error;
+        }
+        const zip = new PizZip(content);
+        const doc = new Docxtemplater().loadZip(zip);
+        doc.setData({
+          first_name: "John",
+          last_name: "Doe",
+          phone: "0652455478",
+          description: "New Website"
+        });
+        try {
+          // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+          doc.render();
+        } catch (error) {
+          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+          function replaceErrors(key, value) {
+            if (value instanceof Error) {
+              return Object.getOwnPropertyNames(value).reduce(function (
+                error,
+                key
+              ) {
+                error[key] = value[key];
+                return error;
+              },
+              {});
+            }
+            return value;
+          }
+          console.log(JSON.stringify({ error: error }, replaceErrors));
+
+          if (error.properties && error.properties.errors instanceof Array) {
+            const errorMessages = error.properties.errors
+              .map(function (error) {
+                return error.properties.explanation;
+              })
+              .join("\n");
+            console.log("errorMessages", errorMessages);
+            // errorMessages is a humanly readable message looking like this:
+            // 'The tag beginning with "foobar" is unopened'
+          }
+          throw error;
+        }
+        const out = doc.getZip().generate({
+          type: "blob",
+          mimeType:
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        });
+        // Output the document using Data-URI
+        saveAs(out, "output.docx");
+      });
+    };
+
+    const Index = () => (
+      <SiteLayout>
+        <div className="mt-8 max-w-xl mx-auto px-8">
+          <h1 className="text-center">
+            <span className="block text-xl text-gray-600 leading-tight">
+              Welcome to this
+            </span>
+            <span className="block text-5xl font-bold leading-none">
+              Awesome Website
+            </span>
+          </h1>
+          <div className="mt-12 text-center">
+            <button
+              onClick={generateDocument}
+              className="inline-block bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg px-6 py-4 leading-tight"
+            >
+              Generate document
+            </button>
+          </div>
+        </div>
+      </SiteLayout>
+    );
+
+    export default Index;
+
 Getting access to page number / total number of pages or regenerate Table of Contents
 -------------------------------------------------------------------------------------
 
@@ -650,8 +877,8 @@ Sometimes, you would like to know what are the total number of pages in the
 document, or what is the page number at the current tag position.
 
 This is something that will never be achievable with docxtemplater, because
-docxtemplater is only a templating engine : it does know how to parse the docx
-format. However, it has no idea on how the docx is rendered at the end : the
+docxtemplater is only a templating engine: it does know how to parse the docx
+format. However, it has no idea on how the docx is rendered at the end: the
 width, height of each paragraph determines the number of pages in a document.
 
 Since docxtemplater does not know how to render a docx document, (which
@@ -675,7 +902,7 @@ This is because angular-expressions does not allow non-ascii characters.
 You will need angular-expressions version 1.1.0 which adds the
 `isIdentifierStart` and `isIdentifierContinue` properties.
 
-You can fix this issue by adding the characters that you would like to support, for example :
+You can fix this issue by adding the characters that you would like to support, for example:
 
 .. code-block:: javascript
 
@@ -737,7 +964,7 @@ It is possible, in a condition, to have some specific behavior for the last item
 
 It will allow you to add a page break at the end of each loop, except for the last item in the loop.
 
-The template will look like this :
+The template will look like this:
 
 .. code-block:: text
 
@@ -792,7 +1019,7 @@ And each user block will be followed by a pagebreak, except the last user.
         }
         // We use the angularParser as the default fallback
         // If you don't wish to use the angularParser,
-        // you can use the default parser as documented here :
+        // you can use the default parser as documented here:
         // https://docxtemplater.readthedocs.io/en/latest/configuration.html#default-parser
         return angularParser(tag);
     }
@@ -804,13 +1031,103 @@ Encrypting files
 
 Docxtemplater itself does not handle the Encryption of the docx files.
 
-There seem to be two solutions for this :
+There seem to be two solutions for this:
 
-* Use a Python tool that does exactly this, it is available here : https://github.com/nolze/msoffcrypto-tool
+* Use a Python tool that does exactly this, it is available here: https://github.com/nolze/msoffcrypto-tool
 
-* The xlsx-populate library also implements the Encryption/Decryption (algorithms are inspired by msoffcrypto-tool), however, the code probably needs to be a bit changed to work with docxtemplater : https://github.com/dtjohnson/xlsx-populate/blob/7480a02575c9140c0e7995623ea192c88c1886d3/lib/Encryptor.js#L236
+* The xlsx-populate library also implements the Encryption/Decryption (algorithms are inspired by msoffcrypto-tool), however, the code probably needs to be a bit changed to work with docxtemplater: https://github.com/dtjohnson/xlsx-populate/blob/7480a02575c9140c0e7995623ea192c88c1886d3/lib/Encryptor.js#L236
 
 Assignment expression in template
 ---------------------------------
 
 By using the angular expressions options, it is possible to add assignment expressions (for example `{full_name = first_name + last_name}` in your template. See `following part of the doc <angular_parse.html#assignments>`__.
+
+Changing the end-user syntax
+----------------------------
+
+If you find that the loop syntax is a bit too complex, you can change it to
+something more human friendly (but more verbose). This could be used to have a
+syntax more similar to what the software "HotDocs" provides.
+
+For example, you could be willing to write loops like this :
+
+.. code-block:: text
+
+    {FOR users}
+    Hello {name}
+    {ENDFOR}
+
+Instead of
+
+.. code-block:: text
+
+    {#users}
+    Hello {name}
+    {/}
+
+This can be done by changing the prefix of the loop module, which is a builtin module.
+
+.. code-block:: javascript
+
+    const doc = new Docxtemplater(zip);
+    doc.modules.forEach(function (module) {
+        if (module.name === "LoopModule") {
+            module.prefix.start = "FOR "
+            module.prefix.start = "ENDFOR "
+        }
+    });
+
+Note that if you don't like the default delimiters which are `{` and `}`, you can also change them, for example :
+
+If you prefer to write :
+
+.. code-block:: text
+
+    [[FOR users]]
+    Hello [[name]]
+    [[ENDFOR]]
+
+You could write your code like this :
+
+.. code-block:: javascript
+
+    const doc = new Docxtemplater(zip, { delimiters: { start: "[[", end: "]]" } });
+    doc.modules.forEach(function (module) {
+        if (module.name === "LoopModule") {
+            module.prefix.start = "FOR "
+            module.prefix.start = "ENDFOR "
+        }
+    });
+
+Note that it is however not possible to use no delimiters at all, docxtemplater
+forces you to have some delimiters.
+
+Similarly, for each paid module (image module, ...), you can set your own prefixes as well.
+
+For example, for the image module, if you would like to write {IMG mydata} instead of {%mydata} and {CENTERIMG mydata} instead of {%%mydata}, you can write your code like this :
+
+.. code-block:: javascript
+
+    const ImageModule = require("docxtemplater-image-module");
+
+    const opts = {};
+    opts.centered = false;
+    opts.getImage = function (tagValue, tagName) {
+      return fs.readFileSync(tagValue);
+    };
+
+    opts.getSize = function (img, tagValue, tagName) {
+      return [150, 150];
+    };
+
+    const imageModule = new ImageModule(opts);
+    imageModule.prefix.normal = "IMG "
+    imageModule.prefix.centered = "CENTERIMG "
+    const doc = new Docxtemplater(zip, { modules: [imageModule], delimiters: { start: "[[", end: "]]" } });
+    doc.modules.forEach(function (module) {
+        if (module.name === "LoopModule") {
+            module.prefix.start = "FOR "
+            module.prefix.start = "ENDFOR "
+        }
+    });
+
