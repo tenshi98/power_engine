@@ -10,12 +10,6 @@ if( ! defined('XMBCXRXSKGC')) {
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
-//Verifico la existencia de errores
-$err_count = 0;
-foreach($_SESSION['ErrorListing'] as $producto) {
-	$err_count++;
-}
-
 //solo si es administrador
 if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 	//Se guarda la memoria final del sistema
@@ -24,23 +18,135 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 	//Obtengo la memoria del sistema
 	$memUsage = obtenerUsoMemoriaServidor(false);
 	//Calculos
-	$total_memory    = $memUsage["total"];
-	$server_memory   = $memUsage["total"] - $memUsage["free"];
-	$actual_memory   = ($sis_mem_fin - $sis_mem_ini)*1024;
+	$total_memory   = $memUsage["total"];
+	$server_memory  = $memUsage["total"] - $memUsage["free"];
+	$actual_memory  = ($sis_mem_fin - $sis_mem_ini)*1024;
 	
 	//obtengo la ip del servidor
 	$serverIP = $_SERVER["SERVER_ADDR"];
 	
+	//Archivos
+	$Archivo1 = '1_logs_hacking.txt';
+	$Archivo2 = '1_logs_send_mail.txt';
+	$Archivo3 = '1_logs_error_log_php.txt';
+	
 	echo '
 	<div style="background: #fff;">
                   
-        <div class="col-md-9 col-sm-12">
-            <div class="bs-callout bs-callout-info" id="callout-type-dl-truncate"> 
-				<h4>Errores detectados</h4>';
+        <div class="col-md-9 col-sm-12">';
+			
+			//Errores PHP
+			if (file_exists($Archivo3)) {
+				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+					echo '<h4>Errores PHP</h4>';
+					echo '<div class="table-responsive">
+							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped dataTable">
+								<thead>
+									<tr role="row">
+										<th>Fecha</th>
+										<th>Hora</th>
+										<th>Usuario</th>
+										<th>Transaccion</th>
+										<th>Tarea</th>
+										<th>ErrorCode</th>
+										<th>Mensaje</th>
+										<th>Consulta</th>
+									</tr>
+								</thead>
+								<tbody role="alert" aria-live="polite" aria-relevant="all">';
+									//se trata de guardar el archivo
+									try {
+										$myfile = fopen($Archivo3, "r") or die("Unable to open file!");
+										while(!feof($myfile)) {
+											echo '<tr class="odd">';
+											//separo lo que obtengo
+											$INT_piezas = explode(" /\ ", fgets($myfile));
+											//recorro los elementos
+											foreach ($INT_piezas as $INT_valor) {
+												echo '<td>'.$INT_valor.'</td>';
+											}
+											echo '</tr>';
+										}
+										fclose($myfile);
+									} catch (Exception $e) {
+										error_log("Ha ocurrido un error (".$e->getMessage().")", 0);
+									}
+									echo '						  
+								</tbody>
+							</table>
+						</div>'; 
+				echo '</div>'; 
+			}else{
+				error_log("No existe el archivo (".$Archivo3.")", 0);
+			}
+			
+            //intentos de Hackeo
+			if (file_exists($Archivo1)) {
+				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+					echo '<h4>Intentos de Hackeo</h4>';
+					echo '<div class="table-responsive">
+							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped dataTable">
+								<thead>
+									<tr role="row">
+										<th>IP Client</th>
+										<th>Fecha</th>
+										<th>Hora</th>
+										<th>Empresa</th>
+										<th>Sistema Operativo</th>
+										<th>Navegador</th>
+										<th>Usuario</th>
+										<th>Archivo</th>
+										<th>Tarea</th>
+									</tr>
+								</thead>
+								<tbody role="alert" aria-live="polite" aria-relevant="all">';
+									//se trata de guardar el archivo
+									try {
+										$myfile = fopen($Archivo1, "r") or die("Unable to open file!");
+										while(!feof($myfile)) {
+											echo '<tr class="odd">';
+											//separo lo que obtengo
+											$INT_piezas = explode(" - ", fgets($myfile));
+											//recorro los elementos
+											foreach ($INT_piezas as $INT_valor) {
+												echo '<td>'.$INT_valor.'</td>';
+											}
+											echo '</tr>';
+										}
+										fclose($myfile);
+									} catch (Exception $e) {
+										error_log("Ha ocurrido un error (".$e->getMessage().")", 0);
+									}					  
+								echo '</tbody>
+							</table>
+						</div>';
+				echo '</div>';
+			}else{
+				error_log("No existe el archivo (".$Archivo1.")", 0);
+			}
+				
+			//Correos Enviados
+			/*if (file_exists($Archivo2)) {
+				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+					echo '<h4>Correos Enviados</h4>';
+					
+				echo '</div>';
+			}else{
+				error_log("No existe el archivo (".$Archivo2.")", 0);
+			}*/
+			
+			
+			
+			
+			//Errores
+            echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+				echo '<h4>Errores detectados</h4>';
 				require_once 'Helpers.Utils.Result.Errors.php';
-			echo '
-			</div>           
-        </div>
+			echo '</div>';
+			
+			
+			           
+        echo '</div>
  
         <div class="col-md-3 col-sm-6">
             <div class="info-box-main">

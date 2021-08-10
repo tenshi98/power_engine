@@ -1,19 +1,24 @@
 <?php
-//variables
-$idUsuario   = $_SESSION['usuario']['basic_data']['idUsuario'];
-$NombreUsr   = $_SESSION['usuario']['basic_data']['Nombre'];
-$idSistema   = $_SESSION['usuario']['basic_data']['idSistema'];
-$Fecha       = fecha_actual();
-$Hora        = hora_actual();
-$Transaccion = $original;
-$email       = DB_ERROR_MAIL;
-$MailBody    = '';
-$CountError  = 0;
 
+//Verifico la existencia de errores
+$err_count = 0;
+foreach($_SESSION['ErrorListing'] as $producto) {
+	$err_count++;
+}
 
 //despliego los errores
 if($err_count!=0){
-	
+	//variables
+	$idUsuario   = $_SESSION['usuario']['basic_data']['idUsuario'];
+	$NombreUsr   = $_SESSION['usuario']['basic_data']['Nombre'];
+	$idSistema   = $_SESSION['usuario']['basic_data']['idSistema'];
+	$Fecha       = fecha_actual();
+	$Hora        = hora_actual();
+	$Transaccion = $original;
+	$email       = DB_ERROR_MAIL;
+	$MailBody    = '';
+	$CountError  = 0;
+
 	//Titulo del cuerpo del correo
 	$MailBody.= '<p><strong>Usuario :</strong>'.$NombreUsr.'</p>'; 
 	$MailBody.= '<p><strong>Transaccion :</strong>'.$Transaccion.'</p>'; 
