@@ -34,53 +34,43 @@ $n_funct_webdata = 0;
 $n_funct_webdata++;
 //Funcion
 function getGoogleImage($consulta, $max_img){
-	
-	//Direccion con la consulta a google image
-	$url = "https://www.google.com/search?q=".$consulta."&tbm=isch&source=hp&biw=1366&bih=636&ei=NWOAYIeGIpDJ1sQPjcYQ&oq=".$consulta."&gs_lcp=CgNpbWcQAzoCCAA6CAgAELEDEIMBOgUIABCxAzoECAAQE1CqHFjAlQFgo5gBaABwAHgAgAFiiAGTB5IBAjE1mAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ved=0ahUKEwjH9L_O8I_wAhWQpJUCHQ0jBAAQ4dUDCAY&uact=5";
-	
-	//obtengo el contenido							
-	$html = file_get_contents($url);
-	preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i',$html, $matches ); 
-	
-	//recorro
-	$i = 0;
-	
-	//div contenedor
-	echo '
-	<style>
-	.getImgGoogle {
-		clear: both;
-	}
-	.getImgGoogle img {
-		padding: 4px;
-		line-height: 1.42857143;
-		background-color: #fff;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		-webkit-transition: all .2s ease-in-out;
-		-o-transition: all .2s ease-in-out;
-		transition: all .2s ease-in-out;
-		display: inline-block;
-		max-width: 100%;
-		height: auto;
-		margin-right:5px;
-	}
-	
-	</style>
-	';
-	echo '<div class="getImgGoogle">';
+	//reemplazo los espacios vacios
+	$consulta = str_replace(' ', '+', $consulta);
+	//Se da permiso para el acceso remoto
+	ini_set("allow_url_fopen", 1);
+	//se verifica si el permiso fue concedido
+	if( ini_get('allow_url_fopen') ) {
+		//Direccion con la consulta a google image
+		$url = "https://www.google.com/search?q=".$consulta."&tbm=isch&source=hp&biw=1366&bih=636&ei=NWOAYIeGIpDJ1sQPjcYQ&oq=".$consulta."&gs_lcp=CgNpbWcQAzoCCAA6CAgAELEDEIMBOgUIABCxAzoECAAQE1CqHFjAlQFgo5gBaABwAHgAgAFiiAGTB5IBAjE1mAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ved=0ahUKEwjH9L_O8I_wAhWQpJUCHQ0jBAAQ4dUDCAY&uact=5";
+		
+		//obtengo el contenido							
+		$html = file_get_contents($url);
+		preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i',$html, $matches ); 
+		
 		//recorro
-		foreach($matches as $image1){
-			foreach($image1 as $image){
-				if($i > $max_img) break;
-				
-				// DO with the image whatever you want here (the image element is '$image'):
-				if($i>0){echo $image;}
-				
-				$i++;
-			}
-		} 
-	echo '</div>';
+		$i = 0;
+		
+		//div contenedor
+		echo '
+		<style>
+		.getImgGoogle {clear: both;}
+		.getImgGoogle img {padding: 4px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;display: inline-block;max-width: 100%;height: auto;margin-right:5px;}
+		</style>
+		';
+		echo '<div class="getImgGoogle">';
+			//recorro
+			foreach($matches as $image1){
+				foreach($image1 as $image){
+					if($i > $max_img) break;
+					
+					// DO with the image whatever you want here (the image element is '$image'):
+					if($i>0){echo $image;}
+					
+					$i++;
+				}
+			} 
+		echo '</div>';
+	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
