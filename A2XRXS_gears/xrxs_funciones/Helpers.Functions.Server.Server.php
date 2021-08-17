@@ -36,9 +36,8 @@ $n_funct_serverdata++;
 function fecha_actual(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$fecha_actual = date("Y-m-d");
-	return $fecha_actual; 
+	//Devolvemos la fecha actual dandole un formato
+	return date("Y-m-d");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -60,9 +59,8 @@ $n_funct_serverdata++;
 function hora_actual(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$hora_actual = date("H:i:s");
-	return $hora_actual; 
+	//Devolvemos la hora actual dandole un formato
+	return date("H:i:s");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -84,9 +82,8 @@ $n_funct_serverdata++;
 function hora_actual_val(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$hora_actual = date("H-i-s");
-	return $hora_actual; 
+	//Devolvemos la hora actual dandole un formato
+	return date("H-i-s");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -108,9 +105,8 @@ $n_funct_serverdata++;
 function dia_actual(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$dia_actual = date("j");
-	return $dia_actual; 
+	//Devolvemos el dia actual dandole un formato
+	return date("j");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -132,9 +128,8 @@ $n_funct_serverdata++;
 function semana_actual(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$semana_actual = date("W");
-	return $semana_actual; 
+	//Devolvemos la semana actual dandole un formato
+	return date("W");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -156,9 +151,8 @@ $n_funct_serverdata++;
 function mes_actual(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$mes_actual = date("n");
-	return $mes_actual; 
+	//Devolvemos el mes actual dandole un formato
+	return date("n");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -180,9 +174,8 @@ $n_funct_serverdata++;
 function ano_actual(){
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$ano_actual = date("Y");
-	return $ano_actual; 
+	//Devolvemos el año actual dandole un formato
+	return date("Y");
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
