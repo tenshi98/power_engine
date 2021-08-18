@@ -431,9 +431,6 @@ class Basic_Form_Inputs{
 					</div>
 				</div>';
 			
-			//Validacion Script		
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/rut_validate/jquery.rut.min.js"></script>';
-			
 			//ejecucion script
 			$input.='
 				<script>
@@ -763,12 +760,8 @@ class Basic_Form_Inputs{
 			$w=$value;
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 								
-			//se cargan recursos
-			$input  ='<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_touchspin/src/jquery.bootstrap-touchspin.js"></script>';
-			$input .='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/bootstrap_touchspin/src/jquery.bootstrap-touchspin.css">';
-								
 			//generacion del input
-			$input .='
+			$input ='
 				<div class="form-group" id="div_'.$name.'">
 					<label class="control-label col-sm-4">'.$placeholder.'</label>
 					<div class="col-sm-8 field">
@@ -973,14 +966,8 @@ class Basic_Form_Inputs{
 			if($value==0){$w='';}elseif($value!=0){$w=$value;}
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 				
-			//solicitud de recursos
-			$input  ='<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/material_datetimepicker/css/bootstrap-material-datetimepicker.css" />';
-			$input .='<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/material_datetimepicker/js/moment-with-locales.min.js"></script>';
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/material_datetimepicker/js/bootstrap-material-datetimepicker.js"></script>';
-					
 			//generacion del input
-			$input .='
+			$input ='
 				<div class="form-group" id="div_'.$name.'">
 					<label class="control-label col-sm-4">'.$placeholder.'</label>
 					<div class="col-sm-8 field">
@@ -1067,11 +1054,8 @@ class Basic_Form_Inputs{
 				case 2: $x_pos = 'bottom'; break;
 			}
 					
-			//solicitud de recursos
-			$input  ='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/clock_timepicker/dist/bootstrap-clockpicker.min.css">';
-					
 			//generacion del input
-			$input .='
+			$input ='
 				<div class="form-group" id="div_'.$name.'">
 					<label class="control-label col-sm-4">'.$placeholder.'</label>
 					<div class="col-sm-8 field">
@@ -1081,9 +1065,6 @@ class Basic_Form_Inputs{
 						</div>
 					</div>
 				</div>';
-					
-			//solicitud de recursos
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/clock_timepicker/dist/bootstrap-clockpicker.min.js"></script>';
 					
 			//ejecucion script
 			$input .='
@@ -1248,27 +1229,22 @@ class Basic_Form_Inputs{
 			
 			//generacion del input
 			$input = '
-				<link href="'.DB_SITE_REPO.'/LIBS_js/bootstrap_colorpicker/dist/css/bootstrap-colorpicker.min.css"  rel="stylesheet">
-				<link href="'.DB_SITE_REPO.'/LIBS_js/bootstrap_colorpicker/dist/css/bootstrap-colorpicker-plus.css" rel="stylesheet">';
-    	
-			//generacion del input
-			$input .= '
 				<div class="form-group" id="div_'.$name.'">
 					<label class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
 					<div class="col-sm-8 field">
-						<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$w.'"  '.$x.' '.$bcolor.' onkeypress="return soloLetras(event)">
+						<div class="input-group bootstrap-timepicker">
+							<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$x.' '.$bcolor.' onkeypress="return soloLetras(event)">
+							<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span> 
+						</div>
 					</div>
 				</div>';
 					
 			//Ejecucion Javascript
 			$input .= '
-				<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-				<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_colorpicker/dist/js/bootstrap-colorpicker-plus.js"></script>
 				<script type="text/javascript">
 					$(function(){
-						var color_'.$name.' = $("#'.$name.'");
-						color_'.$name.'.colorpickerplus();
-						color_'.$name.'.on("changeColor", function(e,color){
+						$("#'.$name.'").colorpickerplus();
+						$("#'.$name.'").on("changeColor", function(e,color){
 							if(color==null)
 							$(this).val("transparent").css("background-color", "#fff");//tranparent
 							else
@@ -1335,15 +1311,7 @@ class Basic_Form_Inputs{
 						<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; height: '.$xheight.'px;" '.$x.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
 					</div>
 				</div>';	
-			
-			//Ejecucion Javascript
-			$input .= '
-				<script src=\''.DB_SITE_REPO.'/LIBS_js/autosize/dist/autosize.js\'></script>
-				<script>
-					autosize(document.querySelectorAll(\'textarea\'));
-				</script>
-			';
-
+				
 			//Imprimir dato	
 			echo $input;
 		}
@@ -1397,10 +1365,7 @@ class Basic_Form_Inputs{
 					<h3>'.$placeholder.'</h3>
 					<textarea id="ckeditor_'.$name.'" class="ckeditor" name="'.$name.'" '.$x.'>'.$value.'</textarea>
 				</div>';
-				
-			//se cargan recursos					
-			$input .= '<script src="'.DB_SITE_REPO.'/LIBS_js/ckeditor/ckeditor.js"></script>';
-				
+			
 			//ejecucion de script
 			$input .= '<script>';
 			//se selecciona el tipo de editor a mostrar
@@ -1522,16 +1487,6 @@ class Basic_Form_Inputs{
 			}else{
 				$ndat = '';
 			}
-					
-			//se cargan recursos
-			$input = '
-				<link href="'.DB_SITE_REPO.'/LIBS_js/bootstrap_fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
-				<link href="'.DB_SITE_REPO.'/LIBS_js/bootstrap_fileinput/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
-				<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_fileinput/js/plugins/sortable.js" type="text/javascript"></script>
-				<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_fileinput/js/fileinput.js" type="text/javascript"></script>
-				<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_fileinput/js/locales/es.js" type="text/javascript"></script>
-				<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_fileinput/themes/explorer/theme.js" type="text/javascript"></script>
-			';
 			
 			//Mostrar Maximo de archivos
 			$s_msg  = '<strong><i class="fa fa-file-o" aria-hidden="true"></i> Maximo de Archivos Permitidos: </strong>'.$max_files.'<br/>';
@@ -1539,7 +1494,7 @@ class Basic_Form_Inputs{
 			$input .= alert_post_data(2,1,1,$s_msg );
 			
 			//generacion del input
-			$input .= '
+			$input = '
 				<div class="form-group" id="div_'.$name.'">
 					<div class="col-sm-12" style="margin-bottom:10px;">
 						<label class="control-label col-sm-4">'.$placeholder.'</label>
@@ -1563,8 +1518,7 @@ class Basic_Form_Inputs{
 							initialPreviewAsData: true,
 							showUpload: false
 						});
-					});
-								
+					});		
 				</script>
 			';
 
@@ -1614,48 +1568,36 @@ class Basic_Form_Inputs{
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 			//Filtro para el where
 			$filtro = '';
-			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
+			if ($filter!='0'){$filtro .= $filter;	}
 			//explode para poder crear cadena
 			$datos = explode(",", $data2);
 			if(count($datos)==1){
 				$data_required = ','.$datos[0].' AS '.$datos[0];
 				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
 			}else{
 				$data_required = '';
 				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
 				foreach($datos as $dato){
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-
-			//se trae un listado con todas las categorias
+			
 			$arrSelect = array();
-			$query = "SELECT  
-			".$data1." AS idData 
-			".$data_required."
-			FROM `".$table."`  
-			".$filtro."
-			ORDER BY ".$order_by;
-			//Consulta
-			$resultado = mysqli_query ($dbConn, $query);
-			//Si ejecuto correctamente la consulta
-			if($resultado){
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSelect,$row );
-				}
-				mysqli_free_result($resultado);
-				
-				$input = '<div class="form-group" id="div_'.$name.'">			
+			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+											
+			//si se devuelven datos
+			if($arrSelect!=false){								
+			
+				$input = '
+						<div class="form-group" id="div_'.$name.'">			
 							<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
 							<div class="col-sm-8 field">';
 								$z = 1;
 								foreach ( $arrSelect as $select ) {
-									$w = '';
-									if($value==$select['idData']){
-										$w .= 'checked';
-									}  	
+									//si el valor es el mismo que el actual
+									if($value==$select['idData']){ $w .= 'checked'; } else{$w = '';} 	
 									if(count($datos)==1){
 										$data_writing = $select[$datos[0]].' ';
 									}else{
@@ -1682,18 +1624,6 @@ class Basic_Form_Inputs{
 						
 				echo $input;
 				
-			//si da error, guardar en el log de errores una copia
-			}else{
-				//Genero numero aleatorio
-				$vardata = genera_password(8,'alfanumerico');
-				
-				//Guardo el error en una variable temporal
-				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
-				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');		
 			}
 		}
 	}
@@ -1740,15 +1670,17 @@ class Basic_Form_Inputs{
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 			//Filtro para el where
 			$filtro = '';
-			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
+			if ($filter!='0'){$filtro .= $filter;	}
 			//explode para poder crear cadena
 			$datos = explode(",", $data2);
 			if(count($datos)==1){
 				$data_required = ','.$datos[0].' AS '.$datos[0];
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+				$order_by = $datos[0].' ASC ';
+				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
 			}else{
 				$data_required = '';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+				$order_by = $datos[0].' ASC ';
+				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
 				foreach($datos as $dato){
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
@@ -1761,37 +1693,22 @@ class Basic_Form_Inputs{
 				$arrTemp[$y] = $dato;
 				$y++;	
 			}
-	
-			//se trae un listado con todas las categorias
+			
 			$arrSelect = array();
-			$query = "SELECT  
-			".$data1." AS idData 
-			".$data_required."
-			FROM `".$table."`  
-			".$filtro."
-			ORDER BY idData";
-			//Consulta
-			$resultado = mysqli_query ($dbConn, $query);
-			//Si ejecuto correctamente la consulta
-			if($resultado){
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSelect,$row );
-				}
-				mysqli_free_result($resultado);
+			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox_active', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+											
+			//si hay resultados
+			if($arrSelect!=false){								
 				
-				$input = '<div class="form-group" id="div_'.$name.'">			
+				$input = '
+						<div class="form-group" id="div_'.$name.'">			
 							<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
 							<div class="col-sm-8 field">';
 								$z = 1;
 								foreach ( $arrSelect as $select ) {
-									$w = '';
-									$m = '';
+									
 									if(isset($arrTemp[$z])&&$arrTemp[$z]==2){
-										$w .= 'checked';
-										$m = '2';
-									}else{
-										$m = '2';
-									}	
+										$w = 'checked'; $m = '2'; }else{ $w = ''; $m = '2'; }	
 									if(count($datos)==1){
 										$data_writing = $select[$datos[0]].' ';
 									}else{
@@ -1819,18 +1736,6 @@ class Basic_Form_Inputs{
 						
 				echo $input;
 				
-			//si da error, guardar en el log de errores una copia
-			}else{
-				//Genero numero aleatorio
-				$vardata = genera_password(8,'alfanumerico');
-				
-				//Guardo el error en una variable temporal
-				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
-				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');		
 			}
 		}
 	}
@@ -2088,17 +1993,17 @@ class Basic_Form_Inputs{
 				if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 				//Filtro para el where
 				$filtro = '';
-				if ($filter!='0'){ $filtro .="WHERE ".$filter;	}
+				if ($filter!='0'){ $filtro .= $filter;	}
 				//explode para poder crear cadena
 				$datos = explode(",", $data2);
 				if(count($datos)==1){
 					$data_required = ','.$datos[0].' AS '.$datos[0];
-					$order_by = 'ORDER BY '.$datos[0].' ASC ';
-					if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+					$order_by = $datos[0].' ASC ';
+					if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
 				}else{
 					$data_required = '';
-					$order_by = 'ORDER BY '.$datos[0].' ASC ';
-					if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+					$order_by = $datos[0].' ASC ';
+					if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
 					foreach($datos as $dato){
 						$data_required .= ','.$dato.' AS '.$dato;
 					}
@@ -2108,52 +2013,43 @@ class Basic_Form_Inputs{
 
 				//se trae un listado con todas las categorias
 				$arrSelect = array();
-				$query = "SELECT  
-				".$data1." AS idData 
-				".$data_required."
-				FROM `".$table."`  
-				".$filtro."
-				".$extrafilter;
-				//Consulta
-				$resultado = mysqli_query ($dbConn, $query);
-				//Si ejecuto correctamente la consulta
-				if($resultado){
-					while ( $row = mysqli_fetch_assoc ($resultado)) {
-						array_push( $arrSelect,$row );
-					}
-					mysqli_free_result($resultado);
+				$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $extrafilter, $dbConn, 'form_select_filter', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+				
+				//si hay resultados							
+				if($arrSelect!=false){
 							
-					$input = '<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">';
-					$input .= '<div class="form-group" id="div_'.$name.'">
+					$input = '
+							<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">
+								<div class="form-group" id="div_'.$name.'">
 									<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
 									<div class="col-sm-8 field">
 										<select name="'.$name.'" id="'.$name.'" '.$x.' data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.' " tabindex="2" >
 											<option value=""></option>';
 													
-												
-										foreach ( $arrSelect as $select ) {
-											$w = '';
-											if($value==$select['idData']){
-												$w .= 'selected="selected"';
-											}  	
-											if(count($datos)==1){
-												$data_writing = $select[$datos[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datos as $dato){
-													$data_writing .= $select[$dato].' ';
+											//se recorren las opciones	
+											foreach ( $arrSelect as $select ) {
+												//si el seleccionado esta activo
+												if($value==$select['idData']){ $w .= 'selected="selected"'; }else{$w = '';}  	
+												//si tiene uno o mas datos
+												if(count($datos)==1){
+													$data_writing = $select[$datos[0]].' ';
+												}else{
+													$data_writing = '';
+													foreach($datos as $dato){
+														$data_writing .= $select[$dato].' ';
+													}
 												}
-											}
-													$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										} 
+												//se crea cadena
+												$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
+											} 
 												
 												
-							$input .= '</select>
+							$input .= '
+										</select>
 									</div>
 								</div>
 									
 								<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js" type="text/javascript"></script>
-								<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 								<script type="text/javascript">
 										
 									$.fn.oldChosen = $.fn.chosen
@@ -2186,18 +2082,6 @@ class Basic_Form_Inputs{
 
 					echo $input;
 							
-				//si da error, guardar en el log de errores una copia
-				}else{
-					//Genero numero aleatorio
-					$vardata = genera_password(8,'alfanumerico');
-							
-					//Guardo el error en una variable temporal
-					$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-					$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-					$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-							
-					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');		
 				}
 			}
 		}
@@ -2256,59 +2140,34 @@ class Basic_Form_Inputs{
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 			//Filtro para el where
 			$filtro = '';
-			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
-				
-			//se trae un listado con todas las categorias
+			if ($filter!='0'){$filtro .= $filter; }
+			
 			$arrSelect = array();
-			$query = "SELECT  
-			".$table1.".".$data1." AS idData, 
-			".$table1.".".$data2."
-			FROM `".$table1."`  
-			INNER JOIN ".$table2." ON ".$table2.".".$data1." = ".$table1.".".$data1."
-			".$filtro."
-			GROUP BY ".$table1.".".$data1."
-			ORDER BY ".$table1.".".$data2." ASC";
-			//Consulta
-			$resultado = mysqli_query ($dbConn, $query);
-			//Si ejecuto correctamente la consulta
-			if($resultado){
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSelect,$row );
-				}
-				mysqli_free_result($resultado);
+			$arrSelect = db_select_array (false, $table1.'.'.$data1.' AS idData, '.$table1.'.'.$data2, $table1, 'INNER JOIN '.$table2.' ON '.$table2.'.'.$data1.' = '.$table1.'.'.$data1, $filtro.' GROUP BY '.$table1.'.'.$data1, $table1.'.'.$data2.' ASC', $dbConn, 'form_select_join', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+											
+			//si hay resultados							
+			if($arrSelect!=false){
 						
-				$input = '<div class="form-group" id="div_'.$name.'">
-						<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-									<div class="col-sm-8 field">
-									<select name="'.$name.'" id="'.$name.'" class="form-control" '.$x.' >
+				$input = '
+						<div class="form-group" id="div_'.$name.'">
+							<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
+							<div class="col-sm-8 field">
+								<select name="'.$name.'" id="'.$name.'" class="form-control" '.$x.' >
 									<option value="" selected>Seleccione una Opcion</option>';
-									
+									//recorro los resultados
 									foreach ( $arrSelect as $select ) {
 										$w = '';
 										if($value==$select['idData']){
 											$w .= 'selected="selected"';
-										}  	
-										
-						$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$select[$data2].'</option>';
-								} 
-				$input .= '</select>
+										} 
+										$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$select[$data2].'</option>';
+									} 
+					$input .= '</select>
 							</div>
 						</div>';
 								
 				echo $input;
 						
-			//si da error, guardar en el log de errores una copia
-			}else{
-				//Genero numero aleatorio
-				$vardata = genera_password(8,'alfanumerico');
-						
-				//Guardo el error en una variable temporal
-				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-						
-				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');		
 			}
 		}
 	}
@@ -2371,26 +2230,14 @@ class Basic_Form_Inputs{
 				if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 				//Filtro para el where
 				$filtro = '';
-				if ($filter!='0'){$filtro .="WHERE ".$filter;	}
-						
-				//se trae un listado con todas las categorias
+				if ($filter!='0'){$filtro .= $filter;	}
+				
 				$arrSelect = array();
-				$query = "SELECT  
-				".$table1.".".$data1." AS idData, 
-				".$table1.".".$data2."
-				FROM `".$table1."`  
-				INNER JOIN ".$table2." ON ".$table2.".".$data1." = ".$table1.".".$data1."
-				".$filtro."
-				GROUP BY ".$table1.".".$data1."
-				ORDER BY ".$table1.".".$data2." ASC";
-				//Consulta
-				$resultado = mysqli_query ($dbConn, $query);
-				//Si ejecuto correctamente la consulta
-				if($resultado){
-					while ( $row = mysqli_fetch_assoc ($resultado)) {
-						array_push( $arrSelect,$row );
-					}
-					mysqli_free_result($resultado);
+				$arrSelect = db_select_array (false, $table1.'.'.$data1.' AS idData, '.$table1.'.'.$data2, $table1, 'INNER JOIN '.$table2.' ON '.$table2.'.'.$data1.' = '.$table1.'.'.$data1, $filtro.' GROUP BY '.$table1.'.'.$data1, $table1.'.'.$data2.' ASC', $dbConn, 'form_select_join', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+												
+				//si hay resultados							
+				if($arrSelect!=false){
+				
 							
 					$input = '<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">';
 					$input .= '<div class="form-group" id="div_'.$name.'">
@@ -2731,7 +2578,7 @@ class Basic_Form_Inputs{
 			$input .= '
 			<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/country_picker/css/bootstrap-select.min.css">
 			<script src="'.DB_SITE_REPO.'/LIBS_js/country_picker/js/bootstrap-select.min.js"></script>
-			<script>var domain_val = "'.DB_SITE_REPO.'";</script>   	
+			<script>let domain_val = "'.DB_SITE_REPO.'";</script>   	
 			<script src="'.DB_SITE_REPO.'/LIBS_js/country_picker/js/countrypicker.js"></script>'; 
 					
 			//Imprimir dato	
@@ -2984,7 +2831,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat');
 				$vowels = array(" ", "´", "-"); 
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -2993,7 +2840,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -3012,19 +2859,16 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-							
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 								
@@ -3032,9 +2876,9 @@ class Basic_Form_Inputs{
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -3045,9 +2889,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
@@ -3326,7 +3170,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat');
 				$vowels = array(" ", "´", "-"); 
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -3335,7 +3179,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -3354,26 +3198,25 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 							}else{';
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -3384,9 +3227,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
@@ -3687,7 +3530,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat'); 
 				$vowels = array(" ", "´", "-");
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -3696,7 +3539,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -3715,26 +3558,25 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 							}else{';
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -3745,9 +3587,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
@@ -4071,7 +3913,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat'); 
 				$vowels = array(" ", "´", "-");
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -4080,7 +3922,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -4099,26 +3941,25 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 							}else{';
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -4129,9 +3970,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
@@ -4480,7 +4321,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat'); 
 				$vowels = array(" ", "´", "-");
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -4489,7 +4330,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -4508,26 +4349,25 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 							}else{';
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -4538,9 +4378,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
@@ -5326,7 +5166,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat'); 
 				$vowels = array(" ", "´", "-");
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -5335,7 +5175,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -5354,26 +5194,25 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 							}else{';
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -5384,9 +5223,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
@@ -6748,7 +6587,7 @@ class Basic_Form_Inputs{
 				filtrar($arrTodos, 'idCat'); 
 				$vowels = array(" ", "´", "-");
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -6757,7 +6596,7 @@ class Basic_Form_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -6776,26 +6615,25 @@ class Basic_Form_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 							}else{';
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -6806,9 +6644,9 @@ class Basic_Form_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								

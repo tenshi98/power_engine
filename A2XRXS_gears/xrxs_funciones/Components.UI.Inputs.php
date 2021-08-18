@@ -564,14 +564,6 @@ class Basic_Inputs{
 				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$x.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
 			</div>';
 			
-			//Ejecucion Javascript
-			$input .= '
-				<script src=\''.DB_SITE_REPO.'/LIBS_js/autosize/dist/autosize.js\'></script>
-				<script>
-					autosize(document.querySelectorAll(\'textarea\'));
-				</script>
-			';
-
 			//Imprimir dato	
 			echo $input;
 		}
@@ -777,14 +769,8 @@ class Basic_Inputs{
 			//Validacion de variables
 			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
 			
-			//Solicitud de recursos
-			$input  ='<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/material_datetimepicker/css/bootstrap-material-datetimepicker.css" />';
-			$input .='<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-			$input .='<script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>';
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/material_datetimepicker/js/bootstrap-material-datetimepicker.js"></script>';
-				
 			//generacion del input
-			$input .='
+			$input ='
 			<div class="field">
 				<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'"  '.$x.'>
 			</div>';
@@ -859,17 +845,11 @@ class Basic_Inputs{
 			if($value==''){   $w = ''; }else{   $w=$value;}
 			if($required==1){ $x = ''; }elseif( $required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 			
-			//solicitud de recursos
-			$input  ='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/clock_timepicker/dist/bootstrap-clockpicker.min.css">';
-			
 			//generacion del input
-			$input .='
+			$input ='
 			<div class="field">
 				<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' >
 			</div>';
-			
-			//solicitud de recursos
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/clock_timepicker/dist/bootstrap-clockpicker.min.js"></script>';
 			
 			//script activacion
 			$input .='<script type="text/javascript">
@@ -933,8 +913,8 @@ class Basic_Inputs{
 			if($required==1){ $x = ''; }elseif( $required==2){$x='required';$_SESSION['form_require'].=','.$name;}
 			
 			//solicitud de recursos
-			$input  ='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/css/timepicker.css">';
-			$input .='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/js/timepicker.js">';
+			$input  ='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/css/timepicki_bottom.css">';
+			$input .='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/js/timepicki_bottom.js">';
 			
 			//generacion del input
 			$input .='
@@ -1178,12 +1158,8 @@ class Basic_Inputs{
 			if($value==0){    $w = ''; }elseif($value!=0){   $w = $value;}
 			if($required==1){ $x = ''; }elseif($required==2){$x = 'required';$_SESSION['form_require'].=','.$name;}	
 			
-			//solicitud de recursos
-			$input  ='<script src="'.DB_SITE_REPO.'/LIBS_js/bootstrap_touchspin/src/jquery.bootstrap-touchspin.js"></script>';
-			$input .='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/bootstrap_touchspin/src/jquery.bootstrap-touchspin.css">';
-			
 			//generacion del input
-			$input .='
+			$input ='
 			<div class="field">
 				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroRealRacional(event)">
 			</div>';
@@ -1495,9 +1471,6 @@ class Basic_Inputs{
 								<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span> 
 							</div>
 						</div>';
-			
-			//Validacion Script		
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/rut_validate/jquery.rut.min.js"></script>';
 			
 			//script activacion
 			$input.='
@@ -2575,7 +2548,7 @@ class Basic_Inputs{
 				filtrar($arrTodos, 'idCat');
 				$vowels = array(" ", "´", "-"); 
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
+					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
 						$input .= ',"'.$idcomp['idData'].'"';
 					}
@@ -2584,7 +2557,7 @@ class Basic_Inputs{
 				}
 				
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'var data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -2603,19 +2576,16 @@ class Basic_Inputs{
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
-						var Componente
-						Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
+						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
 						try {
 							if (Componente != "") {
-							
-								id_data=eval("id_data_'.$name[$i-1].'_" + Componente)
-								
-								data=eval("data_'.$name[$i-1].'_" + Componente)
-								num_int = id_data.length
-								document.'.$form_name.'.'.$name[$i].'.length = num_int
+								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
+								data    = eval("data_'.$name[$i-1].'_" + Componente);
+								num_int = id_data.length;
+								document.'.$form_name.'.'.$name[$i].'.length = num_int;
 								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i]
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i]
+								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
+								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
 								document.getElementById("div_'.$name[$i].'").style.display = "block";	
 								
@@ -2623,9 +2593,9 @@ class Basic_Inputs{
 						
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 								
@@ -2636,9 +2606,9 @@ class Basic_Inputs{
 						
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = ""
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion"
+									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 								
