@@ -189,9 +189,6 @@ class Basic_Inputs{
 					<input type="text"     placeholder="'.$placeholder.'"    class="form-control top"  id="'.$name.'"  name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloRut(event)">
 				</div>';
 					
-			//Validacion Script		
-			$input .='<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/rut_validate/jquery.rut.min.js"></script>';
-			
 			//script ejecucion
 			$input .='
 				<script>
@@ -1878,8 +1875,6 @@ class Basic_Inputs{
 										
 										
 					$input .= '</select>
-								<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js" type="text/javascript"></script>
-								<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 								<script type="text/javascript">
 									$.fn.oldChosen = $.fn.chosen
 									$.fn.chosen = function(options) {

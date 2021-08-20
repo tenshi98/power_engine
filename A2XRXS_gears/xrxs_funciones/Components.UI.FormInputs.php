@@ -1624,6 +1624,14 @@ class Basic_Form_Inputs{
 						
 				echo $input;
 				
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 			}
 		}
 	}
@@ -1736,6 +1744,14 @@ class Basic_Form_Inputs{
 						
 				echo $input;
 				
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 			}
 		}
 	}
@@ -2049,7 +2065,6 @@ class Basic_Form_Inputs{
 									</div>
 								</div>
 									
-								<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js" type="text/javascript"></script>
 								<script type="text/javascript">
 										
 									$.fn.oldChosen = $.fn.chosen
@@ -2082,6 +2097,14 @@ class Basic_Form_Inputs{
 
 					echo $input;
 							
+				//si no hay datos
+				}elseif(empty($arrSelect) OR $arrSelect==''){
+					//Devuelvo mensaje
+					alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				//si existe un error
+				}elseif($arrSelect==false){
+					//Devuelvo mensaje
+					alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 				}
 			}
 		}
@@ -2168,6 +2191,14 @@ class Basic_Form_Inputs{
 								
 				echo $input;
 						
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 			}
 		}
 	}
@@ -2260,8 +2291,6 @@ class Basic_Form_Inputs{
 											</div>
 										</div>
 									
-										<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js" type="text/javascript"></script>
-										<script src="'.DB_SITE_REPO.'/LIBS_js/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 										<script type="text/javascript">
 											$.fn.oldChosen = $.fn.chosen
 											$.fn.chosen = function(options) {
@@ -2292,19 +2321,16 @@ class Basic_Form_Inputs{
 									
 					echo $input;
 							
-				//si da error, guardar en el log de errores una copia
-				}else{
-					//Genero numero aleatorio
-					$vardata = genera_password(8,'alfanumerico');
-							
-					//Guardo el error en una variable temporal
-					$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-					$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-					$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-							
+				//si no hay datos
+				}elseif(empty($arrSelect) OR $arrSelect==''){
 					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+					alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				//si existe un error
+				}elseif($arrSelect==false){
+					//Devuelvo mensaje
+					alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 				}
+				
 			}
 		}
 	}
@@ -2573,13 +2599,6 @@ class Basic_Form_Inputs{
 						<select name="'.$name.'" id="'.$name.'" class="form-control frm_country selectpicker countrypicker" '.$x.'  data-live-search="true" data-default="'.$pais.'" data-flag="true"></select>
 					</div>
 				</div>';
-					
-			//se cargan recursos
-			$input .= '
-			<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/country_picker/css/bootstrap-select.min.css">
-			<script src="'.DB_SITE_REPO.'/LIBS_js/country_picker/js/bootstrap-select.min.js"></script>
-			<script>let domain_val = "'.DB_SITE_REPO.'";</script>   	
-			<script src="'.DB_SITE_REPO.'/LIBS_js/country_picker/js/countrypicker.js"></script>'; 
 					
 			//Imprimir dato	
 			echo $input;
