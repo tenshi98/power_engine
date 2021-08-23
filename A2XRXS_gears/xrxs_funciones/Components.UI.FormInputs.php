@@ -311,7 +311,9 @@ class Basic_Form_Inputs{
 		if($errorn==0){
 			//Validacion de variables
 			if($value==''){$w='';}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
+			//if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
+			//nunca es requerido
+			if($required==1){$x='';}elseif($required==2){$x='';}	
 			
 			//generacion del input
 			$input = '<div class="form-group" id="div_'.$name.'">
@@ -1198,7 +1200,7 @@ class Basic_Form_Inputs{
 	*===========================    Modo de uso  ===========================
 	* 	
 	* 	//se imprime input	
-	* 	$Form->form_input_color('Categoria','idCategoria', 1, 1 );
+	* 	$Form->form_color_picker('Categoria','idCategoria', 1, 1 );
 	* 
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -1207,7 +1209,7 @@ class Basic_Form_Inputs{
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
-	public function form_input_color($placeholder,$name, $value, $required){
+	public function form_color_picker($placeholder,$name, $value, $required){
 		
 		/********************************************************/
 		//Definicion de errores
@@ -1416,7 +1418,7 @@ class Basic_Form_Inputs{
 	* String   $name          Nombre del identificador del Input
 	* @return  String
 	************************************************************************/
-	public function form_input_file($placeholder,$name){
+	/*public function form_input_file($placeholder,$name){
 		
 		//generacion del input
 		$input = '
@@ -1442,7 +1444,7 @@ class Basic_Form_Inputs{
 		//Imprimir dato	
 		echo $input;
 		
-	}
+	}*/
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input para subir archivos
@@ -1491,10 +1493,10 @@ class Basic_Form_Inputs{
 			//Mostrar Maximo de archivos
 			$s_msg  = '<strong><i class="fa fa-file-o" aria-hidden="true"></i> Maximo de Archivos Permitidos: </strong>'.$max_files.'<br/>';
 			$s_msg .= '<strong><i class="fa fa-file-o" aria-hidden="true"></i> Extensiones de Archivos Permitidos: </strong><br/>'.$type_files;
-			$input .= alert_post_data(2,1,1,$s_msg );
+			$input = alert_post_data(2,1,1,$s_msg );
 			
 			//generacion del input
-			$input = '
+			$input .= '
 				<div class="form-group" id="div_'.$name.'">
 					<div class="col-sm-12" style="margin-bottom:10px;">
 						<label class="control-label col-sm-4">'.$placeholder.'</label>
@@ -2033,9 +2035,12 @@ class Basic_Form_Inputs{
 				
 				//si hay resultados							
 				if($arrSelect!=false){
-							
-					$input = '
-							<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">
+					
+					//se llama por obligacion libreria javascript desde aqui, porque en el head da problemas		
+					$input = '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js"></script>';
+					
+					//se crea formulario
+					$input .= '
 								<div class="form-group" id="div_'.$name.'">
 									<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
 									<div class="col-sm-8 field">
@@ -2067,22 +2072,22 @@ class Basic_Form_Inputs{
 									
 								<script type="text/javascript">
 										
-									$.fn.oldChosen = $.fn.chosen
+									$.fn.oldChosen = $.fn.chosen;
 									$.fn.chosen = function(options) {
-										 var selectcz_'.$name.' = $(".chosendiv_'.$name.'")
-										, is_creating_chosen = !!options
+										var selectcz_'.$name.' = $(".chosendiv_'.$name.'") , is_creating_chosen_'.$name.' = !!options;
 
-										if (is_creating_chosen && selectcz_'.$name.'.css(\'position\') === \'absolute\') {
-											selectcz_'.$name.'.removeAttr(\'style\')
+										if (is_creating_chosen_'.$name.' && selectcz_'.$name.'.css(\'position\') === \'absolute\') {
+											selectcz_'.$name.'.removeAttr(\'style\');
 										}
 
-										var ret = selectcz_'.$name.'.oldChosen(options)
+										var ret_'.$name.' = selectcz_'.$name.'.oldChosen(options);
 
-										if (is_creating_chosen) {
+										if (is_creating_chosen_'.$name.') {
 											selectcz_'.$name.'.attr(\'style\',\'display:visible; position:absolute; clip:rect(0,0,0,0)\');
 											selectcz_'.$name.'.attr(\'tabindex\', -1);
 										}
-										 return ret
+										
+										return ret_'.$name.';
 									}
 									$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
 
@@ -2269,48 +2274,48 @@ class Basic_Form_Inputs{
 				//si hay resultados							
 				if($arrSelect!=false){
 				
-							
-					$input = '<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">';
+					//se llama por obligacion libreria javascript desde aqui, porque en el head da problemas
+					$input = '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js"></script>';
+					
+					//se crea formulario
 					$input .= '<div class="form-group" id="div_'.$name.'">
 									<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
 									<div class="col-sm-8 field">
 										<select name="'.$name.'" id="'.$name.'" '.$x.' data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
 											<option value=""></option>';
-													
 												
-									foreach ( $arrSelect as $select ) {
-										$w = '';
-										if($value==$select['idData']){
-											$w .= 'selected="selected"';
-										}  	
-										$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$select[$data2].'</option>';
-									} 
+											foreach ( $arrSelect as $select ) {
+												$w = '';
+												if($value==$select['idData']){
+													$w .= 'selected="selected"';
+												}  	
+												$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$select[$data2].'</option>';
+											} 
 												
-												
-									$input .= '</select>
-											</div>
-										</div>
+									$input .= '
+										</select>
+									</div>
+								</div>
 									
-										<script type="text/javascript">
-											$.fn.oldChosen = $.fn.chosen
-											$.fn.chosen = function(options) {
-											  var selectcz_'.$name.' = $(".chosendiv_'.$name.'")
-												, is_creating_chosen = !!options
+								<script type="text/javascript">
+									$.fn.oldChosen = $.fn.chosen;
+									$.fn.chosen = function(options) {
+										var selectcz_'.$name.' = $(".chosendiv_'.$name.'"), is_creating_chosen_'.$name.' = !!options;
 
-											  if (is_creating_chosen && selectcz_'.$name.'.css(\'position\') === \'absolute\') {
-												selectcz_'.$name.'.removeAttr(\'style\')
-											  }
+										if (is_creating_chosen_'.$name.' && selectcz_'.$name.'.css(\'position\') === \'absolute\') {
+											selectcz_'.$name.'.removeAttr(\'style\');
+										}
 
-											  var ret = selectcz_'.$name.'.oldChosen(options)
+										var ret_'.$name.' = selectcz_'.$name.'.oldChosen(options);
 
-											  if (is_creating_chosen) {
-												selectcz_'.$name.'.attr(\'style\',\'display:visible; position:absolute; clip:rect(0,0,0,0)\');
-												selectcz_'.$name.'.attr(\'tabindex\', -1);
-											  }
-											  return ret
-											}
-											$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
-										</script>';
+										if (is_creating_chosen_'.$name.') {
+											selectcz_'.$name.'.attr(\'style\',\'display:visible; position:absolute; clip:rect(0,0,0,0)\');
+											selectcz_'.$name.'.attr(\'tabindex\', -1);
+										}
+										return ret_'.$name.'
+									}
+									$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
+								</script>';
 							//validacion si es requerido
 							if($required==2){	
 								$input .='
@@ -2400,21 +2405,17 @@ class Basic_Form_Inputs{
 				}
 			}
 
-			//se trae un listado con todas las categorias
-			$query = "SELECT  
-			".$data1." AS idData 
-			".$data_required."
-			FROM `".$table."`  
-			WHERE ".$data1."=".$value." 
-			".$filtro."
-			ORDER BY ".$order_by;
-			//Consulta
-			$resultado = mysqli_query ($dbConn, $query);
-			//Si ejecuto correctamente la consulta
-			if($resultado){
-				$rowselect = mysqli_fetch_assoc ($resultado);
-				mysqli_free_result($resultado);
-							
+			//se hace consulta
+			$rowselect = db_select_data (false, 
+			$data1.' AS idData '.$data_required, 
+			$table, 
+			'', 
+			$data1.'='.$value.' '.$filtro.' ORDER BY '.$order_by,
+			$dbConn, $_SESSION['usuario']['basic_data']['Nombre'], basename($_SERVER["REQUEST_URI"], ".php"), 'cron');
+				
+			//si hay resultados							
+			if($rowselect!=false){
+				
 				if(count($datos)==1){
 					$data_writing = $rowselect[$datos[0]].' ';
 				}else{
@@ -2431,21 +2432,17 @@ class Basic_Form_Inputs{
 								value="'.$data_writing.'"   disabled="disabled">
 							</div>
 						</div>';	
-				echo $input;
-						
-			//si da error, guardar en el log de errores una copia
-			}else{
-				//Genero numero aleatorio
-				$vardata = genera_password(8,'alfanumerico');
-						
-				//Guardo el error en una variable temporal
-				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-						
+				echo $input;	
+							
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');		
-			}
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+			}	
 		}
 	}
 	/*******************************************************************************************************************/

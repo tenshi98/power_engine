@@ -1852,7 +1852,10 @@ class Basic_Inputs{
 					}
 					mysqli_free_result($resultado);
 					
-					$input = '<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">';
+					//se llama por obligacion libreria javascript desde aqui, porque en el head da problemas
+					$input = '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js"></script>';
+					
+					//se crea formulario
 					$input .= '<select name="'.$name.'" id="'.$name.'" '.$x.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
 									<option value=""></option>';
 
@@ -1876,22 +1879,21 @@ class Basic_Inputs{
 										
 					$input .= '</select>
 								<script type="text/javascript">
-									$.fn.oldChosen = $.fn.chosen
+									$.fn.oldChosen = $.fn.chosen;
 									$.fn.chosen = function(options) {
-									  var selectcz_'.$name.' = $(".chosendiv_'.$name.'")
-										, is_creating_chosen = !!options
+										var selectcz_'.$name.' = $(".chosendiv_'.$name.'"), is_creating_chosen_'.$name.' = !!options;
 
-									  if (is_creating_chosen && selectcz_'.$name.'.css(\'position\') === \'absolute\') {
-										selectcz_'.$name.'.removeAttr(\'style\')
-									  }
+										if (is_creating_chosen_'.$name.' && selectcz_'.$name.'.css(\'position\') === \'absolute\') {
+											selectcz_'.$name.'.removeAttr(\'style\');
+										}
 
-									  var ret = selectcz_'.$name.'.oldChosen(options)
+										var ret_'.$name.' = selectcz_'.$name.'.oldChosen(options);
 
-									  if (is_creating_chosen) {
-										selectcz_'.$name.'.attr(\'style\',\'display:visible; position:absolute; clip:rect(0,0,0,0)\');
-										selectcz_'.$name.'.attr(\'tabindex\', -1);
-									  }
-									  return ret
+										if (is_creating_chosen_'.$name.') {
+											selectcz_'.$name.'.attr(\'style\',\'display:visible; position:absolute; clip:rect(0,0,0,0)\');
+											selectcz_'.$name.'.attr(\'tabindex\', -1);
+										}
+										return ret_'.$name.';
 									}
 									$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
 								</script>';
