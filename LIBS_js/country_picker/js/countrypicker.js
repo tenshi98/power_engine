@@ -1279,8 +1279,12 @@ $(function () {
             
         }
         
-         //append country list
-        countryInput.eq(i).html(countryList);
+        datat = "<option data-country-code='none' data-tokens='' value=''>Seleccione una opcion</option>";
+        datat += countryList;
+        
+        countryInput.eq(i).html(datat);
+        //append country list
+        //countryInput.eq(i).html(countryList);
 
 
         //check if default
@@ -1292,12 +1296,6 @@ $(function () {
 
 
     }
-
-
-
-
-
-
 
 
 
