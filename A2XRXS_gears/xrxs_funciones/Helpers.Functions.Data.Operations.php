@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_dataoperations = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -34,8 +28,6 @@ $n_funct_dataoperations = 0;
 * Integer  $divisor     Divisor de la hora
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function divHoras($hora,$divisor) {
 	//valido la hora
@@ -74,8 +66,6 @@ function divHoras($hora,$divisor) {
 * Integer  $multiplicador   Multiplicador de la hora
 * @return  Time
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function multHoras($hora,$multiplicador) {
 	//valido la hora
@@ -119,8 +109,6 @@ function multHoras($hora,$multiplicador) {
 * Time    $horaresta   Cantidad de horas a restar
 * @return  Time
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function restahoras($hora, $horaresta){
 		
@@ -176,8 +164,6 @@ function restahoras($hora, $horaresta){
 * Time     $horasuma    Cantidad de horas a sumar
 * @return  Time
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function sumahoras($hora,$horasuma){
 	//valido la hora
@@ -227,8 +213,6 @@ function sumahoras($hora,$horasuma){
 * Integer  $nDias   Cantidad de dias a sumar
 * @return  Date
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function sumarDias($Fecha,$nDias){
 	//valido las fechas
@@ -266,8 +250,6 @@ function sumarDias($Fecha,$nDias){
 * Integer  $nDias   Cantidad de dias a restar
 * @return  Date
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function restarDias($Fecha,$nDias){
 	//valido las fechas
@@ -305,8 +287,6 @@ function restarDias($Fecha,$nDias){
 * Date     $fecha_f   Fecha de termino
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function dias_transcurridos($fecha_i,$fecha_f){
 	//valido las fechas
@@ -340,8 +320,6 @@ function dias_transcurridos($fecha_i,$fecha_f){
 * Date     $fechafinal     Fecha de termino
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_dataoperations++;
 //Funcion
 function diferencia_meses( $fechainicial, $fechafinal ) {  
 	//valido las fechas

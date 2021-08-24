@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_clientdata = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -30,8 +24,6 @@ $n_funct_clientdata = 0;
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_clientdata++;
 //Funcion
 function obtenerIpCliente() {
 	$ipaddress = '';
@@ -66,8 +58,6 @@ function obtenerIpCliente() {
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_clientdata++;
 //Funcion
 function obtenerIpClienteAlt($headerContainingIPAddress = null){
     if (!empty($headerContainingIPAddress)) {
@@ -112,8 +102,6 @@ function obtenerIpClienteAlt($headerContainingIPAddress = null){
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_clientdata++;
 //Funcion
 function obtenerNavegador(){
 	//obtengo datos
@@ -191,8 +179,6 @@ function obtenerNavegador(){
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_clientdata++;
 //Funcion
 function obtenerSistOperativo(){
 	//obtengo datos
@@ -304,8 +290,6 @@ function obtenerSistOperativo(){
 * Array    $attributes (Opcional)Clases,etc
 * @return  Image
 ************************************************************************/
-//control numero funciones
-$n_funct_clientdata++;
 //Funcion
 function getGravatar($email, $size = 80, $default = 'mm', $rating = 'g', $attributes = []){
         
@@ -347,8 +331,6 @@ function getGravatar($email, $size = 80, $default = 'mm', $rating = 'g', $attrib
 * Array    $attributes (Opcional)Clases,etc
 * @return  Image
 ************************************************************************/
-//control numero funciones
-$n_funct_clientdata++;
 //Funcion
 function getEntorno(){
         

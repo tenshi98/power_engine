@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_database = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -35,8 +29,6 @@ $n_funct_database = 0;
 * Constantes  DB_NAME    Nombre de la BD
 * @return  db_con
 ************************************************************************/
-//control numero funciones
-$n_funct_database++;
 //Funcion
 function conectar () {
 	$db_con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -66,8 +58,6 @@ function conectar () {
 * String   $Tarea          Definicion de la tarea donde se ejecuta
 * @return  Object
 ************************************************************************/
-//control numero funciones
-$n_funct_database++;
 //Funcion
 function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
@@ -132,8 +122,6 @@ function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usu
 * String   $Tarea          Definicion de la tarea donde se ejecuta
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_database++;
 //Funcion
 function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
@@ -196,8 +184,6 @@ function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Us
 * String   $Tarea          Definicion de la tarea donde se ejecuta
 * @return  Object
 ************************************************************************/
-//control numero funciones
-$n_funct_database++;
 //Funcion
 function db_delete_data($showQuery, $table, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
@@ -259,8 +245,6 @@ function db_delete_data($showQuery, $table, $where, $dbConn, $Usuario, $Transacc
 * String   $Tarea          Definicion de la tarea donde se ejecuta
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_database++;
 //Funcion
 function db_update_data ($showQuery, $data, $table, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
@@ -322,8 +306,6 @@ function db_update_data ($showQuery, $data, $table, $where, $dbConn, $Usuario, $
 * String   $Tarea          Definicion de la tarea donde se ejecuta
 * @return  Object
 ************************************************************************/
-//control numero funciones
-$n_funct_database++;
 //Funcion
 function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	

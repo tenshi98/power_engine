@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_datavalidations = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -31,8 +25,6 @@ $n_funct_datavalidations = 0;
 * String   $Rut    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validarRut($Rut) {
     $Rut=str_replace('.', '', $Rut);
@@ -57,8 +49,6 @@ function validarRut($Rut) {
 * String   $Direccion    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validarEmail($Direccion, $tempEmailAllowed = false){ 
 	if(filter_var($Direccion,FILTER_VALIDATE_EMAIL)){ 
@@ -110,8 +100,6 @@ function validarEmail($Direccion, $tempEmailAllowed = false){
 * Decimal  $numero    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validarNumero($numero){ 
 	//cambio la coma por puntos para evitar problemas con los decimales
@@ -139,8 +127,6 @@ function validarNumero($numero){
 * String   $patente    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function ValidarPatente($patente){
 	//elimino los posibles guones
@@ -170,8 +156,6 @@ function ValidarPatente($patente){
 * String   $url    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validarURL($url){
     return (bool) filter_var($url, FILTER_VALIDATE_URL);
@@ -190,8 +174,6 @@ function validarURL($url){
 *===========================    Parametros   ===========================
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validarHttps(){
 	if ((isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
@@ -214,8 +196,6 @@ function validarHttps(){
 *===========================    Parametros   ===========================
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validarAjax(){
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
@@ -240,8 +220,6 @@ function validarAjax(){
 * Time     $time     Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validaHora($time) {
 	$pattern1 = "/^([0-9][0-9])[\:]([0-5][0-9])[\:]([0-5][0-9])$/";
@@ -274,8 +252,6 @@ function validaHora($time) {
 * String   $format   (Opcional) formato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validaFecha($date, $format = 'Y-m-d'){
 	if($date=='0000-00-00'){
@@ -301,8 +277,6 @@ function validaFecha($date, $format = 'Y-m-d'){
 * Integer  $input    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validaEntero($input){
     //se verifica si es un numero lo que se recibe
@@ -328,8 +302,6 @@ function validaEntero($input){
 * Integer  $input    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validaDispositivoMovil(){
     $useragent=$_SERVER['HTTP_USER_AGENT'];
@@ -354,8 +326,6 @@ function validaDispositivoMovil(){
 * Integer  $input    Dato a validar
 * @return  Bolean
 ************************************************************************/
-//control numero funciones
-$n_funct_datavalidations++;
 //Funcion
 function validaPermisoUser($nivel_usuario, $nivel_requerido, $dbConn){
 	//si el nivel de permiso del usuario es inferior al requerido

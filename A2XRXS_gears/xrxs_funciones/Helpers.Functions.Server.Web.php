@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_webdata = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -30,8 +24,6 @@ $n_funct_webdata = 0;
 *===========================    Parametros   ===========================
 * @return  Date
 ************************************************************************/
-//control numero funciones
-$n_funct_webdata++;
 //Funcion
 function getGoogleImage($consulta, $max_img){
 	//reemplazo los espacios vacios
@@ -91,8 +83,6 @@ function getGoogleImage($consulta, $max_img){
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_webdata++;
 //Funcion
 function obtenerInfoIp($IP_Cliente, $purpose) {
 	//salida
@@ -126,8 +116,6 @@ function obtenerInfoIp($IP_Cliente, $purpose) {
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_webdata++;
 //Funcion
 if (!function_exists('base_url')) {
     function base_url($atRoot=FALSE, $atCore=FALSE, $parse=FALSE){
@@ -168,8 +156,6 @@ if (!function_exists('base_url')) {
 * String   $url    Direccion web desde donde se obtendra el favicon
 * @return  Image
 ************************************************************************/
-//control numero funciones
-$n_funct_webdata++;
 //Funcion
 function getFavicon($url){
 	return sprintf('<img src="https://www.google.com/s2/favicons?domain=%s"/>',urlencode($url));

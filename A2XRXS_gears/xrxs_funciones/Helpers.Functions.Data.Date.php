@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_datadate = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -32,8 +26,6 @@ $n_funct_datadate = 0;
 * Date     $Fecha   Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_completa($Fecha){	
 	//Se verifica que se recibe algo
@@ -87,8 +79,6 @@ function Fecha_completa($Fecha){
 * Date     $Fecha    Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_completa_alt($Fecha){	
 	//Se verifica que se recibe algo
@@ -142,8 +132,6 @@ function Fecha_completa_alt($Fecha){
 * Date     $Fecha    Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Dia_Mes($Fecha){	
 	//Se verifica que se recibe algo
@@ -196,8 +184,6 @@ function Dia_Mes($Fecha){
 * Date     $Fecha    Fecha a Formatear
 * @return  Date
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_estandar($Fecha){
 	//Se verifica que se recibe algo
@@ -233,8 +219,6 @@ function Fecha_estandar($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Date
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_estandar_c($Fecha){
 	//Se verifica que se recibe algo
@@ -270,8 +254,6 @@ function Fecha_estandar_c($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Date
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_normalizada($Fecha){
 	//Se verifica que se recibe algo
@@ -304,8 +286,6 @@ function Fecha_normalizada($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Date
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_archivos($Fecha){
 	//Se verifica que se recibe algo
@@ -338,8 +318,6 @@ function Fecha_archivos($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_mes_ano($Fecha){	
 	//Se verifica que se recibe algo
@@ -392,8 +370,6 @@ function Fecha_mes_ano($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NdiaMes($Fecha){
 	//Se verifica que se recibe algo
@@ -427,8 +403,6 @@ function fecha2NdiaMes($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NdiaMesCon0($Fecha){	
 	//Se verifica que se recibe algo
@@ -465,8 +439,6 @@ function fecha2NdiaMesCon0($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NDiaSemana($Fecha){
 	//Se verifica que se recibe algo
@@ -502,8 +474,6 @@ function fecha2NDiaSemana($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NombreDia($Fecha){
 	//Se verifica que se recibe algo
@@ -543,8 +513,6 @@ function fecha2NombreDia($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NSemana($Fecha){
 	//Se verifica que se recibe algo
@@ -580,8 +548,6 @@ function fecha2NSemana($Fecha){
 * Date     $Fecha  Fecha a Formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NMes($Fecha){
 	//Se verifica que se recibe algo
@@ -617,8 +583,6 @@ function fecha2NMes($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NombreMes($Fecha){	
 	//Se verifica que se recibe algo
@@ -668,8 +632,6 @@ function fecha2NombreMes($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2NombreMesCorto($Fecha){	
 	//Se verifica que se recibe algo
@@ -718,8 +680,6 @@ function fecha2NombreMesCorto($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function fecha2Ano($Fecha){	
 	//Se verifica que se recibe algo
@@ -757,8 +717,6 @@ function fecha2Ano($Fecha){
 * Date     $Fecha   Fecha a Formatear
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_gringa($Fecha){
 	//Se verifica que se recibe algo
@@ -793,8 +751,6 @@ function Fecha_gringa($Fecha){
 * Date     $Fecha   Fecha a usar
 * @return  String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datadate++;
 //Funcion
 function Fecha_ultimo_dia_mes($Fecha){
 	//Se verifica que se recibe algo

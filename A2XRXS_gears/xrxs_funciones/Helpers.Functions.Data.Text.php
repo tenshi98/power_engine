@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_datatext = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -34,8 +28,6 @@ $n_funct_datatext = 0;
 * Integer  $cuantos   Cantidad de caracteres a mostrar antes de cortar
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function cortar($texto, $cuantos){
 	//se verifica si es un numero lo que se recibe
@@ -72,8 +64,6 @@ function cortar($texto, $cuantos){
 * String   $Rut    Rut a cortar
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function cortarRut($Rut){
 	//verifico si existe el guion	
@@ -105,8 +95,6 @@ function cortarRut($Rut){
 * Integer  $largo     Cantidad de caracteres minimos a admitir
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function palabra_largo($oracion,$largo){
 	//se verifica si es un numero lo que se recibe
@@ -142,8 +130,6 @@ function palabra_largo($oracion,$largo){
 * Integer  $largo     Cantidad de caracteres maximo a admitir
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function palabra_corto($oracion,$largo){
 	//se verifica si es un numero lo que se recibe
@@ -176,8 +162,6 @@ function palabra_corto($oracion,$largo){
 * String   $texto   Texto a limpiar
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function limpiarString($texto){
     //Limpieza caracteres normales
@@ -202,8 +186,6 @@ function limpiarString($texto){
 * String   $dato   Oracion a transformar
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function espacio_guion($dato) {
     return str_replace(' ', '_', $dato);
@@ -223,8 +205,6 @@ function espacio_guion($dato) {
 * String   $dato   Oracion a transformar
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function texto_mail($dato) {
     //Datos a cambiar
@@ -253,8 +233,6 @@ function texto_mail($dato) {
 * String   $dato   Oracion a revisar
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function contar_palabras_censuradas($oracion) {
     
@@ -404,8 +382,6 @@ function contar_palabras_censuradas($oracion) {
 * String   $dato   Oracion a revisar
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_datatext++;
 //Funcion
 function filtrar_palabras_censuradas($oracion) {
     

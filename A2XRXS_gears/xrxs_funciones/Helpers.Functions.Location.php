@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_location = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -35,8 +29,6 @@ $n_funct_location = 0;
 * Decimal  $longitude2    Longitud posicion 2
 * @return  Integer
 ************************************************************************/
-//control numero funciones
-$n_funct_location++;
 //Funcion
 function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {  
     
@@ -81,8 +73,6 @@ function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
 * String   $point     Latitud y longitus separado por un espacio
 * @return  String
 ************************************************************************/
-//control numero funciones
-$n_funct_location++;
 //Funcion
 class subpointLocation {
     var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
@@ -174,26 +164,34 @@ class subpointLocation {
 * String   $ApiKey     La Api Key de Google Maps
 * @return  Object
 ************************************************************************/
-//control numero funciones
-$n_funct_location++;
 //Funcion
 function getGeocodeData($address, $ApiKey) { 
+    //Obtengo la direccion
     $address = urlencode($address);     
+    //consulto a google
     $googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=".$address."&key=".$ApiKey;
+    //obtengo la respuesta
     $geocodeResponseData = file_get_contents($googleMapUrl);
-    $responseData = json_decode($geocodeResponseData, true);
+    //decodifico la respuesta
+    $responseData        = json_decode($geocodeResponseData, true);
+    //si hay un resultado
     if($responseData['status']=='OK') {
-        $latitude = isset($responseData['results'][0]['geometry']['location']['lat']) ? $responseData['results'][0]['geometry']['location']['lat'] : "";
-        $longitude = isset($responseData['results'][0]['geometry']['location']['lng']) ? $responseData['results'][0]['geometry']['location']['lng'] : "";
+        //datos obtenidos
+        $latitude         = isset($responseData['results'][0]['geometry']['location']['lat']) ? $responseData['results'][0]['geometry']['location']['lat'] : "";
+        $longitude        = isset($responseData['results'][0]['geometry']['location']['lng']) ? $responseData['results'][0]['geometry']['location']['lng'] : "";
         $formattedAddress = isset($responseData['results'][0]['formatted_address']) ? $responseData['results'][0]['formatted_address'] : "";         
+        //si existen todos los datos
         if($latitude && $longitude && $formattedAddress) {         
+            //creo arreglo
             $geocodeData = array();                         
+            //lleno los datos
             array_push(
                 $geocodeData, 
                 $latitude, 
                 $longitude, 
                 $formattedAddress
-            );             
+            ); 
+            //devuelvo arreglo            
             return $geocodeData;             
         } else {
             return false;

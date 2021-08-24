@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_datatime = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -31,8 +25,6 @@ $n_funct_datatime = 0;
 * Time     $Hora   Hora a formatear
 * @return  Time
 ************************************************************************/
-//control numero funciones
-$n_funct_datatime++;
 //Funcion
 function Hora_estandar($Hora){
 	//valido la hora
@@ -62,8 +54,6 @@ function Hora_estandar($Hora){
 * Time     $Hora   Hora a formatear
 * @return  Time
 ************************************************************************/
-//control numero funciones
-$n_funct_datatime++;
 //Funcion
 function Hora_prog($Hora){	
 	//valido la hora
@@ -92,8 +82,6 @@ function Hora_prog($Hora){
 * Time     $Hora   Hora a formatear
 * @return  Time
 ************************************************************************/
-//control numero funciones
-$n_funct_datatime++;
 //Funcion
 function Hora_archivos($Hora){	
 	//valido la hora

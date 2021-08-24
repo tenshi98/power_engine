@@ -7,12 +7,6 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
-/*                                        Control de numero de funciones                                           */
-/*                                                                                                                 */
-/*******************************************************************************************************************/
-$n_funct_datanumbers = 0;
-/*******************************************************************************************************************/
-/*                                                                                                                 */
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
@@ -35,8 +29,6 @@ $n_funct_datanumbers = 0;
 * Integer     $n_decimales   Numero de decimales deseados
 * @return     String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function Cantidades($valor, $n_decimales){	
 	//Se verifica que se recibe algo
@@ -79,8 +71,6 @@ function Cantidades($valor, $n_decimales){
 * Integer     $n_ceros       Numero de ceros a la izquierda del valor
 * @return     String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function n_doc($valor, $n_ceros){	
 	//Se verifica que se recibe algo
@@ -118,8 +108,6 @@ function n_doc($valor, $n_ceros){
 * Integer     $n_decimales   Numero de decimales deseados
 * @return     String
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function Valores($valor, $n_decimales){	
 	//Se verifica que se recibe algo
@@ -155,8 +143,6 @@ function Valores($valor, $n_decimales){
 * Decimal  $valor   Numero a formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function valores_enteros($valor){	
 	//Se verifica que se recibe algo
@@ -191,8 +177,6 @@ function valores_enteros($valor){
 * Decimal  $valor   Numero a comparar
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function valores_comparables($valor){	
 	//Se verifica que se recibe algo
@@ -228,8 +212,6 @@ function valores_comparables($valor){
 * Decimal  $valor   Numero a formatear
 * @return  Integer
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function valores_truncados($valor){	
 	//Se verifica que se recibe algo
@@ -269,8 +251,6 @@ function valores_truncados($valor){
 * Decimal  $valor   Numero a formatear
 * @return  Decimal
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function Cantidades_decimales_justos($valor){	
 	//Se verifica que se recibe algo
@@ -315,8 +295,6 @@ function Cantidades_decimales_justos($valor){
 * Decimal  $valor   Numero a formatear
 * @return  Decimal
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function Cantidades_decimales_justos_alt($valor){	
 	//Se verifica que se recibe algo
@@ -355,8 +333,6 @@ function Cantidades_decimales_justos_alt($valor){
 * Decimal   $valor   Numero a formatear
 * @return   Decimal
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function cantidades_excel($valor){	
 	//Se verifica que se recibe algo
@@ -381,8 +357,6 @@ function cantidades_excel($valor){
 * Decimal   $valor   Numero a formatear
 * @return   Decimal
 ************************************************************************/ 
-//control numero funciones
-$n_funct_datanumbers++;
 //Funcion
 function cantidades_google($valor){	
 	//Se verifica que se recibe algo
