@@ -126,7 +126,8 @@ function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usu
 function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
 	// Se hace consulta
-	$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join.' WHERE '.$where;
+	$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join;
+	if(isset($where)&&$where!=''){$query .= ' WHERE '.$where;}
 	//si estoy pidiendo mostrar la query
 	if($showQuery==true){
 		echo '<pre>';
