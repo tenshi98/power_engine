@@ -1407,49 +1407,6 @@ class Basic_Form_Inputs{
 	* Crea un input para subir archivos
 	* 
 	*===========================     Detalles    ===========================
-	* Permite crear un input estandar para subir archivos
-	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_input_file('Adjuntar Archivos','archivos' );
-	* 
-	*===========================    Parametros   ===========================
-	* String   $placeholder   Nombre o texto a mostrar en el navegador
-	* String   $name          Nombre del identificador del Input
-	* @return  String
-	************************************************************************/
-	/*public function form_input_file($placeholder,$name){
-		
-		//generacion del input
-		$input = '
-			<div class="form-group" id="div_'.$name.'">
-				<label class="control-label col-sm-4">'.$placeholder.'</label>
-				<div class="col-sm-8 field">
-					<input id="uploadFile'.$name.'" placeholder="'.$placeholder.'" disabled="disabled" />
-					<div class="fileUpload btn btn-primary">
-						<span><i class="fa fa-search" aria-hidden="true"></i> Seleccionar Archivo</span>
-						<input id="uploadBtn'.$name.'" type="file" class="upload" name="'.$name.'" />
-					</div>
-				</div>
-			</div>';
-			
-		//ejecucion de codigo
-		$input .= '
-			<script>
-				document.getElementById("uploadBtn'.$name.'").onchange = function () {
-					document.getElementById("uploadFile'.$name.'").value = this.value;
-				};
-			</script>';
-
-		//Imprimir dato	
-		echo $input;
-		
-	}*/
-	/*******************************************************************************************************************/
-	/***********************************************************************
-	* Crea un input para subir archivos
-	* 
-	*===========================     Detalles    ===========================
 	* Permite crear un input que permite subir multiples archivos 
 	* simultaneamente, con validacion y previsualizacion para algunos 
 	* tipos de archivo
@@ -1533,115 +1490,6 @@ class Basic_Form_Inputs{
 	* Crea un input tipo checkbox
 	* 
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo checkbox en base a datos de la base de datos
-	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_checkbox('Opciones','opciones', '', 1, 'ID', 'Nombre', 'tabla_opciones', '', $dbConn );
-	* 
-	*===========================    Parametros   ===========================
-	* String   $placeholder   Nombre o texto a mostrar en el navegador
-	* String   $name          Nombre del identificador del Input
-	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
-	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
-	* String   $table         Tabla desde donde tomar los datos
-	* String   $filter        Filtro de la seleccion de la base de datos
-	* Object   $dbConn        Puntero a la base de datos
-	* @return  String
-	************************************************************************/
-	public function form_checkbox($placeholder,$name, $value, $required, $data1, $data2, $table, $filter, $dbConn){
-
-		/********************************************************/
-		//Definicion de errores
-		$errorn = 0;
-		//se definen las opciones disponibles
-		$requerido = array(1, 2);
-		//verifico si el dato ingresado existe dentro de las opciones
-		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
-			$errorn++;
-		}
-		/********************************************************/
-		//Ejecucion si no hay errores
-		if($errorn==0){
-			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
-			//Filtro para el where
-			$filtro = '';
-			if ($filter!='0'){$filtro .= $filter;	}
-			//explode para poder crear cadena
-			$datos = explode(",", $data2);
-			if(count($datos)==1){
-				$data_required = ','.$datos[0].' AS '.$datos[0];
-				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
-			}else{
-				$data_required = '';
-				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
-				foreach($datos as $dato){
-					$data_required .= ','.$dato.' AS '.$dato;
-				}
-			}
-			
-			$arrSelect = array();
-			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-											
-			//si se devuelven datos
-			if($arrSelect!=false){								
-			
-				$input = '
-						<div class="form-group" id="div_'.$name.'">			
-							<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
-							<div class="col-sm-8 field">';
-								$z = 1;
-								foreach ( $arrSelect as $select ) {
-									//si el valor es el mismo que el actual
-									if($value==$select['idData']){ $w .= 'checked'; } else{$w = '';} 	
-									if(count($datos)==1){
-										$data_writing = $select[$datos[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datos as $dato){
-											$data_writing .= $select[$dato].' ';
-										}
-									}
-								
-									$input .= '			
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox" value="'.$select['idData'].'" '.$w.' name="'.$name.'_'.$z.'" id="'.$name.'_'.$z.'">
-										<label for="'.$name.'_'.$z.'">
-											'.$data_writing.'
-										</label>
-									</div>';
-									
-									$z++;	
-								}
-								
-								$input .= '		
-							</div>		
-						</div>';
-						
-				echo $input;
-				
-			//si no hay datos
-			}elseif(empty($arrSelect) OR $arrSelect==''){
-				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
-			//si existe un error
-			}elseif($arrSelect==false){
-				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
-			}
-		}
-	}
-	/*******************************************************************************************************************/
-	/***********************************************************************
-	* Crea un input tipo checkbox
-	* 
-	*===========================     Detalles    ===========================
 	* Permite crear un input tipo checkbox en base a datos de la base de 
 	* datos, que lleva por defecto opciones activas
 	*===========================    Modo de uso  ===========================
@@ -1676,34 +1524,52 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
-			//Filtro para el where
-			$filtro = '';
-			if ($filter!='0'){$filtro .= $filter;	}
-			//explode para poder crear cadena
+			
+			/******************************************/
+			//Variables
+			$filtro        = '';
+			$data_required = '';
+			$arrValTab     = array();
+			$y             = 1;
+			
+			/******************************************/
+			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
+			//Si es solo uno
 			if(count($datos)==1){
-				$data_required = ','.$datos[0].' AS '.$datos[0];
-				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
+				//datos requeridos
+				$data_required .= ','.$datos[0].' AS '.$datos[0];
+			//Si es mas de uno
 			}else{
-				$data_required = '';
-				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .= $datos[0]."!='' ";}
+				//recorro todos los datos solicitados
 				foreach($datos as $dato){
+					//datos requeridos
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-			//explode para poder crear cadena
+			
+			/******************************************/
+			//Ordenar por el dato requerido
+			$order_by = $datos[0].' ASC ';
+			//Si se envia filtro desde afuera
+			if($filter!='0' OR $filter!=''){
+				//que exista un dato
+				$filtro .= $filter." AND ".$datos[0]."!='' ";
+			}elseif($filter=='' OR $filter==0){
+				//que exista un dato
+				$filtro .= $datos[0]."!='' ";
+			}
+				
+			/******************************************/
+			//Valores de cada tab
 			$datos2 = explode(",", $value);
-			$arrTemp = array();
-			$y = 1;
 			foreach($datos2 as $dato){
-				$arrTemp[$y] = $dato;
+				$arrValTab[$y] = $dato;
 				$y++;	
 			}
 			
+			/******************************************/
+			//consulto
 			$arrSelect = array();
 			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox_active', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
 											
@@ -1714,11 +1580,18 @@ class Basic_Form_Inputs{
 						<div class="form-group" id="div_'.$name.'">			
 							<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
 							<div class="col-sm-8 field">';
-								$z = 1;
+								
+								/******************************************/
+								//Recorro
 								foreach ( $arrSelect as $select ) {
+									//Si el tab correspondiente esta seleccionado
+									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+										$w = 'checked'; $m = '2'; 
+									}else{ 
+										$w = ''; $m = '2'; 
+									}	
 									
-									if(isset($arrTemp[$z])&&$arrTemp[$z]==2){
-										$w = 'checked'; $m = '2'; }else{ $w = ''; $m = '2'; }	
+									//Escribo los datos solicitados
 									if(count($datos)==1){
 										$data_writing = $select[$datos[0]].' ';
 									}else{
@@ -1730,14 +1603,13 @@ class Basic_Form_Inputs{
 								
 									$input .= '			
 									<div class="checkbox checkbox-primary">
-										<input                type="hidden"   value="1"      '.$w.' name="'.$name.'_'.$z.'" >
-										<input class="styled" type="checkbox" value="'.$m.'" '.$w.' name="'.$name.'_'.$z.'" id="'.$name.'_'.$z.'">
-										<label for="'.$name.'_'.$z.'">
+										<input                type="hidden"   value="1"      '.$w.' name="'.$name.'_'.$select['idData'].'" >
+										<input class="styled" type="checkbox" value="'.$m.'" '.$w.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'">
+										<label for="'.$name.'_'.$select['idData'].'">
 											'.$data_writing.'
 										</label>
 									</div>';
-									
-									$z++;	
+										
 								}
 								
 								$input .= '		
