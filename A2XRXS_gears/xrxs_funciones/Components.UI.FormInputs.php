@@ -1820,7 +1820,7 @@ class Basic_Form_Inputs{
 	*===========================    Modo de uso  ===========================
 	* 	
 	* 	//se imprime input	
-	* 	$Form->form_textarea('Observaciones','observaciones', '', 1, 160 );
+	* 	$Form->form_textarea('Observaciones','observaciones', '', 1);
 	* 
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -1830,7 +1830,7 @@ class Basic_Form_Inputs{
 	* Integer  $height        Altura del input
 	* @return  String
 	************************************************************************/
-	public function form_textarea($placeholder,$name, $value, $required, $height){
+	public function form_textarea($placeholder,$name, $value, $required){
 		
 		/********************************************************/
 		//Definicion de errores
@@ -1840,11 +1840,6 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
-			$errorn++;
-		}
-		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($height)&&$height!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $height ('.$height.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		/********************************************************/
