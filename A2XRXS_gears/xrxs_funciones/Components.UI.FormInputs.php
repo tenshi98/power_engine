@@ -604,16 +604,15 @@ class Basic_Form_Inputs{
 	*===========================    Modo de uso  ===========================
 	* 	
 	* 	//se imprime input	
-	* 	$Form->form_input_disabled('Dia actual','dia', '2018-02-02', 1 );
+	* 	$Form->form_input_disabled('Dia actual','dia', '2018-02-02');
 	* 
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
-	public function form_input_disabled($placeholder,$name, $value, $required){
+	public function form_input_disabled($placeholder,$name, $value){
 		
 		/********************************************************/
 		//Definicion de errores
