@@ -434,7 +434,6 @@ function file_explorer($type, $conector, $emp_path, $id_emp, $prm){
 /*******************************************************************************************************************/
 //Muestra la ventana modal
 function widget_modal($width, $height){
-	require_once '../LIBS_js/modal/modal.php';
 	echo "
 	<script>
 		$(document).ready(function(){
