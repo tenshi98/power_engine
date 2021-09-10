@@ -9,8 +9,21 @@ if( ! defined('XMBCXRXSKGC')) {
 //Crea un grafico lineal
 function GraphLinear_1($idDiv, 
 						$titulo, $eje_x_titulo, $eje_y_titulo, 
-						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth){
+						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth,
+						$legendOptions){
 	
+	//Opciones del legend
+	switch ($legendOptions) {
+		//Opcion abajo
+		case 1:
+			$lopts = 'legend: {"orientation": "h"}';
+			break;
+		default:
+			$lopts = '';
+	}
+
+	/*************************************************/
+	//imprime
 	$graph  = '<div id="'.$idDiv.'"></div>';
 	$graph .= '<script>';
 		$graph .= $xData;
@@ -49,7 +62,9 @@ function GraphLinear_1($idDiv,
 		var layout = {
 			title:\''.$titulo.'\',
 			xaxis: {title: \''.$eje_x_titulo.'\', showticklabels: labelview},
-			yaxis: {title: \''.$eje_y_titulo.'\'}
+			yaxis: {title: \''.$eje_y_titulo.'\'},
+			showlegend: true,
+			'.$lopts.'
 		};
 
 		var config = {
@@ -63,15 +78,28 @@ function GraphLinear_1($idDiv,
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
 	</script>';	
 	
-	echo $graph;
+	return $graph;
 	
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal
 function GraphLinear_2($idDiv, 
 						$titulo, $eje_x_titulo, $eje_y_titulo, 
-						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth){
+						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth,
+						$legendOptions){
 	
+	//Opciones del legend
+	switch ($legendOptions) {
+		//Opcion abajo
+		case 1:
+			$lopts = 'legend: {"orientation": "h",x: 0, y: 1}';
+			break;
+		default:
+			$lopts = '';
+	}
+
+	/*************************************************/
+	//imprime
 	$graph  = '<div id="'.$idDiv.'"></div>';
 	$graph .= '<script>';
 		$graph .= $xData;
@@ -105,7 +133,9 @@ function GraphLinear_2($idDiv,
 		var layout = {
 			title:\''.$titulo.'\',
 			xaxis: {title: \''.$eje_x_titulo.'\', autorange: true,rangeslider: {range: [xData[0][0], xData[0][xData[0].length]]},type: \'linear\'},
-			yaxis: {title: \''.$eje_y_titulo.'\'}
+			yaxis: {title: \''.$eje_y_titulo.'\'},
+			showlegend: true,
+			'.$lopts.'
 		};
 
 		var config = {
@@ -119,7 +149,7 @@ function GraphLinear_2($idDiv,
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
 	</script>';	
 	
-	echo $graph;
+	return $graph;
 	
 }
 
