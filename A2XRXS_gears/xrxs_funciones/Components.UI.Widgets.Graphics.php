@@ -6,7 +6,7 @@ if( ! defined('XMBCXRXSKGC')) {
     die('No tienes acceso a esta carpeta o archivo.');
 }
 /*******************************************************************************************************************/
-//Crea un grafico lineal
+//Crea un grafico lineal (Seleccion Normal)
 function GraphLinear_1($idDiv, 
 						$titulo, $eje_x_titulo, $eje_y_titulo, 
 						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth,
@@ -16,7 +16,7 @@ function GraphLinear_1($idDiv,
 	switch ($legendOptions) {
 		//Opcion abajo
 		case 1:
-			$lopts = 'legend: {"orientation": "h"}';
+			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
 			break;
 		default:
 			$lopts = '';
@@ -59,13 +59,13 @@ function GraphLinear_1($idDiv,
 			labelview = false;
 		}
 		/*****************************************************************/
-		var layout = {
-			title:\''.$titulo.'\',
-			xaxis: {title: \''.$eje_x_titulo.'\', showticklabels: labelview},
-			yaxis: {title: \''.$eje_y_titulo.'\'},
-			showlegend: true,
-			'.$lopts.'
-		};
+		var layout = {';
+			if(isset($titulo)&&$titulo!=''){             $graph .= 'title:\''.$titulo.'\',';}
+			if(isset($eje_x_titulo)&&$eje_x_titulo!=''){ $graph .= 'xaxis: {title: \''.$eje_x_titulo.'\', showticklabels: labelview},';}
+			if(isset($eje_y_titulo)&&$eje_y_titulo!=''){ $graph .= 'yaxis: {title: \''.$eje_y_titulo.'\'},';}
+			$graph .= 'showlegend: true,';
+			$graph .= $lopts;
+		$graph .= ' };
 
 		var config = {
 			locale: \'es-ar\',
@@ -82,7 +82,7 @@ function GraphLinear_1($idDiv,
 	
 }
 /*******************************************************************************************************************/
-//Crea un grafico lineal
+//Crea un grafico lineal (Seleccion con Rango)
 function GraphLinear_2($idDiv, 
 						$titulo, $eje_x_titulo, $eje_y_titulo, 
 						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth,
@@ -92,7 +92,7 @@ function GraphLinear_2($idDiv,
 	switch ($legendOptions) {
 		//Opcion abajo
 		case 1:
-			$lopts = 'legend: {"orientation": "h",x: 0, y: 1}';
+			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
 			break;
 		default:
 			$lopts = '';
