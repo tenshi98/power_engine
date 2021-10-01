@@ -3180,11 +3180,12 @@ class Basic_Form_Inputs{
 			$filtro        = array();
 			
 			//Variables Vacias
-			$input            = '';
-			$data_required[1] = '';
-			$data_required[2] = '';
-			$filtro[1]        = '';
-			$filtro[2]        = '';
+			$input = '';
+			//recorro
+			for ($i = 1; $i <= 2; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
+			}
 			
 			/******************************************/
 			//Si el dato no es requerido
@@ -3325,13 +3326,12 @@ class Basic_Form_Inputs{
 			$filtro        = array();
 			
 			//Variables Vacias
-			$input            = '';
-			$data_required[1] = '';
-			$data_required[2] = '';
-			$data_required[3] = '';
-			$filtro[1]        = '';
-			$filtro[2]        = '';
-			$filtro[3]        = '';
+			$input = '';
+			//recorro
+			for ($i = 1; $i <= 3; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
+			}
 			
 			/******************************************/
 			//Si el dato no es requerido
@@ -3496,15 +3496,12 @@ class Basic_Form_Inputs{
 			$filtro        = array();
 			
 			//Variables Vacias
-			$input            = '';
-			$data_required[1] = '';
-			$data_required[2] = '';
-			$data_required[3] = '';
-			$data_required[4] = '';
-			$filtro[1]        = '';
-			$filtro[2]        = '';
-			$filtro[3]        = '';
-			$filtro[4]        = '';
+			$input = '';
+			//recorro
+			for ($i = 1; $i <= 4; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
+			}
 			
 			/******************************************/
 			//Si el dato no es requerido
@@ -3604,11 +3601,11 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_select_depend4($placeholder1, $name1,  $value1,  $required1,  $dataA1,  $dataB1,  $table1,  $filter1,   $extracomand1,
-										$placeholder2, $name2,  $value2,  $required2,  $dataA2,  $dataB2,  $table2,  $filter2,   $extracomand2, 
-										$placeholder3, $name3,  $value3,  $required3,  $dataA3,  $dataB3,  $table3,  $filter3,   $extracomand3,
-										$placeholder4, $name4,  $value4,  $required4,  $dataA4,  $dataB4,  $table4,  $filter4,   $extracomand4,
-										$placeholder5, $name5,  $value5,  $required5,  $dataA5,  $dataB5,  $table5,  $filter5,   $extracomand5,
+	public function form_select_depend4($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_3, $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,   $extracomand_3,
+										$placeholder_4, $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,   $extracomand_4,
+										$placeholder_5, $name_5,  $value_5,  $required_5,  $dataA_5,  $dataB_5,  $table_5,  $filter_5,   $extracomand_5,
 										$dbConn, $form_name){
 
 		/********************************************************/
@@ -3617,346 +3614,166 @@ class Basic_Form_Inputs{
 		//se definen las opciones disponibles
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
-		if (!in_array($required1, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required1 ('.$required1.') entregada en '.$placeholder1.' no esta dentro de las opciones');
+		if (!in_array($required_1, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required2, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required2 ('.$required2.') entregada en '.$placeholder2.' no esta dentro de las opciones');
+		if (!in_array($required_2, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required3, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required3 ('.$required3.') entregada en '.$placeholder3.' no esta dentro de las opciones');
+		if (!in_array($required_3, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_3 ('.$required_3.') entregada en '.$placeholder_3.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required4, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required4 ('.$required4.') entregada en '.$placeholder4.' no esta dentro de las opciones');
+		if (!in_array($required_4, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_4 ('.$required_4.') entregada en '.$placeholder_4.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required5, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required5 ('.$required5.') entregada en '.$placeholder5.' no esta dentro de las opciones');
+		if (!in_array($required_5, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_5 ('.$required_5.') entregada en '.$placeholder_5.' no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero');
+		if (!validarNumero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero');
+		if (!validarNumero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero');
+		if (!validarNumero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero');
+		if (!validarNumero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero');
+		if (!validarNumero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero entero');
+		if (!validaEntero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero entero');
+		if (!validaEntero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero entero');
+		if (!validaEntero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero entero');
+		if (!validaEntero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero entero');
+		if (!validaEntero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Variables
+			
+			/******************************************/
+			//Arreglos
+			$requerido     = array();
+			$datos         = array();
+			$data_required = array();
+			$filtro        = array();
+			
+			//Variables Vacias
 			$input = '';
-			
-			//DATOS REQUERIDOS
-			$required = array();
-			if($required1==1){$required[1]='';      }elseif($required1==2){$required[1]='required';$_SESSION['form_require'].=','.$name1;}
-			if($required2==1){$required[2]='';      }elseif($required2==2){$required[2]='required';$_SESSION['form_require'].=','.$name2;}
-			if($required3==1){$required[3]='';      }elseif($required3==2){$required[3]='required';$_SESSION['form_require'].=','.$name3;}
-			if($required4==1){$required[4]='';      }elseif($required4==2){$required[4]='required';$_SESSION['form_require'].=','.$name4;}
-			if($required5==1){$required[5]='';      }elseif($required5==2){$required[5]='required';$_SESSION['form_require'].=','.$name5;}
-			
-			//FILTROS
-			$filtro = array();
-			$filtro[1] = '';  if ($filter1!='0') {$filtro[1] .=" AND ".$filter1;	}
-			$filtro[2] = '';  if ($filter2!='0') {$filtro[2] .=" AND ".$filter2;	}
-			$filtro[3] = '';  if ($filter3!='0') {$filtro[3] .=" AND ".$filter3;	}
-			$filtro[4] = '';  if ($filter4!='0') {$filtro[4] .=" AND ".$filter4;	}
-			$filtro[5] = '';  if ($filter5!='0') {$filtro[5] .=" AND ".$filter5;	}
-			
-			//COMANDOS EXTRAS
-			$excom = array();
-			$excom[1] = '';  if ($extracomand1!='0') {$excom[1] .=" ".$extracomand1;	} else{$excom[1] .=" ORDER BY Nombre ASC ";}
-			$excom[2] = '';  if ($extracomand2!='0') {$excom[2] .=" ".$extracomand2;	} else{$excom[2] .=" ORDER BY Nombre ASC ";}
-			$excom[3] = '';  if ($extracomand3!='0') {$excom[3] .=" ".$extracomand3;	} else{$excom[3] .=" ORDER BY Nombre ASC ";}
-			$excom[4] = '';  if ($extracomand4!='0') {$excom[4] .=" ".$extracomand4;	} else{$excom[4] .=" ORDER BY Nombre ASC ";} 
-			$excom[5] = '';  if ($extracomand5!='0') {$excom[5] .=" ".$extracomand5;	} else{$excom[5] .=" ORDER BY Nombre ASC ";}
-			
-			//visualizar listado
-			$display = array();
-			if ($value2!=0&&$value2!=''){$display[2]='';}else{$display[2]='style="display:none;"';}
-			if ($value3!=0&&$value3!=''){$display[3]='';}else{$display[3]='style="display:none;"';}
-			if ($value4!=0&&$value4!=''){$display[4]='';}else{$display[4]='style="display:none;"';}
-			if ($value5!=0&&$value5!=''){$display[5]='';}else{$display[5]='style="display:none;"';}
-			
-			//Se guardan los valores
-			$value = array();
-			if ($value1!=0&&$value1!=''){$value[1]=$value1;}else{$value[1]='';}
-			if ($value2!=0&&$value2!=''){$value[2]=$value2;}else{$value[2]='';}
-			if ($value3!=0&&$value3!=''){$value[3]=$value3;}else{$value[3]='';}
-			if ($value4!=0&&$value4!=''){$value[4]=$value4;}else{$value[4]='';}
-			if ($value5!=0&&$value5!=''){$value[5]=$value5;}else{$value[5]='';}
-			
-			//Se guardan los nombres
-			$name = array();
-			if (isset($name1)&&$name1!=''){$name[1]=$name1;}else{$name[1]='';}
-			if (isset($name2)&&$name2!=''){$name[2]=$name2;}else{$name[2]='';}
-			if (isset($name3)&&$name3!=''){$name[3]=$name3;}else{$name[3]='';}
-			if (isset($name4)&&$name4!=''){$name[4]=$name4;}else{$name[4]='';}
-			if (isset($name5)&&$name5!=''){$name[5]=$name5;}else{$name[5]='';}
-				
-			//Se guardan los nombres
-			$dataA = array();
-			if (isset($dataA1)&&$dataA1!=''){$dataA[1]=$dataA1;}else{$dataA[1]='';}
-			if (isset($dataA2)&&$dataA2!=''){$dataA[2]=$dataA2;}else{$dataA[2]='';}
-			if (isset($dataA3)&&$dataA3!=''){$dataA[3]=$dataA3;}else{$dataA[3]='';}
-			if (isset($dataA4)&&$dataA4!=''){$dataA[4]=$dataA4;}else{$dataA[4]='';}
-			if (isset($dataA5)&&$dataA5!=''){$dataA[5]=$dataA5;}else{$dataA[5]='';}
-			
-			//Se guardan los nombres
-			$dataB = array();
-			if (isset($dataB1)&&$dataB1!=''){$dataB[1]=$dataB1;}else{$dataB[1]='';}
-			if (isset($dataB2)&&$dataB2!=''){$dataB[2]=$dataB2;}else{$dataB[2]='';}
-			if (isset($dataB3)&&$dataB3!=''){$dataB[3]=$dataB3;}else{$dataB[3]='';}
-			if (isset($dataB4)&&$dataB4!=''){$dataB[4]=$dataB4;}else{$dataB[4]='';}
-			if (isset($dataB5)&&$dataB5!=''){$dataB[5]=$dataB5;}else{$dataB[5]='';}
-			
-			//Se guardan los nombres
-			$table = array();
-			if (isset($table1)&&$table1!=''){$table[1]=$table1;}else{$table[1]='';}
-			if (isset($table2)&&$table2!=''){$table[2]=$table2;}else{$table[2]='';}
-			if (isset($table3)&&$table3!=''){$table[3]=$table3;}else{$table[3]='';}
-			if (isset($table4)&&$table4!=''){$table[4]=$table4;}else{$table[4]='';}
-			if (isset($table5)&&$table5!=''){$table[5]=$table5;}else{$table[5]='';}
-			
-			//Se guardan los nombres
-			$placeholder = array();
-			if (isset($placeholder1)&&$placeholder1!=''){$placeholder[1]=$placeholder1;}else{$placeholder[1]='';}
-			if (isset($placeholder2)&&$placeholder2!=''){$placeholder[2]=$placeholder2;}else{$placeholder[2]='';}
-			if (isset($placeholder3)&&$placeholder3!=''){$placeholder[3]=$placeholder3;}else{$placeholder[3]='';}
-			if (isset($placeholder4)&&$placeholder4!=''){$placeholder[4]=$placeholder4;}else{$placeholder[4]='';}
-			if (isset($placeholder5)&&$placeholder5!=''){$placeholder[5]=$placeholder5;}else{$placeholder[5]='';}
-			
-			/********************************************************************************************************************/	
-			//explode para poder crear cadena
-			$datosA = explode(",", $dataB[1]);
-			if(count($datosA)==1){
-				$data_requiredA = ','.$datosA[0].' AS '.$datosA[0];
-			}else{
-				$data_requiredA = '';
-				foreach($datosA as $dato){
-					$data_requiredA .= ','.$dato.' AS '.$dato;
-				}
+			//recorro
+			for ($i = 1; $i <= 5; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
 			}
-			//Primera Consulta estandar			
-			$arrSeleccion = array();
-			$query = "SELECT ".$dataA[1]." AS idData ".$data_requiredA." FROM `".$table[1]."` WHERE ".$dataA[1]."!='' ".$filtro[1]." ".$excom[1];
-			$resultado = mysqli_query ($dbConn, $query);
-			while ( $row = mysqli_fetch_assoc ($resultado)) {
-			array_push( $arrSeleccion,$row );
-			}
-			mysqli_free_result($resultado);
-			/********************************************************************************************************************/
-			//Se dibuja el input
-			$input .= '
-					<div class="form-group" id="div_'.$name[1].'">
-						<label for="text2" class="control-label col-sm-4">'.$placeholder[1].'</label>
-						<div class="col-sm-8 field">
-							<select name="'.$name[1].'" id="'.$name[1].'" class="form-control" '.$required[1].' onChange="cambia_'.$name[1].'()" >
-								<option value="" selected>Seleccione una Opcion</option>';
-						
-								foreach ( $arrSeleccion as $seleccion ) {
-									if(count($datosA)==1){
-										$data_writing = $seleccion[$datosA[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datosA as $dato){
-											$data_writing .= $seleccion[$dato].' ';
-										}
-									}
-									
-									$w = ''; if($value[1]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-									$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-								} 
-				$input .= '</select>
-						</div>
-					</div>';
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
+			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
+			if($required_3==1){$requerido[3]=''; }elseif($required_3==2){$requerido[3]='required';$_SESSION['form_require'].=','.$name_3;}
+			if($required_4==1){$requerido[4]=''; }elseif($required_4==2){$requerido[4]='required';$_SESSION['form_require'].=','.$name_4;}
+			if($required_5==1){$requerido[5]=''; }elseif($required_5==2){$requerido[5]='required';$_SESSION['form_require'].=','.$name_5;}
+												
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos[1] = explode(",", $dataB_1);
+			$datos[2] = explode(",", $dataB_2);
+			$datos[3] = explode(",", $dataB_3);
+			$datos[4] = explode(",", $dataB_4);
+			$datos[5] = explode(",", $dataB_5);
+			
+			/******************************************/
+			//Se arman los datos requeridos
+			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[3])==1){$data_required[3] .= ','.$datos[3][0].' AS '.$datos[3][0];}else{foreach($datos[3] as $dato){$data_required[3] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[4])==1){$data_required[4] .= ','.$datos[4][0].' AS '.$datos[4][0];}else{foreach($datos[4] as $dato){$data_required[4] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[5])==1){$data_required[5] .= ','.$datos[5][0].' AS '.$datos[5][0];}else{foreach($datos[5] as $dato){$data_required[5] .= ','.$dato.' AS '.$dato;}}
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
+			if($filter_3!='0' && $filter_3!=''){$filtro[3] .= $filter_3." AND ".$datos[3][0]."!='' ";}elseif($filter_3=='' OR $filter_3==0){$filtro[3] .= $datos[3][0]."!='' ";}
+			if($filter_4!='0' && $filter_4!=''){$filtro[4] .= $filter_4." AND ".$datos[4][0]."!='' ";}elseif($filter_4=='' OR $filter_4==0){$filtro[4] .= $datos[4][0]."!='' ";}
+			if($filter_5!='0' && $filter_5!=''){$filtro[5] .= $filter_5." AND ".$datos[5][0]."!='' ";}elseif($filter_5=='' OR $filter_5==0){$filtro[5] .= $datos[5][0]."!='' ";}
 
-			//Se recorre 5 veces
-			$maxs = 5;
-			for ($i = 2; $i <= $maxs; $i++) {
-				
-				//explode para poder crear cadena
-				$datosB = explode(",", $dataB[$i]);
-				if(count($datosB)==1){
-					$data_requiredB = ','.$datosB[0].' AS '.$datosB[0];
-				}else{
-					$data_requiredB = '';
-					foreach($datosB as $dato){
-						$data_requiredB .= ','.$dato.' AS '.$dato;
-					}
-				}
-				
-				// Se trae un listado con los datos previamente seleccionados
-				if ($value[$i-1]!=0&&$value[$i-1]!=''){
-					$arrSeleccion = array();
-					$query = "SELECT ".$dataA[$i]." AS idData ".$data_requiredB."  FROM `".$table[$i]."` WHERE ".$dataA[$i-1]." = ".$value[$i-1]." ".$filtro[$i]." ".$excom[$i];
-					$resultado = mysqli_query ($dbConn, $query);
-					while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSeleccion,$row );
-					}
-					mysqli_free_result($resultado);
-				} 
-				// Se trae un listado con todos los datos
-				$arrTodos = array();
-				$query = "SELECT ".$dataA[$i]." AS idData, ".$dataA[$i-1]." AS idCat ".$data_requiredB." FROM `".$table[$i]."` WHERE ".$dataA[$i]."!='' ".$filtro[$i]." ".$excom[$i];
-				$resultado = mysqli_query ($dbConn, $query);
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-				array_push( $arrTodos,$row );
-				}
-				mysqli_free_result($resultado);
-				
-				
-				//Se verifica la funcion
-				$onchange = '';
-				if($i!=$maxs){
-					$onchange = 'onChange="cambia_'.$name[$i].'()"';
-				}
-				
-				//Se dibuja el input
-				$input .= '
-						<div class="form-group" id="div_'.$name[$i].'" '.$display[$i].'>
-							<label for="text2" class="control-label col-sm-4">'.$placeholder[$i].'</label>
-							<div class="col-sm-8 field">
-								<select name="'.$name[$i].'" id="'.$name[$i].'" class="form-control" '.$required[$i].' '.$onchange.' >
-									<option value="" selected>Seleccione una Opcion</option>';
-									if ($value[$i-1]!=0&&$value[$i-1]!=''){
-										foreach ( $arrSeleccion as $seleccion ) {
-											if(count($datosB)==1){
-												$data_writing = $seleccion[$datosB[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datosB as $dato){
-													$data_writing .= $seleccion[$dato].' ';
-												}
-											}
-											//echo $data_writing.'<br/>';
-											$w = ''; if($value[$i]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-											$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										} 
-									}
-					$input .= '</select>
-							</div>
-						</div>';
-				
-				$input .= '<script>
-				';	
-			
-				//Input 2
-				filtrar($arrTodos, 'idCat'); 
-				$vowels = array(" ", "´", "-");
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
-					foreach ($componentes as $idcomp) {
-						$input .= ',"'.$idcomp['idData'].'"';
-					}
-					$input .= ');
-					';
-				}
-				
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
-					foreach ($componentes as $comp) {
-						if(count($datosB)==1){
-							$data_writing = $comp[$datosB[0]].' ';
-						}else{
-							$data_writing = '';
-							foreach($datosB as $dato){
-								$data_writing .= $comp[$dato].' ';
-							}
-						}					
-						$input .= ',"'.str_replace('"', '',$data_writing).'"';
-					}
-					$input .= ');
-					';
-				}
-			
-				if($i <= $maxs){
-					$input .= '
-					function cambia_'.$name[$i-1].'(){
-						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
-						try {
-							if (Componente != "") {
-								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
-								data    = eval("data_'.$name[$i-1].'_" + Componente);
-								num_int = id_data.length;
-								document.'.$form_name.'.'.$name[$i].'.length = num_int;
-								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
-								}
-								document.getElementById("div_'.$name[$i].'").style.display = "block";	
-							}else{';
-						
-								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-									';
-								
-								}
-							$input .= '	
-							}
-						} catch (e) {';
-						
-							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-								';
-								
-							}
-						$input .= '	
-						}
-						document.'.$form_name.'.'.$name[$i].'.options[0].selected = true
-					}
-					';
-				}
-				$input .= '</script>';
-				
+			/******************************************/
+			//Verifica si se enviaron mas datos
+			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
+			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
+			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC '; }
+			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4 = $datos[4][0].' ASC '; }
+			if(!isset($extracomand_5) OR $extracomand_5==''){ $extracomand_5 = $datos[5][0].' ASC '; }
+
+			/******************************************/
+			//consulto
+			$arrSelect_1 = array();
+			$arrSelect_2 = array();
+			$arrSelect_3 = array();
+			$arrSelect_4 = array();
+			$arrSelect_5 = array();
+			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_3 = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3], $table_3, '', $filtro[3], $extracomand_3, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
+			$arrSelect_4 = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4], $table_4, '', $filtro[4], $extracomand_4, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
+			$arrSelect_5 = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5], $table_5, '', $filtro[5], $extracomand_5, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
+									
+			/******************************************/
+			//si hay resultados
+			if($arrSelect_1!=false){
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
 			}
-	
+			//si hay resultados
+			if($arrSelect_2!=false){
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_3!=false){
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_4!=false){
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_5!=false){
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
+			}
+			
 			/******************************************/
 			//Imprimir dato	
 			echo $input;
@@ -3988,12 +3805,12 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_select_depend5($placeholder1, $name1,  $value1,  $required1,  $dataA1,  $dataB1,  $table1,  $filter1,   $extracomand1,
-										$placeholder2, $name2,  $value2,  $required2,  $dataA2,  $dataB2,  $table2,  $filter2,   $extracomand2, 
-										$placeholder3, $name3,  $value3,  $required3,  $dataA3,  $dataB3,  $table3,  $filter3,   $extracomand3,
-										$placeholder4, $name4,  $value4,  $required4,  $dataA4,  $dataB4,  $table4,  $filter4,   $extracomand4,
-										$placeholder5, $name5,  $value5,  $required5,  $dataA5,  $dataB5,  $table5,  $filter5,   $extracomand5,
-										$placeholder6, $name6,  $value6,  $required6,  $dataA6,  $dataB6,  $table6,  $filter6,   $extracomand6,
+	public function form_select_depend5($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_3, $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,   $extracomand_3,
+										$placeholder_4, $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,   $extracomand_4,
+										$placeholder_5, $name_5,  $value_5,  $required_5,  $dataA_5,  $dataB_5,  $table_5,  $filter_5,   $extracomand_5,
+										$placeholder_6, $name_6,  $value_6,  $required_6,  $dataA_6,  $dataB_6,  $table_6,  $filter_6,   $extracomand_6,
 										$dbConn, $form_name){
 
 		/********************************************************/
@@ -4002,377 +3819,195 @@ class Basic_Form_Inputs{
 		//se definen las opciones disponibles
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
-		if (!in_array($required1, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required1 ('.$required1.') entregada en '.$placeholder1.' no esta dentro de las opciones');
+		if (!in_array($required_1, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required2, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required2 ('.$required2.') entregada en '.$placeholder2.' no esta dentro de las opciones');
+		if (!in_array($required_2, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required3, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required3 ('.$required3.') entregada en '.$placeholder3.' no esta dentro de las opciones');
+		if (!in_array($required_3, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_3 ('.$required_3.') entregada en '.$placeholder_3.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required4, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required4 ('.$required4.') entregada en '.$placeholder4.' no esta dentro de las opciones');
+		if (!in_array($required_4, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_4 ('.$required_4.') entregada en '.$placeholder_4.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required5, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required5 ('.$required5.') entregada en '.$placeholder5.' no esta dentro de las opciones');
+		if (!in_array($required_5, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_5 ('.$required_5.') entregada en '.$placeholder_5.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required6, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required6 ('.$required6.') entregada en '.$placeholder6.' no esta dentro de las opciones');
+		if (!in_array($required_6, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_6 ('.$required_6.') entregada en '.$placeholder_6.' no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero');
+		if (!validarNumero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero');
+		if (!validarNumero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero');
+		if (!validarNumero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero');
+		if (!validarNumero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero');
+		if (!validarNumero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value6)&&$value6!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value6 ('.$value6.') en <strong>'.$placeholder6.'</strong> no es un numero');
+		if (!validarNumero($value_6)&&$value_6!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero entero');
+		if (!validaEntero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero entero');
+		if (!validaEntero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero entero');
+		if (!validaEntero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero entero');
+		if (!validaEntero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero entero');
+		if (!validaEntero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value6)&&$value6!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value6 ('.$value6.') en <strong>'.$placeholder6.'</strong> no es un numero entero');
+		if (!validaEntero($value_6)&&$value_6!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Variables
+			
+			/******************************************/
+			//Arreglos
+			$requerido     = array();
+			$datos         = array();
+			$data_required = array();
+			$filtro        = array();
+			
+			//Variables Vacias
 			$input = '';
-			
-			//DATOS REQUERIDOS
-			$required = array();
-			if($required1==1){$required[1]='';      }elseif($required1==2){$required[1]='required';$_SESSION['form_require'].=','.$name1;}
-			if($required2==1){$required[2]='';      }elseif($required2==2){$required[2]='required';$_SESSION['form_require'].=','.$name2;}
-			if($required3==1){$required[3]='';      }elseif($required3==2){$required[3]='required';$_SESSION['form_require'].=','.$name3;}
-			if($required4==1){$required[4]='';      }elseif($required4==2){$required[4]='required';$_SESSION['form_require'].=','.$name4;}
-			if($required5==1){$required[5]='';      }elseif($required5==2){$required[5]='required';$_SESSION['form_require'].=','.$name5;}
-			if($required6==1){$required[6]='';      }elseif($required6==2){$required[6]='required';$_SESSION['form_require'].=','.$name6;}
-			
-			//FILTROS
-			$filtro = array();
-			$filtro[1] = '';  if ($filter1!='0') {$filtro[1] .=" AND ".$filter1;	}
-			$filtro[2] = '';  if ($filter2!='0') {$filtro[2] .=" AND ".$filter2;	}
-			$filtro[3] = '';  if ($filter3!='0') {$filtro[3] .=" AND ".$filter3;	}
-			$filtro[4] = '';  if ($filter4!='0') {$filtro[4] .=" AND ".$filter4;	}
-			$filtro[5] = '';  if ($filter5!='0') {$filtro[5] .=" AND ".$filter5;	}
-			$filtro[6] = '';  if ($filter6!='0') {$filtro[6] .=" AND ".$filter6;	}
-			
-			//COMANDOS EXTRAS
-			$excom = array();
-			$excom[1] = '';  if ($extracomand1!='0') {$excom[1] .=" ".$extracomand1;	} else{$excom[1] .=" ORDER BY Nombre ASC ";}
-			$excom[2] = '';  if ($extracomand2!='0') {$excom[2] .=" ".$extracomand2;	} else{$excom[2] .=" ORDER BY Nombre ASC ";}
-			$excom[3] = '';  if ($extracomand3!='0') {$excom[3] .=" ".$extracomand3;	} else{$excom[3] .=" ORDER BY Nombre ASC ";}
-			$excom[4] = '';  if ($extracomand4!='0') {$excom[4] .=" ".$extracomand4;	} else{$excom[4] .=" ORDER BY Nombre ASC ";} 
-			$excom[5] = '';  if ($extracomand5!='0') {$excom[5] .=" ".$extracomand5;	} else{$excom[5] .=" ORDER BY Nombre ASC ";}
-			$excom[6] = '';  if ($extracomand6!='0') {$excom[6] .=" ".$extracomand6;	} else{$excom[6] .=" ORDER BY Nombre ASC ";}
-			
-			//visualizar listado
-			$display = array();
-			if ($value2!=0&&$value2!=''){$display[2]='';}else{$display[2]='style="display:none;"';}
-			if ($value3!=0&&$value3!=''){$display[3]='';}else{$display[3]='style="display:none;"';}
-			if ($value4!=0&&$value4!=''){$display[4]='';}else{$display[4]='style="display:none;"';}
-			if ($value5!=0&&$value5!=''){$display[5]='';}else{$display[5]='style="display:none;"';}
-			if ($value6!=0&&$value6!=''){$display[6]='';}else{$display[6]='style="display:none;"';}
-			
-			//Se guardan los valores
-			$value = array();
-			if ($value1!=0&&$value1!=''){$value[1]=$value1;}else{$value[1]='';}
-			if ($value2!=0&&$value2!=''){$value[2]=$value2;}else{$value[2]='';}
-			if ($value3!=0&&$value3!=''){$value[3]=$value3;}else{$value[3]='';}
-			if ($value4!=0&&$value4!=''){$value[4]=$value4;}else{$value[4]='';}
-			if ($value5!=0&&$value5!=''){$value[5]=$value5;}else{$value[5]='';}
-			if ($value6!=0&&$value6!=''){$value[6]=$value6;}else{$value[6]='';}
-			
-			//Se guardan los nombres
-			$name = array();
-			if (isset($name1)&&$name1!=''){$name[1]=$name1;}else{$name[1]='';}
-			if (isset($name2)&&$name2!=''){$name[2]=$name2;}else{$name[2]='';}
-			if (isset($name3)&&$name3!=''){$name[3]=$name3;}else{$name[3]='';}
-			if (isset($name4)&&$name4!=''){$name[4]=$name4;}else{$name[4]='';}
-			if (isset($name5)&&$name5!=''){$name[5]=$name5;}else{$name[5]='';}
-			if (isset($name6)&&$name6!=''){$name[6]=$name6;}else{$name[6]='';}
-			
-
-			//Se guardan los nombres
-			$dataA = array();
-			if (isset($dataA1)&&$dataA1!=''){$dataA[1]=$dataA1;}else{$dataA[1]='';}
-			if (isset($dataA2)&&$dataA2!=''){$dataA[2]=$dataA2;}else{$dataA[2]='';}
-			if (isset($dataA3)&&$dataA3!=''){$dataA[3]=$dataA3;}else{$dataA[3]='';}
-			if (isset($dataA4)&&$dataA4!=''){$dataA[4]=$dataA4;}else{$dataA[4]='';}
-			if (isset($dataA5)&&$dataA5!=''){$dataA[5]=$dataA5;}else{$dataA[5]='';}
-			if (isset($dataA6)&&$dataA6!=''){$dataA[6]=$dataA6;}else{$dataA[6]='';}
-			
-			//Se guardan los nombres
-			$dataB = array();
-			if (isset($dataB1)&&$dataB1!=''){$dataB[1]=$dataB1;}else{$dataB[1]='';}
-			if (isset($dataB2)&&$dataB2!=''){$dataB[2]=$dataB2;}else{$dataB[2]='';}
-			if (isset($dataB3)&&$dataB3!=''){$dataB[3]=$dataB3;}else{$dataB[3]='';}
-			if (isset($dataB4)&&$dataB4!=''){$dataB[4]=$dataB4;}else{$dataB[4]='';}
-			if (isset($dataB5)&&$dataB5!=''){$dataB[5]=$dataB5;}else{$dataB[5]='';}
-			if (isset($dataB6)&&$dataB6!=''){$dataB[6]=$dataB6;}else{$dataB[6]='';}
-			
-			//Se guardan los nombres
-			$table = array();
-			if (isset($table1)&&$table1!=''){$table[1]=$table1;}else{$table[1]='';}
-			if (isset($table2)&&$table2!=''){$table[2]=$table2;}else{$table[2]='';}
-			if (isset($table3)&&$table3!=''){$table[3]=$table3;}else{$table[3]='';}
-			if (isset($table4)&&$table4!=''){$table[4]=$table4;}else{$table[4]='';}
-			if (isset($table5)&&$table5!=''){$table[5]=$table5;}else{$table[5]='';}
-			if (isset($table6)&&$table6!=''){$table[6]=$table6;}else{$table[6]='';}
-			
-
-			//Se guardan los nombres
-			$placeholder = array();
-			if (isset($placeholder1)&&$placeholder1!=''){$placeholder[1]=$placeholder1;}else{$placeholder[1]='';}
-			if (isset($placeholder2)&&$placeholder2!=''){$placeholder[2]=$placeholder2;}else{$placeholder[2]='';}
-			if (isset($placeholder3)&&$placeholder3!=''){$placeholder[3]=$placeholder3;}else{$placeholder[3]='';}
-			if (isset($placeholder4)&&$placeholder4!=''){$placeholder[4]=$placeholder4;}else{$placeholder[4]='';}
-			if (isset($placeholder5)&&$placeholder5!=''){$placeholder[5]=$placeholder5;}else{$placeholder[5]='';}
-			if (isset($placeholder6)&&$placeholder6!=''){$placeholder[6]=$placeholder6;}else{$placeholder[6]='';}
-			
-			/********************************************************************************************************************/	
-			//explode para poder crear cadena
-			$datosA = explode(",", $dataB[1]);
-			if(count($datosA)==1){
-				$data_requiredA = ','.$datosA[0].' AS '.$datosA[0];
-			}else{
-				$data_requiredA = '';
-				foreach($datosA as $dato){
-					$data_requiredA .= ','.$dato.' AS '.$dato;
-				}
+			//recorro
+			for ($i = 1; $i <= 6; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
 			}
-			//Primera Consulta estandar			
-			$arrSeleccion = array();
-			$query = "SELECT ".$dataA[1]." AS idData ".$data_requiredA." FROM `".$table[1]."` WHERE ".$dataA[1]."!='' ".$filtro[1]." ".$excom[1];
-			$resultado = mysqli_query ($dbConn, $query);
-			while ( $row = mysqli_fetch_assoc ($resultado)) {
-			array_push( $arrSeleccion,$row );
-			}
-			mysqli_free_result($resultado);
-			/********************************************************************************************************************/
-			//Se dibuja el input
-			$input .= '
-					<div class="form-group" id="div_'.$name[1].'">
-						<label for="text2" class="control-label col-sm-4">'.$placeholder[1].'</label>
-						<div class="col-sm-8 field">
-							<select name="'.$name[1].'" id="'.$name[1].'" class="form-control" '.$required[1].' onChange="cambia_'.$name[1].'()" >
-								<option value="" selected>Seleccione una Opcion</option>';
-						
-								foreach ( $arrSeleccion as $seleccion ) {
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
+			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
+			if($required_3==1){$requerido[3]=''; }elseif($required_3==2){$requerido[3]='required';$_SESSION['form_require'].=','.$name_3;}
+			if($required_4==1){$requerido[4]=''; }elseif($required_4==2){$requerido[4]='required';$_SESSION['form_require'].=','.$name_4;}
+			if($required_5==1){$requerido[5]=''; }elseif($required_5==2){$requerido[5]='required';$_SESSION['form_require'].=','.$name_5;}
+			if($required_6==1){$requerido[6]=''; }elseif($required_6==2){$requerido[6]='required';$_SESSION['form_require'].=','.$name_6;}
+													
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos[1] = explode(",", $dataB_1);
+			$datos[2] = explode(",", $dataB_2);
+			$datos[3] = explode(",", $dataB_3);
+			$datos[4] = explode(",", $dataB_4);
+			$datos[5] = explode(",", $dataB_5);
+			$datos[6] = explode(",", $dataB_6);
+				
+			/******************************************/
+			//Se arman los datos requeridos
+			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[3])==1){$data_required[3] .= ','.$datos[3][0].' AS '.$datos[3][0];}else{foreach($datos[3] as $dato){$data_required[3] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[4])==1){$data_required[4] .= ','.$datos[4][0].' AS '.$datos[4][0];}else{foreach($datos[4] as $dato){$data_required[4] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[5])==1){$data_required[5] .= ','.$datos[5][0].' AS '.$datos[5][0];}else{foreach($datos[5] as $dato){$data_required[5] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[6])==1){$data_required[6] .= ','.$datos[6][0].' AS '.$datos[6][0];}else{foreach($datos[6] as $dato){$data_required[6] .= ','.$dato.' AS '.$dato;}}
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
+			if($filter_3!='0' && $filter_3!=''){$filtro[3] .= $filter_3." AND ".$datos[3][0]."!='' ";}elseif($filter_3=='' OR $filter_3==0){$filtro[3] .= $datos[3][0]."!='' ";}
+			if($filter_4!='0' && $filter_4!=''){$filtro[4] .= $filter_4." AND ".$datos[4][0]."!='' ";}elseif($filter_4=='' OR $filter_4==0){$filtro[4] .= $datos[4][0]."!='' ";}
+			if($filter_5!='0' && $filter_5!=''){$filtro[5] .= $filter_5." AND ".$datos[5][0]."!='' ";}elseif($filter_5=='' OR $filter_5==0){$filtro[5] .= $datos[5][0]."!='' ";}
+			if($filter_6!='0' && $filter_6!=''){$filtro[6] .= $filter_6." AND ".$datos[6][0]."!='' ";}elseif($filter_6=='' OR $filter_6==0){$filtro[6] .= $datos[6][0]."!='' ";}
 									
-									if(count($datosA)==1){
-										$data_writing = $seleccion[$datosA[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datosA as $dato){
-											$data_writing .= $seleccion[$dato].' ';
-										}
-									}
-									
-									$w = ''; if($value[1]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-									$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-								} 
-				$input .= '</select>
-						</div>
-					</div>';
+			/******************************************/
+			//Verifica si se enviaron mas datos
+			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
+			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
+			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC '; }
+			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4 = $datos[4][0].' ASC '; }
+			if(!isset($extracomand_5) OR $extracomand_5==''){ $extracomand_5 = $datos[5][0].' ASC '; }
+			if(!isset($extracomand_6) OR $extracomand_6==''){ $extracomand_6 = $datos[6][0].' ASC '; }
 
-			//Se recorre 6 veces
-			$maxs = 6;
-			for ($i = 2; $i <= $maxs; $i++) {
-				
-				//explode para poder crear cadena
-				$datosB = explode(",", $dataB[$i]);
-				if(count($datosB)==1){
-					$data_requiredB = ','.$datosB[0].' AS '.$datosB[0];
-				}else{
-					$data_requiredB = '';
-					foreach($datosB as $dato){
-						$data_requiredB .= ','.$dato.' AS '.$dato;
-					}
-				}
-				
-				// Se trae un listado con los datos previamente seleccionados
-				if ($value[$i-1]!=0&&$value[$i-1]!=''){
-					$arrSeleccion = array();
-					$query = "SELECT ".$dataA[$i]." AS idData ".$data_requiredB."  FROM `".$table[$i]."` WHERE ".$dataA[$i-1]." = ".$value[$i-1]." ".$filtro[$i]." ".$excom[$i];
-					$resultado = mysqli_query ($dbConn, $query);
-					while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSeleccion,$row );
-					}
-					mysqli_free_result($resultado);
-				} 
-				// Se trae un listado con todos los datos
-				$arrTodos = array();
-				$query = "SELECT ".$dataA[$i]." AS idData, ".$dataA[$i-1]." AS idCat ".$data_requiredB." FROM `".$table[$i]."` WHERE ".$dataA[$i]."!='' ".$filtro[$i]." ".$excom[$i];
-				$resultado = mysqli_query ($dbConn, $query);
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-				array_push( $arrTodos,$row );
-				}
-				mysqli_free_result($resultado);
-				
-				
-				//Se verifica la funcion
-				$onchange = '';
-				if($i!=$maxs){
-					$onchange = 'onChange="cambia_'.$name[$i].'()"';
-				}
-				
-				//Se dibuja el input
-				$input .= '
-						<div class="form-group" id="div_'.$name[$i].'" '.$display[$i].'>
-							<label for="text2" class="control-label col-sm-4">'.$placeholder[$i].'</label>
-							<div class="col-sm-8 field">
-								<select name="'.$name[$i].'" id="'.$name[$i].'" class="form-control" '.$required[$i].' '.$onchange.' >
-									<option value="" selected>Seleccione una Opcion</option>';
-									if ($value[$i-1]!=0&&$value[$i-1]!=''){
-										foreach ( $arrSeleccion as $seleccion ) {
-											if(count($datosB)==1){
-												$data_writing = $seleccion[$datosB[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datosB as $dato){
-													$data_writing .= $seleccion[$dato].' ';
-												}
-											}
-											//echo $data_writing.'<br/>';
-											$w = ''; if($value[$i]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-											$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										} 
-									}
-					$input .= '</select>
-							</div>
-						</div>';
-				
-				$input .= '<script>
-				';	
-			
-				//Input 2
-				filtrar($arrTodos, 'idCat'); 
-				$vowels = array(" ", "´", "-");
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
-					foreach ($componentes as $idcomp) {
-						$input .= ',"'.$idcomp['idData'].'"';
-					}
-					$input .= ');
-					';
-				}
-				
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
-					foreach ($componentes as $comp) {
-						if(count($datosB)==1){
-							$data_writing = $comp[$datosB[0]].' ';
-						}else{
-							$data_writing = '';
-							foreach($datosB as $dato){
-								$data_writing .= $comp[$dato].' ';
-							}
-						}					
-						$input .= ',"'.str_replace('"', '',$data_writing).'"';
-					}
-					$input .= ');
-					';
-				}
-			
-				if($i <= $maxs){
-					$input .= '
-					function cambia_'.$name[$i-1].'(){
-						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
-						try {
-							if (Componente != "") {
-								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
-								data    = eval("data_'.$name[$i-1].'_" + Componente);
-								num_int = id_data.length;
-								document.'.$form_name.'.'.$name[$i].'.length = num_int;
-								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
-								}
-								document.getElementById("div_'.$name[$i].'").style.display = "block";	
-							}else{';
-						
-								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-									';
-								
-								}
-							$input .= '	
-							}
-						} catch (e) {';
-						
-							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-								';
-								
-							}
-						$input .= '	
-						}
-						document.'.$form_name.'.'.$name[$i].'.options[0].selected = true
-					}
-					';
-				}
-				$input .= '</script>';
-				
+			/******************************************/
+			//consulto
+			$arrSelect_1 = array();
+			$arrSelect_2 = array();
+			$arrSelect_3 = array();
+			$arrSelect_4 = array();
+			$arrSelect_5 = array();
+			$arrSelect_6 = array();
+			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_3 = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3], $table_3, '', $filtro[3], $extracomand_3, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
+			$arrSelect_4 = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4], $table_4, '', $filtro[4], $extracomand_4, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
+			$arrSelect_5 = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5], $table_5, '', $filtro[5], $extracomand_5, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
+			$arrSelect_6 = db_select_array (false, $dataA_6.' AS idData ,'.$dataA_5.' AS idDataFilter '.$data_required[6], $table_6, '', $filtro[6], $extracomand_6, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_6');
+									
+			/******************************************/
+			//si hay resultados
+			if($arrSelect_1!=false){
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
 			}
-				
+			//si hay resultados
+			if($arrSelect_2!=false){
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_3!=false){
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_4!=false){
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_5!=false){
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_6!=false){
+				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);		
+				$input .= $this->select_input_script($arrSelect_6, $value_6, $name_5, $name_6, $datos[6], $form_name);
+			}
+			
 			/******************************************/
 			//Imprimir dato	
 			echo $input;
 		}
 	}
-
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
@@ -4399,827 +4034,684 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_select_depend25($placeholder1, $name1,  $value1,  $required1,  $dataA1,  $dataB1,  $table1,  $filter1,   $extracomand1,
-										 $placeholder2, $name2,  $value2,  $required2,  $dataA2,  $dataB2,  $table2,  $filter2,   $extracomand2, 
-										 $placeholder3, $name3,  $value3,  $required3,  $dataA3,  $dataB3,  $table3,  $filter3,   $extracomand3,
-										 $placeholder4, $name4,  $value4,  $required4,  $dataA4,  $dataB4,  $table4,  $filter4,   $extracomand4,
-										 $placeholder5, $name5,  $value5,  $required5,  $dataA5,  $dataB5,  $table5,  $filter5,   $extracomand5,
-										 $placeholder6, $name6,  $value6,  $required6,  $dataA6,  $dataB6,  $table6,  $filter6,   $extracomand6,
-										 $placeholder7, $name7,  $value7,  $required7,  $dataA7,  $dataB7,  $table7,  $filter7,   $extracomand7,
-										 $placeholder8, $name8,  $value8,  $required8,  $dataA8,  $dataB8,  $table8,  $filter8,   $extracomand8,
-										 $placeholder9, $name9,  $value9,  $required9,  $dataA9,  $dataB9,  $table9,  $filter9,   $extracomand9,
-										 $placeholder10,$name10, $value10, $required10, $dataA10, $dataB10, $table10, $filter10,  $extracomand10,
-										 $placeholder11,$name11, $value11, $required11, $dataA11, $dataB11, $table11, $filter11,  $extracomand11,
-										 $placeholder12,$name12, $value12, $required12, $dataA12, $dataB12, $table12, $filter12,  $extracomand12,
-										 $placeholder13,$name13, $value13, $required13, $dataA13, $dataB13, $table13, $filter13,  $extracomand13,
-										 $placeholder14,$name14, $value14, $required14, $dataA14, $dataB14, $table14, $filter14,  $extracomand14,
-										 $placeholder15,$name15, $value15, $required15, $dataA15, $dataB15, $table15, $filter15,  $extracomand15,
-										 $placeholder16,$name16, $value16, $required16, $dataA16, $dataB16, $table16, $filter16,  $extracomand16,
-										 $placeholder17,$name17, $value17, $required17, $dataA17, $dataB17, $table17, $filter17,  $extracomand17,
-										 $placeholder18,$name18, $value18, $required18, $dataA18, $dataB18, $table18, $filter18,  $extracomand18,
-										 $placeholder19,$name19, $value19, $required19, $dataA19, $dataB19, $table19, $filter19,  $extracomand19,
-										 $placeholder20,$name20, $value20, $required20, $dataA20, $dataB20, $table20, $filter20,  $extracomand20,
-										 $placeholder21,$name21, $value21, $required21, $dataA21, $dataB21, $table21, $filter21,  $extracomand21,
-										 $placeholder22,$name22, $value22, $required22, $dataA22, $dataB22, $table22, $filter22,  $extracomand22,
-										 $placeholder23,$name23, $value23, $required23, $dataA23, $dataB23, $table23, $filter23,  $extracomand23,
-										 $placeholder24,$name24, $value24, $required24, $dataA24, $dataB24, $table24, $filter24,  $extracomand24,
-										 $placeholder25,$name25, $value25, $required25, $dataA25, $dataB25, $table25, $filter25,  $extracomand25,
-										 $dbConn, $form_name){
+	public function form_select_depend25($placeholder_1,  $name_1,   $value_1,   $required_1,   $dataA_1,   $dataB_1,   $table_1,   $filter_1,   $extracomand_1,
+										$placeholder_2,  $name_2,   $value_2,   $required_2,   $dataA_2,   $dataB_2,   $table_2,   $filter_2,   $extracomand_2, 
+										$placeholder_3,  $name_3,   $value_3,   $required_3,   $dataA_3,   $dataB_3,   $table_3,   $filter_3,   $extracomand_3,
+										$placeholder_4,  $name_4,   $value_4,   $required_4,   $dataA_4,   $dataB_4,   $table_4,   $filter_4,   $extracomand_4,
+										$placeholder_5,  $name_5,   $value_5,   $required_5,   $dataA_5,   $dataB_5,   $table_5,   $filter_5,   $extracomand_5,
+										$placeholder_6,  $name_6,   $value_6,   $required_6,   $dataA_6,   $dataB_6,   $table_6,   $filter_6,   $extracomand_6,
+										$placeholder_7,  $name_7,   $value_7,   $required_7,   $dataA_7,   $dataB_7,   $table_7,   $filter_7,   $extracomand_7,
+										$placeholder_8,  $name_8,   $value_8,   $required_8,   $dataA_8,   $dataB_8,   $table_8,   $filter_8,   $extracomand_8,
+										$placeholder_9,  $name_9,   $value_9,   $required_9,   $dataA_9,   $dataB_9,   $table_9,   $filter_9,   $extracomand_9,
+										$placeholder_10, $name_10,  $value_10,  $required_10,  $dataA_10,  $dataB_10,  $table_10,  $filter_10,  $extracomand_10,
+										$placeholder_11, $name_11,  $value_11,  $required_11,  $dataA_11,  $dataB_11,  $table_11,  $filter_11,  $extracomand_11,
+										$placeholder_12, $name_12,  $value_12,  $required_12,  $dataA_12,  $dataB_12,  $table_12,  $filter_12,  $extracomand_12,
+										$placeholder_13, $name_13,  $value_13,  $required_13,  $dataA_13,  $dataB_13,  $table_13,  $filter_13,  $extracomand_13,
+										$placeholder_14, $name_14,  $value_14,  $required_14,  $dataA_14,  $dataB_14,  $table_14,  $filter_14,  $extracomand_14,
+										$placeholder_15, $name_15,  $value_15,  $required_15,  $dataA_15,  $dataB_15,  $table_15,  $filter_15,  $extracomand_15,
+										$placeholder_16, $name_16,  $value_16,  $required_16,  $dataA_16,  $dataB_16,  $table_16,  $filter_16,  $extracomand_16,
+										$placeholder_17, $name_17,  $value_17,  $required_17,  $dataA_17,  $dataB_17,  $table_17,  $filter_17,  $extracomand_17,
+										$placeholder_18, $name_18,  $value_18,  $required_18,  $dataA_18,  $dataB_18,  $table_18,  $filter_18,  $extracomand_18,
+										$placeholder_19, $name_19,  $value_19,  $required_19,  $dataA_19,  $dataB_19,  $table_19,  $filter_19,  $extracomand_19,
+										$placeholder_20, $name_20,  $value_20,  $required_20,  $dataA_20,  $dataB_20,  $table_20,  $filter_20,  $extracomand_20,
+										$placeholder_21, $name_21,  $value_21,  $required_21,  $dataA_21,  $dataB_21,  $table_21,  $filter_21,  $extracomand_21,
+										$placeholder_22, $name_22,  $value_22,  $required_22,  $dataA_22,  $dataB_22,  $table_22,  $filter_22,  $extracomand_22,
+										$placeholder_23, $name_23,  $value_23,  $required_23,  $dataA_23,  $dataB_23,  $table_23,  $filter_23,  $extracomand_23,
+										$placeholder_24, $name_24,  $value_24,  $required_24,  $dataA_24,  $dataB_24,  $table_24,  $filter_24,  $extracomand_24,
+										$placeholder_25, $name_25,  $value_25,  $required_25,  $dataA_25,  $dataB_25,  $table_25,  $filter_25,  $extracomand_25,
+										$dbConn, $form_name){
 
-		
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
-		if (!in_array($required1, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required1 ('.$required1.') entregada en '.$placeholder1.' no esta dentro de las opciones');
+		if (!in_array($required_1, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required2, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required2 ('.$required2.') entregada en '.$placeholder2.' no esta dentro de las opciones');
+		if (!in_array($required_2, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required3, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required3 ('.$required3.') entregada en '.$placeholder3.' no esta dentro de las opciones');
+		if (!in_array($required_3, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_3 ('.$required_3.') entregada en '.$placeholder_3.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required4, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required4 ('.$required4.') entregada en '.$placeholder4.' no esta dentro de las opciones');
+		if (!in_array($required_4, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_4 ('.$required_4.') entregada en '.$placeholder_4.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required5, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required5 ('.$required5.') entregada en '.$placeholder5.' no esta dentro de las opciones');
+		if (!in_array($required_5, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_5 ('.$required_5.') entregada en '.$placeholder_5.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required6, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required6 ('.$required6.') entregada en '.$placeholder6.' no esta dentro de las opciones');
+		if (!in_array($required_6, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_6 ('.$required_6.') entregada en '.$placeholder_6.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required7, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required7 ('.$required7.') entregada en '.$placeholder7.' no esta dentro de las opciones');
+		if (!in_array($required_7, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_7 ('.$required_7.') entregada en '.$placeholder_7.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required8, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required8 ('.$required8.') entregada en '.$placeholder8.' no esta dentro de las opciones');
+		if (!in_array($required_8, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_8 ('.$required_8.') entregada en '.$placeholder_8.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required9, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required9 ('.$required9.') entregada en '.$placeholder9.' no esta dentro de las opciones');
+		if (!in_array($required_9, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_9 ('.$required_9.') entregada en '.$placeholder_9.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required10, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required10 ('.$required10.') entregada en '.$placeholder10.' no esta dentro de las opciones');
+		if (!in_array($required_10, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_10 ('.$required_10.') entregada en '.$placeholder_10.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required11, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required11 ('.$required11.') entregada en '.$placeholder11.' no esta dentro de las opciones');
+		if (!in_array($required_11, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_11 ('.$required_11.') entregada en '.$placeholder_11.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required12, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required12 ('.$required12.') entregada en '.$placeholder12.' no esta dentro de las opciones');
+		if (!in_array($required_12, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_12 ('.$required_12.') entregada en '.$placeholder_12.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required13, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required13 ('.$required13.') entregada en '.$placeholder13.' no esta dentro de las opciones');
+		if (!in_array($required_13, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_13 ('.$required_13.') entregada en '.$placeholder_13.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required14, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required14 ('.$required14.') entregada en '.$placeholder14.' no esta dentro de las opciones');
+		if (!in_array($required_14, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_14 ('.$required_14.') entregada en '.$placeholder_14.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required15, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required15 ('.$required15.') entregada en '.$placeholder15.' no esta dentro de las opciones');
+		if (!in_array($required_15, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_15 ('.$required_15.') entregada en '.$placeholder_15.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required16, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required16 ('.$required16.') entregada en '.$placeholder16.' no esta dentro de las opciones');
+		if (!in_array($required_16, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_16 ('.$required_16.') entregada en '.$placeholder_16.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required17, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required17 ('.$required17.') entregada en '.$placeholder17.' no esta dentro de las opciones');
+		if (!in_array($required_17, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_17 ('.$required_17.') entregada en '.$placeholder_17.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required18, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required18 ('.$required18.') entregada en '.$placeholder18.' no esta dentro de las opciones');
+		if (!in_array($required_18, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_18 ('.$required_18.') entregada en '.$placeholder_18.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required19, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required19 ('.$required19.') entregada en '.$placeholder19.' no esta dentro de las opciones');
+		if (!in_array($required_19, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_19 ('.$required_19.') entregada en '.$placeholder_19.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required20, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required20 ('.$required20.') entregada en '.$placeholder20.' no esta dentro de las opciones');
+		if (!in_array($required_20, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_20 ('.$required_20.') entregada en '.$placeholder_20.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required21, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required21 ('.$required21.') entregada en '.$placeholder21.' no esta dentro de las opciones');
+		if (!in_array($required_21, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_21 ('.$required_21.') entregada en '.$placeholder_21.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required22, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required22 ('.$required22.') entregada en '.$placeholder22.' no esta dentro de las opciones');
+		if (!in_array($required_22, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_22 ('.$required_22.') entregada en '.$placeholder_22.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required23, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required23 ('.$required23.') entregada en '.$placeholder23.' no esta dentro de las opciones');
+		if (!in_array($required_23, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_23 ('.$required_23.') entregada en '.$placeholder_23.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required24, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required24 ('.$required24.') entregada en '.$placeholder24.' no esta dentro de las opciones');
+		if (!in_array($required_24, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_24 ('.$required_24.') entregada en '.$placeholder_24.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required25, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required25 ('.$required25.') entregada en '.$placeholder25.' no esta dentro de las opciones');
+		if (!in_array($required_25, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_25 ('.$required_25.') entregada en '.$placeholder_25.' no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero');
+		if (!validarNumero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero');
+		if (!validarNumero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero');
+		if (!validarNumero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero');
+		if (!validarNumero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero');
+		if (!validarNumero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value6)&&$value6!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value6 ('.$value6.') en <strong>'.$placeholder6.'</strong> no es un numero');
+		if (!validarNumero($value_6)&&$value_6!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value7)&&$value7!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value7 ('.$value7.') en <strong>'.$placeholder7.'</strong> no es un numero');
+		if (!validarNumero($value_7)&&$value_7!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value8)&&$value8!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value8 ('.$value8.') en <strong>'.$placeholder8.'</strong> no es un numero');
+		if (!validarNumero($value_8)&&$value_8!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value9)&&$value9!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value9 ('.$value9.') en <strong>'.$placeholder9.'</strong> no es un numero');
+		if (!validarNumero($value_9)&&$value_9!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value10)&&$value10!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value10 ('.$value10.') en <strong>'.$placeholder10.'</strong> no es un numero');
+		if (!validarNumero($value_10)&&$value_10!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value11)&&$value11!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value11 ('.$value11.') en <strong>'.$placeholder11.'</strong> no es un numero');
+		if (!validarNumero($value_11)&&$value_11!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value12)&&$value12!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value12 ('.$value12.') en <strong>'.$placeholder12.'</strong> no es un numero');
+		if (!validarNumero($value_12)&&$value_12!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value13)&&$value13!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value13 ('.$value13.') en <strong>'.$placeholder13.'</strong> no es un numero');
+		if (!validarNumero($value_13)&&$value_13!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value14)&&$value14!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value14 ('.$value14.') en <strong>'.$placeholder14.'</strong> no es un numero');
+		if (!validarNumero($value_14)&&$value_14!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value15)&&$value15!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value15 ('.$value15.') en <strong>'.$placeholder15.'</strong> no es un numero');
+		if (!validarNumero($value_15)&&$value_15!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value16)&&$value16!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value16 ('.$value16.') en <strong>'.$placeholder16.'</strong> no es un numero');
+		if (!validarNumero($value_16)&&$value_16!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value17)&&$value17!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value17 ('.$value17.') en <strong>'.$placeholder17.'</strong> no es un numero');
+		if (!validarNumero($value_17)&&$value_17!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value18)&&$value18!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value18 ('.$value18.') en <strong>'.$placeholder18.'</strong> no es un numero');
+		if (!validarNumero($value_18)&&$value_18!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value19)&&$value19!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value19 ('.$value19.') en <strong>'.$placeholder19.'</strong> no es un numero');
+		if (!validarNumero($value_19)&&$value_19!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value20)&&$value20!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value20 ('.$value20.') en <strong>'.$placeholder20.'</strong> no es un numero');
+		if (!validarNumero($value_20)&&$value_20!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value21)&&$value21!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value21 ('.$value21.') en <strong>'.$placeholder21.'</strong> no es un numero');
+		if (!validarNumero($value_21)&&$value_21!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value22)&&$value22!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value22 ('.$value22.') en <strong>'.$placeholder22.'</strong> no es un numero');
+		if (!validarNumero($value_22)&&$value_22!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value23)&&$value23!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value23 ('.$value23.') en <strong>'.$placeholder23.'</strong> no es un numero');
+		if (!validarNumero($value_23)&&$value_23!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value24)&&$value24!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value24 ('.$value24.') en <strong>'.$placeholder24.'</strong> no es un numero');
+		if (!validarNumero($value_24)&&$value_24!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value25)&&$value25!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value25 ('.$value25.') en <strong>'.$placeholder25.'</strong> no es un numero');
+		if (!validarNumero($value_25)&&$value_25!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero entero');
+		if (!validaEntero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero entero');
+		if (!validaEntero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero entero');
+		if (!validaEntero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero entero');
+		if (!validaEntero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero entero');
+		if (!validaEntero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value6)&&$value6!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value6 ('.$value6.') en <strong>'.$placeholder6.'</strong> no es un numero entero');
+		if (!validaEntero($value_6)&&$value_6!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value7)&&$value7!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value7 ('.$value7.') en <strong>'.$placeholder7.'</strong> no es un numero entero');
+		if (!validaEntero($value_7)&&$value_7!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value8)&&$value8!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value8 ('.$value8.') en <strong>'.$placeholder8.'</strong> no es un numero entero');
+		if (!validaEntero($value_8)&&$value_8!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value9)&&$value9!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value9 ('.$value9.') en <strong>'.$placeholder9.'</strong> no es un numero entero');
+		if (!validaEntero($value_9)&&$value_9!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value10)&&$value10!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value10 ('.$value10.') en <strong>'.$placeholder10.'</strong> no es un numero entero');
+		if (!validaEntero($value_10)&&$value_10!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value11)&&$value11!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value11 ('.$value11.') en <strong>'.$placeholder11.'</strong> no es un numero entero');
+		if (!validaEntero($value_11)&&$value_11!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value12)&&$value12!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value12 ('.$value12.') en <strong>'.$placeholder12.'</strong> no es un numero entero');
+		if (!validaEntero($value_12)&&$value_12!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value13)&&$value13!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value13 ('.$value13.') en <strong>'.$placeholder13.'</strong> no es un numero entero');
+		if (!validaEntero($value_13)&&$value_13!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value14)&&$value14!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value14 ('.$value14.') en <strong>'.$placeholder14.'</strong> no es un numero entero');
+		if (!validaEntero($value_14)&&$value_14!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value15)&&$value15!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value15 ('.$value15.') en <strong>'.$placeholder15.'</strong> no es un numero entero');
+		if (!validaEntero($value_15)&&$value_15!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value16)&&$value16!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value16 ('.$value16.') en <strong>'.$placeholder16.'</strong> no es un numero entero');
+		if (!validaEntero($value_16)&&$value_16!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value17)&&$value17!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value17 ('.$value17.') en <strong>'.$placeholder17.'</strong> no es un numero entero');
+		if (!validaEntero($value_17)&&$value_17!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value18)&&$value18!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value18 ('.$value18.') en <strong>'.$placeholder18.'</strong> no es un numero entero');
+		if (!validaEntero($value_18)&&$value_18!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value19)&&$value19!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value19 ('.$value19.') en <strong>'.$placeholder19.'</strong> no es un numero entero');
+		if (!validaEntero($value_19)&&$value_19!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value20)&&$value20!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value20 ('.$value20.') en <strong>'.$placeholder20.'</strong> no es un numero entero');
+		if (!validaEntero($value_20)&&$value_20!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value21)&&$value21!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value21 ('.$value21.') en <strong>'.$placeholder21.'</strong> no es un numero entero');
+		if (!validaEntero($value_21)&&$value_21!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value22)&&$value22!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value22 ('.$value22.') en <strong>'.$placeholder22.'</strong> no es un numero entero');
+		if (!validaEntero($value_22)&&$value_22!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value23)&&$value23!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value23 ('.$value23.') en <strong>'.$placeholder23.'</strong> no es un numero entero');
+		if (!validaEntero($value_23)&&$value_23!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value24)&&$value24!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value24 ('.$value24.') en <strong>'.$placeholder24.'</strong> no es un numero entero');
+		if (!validaEntero($value_24)&&$value_24!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value25)&&$value25!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value25 ('.$value25.') en <strong>'.$placeholder25.'</strong> no es un numero entero');
+		if (!validaEntero($value_25)&&$value_25!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Variables
+			
+			/******************************************/
+			//Arreglos
+			$requerido     = array();
+			$datos         = array();
+			$data_required = array();
+			$filtro        = array();
+			
+			//Variables Vacias
 			$input = '';
-			
-			//DATOS REQUERIDOS
-			$required = array();
-			if($required1==1){$required[1]='';      }elseif($required1==2){$required[1]='required';$_SESSION['form_require'].=','.$name1;}
-			if($required2==1){$required[2]='';      }elseif($required2==2){$required[2]='required';$_SESSION['form_require'].=','.$name2;}
-			if($required3==1){$required[3]='';      }elseif($required3==2){$required[3]='required';$_SESSION['form_require'].=','.$name3;}
-			if($required4==1){$required[4]='';      }elseif($required4==2){$required[4]='required';$_SESSION['form_require'].=','.$name4;}
-			if($required5==1){$required[5]='';      }elseif($required5==2){$required[5]='required';$_SESSION['form_require'].=','.$name5;}
-			if($required6==1){$required[6]='';      }elseif($required6==2){$required[6]='required';$_SESSION['form_require'].=','.$name6;}
-			if($required7==1){$required[7]='';      }elseif($required7==2){$required[7]='required';$_SESSION['form_require'].=','.$name7;}
-			if($required8==1){$required[8]='';      }elseif($required8==2){$required[8]='required';$_SESSION['form_require'].=','.$name8;}
-			if($required9==1){$required[9]='';      }elseif($required9==2){$required[9]='required';$_SESSION['form_require'].=','.$name9;}
-			if($required10==1){$required[10]='';    }elseif($required10==2){$required[10]='required';$_SESSION['form_require'].=','.$name10;}
-			if($required11==1){$required[11]='';    }elseif($required11==2){$required[11]='required';$_SESSION['form_require'].=','.$name11;}
-			if($required12==1){$required[12]='';    }elseif($required12==2){$required[12]='required';$_SESSION['form_require'].=','.$name12;}
-			if($required13==1){$required[13]='';    }elseif($required13==2){$required[13]='required';$_SESSION['form_require'].=','.$name13;}
-			if($required14==1){$required[14]='';    }elseif($required14==2){$required[14]='required';$_SESSION['form_require'].=','.$name14;}
-			if($required15==1){$required[15]='';    }elseif($required15==2){$required[15]='required';$_SESSION['form_require'].=','.$name15;}
-			if($required16==1){$required[16]='';    }elseif($required16==2){$required[16]='required';$_SESSION['form_require'].=','.$name16;}
-			if($required17==1){$required[17]='';    }elseif($required17==2){$required[17]='required';$_SESSION['form_require'].=','.$name17;}
-			if($required18==1){$required[18]='';    }elseif($required18==2){$required[18]='required';$_SESSION['form_require'].=','.$name18;}
-			if($required19==1){$required[19]='';    }elseif($required19==2){$required[19]='required';$_SESSION['form_require'].=','.$name19;}
-			if($required20==1){$required[20]='';    }elseif($required20==2){$required[20]='required';$_SESSION['form_require'].=','.$name20;}
-			if($required21==1){$required[21]='';    }elseif($required21==2){$required[21]='required';$_SESSION['form_require'].=','.$name21;}
-			if($required22==1){$required[22]='';    }elseif($required22==2){$required[22]='required';$_SESSION['form_require'].=','.$name22;}
-			if($required23==1){$required[23]='';    }elseif($required23==2){$required[23]='required';$_SESSION['form_require'].=','.$name23;}
-			if($required24==1){$required[24]='';    }elseif($required24==2){$required[24]='required';$_SESSION['form_require'].=','.$name24;}
-			if($required25==1){$required[25]='';    }elseif($required25==2){$required[25]='required';$_SESSION['form_require'].=','.$name25;}
-			
-			//FILTROS
-			$filtro = array();
-			$filtro[1] = '';  if ($filter1!='0') {$filtro[1] .=" AND ".$filter1;	}
-			$filtro[2] = '';  if ($filter2!='0') {$filtro[2] .=" AND ".$filter2;	}
-			$filtro[3] = '';  if ($filter3!='0') {$filtro[3] .=" AND ".$filter3;	}
-			$filtro[4] = '';  if ($filter4!='0') {$filtro[4] .=" AND ".$filter4;	}
-			$filtro[5] = '';  if ($filter5!='0') {$filtro[5] .=" AND ".$filter5;	}
-			$filtro[6] = '';  if ($filter6!='0') {$filtro[6] .=" AND ".$filter6;	}
-			$filtro[7] = '';  if ($filter7!='0') {$filtro[7] .=" AND ".$filter7;	}
-			$filtro[8] = '';  if ($filter8!='0') {$filtro[8] .=" AND ".$filter8;	}
-			$filtro[9] = '';  if ($filter9!='0') {$filtro[9] .=" AND ".$filter9;	}
-			$filtro[10] = ''; if ($filter10!='0'){$filtro[10] .=" AND ".$filter10;	}
-			$filtro[11] = ''; if ($filter11!='0'){$filtro[11] .=" AND ".$filter11;	}
-			$filtro[12] = ''; if ($filter12!='0'){$filtro[12] .=" AND ".$filter12;	}
-			$filtro[13] = ''; if ($filter13!='0'){$filtro[13] .=" AND ".$filter13;	}
-			$filtro[14] = ''; if ($filter14!='0'){$filtro[14] .=" AND ".$filter14;	}
-			$filtro[15] = ''; if ($filter15!='0'){$filtro[15] .=" AND ".$filter15;	}
-			$filtro[16] = ''; if ($filter16!='0'){$filtro[16] .=" AND ".$filter16;	}
-			$filtro[17] = ''; if ($filter17!='0'){$filtro[17] .=" AND ".$filter17;	}
-			$filtro[18] = ''; if ($filter18!='0'){$filtro[18] .=" AND ".$filter18;	}
-			$filtro[19] = ''; if ($filter19!='0'){$filtro[19] .=" AND ".$filter19;	}
-			$filtro[20] = ''; if ($filter20!='0'){$filtro[20] .=" AND ".$filter20;	}
-			$filtro[21] = ''; if ($filter21!='0'){$filtro[21] .=" AND ".$filter21;	}
-			$filtro[22] = ''; if ($filter22!='0'){$filtro[22] .=" AND ".$filter22;	}
-			$filtro[23] = ''; if ($filter23!='0'){$filtro[23] .=" AND ".$filter23;	}
-			$filtro[24] = ''; if ($filter24!='0'){$filtro[24] .=" AND ".$filter24;	}
-			$filtro[25] = ''; if ($filter25!='0'){$filtro[25] .=" AND ".$filter25;	}
-			
-			//COMANDOS EXTRAS
-			$excom = array();
-			$excom[1] = '';  if ($extracomand1!='0') {$excom[1] .=" ".$extracomand1;	} else{$excom[1] .=" ORDER BY Nombre ASC ";}
-			$excom[2] = '';  if ($extracomand2!='0') {$excom[2] .=" ".$extracomand2;	} else{$excom[2] .=" ORDER BY Nombre ASC ";}
-			$excom[3] = '';  if ($extracomand3!='0') {$excom[3] .=" ".$extracomand3;	} else{$excom[3] .=" ORDER BY Nombre ASC ";}
-			$excom[4] = '';  if ($extracomand4!='0') {$excom[4] .=" ".$extracomand4;	} else{$excom[4] .=" ORDER BY Nombre ASC ";} 
-			$excom[5] = '';  if ($extracomand5!='0') {$excom[5] .=" ".$extracomand5;	} else{$excom[5] .=" ORDER BY Nombre ASC ";}
-			$excom[6] = '';  if ($extracomand6!='0') {$excom[6] .=" ".$extracomand6;	} else{$excom[6] .=" ORDER BY Nombre ASC ";}
-			$excom[7] = '';  if ($extracomand7!='0') {$excom[7] .=" ".$extracomand7;	} else{$excom[7] .=" ORDER BY Nombre ASC ";}
-			$excom[8] = '';  if ($extracomand8!='0') {$excom[8] .=" ".$extracomand8;	} else{$excom[8] .=" ORDER BY Nombre ASC ";}
-			$excom[9] = '';  if ($extracomand9!='0') {$excom[9] .=" ".$extracomand9;	} else{$excom[9] .=" ORDER BY Nombre ASC ";}
-			$excom[10] = ''; if ($extracomand10!='0'){$excom[10] .=" ".$extracomand10;	} else{$excom[10] .=" ORDER BY Nombre ASC ";}
-			$excom[11] = ''; if ($extracomand11!='0'){$excom[11] .=" ".$extracomand11;	} else{$excom[11] .=" ORDER BY Nombre ASC ";}
-			$excom[12] = ''; if ($extracomand12!='0'){$excom[12] .=" ".$extracomand12;	} else{$excom[12] .=" ORDER BY Nombre ASC ";}
-			$excom[13] = ''; if ($extracomand13!='0'){$excom[13] .=" ".$extracomand13;	} else{$excom[13] .=" ORDER BY Nombre ASC ";}
-			$excom[14] = ''; if ($extracomand14!='0'){$excom[14] .=" ".$extracomand14;	} else{$excom[14] .=" ORDER BY Nombre ASC ";}
-			$excom[15] = ''; if ($extracomand15!='0'){$excom[15] .=" ".$extracomand15;	} else{$excom[15] .=" ORDER BY Nombre ASC ";}
-			$excom[16] = ''; if ($extracomand16!='0'){$excom[16] .=" ".$extracomand16;	} else{$excom[16] .=" ORDER BY Nombre ASC ";}
-			$excom[17] = ''; if ($extracomand17!='0'){$excom[17] .=" ".$extracomand17;	} else{$excom[17] .=" ORDER BY Nombre ASC ";}
-			$excom[18] = ''; if ($extracomand18!='0'){$excom[18] .=" ".$extracomand18;	} else{$excom[18] .=" ORDER BY Nombre ASC ";}
-			$excom[19] = ''; if ($extracomand19!='0'){$excom[19] .=" ".$extracomand19;	} else{$excom[19] .=" ORDER BY Nombre ASC ";}
-			$excom[20] = ''; if ($extracomand20!='0'){$excom[20] .=" ".$extracomand20;	} else{$excom[20] .=" ORDER BY Nombre ASC ";}
-			$excom[21] = ''; if ($extracomand21!='0'){$excom[21] .=" ".$extracomand21;	} else{$excom[21] .=" ORDER BY Nombre ASC ";}
-			$excom[22] = ''; if ($extracomand22!='0'){$excom[22] .=" ".$extracomand22;	} else{$excom[22] .=" ORDER BY Nombre ASC ";}
-			$excom[23] = ''; if ($extracomand23!='0'){$excom[23] .=" ".$extracomand23;	} else{$excom[23] .=" ORDER BY Nombre ASC ";}
-			$excom[24] = ''; if ($extracomand24!='0'){$excom[24] .=" ".$extracomand24;	} else{$excom[24] .=" ORDER BY Nombre ASC ";}
-			$excom[25] = ''; if ($extracomand25!='0'){$excom[25] .=" ".$extracomand25;	} else{$excom[25] .=" ORDER BY Nombre ASC ";}
-			
-			//visualizar listado
-			$display = array();
-			if ($value2!=0&&$value2!=''){$display[2]='';}else{$display[2]='style="display:none;"';}
-			if ($value3!=0&&$value3!=''){$display[3]='';}else{$display[3]='style="display:none;"';}
-			if ($value4!=0&&$value4!=''){$display[4]='';}else{$display[4]='style="display:none;"';}
-			if ($value5!=0&&$value5!=''){$display[5]='';}else{$display[5]='style="display:none;"';}
-			if ($value6!=0&&$value6!=''){$display[6]='';}else{$display[6]='style="display:none;"';}
-			if ($value7!=0&&$value7!=''){$display[7]='';}else{$display[7]='style="display:none;"';}
-			if ($value8!=0&&$value8!=''){$display[8]='';}else{$display[8]='style="display:none;"';}
-			if ($value9!=0&&$value9!=''){$display[9]='';}else{$display[9]='style="display:none;"';}
-			if ($value10!=0&&$value10!=''){$display[10]='';}else{$display[10]='style="display:none;"';}
-			if ($value11!=0&&$value11!=''){$display[11]='';}else{$display[11]='style="display:none;"';}
-			if ($value12!=0&&$value12!=''){$display[12]='';}else{$display[12]='style="display:none;"';}
-			if ($value13!=0&&$value13!=''){$display[13]='';}else{$display[13]='style="display:none;"';}
-			if ($value14!=0&&$value14!=''){$display[14]='';}else{$display[14]='style="display:none;"';}
-			if ($value15!=0&&$value15!=''){$display[15]='';}else{$display[15]='style="display:none;"';}
-			if ($value16!=0&&$value16!=''){$display[16]='';}else{$display[16]='style="display:none;"';}
-			if ($value17!=0&&$value17!=''){$display[17]='';}else{$display[17]='style="display:none;"';}
-			if ($value18!=0&&$value18!=''){$display[18]='';}else{$display[18]='style="display:none;"';}
-			if ($value19!=0&&$value19!=''){$display[19]='';}else{$display[19]='style="display:none;"';}
-			if ($value20!=0&&$value20!=''){$display[20]='';}else{$display[20]='style="display:none;"';}
-			if ($value21!=0&&$value21!=''){$display[21]='';}else{$display[21]='style="display:none;"';}
-			if ($value22!=0&&$value22!=''){$display[22]='';}else{$display[22]='style="display:none;"';}
-			if ($value23!=0&&$value23!=''){$display[23]='';}else{$display[23]='style="display:none;"';}
-			if ($value24!=0&&$value24!=''){$display[24]='';}else{$display[24]='style="display:none;"';}
-			if ($value25!=0&&$value25!=''){$display[25]='';}else{$display[25]='style="display:none;"';}
-			
-			//Se guardan los valores
-			$value = array();
-			if ($value1!=0&&$value1!=''){$value[1]=$value1;}else{$value[1]='';}
-			if ($value2!=0&&$value2!=''){$value[2]=$value2;}else{$value[2]='';}
-			if ($value3!=0&&$value3!=''){$value[3]=$value3;}else{$value[3]='';}
-			if ($value4!=0&&$value4!=''){$value[4]=$value4;}else{$value[4]='';}
-			if ($value5!=0&&$value5!=''){$value[5]=$value5;}else{$value[5]='';}
-			if ($value6!=0&&$value6!=''){$value[6]=$value6;}else{$value[6]='';}
-			if ($value7!=0&&$value7!=''){$value[7]=$value7;}else{$value[7]='';}
-			if ($value8!=0&&$value8!=''){$value[8]=$value8;}else{$value[8]='';}
-			if ($value9!=0&&$value9!=''){$value[9]=$value9;}else{$value[9]='';}
-			if ($value10!=0&&$value10!=''){$value[10]=$value10;}else{$value[10]='';}
-			if ($value11!=0&&$value11!=''){$value[11]=$value11;}else{$value[11]='';}
-			if ($value12!=0&&$value12!=''){$value[12]=$value12;}else{$value[12]='';}
-			if ($value13!=0&&$value13!=''){$value[13]=$value13;}else{$value[13]='';}
-			if ($value14!=0&&$value14!=''){$value[14]=$value14;}else{$value[14]='';}
-			if ($value15!=0&&$value15!=''){$value[15]=$value15;}else{$value[15]='';}
-			if ($value16!=0&&$value16!=''){$value[16]=$value16;}else{$value[16]='';}
-			if ($value17!=0&&$value17!=''){$value[17]=$value17;}else{$value[17]='';}
-			if ($value18!=0&&$value18!=''){$value[18]=$value18;}else{$value[18]='';}
-			if ($value19!=0&&$value19!=''){$value[19]=$value19;}else{$value[19]='';}
-			if ($value20!=0&&$value20!=''){$value[20]=$value20;}else{$value[20]='';}
-			if ($value21!=0&&$value21!=''){$value[21]=$value21;}else{$value[21]='';}
-			if ($value22!=0&&$value22!=''){$value[22]=$value22;}else{$value[22]='';}
-			if ($value23!=0&&$value23!=''){$value[23]=$value23;}else{$value[23]='';}
-			if ($value24!=0&&$value24!=''){$value[24]=$value24;}else{$value[24]='';}
-			if ($value25!=0&&$value25!=''){$value[25]=$value25;}else{$value[25]='';}
-
-			//Se guardan los nombres
-			$name = array();
-			if (isset($name1)&&$name1!=''){$name[1]=$name1;}else{$name[1]='';}
-			if (isset($name2)&&$name2!=''){$name[2]=$name2;}else{$name[2]='';}
-			if (isset($name3)&&$name3!=''){$name[3]=$name3;}else{$name[3]='';}
-			if (isset($name4)&&$name4!=''){$name[4]=$name4;}else{$name[4]='';}
-			if (isset($name5)&&$name5!=''){$name[5]=$name5;}else{$name[5]='';}
-			if (isset($name6)&&$name6!=''){$name[6]=$name6;}else{$name[6]='';}
-			if (isset($name7)&&$name7!=''){$name[7]=$name7;}else{$name[7]='';}
-			if (isset($name8)&&$name8!=''){$name[8]=$name8;}else{$name[8]='';}
-			if (isset($name9)&&$name9!=''){$name[9]=$name9;}else{$name[9]='';}
-			if (isset($name10)&&$name10!=''){$name[10]=$name10;}else{$name[10]='';}
-			if (isset($name11)&&$name11!=''){$name[11]=$name11;}else{$name[11]='';}
-			if (isset($name12)&&$name12!=''){$name[12]=$name12;}else{$name[12]='';}
-			if (isset($name13)&&$name13!=''){$name[13]=$name13;}else{$name[13]='';}
-			if (isset($name14)&&$name14!=''){$name[14]=$name14;}else{$name[14]='';}
-			if (isset($name15)&&$name15!=''){$name[15]=$name15;}else{$name[15]='';}
-			if (isset($name16)&&$name16!=''){$name[16]=$name16;}else{$name[16]='';}
-			if (isset($name17)&&$name17!=''){$name[17]=$name17;}else{$name[17]='';}
-			if (isset($name18)&&$name18!=''){$name[18]=$name18;}else{$name[18]='';}
-			if (isset($name19)&&$name19!=''){$name[19]=$name19;}else{$name[19]='';}
-			if (isset($name20)&&$name20!=''){$name[20]=$name20;}else{$name[20]='';}
-			if (isset($name21)&&$name21!=''){$name[21]=$name21;}else{$name[21]='';}
-			if (isset($name22)&&$name22!=''){$name[22]=$name22;}else{$name[22]='';}
-			if (isset($name23)&&$name23!=''){$name[23]=$name23;}else{$name[23]='';}
-			if (isset($name24)&&$name24!=''){$name[24]=$name24;}else{$name[24]='';}
-			if (isset($name25)&&$name25!=''){$name[25]=$name25;}else{$name[25]='';}
-
-			//Se guardan los nombres
-			$dataA = array();
-			if (isset($dataA1)&&$dataA1!=''){$dataA[1]=$dataA1;}else{$dataA[1]='';}
-			if (isset($dataA2)&&$dataA2!=''){$dataA[2]=$dataA2;}else{$dataA[2]='';}
-			if (isset($dataA3)&&$dataA3!=''){$dataA[3]=$dataA3;}else{$dataA[3]='';}
-			if (isset($dataA4)&&$dataA4!=''){$dataA[4]=$dataA4;}else{$dataA[4]='';}
-			if (isset($dataA5)&&$dataA5!=''){$dataA[5]=$dataA5;}else{$dataA[5]='';}
-			if (isset($dataA6)&&$dataA6!=''){$dataA[6]=$dataA6;}else{$dataA[6]='';}
-			if (isset($dataA7)&&$dataA7!=''){$dataA[7]=$dataA7;}else{$dataA[7]='';}
-			if (isset($dataA8)&&$dataA8!=''){$dataA[8]=$dataA8;}else{$dataA[8]='';}
-			if (isset($dataA9)&&$dataA9!=''){$dataA[9]=$dataA9;}else{$dataA[9]='';}
-			if (isset($dataA10)&&$dataA10!=''){$dataA[10]=$dataA10;}else{$dataA[10]='';}
-			if (isset($dataA11)&&$dataA11!=''){$dataA[11]=$dataA11;}else{$dataA[11]='';}
-			if (isset($dataA12)&&$dataA12!=''){$dataA[12]=$dataA12;}else{$dataA[12]='';}
-			if (isset($dataA13)&&$dataA13!=''){$dataA[13]=$dataA13;}else{$dataA[13]='';}
-			if (isset($dataA14)&&$dataA14!=''){$dataA[14]=$dataA14;}else{$dataA[14]='';}
-			if (isset($dataA15)&&$dataA15!=''){$dataA[15]=$dataA15;}else{$dataA[15]='';}
-			if (isset($dataA16)&&$dataA16!=''){$dataA[16]=$dataA16;}else{$dataA[16]='';}
-			if (isset($dataA17)&&$dataA17!=''){$dataA[17]=$dataA17;}else{$dataA[17]='';}
-			if (isset($dataA18)&&$dataA18!=''){$dataA[18]=$dataA18;}else{$dataA[18]='';}
-			if (isset($dataA19)&&$dataA19!=''){$dataA[19]=$dataA19;}else{$dataA[19]='';}
-			if (isset($dataA20)&&$dataA20!=''){$dataA[20]=$dataA20;}else{$dataA[20]='';}
-			if (isset($dataA21)&&$dataA21!=''){$dataA[21]=$dataA21;}else{$dataA[21]='';}
-			if (isset($dataA22)&&$dataA22!=''){$dataA[22]=$dataA22;}else{$dataA[22]='';}
-			if (isset($dataA23)&&$dataA23!=''){$dataA[23]=$dataA23;}else{$dataA[23]='';}
-			if (isset($dataA24)&&$dataA24!=''){$dataA[24]=$dataA24;}else{$dataA[24]='';}
-			if (isset($dataA25)&&$dataA25!=''){$dataA[25]=$dataA25;}else{$dataA[25]='';}
-
-			//Se guardan los nombres
-			$dataB = array();
-			if (isset($dataB1)&&$dataB1!=''){$dataB[1]=$dataB1;}else{$dataB[1]='';}
-			if (isset($dataB2)&&$dataB2!=''){$dataB[2]=$dataB2;}else{$dataB[2]='';}
-			if (isset($dataB3)&&$dataB3!=''){$dataB[3]=$dataB3;}else{$dataB[3]='';}
-			if (isset($dataB4)&&$dataB4!=''){$dataB[4]=$dataB4;}else{$dataB[4]='';}
-			if (isset($dataB5)&&$dataB5!=''){$dataB[5]=$dataB5;}else{$dataB[5]='';}
-			if (isset($dataB6)&&$dataB6!=''){$dataB[6]=$dataB6;}else{$dataB[6]='';}
-			if (isset($dataB7)&&$dataB7!=''){$dataB[7]=$dataB7;}else{$dataB[7]='';}
-			if (isset($dataB8)&&$dataB8!=''){$dataB[8]=$dataB8;}else{$dataB[8]='';}
-			if (isset($dataB9)&&$dataB9!=''){$dataB[9]=$dataB9;}else{$dataB[9]='';}
-			if (isset($dataB10)&&$dataB10!=''){$dataB[10]=$dataB10;}else{$dataB[10]='';}
-			if (isset($dataB11)&&$dataB11!=''){$dataB[11]=$dataB11;}else{$dataB[11]='';}
-			if (isset($dataB12)&&$dataB12!=''){$dataB[12]=$dataB12;}else{$dataB[12]='';}
-			if (isset($dataB13)&&$dataB13!=''){$dataB[13]=$dataB13;}else{$dataB[13]='';}
-			if (isset($dataB14)&&$dataB14!=''){$dataB[14]=$dataB14;}else{$dataB[14]='';}
-			if (isset($dataB15)&&$dataB15!=''){$dataB[15]=$dataB15;}else{$dataB[15]='';}
-			if (isset($dataB16)&&$dataB16!=''){$dataB[16]=$dataB16;}else{$dataB[16]='';}
-			if (isset($dataB17)&&$dataB17!=''){$dataB[17]=$dataB17;}else{$dataB[17]='';}
-			if (isset($dataB18)&&$dataB18!=''){$dataB[18]=$dataB18;}else{$dataB[18]='';}
-			if (isset($dataB19)&&$dataB19!=''){$dataB[19]=$dataB19;}else{$dataB[19]='';}
-			if (isset($dataB20)&&$dataB20!=''){$dataB[20]=$dataB20;}else{$dataB[20]='';}
-			if (isset($dataB21)&&$dataB21!=''){$dataB[21]=$dataB21;}else{$dataB[21]='';}
-			if (isset($dataB22)&&$dataB22!=''){$dataB[22]=$dataB22;}else{$dataB[22]='';}
-			if (isset($dataB23)&&$dataB23!=''){$dataB[23]=$dataB23;}else{$dataB[23]='';}
-			if (isset($dataB24)&&$dataB24!=''){$dataB[24]=$dataB24;}else{$dataB[24]='';}
-			if (isset($dataB25)&&$dataB25!=''){$dataB[25]=$dataB25;}else{$dataB[25]='';}
-
-			//Se guardan los nombres
-			$table = array();
-			if (isset($table1)&&$table1!=''){$table[1]=$table1;}else{$table[1]='';}
-			if (isset($table2)&&$table2!=''){$table[2]=$table2;}else{$table[2]='';}
-			if (isset($table3)&&$table3!=''){$table[3]=$table3;}else{$table[3]='';}
-			if (isset($table4)&&$table4!=''){$table[4]=$table4;}else{$table[4]='';}
-			if (isset($table5)&&$table5!=''){$table[5]=$table5;}else{$table[5]='';}
-			if (isset($table6)&&$table6!=''){$table[6]=$table6;}else{$table[6]='';}
-			if (isset($table7)&&$table7!=''){$table[7]=$table7;}else{$table[7]='';}
-			if (isset($table8)&&$table8!=''){$table[8]=$table8;}else{$table[8]='';}
-			if (isset($table9)&&$table9!=''){$table[9]=$table9;}else{$table[9]='';}
-			if (isset($table10)&&$table10!=''){$table[10]=$table10;}else{$table[10]='';}
-			if (isset($table11)&&$table11!=''){$table[11]=$table11;}else{$table[11]='';}
-			if (isset($table12)&&$table12!=''){$table[12]=$table12;}else{$table[12]='';}
-			if (isset($table13)&&$table13!=''){$table[13]=$table13;}else{$table[13]='';}
-			if (isset($table14)&&$table14!=''){$table[14]=$table14;}else{$table[14]='';}
-			if (isset($table15)&&$table15!=''){$table[15]=$table15;}else{$table[15]='';}
-			if (isset($table16)&&$table16!=''){$table[16]=$table16;}else{$table[16]='';}
-			if (isset($table17)&&$table17!=''){$table[17]=$table17;}else{$table[17]='';}
-			if (isset($table18)&&$table18!=''){$table[18]=$table18;}else{$table[18]='';}
-			if (isset($table19)&&$table19!=''){$table[19]=$table19;}else{$table[19]='';}
-			if (isset($table20)&&$table20!=''){$table[20]=$table20;}else{$table[20]='';}
-			if (isset($table21)&&$table21!=''){$table[21]=$table21;}else{$table[21]='';}
-			if (isset($table22)&&$table22!=''){$table[22]=$table22;}else{$table[22]='';}
-			if (isset($table23)&&$table23!=''){$table[23]=$table23;}else{$table[23]='';}
-			if (isset($table24)&&$table24!=''){$table[24]=$table24;}else{$table[24]='';}
-			if (isset($table25)&&$table25!=''){$table[25]=$table25;}else{$table[25]='';}
-
-			//Se guardan los nombres
-			$placeholder = array();
-			if (isset($placeholder1)&&$placeholder1!=''){$placeholder[1]=$placeholder1;}else{$placeholder[1]='';}
-			if (isset($placeholder2)&&$placeholder2!=''){$placeholder[2]=$placeholder2;}else{$placeholder[2]='';}
-			if (isset($placeholder3)&&$placeholder3!=''){$placeholder[3]=$placeholder3;}else{$placeholder[3]='';}
-			if (isset($placeholder4)&&$placeholder4!=''){$placeholder[4]=$placeholder4;}else{$placeholder[4]='';}
-			if (isset($placeholder5)&&$placeholder5!=''){$placeholder[5]=$placeholder5;}else{$placeholder[5]='';}
-			if (isset($placeholder6)&&$placeholder6!=''){$placeholder[6]=$placeholder6;}else{$placeholder[6]='';}
-			if (isset($placeholder7)&&$placeholder7!=''){$placeholder[7]=$placeholder7;}else{$placeholder[7]='';}
-			if (isset($placeholder8)&&$placeholder8!=''){$placeholder[8]=$placeholder8;}else{$placeholder[8]='';}
-			if (isset($placeholder9)&&$placeholder9!=''){$placeholder[9]=$placeholder9;}else{$placeholder[9]='';}
-			if (isset($placeholder10)&&$placeholder10!=''){$placeholder[10]=$placeholder10;}else{$placeholder[10]='';}
-			if (isset($placeholder11)&&$placeholder11!=''){$placeholder[11]=$placeholder11;}else{$placeholder[11]='';}
-			if (isset($placeholder12)&&$placeholder12!=''){$placeholder[12]=$placeholder12;}else{$placeholder[12]='';}
-			if (isset($placeholder13)&&$placeholder13!=''){$placeholder[13]=$placeholder13;}else{$placeholder[13]='';}
-			if (isset($placeholder14)&&$placeholder14!=''){$placeholder[14]=$placeholder14;}else{$placeholder[14]='';}
-			if (isset($placeholder15)&&$placeholder15!=''){$placeholder[15]=$placeholder15;}else{$placeholder[15]='';}
-			if (isset($placeholder16)&&$placeholder16!=''){$placeholder[16]=$placeholder16;}else{$placeholder[16]='';}
-			if (isset($placeholder17)&&$placeholder17!=''){$placeholder[17]=$placeholder17;}else{$placeholder[17]='';}
-			if (isset($placeholder18)&&$placeholder18!=''){$placeholder[18]=$placeholder18;}else{$placeholder[18]='';}
-			if (isset($placeholder19)&&$placeholder19!=''){$placeholder[19]=$placeholder19;}else{$placeholder[19]='';}
-			if (isset($placeholder20)&&$placeholder20!=''){$placeholder[20]=$placeholder20;}else{$placeholder[20]='';}
-			if (isset($placeholder21)&&$placeholder21!=''){$placeholder[21]=$placeholder21;}else{$placeholder[21]='';}
-			if (isset($placeholder22)&&$placeholder22!=''){$placeholder[22]=$placeholder22;}else{$placeholder[22]='';}
-			if (isset($placeholder23)&&$placeholder23!=''){$placeholder[23]=$placeholder23;}else{$placeholder[23]='';}
-			if (isset($placeholder24)&&$placeholder24!=''){$placeholder[24]=$placeholder24;}else{$placeholder[24]='';}
-			if (isset($placeholder25)&&$placeholder25!=''){$placeholder[25]=$placeholder25;}else{$placeholder[25]='';}
-
-			/********************************************************************************************************************/	
-			//explode para poder crear cadena
-			$datosA = explode(",", $dataB[1]);
-			if(count($datosA)==1){
-				$data_requiredA = ','.$datosA[0].' AS '.$datosA[0];
-			}else{
-				$data_requiredA = '';
-				foreach($datosA as $dato){
-					$data_requiredA .= ','.$dato.' AS '.$dato;
-				}
+			//recorro
+			for ($i = 1; $i <= 25; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
 			}
-			//Primera Consulta estandar			
-			$arrSeleccion = array();
-			$query = "SELECT ".$dataA[1]." AS idData ".$data_requiredA." FROM `".$table[1]."` WHERE ".$dataA[1]."!='' ".$filtro[1]." ".$excom[1];
-			$resultado = mysqli_query ($dbConn, $query);
-			while ( $row = mysqli_fetch_assoc ($resultado)) {
-			array_push( $arrSeleccion,$row );
-			}
-			mysqli_free_result($resultado);
-			/********************************************************************************************************************/
-			//Se dibuja el input
-			$input .= '
-					<div class="form-group" id="div_'.$name[1].'">
-						<label for="text2" class="control-label col-sm-4">'.$placeholder[1].'</label>
-						<div class="col-sm-8 field">
-							<select name="'.$name[1].'" id="'.$name[1].'" class="form-control" '.$required[1].' onChange="cambia_'.$name[1].'()" >
-								<option value="" selected>Seleccione una Opcion</option>';
-						
-								foreach ( $arrSeleccion as $seleccion ) {
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required_1==1){ $requerido[1]='';  }elseif($required_1==2){ $requerido[1]='required'; $_SESSION['form_require'].=','.$name_1;}
+			if($required_2==1){ $requerido[2]='';  }elseif($required_2==2){ $requerido[2]='required'; $_SESSION['form_require'].=','.$name_2;}
+			if($required_3==1){ $requerido[3]='';  }elseif($required_3==2){ $requerido[3]='required'; $_SESSION['form_require'].=','.$name_3;}
+			if($required_4==1){ $requerido[4]='';  }elseif($required_4==2){ $requerido[4]='required'; $_SESSION['form_require'].=','.$name_4;}
+			if($required_5==1){ $requerido[5]='';  }elseif($required_5==2){ $requerido[5]='required'; $_SESSION['form_require'].=','.$name_5;}
+			if($required_6==1){ $requerido[6]='';  }elseif($required_6==2){ $requerido[6]='required'; $_SESSION['form_require'].=','.$name_6;}
+			if($required_7==1){ $requerido[7]='';  }elseif($required_7==2){ $requerido[7]='required'; $_SESSION['form_require'].=','.$name_7;}
+			if($required_8==1){ $requerido[8]='';  }elseif($required_8==2){ $requerido[8]='required'; $_SESSION['form_require'].=','.$name_8;}
+			if($required_9==1){ $requerido[9]='';  }elseif($required_9==2){ $requerido[9]='required'; $_SESSION['form_require'].=','.$name_9;}
+			if($required_10==1){$requerido[10]=''; }elseif($required_10==2){$requerido[10]='required';$_SESSION['form_require'].=','.$name_10;}
+			if($required_11==1){$requerido[11]=''; }elseif($required_11==2){$requerido[11]='required';$_SESSION['form_require'].=','.$name_11;}
+			if($required_12==1){$requerido[12]=''; }elseif($required_12==2){$requerido[12]='required';$_SESSION['form_require'].=','.$name_12;}
+			if($required_13==1){$requerido[13]=''; }elseif($required_13==2){$requerido[13]='required';$_SESSION['form_require'].=','.$name_13;}
+			if($required_14==1){$requerido[14]=''; }elseif($required_14==2){$requerido[14]='required';$_SESSION['form_require'].=','.$name_14;}
+			if($required_15==1){$requerido[15]=''; }elseif($required_15==2){$requerido[15]='required';$_SESSION['form_require'].=','.$name_15;}
+			if($required_16==1){$requerido[16]=''; }elseif($required_16==2){$requerido[16]='required';$_SESSION['form_require'].=','.$name_16;}
+			if($required_17==1){$requerido[17]=''; }elseif($required_17==2){$requerido[17]='required';$_SESSION['form_require'].=','.$name_17;}
+			if($required_18==1){$requerido[18]=''; }elseif($required_18==2){$requerido[18]='required';$_SESSION['form_require'].=','.$name_18;}
+			if($required_19==1){$requerido[19]=''; }elseif($required_19==2){$requerido[19]='required';$_SESSION['form_require'].=','.$name_19;}
+			if($required_20==1){$requerido[20]=''; }elseif($required_20==2){$requerido[20]='required';$_SESSION['form_require'].=','.$name_20;}
+			if($required_21==1){$requerido[21]=''; }elseif($required_21==2){$requerido[21]='required';$_SESSION['form_require'].=','.$name_21;}
+			if($required_22==1){$requerido[22]=''; }elseif($required_22==2){$requerido[22]='required';$_SESSION['form_require'].=','.$name_22;}
+			if($required_23==1){$requerido[23]=''; }elseif($required_23==2){$requerido[23]='required';$_SESSION['form_require'].=','.$name_23;}
+			if($required_24==1){$requerido[24]=''; }elseif($required_24==2){$requerido[24]='required';$_SESSION['form_require'].=','.$name_24;}
+			if($required_25==1){$requerido[25]=''; }elseif($required_25==2){$requerido[25]='required';$_SESSION['form_require'].=','.$name_25;}
+												
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos[1]  = explode(",", $dataB_1);
+			$datos[2]  = explode(",", $dataB_2);
+			$datos[3]  = explode(",", $dataB_3);
+			$datos[4]  = explode(",", $dataB_4);
+			$datos[5]  = explode(",", $dataB_5);
+			$datos[6]  = explode(",", $dataB_6);
+			$datos[7]  = explode(",", $dataB_7);			
+			$datos[8]  = explode(",", $dataB_8);			
+			$datos[9]  = explode(",", $dataB_9);			
+			$datos[10] = explode(",", $dataB_10);
+			$datos[11] = explode(",", $dataB_11);
+			$datos[12] = explode(",", $dataB_12);
+			$datos[13] = explode(",", $dataB_13);
+			$datos[14] = explode(",", $dataB_14);
+			$datos[15] = explode(",", $dataB_15);
+			$datos[16] = explode(",", $dataB_16);
+			$datos[17] = explode(",", $dataB_17);
+			$datos[18] = explode(",", $dataB_18);
+			$datos[19] = explode(",", $dataB_19);
+			$datos[20] = explode(",", $dataB_20);
+			$datos[21] = explode(",", $dataB_21);
+			$datos[22] = explode(",", $dataB_22);
+			$datos[23] = explode(",", $dataB_23);
+			$datos[24] = explode(",", $dataB_24);
+			$datos[25] = explode(",", $dataB_25);
+				
+			/******************************************/
+			//Se arman los datos requeridos
+			if(count($datos[1])==1){ $data_required[1]  .= ','.$datos[1][0].' AS '.$datos[1][0];  }else{foreach($datos[1] as $dato){ $data_required[1]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){ $data_required[2]  .= ','.$datos[2][0].' AS '.$datos[2][0];  }else{foreach($datos[2] as $dato){ $data_required[2]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[3])==1){ $data_required[3]  .= ','.$datos[3][0].' AS '.$datos[3][0];  }else{foreach($datos[3] as $dato){ $data_required[3]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[4])==1){ $data_required[4]  .= ','.$datos[4][0].' AS '.$datos[4][0];  }else{foreach($datos[4] as $dato){ $data_required[4]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[5])==1){ $data_required[5]  .= ','.$datos[5][0].' AS '.$datos[5][0];  }else{foreach($datos[5] as $dato){ $data_required[5]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[6])==1){ $data_required[6]  .= ','.$datos[6][0].' AS '.$datos[6][0];  }else{foreach($datos[6] as $dato){ $data_required[6]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[7])==1){ $data_required[7]  .= ','.$datos[7][0].' AS '.$datos[7][0];  }else{foreach($datos[7] as $dato){ $data_required[7]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[8])==1){ $data_required[8]  .= ','.$datos[8][0].' AS '.$datos[8][0];  }else{foreach($datos[8] as $dato){ $data_required[8]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[9])==1){ $data_required[9]  .= ','.$datos[9][0].' AS '.$datos[9][0];  }else{foreach($datos[9] as $dato){ $data_required[9]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[10])==1){$data_required[10] .= ','.$datos[10][0].' AS '.$datos[10][0];}else{foreach($datos[10] as $dato){$data_required[10] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[11])==1){$data_required[11] .= ','.$datos[11][0].' AS '.$datos[11][0];}else{foreach($datos[11] as $dato){$data_required[11] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[12])==1){$data_required[12] .= ','.$datos[12][0].' AS '.$datos[12][0];}else{foreach($datos[12] as $dato){$data_required[12] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[13])==1){$data_required[13] .= ','.$datos[13][0].' AS '.$datos[13][0];}else{foreach($datos[13] as $dato){$data_required[13] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[14])==1){$data_required[14] .= ','.$datos[14][0].' AS '.$datos[14][0];}else{foreach($datos[14] as $dato){$data_required[14] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[15])==1){$data_required[15] .= ','.$datos[15][0].' AS '.$datos[15][0];}else{foreach($datos[15] as $dato){$data_required[15] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[16])==1){$data_required[16] .= ','.$datos[16][0].' AS '.$datos[16][0];}else{foreach($datos[16] as $dato){$data_required[16] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[17])==1){$data_required[17] .= ','.$datos[17][0].' AS '.$datos[17][0];}else{foreach($datos[17] as $dato){$data_required[17] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[18])==1){$data_required[18] .= ','.$datos[18][0].' AS '.$datos[18][0];}else{foreach($datos[18] as $dato){$data_required[18] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[19])==1){$data_required[19] .= ','.$datos[19][0].' AS '.$datos[19][0];}else{foreach($datos[19] as $dato){$data_required[19] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[20])==1){$data_required[20] .= ','.$datos[20][0].' AS '.$datos[20][0];}else{foreach($datos[20] as $dato){$data_required[20] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[21])==1){$data_required[21] .= ','.$datos[21][0].' AS '.$datos[21][0];}else{foreach($datos[21] as $dato){$data_required[21] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[22])==1){$data_required[22] .= ','.$datos[22][0].' AS '.$datos[22][0];}else{foreach($datos[22] as $dato){$data_required[22] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[23])==1){$data_required[23] .= ','.$datos[23][0].' AS '.$datos[23][0];}else{foreach($datos[23] as $dato){$data_required[23] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[24])==1){$data_required[24] .= ','.$datos[24][0].' AS '.$datos[24][0];}else{foreach($datos[24] as $dato){$data_required[24] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[25])==1){$data_required[25] .= ','.$datos[25][0].' AS '.$datos[25][0];}else{foreach($datos[25] as $dato){$data_required[25] .= ','.$dato.' AS '.$dato;}}
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter_1!='0' && $filter_1!=''){  $filtro[1]  .= $filter_1." AND ".$datos[1][0]."!='' ";  }elseif($filter_1=='' OR $filter_1==0){  $filtro[1]  .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){  $filtro[2]  .= $filter_2." AND ".$datos[2][0]."!='' ";  }elseif($filter_2=='' OR $filter_2==0){  $filtro[2]  .= $datos[2][0]."!='' ";}
+			if($filter_3!='0' && $filter_3!=''){  $filtro[3]  .= $filter_3." AND ".$datos[3][0]."!='' ";  }elseif($filter_3=='' OR $filter_3==0){  $filtro[3]  .= $datos[3][0]."!='' ";}
+			if($filter_4!='0' && $filter_4!=''){  $filtro[4]  .= $filter_4." AND ".$datos[4][0]."!='' ";  }elseif($filter_4=='' OR $filter_4==0){  $filtro[4]  .= $datos[4][0]."!='' ";}
+			if($filter_5!='0' && $filter_5!=''){  $filtro[5]  .= $filter_5." AND ".$datos[5][0]."!='' ";  }elseif($filter_5=='' OR $filter_5==0){  $filtro[5]  .= $datos[5][0]."!='' ";}
+			if($filter_6!='0' && $filter_6!=''){  $filtro[6]  .= $filter_6." AND ".$datos[6][0]."!='' ";  }elseif($filter_6=='' OR $filter_6==0){  $filtro[6]  .= $datos[6][0]."!='' ";}
+			if($filter_7!='0' && $filter_7!=''){  $filtro[7]  .= $filter_7." AND ".$datos[7][0]."!='' ";  }elseif($filter_7=='' OR $filter_7==0){  $filtro[7]  .= $datos[7][0]."!='' ";}
+			if($filter_8!='0' && $filter_8!=''){  $filtro[8]  .= $filter_8." AND ".$datos[8][0]."!='' ";  }elseif($filter_8=='' OR $filter_8==0){  $filtro[8]  .= $datos[8][0]."!='' ";}
+			if($filter_9!='0' && $filter_9!=''){  $filtro[9]  .= $filter_9." AND ".$datos[9][0]."!='' ";  }elseif($filter_9=='' OR $filter_9==0){  $filtro[9]  .= $datos[9][0]."!='' ";}
+			if($filter_10!='0' && $filter_10!=''){$filtro[10] .= $filter_10." AND ".$datos[10][0]."!='' ";}elseif($filter_10=='' OR $filter_10==0){$filtro[10] .= $datos[10][0]."!='' ";}
+			if($filter_11!='0' && $filter_11!=''){$filtro[11] .= $filter_11." AND ".$datos[11][0]."!='' ";}elseif($filter_11=='' OR $filter_11==0){$filtro[11] .= $datos[11][0]."!='' ";}
+			if($filter_12!='0' && $filter_12!=''){$filtro[12] .= $filter_12." AND ".$datos[12][0]."!='' ";}elseif($filter_12=='' OR $filter_12==0){$filtro[12] .= $datos[12][0]."!='' ";}
+			if($filter_13!='0' && $filter_13!=''){$filtro[13] .= $filter_13." AND ".$datos[13][0]."!='' ";}elseif($filter_13=='' OR $filter_13==0){$filtro[13] .= $datos[13][0]."!='' ";}
+			if($filter_14!='0' && $filter_14!=''){$filtro[14] .= $filter_14." AND ".$datos[14][0]."!='' ";}elseif($filter_14=='' OR $filter_14==0){$filtro[14] .= $datos[14][0]."!='' ";}
+			if($filter_15!='0' && $filter_15!=''){$filtro[15] .= $filter_15." AND ".$datos[15][0]."!='' ";}elseif($filter_15=='' OR $filter_15==0){$filtro[15] .= $datos[15][0]."!='' ";}
+			if($filter_16!='0' && $filter_16!=''){$filtro[16] .= $filter_16." AND ".$datos[16][0]."!='' ";}elseif($filter_16=='' OR $filter_16==0){$filtro[16] .= $datos[16][0]."!='' ";}
+			if($filter_17!='0' && $filter_17!=''){$filtro[17] .= $filter_17." AND ".$datos[17][0]."!='' ";}elseif($filter_17=='' OR $filter_17==0){$filtro[17] .= $datos[17][0]."!='' ";}
+			if($filter_18!='0' && $filter_18!=''){$filtro[18] .= $filter_18." AND ".$datos[18][0]."!='' ";}elseif($filter_18=='' OR $filter_18==0){$filtro[18] .= $datos[18][0]."!='' ";}
+			if($filter_19!='0' && $filter_19!=''){$filtro[19] .= $filter_19." AND ".$datos[19][0]."!='' ";}elseif($filter_19=='' OR $filter_19==0){$filtro[19] .= $datos[19][0]."!='' ";}
+			if($filter_20!='0' && $filter_20!=''){$filtro[20] .= $filter_20." AND ".$datos[20][0]."!='' ";}elseif($filter_20=='' OR $filter_20==0){$filtro[20] .= $datos[20][0]."!='' ";}
+			if($filter_21!='0' && $filter_21!=''){$filtro[21] .= $filter_21." AND ".$datos[21][0]."!='' ";}elseif($filter_21=='' OR $filter_21==0){$filtro[21] .= $datos[21][0]."!='' ";}
+			if($filter_22!='0' && $filter_22!=''){$filtro[22] .= $filter_22." AND ".$datos[22][0]."!='' ";}elseif($filter_22=='' OR $filter_22==0){$filtro[22] .= $datos[22][0]."!='' ";}
+			if($filter_23!='0' && $filter_23!=''){$filtro[23] .= $filter_23." AND ".$datos[23][0]."!='' ";}elseif($filter_23=='' OR $filter_23==0){$filtro[23] .= $datos[23][0]."!='' ";}
+			if($filter_24!='0' && $filter_24!=''){$filtro[24] .= $filter_24." AND ".$datos[24][0]."!='' ";}elseif($filter_24=='' OR $filter_24==0){$filtro[24] .= $datos[24][0]."!='' ";}
+			if($filter_25!='0' && $filter_25!=''){$filtro[25] .= $filter_25." AND ".$datos[25][0]."!='' ";}elseif($filter_25=='' OR $filter_25==0){$filtro[25] .= $datos[25][0]."!='' ";}
 									
-									if(count($datosA)==1){
-										$data_writing = $seleccion[$datosA[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datosA as $dato){
-											$data_writing .= $seleccion[$dato].' ';
-										}
-									}
+			/******************************************/
+			//Verifica si se enviaron mas datos
+			if(!isset($extracomand_1) OR $extracomand_1==''){   $extracomand_1 = $datos[1][0].' ASC '; }
+			if(!isset($extracomand_2) OR $extracomand_2==''){   $extracomand_2 = $datos[2][0].' ASC '; }
+			if(!isset($extracomand_3) OR $extracomand_3==''){   $extracomand_3 = $datos[3][0].' ASC '; }
+			if(!isset($extracomand_4) OR $extracomand_4==''){   $extracomand_4 = $datos[4][0].' ASC '; }
+			if(!isset($extracomand_5) OR $extracomand_5==''){   $extracomand_5 = $datos[5][0].' ASC '; }
+			if(!isset($extracomand_6) OR $extracomand_6==''){   $extracomand_6 = $datos[6][0].' ASC '; }
+			if(!isset($extracomand_7) OR $extracomand_7==''){   $extracomand_7 = $datos[7][0].' ASC '; }
+			if(!isset($extracomand_8) OR $extracomand_8==''){   $extracomand_8 = $datos[8][0].' ASC '; }
+			if(!isset($extracomand_9) OR $extracomand_9==''){   $extracomand_9 = $datos[9][0].' ASC '; }
+			if(!isset($extracomand_10) OR $extracomand_10==''){ $extracomand_10 = $datos[10][0].' ASC '; }
+			if(!isset($extracomand_11) OR $extracomand_11==''){ $extracomand_11 = $datos[11][0].' ASC '; }
+			if(!isset($extracomand_12) OR $extracomand_12==''){ $extracomand_12 = $datos[12][0].' ASC '; }
+			if(!isset($extracomand_13) OR $extracomand_13==''){ $extracomand_13 = $datos[13][0].' ASC '; }
+			if(!isset($extracomand_14) OR $extracomand_14==''){ $extracomand_14 = $datos[14][0].' ASC '; }
+			if(!isset($extracomand_15) OR $extracomand_15==''){ $extracomand_15 = $datos[15][0].' ASC '; }
+			if(!isset($extracomand_16) OR $extracomand_16==''){ $extracomand_16 = $datos[16][0].' ASC '; }
+			if(!isset($extracomand_17) OR $extracomand_17==''){ $extracomand_17 = $datos[17][0].' ASC '; }
+			if(!isset($extracomand_18) OR $extracomand_18==''){ $extracomand_18 = $datos[18][0].' ASC '; }
+			if(!isset($extracomand_19) OR $extracomand_19==''){ $extracomand_19 = $datos[19][0].' ASC '; }
+			if(!isset($extracomand_20) OR $extracomand_20==''){ $extracomand_20 = $datos[20][0].' ASC '; }
+			if(!isset($extracomand_21) OR $extracomand_21==''){ $extracomand_21 = $datos[21][0].' ASC '; }
+			if(!isset($extracomand_22) OR $extracomand_22==''){ $extracomand_22 = $datos[22][0].' ASC '; }
+			if(!isset($extracomand_23) OR $extracomand_23==''){ $extracomand_23 = $datos[23][0].' ASC '; }
+			if(!isset($extracomand_24) OR $extracomand_24==''){ $extracomand_24 = $datos[24][0].' ASC '; }
+			if(!isset($extracomand_25) OR $extracomand_25==''){ $extracomand_25 = $datos[25][0].' ASC '; }
+			
+			/******************************************/
+			//consulto
+			$arrSelect_1 = array();
+			$arrSelect_2 = array();
+			$arrSelect_3 = array();
+			$arrSelect_4 = array();
+			$arrSelect_5 = array();
+			$arrSelect_6 = array();
+			$arrSelect_7 = array();
+			$arrSelect_8 = array();
+			$arrSelect_9 = array();
+			$arrSelect_10 = array();
+			$arrSelect_11 = array();
+			$arrSelect_12 = array();
+			$arrSelect_13 = array();
+			$arrSelect_14 = array();
+			$arrSelect_15 = array();
+			$arrSelect_16 = array();
+			$arrSelect_17 = array();
+			$arrSelect_18 = array();
+			$arrSelect_19 = array();
+			$arrSelect_20 = array();
+			$arrSelect_21 = array();
+			$arrSelect_22 = array();
+			$arrSelect_23 = array();
+			$arrSelect_24 = array();
+			$arrSelect_25 = array();
+			$arrSelect_1  = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
+			$arrSelect_2  = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2],    $table_2,  '', $filtro[2],  $extracomand_2,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_3  = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3],    $table_3,  '', $filtro[3],  $extracomand_3,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
+			$arrSelect_4  = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4],    $table_4,  '', $filtro[4],  $extracomand_4,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
+			$arrSelect_5  = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5],    $table_5,  '', $filtro[5],  $extracomand_5,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
+			$arrSelect_6  = db_select_array (false, $dataA_6.' AS idData ,'.$dataA_5.' AS idDataFilter '.$data_required[6],    $table_6,  '', $filtro[6],  $extracomand_6,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_6');
+			$arrSelect_7  = db_select_array (false, $dataA_7.' AS idData ,'.$dataA_6.' AS idDataFilter '.$data_required[7],    $table_7,  '', $filtro[7],  $extracomand_7,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_7');
+			$arrSelect_8  = db_select_array (false, $dataA_8.' AS idData ,'.$dataA_7.' AS idDataFilter '.$data_required[8],    $table_8,  '', $filtro[8],  $extracomand_8,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_8');
+			$arrSelect_9  = db_select_array (false, $dataA_9.' AS idData ,'.$dataA_8.' AS idDataFilter '.$data_required[9],    $table_9,  '', $filtro[9],  $extracomand_9,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_9');
+			$arrSelect_10 = db_select_array (false, $dataA_10.' AS idData ,'.$dataA_9.' AS idDataFilter '.$data_required[10],  $table_10, '', $filtro[10], $extracomand_10, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_10');
+			$arrSelect_11 = db_select_array (false, $dataA_11.' AS idData ,'.$dataA_10.' AS idDataFilter '.$data_required[11], $table_11, '', $filtro[11], $extracomand_11, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_11');
+			$arrSelect_12 = db_select_array (false, $dataA_12.' AS idData ,'.$dataA_11.' AS idDataFilter '.$data_required[12], $table_12, '', $filtro[12], $extracomand_12, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_12');
+			$arrSelect_13 = db_select_array (false, $dataA_13.' AS idData ,'.$dataA_12.' AS idDataFilter '.$data_required[13], $table_13, '', $filtro[13], $extracomand_13, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_13');
+			$arrSelect_14 = db_select_array (false, $dataA_14.' AS idData ,'.$dataA_13.' AS idDataFilter '.$data_required[14], $table_14, '', $filtro[14], $extracomand_14, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_14');
+			$arrSelect_15 = db_select_array (false, $dataA_15.' AS idData ,'.$dataA_14.' AS idDataFilter '.$data_required[15], $table_15, '', $filtro[15], $extracomand_15, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_15');
+			$arrSelect_16 = db_select_array (false, $dataA_16.' AS idData ,'.$dataA_15.' AS idDataFilter '.$data_required[16], $table_16, '', $filtro[16], $extracomand_16, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_16');
+			$arrSelect_17 = db_select_array (false, $dataA_17.' AS idData ,'.$dataA_16.' AS idDataFilter '.$data_required[17], $table_17, '', $filtro[17], $extracomand_17, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_17');
+			$arrSelect_18 = db_select_array (false, $dataA_18.' AS idData ,'.$dataA_17.' AS idDataFilter '.$data_required[18], $table_18, '', $filtro[18], $extracomand_18, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_18');
+			$arrSelect_19 = db_select_array (false, $dataA_19.' AS idData ,'.$dataA_18.' AS idDataFilter '.$data_required[19], $table_19, '', $filtro[19], $extracomand_19, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_19');
+			$arrSelect_20 = db_select_array (false, $dataA_20.' AS idData ,'.$dataA_19.' AS idDataFilter '.$data_required[20], $table_20, '', $filtro[20], $extracomand_20, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_20');
+			$arrSelect_21 = db_select_array (false, $dataA_21.' AS idData ,'.$dataA_20.' AS idDataFilter '.$data_required[21], $table_21, '', $filtro[21], $extracomand_21, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_21');
+			$arrSelect_22 = db_select_array (false, $dataA_22.' AS idData ,'.$dataA_21.' AS idDataFilter '.$data_required[22], $table_22, '', $filtro[22], $extracomand_22, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_22');
+			$arrSelect_23 = db_select_array (false, $dataA_23.' AS idData ,'.$dataA_22.' AS idDataFilter '.$data_required[23], $table_23, '', $filtro[23], $extracomand_23, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_23');
+			$arrSelect_24 = db_select_array (false, $dataA_24.' AS idData ,'.$dataA_23.' AS idDataFilter '.$data_required[24], $table_24, '', $filtro[24], $extracomand_24, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_24');
+			$arrSelect_25 = db_select_array (false, $dataA_25.' AS idData ,'.$dataA_24.' AS idDataFilter '.$data_required[25], $table_25, '', $filtro[25], $extracomand_25, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_25');
 									
-									$w = ''; if($value[1]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-									$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-								} 
-				$input .= '</select>
-						</div>
-					</div>';
-
-			//Se recorre 25 veces
-			$maxs = 25;
-			for ($i = 2; $i <= $maxs; $i++) {
-				
-				//explode para poder crear cadena
-				$datosB = explode(",", $dataB[$i]);
-				if(count($datosB)==1){
-					$data_requiredB = ','.$datosB[0].' AS '.$datosB[0];
-				}else{
-					$data_requiredB = '';
-					foreach($datosB as $dato){
-						$data_requiredB .= ','.$dato.' AS '.$dato;
-					}
-				}
-				
-				// Se trae un listado con los datos previamente seleccionados
-				if ($value[$i-1]!=0&&$value[$i-1]!=''){
-					$arrSeleccion = array();
-					$query = "SELECT ".$dataA[$i]." AS idData ".$data_requiredB."  FROM `".$table[$i]."` WHERE ".$dataA[$i-1]." = ".$value[$i-1]." ".$filtro[$i]." ".$excom[$i];
-					$resultado = mysqli_query ($dbConn, $query);
-					while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSeleccion,$row );
-					}
-					mysqli_free_result($resultado);
-				} 
-				// Se trae un listado con todos los datos
-				$arrTodos = array();
-				$query = "SELECT ".$dataA[$i]." AS idData, ".$dataA[$i-1]." AS idCat ".$data_requiredB." FROM `".$table[$i]."` WHERE ".$dataA[$i]."!='' ".$filtro[$i]." ".$excom[$i];
-				$resultado = mysqli_query ($dbConn, $query);
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-				array_push( $arrTodos,$row );
-				}
-				mysqli_free_result($resultado);
-				
-				
-				//Se verifica la funcion
-				$onchange = '';
-				if($i!=$maxs){
-					$onchange = 'onChange="cambia_'.$name[$i].'()"';
-				}
-				
-				//Se dibuja el input
-				$input .= '
-						<div class="form-group" id="div_'.$name[$i].'" '.$display[$i].'>
-							<label for="text2" class="control-label col-sm-4">'.$placeholder[$i].'</label>
-							<div class="col-sm-8 field">
-								<select name="'.$name[$i].'" id="'.$name[$i].'" class="form-control" '.$required[$i].' '.$onchange.' >
-									<option value="" selected>Seleccione una Opcion</option>';
-									if ($value[$i-1]!=0&&$value[$i-1]!=''){
-										foreach ( $arrSeleccion as $seleccion ) {
-											if(count($datosB)==1){
-												$data_writing = $seleccion[$datosB[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datosB as $dato){
-													$data_writing .= $seleccion[$dato].' ';
-												}
-											}
-											//echo $data_writing.'<br/>';
-											$w = ''; if($value[$i]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-											$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										} 
-									}
-					$input .= '</select>
-							</div>
-						</div>';
-				
-				$input .= '<script>
-				';	
-			
-				//Input 2
-				filtrar($arrTodos, 'idCat'); 
-				$vowels = array(" ", "´", "-");
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
-					foreach ($componentes as $idcomp) {
-						$input .= ',"'.$idcomp['idData'].'"';
-					}
-					$input .= ');
-					';
-				}
-				
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
-					foreach ($componentes as $comp) {
-						if(count($datosB)==1){
-							$data_writing = $comp[$datosB[0]].' ';
-						}else{
-							$data_writing = '';
-							foreach($datosB as $dato){
-								$data_writing .= $comp[$dato].' ';
-							}
-						}					
-						$input .= ',"'.str_replace('"', '',$data_writing).'"';
-					}
-					$input .= ');
-					';
-				}
-			
-				if($i <= $maxs){
-					$input .= '
-					function cambia_'.$name[$i-1].'(){
-						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
-						try {
-							if (Componente != "") {
-								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
-								data    = eval("data_'.$name[$i-1].'_" + Componente);
-								num_int = id_data.length;
-								document.'.$form_name.'.'.$name[$i].'.length = num_int;
-								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
-								}
-								document.getElementById("div_'.$name[$i].'").style.display = "block";	
-							}else{';
-						
-								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-									';
-								
-								}
-							$input .= '	
-							}
-						} catch (e) {';
-						
-							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-								';
-								
-							}
-						$input .= '	
-						}
-						document.'.$form_name.'.'.$name[$i].'.options[0].selected = true
-					}
-					';
-				}
-				$input .= '</script>';
-				
+			/******************************************/
+			//si hay resultados
+			if($arrSelect_1!=false){
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
 			}
-
+			//si hay resultados
+			if($arrSelect_2!=false){
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_3!=false){
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_4!=false){
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_5!=false){
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_6!=false){
+				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);		
+				$input .= $this->select_input_script($arrSelect_6, $value_6, $name_5, $name_6, $datos[6], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_7!=false){
+				$input .= $this->select_input_empty($name_7, $placeholder_7, $requerido[7]);		
+				$input .= $this->select_input_script($arrSelect_7, $value_7, $name_6, $name_7, $datos[7], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_8!=false){
+				$input .= $this->select_input_empty($name_8, $placeholder_8, $requerido[8]);		
+				$input .= $this->select_input_script($arrSelect_8, $value_8, $name_7, $name_8, $datos[8], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_9!=false){
+				$input .= $this->select_input_empty($name_9, $placeholder_9, $requerido[9]);		
+				$input .= $this->select_input_script($arrSelect_9, $value_9, $name_8, $name_9, $datos[9], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_10!=false){
+				$input .= $this->select_input_empty($name_10, $placeholder_10, $requerido[10]);		
+				$input .= $this->select_input_script($arrSelect_10, $value_10, $name_9, $name_10, $datos[10], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_11!=false){
+				$input .= $this->select_input_empty($name_11, $placeholder_11, $requerido[11]);		
+				$input .= $this->select_input_script($arrSelect_11, $value_11, $name_10, $name_11, $datos[11], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_12!=false){
+				$input .= $this->select_input_empty($name_12, $placeholder_12, $requerido[12]);		
+				$input .= $this->select_input_script($arrSelect_12, $value_12, $name_11, $name_12, $datos[12], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_13!=false){
+				$input .= $this->select_input_empty($name_13, $placeholder_13, $requerido[13]);		
+				$input .= $this->select_input_script($arrSelect_13, $value_13, $name_12, $name_13, $datos[13], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_14!=false){
+				$input .= $this->select_input_empty($name_14, $placeholder_14, $requerido[14]);		
+				$input .= $this->select_input_script($arrSelect_14, $value_14, $name_13, $name_14, $datos[14], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_15!=false){
+				$input .= $this->select_input_empty($name_15, $placeholder_15, $requerido[15]);		
+				$input .= $this->select_input_script($arrSelect_15, $value_15, $name_14, $name_15, $datos[15], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_16!=false){
+				$input .= $this->select_input_empty($name_16, $placeholder_16, $requerido[16]);		
+				$input .= $this->select_input_script($arrSelect_16, $value_16, $name_15, $name_16, $datos[16], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_17!=false){
+				$input .= $this->select_input_empty($name_17, $placeholder_17, $requerido[17]);		
+				$input .= $this->select_input_script($arrSelect_17, $value_17, $name_16, $name_17, $datos[17], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_18!=false){
+				$input .= $this->select_input_empty($name_18, $placeholder_18, $requerido[18]);		
+				$input .= $this->select_input_script($arrSelect_18, $value_18, $name_17, $name_18, $datos[18], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_19!=false){
+				$input .= $this->select_input_empty($name_19, $placeholder_19, $requerido[19]);		
+				$input .= $this->select_input_script($arrSelect_19, $value_19, $name_18, $name_19, $datos[19], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_20!=false){
+				$input .= $this->select_input_empty($name_20, $placeholder_20, $requerido[20]);		
+				$input .= $this->select_input_script($arrSelect_20, $value_20, $name_19, $name_20, $datos[20], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_21!=false){
+				$input .= $this->select_input_empty($name_21, $placeholder_21, $requerido[21]);		
+				$input .= $this->select_input_script($arrSelect_21, $value_21, $name_20, $name_21, $datos[21], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_22!=false){
+				$input .= $this->select_input_empty($name_22, $placeholder_22, $requerido[22]);		
+				$input .= $this->select_input_script($arrSelect_22, $value_22, $name_21, $name_22, $datos[22], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_23!=false){
+				$input .= $this->select_input_empty($name_23, $placeholder_23, $requerido[23]);		
+				$input .= $this->select_input_script($arrSelect_23, $value_23, $name_22, $name_23, $datos[23], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_24!=false){
+				$input .= $this->select_input_empty($name_24, $placeholder_24, $requerido[24]);		
+				$input .= $this->select_input_script($arrSelect_24, $value_24, $name_23, $name_24, $datos[24], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_25!=false){
+				$input .= $this->select_input_empty($name_25, $placeholder_25, $requerido[25]);		
+				$input .= $this->select_input_script($arrSelect_25, $value_25, $name_24, $name_25, $datos[25], $form_name);
+			}
+			
 			/******************************************/
 			//Imprimir dato	
 			echo $input;
 		}
 	}
-
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
@@ -5246,1402 +4738,1309 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_select_depend50($placeholder1, $name1,  $value1,  $required1,  $dataA1,  $dataB1,  $table1,  $filter1,   $extracomand1,
-										 $placeholder2, $name2,  $value2,  $required2,  $dataA2,  $dataB2,  $table2,  $filter2,   $extracomand2, 
-										 $placeholder3, $name3,  $value3,  $required3,  $dataA3,  $dataB3,  $table3,  $filter3,   $extracomand3,
-										 $placeholder4, $name4,  $value4,  $required4,  $dataA4,  $dataB4,  $table4,  $filter4,   $extracomand4,
-										 $placeholder5, $name5,  $value5,  $required5,  $dataA5,  $dataB5,  $table5,  $filter5,   $extracomand5,
-										 $placeholder6, $name6,  $value6,  $required6,  $dataA6,  $dataB6,  $table6,  $filter6,   $extracomand6,
-										 $placeholder7, $name7,  $value7,  $required7,  $dataA7,  $dataB7,  $table7,  $filter7,   $extracomand7,
-										 $placeholder8, $name8,  $value8,  $required8,  $dataA8,  $dataB8,  $table8,  $filter8,   $extracomand8,
-										 $placeholder9, $name9,  $value9,  $required9,  $dataA9,  $dataB9,  $table9,  $filter9,   $extracomand9,
-										 $placeholder10,$name10, $value10, $required10, $dataA10, $dataB10, $table10, $filter10,  $extracomand10,
-										 $placeholder11,$name11, $value11, $required11, $dataA11, $dataB11, $table11, $filter11,  $extracomand11,
-										 $placeholder12,$name12, $value12, $required12, $dataA12, $dataB12, $table12, $filter12,  $extracomand12,
-										 $placeholder13,$name13, $value13, $required13, $dataA13, $dataB13, $table13, $filter13,  $extracomand13,
-										 $placeholder14,$name14, $value14, $required14, $dataA14, $dataB14, $table14, $filter14,  $extracomand14,
-										 $placeholder15,$name15, $value15, $required15, $dataA15, $dataB15, $table15, $filter15,  $extracomand15,
-										 $placeholder16,$name16, $value16, $required16, $dataA16, $dataB16, $table16, $filter16,  $extracomand16,
-										 $placeholder17,$name17, $value17, $required17, $dataA17, $dataB17, $table17, $filter17,  $extracomand17,
-										 $placeholder18,$name18, $value18, $required18, $dataA18, $dataB18, $table18, $filter18,  $extracomand18,
-										 $placeholder19,$name19, $value19, $required19, $dataA19, $dataB19, $table19, $filter19,  $extracomand19,
-										 $placeholder20,$name20, $value20, $required20, $dataA20, $dataB20, $table20, $filter20,  $extracomand20,
-										 $placeholder21,$name21, $value21, $required21, $dataA21, $dataB21, $table21, $filter21,  $extracomand21,
-										 $placeholder22,$name22, $value22, $required22, $dataA22, $dataB22, $table22, $filter22,  $extracomand22,
-										 $placeholder23,$name23, $value23, $required23, $dataA23, $dataB23, $table23, $filter23,  $extracomand23,
-										 $placeholder24,$name24, $value24, $required24, $dataA24, $dataB24, $table24, $filter24,  $extracomand24,
-										 $placeholder25,$name25, $value25, $required25, $dataA25, $dataB25, $table25, $filter25,  $extracomand25,
-										 $placeholder26,$name26, $value26, $required26, $dataA26, $dataB26, $table26, $filter26,  $extracomand26,
-										 $placeholder27,$name27, $value27, $required27, $dataA27, $dataB27, $table27, $filter27,  $extracomand27,
-										 $placeholder28,$name28, $value28, $required28, $dataA28, $dataB28, $table28, $filter28,  $extracomand28,
-										 $placeholder29,$name29, $value29, $required29, $dataA29, $dataB29, $table29, $filter29,  $extracomand29,
-										 $placeholder30,$name30, $value30, $required30, $dataA30, $dataB30, $table30, $filter30,  $extracomand30,
-										 $placeholder31,$name31, $value31, $required31, $dataA31, $dataB31, $table31, $filter31,  $extracomand31,
-										 $placeholder32,$name32, $value32, $required32, $dataA32, $dataB32, $table32, $filter32,  $extracomand32,
-										 $placeholder33,$name33, $value33, $required33, $dataA33, $dataB33, $table33, $filter33,  $extracomand33,
-										 $placeholder34,$name34, $value34, $required34, $dataA34, $dataB34, $table34, $filter34,  $extracomand34,
-										 $placeholder35,$name35, $value35, $required35, $dataA35, $dataB35, $table35, $filter35,  $extracomand35,
-										 $placeholder36,$name36, $value36, $required36, $dataA36, $dataB36, $table36, $filter36,  $extracomand36,
-										 $placeholder37,$name37, $value37, $required37, $dataA37, $dataB37, $table37, $filter37,  $extracomand37,
-										 $placeholder38,$name38, $value38, $required38, $dataA38, $dataB38, $table38, $filter38,  $extracomand38,
-										 $placeholder39,$name39, $value39, $required39, $dataA39, $dataB39, $table39, $filter39,  $extracomand39,
-										 $placeholder40,$name40, $value40, $required40, $dataA40, $dataB40, $table40, $filter40,  $extracomand40,
-										 $placeholder41,$name41, $value41, $required41, $dataA41, $dataB41, $table41, $filter41,  $extracomand41,
-										 $placeholder42,$name42, $value42, $required42, $dataA42, $dataB42, $table42, $filter42,  $extracomand42,
-										 $placeholder43,$name43, $value43, $required43, $dataA43, $dataB43, $table43, $filter43,  $extracomand43,
-										 $placeholder44,$name44, $value44, $required44, $dataA44, $dataB44, $table44, $filter44,  $extracomand44,
-										 $placeholder45,$name45, $value45, $required45, $dataA45, $dataB45, $table45, $filter45,  $extracomand45,
-										 $placeholder46,$name46, $value46, $required46, $dataA46, $dataB46, $table46, $filter46,  $extracomand46,
-										 $placeholder47,$name47, $value47, $required47, $dataA47, $dataB47, $table47, $filter47,  $extracomand47,
-										 $placeholder48,$name48, $value48, $required48, $dataA48, $dataB48, $table48, $filter48,  $extracomand48,
-										 $placeholder49,$name49, $value49, $required49, $dataA49, $dataB49, $table49, $filter49,  $extracomand49,
-										 $placeholder50,$name50, $value50, $required50, $dataA50, $dataB50, $table50, $filter50,  $extracomand50,
-										 $dbConn, $form_name){
+	public function form_select_depend50($placeholder_1,  $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,  $extracomand_1,
+										$placeholder_2,  $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,  $extracomand_2, 
+										$placeholder_3,  $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,  $extracomand_3,
+										$placeholder_4,  $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,  $extracomand_4,
+										$placeholder_5,  $name_5,  $value_5,  $required_5,  $dataA_5,  $dataB_5,  $table_5,  $filter_5,  $extracomand_5,
+										$placeholder_6,  $name_6,  $value_6,  $required_6,  $dataA_6,  $dataB_6,  $table_6,  $filter_6,  $extracomand_6,
+										$placeholder_7,  $name_7,  $value_7,  $required_7,  $dataA_7,  $dataB_7,  $table_7,  $filter_7,  $extracomand_7,
+										$placeholder_8,  $name_8,  $value_8,  $required_8,  $dataA_8,  $dataB_8,  $table_8,  $filter_8,  $extracomand_8,
+										$placeholder_9,  $name_9,  $value_9,  $required_9,  $dataA_9,  $dataB_9,  $table_9,  $filter_9,  $extracomand_9,
+										$placeholder_10, $name_10, $value_10, $required_10, $dataA_10, $dataB_10, $table_10, $filter_10, $extracomand_10,
+										$placeholder_11, $name_11, $value_11, $required_11, $dataA_11, $dataB_11, $table_11, $filter_11, $extracomand_11,
+										$placeholder_12, $name_12, $value_12, $required_12, $dataA_12, $dataB_12, $table_12, $filter_12, $extracomand_12,
+										$placeholder_13, $name_13, $value_13, $required_13, $dataA_13, $dataB_13, $table_13, $filter_13, $extracomand_13,
+										$placeholder_14, $name_14, $value_14, $required_14, $dataA_14, $dataB_14, $table_14, $filter_14, $extracomand_14,
+										$placeholder_15, $name_15, $value_15, $required_15, $dataA_15, $dataB_15, $table_15, $filter_15, $extracomand_15,
+										$placeholder_16, $name_16, $value_16, $required_16, $dataA_16, $dataB_16, $table_16, $filter_16, $extracomand_16,
+										$placeholder_17, $name_17, $value_17, $required_17, $dataA_17, $dataB_17, $table_17, $filter_17, $extracomand_17,
+										$placeholder_18, $name_18, $value_18, $required_18, $dataA_18, $dataB_18, $table_18, $filter_18, $extracomand_18,
+										$placeholder_19, $name_19, $value_19, $required_19, $dataA_19, $dataB_19, $table_19, $filter_19, $extracomand_19,
+										$placeholder_20, $name_20, $value_20, $required_20, $dataA_20, $dataB_20, $table_20, $filter_20, $extracomand_20,
+										$placeholder_21, $name_21, $value_21, $required_21, $dataA_21, $dataB_21, $table_21, $filter_21, $extracomand_21,
+										$placeholder_22, $name_22, $value_22, $required_22, $dataA_22, $dataB_22, $table_22, $filter_22, $extracomand_22,
+										$placeholder_23, $name_23, $value_23, $required_23, $dataA_23, $dataB_23, $table_23, $filter_23, $extracomand_23,
+										$placeholder_24, $name_24, $value_24, $required_24, $dataA_24, $dataB_24, $table_24, $filter_24, $extracomand_24,
+										$placeholder_25, $name_25, $value_25, $required_25, $dataA_25, $dataB_25, $table_25, $filter_25, $extracomand_25,
+										$placeholder_26, $name_26, $value_26, $required_26, $dataA_26, $dataB_26, $table_26, $filter_26, $extracomand_26, 
+										$placeholder_27, $name_27, $value_27, $required_27, $dataA_27, $dataB_27, $table_27, $filter_27, $extracomand_27, 
+										$placeholder_28, $name_28, $value_28, $required_28, $dataA_28, $dataB_28, $table_28, $filter_28, $extracomand_28, 
+										$placeholder_29, $name_29, $value_29, $required_29, $dataA_29, $dataB_29, $table_29, $filter_29, $extracomand_29, 
+										$placeholder_30, $name_30, $value_30, $required_30, $dataA_30, $dataB_30, $table_30, $filter_30, $extracomand_30,
+										$placeholder_31, $name_31, $value_31, $required_31, $dataA_31, $dataB_31, $table_31, $filter_31, $extracomand_31,
+										$placeholder_32, $name_32, $value_32, $required_32, $dataA_32, $dataB_32, $table_32, $filter_32, $extracomand_32,
+										$placeholder_33, $name_33, $value_33, $required_33, $dataA_33, $dataB_33, $table_33, $filter_33, $extracomand_33,
+										$placeholder_34, $name_34, $value_34, $required_34, $dataA_34, $dataB_34, $table_34, $filter_34, $extracomand_34,
+										$placeholder_35, $name_35, $value_35, $required_35, $dataA_35, $dataB_35, $table_35, $filter_35, $extracomand_35,
+										$placeholder_36, $name_36, $value_36, $required_36, $dataA_36, $dataB_36, $table_36, $filter_36, $extracomand_36,
+										$placeholder_37, $name_37, $value_37, $required_37, $dataA_37, $dataB_37, $table_37, $filter_37, $extracomand_37,
+										$placeholder_38, $name_38, $value_38, $required_38, $dataA_38, $dataB_38, $table_38, $filter_38, $extracomand_38,
+										$placeholder_39, $name_39, $value_39, $required_39, $dataA_39, $dataB_39, $table_39, $filter_39, $extracomand_39,
+										$placeholder_40, $name_40, $value_40, $required_40, $dataA_40, $dataB_40, $table_40, $filter_40, $extracomand_40,
+										$placeholder_41, $name_41, $value_41, $required_41, $dataA_41, $dataB_41, $table_41, $filter_41, $extracomand_41,
+										$placeholder_42, $name_42, $value_42, $required_42, $dataA_42, $dataB_42, $table_42, $filter_42, $extracomand_42,
+										$placeholder_43, $name_43, $value_43, $required_43, $dataA_43, $dataB_43, $table_43, $filter_43, $extracomand_43,
+										$placeholder_44, $name_44, $value_44, $required_44, $dataA_44, $dataB_44, $table_44, $filter_44, $extracomand_44,
+										$placeholder_45, $name_45, $value_45, $required_45, $dataA_45, $dataB_45, $table_45, $filter_45, $extracomand_45,
+										$placeholder_46, $name_46, $value_46, $required_46, $dataA_46, $dataB_46, $table_46, $filter_46, $extracomand_46,
+										$placeholder_47, $name_47, $value_47, $required_47, $dataA_47, $dataB_47, $table_47, $filter_47, $extracomand_47,
+										$placeholder_48, $name_48, $value_48, $required_48, $dataA_48, $dataB_48, $table_48, $filter_48, $extracomand_48,
+										$placeholder_49, $name_49, $value_49, $required_49, $dataA_49, $dataB_49, $table_49, $filter_49, $extracomand_49,
+										$placeholder_50, $name_50, $value_50, $required_50, $dataA_50, $dataB_50, $table_50, $filter_50, $extracomand_50,
+										$dbConn, $form_name){
 
-		
-		
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
-		if (!in_array($required1, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required1 ('.$required1.') entregada en '.$placeholder1.' no esta dentro de las opciones');
+		if (!in_array($required_1, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required2, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required2 ('.$required2.') entregada en '.$placeholder2.' no esta dentro de las opciones');
+		if (!in_array($required_2, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required3, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required3 ('.$required3.') entregada en '.$placeholder3.' no esta dentro de las opciones');
+		if (!in_array($required_3, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_3 ('.$required_3.') entregada en '.$placeholder_3.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required4, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required4 ('.$required4.') entregada en '.$placeholder4.' no esta dentro de las opciones');
+		if (!in_array($required_4, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_4 ('.$required_4.') entregada en '.$placeholder_4.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required5, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required5 ('.$required5.') entregada en '.$placeholder5.' no esta dentro de las opciones');
+		if (!in_array($required_5, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_5 ('.$required_5.') entregada en '.$placeholder_5.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required6, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required6 ('.$required6.') entregada en '.$placeholder6.' no esta dentro de las opciones');
+		if (!in_array($required_6, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_6 ('.$required_6.') entregada en '.$placeholder_6.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required7, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required7 ('.$required7.') entregada en '.$placeholder7.' no esta dentro de las opciones');
+		if (!in_array($required_7, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_7 ('.$required_7.') entregada en '.$placeholder_7.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required8, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required8 ('.$required8.') entregada en '.$placeholder8.' no esta dentro de las opciones');
+		if (!in_array($required_8, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_8 ('.$required_8.') entregada en '.$placeholder_8.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required9, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required9 ('.$required9.') entregada en '.$placeholder9.' no esta dentro de las opciones');
+		if (!in_array($required_9, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_9 ('.$required_9.') entregada en '.$placeholder_9.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required10, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required10 ('.$required10.') entregada en '.$placeholder10.' no esta dentro de las opciones');
+		if (!in_array($required_10, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_10 ('.$required_10.') entregada en '.$placeholder_10.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required11, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required11 ('.$required11.') entregada en '.$placeholder11.' no esta dentro de las opciones');
+		if (!in_array($required_11, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_11 ('.$required_11.') entregada en '.$placeholder_11.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required12, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required12 ('.$required12.') entregada en '.$placeholder12.' no esta dentro de las opciones');
+		if (!in_array($required_12, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_12 ('.$required_12.') entregada en '.$placeholder_12.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required13, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required13 ('.$required13.') entregada en '.$placeholder13.' no esta dentro de las opciones');
+		if (!in_array($required_13, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_13 ('.$required_13.') entregada en '.$placeholder_13.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required14, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required14 ('.$required14.') entregada en '.$placeholder14.' no esta dentro de las opciones');
+		if (!in_array($required_14, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_14 ('.$required_14.') entregada en '.$placeholder_14.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required15, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required15 ('.$required15.') entregada en '.$placeholder15.' no esta dentro de las opciones');
+		if (!in_array($required_15, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_15 ('.$required_15.') entregada en '.$placeholder_15.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required16, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required16 ('.$required16.') entregada en '.$placeholder16.' no esta dentro de las opciones');
+		if (!in_array($required_16, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_16 ('.$required_16.') entregada en '.$placeholder_16.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required17, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required17 ('.$required17.') entregada en '.$placeholder17.' no esta dentro de las opciones');
+		if (!in_array($required_17, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_17 ('.$required_17.') entregada en '.$placeholder_17.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required18, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required18 ('.$required18.') entregada en '.$placeholder18.' no esta dentro de las opciones');
+		if (!in_array($required_18, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_18 ('.$required_18.') entregada en '.$placeholder_18.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required19, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required19 ('.$required19.') entregada en '.$placeholder19.' no esta dentro de las opciones');
+		if (!in_array($required_19, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_19 ('.$required_19.') entregada en '.$placeholder_19.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required20, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required20 ('.$required20.') entregada en '.$placeholder20.' no esta dentro de las opciones');
+		if (!in_array($required_20, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_20 ('.$required_20.') entregada en '.$placeholder_20.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required21, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required21 ('.$required21.') entregada en '.$placeholder21.' no esta dentro de las opciones');
+		if (!in_array($required_21, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_21 ('.$required_21.') entregada en '.$placeholder_21.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required22, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required22 ('.$required22.') entregada en '.$placeholder22.' no esta dentro de las opciones');
+		if (!in_array($required_22, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_22 ('.$required_22.') entregada en '.$placeholder_22.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required23, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required23 ('.$required23.') entregada en '.$placeholder23.' no esta dentro de las opciones');
+		if (!in_array($required_23, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_23 ('.$required_23.') entregada en '.$placeholder_23.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required24, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required24 ('.$required24.') entregada en '.$placeholder24.' no esta dentro de las opciones');
+		if (!in_array($required_24, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_24 ('.$required_24.') entregada en '.$placeholder_24.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required25, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required25 ('.$required25.') entregada en '.$placeholder25.' no esta dentro de las opciones');
+		if (!in_array($required_25, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_25 ('.$required_25.') entregada en '.$placeholder_25.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required26, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required26 ('.$required26.') entregada en '.$placeholder26.' no esta dentro de las opciones');
+		if (!in_array($required_26, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_26 ('.$required_26.') entregada en '.$placeholder_26.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required27, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required27 ('.$required27.') entregada en '.$placeholder27.' no esta dentro de las opciones');
+		if (!in_array($required_27, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_27 ('.$required_27.') entregada en '.$placeholder_27.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required28, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required28 ('.$required28.') entregada en '.$placeholder28.' no esta dentro de las opciones');
+		if (!in_array($required_28, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_28 ('.$required_28.') entregada en '.$placeholder_28.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required29, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required29 ('.$required29.') entregada en '.$placeholder29.' no esta dentro de las opciones');
+		if (!in_array($required_29, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_29 ('.$required_29.') entregada en '.$placeholder_29.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required30, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required30 ('.$required30.') entregada en '.$placeholder30.' no esta dentro de las opciones');
+		if (!in_array($required_30, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_30 ('.$required_30.') entregada en '.$placeholder_30.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required31, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required31 ('.$required31.') entregada en '.$placeholder31.' no esta dentro de las opciones');
+		if (!in_array($required_31, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_31 ('.$required_31.') entregada en '.$placeholder_31.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required32, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required32 ('.$required32.') entregada en '.$placeholder32.' no esta dentro de las opciones');
+		if (!in_array($required_32, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_32 ('.$required_32.') entregada en '.$placeholder_32.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required33, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required33 ('.$required33.') entregada en '.$placeholder33.' no esta dentro de las opciones');
+		if (!in_array($required_33, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_33 ('.$required_33.') entregada en '.$placeholder_33.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required34, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required34 ('.$required34.') entregada en '.$placeholder34.' no esta dentro de las opciones');
+		if (!in_array($required_34, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_34 ('.$required_34.') entregada en '.$placeholder_34.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required35, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required35 ('.$required35.') entregada en '.$placeholder35.' no esta dentro de las opciones');
+		if (!in_array($required_35, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_35 ('.$required_35.') entregada en '.$placeholder_35.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required36, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required36 ('.$required36.') entregada en '.$placeholder36.' no esta dentro de las opciones');
+		if (!in_array($required_36, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_36 ('.$required_36.') entregada en '.$placeholder_36.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required37, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required37 ('.$required37.') entregada en '.$placeholder37.' no esta dentro de las opciones');
+		if (!in_array($required_37, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_37 ('.$required_37.') entregada en '.$placeholder_37.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required38, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required38 ('.$required38.') entregada en '.$placeholder38.' no esta dentro de las opciones');
+		if (!in_array($required_38, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_38 ('.$required_38.') entregada en '.$placeholder_38.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required39, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required39 ('.$required39.') entregada en '.$placeholder39.' no esta dentro de las opciones');
+		if (!in_array($required_39, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_39 ('.$required_39.') entregada en '.$placeholder_39.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required40, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required40 ('.$required40.') entregada en '.$placeholder40.' no esta dentro de las opciones');
+		if (!in_array($required_40, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_40 ('.$required_40.') entregada en '.$placeholder_40.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required41, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required41 ('.$required41.') entregada en '.$placeholder41.' no esta dentro de las opciones');
+		if (!in_array($required_41, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_41 ('.$required_41.') entregada en '.$placeholder_41.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required42, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required42 ('.$required42.') entregada en '.$placeholder42.' no esta dentro de las opciones');
+		if (!in_array($required_42, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_42 ('.$required_42.') entregada en '.$placeholder_42.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required43, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required43 ('.$required43.') entregada en '.$placeholder43.' no esta dentro de las opciones');
+		if (!in_array($required_43, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_43 ('.$required_43.') entregada en '.$placeholder_43.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required44, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required44 ('.$required44.') entregada en '.$placeholder44.' no esta dentro de las opciones');
+		if (!in_array($required_44, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_44 ('.$required_44.') entregada en '.$placeholder_44.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required45, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required45 ('.$required45.') entregada en '.$placeholder45.' no esta dentro de las opciones');
+		if (!in_array($required_45, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_45 ('.$required_45.') entregada en '.$placeholder_45.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required46, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required46 ('.$required46.') entregada en '.$placeholder46.' no esta dentro de las opciones');
+		if (!in_array($required_46, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_46 ('.$required_46.') entregada en '.$placeholder_46.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required47, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required47 ('.$required47.') entregada en '.$placeholder47.' no esta dentro de las opciones');
+		if (!in_array($required_47, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_47 ('.$required_47.') entregada en '.$placeholder_47.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required48, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required48 ('.$required48.') entregada en '.$placeholder48.' no esta dentro de las opciones');
+		if (!in_array($required_48, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_48 ('.$required_48.') entregada en '.$placeholder_48.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required49, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required49 ('.$required49.') entregada en '.$placeholder49.' no esta dentro de las opciones');
+		if (!in_array($required_49, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_49 ('.$required_49.') entregada en '.$placeholder_49.' no esta dentro de las opciones');
 			$errorn++;
 		}
-		if (!in_array($required50, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required50 ('.$required50.') entregada en '.$placeholder50.' no esta dentro de las opciones');
+		if (!in_array($required_50, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_50 ('.$required_50.') entregada en '.$placeholder_50.' no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero');
+		if (!validarNumero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero');
+		if (!validarNumero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero');
+		if (!validarNumero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero');
+		if (!validarNumero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero');
+		if (!validarNumero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value6)&&$value6!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value6 ('.$value6.') en <strong>'.$placeholder6.'</strong> no es un numero');
+		if (!validarNumero($value_6)&&$value_6!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value7)&&$value7!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value7 ('.$value7.') en <strong>'.$placeholder7.'</strong> no es un numero');
+		if (!validarNumero($value_7)&&$value_7!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value8)&&$value8!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value8 ('.$value8.') en <strong>'.$placeholder8.'</strong> no es un numero');
+		if (!validarNumero($value_8)&&$value_8!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value9)&&$value9!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value9 ('.$value9.') en <strong>'.$placeholder9.'</strong> no es un numero');
+		if (!validarNumero($value_9)&&$value_9!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value10)&&$value10!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value10 ('.$value10.') en <strong>'.$placeholder10.'</strong> no es un numero');
+		if (!validarNumero($value_10)&&$value_10!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value11)&&$value11!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value11 ('.$value11.') en <strong>'.$placeholder11.'</strong> no es un numero');
+		if (!validarNumero($value_11)&&$value_11!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value12)&&$value12!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value12 ('.$value12.') en <strong>'.$placeholder12.'</strong> no es un numero');
+		if (!validarNumero($value_12)&&$value_12!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value13)&&$value13!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value13 ('.$value13.') en <strong>'.$placeholder13.'</strong> no es un numero');
+		if (!validarNumero($value_13)&&$value_13!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value14)&&$value14!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value14 ('.$value14.') en <strong>'.$placeholder14.'</strong> no es un numero');
+		if (!validarNumero($value_14)&&$value_14!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value15)&&$value15!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value15 ('.$value15.') en <strong>'.$placeholder15.'</strong> no es un numero');
+		if (!validarNumero($value_15)&&$value_15!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value16)&&$value16!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value16 ('.$value16.') en <strong>'.$placeholder16.'</strong> no es un numero');
+		if (!validarNumero($value_16)&&$value_16!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value17)&&$value17!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value17 ('.$value17.') en <strong>'.$placeholder17.'</strong> no es un numero');
+		if (!validarNumero($value_17)&&$value_17!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value18)&&$value18!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value18 ('.$value18.') en <strong>'.$placeholder18.'</strong> no es un numero');
+		if (!validarNumero($value_18)&&$value_18!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value19)&&$value19!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value19 ('.$value19.') en <strong>'.$placeholder19.'</strong> no es un numero');
+		if (!validarNumero($value_19)&&$value_19!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value20)&&$value20!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value20 ('.$value20.') en <strong>'.$placeholder20.'</strong> no es un numero');
+		if (!validarNumero($value_20)&&$value_20!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value21)&&$value21!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value21 ('.$value21.') en <strong>'.$placeholder21.'</strong> no es un numero');
+		if (!validarNumero($value_21)&&$value_21!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value22)&&$value22!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value22 ('.$value22.') en <strong>'.$placeholder22.'</strong> no es un numero');
+		if (!validarNumero($value_22)&&$value_22!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value23)&&$value23!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value23 ('.$value23.') en <strong>'.$placeholder23.'</strong> no es un numero');
+		if (!validarNumero($value_23)&&$value_23!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value24)&&$value24!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value24 ('.$value24.') en <strong>'.$placeholder24.'</strong> no es un numero');
+		if (!validarNumero($value_24)&&$value_24!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value25)&&$value25!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value25 ('.$value25.') en <strong>'.$placeholder25.'</strong> no es un numero');
+		if (!validarNumero($value_25)&&$value_25!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value26)&&$value26!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value26 ('.$value26.') en <strong>'.$placeholder26.'</strong> no es un numero');
+		if (!validarNumero($value_26)&&$value_26!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_26 ('.$value_26.') en <strong>'.$placeholder_26.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value27)&&$value27!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value27 ('.$value27.') en <strong>'.$placeholder27.'</strong> no es un numero');
+		if (!validarNumero($value_27)&&$value_27!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_27 ('.$value_27.') en <strong>'.$placeholder_27.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value28)&&$value28!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value28 ('.$value28.') en <strong>'.$placeholder28.'</strong> no es un numero');
+		if (!validarNumero($value_28)&&$value_28!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_28 ('.$value_28.') en <strong>'.$placeholder_28.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value29)&&$value29!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value29 ('.$value29.') en <strong>'.$placeholder29.'</strong> no es un numero');
+		if (!validarNumero($value_29)&&$value_29!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_29 ('.$value_29.') en <strong>'.$placeholder_29.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value30)&&$value30!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value30 ('.$value30.') en <strong>'.$placeholder30.'</strong> no es un numero');
+		if (!validarNumero($value_30)&&$value_30!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_30 ('.$value_30.') en <strong>'.$placeholder_30.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value31)&&$value31!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value31 ('.$value31.') en <strong>'.$placeholder31.'</strong> no es un numero');
+		if (!validarNumero($value_31)&&$value_31!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_31 ('.$value_31.') en <strong>'.$placeholder_31.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value32)&&$value32!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value32 ('.$value32.') en <strong>'.$placeholder32.'</strong> no es un numero');
+		if (!validarNumero($value_32)&&$value_32!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_32 ('.$value_32.') en <strong>'.$placeholder_32.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value33)&&$value33!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value33 ('.$value33.') en <strong>'.$placeholder33.'</strong> no es un numero');
+		if (!validarNumero($value_33)&&$value_33!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_33 ('.$value_33.') en <strong>'.$placeholder_33.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value34)&&$value34!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value34 ('.$value34.') en <strong>'.$placeholder34.'</strong> no es un numero');
+		if (!validarNumero($value_34)&&$value_34!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_34 ('.$value_34.') en <strong>'.$placeholder_34.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value35)&&$value35!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value35 ('.$value35.') en <strong>'.$placeholder35.'</strong> no es un numero');
+		if (!validarNumero($value_35)&&$value_35!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_35 ('.$value_35.') en <strong>'.$placeholder_35.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value36)&&$value36!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value36 ('.$value36.') en <strong>'.$placeholder36.'</strong> no es un numero');
+		if (!validarNumero($value_36)&&$value_36!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_36 ('.$value_36.') en <strong>'.$placeholder_36.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value37)&&$value37!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value37 ('.$value37.') en <strong>'.$placeholder37.'</strong> no es un numero');
+		if (!validarNumero($value_37)&&$value_37!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_37 ('.$value_37.') en <strong>'.$placeholder_37.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value38)&&$value38!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value38 ('.$value38.') en <strong>'.$placeholder38.'</strong> no es un numero');
+		if (!validarNumero($value_38)&&$value_38!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_38 ('.$value_38.') en <strong>'.$placeholder_38.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value39)&&$value39!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value39 ('.$value39.') en <strong>'.$placeholder39.'</strong> no es un numero');
+		if (!validarNumero($value_39)&&$value_39!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_39 ('.$value_39.') en <strong>'.$placeholder_39.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value40)&&$value40!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value40 ('.$value40.') en <strong>'.$placeholder40.'</strong> no es un numero');
+		if (!validarNumero($value_40)&&$value_40!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_40 ('.$value_40.') en <strong>'.$placeholder_40.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value41)&&$value41!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value41 ('.$value41.') en <strong>'.$placeholder41.'</strong> no es un numero');
+		if (!validarNumero($value_41)&&$value_41!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_41 ('.$value_41.') en <strong>'.$placeholder_41.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value42)&&$value42!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value42 ('.$value42.') en <strong>'.$placeholder42.'</strong> no es un numero');
+		if (!validarNumero($value_42)&&$value_42!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_42 ('.$value_42.') en <strong>'.$placeholder_42.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value43)&&$value43!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value43 ('.$value43.') en <strong>'.$placeholder43.'</strong> no es un numero');
+		if (!validarNumero($value_43)&&$value_43!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_43 ('.$value_43.') en <strong>'.$placeholder_43.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value44)&&$value44!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value44 ('.$value44.') en <strong>'.$placeholder44.'</strong> no es un numero');
+		if (!validarNumero($value_44)&&$value_44!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_44 ('.$value_44.') en <strong>'.$placeholder_44.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value45)&&$value45!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value45 ('.$value45.') en <strong>'.$placeholder45.'</strong> no es un numero');
+		if (!validarNumero($value_45)&&$value_45!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_45 ('.$value_45.') en <strong>'.$placeholder_45.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value46)&&$value46!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value46 ('.$value46.') en <strong>'.$placeholder46.'</strong> no es un numero');
+		if (!validarNumero($value_46)&&$value_46!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_46 ('.$value_46.') en <strong>'.$placeholder_46.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value47)&&$value47!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value47 ('.$value47.') en <strong>'.$placeholder47.'</strong> no es un numero');
+		if (!validarNumero($value_47)&&$value_47!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_47 ('.$value_47.') en <strong>'.$placeholder_47.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value48)&&$value48!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value48 ('.$value48.') en <strong>'.$placeholder48.'</strong> no es un numero');
+		if (!validarNumero($value_48)&&$value_48!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_48 ('.$value_48.') en <strong>'.$placeholder_48.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value49)&&$value49!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value49 ('.$value49.') en <strong>'.$placeholder49.'</strong> no es un numero');
+		if (!validarNumero($value_49)&&$value_49!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_49 ('.$value_49.') en <strong>'.$placeholder_49.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value50)&&$value50!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value50 ('.$value50.') en <strong>'.$placeholder50.'</strong> no es un numero');
+		if (!validarNumero($value_50)&&$value_50!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_50 ('.$value_50.') en <strong>'.$placeholder_50.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value1)&&$value1!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero entero');
+		if (!validaEntero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value2)&&$value2!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero entero');
+		if (!validaEntero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value3)&&$value3!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value3 ('.$value3.') en <strong>'.$placeholder3.'</strong> no es un numero entero');
+		if (!validaEntero($value_3)&&$value_3!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value4)&&$value4!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value4 ('.$value4.') en <strong>'.$placeholder4.'</strong> no es un numero entero');
+		if (!validaEntero($value_4)&&$value_4!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value5)&&$value5!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value5 ('.$value5.') en <strong>'.$placeholder5.'</strong> no es un numero entero');
+		if (!validaEntero($value_5)&&$value_5!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value6)&&$value6!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value6 ('.$value6.') en <strong>'.$placeholder6.'</strong> no es un numero entero');
+		if (!validaEntero($value_6)&&$value_6!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value7)&&$value7!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value7 ('.$value7.') en <strong>'.$placeholder7.'</strong> no es un numero entero');
+		if (!validaEntero($value_7)&&$value_7!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value8)&&$value8!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value8 ('.$value8.') en <strong>'.$placeholder8.'</strong> no es un numero entero');
+		if (!validaEntero($value_8)&&$value_8!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value9)&&$value9!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value9 ('.$value9.') en <strong>'.$placeholder9.'</strong> no es un numero entero');
+		if (!validaEntero($value_9)&&$value_9!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value10)&&$value10!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value10 ('.$value10.') en <strong>'.$placeholder10.'</strong> no es un numero entero');
+		if (!validaEntero($value_10)&&$value_10!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value11)&&$value11!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value11 ('.$value11.') en <strong>'.$placeholder11.'</strong> no es un numero entero');
+		if (!validaEntero($value_11)&&$value_11!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value12)&&$value12!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value12 ('.$value12.') en <strong>'.$placeholder12.'</strong> no es un numero entero');
+		if (!validaEntero($value_12)&&$value_12!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value13)&&$value13!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value13 ('.$value13.') en <strong>'.$placeholder13.'</strong> no es un numero entero');
+		if (!validaEntero($value_13)&&$value_13!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value14)&&$value14!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value14 ('.$value14.') en <strong>'.$placeholder14.'</strong> no es un numero entero');
+		if (!validaEntero($value_14)&&$value_14!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value15)&&$value15!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value15 ('.$value15.') en <strong>'.$placeholder15.'</strong> no es un numero entero');
+		if (!validaEntero($value_15)&&$value_15!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value16)&&$value16!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value16 ('.$value16.') en <strong>'.$placeholder16.'</strong> no es un numero entero');
+		if (!validaEntero($value_16)&&$value_16!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value17)&&$value17!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value17 ('.$value17.') en <strong>'.$placeholder17.'</strong> no es un numero entero');
+		if (!validaEntero($value_17)&&$value_17!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value18)&&$value18!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value18 ('.$value18.') en <strong>'.$placeholder18.'</strong> no es un numero entero');
+		if (!validaEntero($value_18)&&$value_18!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value19)&&$value19!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value19 ('.$value19.') en <strong>'.$placeholder19.'</strong> no es un numero entero');
+		if (!validaEntero($value_19)&&$value_19!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value20)&&$value20!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value20 ('.$value20.') en <strong>'.$placeholder20.'</strong> no es un numero entero');
+		if (!validaEntero($value_20)&&$value_20!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value21)&&$value21!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value21 ('.$value21.') en <strong>'.$placeholder21.'</strong> no es un numero entero');
+		if (!validaEntero($value_21)&&$value_21!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value22)&&$value22!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value22 ('.$value22.') en <strong>'.$placeholder22.'</strong> no es un numero entero');
+		if (!validaEntero($value_22)&&$value_22!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value23)&&$value23!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value23 ('.$value23.') en <strong>'.$placeholder23.'</strong> no es un numero entero');
+		if (!validaEntero($value_23)&&$value_23!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value24)&&$value24!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value24 ('.$value24.') en <strong>'.$placeholder24.'</strong> no es un numero entero');
+		if (!validaEntero($value_24)&&$value_24!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value25)&&$value25!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value25 ('.$value25.') en <strong>'.$placeholder25.'</strong> no es un numero entero');
+		if (!validaEntero($value_25)&&$value_25!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value26)&&$value26!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value26 ('.$value26.') en <strong>'.$placeholder26.'</strong> no es un numero entero');
+		if (!validaEntero($value_26)&&$value_26!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_26 ('.$value_26.') en <strong>'.$placeholder_26.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value27)&&$value27!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value27 ('.$value27.') en <strong>'.$placeholder27.'</strong> no es un numero entero');
+		if (!validaEntero($value_27)&&$value_27!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_27 ('.$value_27.') en <strong>'.$placeholder_27.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value28)&&$value28!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value28 ('.$value28.') en <strong>'.$placeholder28.'</strong> no es un numero entero');
+		if (!validaEntero($value_28)&&$value_28!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_28 ('.$value_28.') en <strong>'.$placeholder_28.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value29)&&$value29!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value29 ('.$value29.') en <strong>'.$placeholder29.'</strong> no es un numero entero');
+		if (!validaEntero($value_29)&&$value_29!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_29 ('.$value_29.') en <strong>'.$placeholder_29.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value30)&&$value30!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value30 ('.$value30.') en <strong>'.$placeholder30.'</strong> no es un numero entero');
+		if (!validaEntero($value_30)&&$value_30!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_30 ('.$value_30.') en <strong>'.$placeholder_30.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value31)&&$value31!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value31 ('.$value31.') en <strong>'.$placeholder31.'</strong> no es un numero entero');
+		if (!validaEntero($value_31)&&$value_31!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_31 ('.$value_31.') en <strong>'.$placeholder_31.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value32)&&$value32!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value32 ('.$value32.') en <strong>'.$placeholder32.'</strong> no es un numero entero');
+		if (!validaEntero($value_32)&&$value_32!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_32 ('.$value_32.') en <strong>'.$placeholder_32.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value33)&&$value33!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value33 ('.$value33.') en <strong>'.$placeholder33.'</strong> no es un numero entero');
+		if (!validaEntero($value_33)&&$value_33!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_33 ('.$value_33.') en <strong>'.$placeholder_33.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value34)&&$value34!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value34 ('.$value34.') en <strong>'.$placeholder34.'</strong> no es un numero entero');
+		if (!validaEntero($value_34)&&$value_34!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_34 ('.$value_34.') en <strong>'.$placeholder_34.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value35)&&$value35!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value35 ('.$value35.') en <strong>'.$placeholder35.'</strong> no es un numero entero');
+		if (!validaEntero($value_35)&&$value_35!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_35 ('.$value_35.') en <strong>'.$placeholder_35.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value36)&&$value36!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value36 ('.$value36.') en <strong>'.$placeholder36.'</strong> no es un numero entero');
+		if (!validaEntero($value_36)&&$value_36!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_36 ('.$value_36.') en <strong>'.$placeholder_36.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value37)&&$value37!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value37 ('.$value37.') en <strong>'.$placeholder37.'</strong> no es un numero entero');
+		if (!validaEntero($value_37)&&$value_37!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_37 ('.$value_37.') en <strong>'.$placeholder_37.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value38)&&$value38!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value38 ('.$value38.') en <strong>'.$placeholder38.'</strong> no es un numero entero');
+		if (!validaEntero($value_38)&&$value_38!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_38 ('.$value_38.') en <strong>'.$placeholder_38.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value39)&&$value39!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value39 ('.$value39.') en <strong>'.$placeholder39.'</strong> no es un numero entero');
+		if (!validaEntero($value_39)&&$value_39!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_39 ('.$value_39.') en <strong>'.$placeholder_39.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value40)&&$value40!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value40 ('.$value40.') en <strong>'.$placeholder40.'</strong> no es un numero entero');
+		if (!validaEntero($value_40)&&$value_40!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_40 ('.$value_40.') en <strong>'.$placeholder_40.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value41)&&$value41!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value41 ('.$value41.') en <strong>'.$placeholder41.'</strong> no es un numero entero');
+		if (!validaEntero($value_41)&&$value_41!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_41 ('.$value_41.') en <strong>'.$placeholder_41.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value42)&&$value42!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value42 ('.$value42.') en <strong>'.$placeholder42.'</strong> no es un numero entero');
+		if (!validaEntero($value_42)&&$value_42!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_42 ('.$value_42.') en <strong>'.$placeholder_42.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value43)&&$value43!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value43 ('.$value43.') en <strong>'.$placeholder43.'</strong> no es un numero entero');
+		if (!validaEntero($value_43)&&$value_43!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_43 ('.$value_43.') en <strong>'.$placeholder_43.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value44)&&$value44!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value44 ('.$value44.') en <strong>'.$placeholder44.'</strong> no es un numero entero');
+		if (!validaEntero($value_44)&&$value_44!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_44 ('.$value_44.') en <strong>'.$placeholder_44.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value45)&&$value45!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value45 ('.$value45.') en <strong>'.$placeholder45.'</strong> no es un numero entero');
+		if (!validaEntero($value_45)&&$value_45!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_45 ('.$value_45.') en <strong>'.$placeholder_45.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value46)&&$value46!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value46 ('.$value46.') en <strong>'.$placeholder46.'</strong> no es un numero entero');
+		if (!validaEntero($value_46)&&$value_46!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_46 ('.$value_46.') en <strong>'.$placeholder_46.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value47)&&$value47!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value47 ('.$value47.') en <strong>'.$placeholder47.'</strong> no es un numero entero');
+		if (!validaEntero($value_47)&&$value_47!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_47 ('.$value_47.') en <strong>'.$placeholder_47.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value48)&&$value48!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value48 ('.$value48.') en <strong>'.$placeholder48.'</strong> no es un numero entero');
+		if (!validaEntero($value_48)&&$value_48!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_48 ('.$value_48.') en <strong>'.$placeholder_48.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value49)&&$value49!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value49 ('.$value49.') en <strong>'.$placeholder49.'</strong> no es un numero entero');
+		if (!validaEntero($value_49)&&$value_49!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_49 ('.$value_49.') en <strong>'.$placeholder_49.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value50)&&$value50!=''){ 
-			alert_post_data(4,1,1, 'El valor ingresado en $value50 ('.$value50.') en <strong>'.$placeholder50.'</strong> no es un numero entero');
+		if (!validaEntero($value_50)&&$value_50!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_50 ('.$value_50.') en <strong>'.$placeholder_50.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Variables
+			
+			/******************************************/
+			//Arreglos
+			$requerido     = array();
+			$datos         = array();
+			$data_required = array();
+			$filtro        = array();
+			
+			//Variables Vacias
 			$input = '';
-			
-			//DATOS REQUERIDOS
-			$required = array();
-			if($required1==1){$required[1]='';      }elseif($required1==2){$required[1]='required';$_SESSION['form_require'].=','.$name1;}
-			if($required2==1){$required[2]='';      }elseif($required2==2){$required[2]='required';$_SESSION['form_require'].=','.$name2;}
-			if($required3==1){$required[3]='';      }elseif($required3==2){$required[3]='required';$_SESSION['form_require'].=','.$name3;}
-			if($required4==1){$required[4]='';      }elseif($required4==2){$required[4]='required';$_SESSION['form_require'].=','.$name4;}
-			if($required5==1){$required[5]='';      }elseif($required5==2){$required[5]='required';$_SESSION['form_require'].=','.$name5;}
-			if($required6==1){$required[6]='';      }elseif($required6==2){$required[6]='required';$_SESSION['form_require'].=','.$name6;}
-			if($required7==1){$required[7]='';      }elseif($required7==2){$required[7]='required';$_SESSION['form_require'].=','.$name7;}
-			if($required8==1){$required[8]='';      }elseif($required8==2){$required[8]='required';$_SESSION['form_require'].=','.$name8;}
-			if($required9==1){$required[9]='';      }elseif($required9==2){$required[9]='required';$_SESSION['form_require'].=','.$name9;}
-			if($required10==1){$required[10]='';    }elseif($required10==2){$required[10]='required';$_SESSION['form_require'].=','.$name10;}
-			if($required11==1){$required[11]='';    }elseif($required11==2){$required[11]='required';$_SESSION['form_require'].=','.$name11;}
-			if($required12==1){$required[12]='';    }elseif($required12==2){$required[12]='required';$_SESSION['form_require'].=','.$name12;}
-			if($required13==1){$required[13]='';    }elseif($required13==2){$required[13]='required';$_SESSION['form_require'].=','.$name13;}
-			if($required14==1){$required[14]='';    }elseif($required14==2){$required[14]='required';$_SESSION['form_require'].=','.$name14;}
-			if($required15==1){$required[15]='';    }elseif($required15==2){$required[15]='required';$_SESSION['form_require'].=','.$name15;}
-			if($required16==1){$required[16]='';    }elseif($required16==2){$required[16]='required';$_SESSION['form_require'].=','.$name16;}
-			if($required17==1){$required[17]='';    }elseif($required17==2){$required[17]='required';$_SESSION['form_require'].=','.$name17;}
-			if($required18==1){$required[18]='';    }elseif($required18==2){$required[18]='required';$_SESSION['form_require'].=','.$name18;}
-			if($required19==1){$required[19]='';    }elseif($required19==2){$required[19]='required';$_SESSION['form_require'].=','.$name19;}
-			if($required20==1){$required[20]='';    }elseif($required20==2){$required[20]='required';$_SESSION['form_require'].=','.$name20;}
-			if($required21==1){$required[21]='';    }elseif($required21==2){$required[21]='required';$_SESSION['form_require'].=','.$name21;}
-			if($required22==1){$required[22]='';    }elseif($required22==2){$required[22]='required';$_SESSION['form_require'].=','.$name22;}
-			if($required23==1){$required[23]='';    }elseif($required23==2){$required[23]='required';$_SESSION['form_require'].=','.$name23;}
-			if($required24==1){$required[24]='';    }elseif($required24==2){$required[24]='required';$_SESSION['form_require'].=','.$name24;}
-			if($required25==1){$required[25]='';    }elseif($required25==2){$required[25]='required';$_SESSION['form_require'].=','.$name25;}
-			if($required26==1){$required[26]='';    }elseif($required26==2){$required[26]='required';$_SESSION['form_require'].=','.$name26;}
-			if($required27==1){$required[27]='';    }elseif($required27==2){$required[27]='required';$_SESSION['form_require'].=','.$name27;}
-			if($required28==1){$required[28]='';    }elseif($required28==2){$required[28]='required';$_SESSION['form_require'].=','.$name28;}
-			if($required29==1){$required[29]='';    }elseif($required29==2){$required[29]='required';$_SESSION['form_require'].=','.$name29;}
-			if($required30==1){$required[30]='';    }elseif($required30==2){$required[30]='required';$_SESSION['form_require'].=','.$name30;}
-			if($required31==1){$required[31]='';    }elseif($required31==2){$required[31]='required';$_SESSION['form_require'].=','.$name31;}
-			if($required32==1){$required[32]='';    }elseif($required32==2){$required[32]='required';$_SESSION['form_require'].=','.$name32;}
-			if($required33==1){$required[33]='';    }elseif($required33==2){$required[33]='required';$_SESSION['form_require'].=','.$name33;}
-			if($required34==1){$required[34]='';    }elseif($required34==2){$required[34]='required';$_SESSION['form_require'].=','.$name34;}
-			if($required35==1){$required[35]='';    }elseif($required35==2){$required[35]='required';$_SESSION['form_require'].=','.$name35;}
-			if($required36==1){$required[36]='';    }elseif($required36==2){$required[36]='required';$_SESSION['form_require'].=','.$name36;}
-			if($required37==1){$required[37]='';    }elseif($required37==2){$required[37]='required';$_SESSION['form_require'].=','.$name37;}
-			if($required38==1){$required[38]='';    }elseif($required38==2){$required[38]='required';$_SESSION['form_require'].=','.$name38;}
-			if($required39==1){$required[39]='';    }elseif($required39==2){$required[39]='required';$_SESSION['form_require'].=','.$name39;}
-			if($required40==1){$required[40]='';    }elseif($required40==2){$required[40]='required';$_SESSION['form_require'].=','.$name40;}
-			if($required41==1){$required[41]='';    }elseif($required41==2){$required[41]='required';$_SESSION['form_require'].=','.$name41;}
-			if($required42==1){$required[42]='';    }elseif($required42==2){$required[42]='required';$_SESSION['form_require'].=','.$name42;}
-			if($required43==1){$required[43]='';    }elseif($required43==2){$required[43]='required';$_SESSION['form_require'].=','.$name43;}
-			if($required44==1){$required[44]='';    }elseif($required44==2){$required[44]='required';$_SESSION['form_require'].=','.$name44;}
-			if($required45==1){$required[45]='';    }elseif($required45==2){$required[45]='required';$_SESSION['form_require'].=','.$name45;}
-			if($required46==1){$required[46]='';    }elseif($required46==2){$required[46]='required';$_SESSION['form_require'].=','.$name46;}
-			if($required47==1){$required[47]='';    }elseif($required47==2){$required[47]='required';$_SESSION['form_require'].=','.$name47;}
-			if($required48==1){$required[48]='';    }elseif($required48==2){$required[48]='required';$_SESSION['form_require'].=','.$name48;}
-			if($required49==1){$required[49]='';    }elseif($required49==2){$required[49]='required';$_SESSION['form_require'].=','.$name49;}
-			if($required50==1){$required[50]='';    }elseif($required50==2){$required[50]='required';$_SESSION['form_require'].=','.$name50;}
-			
-			//FILTROS
-			$filtro = array();
-			$filtro[1] = '';  if ($filter1!='0') {$filtro[1] .=" AND ".$filter1;	}
-			$filtro[2] = '';  if ($filter2!='0') {$filtro[2] .=" AND ".$filter2;	}
-			$filtro[3] = '';  if ($filter3!='0') {$filtro[3] .=" AND ".$filter3;	}
-			$filtro[4] = '';  if ($filter4!='0') {$filtro[4] .=" AND ".$filter4;	}
-			$filtro[5] = '';  if ($filter5!='0') {$filtro[5] .=" AND ".$filter5;	}
-			$filtro[6] = '';  if ($filter6!='0') {$filtro[6] .=" AND ".$filter6;	}
-			$filtro[7] = '';  if ($filter7!='0') {$filtro[7] .=" AND ".$filter7;	}
-			$filtro[8] = '';  if ($filter8!='0') {$filtro[8] .=" AND ".$filter8;	}
-			$filtro[9] = '';  if ($filter9!='0') {$filtro[9] .=" AND ".$filter9;	}
-			$filtro[10] = ''; if ($filter10!='0'){$filtro[10] .=" AND ".$filter10;	}
-			$filtro[11] = ''; if ($filter11!='0'){$filtro[11] .=" AND ".$filter11;	}
-			$filtro[12] = ''; if ($filter12!='0'){$filtro[12] .=" AND ".$filter12;	}
-			$filtro[13] = ''; if ($filter13!='0'){$filtro[13] .=" AND ".$filter13;	}
-			$filtro[14] = ''; if ($filter14!='0'){$filtro[14] .=" AND ".$filter14;	}
-			$filtro[15] = ''; if ($filter15!='0'){$filtro[15] .=" AND ".$filter15;	}
-			$filtro[16] = ''; if ($filter16!='0'){$filtro[16] .=" AND ".$filter16;	}
-			$filtro[17] = ''; if ($filter17!='0'){$filtro[17] .=" AND ".$filter17;	}
-			$filtro[18] = ''; if ($filter18!='0'){$filtro[18] .=" AND ".$filter18;	}
-			$filtro[19] = ''; if ($filter19!='0'){$filtro[19] .=" AND ".$filter19;	}
-			$filtro[20] = ''; if ($filter20!='0'){$filtro[20] .=" AND ".$filter20;	}
-			$filtro[21] = ''; if ($filter21!='0'){$filtro[21] .=" AND ".$filter21;	}
-			$filtro[22] = ''; if ($filter22!='0'){$filtro[22] .=" AND ".$filter22;	}
-			$filtro[23] = ''; if ($filter23!='0'){$filtro[23] .=" AND ".$filter23;	}
-			$filtro[24] = ''; if ($filter24!='0'){$filtro[24] .=" AND ".$filter24;	}
-			$filtro[25] = ''; if ($filter25!='0'){$filtro[25] .=" AND ".$filter25;	}
-			$filtro[26] = ''; if ($filter26!='0'){$filtro[26] .=" AND ".$filter26;	}
-			$filtro[27] = ''; if ($filter27!='0'){$filtro[27] .=" AND ".$filter27;	}
-			$filtro[28] = ''; if ($filter28!='0'){$filtro[28] .=" AND ".$filter28;	}
-			$filtro[29] = ''; if ($filter29!='0'){$filtro[29] .=" AND ".$filter29;	}
-			$filtro[30] = ''; if ($filter30!='0'){$filtro[30] .=" AND ".$filter30;	}
-			$filtro[31] = ''; if ($filter31!='0'){$filtro[31] .=" AND ".$filter31;	}
-			$filtro[32] = ''; if ($filter32!='0'){$filtro[32] .=" AND ".$filter32;	}
-			$filtro[33] = ''; if ($filter33!='0'){$filtro[33] .=" AND ".$filter33;	}
-			$filtro[34] = ''; if ($filter34!='0'){$filtro[34] .=" AND ".$filter34;	}
-			$filtro[35] = ''; if ($filter35!='0'){$filtro[35] .=" AND ".$filter35;	}
-			$filtro[36] = ''; if ($filter36!='0'){$filtro[36] .=" AND ".$filter36;	}
-			$filtro[37] = ''; if ($filter37!='0'){$filtro[37] .=" AND ".$filter37;	}
-			$filtro[38] = ''; if ($filter38!='0'){$filtro[38] .=" AND ".$filter38;	}
-			$filtro[39] = ''; if ($filter39!='0'){$filtro[39] .=" AND ".$filter39;	}
-			$filtro[40] = ''; if ($filter40!='0'){$filtro[40] .=" AND ".$filter40;	}
-			$filtro[41] = ''; if ($filter41!='0'){$filtro[41] .=" AND ".$filter41;	}
-			$filtro[42] = ''; if ($filter42!='0'){$filtro[42] .=" AND ".$filter42;	}
-			$filtro[43] = ''; if ($filter43!='0'){$filtro[43] .=" AND ".$filter43;	}
-			$filtro[44] = ''; if ($filter44!='0'){$filtro[44] .=" AND ".$filter44;	}
-			$filtro[45] = ''; if ($filter45!='0'){$filtro[45] .=" AND ".$filter45;	}
-			$filtro[46] = ''; if ($filter46!='0'){$filtro[46] .=" AND ".$filter46;	}
-			$filtro[47] = ''; if ($filter47!='0'){$filtro[47] .=" AND ".$filter47;	}
-			$filtro[48] = ''; if ($filter48!='0'){$filtro[48] .=" AND ".$filter48;	}
-			$filtro[49] = ''; if ($filter49!='0'){$filtro[49] .=" AND ".$filter49;	}
-			$filtro[50] = ''; if ($filter50!='0'){$filtro[50] .=" AND ".$filter50;	}
-			
-			//COMANDOS EXTRAS
-			$excom = array();
-			$excom[1] = '';  if ($extracomand1!='0') {$excom[1] .=" ".$extracomand1;	} else{$excom[1] .=" ORDER BY Nombre ASC ";}
-			$excom[2] = '';  if ($extracomand2!='0') {$excom[2] .=" ".$extracomand2;	} else{$excom[2] .=" ORDER BY Nombre ASC ";}
-			$excom[3] = '';  if ($extracomand3!='0') {$excom[3] .=" ".$extracomand3;	} else{$excom[3] .=" ORDER BY Nombre ASC ";}
-			$excom[4] = '';  if ($extracomand4!='0') {$excom[4] .=" ".$extracomand4;	} else{$excom[4] .=" ORDER BY Nombre ASC ";} 
-			$excom[5] = '';  if ($extracomand5!='0') {$excom[5] .=" ".$extracomand5;	} else{$excom[5] .=" ORDER BY Nombre ASC ";}
-			$excom[6] = '';  if ($extracomand6!='0') {$excom[6] .=" ".$extracomand6;	} else{$excom[6] .=" ORDER BY Nombre ASC ";}
-			$excom[7] = '';  if ($extracomand7!='0') {$excom[7] .=" ".$extracomand7;	} else{$excom[7] .=" ORDER BY Nombre ASC ";}
-			$excom[8] = '';  if ($extracomand8!='0') {$excom[8] .=" ".$extracomand8;	} else{$excom[8] .=" ORDER BY Nombre ASC ";}
-			$excom[9] = '';  if ($extracomand9!='0') {$excom[9] .=" ".$extracomand9;	} else{$excom[9] .=" ORDER BY Nombre ASC ";}
-			$excom[10] = ''; if ($extracomand10!='0'){$excom[10] .=" ".$extracomand10;	} else{$excom[10] .=" ORDER BY Nombre ASC ";}
-			$excom[11] = ''; if ($extracomand11!='0'){$excom[11] .=" ".$extracomand11;	} else{$excom[11] .=" ORDER BY Nombre ASC ";}
-			$excom[12] = ''; if ($extracomand12!='0'){$excom[12] .=" ".$extracomand12;	} else{$excom[12] .=" ORDER BY Nombre ASC ";}
-			$excom[13] = ''; if ($extracomand13!='0'){$excom[13] .=" ".$extracomand13;	} else{$excom[13] .=" ORDER BY Nombre ASC ";}
-			$excom[14] = ''; if ($extracomand14!='0'){$excom[14] .=" ".$extracomand14;	} else{$excom[14] .=" ORDER BY Nombre ASC ";}
-			$excom[15] = ''; if ($extracomand15!='0'){$excom[15] .=" ".$extracomand15;	} else{$excom[15] .=" ORDER BY Nombre ASC ";}
-			$excom[16] = ''; if ($extracomand16!='0'){$excom[16] .=" ".$extracomand16;	} else{$excom[16] .=" ORDER BY Nombre ASC ";}
-			$excom[17] = ''; if ($extracomand17!='0'){$excom[17] .=" ".$extracomand17;	} else{$excom[17] .=" ORDER BY Nombre ASC ";}
-			$excom[18] = ''; if ($extracomand18!='0'){$excom[18] .=" ".$extracomand18;	} else{$excom[18] .=" ORDER BY Nombre ASC ";}
-			$excom[19] = ''; if ($extracomand19!='0'){$excom[19] .=" ".$extracomand19;	} else{$excom[19] .=" ORDER BY Nombre ASC ";}
-			$excom[20] = ''; if ($extracomand20!='0'){$excom[20] .=" ".$extracomand20;	} else{$excom[20] .=" ORDER BY Nombre ASC ";}
-			$excom[21] = ''; if ($extracomand21!='0'){$excom[21] .=" ".$extracomand21;	} else{$excom[21] .=" ORDER BY Nombre ASC ";}
-			$excom[22] = ''; if ($extracomand22!='0'){$excom[22] .=" ".$extracomand22;	} else{$excom[22] .=" ORDER BY Nombre ASC ";}
-			$excom[23] = ''; if ($extracomand23!='0'){$excom[23] .=" ".$extracomand23;	} else{$excom[23] .=" ORDER BY Nombre ASC ";}
-			$excom[24] = ''; if ($extracomand24!='0'){$excom[24] .=" ".$extracomand24;	} else{$excom[24] .=" ORDER BY Nombre ASC ";}
-			$excom[25] = ''; if ($extracomand25!='0'){$excom[25] .=" ".$extracomand25;	} else{$excom[25] .=" ORDER BY Nombre ASC ";}
-			$excom[26] = ''; if ($extracomand26!='0'){$excom[26] .=" ".$extracomand26;	} else{$excom[26] .=" ORDER BY Nombre ASC ";}
-			$excom[27] = ''; if ($extracomand27!='0'){$excom[27] .=" ".$extracomand27;	} else{$excom[27] .=" ORDER BY Nombre ASC ";}
-			$excom[28] = ''; if ($extracomand28!='0'){$excom[28] .=" ".$extracomand28;	} else{$excom[28] .=" ORDER BY Nombre ASC ";}
-			$excom[29] = ''; if ($extracomand29!='0'){$excom[29] .=" ".$extracomand29;	} else{$excom[29] .=" ORDER BY Nombre ASC ";}
-			$excom[30] = ''; if ($extracomand30!='0'){$excom[30] .=" ".$extracomand30;	} else{$excom[30] .=" ORDER BY Nombre ASC ";}
-			$excom[31] = ''; if ($extracomand31!='0'){$excom[31] .=" ".$extracomand31;	} else{$excom[31] .=" ORDER BY Nombre ASC ";}
-			$excom[32] = ''; if ($extracomand32!='0'){$excom[32] .=" ".$extracomand32;	} else{$excom[32] .=" ORDER BY Nombre ASC ";}
-			$excom[33] = ''; if ($extracomand33!='0'){$excom[33] .=" ".$extracomand33;	} else{$excom[33] .=" ORDER BY Nombre ASC ";}
-			$excom[34] = ''; if ($extracomand34!='0'){$excom[34] .=" ".$extracomand34;	} else{$excom[34] .=" ORDER BY Nombre ASC ";}
-			$excom[35] = ''; if ($extracomand35!='0'){$excom[35] .=" ".$extracomand35;	} else{$excom[35] .=" ORDER BY Nombre ASC ";}
-			$excom[36] = ''; if ($extracomand36!='0'){$excom[36] .=" ".$extracomand36;	} else{$excom[36] .=" ORDER BY Nombre ASC ";}
-			$excom[37] = ''; if ($extracomand37!='0'){$excom[37] .=" ".$extracomand37;	} else{$excom[37] .=" ORDER BY Nombre ASC ";}
-			$excom[38] = ''; if ($extracomand38!='0'){$excom[38] .=" ".$extracomand38;	} else{$excom[38] .=" ORDER BY Nombre ASC ";}
-			$excom[39] = ''; if ($extracomand39!='0'){$excom[39] .=" ".$extracomand39;	} else{$excom[39] .=" ORDER BY Nombre ASC ";}
-			$excom[40] = ''; if ($extracomand40!='0'){$excom[40] .=" ".$extracomand40;	} else{$excom[40] .=" ORDER BY Nombre ASC ";} 
-			$excom[41] = ''; if ($extracomand41!='0'){$excom[41] .=" ".$extracomand41;	} else{$excom[41] .=" ORDER BY Nombre ASC ";} 
-			$excom[42] = ''; if ($extracomand42!='0'){$excom[42] .=" ".$extracomand42;	} else{$excom[42] .=" ORDER BY Nombre ASC ";} 
-			$excom[43] = ''; if ($extracomand43!='0'){$excom[43] .=" ".$extracomand43;	} else{$excom[43] .=" ORDER BY Nombre ASC ";} 
-			$excom[44] = ''; if ($extracomand44!='0'){$excom[44] .=" ".$extracomand44;	} else{$excom[44] .=" ORDER BY Nombre ASC ";} 
-			$excom[45] = ''; if ($extracomand45!='0'){$excom[45] .=" ".$extracomand45;	} else{$excom[45] .=" ORDER BY Nombre ASC ";} 
-			$excom[46] = ''; if ($extracomand46!='0'){$excom[46] .=" ".$extracomand46;	} else{$excom[46] .=" ORDER BY Nombre ASC ";} 
-			$excom[47] = ''; if ($extracomand47!='0'){$excom[47] .=" ".$extracomand47;	} else{$excom[47] .=" ORDER BY Nombre ASC ";} 
-			$excom[48] = ''; if ($extracomand48!='0'){$excom[48] .=" ".$extracomand48;	} else{$excom[48] .=" ORDER BY Nombre ASC ";} 
-			$excom[49] = ''; if ($extracomand49!='0'){$excom[49] .=" ".$extracomand49;	} else{$excom[49] .=" ORDER BY Nombre ASC ";} 
-			$excom[50] = ''; if ($extracomand50!='0'){$excom[50] .=" ".$extracomand50;	} else{$excom[50] .=" ORDER BY Nombre ASC ";}
-			
-			//visualizar listado
-			$display = array();
-			if ($value2!=0&&$value2!=''){$display[2]='';}else{$display[2]='style="display:none;"';}
-			if ($value3!=0&&$value3!=''){$display[3]='';}else{$display[3]='style="display:none;"';}
-			if ($value4!=0&&$value4!=''){$display[4]='';}else{$display[4]='style="display:none;"';}
-			if ($value5!=0&&$value5!=''){$display[5]='';}else{$display[5]='style="display:none;"';}
-			if ($value6!=0&&$value6!=''){$display[6]='';}else{$display[6]='style="display:none;"';}
-			if ($value7!=0&&$value7!=''){$display[7]='';}else{$display[7]='style="display:none;"';}
-			if ($value8!=0&&$value8!=''){$display[8]='';}else{$display[8]='style="display:none;"';}
-			if ($value9!=0&&$value9!=''){$display[9]='';}else{$display[9]='style="display:none;"';}
-			if ($value10!=0&&$value10!=''){$display[10]='';}else{$display[10]='style="display:none;"';}
-			if ($value11!=0&&$value11!=''){$display[11]='';}else{$display[11]='style="display:none;"';}
-			if ($value12!=0&&$value12!=''){$display[12]='';}else{$display[12]='style="display:none;"';}
-			if ($value13!=0&&$value13!=''){$display[13]='';}else{$display[13]='style="display:none;"';}
-			if ($value14!=0&&$value14!=''){$display[14]='';}else{$display[14]='style="display:none;"';}
-			if ($value15!=0&&$value15!=''){$display[15]='';}else{$display[15]='style="display:none;"';}
-			if ($value16!=0&&$value16!=''){$display[16]='';}else{$display[16]='style="display:none;"';}
-			if ($value17!=0&&$value17!=''){$display[17]='';}else{$display[17]='style="display:none;"';}
-			if ($value18!=0&&$value18!=''){$display[18]='';}else{$display[18]='style="display:none;"';}
-			if ($value19!=0&&$value19!=''){$display[19]='';}else{$display[19]='style="display:none;"';}
-			if ($value20!=0&&$value20!=''){$display[20]='';}else{$display[20]='style="display:none;"';}
-			if ($value21!=0&&$value21!=''){$display[21]='';}else{$display[21]='style="display:none;"';}
-			if ($value22!=0&&$value22!=''){$display[22]='';}else{$display[22]='style="display:none;"';}
-			if ($value23!=0&&$value23!=''){$display[23]='';}else{$display[23]='style="display:none;"';}
-			if ($value24!=0&&$value24!=''){$display[24]='';}else{$display[24]='style="display:none;"';}
-			if ($value25!=0&&$value25!=''){$display[25]='';}else{$display[25]='style="display:none;"';}
-			if ($value26!=0&&$value26!=''){$display[26]='';}else{$display[26]='style="display:none;"';}
-			if ($value27!=0&&$value27!=''){$display[27]='';}else{$display[27]='style="display:none;"';}
-			if ($value28!=0&&$value28!=''){$display[28]='';}else{$display[28]='style="display:none;"';}
-			if ($value29!=0&&$value29!=''){$display[29]='';}else{$display[29]='style="display:none;"';}
-			if ($value30!=0&&$value30!=''){$display[30]='';}else{$display[30]='style="display:none;"';}
-			if ($value31!=0&&$value31!=''){$display[31]='';}else{$display[31]='style="display:none;"';}
-			if ($value32!=0&&$value32!=''){$display[32]='';}else{$display[32]='style="display:none;"';}
-			if ($value33!=0&&$value33!=''){$display[33]='';}else{$display[33]='style="display:none;"';}
-			if ($value34!=0&&$value34!=''){$display[34]='';}else{$display[34]='style="display:none;"';}
-			if ($value35!=0&&$value35!=''){$display[35]='';}else{$display[35]='style="display:none;"';}
-			if ($value36!=0&&$value36!=''){$display[36]='';}else{$display[36]='style="display:none;"';}
-			if ($value37!=0&&$value37!=''){$display[37]='';}else{$display[37]='style="display:none;"';}
-			if ($value38!=0&&$value38!=''){$display[38]='';}else{$display[38]='style="display:none;"';}
-			if ($value39!=0&&$value39!=''){$display[39]='';}else{$display[39]='style="display:none;"';}
-			if ($value40!=0&&$value40!=''){$display[40]='';}else{$display[40]='style="display:none;"';}
-			if ($value41!=0&&$value41!=''){$display[41]='';}else{$display[41]='style="display:none;"';}
-			if ($value42!=0&&$value42!=''){$display[42]='';}else{$display[42]='style="display:none;"';}
-			if ($value43!=0&&$value43!=''){$display[43]='';}else{$display[43]='style="display:none;"';}
-			if ($value44!=0&&$value44!=''){$display[44]='';}else{$display[44]='style="display:none;"';}
-			if ($value45!=0&&$value45!=''){$display[45]='';}else{$display[45]='style="display:none;"';}
-			if ($value46!=0&&$value46!=''){$display[46]='';}else{$display[46]='style="display:none;"';}
-			if ($value47!=0&&$value47!=''){$display[47]='';}else{$display[47]='style="display:none;"';}
-			if ($value48!=0&&$value48!=''){$display[48]='';}else{$display[48]='style="display:none;"';}
-			if ($value49!=0&&$value49!=''){$display[49]='';}else{$display[49]='style="display:none;"';}
-			if ($value50!=0&&$value50!=''){$display[50]='';}else{$display[50]='style="display:none;"';}
-			
-			//Se guardan los valores
-			$value = array();
-			if ($value1!=0&&$value1!=''){$value[1]=$value1;}else{$value[1]='';}
-			if ($value2!=0&&$value2!=''){$value[2]=$value2;}else{$value[2]='';}
-			if ($value3!=0&&$value3!=''){$value[3]=$value3;}else{$value[3]='';}
-			if ($value4!=0&&$value4!=''){$value[4]=$value4;}else{$value[4]='';}
-			if ($value5!=0&&$value5!=''){$value[5]=$value5;}else{$value[5]='';}
-			if ($value6!=0&&$value6!=''){$value[6]=$value6;}else{$value[6]='';}
-			if ($value7!=0&&$value7!=''){$value[7]=$value7;}else{$value[7]='';}
-			if ($value8!=0&&$value8!=''){$value[8]=$value8;}else{$value[8]='';}
-			if ($value9!=0&&$value9!=''){$value[9]=$value9;}else{$value[9]='';}
-			if ($value10!=0&&$value10!=''){$value[10]=$value10;}else{$value[10]='';}
-			if ($value11!=0&&$value11!=''){$value[11]=$value11;}else{$value[11]='';}
-			if ($value12!=0&&$value12!=''){$value[12]=$value12;}else{$value[12]='';}
-			if ($value13!=0&&$value13!=''){$value[13]=$value13;}else{$value[13]='';}
-			if ($value14!=0&&$value14!=''){$value[14]=$value14;}else{$value[14]='';}
-			if ($value15!=0&&$value15!=''){$value[15]=$value15;}else{$value[15]='';}
-			if ($value16!=0&&$value16!=''){$value[16]=$value16;}else{$value[16]='';}
-			if ($value17!=0&&$value17!=''){$value[17]=$value17;}else{$value[17]='';}
-			if ($value18!=0&&$value18!=''){$value[18]=$value18;}else{$value[18]='';}
-			if ($value19!=0&&$value19!=''){$value[19]=$value19;}else{$value[19]='';}
-			if ($value20!=0&&$value20!=''){$value[20]=$value20;}else{$value[20]='';}
-			if ($value21!=0&&$value21!=''){$value[21]=$value21;}else{$value[21]='';}
-			if ($value22!=0&&$value22!=''){$value[22]=$value22;}else{$value[22]='';}
-			if ($value23!=0&&$value23!=''){$value[23]=$value23;}else{$value[23]='';}
-			if ($value24!=0&&$value24!=''){$value[24]=$value24;}else{$value[24]='';}
-			if ($value25!=0&&$value25!=''){$value[25]=$value25;}else{$value[25]='';}
-			if ($value26!=0&&$value26!=''){$value[26]=$value26;}else{$value[26]='';}
-			if ($value27!=0&&$value27!=''){$value[27]=$value27;}else{$value[27]='';}
-			if ($value28!=0&&$value28!=''){$value[28]=$value28;}else{$value[28]='';}
-			if ($value29!=0&&$value29!=''){$value[29]=$value29;}else{$value[29]='';}
-			if ($value30!=0&&$value30!=''){$value[30]=$value30;}else{$value[30]='';}
-			if ($value31!=0&&$value31!=''){$value[31]=$value31;}else{$value[31]='';}
-			if ($value32!=0&&$value32!=''){$value[32]=$value32;}else{$value[32]='';}
-			if ($value33!=0&&$value33!=''){$value[33]=$value33;}else{$value[33]='';}
-			if ($value34!=0&&$value34!=''){$value[34]=$value34;}else{$value[34]='';}
-			if ($value35!=0&&$value35!=''){$value[35]=$value35;}else{$value[35]='';}
-			if ($value36!=0&&$value36!=''){$value[36]=$value36;}else{$value[36]='';}
-			if ($value37!=0&&$value37!=''){$value[37]=$value37;}else{$value[37]='';}
-			if ($value38!=0&&$value38!=''){$value[38]=$value38;}else{$value[38]='';}
-			if ($value39!=0&&$value39!=''){$value[39]=$value39;}else{$value[39]='';}
-			if ($value40!=0&&$value40!=''){$value[40]=$value40;}else{$value[40]='';}
-			if ($value41!=0&&$value41!=''){$value[41]=$value41;}else{$value[41]='';}
-			if ($value42!=0&&$value42!=''){$value[42]=$value42;}else{$value[42]='';}
-			if ($value43!=0&&$value43!=''){$value[43]=$value43;}else{$value[43]='';}
-			if ($value44!=0&&$value44!=''){$value[44]=$value44;}else{$value[44]='';}
-			if ($value45!=0&&$value45!=''){$value[45]=$value45;}else{$value[45]='';}
-			if ($value46!=0&&$value46!=''){$value[46]=$value46;}else{$value[46]='';}
-			if ($value47!=0&&$value47!=''){$value[47]=$value47;}else{$value[47]='';}
-			if ($value48!=0&&$value48!=''){$value[48]=$value48;}else{$value[48]='';}
-			if ($value49!=0&&$value49!=''){$value[49]=$value49;}else{$value[49]='';}
-			if ($value50!=0&&$value50!=''){$value[50]=$value50;}else{$value[50]='';}
-			
-			//Se guardan los nombres
-			$name = array();
-			if (isset($name1)&&$name1!=''){$name[1]=$name1;}else{$name[1]='';}
-			if (isset($name2)&&$name2!=''){$name[2]=$name2;}else{$name[2]='';}
-			if (isset($name3)&&$name3!=''){$name[3]=$name3;}else{$name[3]='';}
-			if (isset($name4)&&$name4!=''){$name[4]=$name4;}else{$name[4]='';}
-			if (isset($name5)&&$name5!=''){$name[5]=$name5;}else{$name[5]='';}
-			if (isset($name6)&&$name6!=''){$name[6]=$name6;}else{$name[6]='';}
-			if (isset($name7)&&$name7!=''){$name[7]=$name7;}else{$name[7]='';}
-			if (isset($name8)&&$name8!=''){$name[8]=$name8;}else{$name[8]='';}
-			if (isset($name9)&&$name9!=''){$name[9]=$name9;}else{$name[9]='';}
-			if (isset($name10)&&$name10!=''){$name[10]=$name10;}else{$name[10]='';}
-			if (isset($name11)&&$name11!=''){$name[11]=$name11;}else{$name[11]='';}
-			if (isset($name12)&&$name12!=''){$name[12]=$name12;}else{$name[12]='';}
-			if (isset($name13)&&$name13!=''){$name[13]=$name13;}else{$name[13]='';}
-			if (isset($name14)&&$name14!=''){$name[14]=$name14;}else{$name[14]='';}
-			if (isset($name15)&&$name15!=''){$name[15]=$name15;}else{$name[15]='';}
-			if (isset($name16)&&$name16!=''){$name[16]=$name16;}else{$name[16]='';}
-			if (isset($name17)&&$name17!=''){$name[17]=$name17;}else{$name[17]='';}
-			if (isset($name18)&&$name18!=''){$name[18]=$name18;}else{$name[18]='';}
-			if (isset($name19)&&$name19!=''){$name[19]=$name19;}else{$name[19]='';}
-			if (isset($name20)&&$name20!=''){$name[20]=$name20;}else{$name[20]='';}
-			if (isset($name21)&&$name21!=''){$name[21]=$name21;}else{$name[21]='';}
-			if (isset($name22)&&$name22!=''){$name[22]=$name22;}else{$name[22]='';}
-			if (isset($name23)&&$name23!=''){$name[23]=$name23;}else{$name[23]='';}
-			if (isset($name24)&&$name24!=''){$name[24]=$name24;}else{$name[24]='';}
-			if (isset($name25)&&$name25!=''){$name[25]=$name25;}else{$name[25]='';}
-			if (isset($name26)&&$name26!=''){$name[26]=$name26;}else{$name[26]='';}
-			if (isset($name27)&&$name27!=''){$name[27]=$name27;}else{$name[27]='';}
-			if (isset($name28)&&$name28!=''){$name[28]=$name28;}else{$name[28]='';}
-			if (isset($name29)&&$name29!=''){$name[29]=$name29;}else{$name[29]='';}
-			if (isset($name30)&&$name30!=''){$name[30]=$name30;}else{$name[30]='';}
-			if (isset($name31)&&$name31!=''){$name[31]=$name31;}else{$name[31]='';}
-			if (isset($name32)&&$name32!=''){$name[32]=$name32;}else{$name[32]='';}
-			if (isset($name33)&&$name33!=''){$name[33]=$name33;}else{$name[33]='';}
-			if (isset($name34)&&$name34!=''){$name[34]=$name34;}else{$name[34]='';}
-			if (isset($name35)&&$name35!=''){$name[35]=$name35;}else{$name[35]='';}
-			if (isset($name36)&&$name36!=''){$name[36]=$name36;}else{$name[36]='';}
-			if (isset($name37)&&$name37!=''){$name[37]=$name37;}else{$name[37]='';}
-			if (isset($name38)&&$name38!=''){$name[38]=$name38;}else{$name[38]='';}
-			if (isset($name39)&&$name39!=''){$name[39]=$name39;}else{$name[39]='';}
-			if (isset($name40)&&$name40!=''){$name[40]=$name40;}else{$name[40]='';}
-			if (isset($name41)&&$name41!=''){$name[41]=$name41;}else{$name[41]='';}
-			if (isset($name42)&&$name42!=''){$name[42]=$name42;}else{$name[42]='';}
-			if (isset($name43)&&$name43!=''){$name[43]=$name43;}else{$name[43]='';}
-			if (isset($name44)&&$name44!=''){$name[44]=$name44;}else{$name[44]='';}
-			if (isset($name45)&&$name45!=''){$name[45]=$name45;}else{$name[45]='';}
-			if (isset($name46)&&$name46!=''){$name[46]=$name46;}else{$name[46]='';}
-			if (isset($name47)&&$name47!=''){$name[47]=$name47;}else{$name[47]='';}
-			if (isset($name48)&&$name48!=''){$name[48]=$name48;}else{$name[48]='';}
-			if (isset($name49)&&$name49!=''){$name[49]=$name49;}else{$name[49]='';}
-			if (isset($name50)&&$name50!=''){$name[50]=$name50;}else{$name[50]='';}
-			
-			//Se guardan los nombres
-			$dataA = array();
-			if (isset($dataA1)&&$dataA1!=''){$dataA[1]=$dataA1;}else{$dataA[1]='';}
-			if (isset($dataA2)&&$dataA2!=''){$dataA[2]=$dataA2;}else{$dataA[2]='';}
-			if (isset($dataA3)&&$dataA3!=''){$dataA[3]=$dataA3;}else{$dataA[3]='';}
-			if (isset($dataA4)&&$dataA4!=''){$dataA[4]=$dataA4;}else{$dataA[4]='';}
-			if (isset($dataA5)&&$dataA5!=''){$dataA[5]=$dataA5;}else{$dataA[5]='';}
-			if (isset($dataA6)&&$dataA6!=''){$dataA[6]=$dataA6;}else{$dataA[6]='';}
-			if (isset($dataA7)&&$dataA7!=''){$dataA[7]=$dataA7;}else{$dataA[7]='';}
-			if (isset($dataA8)&&$dataA8!=''){$dataA[8]=$dataA8;}else{$dataA[8]='';}
-			if (isset($dataA9)&&$dataA9!=''){$dataA[9]=$dataA9;}else{$dataA[9]='';}
-			if (isset($dataA10)&&$dataA10!=''){$dataA[10]=$dataA10;}else{$dataA[10]='';}
-			if (isset($dataA11)&&$dataA11!=''){$dataA[11]=$dataA11;}else{$dataA[11]='';}
-			if (isset($dataA12)&&$dataA12!=''){$dataA[12]=$dataA12;}else{$dataA[12]='';}
-			if (isset($dataA13)&&$dataA13!=''){$dataA[13]=$dataA13;}else{$dataA[13]='';}
-			if (isset($dataA14)&&$dataA14!=''){$dataA[14]=$dataA14;}else{$dataA[14]='';}
-			if (isset($dataA15)&&$dataA15!=''){$dataA[15]=$dataA15;}else{$dataA[15]='';}
-			if (isset($dataA16)&&$dataA16!=''){$dataA[16]=$dataA16;}else{$dataA[16]='';}
-			if (isset($dataA17)&&$dataA17!=''){$dataA[17]=$dataA17;}else{$dataA[17]='';}
-			if (isset($dataA18)&&$dataA18!=''){$dataA[18]=$dataA18;}else{$dataA[18]='';}
-			if (isset($dataA19)&&$dataA19!=''){$dataA[19]=$dataA19;}else{$dataA[19]='';}
-			if (isset($dataA20)&&$dataA20!=''){$dataA[20]=$dataA20;}else{$dataA[20]='';}
-			if (isset($dataA21)&&$dataA21!=''){$dataA[21]=$dataA21;}else{$dataA[21]='';}
-			if (isset($dataA22)&&$dataA22!=''){$dataA[22]=$dataA22;}else{$dataA[22]='';}
-			if (isset($dataA23)&&$dataA23!=''){$dataA[23]=$dataA23;}else{$dataA[23]='';}
-			if (isset($dataA24)&&$dataA24!=''){$dataA[24]=$dataA24;}else{$dataA[24]='';}
-			if (isset($dataA25)&&$dataA25!=''){$dataA[25]=$dataA25;}else{$dataA[25]='';}
-			if (isset($dataA26)&&$dataA26!=''){$dataA[26]=$dataA26;}else{$dataA[26]='';}
-			if (isset($dataA27)&&$dataA27!=''){$dataA[27]=$dataA27;}else{$dataA[27]='';}
-			if (isset($dataA28)&&$dataA28!=''){$dataA[28]=$dataA28;}else{$dataA[28]='';}
-			if (isset($dataA29)&&$dataA29!=''){$dataA[29]=$dataA29;}else{$dataA[29]='';}
-			if (isset($dataA30)&&$dataA30!=''){$dataA[30]=$dataA30;}else{$dataA[30]='';}
-			if (isset($dataA31)&&$dataA31!=''){$dataA[31]=$dataA31;}else{$dataA[31]='';}
-			if (isset($dataA32)&&$dataA32!=''){$dataA[32]=$dataA32;}else{$dataA[32]='';}
-			if (isset($dataA33)&&$dataA33!=''){$dataA[33]=$dataA33;}else{$dataA[33]='';}
-			if (isset($dataA34)&&$dataA34!=''){$dataA[34]=$dataA34;}else{$dataA[34]='';}
-			if (isset($dataA35)&&$dataA35!=''){$dataA[35]=$dataA35;}else{$dataA[35]='';}
-			if (isset($dataA36)&&$dataA36!=''){$dataA[36]=$dataA36;}else{$dataA[36]='';}
-			if (isset($dataA37)&&$dataA37!=''){$dataA[37]=$dataA37;}else{$dataA[37]='';}
-			if (isset($dataA38)&&$dataA38!=''){$dataA[38]=$dataA38;}else{$dataA[38]='';}
-			if (isset($dataA39)&&$dataA39!=''){$dataA[39]=$dataA39;}else{$dataA[39]='';}
-			if (isset($dataA40)&&$dataA40!=''){$dataA[40]=$dataA40;}else{$dataA[40]='';}
-			if (isset($dataA41)&&$dataA41!=''){$dataA[41]=$dataA41;}else{$dataA[41]='';}
-			if (isset($dataA42)&&$dataA42!=''){$dataA[42]=$dataA42;}else{$dataA[42]='';}
-			if (isset($dataA43)&&$dataA43!=''){$dataA[43]=$dataA43;}else{$dataA[43]='';}
-			if (isset($dataA44)&&$dataA44!=''){$dataA[44]=$dataA44;}else{$dataA[44]='';}
-			if (isset($dataA45)&&$dataA45!=''){$dataA[45]=$dataA45;}else{$dataA[45]='';}
-			if (isset($dataA46)&&$dataA46!=''){$dataA[46]=$dataA46;}else{$dataA[46]='';}
-			if (isset($dataA47)&&$dataA47!=''){$dataA[47]=$dataA47;}else{$dataA[47]='';}
-			if (isset($dataA48)&&$dataA48!=''){$dataA[48]=$dataA48;}else{$dataA[48]='';}
-			if (isset($dataA49)&&$dataA49!=''){$dataA[49]=$dataA49;}else{$dataA[49]='';}
-			if (isset($dataA50)&&$dataA50!=''){$dataA[50]=$dataA50;}else{$dataA[50]='';}
-			
-			//Se guardan los nombres
-			$dataB = array();
-			if (isset($dataB1)&&$dataB1!=''){$dataB[1]=$dataB1;}else{$dataB[1]='';}
-			if (isset($dataB2)&&$dataB2!=''){$dataB[2]=$dataB2;}else{$dataB[2]='';}
-			if (isset($dataB3)&&$dataB3!=''){$dataB[3]=$dataB3;}else{$dataB[3]='';}
-			if (isset($dataB4)&&$dataB4!=''){$dataB[4]=$dataB4;}else{$dataB[4]='';}
-			if (isset($dataB5)&&$dataB5!=''){$dataB[5]=$dataB5;}else{$dataB[5]='';}
-			if (isset($dataB6)&&$dataB6!=''){$dataB[6]=$dataB6;}else{$dataB[6]='';}
-			if (isset($dataB7)&&$dataB7!=''){$dataB[7]=$dataB7;}else{$dataB[7]='';}
-			if (isset($dataB8)&&$dataB8!=''){$dataB[8]=$dataB8;}else{$dataB[8]='';}
-			if (isset($dataB9)&&$dataB9!=''){$dataB[9]=$dataB9;}else{$dataB[9]='';}
-			if (isset($dataB10)&&$dataB10!=''){$dataB[10]=$dataB10;}else{$dataB[10]='';}
-			if (isset($dataB11)&&$dataB11!=''){$dataB[11]=$dataB11;}else{$dataB[11]='';}
-			if (isset($dataB12)&&$dataB12!=''){$dataB[12]=$dataB12;}else{$dataB[12]='';}
-			if (isset($dataB13)&&$dataB13!=''){$dataB[13]=$dataB13;}else{$dataB[13]='';}
-			if (isset($dataB14)&&$dataB14!=''){$dataB[14]=$dataB14;}else{$dataB[14]='';}
-			if (isset($dataB15)&&$dataB15!=''){$dataB[15]=$dataB15;}else{$dataB[15]='';}
-			if (isset($dataB16)&&$dataB16!=''){$dataB[16]=$dataB16;}else{$dataB[16]='';}
-			if (isset($dataB17)&&$dataB17!=''){$dataB[17]=$dataB17;}else{$dataB[17]='';}
-			if (isset($dataB18)&&$dataB18!=''){$dataB[18]=$dataB18;}else{$dataB[18]='';}
-			if (isset($dataB19)&&$dataB19!=''){$dataB[19]=$dataB19;}else{$dataB[19]='';}
-			if (isset($dataB20)&&$dataB20!=''){$dataB[20]=$dataB20;}else{$dataB[20]='';}
-			if (isset($dataB21)&&$dataB21!=''){$dataB[21]=$dataB21;}else{$dataB[21]='';}
-			if (isset($dataB22)&&$dataB22!=''){$dataB[22]=$dataB22;}else{$dataB[22]='';}
-			if (isset($dataB23)&&$dataB23!=''){$dataB[23]=$dataB23;}else{$dataB[23]='';}
-			if (isset($dataB24)&&$dataB24!=''){$dataB[24]=$dataB24;}else{$dataB[24]='';}
-			if (isset($dataB25)&&$dataB25!=''){$dataB[25]=$dataB25;}else{$dataB[25]='';}
-			if (isset($dataB26)&&$dataB26!=''){$dataB[26]=$dataB26;}else{$dataB[26]='';}
-			if (isset($dataB27)&&$dataB27!=''){$dataB[27]=$dataB27;}else{$dataB[27]='';}
-			if (isset($dataB28)&&$dataB28!=''){$dataB[28]=$dataB28;}else{$dataB[28]='';}
-			if (isset($dataB29)&&$dataB29!=''){$dataB[29]=$dataB29;}else{$dataB[29]='';}
-			if (isset($dataB30)&&$dataB30!=''){$dataB[30]=$dataB30;}else{$dataB[30]='';}
-			if (isset($dataB31)&&$dataB31!=''){$dataB[31]=$dataB31;}else{$dataB[31]='';}
-			if (isset($dataB32)&&$dataB32!=''){$dataB[32]=$dataB32;}else{$dataB[32]='';}
-			if (isset($dataB33)&&$dataB33!=''){$dataB[33]=$dataB33;}else{$dataB[33]='';}
-			if (isset($dataB34)&&$dataB34!=''){$dataB[34]=$dataB34;}else{$dataB[34]='';}
-			if (isset($dataB35)&&$dataB35!=''){$dataB[35]=$dataB35;}else{$dataB[35]='';}
-			if (isset($dataB36)&&$dataB36!=''){$dataB[36]=$dataB36;}else{$dataB[36]='';}
-			if (isset($dataB37)&&$dataB37!=''){$dataB[37]=$dataB37;}else{$dataB[37]='';}
-			if (isset($dataB38)&&$dataB38!=''){$dataB[38]=$dataB38;}else{$dataB[38]='';}
-			if (isset($dataB39)&&$dataB39!=''){$dataB[39]=$dataB39;}else{$dataB[39]='';}
-			if (isset($dataB40)&&$dataB40!=''){$dataB[40]=$dataB40;}else{$dataB[40]='';}
-			if (isset($dataB41)&&$dataB41!=''){$dataB[41]=$dataB41;}else{$dataB[41]='';}
-			if (isset($dataB42)&&$dataB42!=''){$dataB[42]=$dataB42;}else{$dataB[42]='';}
-			if (isset($dataB43)&&$dataB43!=''){$dataB[43]=$dataB43;}else{$dataB[43]='';}
-			if (isset($dataB44)&&$dataB44!=''){$dataB[44]=$dataB44;}else{$dataB[44]='';}
-			if (isset($dataB45)&&$dataB45!=''){$dataB[45]=$dataB45;}else{$dataB[45]='';}
-			if (isset($dataB46)&&$dataB46!=''){$dataB[46]=$dataB46;}else{$dataB[46]='';}
-			if (isset($dataB47)&&$dataB47!=''){$dataB[47]=$dataB47;}else{$dataB[47]='';}
-			if (isset($dataB48)&&$dataB48!=''){$dataB[48]=$dataB48;}else{$dataB[48]='';}
-			if (isset($dataB49)&&$dataB49!=''){$dataB[49]=$dataB49;}else{$dataB[49]='';}
-			if (isset($dataB50)&&$dataB50!=''){$dataB[50]=$dataB50;}else{$dataB[50]='';}
-			
-			//Se guardan los nombres
-			$table = array();
-			if (isset($table1)&&$table1!=''){$table[1]=$table1;}else{$table[1]='';}
-			if (isset($table2)&&$table2!=''){$table[2]=$table2;}else{$table[2]='';}
-			if (isset($table3)&&$table3!=''){$table[3]=$table3;}else{$table[3]='';}
-			if (isset($table4)&&$table4!=''){$table[4]=$table4;}else{$table[4]='';}
-			if (isset($table5)&&$table5!=''){$table[5]=$table5;}else{$table[5]='';}
-			if (isset($table6)&&$table6!=''){$table[6]=$table6;}else{$table[6]='';}
-			if (isset($table7)&&$table7!=''){$table[7]=$table7;}else{$table[7]='';}
-			if (isset($table8)&&$table8!=''){$table[8]=$table8;}else{$table[8]='';}
-			if (isset($table9)&&$table9!=''){$table[9]=$table9;}else{$table[9]='';}
-			if (isset($table10)&&$table10!=''){$table[10]=$table10;}else{$table[10]='';}
-			if (isset($table11)&&$table11!=''){$table[11]=$table11;}else{$table[11]='';}
-			if (isset($table12)&&$table12!=''){$table[12]=$table12;}else{$table[12]='';}
-			if (isset($table13)&&$table13!=''){$table[13]=$table13;}else{$table[13]='';}
-			if (isset($table14)&&$table14!=''){$table[14]=$table14;}else{$table[14]='';}
-			if (isset($table15)&&$table15!=''){$table[15]=$table15;}else{$table[15]='';}
-			if (isset($table16)&&$table16!=''){$table[16]=$table16;}else{$table[16]='';}
-			if (isset($table17)&&$table17!=''){$table[17]=$table17;}else{$table[17]='';}
-			if (isset($table18)&&$table18!=''){$table[18]=$table18;}else{$table[18]='';}
-			if (isset($table19)&&$table19!=''){$table[19]=$table19;}else{$table[19]='';}
-			if (isset($table20)&&$table20!=''){$table[20]=$table20;}else{$table[20]='';}
-			if (isset($table21)&&$table21!=''){$table[21]=$table21;}else{$table[21]='';}
-			if (isset($table22)&&$table22!=''){$table[22]=$table22;}else{$table[22]='';}
-			if (isset($table23)&&$table23!=''){$table[23]=$table23;}else{$table[23]='';}
-			if (isset($table24)&&$table24!=''){$table[24]=$table24;}else{$table[24]='';}
-			if (isset($table25)&&$table25!=''){$table[25]=$table25;}else{$table[25]='';}
-			if (isset($table26)&&$table26!=''){$table[26]=$table26;}else{$table[26]='';}
-			if (isset($table27)&&$table27!=''){$table[27]=$table27;}else{$table[27]='';}
-			if (isset($table28)&&$table28!=''){$table[28]=$table28;}else{$table[28]='';}
-			if (isset($table29)&&$table29!=''){$table[29]=$table29;}else{$table[29]='';}
-			if (isset($table30)&&$table30!=''){$table[30]=$table30;}else{$table[30]='';}
-			if (isset($table31)&&$table31!=''){$table[31]=$table31;}else{$table[31]='';}
-			if (isset($table32)&&$table32!=''){$table[32]=$table32;}else{$table[32]='';}
-			if (isset($table33)&&$table33!=''){$table[33]=$table33;}else{$table[33]='';}
-			if (isset($table34)&&$table34!=''){$table[34]=$table34;}else{$table[34]='';}
-			if (isset($table35)&&$table35!=''){$table[35]=$table35;}else{$table[35]='';}
-			if (isset($table36)&&$table36!=''){$table[36]=$table36;}else{$table[36]='';}
-			if (isset($table37)&&$table37!=''){$table[37]=$table37;}else{$table[37]='';}
-			if (isset($table38)&&$table38!=''){$table[38]=$table38;}else{$table[38]='';}
-			if (isset($table39)&&$table39!=''){$table[39]=$table39;}else{$table[39]='';}
-			if (isset($table40)&&$table40!=''){$table[40]=$table40;}else{$table[40]='';}
-			if (isset($table41)&&$table41!=''){$table[41]=$table41;}else{$table[41]='';}
-			if (isset($table42)&&$table42!=''){$table[42]=$table42;}else{$table[42]='';}
-			if (isset($table43)&&$table43!=''){$table[43]=$table43;}else{$table[43]='';}
-			if (isset($table44)&&$table44!=''){$table[44]=$table44;}else{$table[44]='';}
-			if (isset($table45)&&$table45!=''){$table[45]=$table45;}else{$table[45]='';}
-			if (isset($table46)&&$table46!=''){$table[46]=$table46;}else{$table[46]='';}
-			if (isset($table47)&&$table47!=''){$table[47]=$table47;}else{$table[47]='';}
-			if (isset($table48)&&$table48!=''){$table[48]=$table48;}else{$table[48]='';}
-			if (isset($table49)&&$table49!=''){$table[49]=$table49;}else{$table[49]='';}
-			if (isset($table50)&&$table50!=''){$table[50]=$table50;}else{$table[50]='';}
-			
-			//Se guardan los nombres
-			$placeholder = array();
-			if (isset($placeholder1)&&$placeholder1!=''){$placeholder[1]=$placeholder1;}else{$placeholder[1]='';}
-			if (isset($placeholder2)&&$placeholder2!=''){$placeholder[2]=$placeholder2;}else{$placeholder[2]='';}
-			if (isset($placeholder3)&&$placeholder3!=''){$placeholder[3]=$placeholder3;}else{$placeholder[3]='';}
-			if (isset($placeholder4)&&$placeholder4!=''){$placeholder[4]=$placeholder4;}else{$placeholder[4]='';}
-			if (isset($placeholder5)&&$placeholder5!=''){$placeholder[5]=$placeholder5;}else{$placeholder[5]='';}
-			if (isset($placeholder6)&&$placeholder6!=''){$placeholder[6]=$placeholder6;}else{$placeholder[6]='';}
-			if (isset($placeholder7)&&$placeholder7!=''){$placeholder[7]=$placeholder7;}else{$placeholder[7]='';}
-			if (isset($placeholder8)&&$placeholder8!=''){$placeholder[8]=$placeholder8;}else{$placeholder[8]='';}
-			if (isset($placeholder9)&&$placeholder9!=''){$placeholder[9]=$placeholder9;}else{$placeholder[9]='';}
-			if (isset($placeholder10)&&$placeholder10!=''){$placeholder[10]=$placeholder10;}else{$placeholder[10]='';}
-			if (isset($placeholder11)&&$placeholder11!=''){$placeholder[11]=$placeholder11;}else{$placeholder[11]='';}
-			if (isset($placeholder12)&&$placeholder12!=''){$placeholder[12]=$placeholder12;}else{$placeholder[12]='';}
-			if (isset($placeholder13)&&$placeholder13!=''){$placeholder[13]=$placeholder13;}else{$placeholder[13]='';}
-			if (isset($placeholder14)&&$placeholder14!=''){$placeholder[14]=$placeholder14;}else{$placeholder[14]='';}
-			if (isset($placeholder15)&&$placeholder15!=''){$placeholder[15]=$placeholder15;}else{$placeholder[15]='';}
-			if (isset($placeholder16)&&$placeholder16!=''){$placeholder[16]=$placeholder16;}else{$placeholder[16]='';}
-			if (isset($placeholder17)&&$placeholder17!=''){$placeholder[17]=$placeholder17;}else{$placeholder[17]='';}
-			if (isset($placeholder18)&&$placeholder18!=''){$placeholder[18]=$placeholder18;}else{$placeholder[18]='';}
-			if (isset($placeholder19)&&$placeholder19!=''){$placeholder[19]=$placeholder19;}else{$placeholder[19]='';}
-			if (isset($placeholder20)&&$placeholder20!=''){$placeholder[20]=$placeholder20;}else{$placeholder[20]='';}
-			if (isset($placeholder21)&&$placeholder21!=''){$placeholder[21]=$placeholder21;}else{$placeholder[21]='';}
-			if (isset($placeholder22)&&$placeholder22!=''){$placeholder[22]=$placeholder22;}else{$placeholder[22]='';}
-			if (isset($placeholder23)&&$placeholder23!=''){$placeholder[23]=$placeholder23;}else{$placeholder[23]='';}
-			if (isset($placeholder24)&&$placeholder24!=''){$placeholder[24]=$placeholder24;}else{$placeholder[24]='';}
-			if (isset($placeholder25)&&$placeholder25!=''){$placeholder[25]=$placeholder25;}else{$placeholder[25]='';}
-			if (isset($placeholder26)&&$placeholder26!=''){$placeholder[26]=$placeholder26;}else{$placeholder[26]='';}
-			if (isset($placeholder27)&&$placeholder27!=''){$placeholder[27]=$placeholder27;}else{$placeholder[27]='';}
-			if (isset($placeholder28)&&$placeholder28!=''){$placeholder[28]=$placeholder28;}else{$placeholder[28]='';}
-			if (isset($placeholder29)&&$placeholder29!=''){$placeholder[29]=$placeholder29;}else{$placeholder[29]='';}
-			if (isset($placeholder30)&&$placeholder30!=''){$placeholder[30]=$placeholder30;}else{$placeholder[30]='';}
-			if (isset($placeholder31)&&$placeholder31!=''){$placeholder[31]=$placeholder31;}else{$placeholder[31]='';}
-			if (isset($placeholder32)&&$placeholder32!=''){$placeholder[32]=$placeholder32;}else{$placeholder[32]='';}
-			if (isset($placeholder33)&&$placeholder33!=''){$placeholder[33]=$placeholder33;}else{$placeholder[33]='';}
-			if (isset($placeholder34)&&$placeholder34!=''){$placeholder[34]=$placeholder34;}else{$placeholder[34]='';}
-			if (isset($placeholder35)&&$placeholder35!=''){$placeholder[35]=$placeholder35;}else{$placeholder[35]='';}
-			if (isset($placeholder36)&&$placeholder36!=''){$placeholder[36]=$placeholder36;}else{$placeholder[36]='';}
-			if (isset($placeholder37)&&$placeholder37!=''){$placeholder[37]=$placeholder37;}else{$placeholder[37]='';}
-			if (isset($placeholder38)&&$placeholder38!=''){$placeholder[38]=$placeholder38;}else{$placeholder[38]='';}
-			if (isset($placeholder39)&&$placeholder39!=''){$placeholder[39]=$placeholder39;}else{$placeholder[39]='';}
-			if (isset($placeholder40)&&$placeholder40!=''){$placeholder[40]=$placeholder40;}else{$placeholder[40]='';}
-			if (isset($placeholder41)&&$placeholder41!=''){$placeholder[41]=$placeholder41;}else{$placeholder[41]='';}
-			if (isset($placeholder42)&&$placeholder42!=''){$placeholder[42]=$placeholder42;}else{$placeholder[42]='';}
-			if (isset($placeholder43)&&$placeholder43!=''){$placeholder[43]=$placeholder43;}else{$placeholder[43]='';}
-			if (isset($placeholder44)&&$placeholder44!=''){$placeholder[44]=$placeholder44;}else{$placeholder[44]='';}
-			if (isset($placeholder45)&&$placeholder45!=''){$placeholder[45]=$placeholder45;}else{$placeholder[45]='';}
-			if (isset($placeholder46)&&$placeholder46!=''){$placeholder[46]=$placeholder46;}else{$placeholder[46]='';}
-			if (isset($placeholder47)&&$placeholder47!=''){$placeholder[47]=$placeholder47;}else{$placeholder[47]='';}
-			if (isset($placeholder48)&&$placeholder48!=''){$placeholder[48]=$placeholder48;}else{$placeholder[48]='';}
-			if (isset($placeholder49)&&$placeholder49!=''){$placeholder[49]=$placeholder49;}else{$placeholder[49]='';}
-			if (isset($placeholder50)&&$placeholder50!=''){$placeholder[50]=$placeholder50;}else{$placeholder[50]='';}
-			
-			/********************************************************************************************************************/	
-			//explode para poder crear cadena
-			$datosA = explode(",", $dataB[1]);
-			if(count($datosA)==1){
-				$data_requiredA = ','.$datosA[0].' AS '.$datosA[0];
-			}else{
-				$data_requiredA = '';
-				foreach($datosA as $dato){
-					$data_requiredA .= ','.$dato.' AS '.$dato;
-				}
+			//recorro
+			for ($i = 1; $i <= 50; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
 			}
-			//Primera Consulta estandar			
-			$arrSeleccion = array();
-			$query = "SELECT ".$dataA[1]." AS idData ".$data_requiredA." FROM `".$table[1]."` WHERE ".$dataA[1]."!='' ".$filtro[1]." ".$excom[1];
-			$resultado = mysqli_query ($dbConn, $query);
-			while ( $row = mysqli_fetch_assoc ($resultado)) {
-			array_push( $arrSeleccion,$row );
-			}
-			mysqli_free_result($resultado);
-			/********************************************************************************************************************/
-			//Se dibuja el input
-			$input .= '
-					<div class="form-group" id="div_'.$name[1].'">
-						<label for="text2" class="control-label col-sm-4">'.$placeholder[1].'</label>
-						<div class="col-sm-8 field">
-							<select name="'.$name[1].'" id="'.$name[1].'" class="form-control" '.$required[1].' onChange="cambia_'.$name[1].'()" >
-								<option value="" selected>Seleccione una Opcion</option>';
-						
-								foreach ( $arrSeleccion as $seleccion ) {
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required_1==1){ $requerido[1]='';  }elseif($required_1==2){ $requerido[1]='required'; $_SESSION['form_require'].=','.$name_1;}
+			if($required_2==1){ $requerido[2]='';  }elseif($required_2==2){ $requerido[2]='required'; $_SESSION['form_require'].=','.$name_2;}
+			if($required_3==1){ $requerido[3]='';  }elseif($required_3==2){ $requerido[3]='required'; $_SESSION['form_require'].=','.$name_3;}
+			if($required_4==1){ $requerido[4]='';  }elseif($required_4==2){ $requerido[4]='required'; $_SESSION['form_require'].=','.$name_4;}
+			if($required_5==1){ $requerido[5]='';  }elseif($required_5==2){ $requerido[5]='required'; $_SESSION['form_require'].=','.$name_5;}
+			if($required_6==1){ $requerido[6]='';  }elseif($required_6==2){ $requerido[6]='required'; $_SESSION['form_require'].=','.$name_6;}
+			if($required_7==1){ $requerido[7]='';  }elseif($required_7==2){ $requerido[7]='required'; $_SESSION['form_require'].=','.$name_7;}
+			if($required_8==1){ $requerido[8]='';  }elseif($required_8==2){ $requerido[8]='required'; $_SESSION['form_require'].=','.$name_8;}
+			if($required_9==1){ $requerido[9]='';  }elseif($required_9==2){ $requerido[9]='required'; $_SESSION['form_require'].=','.$name_9;}
+			if($required_10==1){$requerido[10]=''; }elseif($required_10==2){$requerido[10]='required';$_SESSION['form_require'].=','.$name_10;}
+			if($required_11==1){$requerido[11]=''; }elseif($required_11==2){$requerido[11]='required';$_SESSION['form_require'].=','.$name_11;}
+			if($required_12==1){$requerido[12]=''; }elseif($required_12==2){$requerido[12]='required';$_SESSION['form_require'].=','.$name_12;}
+			if($required_13==1){$requerido[13]=''; }elseif($required_13==2){$requerido[13]='required';$_SESSION['form_require'].=','.$name_13;}
+			if($required_14==1){$requerido[14]=''; }elseif($required_14==2){$requerido[14]='required';$_SESSION['form_require'].=','.$name_14;}
+			if($required_15==1){$requerido[15]=''; }elseif($required_15==2){$requerido[15]='required';$_SESSION['form_require'].=','.$name_15;}
+			if($required_16==1){$requerido[16]=''; }elseif($required_16==2){$requerido[16]='required';$_SESSION['form_require'].=','.$name_16;}
+			if($required_17==1){$requerido[17]=''; }elseif($required_17==2){$requerido[17]='required';$_SESSION['form_require'].=','.$name_17;}
+			if($required_18==1){$requerido[18]=''; }elseif($required_18==2){$requerido[18]='required';$_SESSION['form_require'].=','.$name_18;}
+			if($required_19==1){$requerido[19]=''; }elseif($required_19==2){$requerido[19]='required';$_SESSION['form_require'].=','.$name_19;}
+			if($required_20==1){$requerido[20]=''; }elseif($required_20==2){$requerido[20]='required';$_SESSION['form_require'].=','.$name_20;}
+			if($required_21==1){$requerido[21]=''; }elseif($required_21==2){$requerido[21]='required';$_SESSION['form_require'].=','.$name_21;}
+			if($required_22==1){$requerido[22]=''; }elseif($required_22==2){$requerido[22]='required';$_SESSION['form_require'].=','.$name_22;}
+			if($required_23==1){$requerido[23]=''; }elseif($required_23==2){$requerido[23]='required';$_SESSION['form_require'].=','.$name_23;}
+			if($required_24==1){$requerido[24]=''; }elseif($required_24==2){$requerido[24]='required';$_SESSION['form_require'].=','.$name_24;}
+			if($required_25==1){$requerido[25]=''; }elseif($required_25==2){$requerido[25]='required';$_SESSION['form_require'].=','.$name_25;}
+			if($required_26==1){$requerido[26]=''; }elseif($required_26==2){$requerido[26]='required';$_SESSION['form_require'].=','.$name_26;}
+			if($required_27==1){$requerido[27]=''; }elseif($required_27==2){$requerido[27]='required';$_SESSION['form_require'].=','.$name_27;}
+			if($required_28==1){$requerido[28]=''; }elseif($required_28==2){$requerido[28]='required';$_SESSION['form_require'].=','.$name_28;}
+			if($required_29==1){$requerido[29]=''; }elseif($required_29==2){$requerido[29]='required';$_SESSION['form_require'].=','.$name_29;}
+			if($required_30==1){$requerido[30]=''; }elseif($required_30==2){$requerido[30]='required';$_SESSION['form_require'].=','.$name_30;}
+			if($required_31==1){$requerido[31]=''; }elseif($required_31==2){$requerido[31]='required';$_SESSION['form_require'].=','.$name_31;}
+			if($required_32==1){$requerido[32]=''; }elseif($required_32==2){$requerido[32]='required';$_SESSION['form_require'].=','.$name_32;}
+			if($required_33==1){$requerido[33]=''; }elseif($required_33==2){$requerido[33]='required';$_SESSION['form_require'].=','.$name_33;}
+			if($required_34==1){$requerido[34]=''; }elseif($required_34==2){$requerido[34]='required';$_SESSION['form_require'].=','.$name_34;}
+			if($required_35==1){$requerido[35]=''; }elseif($required_35==2){$requerido[35]='required';$_SESSION['form_require'].=','.$name_35;}
+			if($required_36==1){$requerido[36]=''; }elseif($required_36==2){$requerido[36]='required';$_SESSION['form_require'].=','.$name_36;}
+			if($required_37==1){$requerido[37]=''; }elseif($required_37==2){$requerido[37]='required';$_SESSION['form_require'].=','.$name_37;}
+			if($required_38==1){$requerido[38]=''; }elseif($required_38==2){$requerido[38]='required';$_SESSION['form_require'].=','.$name_38;}
+			if($required_39==1){$requerido[39]=''; }elseif($required_39==2){$requerido[39]='required';$_SESSION['form_require'].=','.$name_39;}
+			if($required_40==1){$requerido[40]=''; }elseif($required_40==2){$requerido[40]='required';$_SESSION['form_require'].=','.$name_40;}
+			if($required_41==1){$requerido[41]=''; }elseif($required_41==2){$requerido[41]='required';$_SESSION['form_require'].=','.$name_41;}
+			if($required_42==1){$requerido[42]=''; }elseif($required_42==2){$requerido[42]='required';$_SESSION['form_require'].=','.$name_42;}
+			if($required_43==1){$requerido[43]=''; }elseif($required_43==2){$requerido[43]='required';$_SESSION['form_require'].=','.$name_43;}
+			if($required_44==1){$requerido[44]=''; }elseif($required_44==2){$requerido[44]='required';$_SESSION['form_require'].=','.$name_44;}
+			if($required_45==1){$requerido[45]=''; }elseif($required_45==2){$requerido[45]='required';$_SESSION['form_require'].=','.$name_45;}
+			if($required_46==1){$requerido[46]=''; }elseif($required_46==2){$requerido[46]='required';$_SESSION['form_require'].=','.$name_46;}
+			if($required_47==1){$requerido[47]=''; }elseif($required_47==2){$requerido[47]='required';$_SESSION['form_require'].=','.$name_47;}
+			if($required_48==1){$requerido[48]=''; }elseif($required_48==2){$requerido[48]='required';$_SESSION['form_require'].=','.$name_48;}
+			if($required_49==1){$requerido[49]=''; }elseif($required_49==2){$requerido[49]='required';$_SESSION['form_require'].=','.$name_49;}
+			if($required_50==1){$requerido[50]=''; }elseif($required_50==2){$requerido[50]='required';$_SESSION['form_require'].=','.$name_50;}
+												
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos[1]  = explode(",", $dataB_1);
+			$datos[2]  = explode(",", $dataB_2);
+			$datos[3]  = explode(",", $dataB_3);
+			$datos[4]  = explode(",", $dataB_4);
+			$datos[5]  = explode(",", $dataB_5);
+			$datos[6]  = explode(",", $dataB_6);
+			$datos[7]  = explode(",", $dataB_7);			
+			$datos[8]  = explode(",", $dataB_8);			
+			$datos[9]  = explode(",", $dataB_9);			
+			$datos[10] = explode(",", $dataB_10);
+			$datos[11] = explode(",", $dataB_11);
+			$datos[12] = explode(",", $dataB_12);
+			$datos[13] = explode(",", $dataB_13);
+			$datos[14] = explode(",", $dataB_14);
+			$datos[15] = explode(",", $dataB_15);
+			$datos[16] = explode(",", $dataB_16);
+			$datos[17] = explode(",", $dataB_17);
+			$datos[18] = explode(",", $dataB_18);
+			$datos[19] = explode(",", $dataB_19);
+			$datos[20] = explode(",", $dataB_20);
+			$datos[21] = explode(",", $dataB_21);
+			$datos[22] = explode(",", $dataB_22);
+			$datos[23] = explode(",", $dataB_23);
+			$datos[24] = explode(",", $dataB_24);
+			$datos[25] = explode(",", $dataB_25);
+			$datos[26] = explode(",", $dataB_26);
+			$datos[27] = explode(",", $dataB_27);
+			$datos[28] = explode(",", $dataB_28);
+			$datos[29] = explode(",", $dataB_29);
+			$datos[30] = explode(",", $dataB_30);
+			$datos[31] = explode(",", $dataB_31);
+			$datos[32] = explode(",", $dataB_32);
+			$datos[33] = explode(",", $dataB_33);
+			$datos[34] = explode(",", $dataB_34);
+			$datos[35] = explode(",", $dataB_35);
+			$datos[36] = explode(",", $dataB_36);
+			$datos[37] = explode(",", $dataB_37);
+			$datos[38] = explode(",", $dataB_38);
+			$datos[39] = explode(",", $dataB_39);
+			$datos[40] = explode(",", $dataB_40);
+			$datos[41] = explode(",", $dataB_41);
+			$datos[42] = explode(",", $dataB_42);
+			$datos[43] = explode(",", $dataB_43);
+			$datos[44] = explode(",", $dataB_44);
+			$datos[45] = explode(",", $dataB_45);
+			$datos[46] = explode(",", $dataB_46);
+			$datos[47] = explode(",", $dataB_47);
+			$datos[48] = explode(",", $dataB_48);
+			$datos[49] = explode(",", $dataB_49);
+			$datos[50] = explode(",", $dataB_50);
+				
+			/******************************************/
+			//Se arman los datos requeridos
+			if(count($datos[1])==1){ $data_required[1]  .= ','.$datos[1][0].' AS '.$datos[1][0];  }else{foreach($datos[1] as $dato){ $data_required[1]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){ $data_required[2]  .= ','.$datos[2][0].' AS '.$datos[2][0];  }else{foreach($datos[2] as $dato){ $data_required[2]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[3])==1){ $data_required[3]  .= ','.$datos[3][0].' AS '.$datos[3][0];  }else{foreach($datos[3] as $dato){ $data_required[3]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[4])==1){ $data_required[4]  .= ','.$datos[4][0].' AS '.$datos[4][0];  }else{foreach($datos[4] as $dato){ $data_required[4]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[5])==1){ $data_required[5]  .= ','.$datos[5][0].' AS '.$datos[5][0];  }else{foreach($datos[5] as $dato){ $data_required[5]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[6])==1){ $data_required[6]  .= ','.$datos[6][0].' AS '.$datos[6][0];  }else{foreach($datos[6] as $dato){ $data_required[6]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[7])==1){ $data_required[7]  .= ','.$datos[7][0].' AS '.$datos[7][0];  }else{foreach($datos[7] as $dato){ $data_required[7]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[8])==1){ $data_required[8]  .= ','.$datos[8][0].' AS '.$datos[8][0];  }else{foreach($datos[8] as $dato){ $data_required[8]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[9])==1){ $data_required[9]  .= ','.$datos[9][0].' AS '.$datos[9][0];  }else{foreach($datos[9] as $dato){ $data_required[9]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[10])==1){$data_required[10] .= ','.$datos[10][0].' AS '.$datos[10][0];}else{foreach($datos[10] as $dato){$data_required[10] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[11])==1){$data_required[11] .= ','.$datos[11][0].' AS '.$datos[11][0];}else{foreach($datos[11] as $dato){$data_required[11] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[12])==1){$data_required[12] .= ','.$datos[12][0].' AS '.$datos[12][0];}else{foreach($datos[12] as $dato){$data_required[12] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[13])==1){$data_required[13] .= ','.$datos[13][0].' AS '.$datos[13][0];}else{foreach($datos[13] as $dato){$data_required[13] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[14])==1){$data_required[14] .= ','.$datos[14][0].' AS '.$datos[14][0];}else{foreach($datos[14] as $dato){$data_required[14] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[15])==1){$data_required[15] .= ','.$datos[15][0].' AS '.$datos[15][0];}else{foreach($datos[15] as $dato){$data_required[15] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[16])==1){$data_required[16] .= ','.$datos[16][0].' AS '.$datos[16][0];}else{foreach($datos[16] as $dato){$data_required[16] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[17])==1){$data_required[17] .= ','.$datos[17][0].' AS '.$datos[17][0];}else{foreach($datos[17] as $dato){$data_required[17] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[18])==1){$data_required[18] .= ','.$datos[18][0].' AS '.$datos[18][0];}else{foreach($datos[18] as $dato){$data_required[18] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[19])==1){$data_required[19] .= ','.$datos[19][0].' AS '.$datos[19][0];}else{foreach($datos[19] as $dato){$data_required[19] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[20])==1){$data_required[20] .= ','.$datos[20][0].' AS '.$datos[20][0];}else{foreach($datos[20] as $dato){$data_required[20] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[21])==1){$data_required[21] .= ','.$datos[21][0].' AS '.$datos[21][0];}else{foreach($datos[21] as $dato){$data_required[21] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[22])==1){$data_required[22] .= ','.$datos[22][0].' AS '.$datos[22][0];}else{foreach($datos[22] as $dato){$data_required[22] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[23])==1){$data_required[23] .= ','.$datos[23][0].' AS '.$datos[23][0];}else{foreach($datos[23] as $dato){$data_required[23] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[24])==1){$data_required[24] .= ','.$datos[24][0].' AS '.$datos[24][0];}else{foreach($datos[24] as $dato){$data_required[24] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[25])==1){$data_required[25] .= ','.$datos[25][0].' AS '.$datos[25][0];}else{foreach($datos[25] as $dato){$data_required[25] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[26])==1){$data_required[26] .= ','.$datos[26][0].' AS '.$datos[26][0];}else{foreach($datos[26] as $dato){$data_required[26] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[27])==1){$data_required[27] .= ','.$datos[27][0].' AS '.$datos[27][0];}else{foreach($datos[27] as $dato){$data_required[27] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[28])==1){$data_required[28] .= ','.$datos[28][0].' AS '.$datos[28][0];}else{foreach($datos[28] as $dato){$data_required[28] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[29])==1){$data_required[29] .= ','.$datos[29][0].' AS '.$datos[29][0];}else{foreach($datos[29] as $dato){$data_required[29] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[30])==1){$data_required[30] .= ','.$datos[30][0].' AS '.$datos[30][0];}else{foreach($datos[30] as $dato){$data_required[30] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[31])==1){$data_required[31] .= ','.$datos[31][0].' AS '.$datos[31][0];}else{foreach($datos[31] as $dato){$data_required[31] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[32])==1){$data_required[32] .= ','.$datos[32][0].' AS '.$datos[32][0];}else{foreach($datos[32] as $dato){$data_required[32] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[33])==1){$data_required[33] .= ','.$datos[33][0].' AS '.$datos[33][0];}else{foreach($datos[33] as $dato){$data_required[33] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[34])==1){$data_required[34] .= ','.$datos[34][0].' AS '.$datos[34][0];}else{foreach($datos[34] as $dato){$data_required[34] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[35])==1){$data_required[35] .= ','.$datos[35][0].' AS '.$datos[35][0];}else{foreach($datos[35] as $dato){$data_required[35] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[36])==1){$data_required[36] .= ','.$datos[36][0].' AS '.$datos[36][0];}else{foreach($datos[36] as $dato){$data_required[36] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[37])==1){$data_required[37] .= ','.$datos[37][0].' AS '.$datos[37][0];}else{foreach($datos[37] as $dato){$data_required[37] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[38])==1){$data_required[38] .= ','.$datos[38][0].' AS '.$datos[38][0];}else{foreach($datos[38] as $dato){$data_required[38] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[39])==1){$data_required[39] .= ','.$datos[39][0].' AS '.$datos[39][0];}else{foreach($datos[39] as $dato){$data_required[39] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[40])==1){$data_required[40] .= ','.$datos[40][0].' AS '.$datos[40][0];}else{foreach($datos[40] as $dato){$data_required[40] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[41])==1){$data_required[41] .= ','.$datos[41][0].' AS '.$datos[41][0];}else{foreach($datos[41] as $dato){$data_required[41] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[42])==1){$data_required[42] .= ','.$datos[42][0].' AS '.$datos[42][0];}else{foreach($datos[42] as $dato){$data_required[42] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[43])==1){$data_required[43] .= ','.$datos[43][0].' AS '.$datos[43][0];}else{foreach($datos[43] as $dato){$data_required[43] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[44])==1){$data_required[44] .= ','.$datos[44][0].' AS '.$datos[44][0];}else{foreach($datos[44] as $dato){$data_required[44] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[45])==1){$data_required[45] .= ','.$datos[45][0].' AS '.$datos[45][0];}else{foreach($datos[45] as $dato){$data_required[45] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[46])==1){$data_required[46] .= ','.$datos[46][0].' AS '.$datos[46][0];}else{foreach($datos[46] as $dato){$data_required[46] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[47])==1){$data_required[47] .= ','.$datos[47][0].' AS '.$datos[47][0];}else{foreach($datos[47] as $dato){$data_required[47] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[48])==1){$data_required[48] .= ','.$datos[48][0].' AS '.$datos[48][0];}else{foreach($datos[48] as $dato){$data_required[48] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[49])==1){$data_required[49] .= ','.$datos[49][0].' AS '.$datos[49][0];}else{foreach($datos[49] as $dato){$data_required[49] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[50])==1){$data_required[50] .= ','.$datos[50][0].' AS '.$datos[50][0];}else{foreach($datos[50] as $dato){$data_required[50] .= ','.$dato.' AS '.$dato;}}
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter_1!='0' && $filter_1!=''){  $filtro[1]  .= $filter_1." AND ".$datos[1][0]."!='' ";  }elseif($filter_1=='' OR $filter_1==0){  $filtro[1]  .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){  $filtro[2]  .= $filter_2." AND ".$datos[2][0]."!='' ";  }elseif($filter_2=='' OR $filter_2==0){  $filtro[2]  .= $datos[2][0]."!='' ";}
+			if($filter_3!='0' && $filter_3!=''){  $filtro[3]  .= $filter_3." AND ".$datos[3][0]."!='' ";  }elseif($filter_3=='' OR $filter_3==0){  $filtro[3]  .= $datos[3][0]."!='' ";}
+			if($filter_4!='0' && $filter_4!=''){  $filtro[4]  .= $filter_4." AND ".$datos[4][0]."!='' ";  }elseif($filter_4=='' OR $filter_4==0){  $filtro[4]  .= $datos[4][0]."!='' ";}
+			if($filter_5!='0' && $filter_5!=''){  $filtro[5]  .= $filter_5." AND ".$datos[5][0]."!='' ";  }elseif($filter_5=='' OR $filter_5==0){  $filtro[5]  .= $datos[5][0]."!='' ";}
+			if($filter_6!='0' && $filter_6!=''){  $filtro[6]  .= $filter_6." AND ".$datos[6][0]."!='' ";  }elseif($filter_6=='' OR $filter_6==0){  $filtro[6]  .= $datos[6][0]."!='' ";}
+			if($filter_7!='0' && $filter_7!=''){  $filtro[7]  .= $filter_7." AND ".$datos[7][0]."!='' ";  }elseif($filter_7=='' OR $filter_7==0){  $filtro[7]  .= $datos[7][0]."!='' ";}
+			if($filter_8!='0' && $filter_8!=''){  $filtro[8]  .= $filter_8." AND ".$datos[8][0]."!='' ";  }elseif($filter_8=='' OR $filter_8==0){  $filtro[8]  .= $datos[8][0]."!='' ";}
+			if($filter_9!='0' && $filter_9!=''){  $filtro[9]  .= $filter_9." AND ".$datos[9][0]."!='' ";  }elseif($filter_9=='' OR $filter_9==0){  $filtro[9]  .= $datos[9][0]."!='' ";}
+			if($filter_10!='0' && $filter_10!=''){$filtro[10] .= $filter_10." AND ".$datos[10][0]."!='' ";}elseif($filter_10=='' OR $filter_10==0){$filtro[10] .= $datos[10][0]."!='' ";}
+			if($filter_11!='0' && $filter_11!=''){$filtro[11] .= $filter_11." AND ".$datos[11][0]."!='' ";}elseif($filter_11=='' OR $filter_11==0){$filtro[11] .= $datos[11][0]."!='' ";}
+			if($filter_12!='0' && $filter_12!=''){$filtro[12] .= $filter_12." AND ".$datos[12][0]."!='' ";}elseif($filter_12=='' OR $filter_12==0){$filtro[12] .= $datos[12][0]."!='' ";}
+			if($filter_13!='0' && $filter_13!=''){$filtro[13] .= $filter_13." AND ".$datos[13][0]."!='' ";}elseif($filter_13=='' OR $filter_13==0){$filtro[13] .= $datos[13][0]."!='' ";}
+			if($filter_14!='0' && $filter_14!=''){$filtro[14] .= $filter_14." AND ".$datos[14][0]."!='' ";}elseif($filter_14=='' OR $filter_14==0){$filtro[14] .= $datos[14][0]."!='' ";}
+			if($filter_15!='0' && $filter_15!=''){$filtro[15] .= $filter_15." AND ".$datos[15][0]."!='' ";}elseif($filter_15=='' OR $filter_15==0){$filtro[15] .= $datos[15][0]."!='' ";}
+			if($filter_16!='0' && $filter_16!=''){$filtro[16] .= $filter_16." AND ".$datos[16][0]."!='' ";}elseif($filter_16=='' OR $filter_16==0){$filtro[16] .= $datos[16][0]."!='' ";}
+			if($filter_17!='0' && $filter_17!=''){$filtro[17] .= $filter_17." AND ".$datos[17][0]."!='' ";}elseif($filter_17=='' OR $filter_17==0){$filtro[17] .= $datos[17][0]."!='' ";}
+			if($filter_18!='0' && $filter_18!=''){$filtro[18] .= $filter_18." AND ".$datos[18][0]."!='' ";}elseif($filter_18=='' OR $filter_18==0){$filtro[18] .= $datos[18][0]."!='' ";}
+			if($filter_19!='0' && $filter_19!=''){$filtro[19] .= $filter_19." AND ".$datos[19][0]."!='' ";}elseif($filter_19=='' OR $filter_19==0){$filtro[19] .= $datos[19][0]."!='' ";}
+			if($filter_20!='0' && $filter_20!=''){$filtro[20] .= $filter_20." AND ".$datos[20][0]."!='' ";}elseif($filter_20=='' OR $filter_20==0){$filtro[20] .= $datos[20][0]."!='' ";}
+			if($filter_21!='0' && $filter_21!=''){$filtro[21] .= $filter_21." AND ".$datos[21][0]."!='' ";}elseif($filter_21=='' OR $filter_21==0){$filtro[21] .= $datos[21][0]."!='' ";}
+			if($filter_22!='0' && $filter_22!=''){$filtro[22] .= $filter_22." AND ".$datos[22][0]."!='' ";}elseif($filter_22=='' OR $filter_22==0){$filtro[22] .= $datos[22][0]."!='' ";}
+			if($filter_23!='0' && $filter_23!=''){$filtro[23] .= $filter_23." AND ".$datos[23][0]."!='' ";}elseif($filter_23=='' OR $filter_23==0){$filtro[23] .= $datos[23][0]."!='' ";}
+			if($filter_24!='0' && $filter_24!=''){$filtro[24] .= $filter_24." AND ".$datos[24][0]."!='' ";}elseif($filter_24=='' OR $filter_24==0){$filtro[24] .= $datos[24][0]."!='' ";}
+			if($filter_25!='0' && $filter_25!=''){$filtro[25] .= $filter_25." AND ".$datos[25][0]."!='' ";}elseif($filter_25=='' OR $filter_25==0){$filtro[25] .= $datos[25][0]."!='' ";}
+			if($filter_26!='0' && $filter_26!=''){$filtro[26] .= $filter_26." AND ".$datos[26][0]."!='' ";}elseif($filter_26=='' OR $filter_26==0){$filtro[26] .= $datos[26][0]."!='' ";}
+			if($filter_27!='0' && $filter_27!=''){$filtro[27] .= $filter_27." AND ".$datos[27][0]."!='' ";}elseif($filter_27=='' OR $filter_27==0){$filtro[27] .= $datos[27][0]."!='' ";}
+			if($filter_28!='0' && $filter_28!=''){$filtro[28] .= $filter_28." AND ".$datos[28][0]."!='' ";}elseif($filter_28=='' OR $filter_28==0){$filtro[28] .= $datos[28][0]."!='' ";}
+			if($filter_29!='0' && $filter_29!=''){$filtro[29] .= $filter_29." AND ".$datos[29][0]."!='' ";}elseif($filter_29=='' OR $filter_29==0){$filtro[29] .= $datos[29][0]."!='' ";}
+			if($filter_30!='0' && $filter_30!=''){$filtro[30] .= $filter_30." AND ".$datos[30][0]."!='' ";}elseif($filter_30=='' OR $filter_30==0){$filtro[30] .= $datos[30][0]."!='' ";}
+			if($filter_31!='0' && $filter_31!=''){$filtro[31] .= $filter_31." AND ".$datos[31][0]."!='' ";}elseif($filter_31=='' OR $filter_31==0){$filtro[31] .= $datos[31][0]."!='' ";}
+			if($filter_32!='0' && $filter_32!=''){$filtro[32] .= $filter_32." AND ".$datos[32][0]."!='' ";}elseif($filter_32=='' OR $filter_32==0){$filtro[32] .= $datos[32][0]."!='' ";}
+			if($filter_33!='0' && $filter_33!=''){$filtro[33] .= $filter_33." AND ".$datos[33][0]."!='' ";}elseif($filter_33=='' OR $filter_33==0){$filtro[33] .= $datos[33][0]."!='' ";}
+			if($filter_34!='0' && $filter_34!=''){$filtro[34] .= $filter_34." AND ".$datos[34][0]."!='' ";}elseif($filter_34=='' OR $filter_34==0){$filtro[34] .= $datos[34][0]."!='' ";}
+			if($filter_35!='0' && $filter_35!=''){$filtro[35] .= $filter_35." AND ".$datos[35][0]."!='' ";}elseif($filter_35=='' OR $filter_35==0){$filtro[35] .= $datos[35][0]."!='' ";}
+			if($filter_36!='0' && $filter_36!=''){$filtro[36] .= $filter_36." AND ".$datos[36][0]."!='' ";}elseif($filter_36=='' OR $filter_36==0){$filtro[36] .= $datos[36][0]."!='' ";}
+			if($filter_37!='0' && $filter_37!=''){$filtro[37] .= $filter_37." AND ".$datos[37][0]."!='' ";}elseif($filter_37=='' OR $filter_37==0){$filtro[37] .= $datos[37][0]."!='' ";}
+			if($filter_38!='0' && $filter_38!=''){$filtro[38] .= $filter_38." AND ".$datos[38][0]."!='' ";}elseif($filter_38=='' OR $filter_38==0){$filtro[38] .= $datos[38][0]."!='' ";}
+			if($filter_39!='0' && $filter_39!=''){$filtro[39] .= $filter_39." AND ".$datos[39][0]."!='' ";}elseif($filter_39=='' OR $filter_39==0){$filtro[39] .= $datos[39][0]."!='' ";}
+			if($filter_40!='0' && $filter_40!=''){$filtro[40] .= $filter_40." AND ".$datos[40][0]."!='' ";}elseif($filter_40=='' OR $filter_40==0){$filtro[40] .= $datos[40][0]."!='' ";}
+			if($filter_41!='0' && $filter_41!=''){$filtro[41] .= $filter_41." AND ".$datos[41][0]."!='' ";}elseif($filter_41=='' OR $filter_41==0){$filtro[41] .= $datos[41][0]."!='' ";}
+			if($filter_42!='0' && $filter_42!=''){$filtro[42] .= $filter_42." AND ".$datos[42][0]."!='' ";}elseif($filter_42=='' OR $filter_42==0){$filtro[42] .= $datos[42][0]."!='' ";}
+			if($filter_43!='0' && $filter_43!=''){$filtro[43] .= $filter_43." AND ".$datos[43][0]."!='' ";}elseif($filter_43=='' OR $filter_43==0){$filtro[43] .= $datos[43][0]."!='' ";}
+			if($filter_44!='0' && $filter_44!=''){$filtro[44] .= $filter_44." AND ".$datos[44][0]."!='' ";}elseif($filter_44=='' OR $filter_44==0){$filtro[44] .= $datos[44][0]."!='' ";}
+			if($filter_45!='0' && $filter_45!=''){$filtro[45] .= $filter_45." AND ".$datos[45][0]."!='' ";}elseif($filter_45=='' OR $filter_45==0){$filtro[45] .= $datos[45][0]."!='' ";}
+			if($filter_46!='0' && $filter_46!=''){$filtro[46] .= $filter_46." AND ".$datos[46][0]."!='' ";}elseif($filter_46=='' OR $filter_46==0){$filtro[46] .= $datos[46][0]."!='' ";}
+			if($filter_47!='0' && $filter_47!=''){$filtro[47] .= $filter_47." AND ".$datos[47][0]."!='' ";}elseif($filter_47=='' OR $filter_47==0){$filtro[47] .= $datos[47][0]."!='' ";}
+			if($filter_48!='0' && $filter_48!=''){$filtro[48] .= $filter_48." AND ".$datos[48][0]."!='' ";}elseif($filter_48=='' OR $filter_48==0){$filtro[48] .= $datos[48][0]."!='' ";}
+			if($filter_49!='0' && $filter_49!=''){$filtro[49] .= $filter_49." AND ".$datos[49][0]."!='' ";}elseif($filter_49=='' OR $filter_49==0){$filtro[49] .= $datos[49][0]."!='' ";}
+			if($filter_50!='0' && $filter_50!=''){$filtro[50] .= $filter_50." AND ".$datos[50][0]."!='' ";}elseif($filter_50=='' OR $filter_50==0){$filtro[50] .= $datos[50][0]."!='' ";}
 									
-									if(count($datosA)==1){
-										$data_writing = $seleccion[$datosA[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datosA as $dato){
-											$data_writing .= $seleccion[$dato].' ';
-										}
-									}
+			/******************************************/
+			//Verifica si se enviaron mas datos
+			if(!isset($extracomand_1) OR $extracomand_1==''){   $extracomand_1 = $datos[1][0].' ASC '; }
+			if(!isset($extracomand_2) OR $extracomand_2==''){   $extracomand_2 = $datos[2][0].' ASC '; }
+			if(!isset($extracomand_3) OR $extracomand_3==''){   $extracomand_3 = $datos[3][0].' ASC '; }
+			if(!isset($extracomand_4) OR $extracomand_4==''){   $extracomand_4 = $datos[4][0].' ASC '; }
+			if(!isset($extracomand_5) OR $extracomand_5==''){   $extracomand_5 = $datos[5][0].' ASC '; }
+			if(!isset($extracomand_6) OR $extracomand_6==''){   $extracomand_6 = $datos[6][0].' ASC '; }
+			if(!isset($extracomand_7) OR $extracomand_7==''){   $extracomand_7 = $datos[7][0].' ASC '; }
+			if(!isset($extracomand_8) OR $extracomand_8==''){   $extracomand_8 = $datos[8][0].' ASC '; }
+			if(!isset($extracomand_9) OR $extracomand_9==''){   $extracomand_9 = $datos[9][0].' ASC '; }
+			if(!isset($extracomand_10) OR $extracomand_10==''){ $extracomand_10 = $datos[10][0].' ASC '; }
+			if(!isset($extracomand_11) OR $extracomand_11==''){ $extracomand_11 = $datos[11][0].' ASC '; }
+			if(!isset($extracomand_12) OR $extracomand_12==''){ $extracomand_12 = $datos[12][0].' ASC '; }
+			if(!isset($extracomand_13) OR $extracomand_13==''){ $extracomand_13 = $datos[13][0].' ASC '; }
+			if(!isset($extracomand_14) OR $extracomand_14==''){ $extracomand_14 = $datos[14][0].' ASC '; }
+			if(!isset($extracomand_15) OR $extracomand_15==''){ $extracomand_15 = $datos[15][0].' ASC '; }
+			if(!isset($extracomand_16) OR $extracomand_16==''){ $extracomand_16 = $datos[16][0].' ASC '; }
+			if(!isset($extracomand_17) OR $extracomand_17==''){ $extracomand_17 = $datos[17][0].' ASC '; }
+			if(!isset($extracomand_18) OR $extracomand_18==''){ $extracomand_18 = $datos[18][0].' ASC '; }
+			if(!isset($extracomand_19) OR $extracomand_19==''){ $extracomand_19 = $datos[19][0].' ASC '; }
+			if(!isset($extracomand_20) OR $extracomand_20==''){ $extracomand_20 = $datos[20][0].' ASC '; }
+			if(!isset($extracomand_21) OR $extracomand_21==''){ $extracomand_21 = $datos[21][0].' ASC '; }
+			if(!isset($extracomand_22) OR $extracomand_22==''){ $extracomand_22 = $datos[22][0].' ASC '; }
+			if(!isset($extracomand_23) OR $extracomand_23==''){ $extracomand_23 = $datos[23][0].' ASC '; }
+			if(!isset($extracomand_24) OR $extracomand_24==''){ $extracomand_24 = $datos[24][0].' ASC '; }
+			if(!isset($extracomand_25) OR $extracomand_25==''){ $extracomand_25 = $datos[25][0].' ASC '; }
+			if(!isset($extracomand_26) OR $extracomand_26==''){ $extracomand_26 = $datos[26][0].' ASC '; }
+			if(!isset($extracomand_27) OR $extracomand_27==''){ $extracomand_27 = $datos[27][0].' ASC '; }
+			if(!isset($extracomand_28) OR $extracomand_28==''){ $extracomand_28 = $datos[28][0].' ASC '; }
+			if(!isset($extracomand_29) OR $extracomand_29==''){ $extracomand_29 = $datos[29][0].' ASC '; }
+			if(!isset($extracomand_30) OR $extracomand_30==''){ $extracomand_30 = $datos[30][0].' ASC '; }
+			if(!isset($extracomand_31) OR $extracomand_31==''){ $extracomand_31 = $datos[31][0].' ASC '; }
+			if(!isset($extracomand_32) OR $extracomand_32==''){ $extracomand_32 = $datos[32][0].' ASC '; }
+			if(!isset($extracomand_33) OR $extracomand_33==''){ $extracomand_33 = $datos[33][0].' ASC '; }
+			if(!isset($extracomand_34) OR $extracomand_34==''){ $extracomand_34 = $datos[34][0].' ASC '; }
+			if(!isset($extracomand_35) OR $extracomand_35==''){ $extracomand_35 = $datos[35][0].' ASC '; }
+			if(!isset($extracomand_36) OR $extracomand_36==''){ $extracomand_36 = $datos[36][0].' ASC '; }
+			if(!isset($extracomand_37) OR $extracomand_37==''){ $extracomand_37 = $datos[37][0].' ASC '; }
+			if(!isset($extracomand_38) OR $extracomand_38==''){ $extracomand_38 = $datos[38][0].' ASC '; }
+			if(!isset($extracomand_39) OR $extracomand_39==''){ $extracomand_39 = $datos[39][0].' ASC '; }
+			if(!isset($extracomand_40) OR $extracomand_40==''){ $extracomand_40 = $datos[40][0].' ASC '; }
+			if(!isset($extracomand_41) OR $extracomand_41==''){ $extracomand_41 = $datos[41][0].' ASC '; }
+			if(!isset($extracomand_42) OR $extracomand_42==''){ $extracomand_42 = $datos[42][0].' ASC '; }
+			if(!isset($extracomand_43) OR $extracomand_43==''){ $extracomand_43 = $datos[43][0].' ASC '; }
+			if(!isset($extracomand_44) OR $extracomand_44==''){ $extracomand_44 = $datos[44][0].' ASC '; }
+			if(!isset($extracomand_45) OR $extracomand_45==''){ $extracomand_45 = $datos[45][0].' ASC '; }
+			if(!isset($extracomand_46) OR $extracomand_46==''){ $extracomand_46 = $datos[46][0].' ASC '; }
+			if(!isset($extracomand_47) OR $extracomand_47==''){ $extracomand_47 = $datos[47][0].' ASC '; }
+			if(!isset($extracomand_48) OR $extracomand_48==''){ $extracomand_48 = $datos[48][0].' ASC '; }
+			if(!isset($extracomand_49) OR $extracomand_49==''){ $extracomand_49 = $datos[49][0].' ASC '; }
+			if(!isset($extracomand_50) OR $extracomand_50==''){ $extracomand_50 = $datos[50][0].' ASC '; }
+			
+			/******************************************/
+			//consulto
+			$arrSelect_1 = array();
+			$arrSelect_2 = array();
+			$arrSelect_3 = array();
+			$arrSelect_4 = array();
+			$arrSelect_5 = array();
+			$arrSelect_6 = array();
+			$arrSelect_7 = array();
+			$arrSelect_8 = array();
+			$arrSelect_9 = array();
+			$arrSelect_10 = array();
+			$arrSelect_11 = array();
+			$arrSelect_12 = array();
+			$arrSelect_13 = array();
+			$arrSelect_14 = array();
+			$arrSelect_15 = array();
+			$arrSelect_16 = array();
+			$arrSelect_17 = array();
+			$arrSelect_18 = array();
+			$arrSelect_19 = array();
+			$arrSelect_20 = array();
+			$arrSelect_21 = array();
+			$arrSelect_22 = array();
+			$arrSelect_23 = array();
+			$arrSelect_24 = array();
+			$arrSelect_25 = array();
+			$arrSelect_26 = array();
+			$arrSelect_27 = array();
+			$arrSelect_28 = array();
+			$arrSelect_29 = array();
+			$arrSelect_30 = array();
+			$arrSelect_31 = array();
+			$arrSelect_32 = array();
+			$arrSelect_33 = array();
+			$arrSelect_34 = array();
+			$arrSelect_35 = array();
+			$arrSelect_36 = array();
+			$arrSelect_37 = array();
+			$arrSelect_38 = array();
+			$arrSelect_39 = array();
+			$arrSelect_40 = array();
+			$arrSelect_41 = array();
+			$arrSelect_42 = array();
+			$arrSelect_43 = array();
+			$arrSelect_44 = array();
+			$arrSelect_45 = array();
+			$arrSelect_46 = array();
+			$arrSelect_47 = array();
+			$arrSelect_48 = array();
+			$arrSelect_49 = array();
+			$arrSelect_50 = array();
+			$arrSelect_1  = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
+			$arrSelect_2  = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2],    $table_2,  '', $filtro[2],  $extracomand_2,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_3  = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3],    $table_3,  '', $filtro[3],  $extracomand_3,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
+			$arrSelect_4  = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4],    $table_4,  '', $filtro[4],  $extracomand_4,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
+			$arrSelect_5  = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5],    $table_5,  '', $filtro[5],  $extracomand_5,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
+			$arrSelect_6  = db_select_array (false, $dataA_6.' AS idData ,'.$dataA_5.' AS idDataFilter '.$data_required[6],    $table_6,  '', $filtro[6],  $extracomand_6,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_6');
+			$arrSelect_7  = db_select_array (false, $dataA_7.' AS idData ,'.$dataA_6.' AS idDataFilter '.$data_required[7],    $table_7,  '', $filtro[7],  $extracomand_7,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_7');
+			$arrSelect_8  = db_select_array (false, $dataA_8.' AS idData ,'.$dataA_7.' AS idDataFilter '.$data_required[8],    $table_8,  '', $filtro[8],  $extracomand_8,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_8');
+			$arrSelect_9  = db_select_array (false, $dataA_9.' AS idData ,'.$dataA_8.' AS idDataFilter '.$data_required[9],    $table_9,  '', $filtro[9],  $extracomand_9,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_9');
+			$arrSelect_10 = db_select_array (false, $dataA_10.' AS idData ,'.$dataA_9.' AS idDataFilter '.$data_required[10],  $table_10, '', $filtro[10], $extracomand_10, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_10');
+			$arrSelect_11 = db_select_array (false, $dataA_11.' AS idData ,'.$dataA_10.' AS idDataFilter '.$data_required[11], $table_11, '', $filtro[11], $extracomand_11, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_11');
+			$arrSelect_12 = db_select_array (false, $dataA_12.' AS idData ,'.$dataA_11.' AS idDataFilter '.$data_required[12], $table_12, '', $filtro[12], $extracomand_12, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_12');
+			$arrSelect_13 = db_select_array (false, $dataA_13.' AS idData ,'.$dataA_12.' AS idDataFilter '.$data_required[13], $table_13, '', $filtro[13], $extracomand_13, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_13');
+			$arrSelect_14 = db_select_array (false, $dataA_14.' AS idData ,'.$dataA_13.' AS idDataFilter '.$data_required[14], $table_14, '', $filtro[14], $extracomand_14, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_14');
+			$arrSelect_15 = db_select_array (false, $dataA_15.' AS idData ,'.$dataA_14.' AS idDataFilter '.$data_required[15], $table_15, '', $filtro[15], $extracomand_15, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_15');
+			$arrSelect_16 = db_select_array (false, $dataA_16.' AS idData ,'.$dataA_15.' AS idDataFilter '.$data_required[16], $table_16, '', $filtro[16], $extracomand_16, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_16');
+			$arrSelect_17 = db_select_array (false, $dataA_17.' AS idData ,'.$dataA_16.' AS idDataFilter '.$data_required[17], $table_17, '', $filtro[17], $extracomand_17, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_17');
+			$arrSelect_18 = db_select_array (false, $dataA_18.' AS idData ,'.$dataA_17.' AS idDataFilter '.$data_required[18], $table_18, '', $filtro[18], $extracomand_18, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_18');
+			$arrSelect_19 = db_select_array (false, $dataA_19.' AS idData ,'.$dataA_18.' AS idDataFilter '.$data_required[19], $table_19, '', $filtro[19], $extracomand_19, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_19');
+			$arrSelect_20 = db_select_array (false, $dataA_20.' AS idData ,'.$dataA_19.' AS idDataFilter '.$data_required[20], $table_20, '', $filtro[20], $extracomand_20, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_20');
+			$arrSelect_21 = db_select_array (false, $dataA_21.' AS idData ,'.$dataA_20.' AS idDataFilter '.$data_required[21], $table_21, '', $filtro[21], $extracomand_21, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_21');
+			$arrSelect_22 = db_select_array (false, $dataA_22.' AS idData ,'.$dataA_21.' AS idDataFilter '.$data_required[22], $table_22, '', $filtro[22], $extracomand_22, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_22');
+			$arrSelect_23 = db_select_array (false, $dataA_23.' AS idData ,'.$dataA_22.' AS idDataFilter '.$data_required[23], $table_23, '', $filtro[23], $extracomand_23, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_23');
+			$arrSelect_24 = db_select_array (false, $dataA_24.' AS idData ,'.$dataA_23.' AS idDataFilter '.$data_required[24], $table_24, '', $filtro[24], $extracomand_24, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_24');
+			$arrSelect_25 = db_select_array (false, $dataA_25.' AS idData ,'.$dataA_24.' AS idDataFilter '.$data_required[25], $table_25, '', $filtro[25], $extracomand_25, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_25');
+			$arrSelect_26 = db_select_array (false, $dataA_26.' AS idData ,'.$dataA_25.' AS idDataFilter '.$data_required[26], $table_26, '', $filtro[26], $extracomand_26, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_26');
+			$arrSelect_27 = db_select_array (false, $dataA_27.' AS idData ,'.$dataA_26.' AS idDataFilter '.$data_required[27], $table_27, '', $filtro[27], $extracomand_27, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_27');
+			$arrSelect_28 = db_select_array (false, $dataA_28.' AS idData ,'.$dataA_27.' AS idDataFilter '.$data_required[28], $table_28, '', $filtro[28], $extracomand_28, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_28');
+			$arrSelect_29 = db_select_array (false, $dataA_29.' AS idData ,'.$dataA_28.' AS idDataFilter '.$data_required[29], $table_29, '', $filtro[29], $extracomand_29, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_29');
+			$arrSelect_30 = db_select_array (false, $dataA_30.' AS idData ,'.$dataA_29.' AS idDataFilter '.$data_required[30], $table_30, '', $filtro[30], $extracomand_30, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_30');
+			$arrSelect_31 = db_select_array (false, $dataA_31.' AS idData ,'.$dataA_30.' AS idDataFilter '.$data_required[31], $table_31, '', $filtro[31], $extracomand_31, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_31');
+			$arrSelect_32 = db_select_array (false, $dataA_32.' AS idData ,'.$dataA_31.' AS idDataFilter '.$data_required[32], $table_32, '', $filtro[32], $extracomand_32, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_32');
+			$arrSelect_33 = db_select_array (false, $dataA_33.' AS idData ,'.$dataA_32.' AS idDataFilter '.$data_required[33], $table_33, '', $filtro[33], $extracomand_33, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_33');
+			$arrSelect_34 = db_select_array (false, $dataA_34.' AS idData ,'.$dataA_33.' AS idDataFilter '.$data_required[34], $table_34, '', $filtro[34], $extracomand_34, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_34');
+			$arrSelect_35 = db_select_array (false, $dataA_35.' AS idData ,'.$dataA_34.' AS idDataFilter '.$data_required[35], $table_35, '', $filtro[35], $extracomand_35, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_35');
+			$arrSelect_36 = db_select_array (false, $dataA_36.' AS idData ,'.$dataA_35.' AS idDataFilter '.$data_required[36], $table_36, '', $filtro[36], $extracomand_36, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_36');
+			$arrSelect_37 = db_select_array (false, $dataA_37.' AS idData ,'.$dataA_36.' AS idDataFilter '.$data_required[37], $table_37, '', $filtro[37], $extracomand_37, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_37');
+			$arrSelect_38 = db_select_array (false, $dataA_38.' AS idData ,'.$dataA_37.' AS idDataFilter '.$data_required[38], $table_38, '', $filtro[38], $extracomand_38, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_38');
+			$arrSelect_39 = db_select_array (false, $dataA_39.' AS idData ,'.$dataA_38.' AS idDataFilter '.$data_required[39], $table_39, '', $filtro[39], $extracomand_39, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_39');
+			$arrSelect_40 = db_select_array (false, $dataA_40.' AS idData ,'.$dataA_39.' AS idDataFilter '.$data_required[40], $table_40, '', $filtro[40], $extracomand_40, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_40');
+			$arrSelect_41 = db_select_array (false, $dataA_41.' AS idData ,'.$dataA_40.' AS idDataFilter '.$data_required[41], $table_41, '', $filtro[41], $extracomand_41, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_41');
+			$arrSelect_42 = db_select_array (false, $dataA_42.' AS idData ,'.$dataA_41.' AS idDataFilter '.$data_required[42], $table_42, '', $filtro[42], $extracomand_42, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_42');
+			$arrSelect_43 = db_select_array (false, $dataA_43.' AS idData ,'.$dataA_42.' AS idDataFilter '.$data_required[43], $table_43, '', $filtro[43], $extracomand_43, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_43');
+			$arrSelect_44 = db_select_array (false, $dataA_44.' AS idData ,'.$dataA_43.' AS idDataFilter '.$data_required[44], $table_44, '', $filtro[44], $extracomand_44, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_44');
+			$arrSelect_45 = db_select_array (false, $dataA_45.' AS idData ,'.$dataA_44.' AS idDataFilter '.$data_required[45], $table_45, '', $filtro[45], $extracomand_45, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_45');
+			$arrSelect_46 = db_select_array (false, $dataA_46.' AS idData ,'.$dataA_45.' AS idDataFilter '.$data_required[46], $table_46, '', $filtro[46], $extracomand_46, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_46');
+			$arrSelect_47 = db_select_array (false, $dataA_47.' AS idData ,'.$dataA_46.' AS idDataFilter '.$data_required[47], $table_47, '', $filtro[47], $extracomand_47, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_47');
+			$arrSelect_48 = db_select_array (false, $dataA_48.' AS idData ,'.$dataA_47.' AS idDataFilter '.$data_required[48], $table_48, '', $filtro[48], $extracomand_48, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_48');
+			$arrSelect_49 = db_select_array (false, $dataA_49.' AS idData ,'.$dataA_48.' AS idDataFilter '.$data_required[49], $table_49, '', $filtro[49], $extracomand_49, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_49');
+			$arrSelect_50 = db_select_array (false, $dataA_50.' AS idData ,'.$dataA_49.' AS idDataFilter '.$data_required[50], $table_50, '', $filtro[50], $extracomand_50, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_50');
 									
-									$w = ''; if($value[1]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-									$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-								} 
-				$input .= '</select>
-						</div>
-					</div>';
-
-			//Se recorre 50 veces
-			$maxs = 50;
-			for ($i = 2; $i <= $maxs; $i++) {
-				
-				//explode para poder crear cadena
-				$datosB = explode(",", $dataB[$i]);
-				if(count($datosB)==1){
-					$data_requiredB = ','.$datosB[0].' AS '.$datosB[0];
-				}else{
-					$data_requiredB = '';
-					foreach($datosB as $dato){
-						$data_requiredB .= ','.$dato.' AS '.$dato;
-					}
-				}
-				
-				// Se trae un listado con los datos previamente seleccionados
-				if ($value[$i-1]!=0&&$value[$i-1]!=''){
-					$arrSeleccion = array();
-					$query = "SELECT ".$dataA[$i]." AS idData ".$data_requiredB."  FROM `".$table[$i]."` WHERE ".$dataA[$i-1]." = ".$value[$i-1]." ".$filtro[$i]." ".$excom[$i];
-					$resultado = mysqli_query ($dbConn, $query);
-					while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSeleccion,$row );
-					}
-					mysqli_free_result($resultado);
-				} 
-				// Se trae un listado con todos los datos
-				$arrTodos = array();
-				$query = "SELECT ".$dataA[$i]." AS idData, ".$dataA[$i-1]." AS idCat ".$data_requiredB." FROM `".$table[$i]."` WHERE ".$dataA[$i]."!='' ".$filtro[$i]." ".$excom[$i];
-				$resultado = mysqli_query ($dbConn, $query);
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-				array_push( $arrTodos,$row );
-				}
-				mysqli_free_result($resultado);
-				
-				
-				//Se verifica la funcion
-				$onchange = '';
-				if($i!=$maxs){
-					$onchange = 'onChange="cambia_'.$name[$i].'()"';
-				}
-				
-				//Se dibuja el input
-				$input .= '
-						<div class="form-group" id="div_'.$name[$i].'" '.$display[$i].'>
-							<label for="text2" class="control-label col-sm-4">'.$placeholder[$i].'</label>
-							<div class="col-sm-8 field">
-								<select name="'.$name[$i].'" id="'.$name[$i].'" class="form-control" '.$required[$i].' '.$onchange.' >
-									<option value="" selected>Seleccione una Opcion</option>';
-									if ($value[$i-1]!=0&&$value[$i-1]!=''){
-										foreach ( $arrSeleccion as $seleccion ) {
-											if(count($datosB)==1){
-												$data_writing = $seleccion[$datosB[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datosB as $dato){
-													$data_writing .= $seleccion[$dato].' ';
-												}
-											}
-											//echo $data_writing.'<br/>';
-											$w = ''; if($value[$i]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-											$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										} 
-									}
-					$input .= '</select>
-							</div>
-						</div>';
-				
-				$input .= '<script>
-				';	
-			
-				//Input 2
-				filtrar($arrTodos, 'idCat'); 
-				$vowels = array(" ", "´", "-");
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
-					foreach ($componentes as $idcomp) {
-						$input .= ',"'.$idcomp['idData'].'"';
-					}
-					$input .= ');
-					';
-				}
-				
-				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
-					foreach ($componentes as $comp) {
-						if(count($datosB)==1){
-							$data_writing = $comp[$datosB[0]].' ';
-						}else{
-							$data_writing = '';
-							foreach($datosB as $dato){
-								$data_writing .= $comp[$dato].' ';
-							}
-						}					
-						$input .= ',"'.str_replace('"', '',$data_writing).'"';
-					}
-					$input .= ');
-					';
-				}
-			
-				if($i <= $maxs){
-					$input .= '
-					function cambia_'.$name[$i-1].'(){
-						let Componente = document.'.$form_name.'.'.$name[$i-1].'[document.'.$form_name.'.'.$name[$i-1].'.selectedIndex].value
-						try {
-							if (Componente != "") {
-								id_data = eval("id_data_'.$name[$i-1].'_" + Componente);
-								data    = eval("data_'.$name[$i-1].'_" + Componente);
-								num_int = id_data.length;
-								document.'.$form_name.'.'.$name[$i].'.length = num_int;
-								for(i=0;i<num_int;i++){
-								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
-								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
-								}
-								document.getElementById("div_'.$name[$i].'").style.display = "block";	
-							}else{';
-						
-								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-									$input .= '
-										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-									';
-								
-								}
-							$input .= '	
-							}
-						} catch (e) {';
-						
-							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
-								$input .= '
-									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
-									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
-								';
-								
-							}
-						$input .= '	
-						}
-						document.'.$form_name.'.'.$name[$i].'.options[0].selected = true
-					}
-					';
-				}
-				$input .= '</script>';
-				
+			/******************************************/
+			//si hay resultados
+			if($arrSelect_1!=false){
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
 			}
+			//si hay resultados
+			if($arrSelect_2!=false){
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_3!=false){
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_4!=false){
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_5!=false){
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_6!=false){
+				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);		
+				$input .= $this->select_input_script($arrSelect_6, $value_6, $name_5, $name_6, $datos[6], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_7!=false){
+				$input .= $this->select_input_empty($name_7, $placeholder_7, $requerido[7]);		
+				$input .= $this->select_input_script($arrSelect_7, $value_7, $name_6, $name_7, $datos[7], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_8!=false){
+				$input .= $this->select_input_empty($name_8, $placeholder_8, $requerido[8]);		
+				$input .= $this->select_input_script($arrSelect_8, $value_8, $name_7, $name_8, $datos[8], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_9!=false){
+				$input .= $this->select_input_empty($name_9, $placeholder_9, $requerido[9]);		
+				$input .= $this->select_input_script($arrSelect_9, $value_9, $name_8, $name_9, $datos[9], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_10!=false){
+				$input .= $this->select_input_empty($name_10, $placeholder_10, $requerido[10]);		
+				$input .= $this->select_input_script($arrSelect_10, $value_10, $name_9, $name_10, $datos[10], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_11!=false){
+				$input .= $this->select_input_empty($name_11, $placeholder_11, $requerido[11]);		
+				$input .= $this->select_input_script($arrSelect_11, $value_11, $name_10, $name_11, $datos[11], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_12!=false){
+				$input .= $this->select_input_empty($name_12, $placeholder_12, $requerido[12]);		
+				$input .= $this->select_input_script($arrSelect_12, $value_12, $name_11, $name_12, $datos[12], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_13!=false){
+				$input .= $this->select_input_empty($name_13, $placeholder_13, $requerido[13]);		
+				$input .= $this->select_input_script($arrSelect_13, $value_13, $name_12, $name_13, $datos[13], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_14!=false){
+				$input .= $this->select_input_empty($name_14, $placeholder_14, $requerido[14]);		
+				$input .= $this->select_input_script($arrSelect_14, $value_14, $name_13, $name_14, $datos[14], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_15!=false){
+				$input .= $this->select_input_empty($name_15, $placeholder_15, $requerido[15]);		
+				$input .= $this->select_input_script($arrSelect_15, $value_15, $name_14, $name_15, $datos[15], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_16!=false){
+				$input .= $this->select_input_empty($name_16, $placeholder_16, $requerido[16]);		
+				$input .= $this->select_input_script($arrSelect_16, $value_16, $name_15, $name_16, $datos[16], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_17!=false){
+				$input .= $this->select_input_empty($name_17, $placeholder_17, $requerido[17]);		
+				$input .= $this->select_input_script($arrSelect_17, $value_17, $name_16, $name_17, $datos[17], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_18!=false){
+				$input .= $this->select_input_empty($name_18, $placeholder_18, $requerido[18]);		
+				$input .= $this->select_input_script($arrSelect_18, $value_18, $name_17, $name_18, $datos[18], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_19!=false){
+				$input .= $this->select_input_empty($name_19, $placeholder_19, $requerido[19]);		
+				$input .= $this->select_input_script($arrSelect_19, $value_19, $name_18, $name_19, $datos[19], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_20!=false){
+				$input .= $this->select_input_empty($name_20, $placeholder_20, $requerido[20]);		
+				$input .= $this->select_input_script($arrSelect_20, $value_20, $name_19, $name_20, $datos[20], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_21!=false){
+				$input .= $this->select_input_empty($name_21, $placeholder_21, $requerido[21]);		
+				$input .= $this->select_input_script($arrSelect_21, $value_21, $name_20, $name_21, $datos[21], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_22!=false){
+				$input .= $this->select_input_empty($name_22, $placeholder_22, $requerido[22]);		
+				$input .= $this->select_input_script($arrSelect_22, $value_22, $name_21, $name_22, $datos[22], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_23!=false){
+				$input .= $this->select_input_empty($name_23, $placeholder_23, $requerido[23]);		
+				$input .= $this->select_input_script($arrSelect_23, $value_23, $name_22, $name_23, $datos[23], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_24!=false){
+				$input .= $this->select_input_empty($name_24, $placeholder_24, $requerido[24]);		
+				$input .= $this->select_input_script($arrSelect_24, $value_24, $name_23, $name_24, $datos[24], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_25!=false){
+				$input .= $this->select_input_empty($name_25, $placeholder_25, $requerido[25]);		
+				$input .= $this->select_input_script($arrSelect_25, $value_25, $name_24, $name_25, $datos[25], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_26!=false){
+				$input .= $this->select_input_empty($name_26, $placeholder_26, $requerido[26]);		
+				$input .= $this->select_input_script($arrSelect_26, $value_26, $name_25, $name_26, $datos[26], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_27!=false){
+				$input .= $this->select_input_empty($name_27, $placeholder_27, $requerido[27]);		
+				$input .= $this->select_input_script($arrSelect_27, $value_27, $name_26, $name_27, $datos[27], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_28!=false){
+				$input .= $this->select_input_empty($name_28, $placeholder_28, $requerido[28]);		
+				$input .= $this->select_input_script($arrSelect_28, $value_28, $name_27, $name_28, $datos[28], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_29!=false){
+				$input .= $this->select_input_empty($name_29, $placeholder_29, $requerido[29]);		
+				$input .= $this->select_input_script($arrSelect_29, $value_29, $name_28, $name_29, $datos[29], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_30!=false){
+				$input .= $this->select_input_empty($name_30, $placeholder_30, $requerido[30]);		
+				$input .= $this->select_input_script($arrSelect_30, $value_30, $name_29, $name_30, $datos[30], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_31!=false){
+				$input .= $this->select_input_empty($name_31, $placeholder_31, $requerido[31]);		
+				$input .= $this->select_input_script($arrSelect_31, $value_31, $name_30, $name_31, $datos[31], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_32!=false){
+				$input .= $this->select_input_empty($name_32, $placeholder_32, $requerido[32]);		
+				$input .= $this->select_input_script($arrSelect_32, $value_32, $name_31, $name_32, $datos[32], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_33!=false){
+				$input .= $this->select_input_empty($name_33, $placeholder_33, $requerido[33]);		
+				$input .= $this->select_input_script($arrSelect_33, $value_33, $name_32, $name_33, $datos[33], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_34!=false){
+				$input .= $this->select_input_empty($name_34, $placeholder_34, $requerido[34]);		
+				$input .= $this->select_input_script($arrSelect_34, $value_34, $name_33, $name_34, $datos[34], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_35!=false){
+				$input .= $this->select_input_empty($name_35, $placeholder_35, $requerido[35]);		
+				$input .= $this->select_input_script($arrSelect_35, $value_35, $name_34, $name_35, $datos[35], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_36!=false){
+				$input .= $this->select_input_empty($name_36, $placeholder_36, $requerido[36]);		
+				$input .= $this->select_input_script($arrSelect_36, $value_36, $name_35, $name_36, $datos[36], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_37!=false){
+				$input .= $this->select_input_empty($name_37, $placeholder_37, $requerido[37]);		
+				$input .= $this->select_input_script($arrSelect_37, $value_37, $name_36, $name_37, $datos[37], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_38!=false){
+				$input .= $this->select_input_empty($name_38, $placeholder_38, $requerido[38]);		
+				$input .= $this->select_input_script($arrSelect_38, $value_38, $name_37, $name_38, $datos[38], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_39!=false){
+				$input .= $this->select_input_empty($name_39, $placeholder_39, $requerido[39]);		
+				$input .= $this->select_input_script($arrSelect_39, $value_39, $name_38, $name_39, $datos[39], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_40!=false){
+				$input .= $this->select_input_empty($name_40, $placeholder_40, $requerido[40]);		
+				$input .= $this->select_input_script($arrSelect_40, $value_40, $name_39, $name_40, $datos[40], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_41!=false){
+				$input .= $this->select_input_empty($name_41, $placeholder_41, $requerido[41]);		
+				$input .= $this->select_input_script($arrSelect_41, $value_41, $name_40, $name_41, $datos[41], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_42!=false){
+				$input .= $this->select_input_empty($name_42, $placeholder_42, $requerido[42]);		
+				$input .= $this->select_input_script($arrSelect_42, $value_42, $name_41, $name_42, $datos[42], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_43!=false){
+				$input .= $this->select_input_empty($name_43, $placeholder_43, $requerido[43]);		
+				$input .= $this->select_input_script($arrSelect_43, $value_43, $name_42, $name_43, $datos[43], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_44!=false){
+				$input .= $this->select_input_empty($name_44, $placeholder_44, $requerido[44]);		
+				$input .= $this->select_input_script($arrSelect_44, $value_44, $name_43, $name_44, $datos[44], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_45!=false){
+				$input .= $this->select_input_empty($name_45, $placeholder_45, $requerido[45]);		
+				$input .= $this->select_input_script($arrSelect_45, $value_45, $name_44, $name_45, $datos[45], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_46!=false){
+				$input .= $this->select_input_empty($name_46, $placeholder_46, $requerido[46]);		
+				$input .= $this->select_input_script($arrSelect_46, $value_46, $name_45, $name_46, $datos[16], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_47!=false){
+				$input .= $this->select_input_empty($name_47, $placeholder_47, $requerido[47]);		
+				$input .= $this->select_input_script($arrSelect_47, $value_47, $name_46, $name_47, $datos[47], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_48!=false){
+				$input .= $this->select_input_empty($name_48, $placeholder_48, $requerido[48]);		
+				$input .= $this->select_input_script($arrSelect_48, $value_48, $name_47, $name_48, $datos[48], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_49!=false){
+				$input .= $this->select_input_empty($name_49, $placeholder_49, $requerido[49]);		
+				$input .= $this->select_input_script($arrSelect_49, $value_49, $name_48, $name_49, $datos[49], $form_name);
+			}
+			//si hay resultados
+			if($arrSelect_50!=false){
+				$input .= $this->select_input_empty($name_50, $placeholder_50, $requerido[50]);		
+				$input .= $this->select_input_script($arrSelect_50, $value_50, $name_49, $name_50, $datos[50], $form_name);
+			}
+			
 			/******************************************/
 			//Imprimir dato	
 			echo $input;
-		}	
+		}
 	}
-	
 /*******************************************************************************************************************/
 	
 }
