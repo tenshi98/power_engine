@@ -18,9 +18,13 @@ function GraphLinear_1($idDiv,
 		case 1:
 			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
 			break;
-		//Doble eje
+		//Legend dentro al lado izquierdo
 		case 2:
-			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
+			$lopts = 'legend: {x: 0,y: 1.0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho
+		case 3:
+			$lopts = 'legend: {x: 0,y: 2.0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
 			break;
 		default:
 			$lopts = '';
@@ -74,7 +78,7 @@ function GraphLinear_1($idDiv,
 		var config = {
 			locale: \'es-ar\',
 			displayModeBar: true,
-			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoom2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
 			displaylogo: false,
 			responsive: true
 		};
@@ -98,9 +102,13 @@ function GraphLinear_2($idDiv,
 		case 1:
 			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
 			break;
-		//Doble eje
+		//Legend dentro al lado izquierdo
 		case 2:
-			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
+			$lopts = 'legend: {x: 0,y: 1.0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho
+		case 3:
+			$lopts = 'legend: {x: 0,y: 2.0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
 			break;
 		default:
 			$lopts = '';
@@ -149,7 +157,7 @@ function GraphLinear_2($idDiv,
 		var config = {
 			locale: \'es-ar\',
 			displayModeBar: true,
-			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoom2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
 			displaylogo: false,
 			responsive: true
 		};
@@ -174,9 +182,13 @@ function GraphLinear_3($idDiv,
 		case 1:
 			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
 			break;
-		//Doble eje
+		//Legend dentro al lado izquierdo
 		case 2:
-			$lopts = 'height: 600,legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
+			$lopts = 'legend: {x: 0,y: 1.0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho
+		case 3:
+			$lopts = 'legend: {x: 0,y: 2.0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
 			break;
 		default:
 			$lopts = '';
@@ -228,7 +240,7 @@ function GraphLinear_3($idDiv,
 		var config = {
 			locale: \'es-ar\',
 			displayModeBar: true,
-			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoom2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
 			displaylogo: false,
 			responsive: true
 		};
@@ -241,5 +253,356 @@ function GraphLinear_3($idDiv,
 	return $graph;
 	
 }
+/*******************************************************************************************************************/
+//Crea un grafico lineal (Seleccion Normal)
+function GraphBarr_1($idDiv, 
+					$titulo, $eje_x_titulo, $eje_y_titulo, 
+					$xData, $yData, $Name, $hoverinfo, $markerColor, $markerLine,
+					$type, $legendOptions){
+	
+	//Tipo de grafico
+	switch ($type) {
+		case 1:  $typeopts = 'group'; break;
+		case 2:  $typeopts = 'stack'; break;
+		default: $typeopts = '';
+	}
+	
+	//Opciones del legend
+	switch ($legendOptions) {
+		//Legend abajo
+		case 1:
+			$lopts = 'legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
+			break;
+		//Legend dentro al lado izquierdo superior
+		case 2:
+			$lopts = 'legend: {x: 0,y: 1, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho superior
+		case 3:
+			$lopts = 'legend: {x: 1,y: 1, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado izquierdo inferior
+		case 4:
+			$lopts = 'legend: {x: 0,y: 0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho inferior
+		case 5:
+			$lopts = 'legend: {x: 1,y: 0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		default:
+			$lopts = '';
+	}
 
+	/*************************************************/
+	//imprime
+	$graph  = '<div id="'.$idDiv.'"></div>';
+	$graph .= '<script>';
+		$graph .= $xData;
+		$graph .= $yData;
+		$graph .= $Name;
+		$graph .= $hoverinfo;
+		$graph .= $markerColor;
+		$graph .= $markerLine;
+		
+		$graph .='
+		//se arman datos	
+		var dataPlotly = [];
+		for ( var i = 0 ; i < xData.length ; i++ ) {
+			var result = {
+				x: xData[i],
+				y: yData[i],
+				type: \'bar\',
+				name: names[i],
+				text: yData[i].map(String),
+				textposition: \'auto\',
+				hoverinfo: \'grf_info[i]\',
+				marker: {
+					color: \'markerColor[i]\',
+					line: {
+						color: \'markerLine[i]\',
+						width: 1.5
+					}
+				}
+			};
+			dataPlotly.push(result);
+		}
+		//vista de los label
+		var labelview = true;
+		if(xData[0].length > 30){
+			labelview = false;
+		}
+		/*****************************************************************/
+		var layout = {
+			title: \''.$titulo.'\',
+			barmode: \''.$typeopts.'\',';
+			if(isset($eje_x_titulo)&&$eje_x_titulo!=''){ $graph .= 'xaxis: {title: \''.$eje_x_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
+			if(isset($eje_y_titulo)&&$eje_y_titulo!=''){ $graph .= 'yaxis: {title: \''.$eje_y_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
+			$graph .= $lopts;
+		 $graph .= '	
+		};
+		var config = {
+			locale: \'es-ar\',
+			displayModeBar: true,
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			displaylogo: false,
+			responsive: true
+		};
+
+		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
+	</script>';	
+	
+	return $graph;
+	
+}
+/*******************************************************************************************************************/
+//Crea un grafico lineal (Seleccion Normal)
+function GraphPie_1($idDiv, 
+					$titulo, 
+					$values,$labels,$width,$height,
+					$dataOptions, $layoutOptions){
+	
+	//Tipo de grafico
+	switch ($dataOptions) {
+		//Normal
+		case 1:  
+			$dopts = 'textinfo: "label+percent", textposition: "inside", automargin: true';
+			break;
+		//Valores fuera
+		case 2:  
+			$dopts = 'textinfo: "label+percent", textposition: "outside", automargin: true';
+			break;
+		//Donut Chart
+		case 3:  
+			$dopts = 'hole: .4,';
+			break;
+		default: 
+			$dopts = '';
+	}
+	//Tipo de grafico
+	switch ($layoutOptions) {
+		//Normal
+		case 1:  
+			$lopts = 'showlegend: false,'; 
+			break;
+		default: 
+			$lopts = '';
+	}
+	
+
+	/*************************************************/
+	//imprime
+	$graph  = '<div id="'.$idDiv.'"></div>';
+	$graph .= '<script>';
+		$graph .= $values;
+		$graph .= $labels;
+		
+		$graph .='
+		//se arman datos	
+		var dataPlotly = [{
+			values: allValues,
+			labels: allLabels,
+			name: allLabels,
+			type: \'pie\',
+			automargin: true,';
+			$graph .= $dopts;
+			$graph .= '
+			
+		}];
+
+		/*****************************************************************/
+		var layout = {
+			title: \''.$titulo.'\',
+			width: \''.$width.'\',
+			height: \''.$height.'\',
+			margin: {"t": 45, "b": 0, "l": 0, "r": 0},';
+			$graph .= $lopts;
+		 $graph .= '	
+		};
+		var config = {
+			locale: \'es-ar\',
+			displayModeBar: true,
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			displaylogo: false,
+			responsive: true
+		};
+
+		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
+	</script>';	
+	
+	return $graph;
+	
+}
+/*******************************************************************************************************************/
+//Crea un grafico lineal (Seleccion Normal)
+function GraphBarrLat_1($idDiv, 
+						$titulo, $eje_x_titulo, $eje_y_titulo, 
+						$xData, $yData, $Name, $hoverinfo, $markerColor, $markerLine,
+						$type, $legendOptions){
+	
+	//Tipo de grafico
+	switch ($type) {
+		case 1:  $typeopts = 'group'; break;
+		case 2:  $typeopts = 'stack'; break;
+		default: $typeopts = '';
+	}
+	
+	//Opciones del legend
+	switch ($legendOptions) {
+		//Legend abajo
+		case 1:
+			$lopts = 'legend: {"orientation": "h",x: 0,  y: -1, bgcolor: "#E2E2E2", bordercolor: "#FFFFFF", borderwidth: 2}';
+			break;
+		//Legend dentro al lado izquierdo superior
+		case 2:
+			$lopts = 'legend: {x: 0,y: 1, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho superior
+		case 3:
+			$lopts = 'legend: {x: 1,y: 1, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado izquierdo inferior
+		case 4:
+			$lopts = 'legend: {x: 0,y: 0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho inferior
+		case 5:
+			$lopts = 'legend: {x: 1,y: 0, bgcolor: \'rgba(255, 255, 255, 0)\',bordercolor: \'rgba(255, 255, 255, 0)\'},';
+			break;
+		//Legend dentro al lado derecho inferior
+		case 6:
+			$lopts = 'margin: {l: 300, r: 0, t: 100, b: 100 },height: 600,';
+			break;
+		
+		default:
+			$lopts = '';
+	}
+
+	/*************************************************/
+	//imprime
+	$graph  = '<div id="'.$idDiv.'"></div>';
+	$graph .= '<script>';
+		$graph .= $xData;
+		$graph .= $yData;
+		$graph .= $Name;
+		$graph .= $hoverinfo;
+		$graph .= $markerColor;
+		$graph .= $markerLine;
+		
+		$graph .='
+		//se arman datos	
+		var dataPlotly = [];
+		for ( var i = 0 ; i < xData.length ; i++ ) {
+			var result = {
+				x: xData[i],
+				y: yData[i],
+				type: \'bar\',
+				name: names[i],
+				orientation: \'h\',
+				text: xData[i].map(String),
+				textposition: \'auto\',
+				hoverinfo: \'grf_info[i]\',
+				marker: {
+					color: \'markerColor[i]\',
+					line: {
+						color: \'markerLine[i]\',
+						width: 1.5
+					}
+				}
+			};
+			dataPlotly.push(result);
+		}
+		/*****************************************************************/
+		var layout = {
+			title: \''.$titulo.'\',
+			barmode: \''.$typeopts.'\',';
+			if(isset($eje_x_titulo)&&$eje_x_titulo!=''){ $graph .= 'xaxis: {title: \''.$eje_x_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
+			if(isset($eje_y_titulo)&&$eje_y_titulo!=''){ $graph .= 'yaxis: {title: \''.$eje_y_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
+			$graph .= $lopts;
+		 $graph .= '	
+		};
+		var config = {
+			locale: \'es-ar\',
+			displayModeBar: true,
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			displaylogo: false,
+			responsive: true
+		};
+
+		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
+	</script>';	
+	
+	return $graph;
+	
+}
+/*******************************************************************************************************************/
+//Crea un grafico lineal (Seleccion Normal)
+function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options){
+	
+	//Opciones del legend
+	switch ($Options) {
+		case 1:
+			$lopts = 'margin: {l: 300, r: 0, t: 100, b: 100 },';
+			break;
+		
+		default:
+			$lopts = '';
+	}
+
+	/*************************************************/
+	//imprime
+	$graph  = '<div id="'.$idDiv.'"></div>';
+	$graph .= '<script>';
+		$graph .= $xData;
+		$graph .= $yData;
+		
+		$graph .='
+		var dataPlotly = [
+			{
+				type: \'funnel\',
+				y: yData,
+				x: xData, 
+				textposition: "inside", 
+				textinfo: "value+percent initial",
+				hoverinfo: "percent total+x", 
+				opacity: 0.65, 
+				marker: {
+					color: ["59D4E8", "DDB6C6", "A696C8", "67EACA", "94D2E6", "59D4E8", "DDB6C6", "A696C8", "67EACA", "94D2E6", "59D4E8", "DDB6C6", "A696C8", "67EACA", "94D2E6"],
+					line: {
+						"width": [4, 2, 2, 3, 1, 1], 
+						color: ["3E4E88", "606470", "3E4E88", "606470", "3E4E88", "3E4E88", "606470", "3E4E88", "606470", "3E4E88", "3E4E88", "606470", "3E4E88", "606470", "3E4E88"]
+					}
+				},
+				connector: {
+					line: {
+						color: "royalblue", 
+						dash: "dot", 
+						width: 3
+					}
+				}
+			}
+		];
+             
+        
+		/*****************************************************************/
+		var layout = {
+			title: \''.$titulo.'\',
+			width: \''.$width.'\',
+			height: \''.$height.'\',';
+			$graph .= $lopts;
+		 $graph .= '	
+		};
+		var config = {
+			locale: \'es-ar\',
+			displayModeBar: true,
+			modeBarButtonsToRemove: [\'select2d\', \'lasso2d\', \'zoomIn2d\', \'zoomOut2d\'],
+			displaylogo: false,
+			responsive: true
+		};
+
+		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
+	</script>';	
+	
+	return $graph;
+	
+}
 ?>
