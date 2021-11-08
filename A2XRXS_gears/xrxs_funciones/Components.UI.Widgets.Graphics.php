@@ -308,12 +308,19 @@ function GraphBarr_1($idDiv,
 		//se arman datos	
 		var dataPlotly = [];
 		for ( var i = 0 ; i < xData.length ; i++ ) {
+			var textin = "";
+			if(grf_info[i]!=""){
+				textin = grf_info[i];
+			}else{
+				textin = yData[i].map(String);
+			}
+			
 			var result = {
 				x: xData[i],
 				y: yData[i],
 				type: \'bar\',
 				name: names[i],
-				text: yData[i].map(String),
+				text: textin,
 				textposition: \'auto\',
 				hoverinfo: \'grf_info[i]\',
 				marker: {
