@@ -414,6 +414,10 @@ function validaPermisoUser($nivel_usuario, $nivel_requerido, $dbConn){
 			//redirijo a la pagina principal
 			header( 'Location: principal.php' );
 			die;
+		//se redirige al principal
+		}else{
+			//redirijo a la pagina principal
+			header( 'Location: principal.php' );
 		}
 	}
 }
