@@ -81,7 +81,7 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 			}
 			
             //intentos de Hackeo
-			if (file_exists($Archivo1)) {
+			/*if (file_exists($Archivo1)) {
 				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
 					echo '<h4>Intentos de Hackeo</h4>';
 					echo '<div class="table-responsive">
@@ -123,7 +123,7 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 				echo '</div>';
 			}else{
 				error_log("No existe el archivo (".$Archivo1.")", 0);
-			}
+			}*/
 				
 			//Correos Enviados
 			/*if (file_exists($Archivo2)) {
