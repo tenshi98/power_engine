@@ -686,33 +686,77 @@ function widget_sismologia(){
 		
 		try {
 			//Obtengo los datos
-			$sismologia = file_get_contents('http://www.sismologia.cl/links/tabla.html');
+			$sismologia = file_get_contents('http://www.sismologia.cl/ultimos_sismos.html');
 			
 			//modifico el html obtenido
-			$sismologia = str_replace('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"','', $sismologia);
-			$sismologia = str_replace('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">','', $sismologia);
-			$sismologia = str_replace('<html xmlns="http://www.w3.org/1999/xhtml">','', $sismologia);
+			$sismologia = str_replace('<!DOCTYPE html>','', $sismologia);
+			$sismologia = str_replace('<html>','', $sismologia);
+			$sismologia = str_replace('</html>','', $sismologia);
 			$sismologia = str_replace('<head>','', $sismologia);
-			$sismologia = str_replace('<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->','', $sismologia);
-			$sismologia = str_replace('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />','', $sismologia);
-			$sismologia = str_replace('<meta http-equiv="refresh" content="150" />','', $sismologia);
-			$sismologia = str_replace('<meta name="description" content="Servicio Sismológico, Universidad de Chile" />','', $sismologia);
-			$sismologia = str_replace('<meta name="author" content="SSUCH" />','', $sismologia);
-			$sismologia = str_replace('<!--[if IE 8]> <link rel="stylesheet" href="/css/style_ie8.css" /><![endif]-->','', $sismologia);
-			$sismologia = str_replace('<link rel="stylesheet" href="/css/style.css" />','', $sismologia);
-			$sismologia = str_replace('<title>Ultimos Sismos</title>','', $sismologia);
-			$sismologia = str_replace('<script type="text/javascript">','', $sismologia);
-			$sismologia = str_replace('function popitup(url) {','', $sismologia);
-			$sismologia = str_replace('var newwindow=window.open(url,"Epicentro","height=480,width=320,resizable=0,scrollbars=0,location=0,toolbar=0");','', $sismologia);
-			$sismologia = str_replace('if (window.focus) {newwindow.focus()}','', $sismologia);
-			$sismologia = str_replace('return false;','', $sismologia);
-			$sismologia = str_replace('}','', $sismologia);
-			$sismologia = str_replace('</script>','', $sismologia);
 			$sismologia = str_replace('</head>','', $sismologia);
 			$sismologia = str_replace('<body>','', $sismologia);
 			$sismologia = str_replace('</body>','', $sismologia);
-			$sismologia = str_replace('</html>','', $sismologia);
-			$sismologia = str_replace('<a href="/events', '<a target="_blank" rel="noopener noreferrer" href="http://www.sismologia.cl/events', $sismologia);
+			$sismologia = str_replace('<meta charset="utf-8">','', $sismologia);
+			$sismologia = str_replace('<link rel="stylesheet" type="text/css" href="/css/style.css">','', $sismologia);
+			$sismologia = str_replace('<title>Centro Sismológico Nacional, Universidad de Chile</title>','', $sismologia);
+			$sismologia = str_replace('<div id="header-container">','', $sismologia);
+			$sismologia = str_replace('</div><!--id="header-container"-->','', $sismologia);
+			$sismologia = str_replace('<div class="header wrapper clearfix">','', $sismologia);
+			$sismologia = str_replace('</div><!--class="header wrapper clearfix"-->','', $sismologia);
+			$sismologia = str_replace('<div id="title">','', $sismologia);
+			$sismologia = str_replace('</div><!--id="title"-->','', $sismologia);
+			$sismologia = str_replace('<div class="nav">','', $sismologia);
+			$sismologia = str_replace('</div><!--class="nav"-->','', $sismologia);
+			$sismologia = str_replace('<a href="/index.html"><img class="logo-a" src="/img/ssuch.png" alt="logo csn"></a>','', $sismologia);
+			$sismologia = str_replace('<ul>','', $sismologia);
+			$sismologia = str_replace('</ul>','', $sismologia);
+			$sismologia = str_replace('<li><a href="/ultimos_sismos.html" style="background:#4E7172 url(/img/boton_menu1.png);">Sismicidad</a></li>','', $sismologia);
+			$sismologia = str_replace('<li><a href="/aprende.html" style="background:#4288B7 url(/img/boton_menu2.png);">Educación</a></li>','', $sismologia);
+			$sismologia = str_replace('<li><a href="http://www.csn.uchile.cl" style="background:#4FA85A url(/img/boton_menu3.png);">Novedades</a></li>','', $sismologia);
+			$sismologia = str_replace('<div class="submenu" style="background:#587f80 url(/img/boton_menu1.png) top;">','', $sismologia);
+			$sismologia = str_replace('<ul class="informate wrapper">','', $sismologia);
+			$sismologia = str_replace('<li><a href="/index.html" class="boton-inicio" style="background:#272727; float:left; margin:0;"><img src="/img/home.png" alt="home-icon"></a></li>','', $sismologia);
+			$sismologia = str_replace('<li><a href="/ultimos_sismos.html">Últimos Sismos</a></li>','', $sismologia);
+			$sismologia = str_replace('<li><a id="menu-catalogo" href="/catalogo.html">Sismos por día</a></li>','', $sismologia);
+			$sismologia = str_replace('<!--li><a href="/perfiles/index.html">Perfiles  Sísmicos</a></li-->','', $sismologia);
+			$sismologia = str_replace('<li><a href="http://www.csn.uchile.cl/sismologia/grandes-terremotos-en-chile/">Terremotos</a></li>','', $sismologia);
+			$sismologia = str_replace('<li><a href="http://www.csn.uchile.cl/archivo/informes-tecnicos/">Informes</a></li>','', $sismologia);
+			$sismologia = str_replace('<!--li><a href="/sismicidad.html" >Actividad Sísmica</a></li-->','', $sismologia);
+			$sismologia = str_replace('<div id="main-container">','', $sismologia);
+			$sismologia = str_replace('<div id="main" class="wrapper clearfix">','', $sismologia);
+			$sismologia = str_replace('<h1>Últimos sismos</h1>','', $sismologia);
+			$sismologia = str_replace('<!--<h2>con magnitud igual o superior a 3.0 (1)</h2>-->','', $sismologia);
+			$sismologia = str_replace('<!--<aside class="col-med" style="width:100%; margin:10px 0 10px 0; float:left;">-->','', $sismologia);
+			$sismologia = str_replace('<!--</aside>-->','', $sismologia);
+			$sismologia = str_replace('<p style="float:left;" class="cushycms"><strong>GUC</strong>','', $sismologia);
+			$sismologia = str_replace('(Geofísica Universidad de Chile): Sigla con la cual es conocido','', $sismologia);
+			$sismologia = str_replace('el Centro Sismológico Nacional de la Universidad de Chile en la Red','', $sismologia);
+			$sismologia = str_replace('Sismológica Mundial.<br />','', $sismologia);
+			$sismologia = str_replace('<strong>(1)</strong> En caso de Sismos','', $sismologia);
+			$sismologia = str_replace('Sensibles serán publicados cualquiera sea su magnitud.<br />','', $sismologia);
+			$sismologia = str_replace('<strong>(2)</strong> Sólo los sismos sensibles (reportados),','', $sismologia);
+			$sismologia = str_replace('tienen informe de intensidades.<br />','', $sismologia);
+			$sismologia = str_replace('<strong>(3)</strong> Sólo los sismos sensibles se muestran en negrita.','', $sismologia);
+			$sismologia = str_replace('</div><!--id="main" class="wrapper clearfix">-->','', $sismologia);
+			$sismologia = str_replace('</div><!--id="main-container"-->','', $sismologia);
+			$sismologia = str_replace('<div id="footer-container">','', $sismologia);
+			$sismologia = str_replace('<div class="footer">','', $sismologia);
+			$sismologia = str_replace('<p class="datos">','', $sismologia);
+			$sismologia = str_replace('<strong>Centro Sismológico Nacional, Universidad de Chile. </strong>','', $sismologia);
+			$sismologia = str_replace('Blanco Encalada 2002 - Casilla #2777 Santiago, Chile. Email: ','', $sismologia);
+			$sismologia = str_replace('<a href="mailto:contacto@csn.uchile.cl">contacto@csn.uchile.cl</a>','', $sismologia);
+			$sismologia = str_replace('</p><!--class="datos"-->','', $sismologia);
+			$sismologia = str_replace('<p class="rs">Síguenos en:','', $sismologia);
+			$sismologia = str_replace('<a href="http://www.twitter.com/sismos_csn" target="_blank"><span class="tt" id="none"></span></a>','', $sismologia);
+			$sismologia = str_replace('<a href="https://www.facebook.com/pages/Centro-Sismol%C3%B3gico-Nacional-Universidad-de-Chile/195079254010666"><span class="fb" id="none"></span></a>','', $sismologia);
+			$sismologia = str_replace('</div><!--class="footer"-->','', $sismologia);
+			$sismologia = str_replace('</div><!--id="footer-container"-->','', $sismologia);
+			$sismologia = str_replace('<script type="text/javascript" src="/js/catalog.js"></script>','', $sismologia);
+			$sismologia = str_replace('</ul>','', $sismologia);
+			$sismologia = str_replace('</div>','', $sismologia);
+			$sismologia = str_replace('<br />','', $sismologia);
+			$sismologia = str_replace('</p>','', $sismologia);
+			$sismologia = str_replace('<a href="/', '<a target="_blank" rel="noopener noreferrer" href="http://www.sismologia.cl/', $sismologia);
 			
 			//genero cuerpo
 			$s_body = '
@@ -756,22 +800,25 @@ function widget_feriados(){
 			//modifico el html obtenido
 			$feriado = str_replace('<!DOCTYPE html>','', $feriado);
 			$feriado = str_replace('<html lang="es">','', $feriado);
+			$feriado = str_replace('</html>','', $feriado);
 			$feriado = str_replace('<head>','', $feriado);
+			$feriado = str_replace('</head>','', $feriado);
 			$feriado = str_replace('<!-- Global site tag (gtag.js) - Google Analytics -->','', $feriado);
 			$feriado = str_replace('<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11741389-1"></script>','', $feriado);
 			$feriado = str_replace('<script>','', $feriado);
+			$feriado = str_replace('</script>','', $feriado);
 			$feriado = str_replace('window.dataLayer = window.dataLayer || [];','', $feriado);
 			$feriado = str_replace('function gtag(){dataLayer.push(arguments);}','', $feriado);
-			$feriado = str_replace('gtag(\'js\', new Date());','', $feriado);
-			$feriado = str_replace("gtag('config', 'UA-11741389-1');", '', $feriado);
+			$feriado = str_replace("gtag('js', new Date());",'', $feriado);
+			$feriado = str_replace("gtag('config', 'UA-11741389-1');",'', $feriado);
 			$feriado = str_replace('<meta charset = "UTF-8" >','', $feriado);
 			$feriado = str_replace('<meta name="description"','', $feriado);
 			$feriado = str_replace('content="Sitio con la información de los días feriados de Chile y las leyes que los rigen.">','', $feriado);
 			$feriado = str_replace('<link rel="shortcut icon" href="favicon.ico">','', $feriado);
 			$feriado = str_replace('<link rel="stylesheet" type="text/css" href="style18-4.css">','', $feriado);
 			$feriado = str_replace('<meta name="keywords"','', $feriado);
-			$feriado = str_replace('content="Feriados de Chile, Feriados, 2021, Año Nuevo, Viernes Santo, Sábado Santo, Día Nacional de Trabajo, San Pedro y San Pablo, Día de la Virgen del Carmen, Asunsión de la Virgen, Independencia Nacional, Día de la Glorias del Ejército, Encuentro de Dos Mundos, Día de las Iglesias Evangélicas y Protestantes, Día de Todos los Santos, Inmaculada Concepción, Navidad, Elecciones Municipales, Plebiscito, Asamblea Constituyente, Constitución">','', $feriado);
-			$feriado = str_replace('<title>Feriados de Chile - Año 2021</title>','', $feriado);
+			$feriado = str_replace('content="Feriados de Chile, Feriados, 2022, Año Nuevo, Viernes Santo, Sábado Santo, Día Nacional de Trabajo, San Pedro y San Pablo, Día de la Virgen del Carmen, Asunsión de la Virgen, Independencia Nacional, Día de la Glorias del Ejército, Encuentro de Dos Mundos, Día de las Iglesias Evangélicas y Protestantes, Día de Todos los Santos, Inmaculada Concepción, Navidad, Elecciones Municipales, Plebiscito, Asamblea Constituyente, Constitución">','', $feriado);
+			$feriado = str_replace('<title>Feriados de Chile - Año 2022</title>','', $feriado);
 			$feriado = str_replace('<link rel="canonical" href="https://www.feriados.cl/index.php">','', $feriado);
 			$feriado = str_replace('<meta name="viewport" content="width=device-width, initial-scale=1">','', $feriado);
 			$feriado = str_replace('<!-- Anuncio Automatico -->','', $feriado);
@@ -780,25 +827,32 @@ function widget_feriados(){
 			$feriado = str_replace('google_ad_client: "pub-1764294017474123",','', $feriado);
 			$feriado = str_replace('enable_page_level_ads: true','', $feriado);
 			$feriado = str_replace('});','', $feriado);
-			$feriado = str_replace('</head>','', $feriado);
 			$feriado = str_replace('<body style="background-color: #ffffff; margin-top: 1%; margin-left: 2%; margin-right: 2%; margin-bottom: 1%;">','', $feriado);
+			$feriado = str_replace('</body>','', $feriado);
 			$feriado = str_replace('<header>','', $feriado);
+			$feriado = str_replace('</header>','', $feriado);
 			$feriado = str_replace('<div class="logo"><a href="#sobre">','', $feriado);
 			$feriado = str_replace('<img src="logoferiados.png" alt="Logo" style="width:75%; margin-left: auto; margin-right: auto; display: block;"></a></div>','', $feriado);
-			$feriado = str_replace('<div class="titulo"><h1 style="text-align:center;  color: #ffffff;">Feriados de Chile Año 2021','', $feriado);
+			$feriado = str_replace('<div class="titulo"><h1 style="text-align:center;  color: #ffffff;">Feriados de Chile Año 2022','', $feriado);
 			$feriado = str_replace('<a href="#menutarget" style="text-decoration: none;"><span class="menulink"></span></a></h1></div>','', $feriado);
-			$feriado = str_replace('</header>','', $feriado);
 			$feriado = str_replace('<main>','', $feriado);
 			$feriado = str_replace('</main>','', $feriado);
 			$feriado = str_replace('<aside>','', $feriado);
+			$feriado = str_replace('</aside>','', $feriado);
 			$feriado = str_replace('<nav id="menu">','', $feriado);
 			$feriado = str_replace('</nav>','', $feriado);
+			$feriado = str_replace('<span  class="menuitemcur">Feriados Año 2022</span>','', $feriado);
+			$feriado = str_replace('<a class="navwhite" href="2023.htm">Feriados Año 2023</a>','', $feriado);
+			$feriado = str_replace('<a class="navwhite" href="leyes.htm">Leyes</a>','', $feriado);
+			$feriado = str_replace('<a class="navwhite" href="faq.htm">Preguntas Frecuentes</a>','', $feriado);
+			$feriado = str_replace('<table class="menutable" id="menutarget">','<table>', $feriado);
 			$feriado = str_replace('<div class="share">','', $feriado);
-			$feriado = str_replace('<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://feriados.cl/" data-via="feriados" ','', $feriado);
+			$feriado = str_replace('<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://feriados.cl/" data-via="feriados"','', $feriado);
 			$feriado = str_replace('data-size="large" data-count="none" data-hashtags="Feriados" style="vertical-align: text-bottom;" >Tweet</a>','', $feriado);
-			$feriado = str_replace('<a href="whatsapp://send?text=Hola! Te recomiendo Feriados de Chile https://feriados.cl/" ','', $feriado);
+			$feriado = str_replace('<a href="whatsapp://send?text=Hola! Te recomiendo Feriados de Chile https://feriados.cl/"','', $feriado);
 			$feriado = str_replace('data-action="share/whatsapp/share"><img src="ws.png" alt="WhatsApp" height="28"></a>','', $feriado);
 			$feriado = str_replace('<div>','', $feriado);
+			$feriado = str_replace('</div>','', $feriado);
 			$feriado = str_replace('<!-- BloqueResponsivo -->','', $feriado);
 			$feriado = str_replace('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>','', $feriado);
 			$feriado = str_replace('<ins class="adsbygoogle"','', $feriado);
@@ -806,54 +860,41 @@ function widget_feriados(){
 			$feriado = str_replace('data-ad-client="ca-pub-1764294017474123"','', $feriado);
 			$feriado = str_replace('data-ad-slot="5711300468"','', $feriado);
 			$feriado = str_replace('data-ad-format="auto"></ins>','', $feriado);
+			$feriado = str_replace('<script>','', $feriado);
+			$feriado = str_replace('</script>','', $feriado);
 			$feriado = str_replace('(adsbygoogle = window.adsbygoogle || []).push({});','', $feriado);
-			$feriado = str_replace('</div>','', $feriado);
 			$feriado = str_replace('<div style="display:block; margin:auto; ">','', $feriado);
 			$feriado = str_replace('<p><span style=" color: #004080; font-weight: bold;">Actualizaciones Twitter</span></p>','', $feriado);
-			$feriado = str_replace('<a class="twitter-timeline"  data-tweet-limit="5" data-chrome="noheader;nofooter" data-width="100%"  data-height="auto"  ','', $feriado);
+			$feriado = str_replace('<a class="twitter-timeline"  data-tweet-limit="5" data-chrome="noheader;nofooter" data-width="100%"  data-height="auto"','', $feriado);
 			$feriado = str_replace('href="https://twitter.com/feriados">Twitter @Feriados</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>','', $feriado);
 			$feriado = str_replace('<p><span style="color: #004080; font-weight: bold;">Licencia</span></p>','', $feriado);
 			$feriado = str_replace('<p style="font-size:smaller;"><a class="navblack" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">','', $feriado);
 			$feriado = str_replace('<img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>','', $feriado);
-			$feriado = str_replace('<br />Esta obra está bajo una <a class="navblack" style="font-weight:normal;" ','', $feriado);
+			$feriado = str_replace('<br />Esta obra está bajo una <a class="navblack" style="font-weight:normal;"','', $feriado);
 			$feriado = str_replace('rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">','', $feriado);
 			$feriado = str_replace('Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.</p>','', $feriado);
-			$feriado = str_replace('</aside>','', $feriado);
-			$feriado = str_replace('</body>','', $feriado);
-			$feriado = str_replace('</html>','', $feriado);
-			$feriado = str_replace('<table>','<table style="width: 100%;white-space: initial;">', $feriado);
 			$feriado = str_replace('<p><span style=" color: #004080; font-weight: bold;">Sobre el sitio</span></p>','', $feriado);
-			$feriado = str_replace('<p style="padding: 0px 6px 0px 6px;">En Feriados de Chile creemos que la familia y comunidad son la base de la sociedad, ','', $feriado);
+			$feriado = str_replace('<p style="padding: 0px 6px 0px 6px;">En Feriados de Chile creemos que la familia y comunidad son la base de la sociedad,','', $feriado);
 			$feriado = str_replace('y que cada momento que pasan juntas, contribuye a una sociedad más fuerte. Nosotros te contamos cuándo es feriado, para que','', $feriado);
-			$feriado = str_replace('disfrutes junto a los tuyos. Fuente de información: ','', $feriado);
+			$feriado = str_replace('disfrutes junto a los tuyos. Fuente de información:','', $feriado);
 			$feriado = str_replace('<a class="navblack" style="font-weight: normal;" href="https://www.bcn.cl/" target="_blank">Biblioteca Congreso Nacional</a>.</p>','', $feriado);
 			$feriado = str_replace('<p><span style=" color: #004080; font-weight: bold;">Otros sitios </span></p>','', $feriado);
 			$feriado = str_replace('<p>','', $feriado);
 			$feriado = str_replace('</p>','', $feriado);
 			$feriado = str_replace('<a href="https://www.preparados.cl/"','', $feriado);
+			$feriado = str_replace('target=_blank><img class="logott" alt="Estar Preparados" src="preparadostt.png" ></a>','', $feriado);
 			$feriado = str_replace('<a href="https://www.datoutil.cl/"','', $feriado);
+			$feriado = str_replace('target=_blank><img class="logott" alt="Dato Util" src="datoutiltt.png" ></a>','', $feriado);
 			$feriado = str_replace('<a href="https://www.efemerides.cl/"','', $feriado);
-			$feriado = str_replace('target','', $feriado);
-			$feriado = str_replace('_blank','', $feriado);
-			$feriado = str_replace('=>','', $feriado);
-			$feriado = str_replace('<img class="logott"','', $feriado);
-			$feriado = str_replace('alt="Estar Preparados"','', $feriado);
-			$feriado = str_replace('alt="Dato Util"','', $feriado);
-			$feriado = str_replace('alt="Efemérides Chile"','', $feriado);
-			$feriado = str_replace('src="preparadostt.png" >','', $feriado);
-			$feriado = str_replace('src="datoutiltt.png" >','', $feriado);
-			$feriado = str_replace('src="efemeridestt.png" >','', $feriado);
-			$feriado = str_replace('<span  class="menuitemcur">Feriados Año 2021</span>','', $feriado);
-			$feriado = str_replace('<a class="navwhite"','', $feriado);
-			$feriado = str_replace('href="2022.htm">Feriados Año 2022','', $feriado);
-			$feriado = str_replace('href="leyes.htm">Leyes','', $feriado);
-			$feriado = str_replace('href="faq.htm">Preguntas Frecuentes','', $feriado);
-			$feriado = str_replace('</a>','', $feriado);	
-			$feriado = str_replace('<th>Día</th>','<th><strong><span style="color:#fff">Día</span></strong></th>', $feriado);	
-			$feriado = str_replace('<th>Festividad</th>','<th><strong><span style="color:#fff">Festividad</span></strong></th>', $feriado);	
-			$feriado = str_replace('<th>Tipo</th>','<th><strong><span style="color:#fff">Tipo</span></strong></th>', $feriado);	
-			$feriado = str_replace('<th class="rl">Respaldo Legal</th>','<th><strong><span style="color:#fff">Respaldo Legal</span></strong></th>', $feriado);	
-			
+			$feriado = str_replace('target=_blank><img class="logott" alt="Efemérides Chile" src="efemeridestt.png" ></a>','', $feriado);
+			$feriado = str_replace('<div class="ads"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">','', $feriado);
+			$feriado = str_replace('<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">','', $feriado);
+			$feriado = str_replace('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">','', $feriado);
+			$feriado = str_replace('href="https://twitter.com/feriados">Twitter @Feriados</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">','', $feriado);
+			$feriado = str_replace('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">','', $feriado);
+			$feriado = str_replace('<div id="sobre">','', $feriado);
+			$feriado = str_replace('<br>','', $feriado);
+			$feriado = str_replace('<tr style="background-color:#004080;">','<tr style="background-color:#cbced0;">', $feriado);
 			
 			//genero cuerpo
 			$s_body = '
@@ -861,7 +902,7 @@ function widget_feriados(){
 					<header>
 						<div class="icons"><i class="fa fa-birthday-cake" aria-hidden="true"></i></div><h5>Feriados de Chile</h5>
 					</header>
-					<div class="">
+					<div class="external_page">
 						'.$feriado.'
 					</div> 
 				</div>';
