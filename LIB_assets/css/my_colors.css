@@ -415,3 +415,154 @@
 .rgba-grey-strong,.rgba-grey-strong:after{background-color:rgba(158,158,158,.7)}
 
 
+.circle_dark-blue {background-color: #34495e;}
+.circle_green {background-color: #16a085;}
+.circle_orange {background-color: #f39c12;}
+.circle_blue {background-color: #2980b9;}
+.circle_red {background-color: #e74c3c;}
+.circle_purple {background-color: #8e44ad;}
+/* BACKGROUNDS */
+.main-box_emerald-bg {background-color: #3498db !important;}
+.main-box_red-bg {background-color: #e74c3c !important;}
+.main-box_yellow-bg {background-color: #f1c40f !important;}
+.main-box_green-bg {background-color: #2ecc71 !important;}
+.main-box_purple-bg {background-color: #9b59b6 !important;}
+.main-box_gray-bg {background-color: #95a5a6 !important;}
+.main-box_white-bg {background-color: #ffffff !important;}
+
+
+.color2-themeprimary {color: #2dc3e8 !important;}
+.color2-themesecondary {color: #fb6e52 !important;}
+.color2-themethirdcolor {color: #ffce55 !important;}
+.color2-themefourthcolor {color: #a0d468 !important;}
+.color2-themefifthcolor {color: #e75b8d !important;}
+.color2-white {color: #ffffff !important;}
+.color2-snow {color: #fbfbfb !important;}
+.color2-whitesmoke {color: #f5f5f5 !important;}
+.color2-seashell {color: #f3f3f3 !important;}
+.color2-ivory {color: #eeeeee !important;}
+.color2-platinum {color: #e5e5e5 !important;}
+.color2-lightgray {color: #d0d0d0 !important;}
+.color2-gray {color: #cccccc !important;}
+.color2-darkgray {color: #999999 !important;}
+.color2-silver {color: #777777 !important;}
+.color2-sonic-silver {color: #737373 !important;}
+.color2-storm-cloud {color: #666666 !important;}
+.color2-lightcarbon {color: #555555 !important;}
+.color2-carbon {color: #444444 !important;}
+.color2-slate-gray {color: #333333 !important;}
+.color2-darkcarbon {color: #262626 !important;}
+.color2-blue {color: #5db2ff !important;}
+.color2-info {color: #57b5e3 !important;}
+.color2-sky {color: #11a9cc !important;}
+.color2-primary {color: #4374e0 !important;}
+.color2-azure {color: #2dc3e8 !important;}
+.color2-blueberry {color: #6f85bf !important;}
+.color2-palegreen {color: #a0d468 !important;}
+.color2-success {color: #53a93f !important;}
+.color2-green {color: #8cc474 !important;}
+.color2-lightyellow {color: #f6d52e !important;}
+.color2-yellow {color: #ffce55 !important;}
+.color2-warning {color: #f4b400 !important;}
+.color2-gold {color: #f9b256 !important;}
+.color2-orange {color: #fb6e52 !important;}
+.color2-lightred {color: #e46f61 !important;}
+.color2-darkorange {color: #ed4e2a !important;}
+.color2-red {color: #df5138 !important;}
+.color2-pink {color: #e75b8d !important;}
+.color2-darkpink {color: #cc324b !important;}
+.color2-danger {color: #d73d32 !important;}
+.color2-magenta {color: #bc5679 !important;}
+.color2-purple {color: #7e3794 !important;}
+.color2-maroon {color: #981b48 !important;}
+
+.bgx-themeprimary{background-color:#2dc3e8 !important}
+.bgx-themesecondary{background-color:#fb6e52 !important}
+.bgx-themethirdcolor{background-color:#ffce55 !important}
+.bgx-themefourthcolor{background-color:#a0d468 !important}
+.bgx-themefifthcolor{background-color:#e75b8d !important}
+.bgx-white{background-color:#fff !important}
+.bgx-snow{background-color:#fbfbfb !important}
+.bgx-whitesmoke{background-color:#f5f5f5 !important}
+.bgx-seashell{background-color:#f3f3f3 !important}
+.bgx-ivory{background-color:#eee !important}
+.bgx-platinum{background-color:#e5e5e5 !important}
+.bgx-lightgray{background-color:#d0d0d0 !important}
+.bgx-gray{background-color:#ccc !important}
+.bgx-darkgray{background-color:#999 !important}
+.bgx-silver{background-color:#777 !important}
+.bgx-sonic-silver{background-color:#737373 !important}
+.bgx-storm-cloud{background-color:#666 !important}
+.bgx-lightcarbon{background-color:#555 !important}
+.bgx-carbon{background-color:#444 !important}
+.bgx-slate-gray{background-color:#333 !important}
+.bgx-darkcarbon{background-color:#262626 !important}
+.bgx-blue{background-color:#5db2ff !important}
+.bgx-info{background-color:#57b5e3 !important}
+.bgx-sky{background-color:#11a9cc !important}
+.bgx-primary{background-color:#4374e0 !important}
+.bgx-azure{background-color:#2dc3e8 !important}
+.bgx-blueberry{background-color:#6f85bf !important}
+.bgx-palegreen{background-color:#a0d468 !important}
+.bgx-success{background-color:#53a93f !important}
+.bgx-green{background-color:#8cc474 !important}
+.bgx-lightyellow{background-color:#f6d52e !important}
+.bgx-yellow{background-color:#ffce55 !important}
+.bgx-warning{background-color:#f4b400 !important}
+.bgx-gold{background-color:#f9b256 !important}
+.bgx-orange{background-color:#fb6e52 !important}
+.bgx-lightred{background-color:#e46f61 !important}
+.bgx-darkorange{background-color:#ed4e2a !important}
+.bgx-red{background-color:#df5138 !important}
+.bgx-danger{background-color:#d73d32 !important}
+.bgx-pink{background-color:#e75b8d !important}
+.bgx-darkpink{background-color:#cc324b !important}
+.bgx-magenta{background-color:#bc5679 !important}
+.bgx-purple{background-color:#7e3794 !important}
+.bgx-maroon{background-color:#981b48 !important}
+.before-themeprimary:before{background-color:#2dc3e8 !important}
+.before-themesecondary:before{background-color:#fb6e52 !important}
+.before-themethirdcolor:before{background-color:#ffce55 !important}
+.before-themefourthcolor:before{background-color:#a0d468 !important}
+.before-themefifthcolor:before{background-color:#e75b8d !important}
+.before-white:before{background-color:#fff !important}
+.before-snow:before{background-color:#fbfbfb !important}
+.before-whitesmoke:before{background-color:#f5f5f5 !important}
+.before-seashell:before{background-color:#f3f3f3 !important}
+.before-ivory:before{background-color:#eee !important}
+.before-platinum:before{background-color:#e5e5e5 !important}
+.before-lightgray:before{background-color:#d0d0d0 !important}
+.before-gray:before{background-color:#ccc !important}
+.before-darkgray:before{background-color:#999 !important}
+.before-silver:before{background-color:#777 !important}
+.before-sonic-silver:before{background-color:#737373 !important}
+.before-storm-cloud:before{background-color:#666 !important}
+.before-lightcarbon:before{background-color:#555 !important}
+.before-carbon:before{background-color:#444 !important}
+.before-slate-gray:before{background-color:#333 !important}
+.before-darkcarbon:before{background-color:#262626 !important}
+.before-blue:before{background-color:#5db2ff !important}
+.before-info:before{background-color:#57b5e3 !important}
+.before-sky:before{background-color:#11a9cc !important}
+.before-primary:before{background-color:#4374e0 !important}
+.before-azure:before{background-color:#2dc3e8 !important}
+.before-blueberry:before{background-color:#6f85bf !important}
+.before-palegreen:before{background-color:#a0d468 !important}
+.before-success:before{background-color:#53a93f !important}
+.before-green:before{background-color:#8cc474 !important}
+.before-lightyellow:before{background-color:#f6d52e !important}
+.before-yellow:before{background-color:#ffce55 !important}
+.before-warning:before{background-color:#f4b400 !important}
+.before-gold:before{background-color:#f9b256 !important}
+.before-orange:before{background-color:#fb6e52 !important}
+.before-lightred:before{background-color:#e46f61 !important}
+.before-darkorange:before{background-color:#ed4e2a !important}
+.before-red:before{background-color:#df5138 !important}
+.before-danger:before{background-color:#d73d32 !important}
+.before-pink:before{background-color:#e75b8d !important}
+.before-darkpink:before{background-color:#cc324b !important}
+.before-magenta:before{background-color:#bc5679 !important}
+.before-purple:before{background-color:#7e3794 !important}
+.before-maroon:before{background-color:#981b48 !important}
+
+
