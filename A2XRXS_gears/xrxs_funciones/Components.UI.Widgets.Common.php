@@ -112,23 +112,360 @@ function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 }
 /*******************************************************************************************************************/
 //permite ver un preview de los documentos
-function preview_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
+function preview_docs($Root, $File, $ExtraData){
 	
 	/****************************************/
 	//se verifican las extensiones
-	if($extensions!=''){
-		$exten = $extensions;
-	}else{
-		$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
-		$exten .= ',doc,docx,xls,xlsx,ppt,pptx';        //archivos microsoft office
-		$exten .= ',odt,odp,ods';                       //archivos libre office
-		$exten .= ',pdf';                               //pdf
-		$exten .= ',mp3,oga,wav';                       //Audio
-		$exten .= ',mp4,webm,ogv,mp2,mpeg,mpg,mov,avi'; //Video
-		$exten .= ',txt,rtf';                           //texto plano
-		$exten .= ',gz,gzip,7Z,zip,rar';                //Archivos Comprimidos
+	$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
+	$exten .= ',doc,docx,xls,xlsx,ppt,pptx';        //archivos microsoft office
+	$exten .= ',odt,odp,ods';                       //archivos libre office
+	$exten .= ',pdf';                               //pdf
+	$exten .= ',mp3,oga,wav';                       //Audio
+	$exten .= ',mp4,webm,ogv,mp2,mpeg,mpg,mov,avi'; //Video
+	$exten .= ',txt,rtf';                           //texto plano
+	$exten .= ',gz,gzip,7Z,zip,rar';                //Archivos Comprimidos
+	
+	/****************************************/
+	//Se verifica si el archivo dado esta dentro de los permitidos
+	$Extension  = pathinfo($File, PATHINFO_EXTENSION);
+	$num_files  = glob($File.".{".$exten."}", GLOB_BRACE);
+	
+	/****************************************/
+	//Se genera ruta del archivo
+	$RutaCompleta = '';
+	if(isset($Root)&&$Root!=''){ $RutaCompleta .= $Root.'/';}
+	if(isset($File)&&$File!=''){ $RutaCompleta .= $File;}
 
+	/****************************************/
+	//Se agrega estilo
+	$input = '
+	<style>
+		img {width: 100%;height: auto;padding: 0;margin: 0;}
+		iframe {width: 100%;height: 100%;padding: 0;margin: 0;}
+		iframe{float:right;height: 600px;}
+	</style>';
+	
+	//Si existen archivos
+	if($num_files > 0){
+		
+		switch($Extension){
+			/**************************************************/
+			//Si son imagenes
+			case 'JPG'; case 'jpg'; case 'jpeg'; case 'gif'; case 'png'; case 'bmp';
+				$input .= '<img src="'.$RutaCompleta.'" />';  
+			break;
+			/**************************************************/
+			//Si son archivos microsoft office
+			case 'doc'; case 'docx'; case 'xls'; case 'xlsx'; case 'ppt'; case 'pptx';
+				$input .= '
+				<iframe src="https://view.officeapps.live.com/op/embed.aspx?src='.$RutaCompleta.'" frameborder="0">
+					<a target="_blank" rel="noopener noreferrer" href="'.$RutaCompleta.'">Descargar Documento</a>
+				</iframe>';
+			break;
+			/**************************************************/
+			//Si son archivos open office y pdf
+			case 'odt'; case 'odp'; case 'ods'; case 'pdf';
+				$input .= '<iframe src = "'.DB_SITE_REPO.'/LIBS_js/ViewerJS/#../..'.DB_SITE_MAIN_PATH.'/'.$File.'" allowfullscreen webkitallowfullscreen></iframe>';
+			break;
+			/**************************************************/
+			//Si son archivos de audio
+			case 'mp3';
+				$input .= '
+				<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/audio_player/css/style.css">
+				<div class="audio green-audio-player">
+					<div class="loading">
+						<div class="spinner"></div>
+					</div>
+					<div class="play-pause-btn">  
+						<svg xmlns="https://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
+							<path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
+						</svg>
+					</div>
+					  
+					<div class="controls">
+						<span class="current-time">0:00</span>
+						<div class="slider" data-direction="horizontal">
+							<div class="progress">
+								<div class="pin" id="progress-pin" data-method="rewind"></div>
+							</div>
+						</div>
+						<span class="total-time">0:00</span>
+					</div>
+					  
+					<div class="volume">
+						<div class="volume-btn">
+							<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+								<path fill="#566574" fill-rule="evenodd" d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z" id="speaker"/>
+							</svg>
+						</div>
+						<div class="volume-controls hidden">
+							<div class="slider" data-direction="vertical">
+								<div class="progress">
+									<div class="pin" id="volume-pin" data-method="changeVolume"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					  
+					<audio crossorigin>
+						<source src="'.$RutaCompleta.'">
+					</audio>
+				</div>
+				<script src="'.DB_SITE_REPO.'/LIBS_js/audio_player/js/index.js"></script>';
+			break;
+			/**************************************************/
+			//Si son archivos de video
+			case 'mp4'; case 'webm'; case 'ogv';
+				$input .= '
+			
+				<link href="'.DB_SITE_REPO.'/LIBS_js/video_player/video-js.min.css" rel="stylesheet">
+				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/ie8/videojs-ie8.min.js"></script>
+				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/video.min.js"></script>
+				<style>
+				.video-js .vjs-big-play-button {
+					visibility: hidden !important;
+				}
+				
+				</style>
+				
+				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/Legacy/gestion_modular/img/video-thumbnail.png" data-setup="{}">';
+					switch ($Extension) {
+						case 'mp4':
+							$input .= '<source src="'.$RutaCompleta.'" type="video/mp4">';
+							break;
+						case 'webm':
+							$input .= '<source src="'.$RutaCompleta.'" type="video/webm">';
+							break;
+						case 'ogv':
+							$input .= '<source src="'.$RutaCompleta.'" type="video/ogg">';
+							break;
+					}
+					$input .= '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+				</video>';
+			break;
+			/**************************************************/
+			//Si son archivos de texto plano
+			case 'txt'; case 'rtf';
+				$archivo = file_get_contents($RutaCompleta); //Guardamos archivo.txt en $archivo
+				$archivo = ucfirst($archivo);                //Le damos un poco de formato
+				$archivo = nl2br($archivo);                  //Transforma todos los saltos de linea en tag <br/>
+				$input = $archivo;
+			break;
+			/**************************************************/
+			//Si son archivos comprimidos
+			case 'gz'; case 'gzip'; case '7Z'; case 'zip'; case 'rar';
+				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos comprimidos '.$Extension.', descarguelos presionando <a href="'.$RutaCompleta.'" class="">aqui</a>');
+			break;
+			/**************************************************/
+			//Si son archivos no reproducibles por los reproductores
+			case 'mp2'; case 'mpeg'; case 'mpg'; case 'mov'; case 'avi'; case 'oga'; case 'wav';
+				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos multimedia '.$Extension.', descarguelos presionando <a href="'.$RutaCompleta.'" class="">aqui</a>');
+			break;
+			/**************************************************/
+			//Si son mapas
+			case 'kml'; case 'kmz';
+				
+				/**************************************/
+				if($Extension=='kmz'){
+					//Nombre del archivo
+					$file_in = $File;
+
+					//Ruta dentro del servidor
+					$path = pathinfo(realpath($File), PATHINFO_DIRNAME);
+					
+					chmod($path.'/doc.kml', 0755); 
+					
+					//Eliminar archivo antes de descomprimir
+					try {
+						/*if(!is_writable($path.'/doc.kml')){
+							//throw new Exception('File not writable');
+						}else{*/
+							unlink($path.'/doc.kml');
+						//}
+					}catch(Exception $e) { 
+						//guardar el dato en un archivo log
+					}
+					
+					//Descomprimir
+					$zip = new ZipArchive;
+					$res = $zip->open($file_in);
+					if ($res === TRUE) {
+						// extract it to the path we determined above
+						$zip->extractTo($path);
+						$zip->close();
+					} else {
+					}
+					
+					//indico el nombre del archivo a abrir
+					$FileUbic = 'upload/doc.kml';
+					
+				/**************************************/
+				}elseif($Extension=='kml'){
+					//indico el nombre del archivo a abrir
+					$FileUbic = $RutaCompleta;
+				}
+				
+				$input = '
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+				
+				<link rel="stylesheet" type="text/css"  href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+            
+				<div style="width: 100%; height: 500px" id="mapContainer"></div>
+
+				<script>
+					
+					function renderKML(map) {
+						//URL
+						var URL = "'.$FileUbic.'?dummy="+(new Date()).getTime();
+						// Create a reader object passing in the URL of our KML file
+						var reader = new H.data.kml.Reader(URL);
+						reader.addEventListener("statechange", function(evt){
+							if (evt.state === H.data.AbstractReader.State.READY) {
+								// Get KML layer from the reader object and add it to the map
+								map.addLayer(reader.getLayer());
+								reader.getLayer().getProvider().addEventListener("tap", (ev) => {
+									openBubble(ev.target.getGeometry(), ev.target.getData().name);
+								});
+							}
+							if (evt.state === H.data.AbstractReader.State.ERROR) {
+								  
+							}	
+						});
+
+						// Parse the document
+						reader.parse();
+					}
+					
+					// Initialize the platform object
+					var platform = new H.service.Platform({
+					\'apikey\': \'kAgcV1Pjxt64ufyybbLaGHuCmIHwzxZXTNoitOiAC0I\'
+					});
+
+					// Obtain the default map types from the platform object
+					var defaultLayers = platform.createDefaultLayers();
+
+					// Instantiate (and display) the map
+					var map = new H.Map(
+					document.getElementById(\'mapContainer\'),
+					defaultLayers.raster.satellite.map,{
+						zoom: 14,
+						pixelRatio: window.devicePixelRatio || 1
+					});
+
+					//Datos
+					window.addEventListener(\'resize\', () => map.getViewPort().resize());
+					var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+					var ui = H.ui.UI.createDefault(map, defaultLayers, \'es-ES\');
+					
+					renderKML(map);
+					
+
+function geocode(platform) {
+  var geocoder = platform.getSearchService(),
+      geocodingParameters = {
+        q: "'.$ExtraData.'"
+      };
+
+  geocoder.geocode(
+    geocodingParameters,
+    onSuccess,
+    onError
+  );
+}
+function onSuccess(result) {
+  var locations = result.items;
+  addLocationsToMap(locations);
+}
+function onError(error) {
+  alert(\'Can t reach the remote server\');
+}
+
+var bubble;
+
+function openBubble(position, text){
+ if(!bubble){
+    bubble =  new H.ui.InfoBubble(
+      position,
+      {content: text});
+    ui.addBubble(bubble);
+  } else {
+    bubble.setPosition(position);
+    bubble.setContent(text);
+    bubble.open();
+  }
+}
+
+
+
+
+function addLocationsToMap(locations){
+  var group = new  H.map.Group(),
+      position,
+      i;
+
+  // Add a marker for each location found
+  for (i = 0;  i < locations.length; i += 1) {
+    let location = locations[i];
+    marker = new H.map.Marker(location.position);
+    marker.label = location.address.label;
+    group.addObject(marker);
+  }
+
+  group.addEventListener(\'tap\', function (evt) {
+    map.setCenter(evt.target.getGeometry());
+    openBubble(evt.target.getGeometry(), evt.target.label);
+  }, false);
+
+  // Add the locations group to the map
+  //map.addObject(group);
+  map.setCenter(group.getBoundingBox().getCenter());
+
+}
+
+// Now use the map as required...
+geocode(platform);
+
+
+				</script>';
+					
+				 
+			break;
+			/**************************************************/
+			//excepcion
+			default;
+				$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion para los archivos '.$Extension.', para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
+			break;
+		}
+		
+	}else{
+		if(isset($RutaCompleta)&&$RutaCompleta!=''){
+			$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
+		}else{
+			$input = alert_post_data(4,1,1, 'El Archivo a previsualizar no existe');
+		}
 	}
+
+	return $input;
+
+}
+/*******************************************************************************************************************/
+//permite ver un preview de los documentos
+function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions, $mainSite, $EmpPath){
+	
+	/****************************************/
+	//se verifican las extensiones
+	$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
+	$exten .= ',doc,docx,xls,xlsx,ppt,pptx';        //archivos microsoft office
+	$exten .= ',odt,odp,ods';                       //archivos libre office
+	$exten .= ',pdf';                               //pdf
+	$exten .= ',mp3,oga,wav';                       //Audio
+	$exten .= ',mp4,webm,ogv,mp2,mpeg,mpg,mov,avi'; //Video
+	$exten .= ',txt,rtf';                           //texto plano
+	$exten .= ',gz,gzip,7Z,zip,rar';                //Archivos Comprimidos
 	
 	/****************************************/
 	//Definicion de directorio y carpeta contenedora
@@ -262,6 +599,131 @@ function preview_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 			//Si son archivos no reproducibles por los reproductores
 			case 'mp2'; case 'mpeg'; case 'mpg'; case 'mov'; case 'avi'; case 'oga'; case 'wav';
 				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos multimedia '.$ext.', descarguelos presionando <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
+			break;
+			/**************************************************/
+			//Si son mapas
+			case 'kml'; case 'kmz';
+				
+				// assuming file.zip is in the same directory as the executing script.
+				$file = $path;
+
+				// get the absolute path to $file
+				$path = pathinfo(realpath($file), PATHINFO_DIRNAME);
+
+				$zip = new ZipArchive;
+				$res = $zip->open($file);
+				if ($res === TRUE) {
+					// extract it to the path we determined above
+					$zip->extractTo($path);
+					$zip->close();
+					//echo "WOOT! $file extracted to $path";
+				} else {
+					//echo "Doh! I couldn't open $file";
+				}
+
+
+				
+				
+				$input = '
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+				
+				<link rel="stylesheet" type="text/css"  href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+            
+				<div style="width: 100%; height: 500px" id="mapContainer"></div>
+
+				<script>
+			
+// Initialize the platform object
+var platform = new H.service.Platform({
+\'apikey\': \'kAgcV1Pjxt64ufyybbLaGHuCmIHwzxZXTNoitOiAC0I\'
+});
+
+// Obtain the default map types from the platform object
+var maptypes = platform.createDefaultLayers();
+
+// Instantiate (and display) the map
+var map = new H.Map(
+document.getElementById(\'mapContainer\'),
+maptypes.raster.satellite.map,
+{
+zoom: 1,
+  pixelRatio: window.devicePixelRatio || 1
+});
+
+// Create reader object initializing it with a document:
+var reader = new H.data.kml.Reader(\'upload/doc.kml\');
+
+// Parse the document:
+reader.parse();
+
+// Get KML layer from the reader object and add it to the map:
+layer = reader.getLayer();
+map.addLayer(layer);
+
+
+reader.addEventListener(\'statechange\', function () {
+	// Wait till the KML document is fully loaded and parsed
+	if (this.getState() === H.data.AbstractReader.State.READY) {
+		// So lets zoom to them by default
+		//alert("listo");
+		
+	
+		var parsedObjects = reader.getParsedObjects();
+		console.log("object: " + parsedObjects[0]);
+		
+		var output = \'\';
+		for (var property in parsedObjects[0]) {
+		  output += property + \': \' + parsedObjects[0][property]+\'; \';
+		}
+		console.log(output);
+
+		
+		str = JSON.stringify(parsedObjects, null, 4); // (Optional) beautiful indented output.
+		console.log(str); // Logs output to dev tools console.
+		
+		map.setViewBounds(parsedObjects[0].getBounds());
+		alert("zoom");
+		map.setCenter(parsedObjects[0].getBounds().getCenter());
+		alert("centrar");
+		console.log(parsedObjects[0].getBounds().getCenter());	
+		alert("consola");
+							
+	}
+});
+
+
+// KML objects receive regular map events, so add an event listener to the 
+// KML layer:
+layer.getProvider().addEventListener(\'tap\', function(ev) {
+    // Log map object data. They contain name, description (if present in 
+    // KML) and the KML node itself.
+    //console.log("target:" + ev.target.getData());
+    alert(ev.target.getData()["name"]);
+});
+
+// add a resize listener to make sure that the map occupies the whole container
+window.addEventListener(\'resize\', () => map.getViewPort().resize());
+
+
+ // Get the default map types from the Platform object:
+var defaultLayers = platform.createDefaultLayers();
+
+var ui = H.ui.UI.createDefault(map, defaultLayers, \'es-ES\');
+
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+
+//map.setCenter(LocationOfMarker);
+
+</script>
+				
+				';
+					
+				 
 			break;
 			/**************************************************/
 			//excepcion
@@ -524,23 +986,27 @@ function widget_excel($identificador, $tabla, $extraconfig){
 }
 /*******************************************************************************************************************/
 //se muestra el buscador dentro de una tabla
-function widget_sherlock($type, $colspan){
+function widget_sherlock($type, $colspan, $idTable){
 	//indica que tipo es
 	switch ($type) {
 		case 1: $html_obj = 'th'; break;
 		case 2: $html_obj = 'td'; break;
 	}
-
+	
+	//variables internas
+	$random_int = rand(1, 999);
+	$InputName  = 'InputTableFilter_'.$random_int;
+			
 	//generacion del widget
 	$widget = '
 	<tr role="row">
-		<'.$html_obj.' colspan="'.$colspan.'"><input class="form-control" id="InputTableFilter" type="text" placeholder="Filtrar Datos.."></'.$html_obj.'>
+		<'.$html_obj.' colspan="'.$colspan.'"><input class="form-control" id="'.$InputName.'" type="text" placeholder="Filtrar Datos.."></'.$html_obj.'>
 	</tr>
 	<script>
 		$(document).ready(function(){
-			$("#InputTableFilter").on("keyup", function() {
+			$("#'.$InputName.'").on("keyup", function() {
 				var value = $(this).val().toLowerCase();
-				$("#TableFiltered tr").filter(function() {
+				$("#'.$idTable.' tr").filter(function() {
 					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 				});
 			});
@@ -572,7 +1038,7 @@ function widget_code_block($type, $code){
 	//Definicion de errores
 	$errorn = 0;
 	//se definen las opciones disponibles
-	$tipos = array(1, 2, 3, 4, 5, 6, 7);
+	$tipos = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 	//verifico si el dato ingresado existe dentro de las opciones
 	if (!in_array($type, $tipos)) {
 		alert_post_data(4,1,1, 'La configuracion $type entregada en el codeblock no esta dentro de las opciones');
@@ -617,13 +1083,41 @@ function widget_code_block($type, $code){
 				$tittle = 'Codigo Git';
 				$class  = 'language-git';
 				break;
+			//JAVA Code Example
+			case 8:
+				$tittle = 'Codigo Java';
+				$class  = 'language-java';
+				break;
+			//C Like Code Example
+			case 9:
+				$tittle = 'Codigo C Like';
+				$class  = 'language-clike';
+				break;
+			//C Code Example
+			case 10:
+				$tittle = 'Codigo C';
+				$class  = 'language-c';
+				break;
+			//CSharp Code Example
+			case 11:
+				$tittle = 'Codigo CSharp';
+				$class  = 'language-csharp';
+				break;
+			//SQL Code Example
+			case 12:
+				$tittle = 'Codigo SQL';
+				$class  = 'language-sql';
+				break;
+			//PLSQL Code Example
+			case 13:
+				$tittle = 'Codigo PLSQL';
+				$class  = 'language-plsql';
+				break;	
 		}
 		//Limpieza
 		$code = str_replace('<','&lt;',$code);	
 		$code = str_replace('>','&gt;',$code);
 		$code = str_replace('"','&quot;',$code);
-		//$code = str_replace('>','&gt;',$code);
-		//$code = str_replace('>','&gt;',$code);
 		$widget = '
 		<div class="code-block">
 			<h6>'.$tittle.'</h6>
