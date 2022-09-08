@@ -10,6 +10,21 @@ if( ! defined('XMBCXRXSKGC')) {
 /*                                                  Funciones                                                      */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* verifica si el dato ingresado es un intento de hackeo
+* 
+*===========================     Detalles    ===========================
+* Verifica si el dato ingresado es un intento de hackeo
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se verifica
+* 	secure("datos'DATA ATACK'");
+* 
+*===========================    Parametros   ===========================
+* String   $string   Texto a verificar
+* @return  String
+************************************************************************/ 
 function secure($Data) {
 
 	//Si el dato no es un numero
@@ -72,15 +87,43 @@ function secure($Data) {
 	}
 	
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Sanitizar los datos
+* 
+*===========================     Detalles    ===========================
+* Sanitiza los datos de acuerdo a los estandares de PHP
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se Sanitiza
+* 	SanitizarDatos("datos'DATA ATACK'");
+* 
+*===========================    Parametros   ===========================
+* String   $string   Texto a Sanitizar
+* @return  String
+************************************************************************/
 function SanitizarDatos($Data) {
-// Loop through POST variables
+	// Loop through POST variables
 	foreach($Data as $input => $value) {
 		$Data[$input] = secure($value);
 	}
 	return $Data;
 }
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Impide la injeccion
+* 
+*===========================     Detalles    ===========================
+* Impide la injeccion de datos
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se verifica
+* 	anti_injection("from|select");
+* 
+*===========================    Parametros   ===========================
+* String   $string   Texto a verificar
+* @return  String
+************************************************************************/
 function anti_injection($sql){
     $sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "" ,$sql);
     $sql = trim($sql);
