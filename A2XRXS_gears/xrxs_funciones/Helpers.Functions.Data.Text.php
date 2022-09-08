@@ -219,6 +219,39 @@ function texto_mail($dato) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
+* Reemplaza las comillas
+* 
+*===========================     Detalles    ===========================
+* Reemplaza las comillas simples y dobles
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se verifica
+* 	EstandarizarInput("bla"bla'bla");
+* 
+*===========================    Parametros   ===========================
+* String   $string   Texto a estandarizar
+* @return  String
+************************************************************************/
+function EstandarizarInput($Data){
+	
+	/******************************************/
+	//Se eliminan saltos de linea y pagina
+    $Data = str_replace(array("\n", "\r"), '', $Data);
+    $Data = strip_tags($Data, '');
+	
+	/******************************************/
+	//Elimino los acentos y reemplazo la ñ
+	$Data = texto_mail($Data);
+	
+	/******************************************/
+	//Elimino las comillas simples y dobles
+	$Data = str_replace("'", '%27', $Data);
+	$Data = str_replace('"', '%22', $Data);
+	
+	return $Data;
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
 * Cuenta si hay palabras malas u ofensivas
 * 
 *===========================     Detalles    ===========================
