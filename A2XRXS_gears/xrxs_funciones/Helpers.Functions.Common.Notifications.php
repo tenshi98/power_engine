@@ -98,5 +98,62 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 		}
 	}
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Genera un cuadro de alerta
+* 
+*===========================     Detalles    ===========================
+* Permite generar un cuadro de alerta personalizado
+*===========================    Modo de uso  ===========================
+* 	//se imprime input	
+* 	info_post_data(1,'dato' );
+* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_post_data(4,'bla' );
+* 
+*===========================    Parametros   ===========================
+* Integer  $type            Tipo de mensaje (define el color de este)
+* String   $Text            Texto del mensaje (permite HTML)
+* @return  String
+************************************************************************/
+//Funcion
+function info_post_data($type, $Text){
+		
+	//Valido si los datos ingresados estan correctos
+	if (validarNumero($type)){
+			
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1,2,3,4,5,6,7);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($type, $requerido_1)) {
+			alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			//Selecciono el tipo de mensaje
+			switch ($type) {
+				case 1: $tipo = 'bs-callout-default';  break;
+				case 2: $tipo = 'bs-callout-primary';  break;
+				case 3: $tipo = 'bs-callout-success';  break;
+				case 4: $tipo = 'bs-callout-info';     break;
+				case 5: $tipo = 'bs-callout-warning';  break;
+				case 6: $tipo = 'bs-callout-danger';   break;
+				case 7: $tipo = 'bs-callout-link';     break;
+			}
+			
+			//generacion del mensaje
+			$input  = '<div class="bs-callout '.$tipo.'" >'.$Text.'<div class="clearfix"></div></div>';
+			
+			//Imprimir dato	
+			echo $input;
+		}
+	}
+	
+}
 
 ?>
