@@ -344,6 +344,44 @@ function diferencia_meses( $fechainicial, $fechafinal ) {
 		return 'El dato ingresado no es una fecha ('.$fechainicial.' - '.$fechafinal.')';
 	}
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Se calcula la diferencia de meses
+* 
+*===========================     Detalles    ===========================
+* Se calcula la diferencia de meses en base a dos fechas
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se ejecuta operacion
+* 	diferencia_meses('2019-01-02', '2019-02-02');
+* 
+*===========================    Parametros   ===========================
+* Date     $fechainicial   Fecha de inicio 
+* Date     $fechafinal     Fecha de termino
+* @return  Integer
+************************************************************************/
+//Funcion
+function horas_transcurridas($diaInicio, $diaTermino, $horaInicio, $horaTermino){
+	
+	//calculo diferencia de dias
+	$n_dias = dias_transcurridos($diaInicio,$diaTermino);
+	//calculo del tiempo transcurrido
+	$HorasTrans = restahoras($horaInicio, $horaTermino);
+	//Calculo del tiempo transcurrido
+	if($n_dias!=0){
+		if($n_dias>=2){
+			$n_dias_temp  = $n_dias-1;
+			$horas_trans  = multHoras('24:00:00',$n_dias_temp);
+			$HorasTrans   = sumahoras($HorasTrans,$horas_trans);
+		}
+		if($n_dias==1&&$horaInicio<$horaTermino){
+			$horas_trans  = multHoras('24:00:00',$n_dias);
+			$HorasTrans   = sumahoras($HorasTrans,$horas_trans);
+		}
+	}
+		
+	return $HorasTrans; 	
+			
+}
 
 ?>
