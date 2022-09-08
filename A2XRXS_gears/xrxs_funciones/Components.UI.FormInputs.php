@@ -116,8 +116,16 @@ class Basic_Form_Inputs{
 			<div class="form-group" id="div_'.$name.'">
 				<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
 				<div class="col-sm-8 field">
-					<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' >
-						<option value="" selected>Seleccione una Opcion</option>';
+					<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' >';
+						//Recorro
+						$selectedx = 'selected="selected"';	
+						foreach ( $arrSelect as $select ) {
+							if($value==$select['idData']){
+								$selectedx = '';
+							}
+						}
+						
+						$data .= '<option value="" '.$selectedx.'>Seleccione una Opcion</option>';
 							
 						/******************************************/
 						//Recorro
@@ -228,18 +236,35 @@ class Basic_Form_Inputs{
 				let Componente = document.getElementById("'.$name_1.'").value;
 				//Verifico que valor exista
 				if (Componente != "") {
-					//Obtengo las variables con los id y los datos
-					slectId_'.$name_1.'   = eval("id_data_'.$name_1.'_" + Componente);
-					slectData_'.$name_1.' = eval("data_'.$name_1.'_" + Componente);
-					//indico al select el numero de elementos
-					document.'.$form_name.'.'.$name_2.'.length = slectId_'.$name_1.'.length;
-					//recorro elementos y lo inserto al select
-					for(i=0;i<slectId_'.$name_1.'.length;i++){
-						document.'.$form_name.'.'.$name_2.'.options[i].value = slectId_'.$name_1.'[i];
-						document.'.$form_name.'.'.$name_2.'.options[i].text  = slectData_'.$name_1.'[i];
+					//actualizo los datos del select
+					try {
+						//Obtengo las variables con los id y los datos
+						slectId_'.$name_1.'   = eval("id_data_'.$name_1.'_" + Componente);
+						slectData_'.$name_1.' = eval("data_'.$name_1.'_" + Componente);
+						//indico al select el numero de elementos
+						document.'.$form_name.'.'.$name_2.'.length = slectId_'.$name_1.'.length;
+						//recorro elementos y lo inserto al select
+						for(i=0;i<slectId_'.$name_1.'.length;i++){
+							document.'.$form_name.'.'.$name_2.'.options[i].value = slectId_'.$name_1.'[i];
+							document.'.$form_name.'.'.$name_2.'.options[i].text  = slectData_'.$name_1.'[i];
+						}
+						//muestro el select
+						document.getElementById("div_'.$name_2.'").style.display = "block";
+					//si el select previo da error
+					} catch (error) {
+						for (let i = document.'.$form_name.'.'.$name_2.'.options.length; i >= 0; i--) {
+							document.'.$form_name.'.'.$name_2.'.remove(i);
+						}
+						//Ingreso dato
+						document.'.$form_name.'.'.$name_2.'.length = 1;
+						document.'.$form_name.'.'.$name_2.'.options[0].value = 0;
+						document.'.$form_name.'.'.$name_2.'.options[0].text  = "Seleccione una Opcion";
 					}
-					//muestro el select
-					document.getElementById("div_'.$name_2.'").style.display = "block";
+				//si el select previo no tiene datos
+				}else{
+					for (let i = document.'.$form_name.'.'.$name_2.'.options.length; i >= 0; i--) {
+						document.'.$form_name.'.'.$name_2.'.remove(i);
+					}
 				}
 				//reposiciono el selected al primer elemento
 				document.getElementById("'.$name_2.'").selectedIndex = "0";
@@ -1413,6 +1438,94 @@ class Basic_Form_Inputs{
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
+	public function form_input_date($placeholder,$name, $value, $required){
+		
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se verifica si es un numero lo que se recibe
+		if (!validaFecha($value)&&$value!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una fecha');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			
+			/******************************************/
+			//variables internas
+			$random_int = rand(1, 999);
+			$EXname     = str_replace('[]', '', $name);
+			$EXname     = $EXname.'_'.$random_int;
+				
+			/******************************************/
+			//Si el dato no es requerido
+			if($required==1){
+				$requerido = '';//variable vacia
+			//Si el dato es requerido
+			}elseif($required==2){
+				$requerido = 'required';//se marca como requerido
+				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
+			}	
+			
+			/******************************************/
+			//Si existe un valor entregado
+			if($value!=0){
+				if($value!='0000-00-00'){
+					$w = $value;
+				}else{
+					$w = '';
+				}
+			//Si no existe se deja en blanco
+			}else{
+				$w = '';
+			}
+			
+			/******************************************/
+			//generacion del input
+			$input ='
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-sm-4">'.$placeholder.'</label>
+					<div class="col-sm-8 field">
+						<div class="input-group bootstrap-timepicker">
+							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="date" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$requerido.' >
+							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span> 
+						</div>
+					</div>
+				</div>';
+						
+			/******************************************/
+			//Imprimir dato	
+			echo $input;
+		}
+	}    
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input de fechas
+	* 
+	*===========================     Detalles    ===========================
+	* Permite crear un input que muestra un calendario al tratar de escribir 
+	* dentro de este, una vez seleccionada la fecha, el calendario 
+	* traspasa la fecha al input
+	*===========================    Modo de uso  ===========================
+	* 	
+	* 	//se imprime input	
+	* 	$Form->form_date('Fecha','fecha', '', 1 );
+	* 
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* Date     $value         Valor por defecto, debe tener formato fecha
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* @return  String
+	************************************************************************/
 	public function form_date($placeholder,$name, $value, $required){
 		
 		/********************************************************/
@@ -1453,7 +1566,11 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//Si existe un valor entregado
 			if($value!=0){
-				$w = $value;
+				if($value!='0000-00-00'){
+					$w = $value;
+				}else{
+					$w = '';
+				}
 			//Si no existe se deja en blanco
 			}else{
 				$w = '';
@@ -1770,7 +1887,7 @@ class Basic_Form_Inputs{
 			//Si existe un valor entregado
 			if($value!=''){
 				$w      = $value;
-				$bcolor = 'style="background-color: '.$value.';"';
+				$bcolor = 'style="background-color: '.$value.'!important;"';
 			//Si no existe se deja en blanco
 			}else{
 				$w      = '';
@@ -2063,6 +2180,61 @@ class Basic_Form_Inputs{
 			echo $input;
 		}
 	}
+	
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo checkbox
+	* 
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo checkbox
+	*===========================    Modo de uso  ===========================
+	* 	
+	* 	//se imprime input	
+	* 	$Form->form_input_checkbox('Opciones','opciones', '');
+	* 
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* @return  String
+	************************************************************************/
+	public function form_input_checkbox($placeholder,$name,$value){
+		
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			//Si el tab correspondiente esta seleccionado
+			if(isset($value)&&$value==2){
+				$w = 'checked'; 
+				$m = '2'; 
+			}else{ 
+				$w = ''; 
+				$m = '2'; 
+			}
+									
+			//generacion del input
+			$input = '
+			<div class="form-group" id="div_'.$name.'">			
+				<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
+				<div class="col-sm-8 field">
+					<div class="checkbox checkbox-primary">
+						<input                type="hidden"   value="1"      '.$w.' name="'.$name.'" >
+						<input class="styled" type="checkbox" value="'.$m.'" '.$w.' name="'.$name.'" id="'.$name.'">
+						<label for="'.$name.'">
+							'.$placeholder.'
+						</label>
+					</div>
+				</div>
+			</div>';
+									
+			
+			//Imprimir dato	
+			echo $input;
+		}
+	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo checkbox
@@ -2239,12 +2411,12 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-sm-12">
+			<div class="col-sm-12 field">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-8">
-					<div class="checkbox">
+					<div class="checkbox checkbox-primary">
+						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
 						<label>
-							<input type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
 							'.$inicio.'  <a class="iframe" href="'.$link.'">'.$fin.'</a> 
 						</label>
 					</div>
@@ -2274,6 +2446,52 @@ class Basic_Form_Inputs{
 			</script>
 			';
 
+		/******************************************/
+		//Imprimir dato	
+		echo $input;
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un cuadro con texto interno
+	* 
+	*===========================     Detalles    ===========================
+	* Permite crear un cuadro de texto
+	*===========================    Modo de uso  ===========================
+	* 	
+	* 	//se imprime input	
+	* 	$Form->form_text_box('www.google.cl', 400);
+	* 
+	*===========================    Parametros   ===========================
+	* String   $link         Enlace con el documento a mostrar en el popup
+	* String   $height       Altura del div
+	* @return  String
+	************************************************************************/
+	public function form_text_box($link, $height, $arrCambios){
+		
+		//Obtengo datos
+		$content = file_get_contents($link);
+		//Elimina acentos
+		$content = str_replace('á','a',$content);
+		$content = str_replace('é','e',$content);
+		$content = str_replace('í','i',$content);
+		$content = str_replace('ó','o',$content);
+		$content = str_replace('ú','u',$content);
+		
+		foreach($arrCambios as $cambios=>$cambio){
+			$content = str_replace($cambio['Original'],$cambio['Cambio'],$content);
+		}
+
+		/******************************************/
+		//generacion del input
+		$input = '
+			<div class="col-sm-12">
+				<div style="overflow-y: auto;padding:10px;height: '.$height.'px;">
+					'.$content.'
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		';
+		
 		/******************************************/
 		//Imprimir dato	
 		echo $input;
@@ -6040,9 +6258,120 @@ class Basic_Form_Inputs{
 			//Imprimir dato	
 			echo $input;
 		}
+	}	
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo select dependiente
+	* 
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* dependiente uno de otro
+	*===========================    Modo de uso  ===========================
+	* 	
+	* 	//se imprime input	
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
+	*                              $dbConn, 'form1' );
+	* 
+	*===========================    Parametros   ===========================
+	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
+	* String   $name_x          Nombre del identificador del Input
+	* Integer  $value_x         Valor por defecto, debe ser un numero entero
+	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
+	* String   $dataA_x         Identificador de la base de datos
+	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $table_x         Tabla desde donde tomar los datos
+	* String   $filter_x        Filtro de la seleccion de la base de datos
+	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
+	* 
+	* Object   $dbConn          Puntero a la base de datos
+	* String   $form_name       Nombre del formulario actual
+	* @return  String
+	************************************************************************/
+	public function form_select_independ1($name_1, $dataA_1, 
+										  $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										  $dbConn, $form_name){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required_2, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se verifica si es un numero lo que se recibe
+		if (!validarNumero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
+			$errorn++;
+		}
+		//Verifica si el numero recibido es un entero
+		if (!validaEntero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			
+			/******************************************/
+			//Arreglos
+			$requerido     = array();
+			$datos         = array();
+			$data_required = array();
+			$filtro        = array();
+			
+			//Variables Vacias
+			$input = '';
+			//recorro
+			$data_required[2] = '';
+			$filtro[2]        = '';
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
+			
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos[2] = explode(",", $dataB_2);
+			
+			/******************************************/
+			//Se arman los datos requeridos
+			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
+			
+			/******************************************/
+			//Verifica si se enviaron mas datos
+			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
+			
+			/******************************************/
+			//consulto
+			$arrSelect_2 = array();
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_independ1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			
+			/******************************************/
+			//si hay resultados
+			if($arrSelect_2!=false){
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
+			}
+			
+			
+			/******************************************/
+			//Imprimir dato	
+			echo $input;
+		}
 	}
-/*******************************************************************************************************************/
-	
+	/*******************************************************************************************************************/
+
+
+
+
 }
 
 
