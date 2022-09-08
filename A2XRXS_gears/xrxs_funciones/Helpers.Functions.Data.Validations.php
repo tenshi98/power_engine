@@ -222,18 +222,28 @@ function validarAjax(){
 ************************************************************************/
 //Funcion
 function validaHora($time) {
-	$pattern1 = "/^([0-9][0-9])[\:]([0-5][0-9])[\:]([0-5][0-9])$/";
-    $pattern2 = "/^([0-9][0-9])[\:]([0-5][0-9])$/";
-    
-    if(preg_match($pattern1,$time)){
-        return true;
+	//Valido el formato
+	$bits = explode(':', $time);
+	//Si es un texto largo o el formato tiene mas de dos :
+	if (count($bits)==1 || count($bits) > 3){
+		return false;
 	}else{
-		if(preg_match($pattern2,$time)){
+		return true;
+		//formatos
+		/*$pattern1 = "/^([0-9][0-9])[\:]([0-5][0-9])[\:]([0-5][0-9])$/";
+		$pattern2 = "/^([0-9][0-9])[\:]([0-5][0-9])$/";
+		
+		if(preg_match($pattern1,$time)){
 			return true;
 		}else{
-			return false;
-		}
+			if(preg_match($pattern2,$time)){
+				return true;
+			}else{
+				return false;
+			}
+		}*/
 	}
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
