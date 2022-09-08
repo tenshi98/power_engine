@@ -61,16 +61,24 @@ function conectar () {
 //Funcion
 function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
+	/********************************************/
 	// Se hace consulta
 	$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join.' WHERE '.$where.' LIMIT 1';
+	
+	/********************************************/
 	//si estoy pidiendo mostrar la query
 	if($showQuery==true){
 		echo '<pre>';
 			var_dump($query);
 		echo '</pre>';
+		
+	/********************************************/
+	//si quiero que se ejecute normal la query
 	}else{
 		//Consulta
 		$resultado = mysqli_query ($dbConn, $query);
+			
+		/********************************************/
 		//Si ejecuto correctamente la consulta
 		if($resultado){
 			//si hay respuesta se devuelven los resultados
@@ -78,7 +86,8 @@ function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usu
 		
 			//devolver objeto
 			return $rowData;
-					
+			
+		/********************************************/
 		//si da error, guardar en el log de errores una copia
 		}else{
 			
@@ -125,17 +134,25 @@ function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usu
 //Funcion
 function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
+	/********************************************/
 	// Se hace consulta
 	$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join;
 	if(isset($where)&&$where!=''){$query .= ' WHERE '.$where;}
+	
+	/********************************************/
 	//si estoy pidiendo mostrar la query
 	if($showQuery==true){
 		echo '<pre>';
 			var_dump($query);
 		echo '</pre>';
+		
+	/********************************************/
+	//si quiero que se ejecute normal la query
 	}else{
 		//Consulta
 		$resultado = mysqli_query ($dbConn, $query);
+			
+		/********************************************/
 		//Si ejecuto correctamente la consulta
 		if($resultado){
 			//obtengo el numero de filas de la seleccion
@@ -143,7 +160,8 @@ function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Us
 		
 			//devolver objeto
 			return $ndata_1;
-					
+			
+		/********************************************/
 		//si da error, guardar en el log de errores una copia
 		}else{
 			
@@ -188,21 +206,30 @@ function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Us
 //Funcion
 function db_delete_data($showQuery, $table, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
+	/********************************************/
 	//se borran los datos
 	$query  = 'DELETE FROM `'.$table.'` WHERE '.$where;
+	
+	/********************************************/
 	//si estoy pidiendo mostrar la query
 	if($showQuery==true){
 		echo '<pre>';
 			var_dump($query);
 		echo '</pre>';
+		
+	/********************************************/
+	//si quiero que se ejecute normal la query
 	}else{
 		//Consulta
 		$resultado = mysqli_query ($dbConn, $query);
+			
+		/********************************************/
 		//Si ejecuto correctamente la consulta
 		if($resultado){
 			//devuelvo ok		
 			return true;
-					
+			
+		/********************************************/
 		//si da error, guardar en el log de errores una copia
 		}else{
 			
@@ -249,21 +276,30 @@ function db_delete_data($showQuery, $table, $where, $dbConn, $Usuario, $Transacc
 //Funcion
 function db_update_data ($showQuery, $data, $table, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
+	/********************************************/
 	// Se actualizan los datos
 	$query  = 'UPDATE `'.$table.'` SET '.$data.' WHERE '.$where;
+	
+	/********************************************/
 	//si estoy pidiendo mostrar la query
 	if($showQuery==true){
 		echo '<pre>';
 			var_dump($query);
 		echo '</pre>';
+		
+	/********************************************/
+	//si quiero que se ejecute normal la query
 	}else{
 		//Consulta
 		$resultado = mysqli_query ($dbConn, $query);
+			
+		/********************************************/
 		//Si ejecuto correctamente la consulta
 		if($resultado){
 			//devuelvo ok		
 			return true;
-					
+			
+		/********************************************/
 		//si da error, guardar en el log de errores una copia
 		}else{
 			
@@ -314,17 +350,25 @@ function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $
 	if (isset($filter)&&$filter!='0'&&$filter!=''){    $where    = "WHERE ".$filter;       }else{$where    = '';}
 	if (isset($orderby)&&$orderby!='0'&&$orderby!=''){ $order_by = "ORDER BY ".$orderby;   }else{$order_by = '';}
 		
+	/********************************************/
 	// Se trae un listado con todos los datos
 	$arrSelect = array();
 	$query = 'SELECT '.$data.' FROM `'.$table.'` '.$joined.' '.$where.' '.$order_by;
+	
+	/********************************************/
 	//si estoy pidiendo mostrar la query
 	if($showQuery==true){
 		echo '<pre>';
 			var_dump($query);
 		echo '</pre>';
+		
+	/********************************************/
+	//si quiero que se ejecute normal la query
 	}else{
 		//Consulta
 		$resultado = mysqli_query ($dbConn, $query);
+			
+		/********************************************/
 		//Si ejecuto correctamente la consulta
 		if($resultado){
 			//si hay respuesta se devuelven los resultados
@@ -333,7 +377,8 @@ function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $
 			}
 			//devolver objeto
 			return $arrSelect;
-					
+			
+		/********************************************/
 		//si da error, guardar en el log de errores una copia
 		}else{
 			
@@ -351,6 +396,77 @@ function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $
 			
 			//devuelvo error
 			return false;
+		}
+	}	
+	
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Seleccionar array de datos
+* 
+*===========================     Detalles    ===========================
+* Funcion para seleccionar informacion desde la base de datos
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se ejecuta codigo
+* 	db_insert_data(false, 'Fecha, Hora, IP_Client','"2022-01-01", "16:00:00", "192.168.1.1"','tabla1',$dbConn, 'usuario', 'transaccion.php', 'insert');
+* 
+*===========================    Parametros   ===========================
+* String   $showQuery      Muestra la consulta que se esta tratando de ejecutar
+* String   $columns        Columnas donde se van a insertar los datos
+* String   $data           datos a insertar ordenados por columnas
+* String   $table          Tabla donde se van a insertar los datos
+* db_con   $dbConn         Puntero Conexion a la base de datos
+* String   $Usuario        Definicion del usuario que ejecuta la accion
+* String   $Transaccion    Definicion de la transaccion donde se ejecuta
+* String   $Tarea          Definicion de la tarea donde se ejecuta
+* @return  Object
+************************************************************************/
+//Funcion
+function db_insert_data ($showQuery, $columns, $data, $table, $dbConn, $Usuario, $Transaccion, $Tarea) {
+	
+	// inserto los datos de registro en la db
+	$query  = "INSERT INTO `".$table."` (".$columns.") VALUES (".$data.")";
+	
+	/********************************************/
+	//si estoy pidiendo mostrar la query
+	if($showQuery==true){
+		echo '<pre>';
+			var_dump($query);
+		echo '</pre>';
+		
+	/********************************************/
+	//si quiero que se ejecute normal la query
+	}else{
+		//Consulta
+		$resultado = mysqli_query ($dbConn, $query);
+		
+		/********************************************/
+		//Si ejecuto correctamente la consulta
+		if($resultado){
+			//obtengo el id del insert
+			$ultimo_id = mysqli_insert_id($dbConn);
+			//devuelvo el id
+			return	$ultimo_id;	
+		
+		/********************************************/
+		//si da error, guardar en el log de errores una copia
+		}else{
+			
+			//Verifico el entorno
+			if(getEntorno()==true){
+				echo '<pre>';
+					echo 'mysqli_errno: '.mysqli_errno($dbConn).'<br/>';
+					echo 'mysqli_error: '.mysqli_error($dbConn).'<br/>';
+					var_dump($query);
+				echo '</pre>';
+			}else{
+				//generar log
+				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+			}
+			
+			//devuelvo error
+			return 0;
 		}
 	}	
 	
