@@ -1005,12 +1005,12 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<div class="checkbox">
-					<input type="checkbox" name="'.$name.'" id="'.$name.'" value="'.$value.'">
+				<div class="checkbox checkbox-primary">
+					<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="'.$value.'">
 					<label>'.$placeholder.'</label>
 				</div>
 			</div>';
-			
+									
 			//Imprimir dato	
 			echo $input;
 		}
