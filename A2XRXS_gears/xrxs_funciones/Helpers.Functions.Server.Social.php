@@ -30,14 +30,26 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
+	/**************************************/
+	//Normalizo el mensaje
+	$saltoLinea = '
+';
+	
+	$vowels_1 = array('<br/>', '<br>', '</br>');
+	$vowels_2 = array('<strong>', '</strong>');
+	$Body = str_replace($vowels_1, $saltoLinea, $Body);
+	$Body = str_replace($vowels_2, '*', $Body);
+						
+	/**************************************/
 	//verifico si numero comienza con +56 o con 56
 	$myNumber = $Phone;
 	$findme_1 = '+';
 	$findme_2 = '+56';
 	$findme_3 = '56';
-	$pos_1      = strpos($myNumber, $findme_1);
-	$pos_2      = strpos($myNumber, $findme_2);
-	$pos_3      = strpos($myNumber, $findme_3);
+	
+	$pos_1 = strpos($myNumber, $findme_1);
+	$pos_2 = strpos($myNumber, $findme_2);
+	$pos_3 = strpos($myNumber, $findme_3);
 		
 	//si comienza con el +
 	if ($pos_1 !== false && $pos_1==0) {
@@ -69,7 +81,8 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 		$json = json_encode($data); // Encode data to JSON
 		// URL for request POST /message
 
-		$url = 'https://api.chat-api.com/instance'.$InstanceId.'/message?token='.$Token;
+		$url = 'https://api.chat-api.com/instance'.$InstanceId.'/sendMessage?token='.$Token;
+		
 		// Make a POST request
 		$options = stream_context_create(['http' => [
 				'method'  => 'POST',
@@ -130,7 +143,7 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 		$json = json_encode($data); // Encode data to JSON
 		// URL for request POST /message
 
-		$url = 'https://api.chat-api.com/instance'.$InstanceId.'/message?token='.$Token;
+		$url = 'https://api.chat-api.com/instance'.$InstanceId.'/sendMessage?token='.$Token;
 		// Make a POST request
 		$options = stream_context_create(['http' => [
 				'method'  => 'POST',
