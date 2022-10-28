@@ -375,5 +375,75 @@ function cantidades_google($valor){
 		return '0';
 	}
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Entrega un formato de numero telefonico
+* 
+*===========================     Detalles    ===========================
+* Devuelve un numero telefonico
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se formatea numero
+* 	formatPhone('+56911265984');
+* 
+*===========================    Parametros   ===========================
+* Decimal   $valor   Numero a formatear
+* @return   String
+************************************************************************/ 
+//Funcion
+function formatPhone($Phone){	
+	
+	//Verifico si existe
+	if(isset($Phone)&&$Phone!=''){
+		/**************************************/
+		//verifico si numero comienza con +56 o con 56
+		$myNumber = $Phone;
+		$findme_1 = '+';
+		$findme_2 = '+56';
+		$findme_3 = '56';
+		
+		$pos_1 = strpos($myNumber, $findme_1);
+		$pos_2 = strpos($myNumber, $findme_2);
+		$pos_3 = strpos($myNumber, $findme_3);
+			
+		//si comienza con el +
+		if ($pos_1 !== false && $pos_1==0) {
+			//comienza con el +56
+			if ($pos_2 !== false && $pos_2==0) {
+				$myPhone = $Phone;
+			//no comienza con el +56, es otro numero
+			} else {
+				$myPhone = '';
+			}
+		//no comienza por el +
+		} else {
+			//comienza con el 56
+			if ($pos_3 !== false && $pos_3==0) {
+				$myPhone = '+'.$Phone;
+			//no comienza con el 56, es otro numero
+			} else {
+				$myPhone = '+56'.$Phone;
+			}
+		}
+		
+		/**************************************/
+		//verifico la existencia de datos
+		if(isset($myPhone)&&$myPhone!=''){
+			
+			$result = sprintf("(%s) %s %s %s %s",
+				  substr($myPhone, 0, 3),
+				  substr($myPhone, 3, 1),
+				  substr($myPhone, 4, 1),
+				  substr($myPhone, 5, 3),
+				  substr($myPhone, 8, 4));
+			
+			return $result;
+		}
+	//si no existe	
+	}else{
+		return '';
+	}
+	
+}
 
 ?>
