@@ -3019,7 +3019,7 @@ class Basic_Form_Inputs{
 				//Si se envia filtro desde afuera
 				if($filter!='0' && $filter!=''){
 					//que exista un dato
-					$filtro .= $filter." AND ".$datos[0]."!='' ";
+					$filtro .= $filter." AND ".$table1.".".$datos[0]."!='' ";
 				}elseif($filter=='' OR $filter==0){
 					//que exista un dato
 					$filtro .= $datos[0]."!='' ";
@@ -3379,6 +3379,139 @@ class Basic_Form_Inputs{
 					</div>
 				</div>';
 					
+			/******************************************/
+			//Imprimir dato	
+			echo $input;
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo select dependiente
+	* 
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* dependiente uno de otro
+	*===========================    Modo de uso  ===========================
+	* 	
+	* 	//se imprime input	
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
+	*                              $dbConn, 'form1' );
+	* 
+	*===========================    Parametros   ===========================
+	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
+	* String   $name_x          Nombre del identificador del Input
+	* Integer  $value_x         Valor por defecto, debe ser un numero entero
+	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
+	* String   $dataA_x         Identificador de la base de datos
+	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $table_x         Tabla desde donde tomar los datos
+	* String   $filter_x        Filtro de la seleccion de la base de datos
+	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
+	* 
+	* Object   $dbConn          Puntero a la base de datos
+	* String   $form_name       Nombre del formulario actual
+	* @return  String
+	************************************************************************/
+	public function form_select_join_depend1($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $join_1,  $filter_1,   $extracomand_1,
+											 $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $join_2,  $filter_2,   $extracomand_2, 
+											 $dbConn, $form_name){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required_1, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
+			$errorn++;
+		}
+		if (!in_array($required_2, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required_2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se verifica si es un numero lo que se recibe
+		if (!validarNumero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
+			$errorn++;
+		}
+		if (!validarNumero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
+			$errorn++;
+		}
+		//Verifica si el numero recibido es un entero
+		if (!validaEntero($value_1)&&$value_1!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
+			$errorn++;
+		}
+		if (!validaEntero($value_2)&&$value_2!=''){ 
+			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			
+			/******************************************/
+			//Arreglos
+			$requerido     = array();
+			$datos         = array();
+			$data_required = array();
+			$filtro        = array();
+			
+			//Variables Vacias
+			$input = '';
+			//recorro
+			for ($i = 1; $i <= 2; $i++) {
+				$data_required[$i] = '';
+				$filtro[$i]        = '';
+			}
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
+			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
+			
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos[1] = explode(",", $dataB_1);
+			$datos[2] = explode(",", $dataB_2);
+			
+			/******************************************/
+			//Se arman los datos requeridos
+			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
+			
+			/******************************************/
+			//Verifica si se enviaron mas datos
+			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
+			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
+			
+			/******************************************/
+			//consulto
+			$arrSelect_1 = array();
+			$arrSelect_2 = array();
+			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, $join_1, $filtro[1], $extracomand_1, $dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, $join_2, $filtro[2], $extracomand_2, $dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			
+			/******************************************/
+			//si hay resultados
+			if($arrSelect_1!=false){
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+			}
+			//si hay resultados
+			if($arrSelect_2!=false){
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
+			}
+			
+			
 			/******************************************/
 			//Imprimir dato	
 			echo $input;
