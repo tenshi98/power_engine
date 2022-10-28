@@ -3,7 +3,7 @@
 /*                                              Bloque de seguridad                                                */
 /*******************************************************************************************************************/
 if( ! defined('XMBCXRXSKGC')) {
-    die('No tienes acceso a esta carpeta o archivo.');
+    die('No tienes acceso a esta carpeta o archivo (Access Code 1003-017).');
 }
 /*******************************************************************************************************************/
 /*                                                                                                                 */
@@ -62,7 +62,7 @@ function tareas_envio_correo($De_correo, $De_nombre,
 							 $GmailPassword){
 	
 	//valido que exista correo
-	if(isset($De_correo)&&isset($Hacia_correo)){
+	if(isset($De_correo)&&isset($Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail($De_correo)&&validarEmail($Hacia_correo)){
 			//verifico si los envio por gmail
@@ -154,16 +154,16 @@ function tareas_envio_correo($De_correo, $De_nombre,
 			
 		}else{
 			error_log("/***************************************************************/", 0);
-			if(!validarEmail($De_correo)){    error_log("Mail Error:El Email (De: ".$De_correo.") ingresado no es valido", 0);}
-			if(!validarEmail($Hacia_correo)){ error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($De_correo)){    $error = 'Mail Error:El Email (De: '.$De_correo.') ingresado no es valido';        error_log("Mail Error:El Email (De: ".$De_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($Hacia_correo)){ $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';  error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
 			error_log("/***************************************************************/", 0);
 			
 			return $error;
 		}
 	}else{
 		error_log("/***************************************************************/", 0);
-		if(!isset($De_correo)){    error_log("Mail Error:No ha ingresado Email (De)", 0);}
-		if(!isset($Hacia_correo)){ error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
+		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De)", 0);}
+		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
 		
 		error_log("/***************************************************************/", 0);
 			
@@ -221,7 +221,7 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 	 
                              			
 	//valido que exista correo
-	if(isset($SMTP_mailUsername)&&isset($Hacia_correo)){
+	if(isset($SMTP_mailUsername)&&isset($Hacia_correo)&&$SMTP_mailUsername!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail($SMTP_mailUsername)&&validarEmail($Hacia_correo)){
 			
@@ -238,8 +238,9 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 			if(!isset($Asunto) OR $Asunto==''){                        $errorn++;$error = 'No ha ingresado el Asunto';}
 			if(!isset($CuerpoHTML) OR $CuerpoHTML==''){                $errorn++;$error = 'No ha ingresado el mensaje';}
 			//si no se sabe a quien va se modifica el nombre
-			if($De_nombre==''){      $De_nombre='Contacto';}    
-			if($Hacia_nombre==''){   $Hacia_nombre='Contacto';} 
+			if(!isset($De_correo) OR $De_correo==''){       $De_correo    = $SMTP_mailUsername;}    
+			if(!isset($De_nombre) OR $De_nombre==''){       $De_nombre    = 'Contacto';}    
+			if(!isset($Hacia_nombre) OR $Hacia_nombre==''){ $Hacia_nombre = 'Contacto';} 
 				
 			/********************************************************/
 			//Ejecucion si no hay errores
@@ -317,16 +318,16 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 			
 		}else{
 			error_log("/***************************************************************/", 0);
-			if(!validarEmail($SMTP_mailUsername)){    error_log("Mail Error:El Email (De: ".$SMTP_mailUsername.") ingresado no es valido", 0);}
-			if(!validarEmail($Hacia_correo)){         error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($SMTP_mailUsername)){    $error = 'Mail Error:El Email (De: '.$SMTP_mailUsername.') ingresado no es valido'; error_log("Mail Error:El Email (De: ".$SMTP_mailUsername.") ingresado no es valido", 0);}
+			if(!validarEmail($Hacia_correo)){         $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';   error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
 			error_log("/***************************************************************/", 0);
 			
 			return $error;
 		}
 	}else{
 		error_log("/***************************************************************/", 0);
-		if(!isset($SMTP_mailUsername)){    error_log("Mail Error:No ha ingresado Email (De)", 0);}
-		if(!isset($Hacia_correo)){         error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
+		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De)", 0);}
+		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
 		
 		error_log("/***************************************************************/", 0);
 			
@@ -382,7 +383,7 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 									$lvl){
 	
 	//valido que exista correo
-	if(isset($GmailUsername)&&isset($Hacia_correo)){
+	if(isset($GmailUsername)&&isset($Hacia_correo)&&$GmailUsername!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail($GmailUsername)&&validarEmail($Hacia_correo)){
 			
@@ -477,16 +478,16 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 			
 		}else{
 			error_log("/***************************************************************/", 0);
-			if(!validarEmail($GmailUsername)){    error_log("Mail Error:El Email (De: ".$GmailUsername.") ingresado no es valido", 0);}
-			if(!validarEmail($Hacia_correo)){     error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($GmailUsername)){    $error = 'Mail Error:El Email (De: '.$GmailUsername.') ingresado no es valido';      error_log("Mail Error:El Email (De: ".$GmailUsername.") ingresado no es valido", 0);}
+			if(!validarEmail($Hacia_correo)){     $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';    error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
 			error_log("/***************************************************************/", 0);
 			
 			return $error;
 		}
 	}else{
 		error_log("/***************************************************************/", 0);
-		if(!isset($GmailUsername)){    error_log("Mail Error:No ha ingresado Email (De)", 0);}
-		if(!isset($Hacia_correo)){     error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
+		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De)", 0);}
+		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
 		
 		error_log("/***************************************************************/", 0);
 			
