@@ -35,26 +35,14 @@ function Fecha_completa($Fecha){
 			if($Fecha=='0000-00-00'){
 				return 'Sin Fecha';
 			}else{
-				$mes_c = new DateTime($Fecha);
-				$dia = $mes_c->format('d');
-				$me = $mes_c->format('m');
-				$ano = $mes_c->format('Y');
-				switch ($me) {
-					case 1:  $mes='Enero'; break;
-					case 2:  $mes='Febrero'; break;
-					case 3:  $mes='Marzo'; break;
-					case 4:  $mes='Abril'; break;
-					case 5:  $mes='Mayo'; break;
-					case 6:  $mes='Junio'; break;
-					case 7:  $mes='Julio'; break;
-					case 8:  $mes='Agosto'; break;
-					case 9:  $mes='Septiembre'; break;
-					case 10: $mes='Octubre'; break;
-					case 11: $mes='Noviembre'; break;
-					case 12: $mes='Diciembre'; break;
-				}
-				$cadena = $mes.' '.$dia.' del '.$ano;
-				return $cadena;
+				$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+				$mes_c   = new DateTime($Fecha);
+				$dia     = $mes_c->format('d');
+				$me      = $mes_c->format('m');
+				$ano     = $mes_c->format('Y');
+				$mes     = $options[$me-1];
+
+				return $mes.' '.$dia.' del '.$ano;
 			}
 		}else{
 			return 'El dato ingresado no es una fecha ('.$Fecha.')';
@@ -88,26 +76,14 @@ function Fecha_completa_alt($Fecha){
 			if($Fecha=='0000-00-00'){
 				return 'Sin Fecha';
 			}else{
-				$mes_c = new DateTime($Fecha);
-				$dia = $mes_c->format('d');
-				$me = $mes_c->format('m');
-				$ano = $mes_c->format('Y');
-				switch ($me) {
-					case 1:  $mes='Enero'; break;
-					case 2:  $mes='Febrero'; break;
-					case 3:  $mes='Marzo'; break;
-					case 4:  $mes='Abril'; break;
-					case 5:  $mes='Mayo'; break;
-					case 6:  $mes='Junio'; break;
-					case 7:  $mes='Julio'; break;
-					case 8:  $mes='Agosto'; break;
-					case 9:  $mes='Septiembre'; break;
-					case 10: $mes='Octubre'; break;
-					case 11: $mes='Noviembre'; break;
-					case 12: $mes='Diciembre'; break;
-				};
-				$cadena = $dia.' de '.$mes.' de '.$ano;
-				return $cadena;
+				$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+				$mes_c   = new DateTime($Fecha);
+				$dia     = $mes_c->format('d');
+				$me      = $mes_c->format('m');
+				$ano     = $mes_c->format('Y');
+				$mes     = $options[$me-1];
+
+				return $dia.' de '.$mes.' de '.$ano;
 			}
 		}else{
 			return 'El dato ingresado no es una fecha ('.$Fecha.')';
@@ -141,25 +117,13 @@ function Dia_Mes($Fecha){
 			if($Fecha=='0000-00-00'){
 				return 'Sin Fecha';
 			}else{
-				$mes_c = new DateTime($Fecha);
-				$dia   = $mes_c->format('d');
-				$me    = $mes_c->format('m');
-				switch ($me) {
-					case 1:  $mes='Enero'; break;
-					case 2:  $mes='Febrero'; break;
-					case 3:  $mes='Marzo'; break;
-					case 4:  $mes='Abril'; break;
-					case 5:  $mes='Mayo'; break;
-					case 6:  $mes='Junio'; break;
-					case 7:  $mes='Julio'; break;
-					case 8:  $mes='Agosto'; break;
-					case 9:  $mes='Septiembre'; break;
-					case 10: $mes='Octubre'; break;
-					case 11: $mes='Noviembre'; break;
-					case 12: $mes='Diciembre'; break;
-				};
-				$cadena = $dia.' '.$mes;
-				return $cadena;
+				$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+				$mes_c   = new DateTime($Fecha);
+				$dia     = $mes_c->format('d');
+				$me      = $mes_c->format('m');
+				$mes     = $options[$me-1];
+
+				return $dia.' '.$mes;
 			}
 		}else{
 			return 'El dato ingresado no es una fecha ('.$Fecha.')';
@@ -327,25 +291,13 @@ function Fecha_mes_ano($Fecha){
 			if($Fecha=='0000-00-00'){
 				return 'Sin Fecha';
 			}else{
-				$mes_c = new DateTime($Fecha);
-				$me    = $mes_c->format('m');
-				$agno  = $mes_c->format('Y');
-				switch ($me) {
-					case 1:  $mes='Enero'; break;
-					case 2:  $mes='Febrero'; break;
-					case 3:  $mes='Marzo'; break;
-					case 4:  $mes='Abril'; break;
-					case 5:  $mes='Mayo'; break;
-					case 6:  $mes='Junio'; break;
-					case 7:  $mes='Julio'; break;
-					case 8:  $mes='Agosto'; break;
-					case 9:  $mes='Septiembre'; break;
-					case 10: $mes='Octubre'; break;
-					case 11: $mes='Noviembre'; break;
-					case 12: $mes='Diciembre'; break;
-				}
-				$cadena = $mes.' del '.$agno;
-				return $cadena;
+				$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+				$mes_c   = new DateTime($Fecha);
+				$me      = $mes_c->format('m');
+				$agno    = $mes_c->format('Y');
+				$mes     = $options[$me-1];
+
+				return $mes.' del '.$agno;
 			}
 		}else{
 			return 'El dato ingresado no es una fecha ('.$Fecha.')';
@@ -480,16 +432,9 @@ function fecha2NombreDia($Fecha){
 	if($Fecha!=''){
 		//valido la fecha
 		if(validaFecha($Fecha)){
-			$me = fecha2NDiaSemana($Fecha);
-			switch ($me) {
-				case 1: $dia = 'Lunes'; break;
-				case 2: $dia = 'Martes'; break;
-				case 3: $dia = 'Miercoles'; break;
-				case 4: $dia = 'Jueves'; break;
-				case 5: $dia = 'Viernes'; break;
-				case 6: $dia = 'Sabado'; break;
-				case 7: $dia = 'Domingo'; break;
-			}
+			$options = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+			$me      = fecha2NDiaSemana($Fecha);	
+			$dia     = $options[$me-1];
 			return $dia;
 		}else{
 			return 'El dato ingresado no es una fecha ('.$Fecha.')';
@@ -592,21 +537,9 @@ function fecha2NombreMes($Fecha){
 			if($Fecha=='0000-00-00'){
 				return 'Sin Fecha';
 			}else{
-				$me = fecha2NMes($Fecha);
-				switch ($me) {
-					case 1:  $mes='Enero'; break;
-					case 2:  $mes='Febrero'; break;
-					case 3:  $mes='Marzo'; break;
-					case 4:  $mes='Abril'; break;
-					case 5:  $mes='Mayo'; break;
-					case 6:  $mes='Junio'; break;
-					case 7:  $mes='Julio'; break;
-					case 8:  $mes='Agosto'; break;
-					case 9:  $mes='Septiembre'; break;
-					case 10: $mes='Octubre'; break;
-					case 11: $mes='Noviembre'; break;
-					case 12: $mes='Diciembre'; break;
-				}
+				$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+				$me      = fecha2NMes($Fecha);	
+				$mes     = $options[$me-1];
 				return $mes;
 			}
 		}else{
@@ -641,21 +574,9 @@ function fecha2NombreMesCorto($Fecha){
 			if($Fecha=='0000-00-00'){
 				return 'Sin Fecha';
 			}else{
-				$me = fecha2NMes($Fecha);
-				switch ($me) {
-					case 1:  $mes='Ene'; break;
-					case 2:  $mes='Feb'; break;
-					case 3:  $mes='Mar'; break;
-					case 4:  $mes='Abr'; break;
-					case 5:  $mes='May'; break;
-					case 6:  $mes='Jun'; break;
-					case 7:  $mes='Jul'; break;
-					case 8:  $mes='Ago'; break;
-					case 9:  $mes='Sep'; break;
-					case 10: $mes='Oct'; break;
-					case 11: $mes='Nov'; break;
-					case 12: $mes='Dic'; break;
-				}
+				$options = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+				$me      = fecha2NMes($Fecha);	
+				$mes     = $options[$me-1];
 				return $mes;
 			}
 		}else{

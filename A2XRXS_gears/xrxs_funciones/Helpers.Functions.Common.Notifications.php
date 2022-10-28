@@ -62,30 +62,18 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 		//Ejecucion si no hay errores
 		if($errorn==0){
 			//Selecciono el tipo de mensaje
-			switch ($type) {
-				case 1: $tipo = 'success';  break;
-				case 2: $tipo = 'info';     break;
-				case 3: $tipo = 'warning';  break;
-				case 4: $tipo = 'danger';   break;
-			}
-				
+			$options = ['success', 'info', 'warning', 'danger'];
+			$tipo    = $options[$type-1];
+			
 			//Selecciono el tipo de mensaje
-			switch ($iconAnimation) {
-				case 0: $Animation = '';                      break;
-				case 1: $Animation = 'faa-bounce animated';   break;
-				case 2: $Animation = 'faa-vertical animated'; break;
-				case 3: $Animation = 'faa-flash animated';    break;	
-			}
+			$options   = ['', 'faa-bounce animated', 'faa-vertical animated', 'faa-flash animated'];
+			$Animation = $options[$iconAnimation];
+			
 				
 			//Selecciono el tipo de icono
-			switch ($icon) {
-				case 0: $iconType = '';                                                                                   break;
-				case 1: $iconType = '<div class="icon"><i class="fa fa-info-circle '.$Animation.'" aria-hidden="true"></i></div>';           break;
-				case 2: $iconType = '<div class="icon"><i class="fa fa-exclamation '.$Animation.'" aria-hidden="true"></i></div>';           break;
-				case 3: $iconType = '<div class="icon"><i class="fa fa-exclamation-triangle '.$Animation.'" aria-hidden="true"></i></div>';  break;
-			}
-
-
+			$options  = ['', '<div class="icon"><i class="fa fa-info-circle '.$Animation.'" aria-hidden="true"></i></div>', '<div class="icon"><i class="fa fa-exclamation '.$Animation.'" aria-hidden="true"></i></div>', '<div class="icon"><i class="fa fa-exclamation-triangle '.$Animation.'" aria-hidden="true"></i></div>'];
+			$iconType = $options[$icon];
+			
 			//generacion del mensaje
 			$input  = '<div class="alert alert-'.$tipo.' alert-white rounded alert_box_correction" role="alert">';
 			if($icon!=0){$input .= $iconType;}
@@ -136,18 +124,11 @@ function info_post_data($type, $Text){
 		//Ejecucion si no hay errores
 		if($errorn==0){
 			//Selecciono el tipo de mensaje
-			switch ($type) {
-				case 1: $tipo = 'bs-callout-default';  break;
-				case 2: $tipo = 'bs-callout-primary';  break;
-				case 3: $tipo = 'bs-callout-success';  break;
-				case 4: $tipo = 'bs-callout-info';     break;
-				case 5: $tipo = 'bs-callout-warning';  break;
-				case 6: $tipo = 'bs-callout-danger';   break;
-				case 7: $tipo = 'bs-callout-link';     break;
-			}
+			$options = ['default', 'primary', 'success', 'info', 'warning', 'danger', 'link'];
+			$tipo = $options[$type-1];
 			
 			//generacion del mensaje
-			$input  = '<div class="bs-callout '.$tipo.'" >'.$Text.'<div class="clearfix"></div></div>';
+			$input  = '<div class="bs-callout bs-callout-'.$tipo.'" >'.$Text.'<div class="clearfix"></div></div>';
 			
 			//Imprimir dato	
 			echo $input;

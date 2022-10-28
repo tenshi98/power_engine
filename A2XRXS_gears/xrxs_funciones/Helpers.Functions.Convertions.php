@@ -275,21 +275,8 @@ function numero_mes($numero){
 	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<13){
-			switch ($numero) {
-				case 1:  $mes = '01'; break;
-				case 2:  $mes = '02'; break;
-				case 3:  $mes = '03'; break;
-				case 4:  $mes = '04'; break;
-				case 5:  $mes = '05'; break;
-				case 6:  $mes = '06'; break;
-				case 7:  $mes = '07'; break;
-				case 8:  $mes = '08'; break;
-				case 9:  $mes = '09'; break;
-				case 10: $mes = '10'; break;
-				case 11: $mes = '11'; break;
-				case 12: $mes = '12'; break;
-			}
-			return $mes;
+			$options = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+			return $options[$numero-1];
 		}else{
 			return 'Numero fuera de parametros esperados';
 		}
@@ -319,21 +306,8 @@ function numero_a_mes($numero){
 	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<13){
-			switch ($numero) {
-				case 1:  $mes = 'Enero'; break;
-				case 2:  $mes = 'Febrero'; break;
-				case 3:  $mes = 'Marzo'; break;
-				case 4:  $mes = 'Abril'; break;
-				case 5:  $mes = 'Mayo'; break;
-				case 6:  $mes = 'Junio'; break;
-				case 7:  $mes = 'Julio'; break;
-				case 8:  $mes = 'Agosto'; break;
-				case 9:  $mes = 'Septiembre'; break;
-				case 10: $mes = 'Octubre'; break;
-				case 11: $mes = 'Noviembre'; break;
-				case 12: $mes = 'Diciembre'; break;
-			}
-			return $mes;
+			$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+			return $options[$numero-1];
 		}else{
 			return 'Numero fuera de parametros esperados';
 		}
@@ -364,21 +338,8 @@ function numero_a_mes_corto($numero){
 	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<13){
-			switch ($numero) {
-				case 1:  $mes = 'Ene'; break;
-				case 2:  $mes = 'Feb'; break;
-				case 3:  $mes = 'Mar'; break;
-				case 4:  $mes = 'Abr'; break;
-				case 5:  $mes = 'May'; break;
-				case 6:  $mes = 'Jun'; break;
-				case 7:  $mes = 'Jul'; break;
-				case 8:  $mes = 'Ago'; break;
-				case 9:  $mes = 'Sep'; break;
-				case 10: $mes = 'Oct'; break;
-				case 11: $mes = 'Nov'; break;
-				case 12: $mes = 'Dic'; break;
-			}
-			return $mes;
+			$options = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+			return $options[$numero-1];
 		}else{
 			return 'Numero fuera de parametros esperados';
 		}
@@ -407,16 +368,8 @@ function numero_nombreDia($numero){
 	if (validarNumero($numero)){ 
 		//verifico que este dentro de los valores esperados
 		if($numero>0&&$numero<8){
-			switch ($numero) {
-				case 1: $dia = 'Lunes'; break;
-				case 2: $dia = 'Martes'; break;
-				case 3: $dia = 'Miercoles'; break;
-				case 4: $dia = 'Jueves'; break;
-				case 5: $dia = 'Viernes'; break;
-				case 6: $dia = 'Sabado'; break;
-				case 7: $dia = 'Domingo'; break;
-			}
-			return $dia;
+			$options = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+			return $options[$numero-1];
 		}else{
 			return 'Numero fuera de parametros esperados';
 		}
