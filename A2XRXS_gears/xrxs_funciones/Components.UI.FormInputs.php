@@ -3,7 +3,7 @@
 /*                                              Bloque de seguridad                                                */
 /*******************************************************************************************************************/
 if( ! defined('XMBCXRXSKGC')) {
-    die('No tienes acceso a esta carpeta o archivo.');
+    die('No tienes acceso a esta carpeta o archivo (Access Code 1002-001).');
 }
 /*******************************************************************************************************************/
 /*                                                    Clases                                                       */
@@ -2418,6 +2418,69 @@ class Basic_Form_Inputs{
 						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
 						<label>
 							'.$inicio.'  <a class="iframe" href="'.$link.'">'.$fin.'</a> 
+						</label>
+					</div>
+				</div>
+			</div>
+		';
+			
+		//ejecucion script	
+		$input .= '
+			<script>
+				//se desactiva el boton f5
+				window.onload = function () {
+					disableSubmit();
+				}
+				//se desactiva el boton submit
+				function disableSubmit() {
+					document.getElementById("'.$submit_name.'").disabled = true;
+				}
+				//si se esta de acuerdo se activa el boton submit
+				function acbtn_'.$name.'(element) {
+					if(element.checked) {
+						document.getElementById("'.$submit_name.'").disabled = false;
+					}else  {
+						document.getElementById("'.$submit_name.'").disabled = true;
+					}
+				}
+			</script>
+			';
+
+		/******************************************/
+		//Imprimir dato	
+		echo $input;
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea una linea con un checkbox de terminos y condiciones
+	* 
+	*===========================     Detalles    ===========================
+	* Permite crear una linea en donde muestra la opcion de terminos y 
+	* condiciones, al tener esta opcion presente deshabilita el boton 
+	* submit del formulario, impidiendo su ejecucion hasta que no se 
+	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
+	*===========================    Modo de uso  ===========================
+	* 	
+	* 	//se imprime input	
+	* 	$Form->form_conditional_submit('terminos','He leido los terminos y condiciones', 'submit_btn' );
+	* 
+	*===========================    Parametros   ===========================
+	* String   $name         Nombre del identificador del Input
+	* String   $text       Texto 
+	* String   $submit_name  Identificador del boton submit del formulario
+	* @return  String
+	************************************************************************/
+	public function form_conditional_submit($name, $text, $submit_name){
+		
+		/******************************************/
+		//generacion del input
+		$input = '
+			<div class="col-sm-12 field">
+				<div class="col-sm-8">
+					<div class="checkbox checkbox-primary">
+						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
+						<label>
+							'.$text.' 
 						</label>
 					</div>
 				</div>
