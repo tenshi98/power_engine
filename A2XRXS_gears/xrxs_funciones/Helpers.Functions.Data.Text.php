@@ -192,7 +192,7 @@ function espacio_guion($dato) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Reemplazar los caracteres especialos
+* Reemplazar los caracteres especiales
 * 
 *===========================     Detalles    ===========================
 * Transforma los caracteres especiales por los estandares html
@@ -214,7 +214,32 @@ function texto_mail($dato) {
 
 	$new_dato = str_replace($healthy, $yummy, $dato);
 
-    
+    return $new_dato;
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Reemplazar los caracteres web
+* 
+*===========================     Detalles    ===========================
+* Transforma los caracteres estandares html por los especiales 
+*===========================    Modo de uso  ===========================
+* 	
+* 	//se ejecuta operacion
+* 	DeSanitizar('Lorem ipsum dolor sit amet, consectetur');
+* 
+*===========================    Parametros   ===========================
+* String   $dato   Oracion a transformar
+* @return  String
+************************************************************************/
+//Funcion
+function DeSanitizar($dato) {
+    //Datos a cambiar
+	$healthy = array("&aacute;", "&eacute;", "&iacute;", "&oacute;", "&uacute;", 
+					 "&ntilde;", "&agrave;", "&egrave;", "&ograve;");
+    $yummy   = array("á", "é", "í", "ó", "ú", "ñ", "à", "è", "ò");
+
+	$new_dato = str_replace($healthy, $yummy, $dato);
+
     return $new_dato;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
