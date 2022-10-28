@@ -62,8 +62,13 @@ function conectar () {
 function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 	
 	/********************************************/
-	// Se hace consulta
-	$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join.' WHERE '.$where.' LIMIT 1';
+	//en el caso de que where tenga el limit
+	if (strpos($where, 'LIMIT') !== false) {
+		$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join.' WHERE '.$where;
+	//si no lo tiene
+	}else{
+		$query = 'SELECT '.$data.' FROM `'.$table.'` '.$join.' WHERE '.$where.' LIMIT 1';
+	}
 	
 	/********************************************/
 	//si estoy pidiendo mostrar la query
