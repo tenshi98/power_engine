@@ -3,7 +3,7 @@
 /*                                              Bloque de seguridad                                                */
 /*******************************************************************************************************************/
 if( ! defined('XMBCXRXSKGC')) {
-    die('No tienes acceso a esta carpeta o archivo.');
+    die('No tienes acceso a esta carpeta o archivo (Access Code 1002-002).');
 }
 /*******************************************************************************************************************/
 /*                                                    Clases                                                       */
@@ -1560,7 +1560,12 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function select($placeholder,$name, $required, $data1, $data2, $table, $filter,$style, $dbConn){
-
+	
+		//variables internas
+		$random_int = rand(1, 999);
+		$EXname     = str_replace('[]', '', $name);
+		$EXname     = $EXname.'_'.$random_int;
+			
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1574,77 +1579,80 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
-			//Filtro para el where
-			$filtro = '';
-			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
-			//explode para poder crear cadena
+			
+			/******************************************/
+			//Si el dato no es requerido
+			if($required==1){
+				$requerido = '';//variable vacia
+			//Si el dato es requerido
+			}elseif($required==2){
+				$requerido = 'required';//se marca como requerido
+				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
+			}		
+			
+			/******************************************/
+			//Variables
+			$filtro        = '';
+			$data_required = '';
+			
+			/******************************************/
+			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
+			//Si es solo uno
 			if(count($datos)==1){
-				$data_required = ','.$datos[0].' AS '.$datos[0];
-				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+				//datos requeridos
+				$data_required .= ','.$datos[0].' AS '.$datos[0];
+			//Si es mas de uno
 			}else{
-				$data_required = '';
-				$order_by = $datos[0].' ASC ';
-				if($filter!=''){$filtro .=" AND ".$datos[0]."!='' ";}elseif($filter==''){$filtro .="WHERE ".$datos[0]."!='' ";}
+				//recorro todos los datos solicitados
 				foreach($datos as $dato){
+					//datos requeridos
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-
-			//se trae un listado con todas las categorias
+			
+			/******************************************/
+			//Si se envia filtro desde afuera
+			if($filter!='0' && $filter!=''){
+				//que exista un dato
+				$filtro .= $filter." AND ".$datos[0]."!='' ";
+			}elseif($filter=='' OR $filter==0){
+				//que exista un dato
+				$filtro .= $datos[0]."!='' ";
+			}
+			
+			/******************************************/
+			//Ordenamiento
+			$extrafilter = $datos[0].' ASC ';
+			
+			/******************************************/
+			//consulto
 			$arrSelect = array();
-			$query = "SELECT  
-			".$data1." AS idData 
-			".$data_required."
-			FROM `".$table."`  
-			".$filtro."
-			ORDER BY ".$order_by;
-			//Consulta
-			$resultado = mysqli_query ($dbConn, $query);
-			//Si ejecuto correctamente la consulta
-			if($resultado){
-				while ( $row = mysqli_fetch_assoc ($resultado)) {
-					array_push( $arrSelect,$row );
-				}
-				mysqli_free_result($resultado);
-				
+			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $extrafilter, $dbConn, 'form_select', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+			
+			/******************************************/
+			//si hay resultados
+			if($arrSelect!=false){
 				$input = '<div class="field">
-							<select name="'.$name.'" id="'.$name.'" class="form-control" '.$x.' style="'.$style.'">
+							<select name="'.$name.'" id="'.$EXname.'" class="form-control" '.$requerido.' style="'.$style.'">
 								<option value="" selected>Seleccione '.$placeholder.'</option>';
 						
-						foreach ( $arrSelect as $select ) {
-							$w = '';
-								
-							if(count($datos)==1){
-								$data_writing = $select[$datos[0]].' ';
-							}else{
-								$data_writing = '';
-								foreach($datos as $dato){
-									$data_writing .= $select[$dato].' ';
-								}
-							}
-				$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
-							 } 
+								foreach ( $arrSelect as $select ) {
+									if(count($datos)==1){
+										$data_writing = $select[$datos[0]].' ';
+									}else{
+										$data_writing = '';
+										foreach($datos as $dato){
+											$data_writing .= $select[$dato].' ';
+										}
+									}
+									$input .= '<option value="'.$select['idData'].'" >'.$data_writing.'</option>';
+								} 
 				$input .= '</select></div>';
 						
 				echo $input;
-				
-			//si da error, guardar en el log de errores una copia
-			}else{
-				//Genero numero aleatorio
-				$vardata = genera_password(8,'alfanumerico');
-				
-				//Guardo el error en una variable temporal
-				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
-				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
-				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 			}
+			
 		}
 	}
 	/*******************************************************************************************************************/
