@@ -3,7 +3,7 @@
 /*                                              Bloque de seguridad                                                */
 /*******************************************************************************************************************/
 if( ! defined('XMBCXRXSKGC')) {
-    die('No tienes acceso a esta carpeta o archivo.');
+    die('No tienes acceso a esta carpeta o archivo (Access Code 1001-001).');
 }
 /*******************************************************************************************************************/
 /*                                          Conexion de la Base de datos                                           */
