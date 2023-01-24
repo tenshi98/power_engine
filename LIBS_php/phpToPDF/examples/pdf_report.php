@@ -31,7 +31,7 @@ $my_html = "<html>
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-    </script>    
+    </script>   
 </head>
 <body>
 

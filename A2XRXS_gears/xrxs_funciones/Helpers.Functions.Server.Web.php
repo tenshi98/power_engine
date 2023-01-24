@@ -13,14 +13,14 @@ if( ! defined('XMBCXRXSKGC')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Web Scraping
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener contenido especifico de la web
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	fecha_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Date
 ************************************************************************/
@@ -31,17 +31,17 @@ function getGoogleImage($consulta, $max_img){
 	//Se da permiso para el acceso remoto
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
-	if( ini_get('allow_url_fopen') ) {
+	if( ini_get('allow_url_fopen')){
 		//Direccion con la consulta a google image
 		$url = "https://www.google.com/search?q=".$consulta."&tbm=isch&source=hp&biw=1366&bih=636&ei=NWOAYIeGIpDJ1sQPjcYQ&oq=".$consulta."&gs_lcp=CgNpbWcQAzoCCAA6CAgAELEDEIMBOgUIABCxAzoECAAQE1CqHFjAlQFgo5gBaABwAHgAgAFiiAGTB5IBAjE1mAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ved=0ahUKEwjH9L_O8I_wAhWQpJUCHQ0jBAAQ4dUDCAY&uact=5";
-		
-		//obtengo el contenido							
+
+		//obtengo el contenido
 		$html = file_get_contents($url);
-		preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i',$html, $matches ); 
-		
+		preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i',$html, $matches );
+
 		//recorro
 		$i = 0;
-		
+
 		//div contenedor
 		echo '
 		<style>
@@ -54,24 +54,24 @@ function getGoogleImage($consulta, $max_img){
 			foreach($matches as $image1){
 				foreach($image1 as $image){
 					if($i > $max_img) break;
-					
+
 					// DO with the image whatever you want here (the image element is '$image'):
 					if($i>0){echo $image;}
-					
+
 					$i++;
 				}
-			} 
+			}
 		echo '</div>';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Datos desde la IP ingresada
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la datos desde la ip ingresada
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	obtenerInfoIp('200.120.163.36', "city");
 *   obtenerInfoIp('200.120.163.36', "region");
@@ -79,7 +79,7 @@ function getGoogleImage($consulta, $max_img){
 *   obtenerInfoIp('200.120.163.36', "countryCode");
 *   obtenerInfoIp('200.120.163.36', "countryName");
 *   obtenerInfoIp('200.120.163.36', "continentName");
-* 
+*
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
@@ -105,14 +105,14 @@ function obtenerInfoIp($IP_Cliente, $purpose) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Devolver la URL Base
-* 
+*
 *===========================     Detalles    ===========================
 * Muestra la URL Base desde donde se ejecuta
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	base_url();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
@@ -124,7 +124,7 @@ if (!function_exists('base_url')) {
             $hostname = $_SERVER['HTTP_HOST'];
             $dir =  str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
 
-            $core = preg_split('@/@', str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(dirname(__FILE__))), NULL, PREG_SPLIT_NO_EMPTY);
+            $core = preg_split('@/@', str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(dirname(__FILE__))), 1, PREG_SPLIT_NO_EMPTY);
             $core = $core[0];
 
             $tmplt = $atRoot ? ($atCore ? "%s://%s/%s/" : "%s://%s/") : ($atCore ? "%s://%s/%s/" : "%s://%s%s");
@@ -144,14 +144,14 @@ if (!function_exists('base_url')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Favicon
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener el favicon del sitio ingresado
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	getFavicon("https://youtube.com/");
-* 
+*
 *===========================    Parametros   ===========================
 * String   $url    Direccion web desde donde se obtendra el favicon
 * @return  Image

@@ -63,7 +63,7 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
         $stage = 0; // this indicates what we're looking for
         $caught = array(); // which stage 0 properties have we caught?
         $stage_1 = array('font-style', 'font-variant', 'font-weight');
-        $final = ''; // output
+        $final = '';// output
 
         for ($i = 0, $size = count($bits); $i < $size; $i++) {
             if ($bits[$i] === '') {

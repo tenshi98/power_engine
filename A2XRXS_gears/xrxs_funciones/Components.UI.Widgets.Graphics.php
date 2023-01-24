@@ -7,11 +7,11 @@ if( ! defined('XMBCXRXSKGC')) {
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal (Seleccion Normal)
-function GraphLinear_1($idDiv, 
-						$titulo, $eje_x_titulo, $eje_y_titulo, 
+function GraphLinear_1($idDiv,
+						$titulo, $eje_x_titulo, $eje_y_titulo,
 						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth,
 						$legendOptions){
-	
+
 	//Opciones del legend
 	switch ($legendOptions) {
 		//Legend abajo
@@ -43,7 +43,7 @@ function GraphLinear_1($idDiv,
 		$graph .= $lineDash;
 		$graph .= $lineWidth;
 		$graph .='
-		//se arman datos	
+		//se arman datos
 		var dataPlotly = [];
 		for ( var i = 0 ; i < xData.length ; i++ ) {
 			var result = {
@@ -84,18 +84,18 @@ function GraphLinear_1($idDiv,
 		};
 
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
-	</script>';	
-	
+	</script>';
+
 	return $graph;
-	
+
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal (Seleccion con Rango)
-function GraphLinear_2($idDiv, 
-						$titulo, $eje_x_titulo, $eje_y_titulo, 
+function GraphLinear_2($idDiv,
+						$titulo, $eje_x_titulo, $eje_y_titulo,
 						$xData, $yData, $names, $types, $texts, $lineColors, $lineDash, $lineWidth,
 						$legendOptions){
-	
+
 	//Opciones del legend
 	switch ($legendOptions) {
 		//Legend abajo
@@ -127,7 +127,7 @@ function GraphLinear_2($idDiv,
 		$graph .= $lineDash;
 		$graph .= $lineWidth;
 		$graph .='
-		//se arman datos	
+		//se arman datos
 		var dataPlotly = [];
 		for ( var i = 0 ; i < xData.length ; i++ ) {
 			var result = {
@@ -163,19 +163,19 @@ function GraphLinear_2($idDiv,
 		};
 
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
-	</script>';	
-	
+	</script>';
+
 	return $graph;
-	
+
 }
 /*******************************************************************************************************************/
 //Crea un grafico de doble eje
-function GraphLinear_3($idDiv, 
-						$titulo, $eje_x_titulo, $eje_y_titulo_1, $eje_y_titulo_2, 
+function GraphLinear_3($idDiv,
+						$titulo, $eje_x_titulo, $eje_y_titulo_1, $eje_y_titulo_2,
 						$xData_1, $yData_1, $name_1,
 						$xData_2, $yData_2, $name_2,
 						$legendOptions){
-	
+
 	//Opciones del legend
 	switch ($legendOptions) {
 		//Legend abajo
@@ -201,7 +201,7 @@ function GraphLinear_3($idDiv,
 		//guardo las fechas
 		var xData_1 = ['.$xData_1.'];
 		var xData_2 = ['.$xData_2.'];
-		
+
 		var trace1 = {
 			x: xData_1,
 			y: ['.$yData_1.'],
@@ -218,7 +218,7 @@ function GraphLinear_3($idDiv,
 		};
 
 		var dataPlotly = [trace1, trace2];
-		
+
 		//vista de los label
 		var labelview = true;
 		if(xData_1.length > 30){
@@ -227,7 +227,7 @@ function GraphLinear_3($idDiv,
 		if(xData_2.length > 30){
 			labelview = false;
 		}
-			
+
 		var layout = {';
 			if(isset($titulo)&&$titulo!=''){                  $graph .= 'title:\''.$titulo.'\',';}
 			if(isset($eje_x_titulo)&&$eje_x_titulo!=''){      $graph .= 'xaxis: {title: \''.$eje_x_titulo.'\', showticklabels: labelview},';}
@@ -248,25 +248,24 @@ function GraphLinear_3($idDiv,
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
 	</script>
 	';
-			
-	
+
 	return $graph;
-	
+
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal (Seleccion Normal)
-function GraphBarr_1($idDiv, 
-					$titulo, $eje_x_titulo, $eje_y_titulo, 
+function GraphBarr_1($idDiv,
+					$titulo, $eje_x_titulo, $eje_y_titulo,
 					$xData, $yData, $Name, $hoverinfo, $markerColor, $markerLine,
 					$type, $legendOptions){
-	
+
 	//Tipo de grafico
 	switch ($type) {
 		case 1:  $typeopts = 'group'; break;
 		case 2:  $typeopts = 'stack'; break;
 		default: $typeopts = '';
 	}
-	
+
 	//Opciones del legend
 	switch ($legendOptions) {
 		//Legend abajo
@@ -303,9 +302,9 @@ function GraphBarr_1($idDiv,
 		$graph .= $hoverinfo;
 		$graph .= $markerColor;
 		$graph .= $markerLine;
-		
+
 		$graph .='
-		//se arman datos	
+		//se arman datos
 		var dataPlotly = [];
 		for ( var i = 0 ; i < xData.length ; i++ ) {
 			var textin = "";
@@ -314,7 +313,7 @@ function GraphBarr_1($idDiv,
 			}else{
 				textin = yData[i].map(String);
 			}
-			
+
 			var result = {
 				x: xData[i],
 				y: yData[i],
@@ -345,7 +344,7 @@ function GraphBarr_1($idDiv,
 			if(isset($eje_x_titulo)&&$eje_x_titulo!=''){ $graph .= 'xaxis: {title: \''.$eje_x_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
 			if(isset($eje_y_titulo)&&$eje_y_titulo!=''){ $graph .= 'yaxis: {title: \''.$eje_y_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
 			$graph .= $lopts;
-		 $graph .= '	
+		 $graph .= '
 		};
 		var config = {
 			locale: \'es-ar\',
@@ -356,45 +355,44 @@ function GraphBarr_1($idDiv,
 		};
 
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
-	</script>';	
-	
+	</script>';
+
 	return $graph;
-	
+
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal (Seleccion Normal)
-function GraphPie_1($idDiv, 
-					$titulo, 
+function GraphPie_1($idDiv,
+					$titulo,
 					$values,$labels,$width,$height,
 					$dataOptions, $layoutOptions){
-	
+
 	//Tipo de grafico
 	switch ($dataOptions) {
 		//Normal
-		case 1:  
+		case 1:
 			$dopts = 'textinfo: "label+percent", textposition: "inside", automargin: true';
 			break;
 		//Valores fuera
-		case 2:  
+		case 2:
 			$dopts = 'textinfo: "label+percent", textposition: "outside", automargin: true';
 			break;
 		//Donut Chart
-		case 3:  
+		case 3:
 			$dopts = 'hole: .4,';
 			break;
-		default: 
+		default:
 			$dopts = '';
 	}
 	//Tipo de grafico
 	switch ($layoutOptions) {
 		//Normal
-		case 1:  
-			$lopts = 'showlegend: false,'; 
+		case 1:
+			$lopts = 'showlegend: false,';
 			break;
-		default: 
+		default:
 			$lopts = '';
 	}
-	
 
 	/*************************************************/
 	//imprime
@@ -402,9 +400,9 @@ function GraphPie_1($idDiv,
 	$graph .= '<script>';
 		$graph .= $values;
 		$graph .= $labels;
-		
+
 		$graph .='
-		//se arman datos	
+		//se arman datos
 		var dataPlotly = [{
 			values: allValues,
 			labels: allLabels,
@@ -413,7 +411,7 @@ function GraphPie_1($idDiv,
 			automargin: true,';
 			$graph .= $dopts;
 			$graph .= '
-			
+
 		}];
 
 		/*****************************************************************/
@@ -423,7 +421,7 @@ function GraphPie_1($idDiv,
 			height: \''.$height.'\',
 			margin: {"t": 45, "b": 0, "l": 0, "r": 0},';
 			$graph .= $lopts;
-		 $graph .= '	
+		 $graph .= '
 		};
 		var config = {
 			locale: \'es-ar\',
@@ -434,25 +432,25 @@ function GraphPie_1($idDiv,
 		};
 
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
-	</script>';	
-	
+	</script>';
+
 	return $graph;
-	
+
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal (Seleccion Normal)
-function GraphBarrLat_1($idDiv, 
-						$titulo, $eje_x_titulo, $eje_y_titulo, 
+function GraphBarrLat_1($idDiv,
+						$titulo, $eje_x_titulo, $eje_y_titulo,
 						$xData, $yData, $Name, $hoverinfo, $markerColor, $markerLine,
 						$type, $legendOptions){
-	
+
 	//Tipo de grafico
 	switch ($type) {
 		case 1:  $typeopts = 'group'; break;
 		case 2:  $typeopts = 'stack'; break;
 		default: $typeopts = '';
 	}
-	
+
 	//Opciones del legend
 	switch ($legendOptions) {
 		//Legend abajo
@@ -479,7 +477,7 @@ function GraphBarrLat_1($idDiv,
 		case 6:
 			$lopts = 'margin: {l: 300, r: 0, t: 100, b: 100 },height: 600,';
 			break;
-		
+
 		default:
 			$lopts = '';
 	}
@@ -494,9 +492,9 @@ function GraphBarrLat_1($idDiv,
 		$graph .= $hoverinfo;
 		$graph .= $markerColor;
 		$graph .= $markerLine;
-		
+
 		$graph .='
-		//se arman datos	
+		//se arman datos
 		var dataPlotly = [];
 		for ( var i = 0 ; i < xData.length ; i++ ) {
 			var result = {
@@ -525,7 +523,7 @@ function GraphBarrLat_1($idDiv,
 			if(isset($eje_x_titulo)&&$eje_x_titulo!=''){ $graph .= 'xaxis: {title: \''.$eje_x_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
 			if(isset($eje_y_titulo)&&$eje_y_titulo!=''){ $graph .= 'yaxis: {title: \''.$eje_y_titulo.'\',titlefont: {size: 16,color: \'rgb(107, 107, 107)\'},tickfont: {size: 14,color: \'rgb(107, 107, 107)\'}},';}
 			$graph .= $lopts;
-		 $graph .= '	
+		 $graph .= '
 		};
 		var config = {
 			locale: \'es-ar\',
@@ -536,21 +534,21 @@ function GraphBarrLat_1($idDiv,
 		};
 
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
-	</script>';	
-	
+	</script>';
+
 	return $graph;
-	
+
 }
 /*******************************************************************************************************************/
 //Crea un grafico lineal (Seleccion Normal)
 function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options){
-	
+
 	//Opciones del legend
 	switch ($Options) {
 		case 1:
 			$lopts = 'margin: {l: 300, r: 0, t: 100, b: 100 },';
 			break;
-		
+
 		default:
 			$lopts = '';
 	}
@@ -561,42 +559,41 @@ function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options)
 	$graph .= '<script>';
 		$graph .= $xData;
 		$graph .= $yData;
-		
+
 		$graph .='
 		var dataPlotly = [
 			{
 				type: \'funnel\',
 				y: yData,
-				x: xData, 
-				textposition: "inside", 
+				x: xData,
+				textposition: "inside",
 				textinfo: "value+percent initial",
-				hoverinfo: "percent total+x", 
-				opacity: 0.65, 
+				hoverinfo: "percent total+x",
+				opacity: 0.65,
 				marker: {
 					color: ["59D4E8", "DDB6C6", "A696C8", "67EACA", "94D2E6", "59D4E8", "DDB6C6", "A696C8", "67EACA", "94D2E6", "59D4E8", "DDB6C6", "A696C8", "67EACA", "94D2E6"],
 					line: {
-						"width": [4, 2, 2, 3, 1, 1], 
+						"width": [4, 2, 2, 3, 1, 1],
 						color: ["3E4E88", "606470", "3E4E88", "606470", "3E4E88", "3E4E88", "606470", "3E4E88", "606470", "3E4E88", "3E4E88", "606470", "3E4E88", "606470", "3E4E88"]
 					}
 				},
 				connector: {
 					line: {
-						color: "royalblue", 
-						dash: "dot", 
+						color: "royalblue",
+						dash: "dot",
 						width: 3
 					}
 				}
 			}
 		];
-             
-        
+
 		/*****************************************************************/
 		var layout = {
 			title: \''.$titulo.'\',
 			width: \''.$width.'\',
 			height: \''.$height.'\',';
 			$graph .= $lopts;
-		 $graph .= '	
+		 $graph .= '
 		};
 		var config = {
 			locale: \'es-ar\',
@@ -607,9 +604,9 @@ function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options)
 		};
 
 		Plotly.newPlot(\''.$idDiv.'\', dataPlotly, layout, config);
-	</script>';	
-	
+	</script>';
+
 	return $graph;
-	
+
 }
 ?>

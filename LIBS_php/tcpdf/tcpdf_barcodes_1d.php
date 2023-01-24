@@ -1175,7 +1175,7 @@ class TCPDFBarcode {
 									$code_data[] = 98;
 									// mark shift
 									$sequence[$key][3] = true;
-								} elseif (!isset($sequence[($key - 1)][3])) {
+								}elseif (!isset($sequence[($key - 1)][3])) {
 									$code_data[] = 101;
 								}
 							}
@@ -1184,7 +1184,7 @@ class TCPDFBarcode {
 								$char_id = ord($char);
 								if (($char_id >= 241) AND ($char_id <= 244)) {
 									$code_data[] = $fnc_a[$char_id];
-								} else {
+								}else {
 									$code_data[] = strpos($keys_a, $char);
 								}
 							}
@@ -1209,7 +1209,7 @@ class TCPDFBarcode {
 										}
 									}
 									break;
-								} else {
+								}else {
 									$startid = 104;
 								}
 							} elseif ($sequence[($key - 1)][0] != 'B') {
@@ -1218,7 +1218,7 @@ class TCPDFBarcode {
 									$code_data[] = 98;
 									// mark shift
 									$sequence[$key][3] = true;
-								} elseif (!isset($sequence[($key - 1)][3])) {
+								}elseif (!isset($sequence[($key - 1)][3])) {
 									$code_data[] = 100;
 								}
 							}
@@ -1227,7 +1227,7 @@ class TCPDFBarcode {
 								$char_id = ord($char);
 								if (($char_id >= 241) AND ($char_id <= 244)) {
 									$code_data[] = $fnc_b[$char_id];
-								} else {
+								}else {
 									$code_data[] = strpos($keys_b, $char);
 								}
 							}

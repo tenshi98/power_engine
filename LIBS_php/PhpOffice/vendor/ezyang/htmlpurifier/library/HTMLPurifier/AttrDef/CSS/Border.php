@@ -35,7 +35,7 @@ class HTMLPurifier_AttrDef_CSS_Border extends HTMLPurifier_AttrDef
         $string = $this->mungeRgb($string);
         $bits = explode(' ', $string);
         $done = array(); // segments we've finished
-        $ret = ''; // return value
+        $ret = '';// return value
         foreach ($bits as $bit) {
             foreach ($this->info as $propname => $validator) {
                 if (isset($done[$propname])) {

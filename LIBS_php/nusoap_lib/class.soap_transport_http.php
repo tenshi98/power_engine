@@ -324,7 +324,7 @@ class soap_transport_http extends nusoap_base {
 			//$this->setCurlOption(CURLOPT_CAINFO, 'f:\php-4.3.2-win32\extensions\curl-ca-bundle.crt');		
 			$this->setCurlOption(CURLOPT_SSL_VERIFYPEER, 0);
 			$this->setCurlOption(CURLOPT_SSL_VERIFYHOST, 0);
-	
+
 			// support client certificates (thanks Tobias Boes, Doug Anarino, Eryan Ariobowo)
 			if ($this->authtype == 'certificate') {
 				$this->debug('set cURL certificate options');
@@ -423,12 +423,12 @@ class soap_transport_http extends nusoap_base {
 				if (!$this->connect($timeout, $response_timeout)){
 					return false;
 				}
-				
+
 				// send request
 				if (!$this->sendRequest($data, $cookies)){
 					return false;
 				}
-				
+
 				// get response
 				$respdata = $this->getResponse();
 			} else {
@@ -476,7 +476,7 @@ class soap_transport_http extends nusoap_base {
 		} elseif ($authtype == 'digest') {
 			if (isset($digestRequest['nonce'])) {
 				$digestRequest['nc'] = isset($digestRequest['nc']) ? $digestRequest['nc']++ : 1;
-				
+
 				// calculate the Digest hashes (calculate code based on digest implementation found at: http://www.rassoc.com/gregr/weblog/stories/2002/07/09/webServicesSecurityHttpDigestAuthenticationWithoutActiveDirectory.html)
 	
 				// A1 = unq(username-value) ":" unq(realm-value) ":" passwd

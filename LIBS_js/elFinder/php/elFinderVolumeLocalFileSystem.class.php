@@ -72,13 +72,13 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
      */
     public function __construct()
     {
-        $this->options['alias'] = '';              // alias to replace root dir name
+        $this->options['alias'] = '';         // alias to replace root dir name
         $this->options['dirMode'] = 0755;            // new dirs mode
         $this->options['fileMode'] = 0644;            // new files mode
         $this->options['quarantine'] = '.quarantine'; // quarantine folder name - required to check archive (must be hidden)
         $this->options['rootCssClass'] = 'elfinder-navbar-root-local';
         $this->options['followSymLinks'] = true;
-        $this->options['detectDirIcon'] = '';         // file name that is detected as a folder icon e.g. '.diricon.png'
+        $this->options['detectDirIcon'] = '';    // file name that is detected as a folder icon e.g. '.diricon.png'
         $this->options['keepTimestamp'] = array('copy', 'move'); // keep timestamp at inner filesystem allowed 'copy', 'move' and 'upload'
         $this->options['substituteImg'] = true;       // support substitute image with dim command
         $this->options['statCorrector'] = null;       // callable to correct stat data `function(&$stat, $path, $statOwner, $volumeDriveInstance){}`

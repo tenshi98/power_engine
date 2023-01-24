@@ -21,23 +21,23 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 	$total_memory   = $memUsage["total"];
 	$server_memory  = $memUsage["total"] - $memUsage["free"];
 	$actual_memory  = ($sis_mem_fin - $sis_mem_ini)*1024;
-	
+
 	//obtengo la ip del servidor
 	$serverIP = $_SERVER["SERVER_ADDR"];
-	
+
 	//Archivos
 	$Archivo1 = '1_logs_hacking.txt';
 	$Archivo2 = '1_logs_send_mail.txt';
 	$Archivo3 = '1_logs_error_log_php.txt';
-	
+
 	echo '
 	<div style="background: #fff;">
-                  
+
         <div class="col-md-9 col-sm-12">';
-			
+
 			//Errores PHP
 			if (file_exists($Archivo3)) {
-				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">';
 					echo '<h4>Errores PHP</h4>';
 					echo '<div class="table-responsive">
 							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped dataTable">
@@ -68,21 +68,21 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 											echo '</tr>';
 										}
 										fclose($myfile);
-									} catch (Exception $e) {
+									}catch (Exception $e) {
 										error_log("Ha ocurrido un error (".$e->getMessage().")", 0);
 									}
-									echo '						  
+									echo '
 								</tbody>
 							</table>
-						</div>'; 
-				echo '</div>'; 
+						</div>';
+				echo '</div>';
 			}else{
 				error_log("No existe el archivo (".$Archivo3.")", 0);
 			}
-			
+
             //intentos de Hackeo
 			/*if (file_exists($Archivo1)) {
-				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">';
 					echo '<h4>Intentos de Hackeo</h4>';
 					echo '<div class="table-responsive">
 							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped dataTable">
@@ -114,9 +114,9 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 											echo '</tr>';
 										}
 										fclose($myfile);
-									} catch (Exception $e) {
+									}catch (Exception $e) {
 										error_log("Ha ocurrido un error (".$e->getMessage().")", 0);
-									}					  
+									}
 								echo '</tbody>
 							</table>
 						</div>';
@@ -124,33 +124,28 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 			}else{
 				error_log("No existe el archivo (".$Archivo1.")", 0);
 			}*/
-				
+
 			//Correos Enviados
 			/*if (file_exists($Archivo2)) {
-				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+				echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">';
 					echo '<h4>Correos Enviados</h4>';
-					
+
 				echo '</div>';
 			}else{
 				error_log("No existe el archivo (".$Archivo2.")", 0);
 			}*/
-			
-			
-			
-			
+
 			//Errores
-            echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">'; 
+            echo '<div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">';
 				echo '<h4>Errores detectados</h4>';
 				require_once 'Helpers.Utils.Result.Errors.php';
 			echo '</div>';
-			
-			
-			           
+
         echo '</div>
- 
+
         <div class="col-md-3 col-sm-6">
             <div class="info-box-main">
-				
+
 				<div class="info-box-box">
 					<div class="info-stats">
 						<p>Carga del Sistema</p>
@@ -163,7 +158,7 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 						</div>
 					</div>
 				</div>
-				
+
                 <div class="info-box-box">
 					<div class="info-stats">
 						<p>Carga del Servidor</p>
@@ -176,39 +171,26 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 						</div>
 					</div>
                 </div>
-                
+
             </div>
-            
+
             <div class="info-box-main">
                 <div class="info-stats">
                     <p>Server IP</p>
                     <span>'.$serverIP.'</span>
                 </div>
             </div>
-            
+
         </div>
 
-        <div class="clearfix"></div>        
+        <div class="clearfix"></div>
     </div>';
 
-//para el resto	
+//para el resto
 }else{
 	//se envian correos
 	require_once 'Helpers.Utils.Result.Errors.php';
 }
 
 
-
-
-
-//Se verifica el tipo de usuario
-if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){ 
-
-	
-
-	?>
-
-	
-
-<?php }
 ?>

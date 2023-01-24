@@ -6,7 +6,7 @@ if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) ){
 	
 	//nada
 
-//si estoy en ambiente de produccion	
+//si estoy en ambiente de produccion
 }else{
 	
 	//redirijo

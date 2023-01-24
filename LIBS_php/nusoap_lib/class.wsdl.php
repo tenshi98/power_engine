@@ -32,7 +32,7 @@ class wsdl extends nusoap_base {
     var $opData = array();
     var $status = '';
     var $documentation = false;
-    var $endpoint = ''; 
+    var $endpoint = '';
     // array of wsdl docs to import
     var $import = array(); 
     // parser vars
@@ -122,7 +122,7 @@ class wsdl extends nusoap_base {
 				                		$imported++;
 				                		$imported_urls[] = $url;
 				                	}
-								} else {
+								}else {
 									$this->debug("Unexpected scenario: empty URL for unloaded import");
 								}
 							}
@@ -863,7 +863,7 @@ class wsdl extends nusoap_base {
 											$b .= "&nbsp;&nbsp;&nbsp;&nbsp;$joanie: $chachi<br>";
 								    	}
 					        		//}
-								} else {
+								}else {
 								    $b .= "&nbsp;&nbsp;$captain: $tenille<br>";
 								}
 						    }

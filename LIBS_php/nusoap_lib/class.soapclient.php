@@ -295,7 +295,7 @@ class nusoap_client extends nusoap_base  {
 			$this->return = $return;
 			$this->debug('sent message successfully and got a(n) '.gettype($return));
            	$this->appendDebug('return=' . $this->varDump($return));
-			
+
 			// fault?
 			if(is_array($return) && isset($return['faultcode'])){
 				$this->debug('got fault');
@@ -464,7 +464,7 @@ class nusoap_client extends nusoap_base  {
 						$this->persistentConnection = $http;
 					}
 				}
-				
+
 				if($err = $http->getError()){
 					$this->setError('HTTP Error: '.$err);
 					return false;

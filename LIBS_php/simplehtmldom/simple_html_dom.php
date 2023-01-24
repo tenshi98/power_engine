@@ -425,8 +425,8 @@ class simple_html_dom_node
 			case HDOM_TYPE_UNKNOWN: return '';
 		}
 
-		if (strcasecmp($this->tag, 'script') === 0) { return ''; }
-		if (strcasecmp($this->tag, 'style') === 0) { return ''; }
+		if (strcasecmp($this->tag, 'script') === 0) { return '';}
+		if (strcasecmp($this->tag, 'style') === 0) { return '';}
 
 		$ret = '';
 
@@ -948,7 +948,7 @@ class simple_html_dom_node
 			}
 
 			// Clear Separator if it's a Selector List
-			if ($is_list = ($m[5] === ',')) { $m[5] = ''; }
+			if ($is_list = ($m[5] === ',')) { $m[5] = '';}
 
 			// Remove full match before adding to results
 			array_shift($m);
@@ -1642,7 +1642,7 @@ class simple_html_dom
 		$this->root->_[HDOM_INFO_BEGIN] = -1;
 		$this->root->nodetype = HDOM_TYPE_ROOT;
 		$this->parent = $this->root;
-		if ($this->size > 0) { $this->char = $this->doc[0]; }
+		if ($this->size > 0) { $this->char = $this->doc[0];}
 	}
 
 	protected function parse()
@@ -1926,7 +1926,7 @@ class simple_html_dom
 				$node->tag = 'unknown';
 			}
 
-			if ($this->char === '>') { $node->_[HDOM_INFO_TEXT] .= '>'; }
+			if ($this->char === '>') { $node->_[HDOM_INFO_TEXT] .= '>';}
 
 			$this->link_nodes($node, true);
 			$this->char = (++$this->pos < $this->size) ? $this->doc[$this->pos] : null; // next
@@ -1954,7 +1954,7 @@ class simple_html_dom
 			}
 
 			// Next char closes current tag, add and be done with it.
-			if ($this->char === '>') { $node->_[HDOM_INFO_TEXT] .= '>'; }
+			if ($this->char === '>') { $node->_[HDOM_INFO_TEXT] .= '>';}
 			$this->link_nodes($node, false);
 			$this->char = (++$this->pos < $this->size) ? $this->doc[$this->pos] : null; // next
 			return true;
@@ -2040,7 +2040,7 @@ class simple_html_dom
 					//no value attr: nowrap, checked selected...
 					$node->_[HDOM_INFO_QUOTE][] = HDOM_QUOTE_NO;
 					$node->attr[$name] = true;
-					if ($this->char != '>') { $this->char = $this->doc[--$this->pos]; } // prev
+					if ($this->char != '>') { $this->char = $this->doc[--$this->pos];} // prev
 				}
 
 				$node->_[HDOM_INFO_SPACE][] = $space;
@@ -2157,7 +2157,7 @@ class simple_html_dom
 		$len = strspn($this->doc, $chars, $pos);
 		$this->pos += $len;
 		$this->char = ($this->pos < $this->size) ? $this->doc[$this->pos] : null; // next
-		if ($len === 0) { return ''; }
+		if ($len === 0) { return '';}
 		return substr($this->doc, $pos, $len);
 	}
 
@@ -2172,7 +2172,7 @@ class simple_html_dom
 
 	protected function copy_until_char($char)
 	{
-		if ($this->char === null) { return ''; }
+		if ($this->char === null) { return '';}
 
 		if (($pos = strpos($this->doc, $char, $this->pos)) === false) {
 			$ret = substr($this->doc, $this->pos, $this->size - $this->pos);
@@ -2181,7 +2181,7 @@ class simple_html_dom
 			return $ret;
 		}
 
-		if ($pos === $this->pos) { return ''; }
+		if ($pos === $this->pos) { return '';}
 
 		$pos_old = $this->pos;
 		$this->char = $this->doc[$pos];

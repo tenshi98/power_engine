@@ -196,7 +196,7 @@ class HTMLPurifier_URI
             }
         } else {
             // path-empty (hier and relative)
-            $this->path = ''; // just to be safe
+            $this->path = '';// just to be safe
         }
 
         // qf = query and fragment

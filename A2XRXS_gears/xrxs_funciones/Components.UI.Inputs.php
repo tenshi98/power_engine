@@ -9,40 +9,38 @@ if( ! defined('XMBCXRXSKGC')) {
 /*                                                    Clases                                                       */
 /*******************************************************************************************************************/
 class Basic_Inputs{
-    
+
     /////////////////////////////        PRIVADAS        /////////////////////////////
     /****************************************************************************************/
 	//imprime el script que impide el tipeo de teclas raras
 	private function test($data){
-	
+
 	}
-	
-	
-	
+
 	/////////////////////////////        PUBLICAS        /////////////////////////////
     /*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un titulo
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite un titulo para los formularios
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_tittle(1, 'dato' );
 	* 	$Form->form_tittle(2, '<strong>Dato:</strong>explicacion' );
 	* 	$Form->form_tittle(3, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
 	* 	$Form->form_tittle(4, 'bla' );
 	* 	$Form->form_tittle(5, 'bla' );
 	* 	$Form->form_tittle(6, 'bla' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type      Tipo de titulo
 	* String   $Text      Texto del titulo
 	* @return  String
 	************************************************************************/
 	public function form_tittle($type, $Text){
-		
+
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
@@ -65,35 +63,37 @@ class Basic_Inputs{
 				case 6: $tipo = 'p';  break;
 			}
 
-			//generacion del mensaje
-			$input = '<'.$tipo.'>'.$Text.'</'.$tipo.'>';	
-				
-			//Imprimir dato	
+			/******************************************/
+			//generacion del input
+			$input = '<'.$tipo.'>'.$Text.'</'.$tipo.'>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un cuadro de mensaje
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un cuadro de alerta mostrando mensajes de explicacion 
+	* Permite crear un cuadro de alerta mostrando mensajes de explicacion
 	* para los inputs
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_post_data(1, 'dato' );
 	* 	$Form->form_post_data(2, '<strong>Dato:</strong>explicacion' );
 	* 	$Form->form_post_data(3, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
 	* 	$Form->form_post_data(4, 'bla' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type      Tipo de mensaje
 	* String   $Text      Texto del mensaje
 	* @return  String
 	************************************************************************/
 	public function form_post_data($type, $Text){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -109,19 +109,19 @@ class Basic_Inputs{
 		if($errorn==0){
 			alert_post_data($type,1,1, $Text);
 		}
-		
+
 	}
-	
+
 	/***********************************************************************
 	* Crea un input tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto, especificamente para ingresar usuario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_login_usr('Usuario','user', '');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -129,41 +129,49 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_login_usr($placeholder,$name, $value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			$x='required';
-			$_SESSION['form_require'].=','.$name;
-			
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido (siempre pasa)
+			$requerido = 'required'; //se marca como requerido
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+
+			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="text" placeholder="'.$placeholder.'" class="form-control top" name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
+					<input type="text" placeholder="'.$placeholder.'" class="form-control top" name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
 				</div>
 			';
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
-		
+
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo rut
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo rut, el cual valida el formato de rut ingresado
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_login_rut('Rut','rut', '');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -171,46 +179,52 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_login_rut($placeholder,$name, $value){
-		
+
 		//********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			$x='required';
-			$_SESSION['form_require'].=','.$name;
-			
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido (siempre pasa)
+			$requerido = 'required'; //se marca como requerido
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+
+			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="text"     placeholder="'.$placeholder.'"    class="form-control top"  id="'.$name.'"  name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloRut(event)">
+					<input type="text" placeholder="'.$placeholder.'" class="form-control top" id="'.$name.'" name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloRut(event)">
 				</div>';
-					
-			//script ejecucion
-			$input .='
-				<script>
-					$("#'.$name.'").rut();
-				</script>';
-				
-			//Imprimir dato	
+
+			/******************************************/
+			//ejecucion script
+			$input .='<script>$("#'.$name.'").rut();</script>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo password
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo password, el cual oculta los datos 
+	* Permite crear un input tipo password, el cual oculta los datos
 	* ingresados, pero que permite verlos si se presiona el boton configurado
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_login_pass('Password','password', '');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -218,29 +232,37 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_login_pass($placeholder,$name, $value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			$x='required';
-			$_SESSION['form_require'].=','.$name;
-			
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido (siempre pasa)
+			$requerido = 'required'; //se marca como requerido
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+
+			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
 					<div class="input-group col-sm-12 bootstrap-timepicker">
-						<input type="password" placeholder="'.$placeholder.'" class="form-control bottom border_fix" name="'.$name.'" id="'.$name.'" autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
+						<input type="password" placeholder="'.$placeholder.'" class="form-control bottom border_fix" name="'.$name.'" id="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
 						<span class="pass_view_log" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
 					</div>
 				</div>';
-			
-			//cambia el tipo de input al presionar el boton 
-			$input .= '		
+
+			/******************************************/
+			//ejecucion script
+			$input .= '
 				<script>
 					$(document).ready(function() {
 						$("#view_button_'.$name.'").bind("mousedown touchstart", function() {
@@ -251,23 +273,24 @@ class Basic_Inputs{
 						})
 					});
 				</script>
-			';	
-			
-			//Imprimir dato	
+			';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
-	}	
+	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo email
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto, el cual permite ingresar elemail
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_login_mail('Email','email', '');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -275,40 +298,49 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_login_mail($placeholder,$name, $value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			$x='required';
-				
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido (siempre pasa)
+			$requerido = 'required'; //se marca como requerido
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+
+			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="email"  placeholder="'.$placeholder.'"    class="form-control"    name="'.$name.'"  autocomplete="off" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
+					<input type="email"  placeholder="'.$placeholder.'" class="form-control"    name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
 				</div>
-			';	
-			
-			//Imprimir dato	
+			';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo texto, al enviar un nombre tipo arreglo, 
+	* Permite crear un input tipo texto, al enviar un nombre tipo arreglo,
 	* lo remmplaza por nombre normal
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input('text','Categoria','Cat', 'Categoria 1', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -318,7 +350,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input($type,$placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -332,38 +364,54 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){$w='';}else{$w=$value;}
-			//if($value==0){$w='';echo $value;}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-				
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="field">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
+					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
 				</div>
-			';	
-			
-			//Imprimir dato	
+			';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto, permite nombres tipo arreglo
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_hold('text','Categoria','Cat', 'Categoria 1', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -373,7 +421,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_hold($type,$placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -387,39 +435,56 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-				
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="field">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
-				</div>';	
-			
-			//Imprimir dato	
+					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
+				</div>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input invisible
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que no es mostrado por el navegador, 
+	* Permite crear un input que no es mostrado por el navegador,
 	* permite pasar datos ocultos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_hidden('idCategoria', 1, 1 );
 	* 	$Form->input_hidden('Categoria', 'Categoria', 1 );
 	* 	$Form->input_hidden('idCategoria', 1, 2 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $name       Nombre del identificador del Input
 	* String   $value      Valor por defecto, puede ser texto o valor
@@ -427,7 +492,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_hidden($name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -435,34 +500,51 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$name.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value!=''){$w=$value;}else{$w='';}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
-			$input = '<input type="hidden" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$x.' >';	
-			
-			//Imprimir dato	
+			$input = '<input type="hidden" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' >';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto, permite nombres tipo arreglo
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_values_val('text','Categoria','Cat', 1, '', '', 25);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -474,7 +556,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_values_val($type,$placeholder,$name,$required,$extra_class,$style,$value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -486,43 +568,61 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value==''){$w='';}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$name.'"  '.$x.' onkeypress="return soloNumeroNaturalReal(event)" value="'.$w.'" >
+				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$name.'"  '.$requerido.' onkeypress="return soloNumeroNaturalReal(event)" value="'.$valor.'" >
 			</div>';
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un textarea
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo text
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_textarea_obs('Observaciones','observaciones', 1, '', 'Observaciones varias' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -532,7 +632,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_textarea_obs($placeholder,$name, $required,$style,$value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -546,36 +646,50 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
 			//Validacion de variables
-			if($value==''){    $w = '';  }else{   $w = $value;}
-			if($required==1){  $x = '';  }elseif( $required==2){ $x='required';$_SESSION['form_require'].=','.$name;}
-			
+			if($value==''){   $w = '';}else{   $w = $value;}
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
-				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$x.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
+				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$requerido.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
 			</div>';
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_text('text','Categoria','Cat', 1, '', '' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -586,7 +700,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_text($type,$placeholder,$name,$required,$extra_class,$style){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -600,35 +714,48 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input class="form-control '.$extra_class.'" style="'.$style.'" "type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'"  '.$x.' onkeypress="return soloLetras(event)">
-			</div>';	
-			
-			//Imprimir dato	
+				<input class="form-control '.$extra_class.'" style="'.$style.'" "type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeypress="return soloLetras(event)">
+			</div>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_text_val('text','Categoria','Cat', 1, '', '', 'Categoria' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -640,7 +767,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_text_val($type,$placeholder,$name,$required,$extra_class,$style,$value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -654,36 +781,53 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){   $w = ''; }else{   $w=$value;}
-			if($required==1){ $x = ''; }elseif( $required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" placeholder="'.$placeholder.'"  name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)">
-			</div>';	
-			
-			//Imprimir dato	
+				<input class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$required.' onkeypress="return soloLetras(event)">
+			</div>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_values_val_2('text','Categoria','Cat', 1, '', '', 'Categoria' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -695,7 +839,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_values_val_2($type,$placeholder,$name,$required,$extra_class,$style,$value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -709,38 +853,55 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){$w='0';}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '0';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$x.' onkeypress="return soloNumeros_'.$EXname.'(event)" value="'.$w.'" >
+				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeypress="return soloNumeros_'.$EXname.'(event)" value="'.$valor.'" >
 			</div>';
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
-	} 
+	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de fechas
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que muestra un calendario al tratar de escribir 
-	* dentro de este, una vez seleccionada la fecha, el calendario 
+	* Permite crear un input que muestra un calendario al tratar de escribir
+	* dentro de este, una vez seleccionada la fecha, el calendario
 	* traspasa la fecha al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_date('Fecha','fecha', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -762,17 +923,31 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
-			//Validacion de variables
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input ='
 			<div class="field">
-				<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'"  '.$x.'>
+				<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'"  '.$requerido.'>
 			</div>';
-			
-			//script activacion
+
+			/******************************************/
+			//ejecucion script
 			$input .='<script type="text/javascript">
 				$(document).ready(function()
 				{
@@ -785,27 +960,28 @@ class Basic_Inputs{
 						clearButton: true,
 						clearText : "Limpiar",
 					});
-					
+
 				});
 				</script>';
-					
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de seleccion de hora
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input dentro del cual se selecciona la hora que se 
-	* desea ingresar, el selector de hora aparece al presionar dentro del 
+	* Permite crear un input dentro del cual se selecciona la hora que se
+	* desea ingresar, el selector de hora aparece al presionar dentro del
 	* input, una vez seleccionada la hora esta sera traspasada al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_time('Hora', 'hora','', 1);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -814,7 +990,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_time($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -826,54 +1002,73 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validaHora($value)&&$value!=''){ 
+		if (!validaHora($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){   $w = ''; }else{   $w=$value;}
-			if($required==1){ $x = ''; }elseif( $required==2){$x='required';$_SESSION['form_require'].=','.$name;}
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input ='
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' >
+				<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' >
 			</div>';
-			
-			//script activacion
-			$input .='<script type="text/javascript">
+
+			/******************************************/
+			//ejecucion script
+			$input .='
+			<script type="text/javascript">
 				$("#'.$EXname.'").clockpicker({
 					placement: "top",
 					align: "right",
 					donetext: "Listo"
 				});
-				</script>';
-			
-			//Imprimir dato	
+			</script>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de seleccion de hora
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input dentro del cual se selecciona la hora que se 
-	* desea ingresar, el selector de hora aparece al presionar dentro del 
+	* Permite crear un input dentro del cual se selecciona la hora que se
+	* desea ingresar, el selector de hora aparece al presionar dentro del
 	* input, una vez seleccionada la hora esta sera traspasada al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_time_popover('Hora Inspeccion','H_inspeccion', '', 1);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -882,7 +1077,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_time_popover($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -894,51 +1089,66 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//valido la hora
-		if(!validaHora($value)&&$value!=''){ 
+		if(!validaHora($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El dato ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){   $w = ''; }else{   $w=$value;}
-			if($required==1){ $x = ''; }elseif( $required==2){$x='required';$_SESSION['form_require'].=','.$name;}
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			//solicitud de recursos
 			$input  ='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/css/timepicki_bottom.css">';
 			$input .='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/js/timepicki_bottom.js">';
-			
+
 			//generacion del input
 			$input .='
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' >
+				<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' >
 			</div>';
-			
-			//script activacion
-			$input .='<script type="text/javascript">
-				$("#'.$EXname.'").timepicker();
-				</script>';
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//ejecucion script
+			$input .='<script type="text/javascript">$("#'.$EXname.'").timepicker();</script>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo radio
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo radio 
+	* Permite crear un input tipo radio
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_radio('Opciones','opciones', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -947,7 +1157,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_radio($placeholder,$name,$value,$checked){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -963,7 +1173,8 @@ class Basic_Inputs{
 		if($errorn==0){
 			//Validacion de variables
 			if($checked==1){$x='';}elseif($checked==2){$x='checked';}
-				
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
@@ -972,22 +1183,23 @@ class Basic_Inputs{
 					<label>'.$placeholder.'</label>
 				</div>
 			</div>';
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo checkbox
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo checkbox
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_checkbox('Opciones','opciones', '');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -995,13 +1207,14 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_checkbox($placeholder,$name,$value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
@@ -1010,25 +1223,26 @@ class Basic_Inputs{
 					<label>'.$placeholder.'</label>
 				</div>
 			</div>';
-									
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea una linea con un checkbox de terminos y condiciones
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear una linea en donde muestra la opcion de terminos y 
-	* condiciones, al tener esta opcion presente deshabilita el boton 
-	* submit del formulario, impidiendo su ejecucion hasta que no se 
+	* Permite crear una linea en donde muestra la opcion de terminos y
+	* condiciones, al tener esta opcion presente deshabilita el boton
+	* submit del formulario, impidiendo su ejecucion hasta que no se
 	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_terms_and_conditions('terminos','He leido los ','www.google.cl','terminos y condiciones', 'submit_btn' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $name         Nombre del identificador del Input
 	* String   $inicio       Texto inicio
@@ -1038,7 +1252,8 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function terms_and_conditions($name, $inicio, $link, $fin, $submit_name){
-		
+
+		/******************************************/
 		//generacion del input
 		$input = '
 		<div class="field">
@@ -1050,8 +1265,9 @@ class Basic_Inputs{
 			</div>
 		</div>
 		';
-			
-		//ejecucion script	
+
+		/******************************************/
+			//ejecucion script
 		$input .= '
 			<script>
 				//se desactiva el boton f5
@@ -1073,23 +1289,24 @@ class Basic_Inputs{
 			</script>
 			';
 
-		//Imprimir dato	
+		/******************************************/
+		//Imprimir dato
 		echo $input;
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros, 
-	* permite valores decimales y numeros negativos, agregando botones 
-	* en ambos lados, que aumentan o disminuyen los valores ingresados, 
+	* Permite crear un input que solo permite el ingreso de numeros,
+	* permite valores decimales y numeros negativos, agregando botones
+	* en ambos lados, que aumentan o disminuyen los valores ingresados,
 	* en los rangos preestablecido
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_number_spinner('Numeros','numeros', '', 1, 50, 1, 2, 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1102,7 +1319,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_number_spinner($placeholder,$name, $value, $min, $max, $step, $ndecimal, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1114,54 +1331,71 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($min)&&$min!=''){ 
+		if (!validarNumero($min)&&$min!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $min ('.$min.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($max)&&$max!=''){ 
+		if (!validarNumero($max)&&$max!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $max ('.$max.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($step)&&$step!=''){ 
+		if (!validarNumero($step)&&$step!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $step ('.$step.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($ndecimal)&&$ndecimal!=''){ 
+		if (!validarNumero($ndecimal)&&$ndecimal!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero entero lo que se recibe
-		if (!validaEntero($ndecimal)&&$ndecimal!=''){ 
+		if (!validaEntero($ndecimal)&&$ndecimal!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==0){    $w = ''; }elseif($value!=0){   $w = $value;}
-			if($required==1){ $x = ''; }elseif($required==2){$x = 'required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input ='
 			<div class="field">
-				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroRealRacional(event)">
+				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)">
 			</div>';
-					
-			//script activacion
+
+			/******************************************/
+			//ejecucion script
 			$input .= '
 				<script>
 					//se inicializa el plugin
@@ -1174,23 +1408,24 @@ class Basic_Inputs{
 						maxboostedstep: 10
 					});
 				</script>';
-				
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros 
+	* Permite crear un input que solo permite el ingreso de numeros
 	* enteros positivos, agregando un icono de telefono
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_phone('Telefono','fono', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1199,7 +1434,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_phone($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1211,52 +1446,69 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-					
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroNatural(event)"  >
-					<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span> 
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+					<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span>
 				</div>
 			</div>';
 
-			//Imprimir dato	
+			/******************************************/
+			//Imprimir dato
 			echo $input;
-		}	
+		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros 
+	* Permite crear un input que solo permite el ingreso de numeros
 	* enteros positivos, agregando un icono de fax
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_fax('Fax','fax', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1265,7 +1517,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_fax($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1277,52 +1529,69 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-					
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="field">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroNatural(event)"  >
-					<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span> 
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+					<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span>
 				</div>
 			</div>';
 
-			//Imprimir dato	
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros, 
+	* Permite crear un input que solo permite el ingreso de numeros,
 	* permite valores decimales y numeros negativos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_number('Numeros','numeros', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1331,7 +1600,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_number($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1343,46 +1612,63 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==0){$w='';}elseif($value!=0){$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input ='<div class="field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloNumeroRealRacional(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span> 		
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
+							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 						</div>
 					</div>';
-					
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input desactivado
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input desactivado, el cual no puede ser modificado 
+	* Permite crear un input desactivado, el cual no puede ser modificado
 	* por el usuario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_disabled('text', 'Dia actual','dia', '2018-02-02', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -1392,7 +1678,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_disabled($type,$placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1406,30 +1692,48 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//Validacion de variables
-			if($value==''){$w='';}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}	
-			
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
-			$input = '<input type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control '.$name.'" value="'.$w.'"  '.$x.' disabled="disabled">';	
-			
-			//Imprimir dato	
+			$input = '<input type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control '.$name.'" value="'.$valor.'"  '.$requerido.' disabled="disabled">';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo texto que solo admite Rut
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo texto en el cual solo se pueden ingresar 
-	* Rut chilenos, estos son formateados (puntos separador de miles) y 
+	* Permite crear un input tipo texto en el cual solo se pueden ingresar
+	* Rut chilenos, estos son formateados (puntos separador de miles) y
 	* validados como rut
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_rut('Rut','rut', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1438,7 +1742,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_rut($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1452,45 +1756,60 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){$w='';}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}			
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '<div class="field">
 							<div class="input-group bootstrap-timepicker">
-								<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloRut(event)"  >
-								<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span> 
+								<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloRut(event)"  >
+								<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
 							</div>
 						</div>';
-			
-			//script activacion
-			$input.='
-				<script>
-					$("#'.$EXname.'").rut();
-				</script>';
-					
-			//Imprimir dato	
+
+			/******************************************/
+			//ejecucion script
+			$input.='<script>$("#'.$EXname.'").rut();</script>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto con la opcion de poner un icono
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo texto, con un icono en el lado derecho, 
+	* Permite crear un input tipo texto, con un icono en el lado derecho,
 	* el icono es tomado de la libreria de fontawesome
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_icon('Categoria','idCategoria', 1, 1,'fa fa-map');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -1501,7 +1820,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_icon($type,$placeholder,$name, $value, $required, $icon){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1515,38 +1834,55 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-			
-			//Validacion de variables
-			if($value==''){$w='';}else{$w=$value;}
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}			
-			
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//generacion del input
 			$input = '<div class="field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="'.$type.'" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$x.' onkeypress="return soloLetras(event)"  >
+							<input type="'.$type.'" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
 							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
 						</div>
-					</div>';		
-			
-			//Imprimir dato	
+					</div>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->select('Meses del año','idMeses', 1, 'idMes', 'Nombre', 'tabla_meses', '', '', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1560,12 +1896,11 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function select($placeholder,$name, $required, $data1, $data2, $table, $filter,$style, $dbConn){
-	
-		//variables internas
-		$random_int = rand(1, 999);
-		$EXname     = str_replace('[]', '', $name);
-		$EXname     = $EXname.'_'.$random_int;
-			
+
+		/******************************************/
+		//Nuevo Nombre
+		$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1579,22 +1914,27 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}		
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Variables
 			$filtro        = '';
 			$data_required = '';
-			
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
@@ -1610,7 +1950,7 @@ class Basic_Inputs{
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter!='0' && $filter!=''){
@@ -1620,23 +1960,25 @@ class Basic_Inputs{
 				//que exista un dato
 				$filtro .= $datos[0]."!='' ";
 			}
-			
+
 			/******************************************/
 			//Ordenamiento
 			$extrafilter = $datos[0].' ASC ';
-			
+
 			/******************************************/
 			//consulto
 			$arrSelect = array();
 			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $extrafilter, $dbConn, 'form_select', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-			
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect!=false){
+				/******************************************/
+				//generacion del input
 				$input = '<div class="field">
 							<select name="'.$name.'" id="'.$EXname.'" class="form-control" '.$requerido.' style="'.$style.'">
 								<option value="" selected>Seleccione '.$placeholder.'</option>';
-						
+
 								foreach ( $arrSelect as $select ) {
 									if(count($datos)==1){
 										$data_writing = $select[$datos[0]].' ';
@@ -1647,26 +1989,27 @@ class Basic_Inputs{
 										}
 									}
 									$input .= '<option value="'.$select['idData'].'" >'.$data_writing.'</option>';
-								} 
+								}
 				$input .= '</select></div>';
-						
+
+				/******************************************/
+				//Imprimir dato
 				echo $input;
 			}
-			
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
+	* Permite crear un input tipo select en base a datos de la base de datos,
 	* agregando un comando javascript onchange
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->select_change('Meses del año','idMeses', 1, 'idMes', 'Nombre', 'tabla_meses', '', '', 'cambia_mes', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1695,8 +2038,20 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
 			//Filtro para el where
 			$filtro = '';
 			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
@@ -1717,10 +2072,10 @@ class Basic_Inputs{
 
 			//se trae un listado con todas las categorias
 			$arrSelect = array();
-			$query = "SELECT  
-			".$data1." AS idData 
+			$query = "SELECT
+			".$data1." AS idData
 			".$data_required."
-			FROM `".$table."`  
+			FROM `".$table."`
 			".$filtro."
 			ORDER BY ".$order_by;
 			//Consulta
@@ -1731,14 +2086,15 @@ class Basic_Inputs{
 					array_push( $arrSelect,$row );
 				}
 				mysqli_free_result($resultado);
-				
+
+				/******************************************/
+				//generacion del input
 				$input = '<div class="field">
-				<select name="'.$name.'" id="'.$name.'" class="form-control" '.$x.' style="'.$style.'" onchange="'.$OnChange.' (this)">
+				<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' style="'.$style.'" onchange="'.$OnChange.' (this)">
 						<option value="" selected>Seleccione '.$placeholder.'</option>';
-						
 						foreach ( $arrSelect as $select ) {
 							$w = '';
-								
+
 							if(count($datos)==1){
 								$data_writing = $select[$datos[0]].' ';
 							}else{
@@ -1747,22 +2103,25 @@ class Basic_Inputs{
 									$data_writing .= $select[$dato].' ';
 								}
 							}
-				$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
-							 } 
+							//imprimo
+							$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
+						}
 				$input .= '</select></div>';
-						
+
+				/******************************************/
+				//Imprimir dato
 				echo $input;
-				
+
 			//si da error, guardar en el log de errores una copia
 			}else{
 				//Genero numero aleatorio
 				$vardata = genera_password(8,'alfanumerico');
-				
+
 				//Guardo el error en una variable temporal
 				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
+
 				//Devuelvo mensaje
 				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 			}
@@ -1771,16 +2130,16 @@ class Basic_Inputs{
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->select_val_filter('Meses del año','idMeses', 1, 'idMes', 'Nombre', 'tabla_meses', 'idMes>2', '', 11, $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1807,12 +2166,12 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
@@ -1823,8 +2182,20 @@ class Basic_Inputs{
 			if(validaDispositivoMovil()){
 				$input = $this->input_select_val($placeholder,$name, $required, $data1, $data2, $table, $filter,$style,$value, $dbConn);
 			}else{
-				//si dato es requerido
-				if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
+				/******************************************/
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
 				//Filtro para el where
 				$filtro = '';
 				if ($filter!='0'){$filtro .="WHERE ".$filter;	}
@@ -1845,10 +2216,10 @@ class Basic_Inputs{
 
 				//se trae un listado con todas las categorias
 				$arrSelect = array();
-				$query = "SELECT  
-				".$data1." AS idData 
+				$query = "SELECT
+				".$data1." AS idData
 				".$data_required."
-				FROM `".$table."`  
+				FROM `".$table."`
 				".$filtro."
 				ORDER BY ".$order_by;
 				//Consulta
@@ -1859,20 +2230,21 @@ class Basic_Inputs{
 						array_push( $arrSelect,$row );
 					}
 					mysqli_free_result($resultado);
-					
+
+					/******************************************/
 					//se llama por obligacion libreria javascript desde aqui, porque en el head da problemas
 					$input = '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js"></script>';
-					
-					//se crea formulario
-					$input .= '<select name="'.$name.'" id="'.$name.'" '.$x.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
+
+					/******************************************/
+					//generacion del input
+					$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
 									<option value=""></option>';
 
-										
 										foreach ( $arrSelect as $select ) {
-											$w = '';
+											$selected = '';
 											if($value==$select['idData']){
-												$w .= 'selected="selected"';
-											}  	
+												$selected = 'selected="selected"';
+											}
 											if(count($datos)==1){
 												$data_writing = $select[$datos[0]].' ';
 											}else{
@@ -1881,11 +2253,14 @@ class Basic_Inputs{
 													$data_writing .= $select[$dato].' ';
 												}
 											}
-											$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										 } 
-										
-										
-					$input .= '</select>
+											$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+										 }
+
+					$input .= '</select>';
+
+					/******************************************/
+					//ejecucion script
+					$input .= '
 								<script type="text/javascript">
 									$.fn.oldChosen = $.fn.chosen;
 									$.fn.chosen = function(options) {
@@ -1905,20 +2280,20 @@ class Basic_Inputs{
 									}
 									$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
 								</script>';
-								
 
-							
+					/******************************************/
+					//Imprimir dato
 					echo $input;
 				//si da error, guardar en el log de errores una copia
 				}else{
 					//Genero numero aleatorio
 					$vardata = genera_password(8,'alfanumerico');
-					
+
 					//Guardo el error en una variable temporal
 					$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
 					$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
 					$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-					
+
 					//Devuelvo mensaje
 					alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
 				}
@@ -1928,16 +2303,16 @@ class Basic_Inputs{
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_select_val('Meses del año','idMeses', 1, 'idMes', 'Nombre', 'tabla_meses', 'idMes>2', '', 1, $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1952,7 +2327,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_select_val($placeholder,$name, $required, $data1, $data2, $table, $filter,$style,$value, $dbConn){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1964,20 +2339,32 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
 			//Filtro para el where
 			$filtro = '';
 			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
@@ -1998,10 +2385,10 @@ class Basic_Inputs{
 
 			//se trae un listado con todas las categorias
 			$arrSelect = array();
-			$query = "SELECT  
-			".$data1." AS idData 
+			$query = "SELECT
+			".$data1." AS idData
 			".$data_required."
-			FROM `".$table."`  
+			FROM `".$table."`
 			".$filtro."
 			ORDER BY ".$order_by;
 			//Consulta
@@ -2012,15 +2399,17 @@ class Basic_Inputs{
 					array_push( $arrSelect,$row );
 				}
 				mysqli_free_result($resultado);
-				
-				$input = '<select name="'.$name.'" id="'.$name.'" class="form-control" '.$x.' style="'.$style.'" >
+
+				/******************************************/
+				//generacion del input
+				$input = '<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' style="'.$style.'" >
 							<option value="" selected>Seleccione '.$placeholder.'</option>';
-							
+
 							foreach ( $arrSelect as $select ) {
-								$w = '';
+								$selected = '';
 								if($value==$select['idData']){
-									$w .= 'selected="selected"';
-								}  	
+									$selected = 'selected="selected"';
+								}
 								if(count($datos)==1){
 									$data_writing = $select[$datos[0]].' ';
 								}else{
@@ -2029,22 +2418,25 @@ class Basic_Inputs{
 										$data_writing .= $select[$dato].' ';
 									}
 								}
-				$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
-							 } 
+								//imprimo
+								$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+							}
 				$input .= '</select>';
-						
+
+				/******************************************/
+				//Imprimir dato
 				echo $input;
-				
+
 			//si da error, guardar en el log de errores una copia
 			}else{
 				//Genero numero aleatorio
 				$vardata = genera_password(8,'alfanumerico');
-				
+
 				//Guardo el error en una variable temporal
 				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
+
 				//Devuelvo mensaje
 				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
@@ -2053,16 +2445,16 @@ class Basic_Inputs{
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->input_select_val_filter_ot('Meses del año','idMeses', 1, 'idMes', 'Nombre', 'tabla_meses', 'idMes>2', '', 1, $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2077,7 +2469,7 @@ class Basic_Inputs{
 	* @return  String
 	************************************************************************/
 	public function input_select_val_filter_ot($placeholder,$name, $required, $data1, $data2, $table, $filter,$style,$value, $dbConn){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -2089,12 +2481,12 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
@@ -2102,7 +2494,20 @@ class Basic_Inputs{
 		//Ejecucion si no hay errores
 		if($errorn==0){
 			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
 			//Filtro para el where
 			$filtro = '';
 			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
@@ -2123,10 +2528,10 @@ class Basic_Inputs{
 
 			//se trae un listado con todas las categorias
 			$arrSelect = array();
-			$query = "SELECT  
-			".$data1." AS idData 
+			$query = "SELECT
+			".$data1." AS idData
 			".$data_required."
-			FROM `".$table."`  
+			FROM `".$table."`
 			".$filtro."
 			ORDER BY ".$order_by;
 			//Consulta
@@ -2137,17 +2542,21 @@ class Basic_Inputs{
 					array_push( $arrSelect,$row );
 				}
 				mysqli_free_result($resultado);
-				
+
+				/******************************************/
+				//recursos
 				$input = '<link rel="stylesheet" href="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.css">';
-				$input .= '<select name="'.$name.'" id="'.$name.'" '.$x.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
+
+				/******************************************/
+				//generacion del input
+				$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
 								<option value=""></option>';
 
-									
 									foreach ( $arrSelect as $select ) {
-										$w = '';
+										$selected = '';
 										if($value==$select['idData']){
-											$w .= 'selected="selected"';
-										}  	
+											$selected = 'selected="selected"';
+										}
 										if(count($datos)==1){
 											$data_writing = $select[$datos[0]].' ';
 										}else{
@@ -2156,12 +2565,15 @@ class Basic_Inputs{
 												$data_writing .= $select[$dato].' ';
 											}
 										}
-										$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
-									 } 
-									
-									
-				$input .= '</select>
-							
+										//imprimo
+										$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+									 }
+
+				$input .= '</select>';
+
+				/******************************************/
+				//ejecucion script
+				$input .= '
 							<script type="text/javascript">
 								$.fn.oldChosen = $.fn.chosen
 								$.fn.chosen = function(options) {
@@ -2183,18 +2595,20 @@ class Basic_Inputs{
 								$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
 							</script>';
 
+				/******************************************/
+				//Imprimir dato
 				echo $input;
-				
+
 			//si da error, guardar en el log de errores una copia
 			}else{
 				//Genero numero aleatorio
 				$vardata = genera_password(8,'alfanumerico');
-				
+
 				//Guardo el error en una variable temporal
 				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
+
 				//Devuelvo mensaje
 				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
@@ -2203,15 +2617,15 @@ class Basic_Inputs{
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
+	* Permite crear un input tipo select en base a datos de la base de datos,
 	* que tambien obtiene datos desde otras tablas
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->select_bodega('Empresas','empresas', 1, 1, 'idEmpresa', 'Nombre,Tipo', 'tabla_empresas', 'tabla_tipo','', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2238,31 +2652,42 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			//si dato es requerido
-			if($required==1){$x='';}elseif($required==2){$x='required';$_SESSION['form_require'].=','.$name;}
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
 			//Filtro para el where
 			$filtro = '';
 			if ($filter!='0'){$filtro .="WHERE ".$filter;	}
-			
 
 			//se trae un listado con todas las categorias
 			$arrSelect = array();
-			$query = "SELECT  
-			".$table1.".".$data1." AS idData, 
+			$query = "SELECT
+			".$table1.".".$data1." AS idData,
 			".$table1.".".$data2."
-			FROM `".$table1."`  
+			FROM `".$table1."`
 			INNER JOIN ".$table2." ON ".$table2.".".$data1." = ".$table1.".".$data1."
 			".$filtro."
 			GROUP BY ".$table1.".".$data1."
@@ -2275,34 +2700,38 @@ class Basic_Inputs{
 					array_push( $arrSelect,$row );
 				}
 				mysqli_free_result($resultado);
-				
+
+				/******************************************/
+				//generacion del input
 				$input = '<div class="field">
-							<select name="'.$name.'" id="'.$name.'" class="form-control" '.$x.' >
+							<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' >
 							<option value="" selected>Seleccione '.$placeholder.'</option>';
-							
+
 							foreach ( $arrSelect as $select ) {
-								$w = '';
+								$selected = '';
 								if($value==$select['idData']){
-									$w .= 'selected="selected"';
-								}  	
-								
-				$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$select[$data2].'</option>';
-							 } 
+									$selected = 'selected="selected"';
+								}
+								//imprimo
+								$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$select[$data2].'</option>';
+							}
 				$input .= '</select>
 						</div>';
-						
+
+				/******************************************/
+				//Imprimir dato
 				echo $input;
-				
+
 			//si da error, guardar en el log de errores una copia
 			}else{
 				//Genero numero aleatorio
 				$vardata = genera_password(8,'alfanumerico');
-				
+
 				//Guardo el error en una variable temporal
 				$_SESSION['ErrorListing'][$vardata]['code']         = mysqli_errno($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['description']  = mysqli_error($dbConn);
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
-				
+
 				//Devuelvo mensaje
 				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
@@ -2311,17 +2740,17 @@ class Basic_Inputs{
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select dependiente
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos,
 	* dependiente uno de otro
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
 	*                         'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
 	*                         $dbConn, 'form1' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder1   Nombre o texto a mostrar en el navegador
 	* String   $name1          Nombre del identificador del Input
@@ -2348,7 +2777,7 @@ class Basic_Inputs{
 	public function select_depend1($placeholder1, $name1,  $value1,  $required1,  $dataA1,  $dataB1,  $table1,  $filter1,   $extracomand1,
 								   $placeholder2, $name2,  $value2,  $required2,  $dataA2,  $dataB2,  $table2,  $filter2,   $extracomand2, 
 								   $dbConn, $form_name){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -2364,20 +2793,20 @@ class Basic_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value1)&&$value1!=''){ 
+		if (!validarNumero($value1)&&$value1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value2)&&$value2!=''){ 
+		if (!validarNumero($value2)&&$value2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value1)&&$value1!=''){ 
+		if (!validaEntero($value1)&&$value1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value1 ('.$value1.') en <strong>'.$placeholder1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value2)&&$value2!=''){ 
+		if (!validaEntero($value2)&&$value2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value2 ('.$value2.') en <strong>'.$placeholder2.'</strong> no es un numero entero');
 			$errorn++;
 		}
@@ -2386,58 +2815,58 @@ class Basic_Inputs{
 		if($errorn==0){
 			//Variables
 			$input = '';
-			
 
 			//DATOS REQUERIDOS
 			$required = array();
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
 			if($required1==1){$required[1]='';      }elseif($required1==2){$required[1]='required';$_SESSION['form_require'].=','.$name1;}
 			if($required2==1){$required[2]='';      }elseif($required2==2){$required[2]='required';$_SESSION['form_require'].=','.$name2;}
-			
+
 			//FILTROS
 			$filtro = array();
-			$filtro[1] = '';  if ($filter1!='0') {$filtro[1] .=" AND ".$filter1;	}
-			$filtro[2] = '';  if ($filter2!='0') {$filtro[2] .=" AND ".$filter2;	}
-			
+			$filtro[1] = '';if ($filter1!='0') {$filtro[1] .=" AND ".$filter1;	}
+			$filtro[2] = '';if ($filter2!='0') {$filtro[2] .=" AND ".$filter2;	}
+
 			//COMANDOS EXTRAS
 			$excom = array();
-			$excom[1] = '';  if ($extracomand1!='0') {$excom[1] .=" ".$extracomand1;	} else{$excom[1] .=" ORDER BY Nombre ASC ";}
-			$excom[2] = '';  if ($extracomand2!='0') {$excom[2] .=" ".$extracomand2;	} else{$excom[2] .=" ORDER BY Nombre ASC ";}
-			
+			$excom[1] = '';if ($extracomand1!='0') {$excom[1] .=" ".$extracomand1;	} else{$excom[1] .=" ORDER BY Nombre ASC ";}
+			$excom[2] = '';if ($extracomand2!='0') {$excom[2] .=" ".$extracomand2;	} else{$excom[2] .=" ORDER BY Nombre ASC ";}
+
 			//visualizar listado
 			$display = array();
 			if ($value2!=0&&$value2!=''){$display[2]='';}else{$display[2]='style="display:none;"';}
-			
+
 			//Se guardan los valores
 			$value = array();
 			if ($value1!=0&&$value1!=''){$value[1]=$value1;}else{$value[1]='';}
 			if ($value2!=0&&$value2!=''){$value[2]=$value2;}else{$value[2]='';}
-			
+
 			//Se guardan los nombres
 			$name = array();
 			if (isset($name1)&&$name1!=''){$name[1]=$name1;}else{$name[1]='';}
 			if (isset($name2)&&$name2!=''){$name[2]=$name2;}else{$name[2]='';}
-				
+
 			//Se guardan los nombres
 			$dataA = array();
 			if (isset($dataA1)&&$dataA1!=''){$dataA[1]=$dataA1;}else{$dataA[1]='';}
 			if (isset($dataA2)&&$dataA2!=''){$dataA[2]=$dataA2;}else{$dataA[2]='';}
-			
+
 			//Se guardan los nombres
 			$dataB = array();
 			if (isset($dataB1)&&$dataB1!=''){$dataB[1]=$dataB1;}else{$dataB[1]='';}
 			if (isset($dataB2)&&$dataB2!=''){$dataB[2]=$dataB2;}else{$dataB[2]='';}
-			
+
 			//Se guardan los nombres
 			$table = array();
 			if (isset($table1)&&$table1!=''){$table[1]=$table1;}else{$table[1]='';}
 			if (isset($table2)&&$table2!=''){$table[2]=$table2;}else{$table[2]='';}
-			
+
 			//Se guardan los nombres
 			$placeholder = array();
 			if (isset($placeholder1)&&$placeholder1!=''){$placeholder[1]=$placeholder1;}else{$placeholder[1]='';}
 			if (isset($placeholder2)&&$placeholder2!=''){$placeholder[2]=$placeholder2;}else{$placeholder[2]='';}
-			
-			/********************************************************************************************************************/	
+
+			/********************************************************************************************************************/
 			//explode para poder crear cadena
 			$datosA = explode(",", $dataB[1]);
 			if(count($datosA)==1){
@@ -2448,7 +2877,7 @@ class Basic_Inputs{
 					$data_requiredA .= ','.$dato.' AS '.$dato;
 				}
 			}
-			//Primera Consulta estandar			
+			//Primera Consulta estandar
 			$arrSeleccion = array();
 			$query = "SELECT ".$dataA[1]." AS idData ".$data_requiredA." FROM `".$table[1]."` WHERE ".$dataA[1]."!='' ".$filtro[1]." ".$excom[1];
 			$resultado = mysqli_query ($dbConn, $query);
@@ -2463,7 +2892,7 @@ class Basic_Inputs{
 						<div class="field">
 							<select name="'.$name[1].'" id="'.$name[1].'" class="form-control" '.$required[1].' onChange="cambia_'.$name[1].'()" >
 								<option value="" selected>Seleccione una Opcion</option>';
-						
+
 								foreach ( $arrSeleccion as $seleccion ) {
 									if(count($datosA)==1){
 										$data_writing = $seleccion[$datosA[0]].' ';
@@ -2473,9 +2902,10 @@ class Basic_Inputs{
 											$data_writing .= $seleccion[$dato].' ';
 										}
 									}
-									$w = ''; if($value[1]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-									$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-								} 
+									$selected = '';
+									if($value[1]==$seleccion['idData']){ $selected = 'selected="selected"';}
+									$input .= '<option value="'.$seleccion['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+								}
 				$input .= '</select>
 						</div>
 					</div>';
@@ -2483,7 +2913,7 @@ class Basic_Inputs{
 			//Se recorre 2 veces
 			$maxs = 2;
 			for ($i = 2; $i <= $maxs; $i++) {
-				
+
 				//explode para poder crear cadena
 				$datosB = explode(",", $dataB[$i]);
 				if(count($datosB)==1){
@@ -2494,7 +2924,7 @@ class Basic_Inputs{
 						$data_requiredB .= ','.$dato.' AS '.$dato;
 					}
 				}
-				
+
 				// Se trae un listado con los datos previamente seleccionados
 				if ($value[$i-1]!=0&&$value[$i-1]!=''){
 					$arrSeleccion = array();
@@ -2504,7 +2934,7 @@ class Basic_Inputs{
 					array_push( $arrSeleccion,$row );
 					}
 					mysqli_free_result($resultado);
-				} 
+				}
 				// Se trae un listado con todos los datos
 				$arrTodos = array();
 				$query = "SELECT ".$dataA[$i]." AS idData, ".$dataA[$i-1]." AS idCat ".$data_requiredB." FROM `".$table[$i]."` WHERE ".$dataA[$i]."!='' ".$filtro[$i]." ".$excom[$i];
@@ -2513,14 +2943,13 @@ class Basic_Inputs{
 				array_push( $arrTodos,$row );
 				}
 				mysqli_free_result($resultado);
-				
-				
+
 				//Se verifica la funcion
 				$onchange = '';
 				if($i!=$maxs){
 					$onchange = 'onChange="cambia_'.$name[$i].'()"';
 				}
-				
+
 				//Se dibuja el input
 				$input .= '
 						<div class="form-group" id="div_'.$name[$i].'" '.$display[$i].'>
@@ -2537,21 +2966,23 @@ class Basic_Inputs{
 													$data_writing .= $seleccion[$dato].' ';
 												}
 											}
-					
-											$w = ''; if($value[$i]==$seleccion['idData']){ $w .= 'selected="selected"'; }  	
-											$input .= '<option value="'.$seleccion['idData'].'" '.$w.' >'.$data_writing.'</option>';
-										} 
+
+											$selected = '';
+											if($value[$i]==$seleccion['idData']){ $selected = 'selected="selected"';}
+											$input .= '<option value="'.$seleccion['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+										}
 									}
 					$input .= '</select>
 							</div>
 						</div>';
-				
-				$input .= '<script>
-				';	
-			
+
+				/******************************************/
+				//ejecucion script
+				$input .= '<script>';
+
 				//Input 2
 				filtrar($arrTodos, 'idCat');
-				$vowels = array(" ", "´", "-"); 
+				$vowels = array(" ", "´", "-");
 				foreach($arrTodos as $tipo=>$componentes){
 					$input .= 'let id_data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
 					foreach ($componentes as $idcomp) {
@@ -2560,7 +2991,7 @@ class Basic_Inputs{
 					$input .= ');
 					';
 				}
-				
+
 				foreach($arrTodos as $tipo=>$componentes){
 					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
 					foreach ($componentes as $comp) {
@@ -2571,13 +3002,13 @@ class Basic_Inputs{
 							foreach($datosB as $dato){
 								$data_writing .= $comp[$dato].' ';
 							}
-						}					
+						}
 						$input .= ',"'.str_replace('"', '',$data_writing).'"';
 					}
 					$input .= ');
 					';
 				}
-			
+
 				if($i <= $maxs){
 					$input .= '
 					function cambia_'.$name[$i-1].'(){
@@ -2592,10 +3023,10 @@ class Basic_Inputs{
 								   document.'.$form_name.'.'.$name[$i].'.options[i].value=id_data[i];
 								   document.'.$form_name.'.'.$name[$i].'.options[i].text=data[i];
 								}
-								document.getElementById("div_'.$name[$i].'").style.display = "block";	
-								
+								document.getElementById("div_'.$name[$i].'").style.display = "block";
+
 							}else{';
-						
+
 								for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 									$input .= '
 										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
@@ -2603,12 +3034,12 @@ class Basic_Inputs{
 										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
-								
+
 								}
-							$input .= '	
+							$input .= '
 							}
 						} catch (e) {';
-						
+
 							for ($xxx = $i; $xxx <= $maxs; $xxx++) {
 								$input .= '
 									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
@@ -2616,22 +3047,24 @@ class Basic_Inputs{
 									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
-								
+
 							}
-						$input .= '	
+						$input .= '
 						}
 						document.'.$form_name.'.'.$name[$i].'.options[0].selected = true
 					}
 					';
 				}
 				$input .= '</script>';
-				
+
 			}
-					
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
-	
+
 }
 
 

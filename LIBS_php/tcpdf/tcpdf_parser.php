@@ -495,8 +495,8 @@ class TCPDF_PARSER {
 	 * @since 1.0.000 (2011-06-20)
 	 */
 	protected function getRawObject($offset=0) {
-		$objtype = ''; // object type to be returned
-		$objval = ''; // object value to be returned
+		$objtype = '';// object type to be returned
+		$objval = '';// object value to be returned
 		// skip initial white space chars: \x00 null (NUL), \x09 horizontal tab (HT), \x0A line feed (LF), \x0C form feed (FF), \x0D carriage return (CR), \x20 space (SP)
 		$offset += strspn($this->pdfdata, "\x00\x09\x0a\x0c\x0d\x20", $offset);
 		// get first char

@@ -12,6 +12,6 @@ if( ! defined('XMBCXRXSKGC')) {
 if (isset($_SESSION['usuario']['basic_data']['tipo'])&&$_SESSION['usuario']['basic_data']['tipo']!=''&&$_SESSION['usuario']['basic_data']['tipo']!=1) {
 	//Si el usuario no posee los permisos redirijo
 	header( 'Location: principal.php' );
-	die;		
+	die;
 }
 ?>

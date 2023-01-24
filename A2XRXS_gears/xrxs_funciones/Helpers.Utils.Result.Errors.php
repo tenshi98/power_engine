@@ -20,47 +20,47 @@ if($err_count!=0){
 	$CountError  = 0;
 
 	//Titulo del cuerpo del correo
-	$MailBody.= '<p><strong>Usuario :</strong>'.$NombreUsr.'</p>'; 
-	$MailBody.= '<p><strong>Transaccion :</strong>'.$Transaccion.'</p>'; 
-	$MailBody.= '<br/>';	
-	
+	$MailBody.= '<p><strong>Usuario :</strong>'.$NombreUsr.'</p>';
+	$MailBody.= '<p><strong>Transaccion :</strong>'.$Transaccion.'</p>';
+	$MailBody.= '<br/>';
+
 	error_log("========================================================================================================================================", 0);
 	error_log("Usuario: ". $NombreUsr, 0);
 	error_log("Transaccion: ". $Transaccion, 0);
 	error_log("-------------------------------------------------------------------", 0);
-	
+
 	//recorro los errores
 	foreach($_SESSION['ErrorListing'] as $producto) {
-		
+
 		$ErrorCode   = limpiarString($producto['code']);
 		$Mensaje     = limpiarString($producto['description']);
 		$Consulta    = $producto['query'];
-		
+
 		/***************************************/
 		//solo si es administrador
 		if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 			//imprimo los errores
-			echo '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>'; 
+			echo '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>';
 			echo '<pre>'.$Consulta.'</pre>';
 		}
-		
+
 		/***************************************/
 		//guardo errores en el log
 		error_log("Error code: ". $ErrorCode, 0);
 		error_log("Error description: ". $Mensaje, 0);
 		error_log("Error query: ". $Consulta, 0);
 		error_log("-------------------------------------------------------------------", 0);
-		
+
 		/***************************************/
 		//Genero el cuerpo del mensaje
-		$MailBody.= '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>'; 
+		$MailBody.= '<p><strong>MySQL error '.$ErrorCode.' :</strong>'.$Mensaje.'</p>';
 		$MailBody.= '<pre>'.$Consulta.'</pre>';
 		$MailBody.= '<br/><br/>';
-		
+
 		/***************************************/
 		//se limpia la cadena antes de guardarla
 		$Consulta = preg_replace("/[\r\n|\n|\r]+/", " ", $Consulta);
-		
+
 		//Cuerpo del log
 		$rmail         = '';
 		$sesion_texto  = '';
@@ -72,44 +72,43 @@ if($err_count!=0){
 		$sesion_texto .= ' /\ '.$ErrorCode;
 		$sesion_texto .= ' /\ '.$Mensaje;
 		$sesion_texto .= ' /\ '.$Consulta;
-				
+
 		//se guarda el log
-		log_response(3, $rmail, $sesion_texto);	
-		
+		log_response(3, $rmail, $sesion_texto);
+
 		//Cuento los errores generados
 		$CountError++;
 	}
-	
+
 }
 
 //Si se genera cuerpo para el correo, se envia el mensaje a soporte
-if(isset($MailBody)&&$MailBody!=''&&$CountError!=0){
-	
+if(isset($MailBody)&&$MailBody!=''&&$CountError!=0&&isset($idSistema)){
+
 	/*********************************/
 	//Busco al usuario en el sistema
-	$query = "SELECT Nombre AS RazonSocial, email_principal,Config_Gmail_Usuario, Config_Gmail_Password
-	FROM `core_sistemas` 
-	WHERE idSistema = '".$idSistema."'";
-	$resultado = mysqli_query($dbConn, $query);
-	$rowUser = mysqli_fetch_array($resultado);
+	$SIS_query = 'Nombre AS RazonSocial, email_principal,Config_Gmail_Usuario, Config_Gmail_Password';
+	$SIS_join  = '';
+	$SIS_where = 'idSistema = '.$idSistema;
+	$rowUser = db_select_data (false, $SIS_query, 'core_sistemas',$SIS_join, $SIS_where, $dbConn, 'Helper utils error', basename($_SERVER["REQUEST_URI"], ".php"), 'rowUser');
 
 	/*********************************/
 	//compruebo que exista correo
 	if(isset($rowUser['email_principal'])&&$rowUser['email_principal']!=''){
 		//Envio de correo
-		$rmail = tareas_envio_correo($rowUser['email_principal'], $rowUser['RazonSocial'], 
-                                     $email, 'Receptor', 
-                                     '', '', 
-                                     'Error Sistema '.$rowUser['RazonSocial'], 
-                                     $MailBody,'', 
-                                     '', 
-                                     1, 
-                                     $rowUser['Config_Gmail_Usuario'], 
+		$rmail = tareas_envio_correo($rowUser['email_principal'], $rowUser['RazonSocial'],
+                                     $email, 'Receptor',
+                                     '', '',
+                                     'Error Sistema '.$rowUser['RazonSocial'],
+                                     $MailBody,'',
+                                     '',
+                                     1,
+                                     $rowUser['Config_Gmail_Usuario'],
                                      $rowUser['Config_Gmail_Password']);
 	}else{
 		error_log("No esta configurado el correo para el envio de errores", 0);
 	}
-	
+
 }
 //borro todos los errores para evitar duplicarlos
 unset($_SESSION['ErrorListing']);

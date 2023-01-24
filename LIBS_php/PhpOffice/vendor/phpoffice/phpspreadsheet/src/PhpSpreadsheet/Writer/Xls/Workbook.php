@@ -1014,7 +1014,7 @@ class Workbook extends BIFFwriter
         $record = 0x0092; // Record identifier
         $length = 2 + 4 * count($aref); // Number of bytes to follow
         $ccv = count($aref); // Number of RGB values to follow
-        $data = ''; // The RGB data
+        $data = '';// The RGB data
 
         // Pack the RGB data
         foreach ($aref as $color) {

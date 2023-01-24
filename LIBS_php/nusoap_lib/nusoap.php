@@ -1254,7 +1254,7 @@ class nusoap_xmlschema extends nusoap_base  {
 	* @access   private
 	*/
 	function schemaStartElement($parser, $name, $attrs) {
-		
+
 		// position in the total number of elements, starting from 0
 		$pos = $this->position++;
 		$depth = $this->depth++;
@@ -2478,7 +2478,7 @@ class soap_transport_http extends nusoap_base {
 			//$this->setCurlOption(CURLOPT_CAINFO, 'f:\php-4.3.2-win32\extensions\curl-ca-bundle.crt');		
 			$this->setCurlOption(CURLOPT_SSL_VERIFYPEER, 0);
 			$this->setCurlOption(CURLOPT_SSL_VERIFYHOST, 0);
-	
+
 			// support client certificates (thanks Tobias Boes, Doug Anarino, Eryan Ariobowo)
 			if ($this->authtype == 'certificate') {
 				$this->debug('set cURL certificate options');
@@ -2577,12 +2577,12 @@ class soap_transport_http extends nusoap_base {
 				if (!$this->connect($timeout, $response_timeout)){
 					return false;
 				}
-				
+
 				// send request
 				if (!$this->sendRequest($data, $cookies)){
 					return false;
 				}
-				
+
 				// get response
 				$respdata = $this->getResponse();
 			} else {
@@ -2630,7 +2630,7 @@ class soap_transport_http extends nusoap_base {
 		} elseif ($authtype == 'digest') {
 			if (isset($digestRequest['nonce'])) {
 				$digestRequest['nc'] = isset($digestRequest['nc']) ? $digestRequest['nc']++ : 1;
-				
+
 				// calculate the Digest hashes (calculate code based on digest implementation found at: http://www.rassoc.com/gregr/weblog/stories/2002/07/09/webServicesSecurityHttpDigestAuthenticationWithoutActiveDirectory.html)
 	
 				// A1 = unq(username-value) ":" unq(realm-value) ":" passwd
@@ -4614,7 +4614,7 @@ class wsdl extends nusoap_base {
     var $opData = array();
     var $status = '';
     var $documentation = false;
-    var $endpoint = ''; 
+    var $endpoint = '';
     // array of wsdl docs to import
     var $import = array(); 
     // parser vars
@@ -4704,7 +4704,7 @@ class wsdl extends nusoap_base {
 				                		$imported++;
 				                		$imported_urls[] = $url;
 				                	}
-								} else {
+								}else {
 									$this->debug("Unexpected scenario: empty URL for unloaded import");
 								}
 							}
@@ -5445,7 +5445,7 @@ class wsdl extends nusoap_base {
 											$b .= "&nbsp;&nbsp;&nbsp;&nbsp;$joanie: $chachi<br>";
 								    	}
 					        		//}
-								} else {
+								}else {
 								    $b .= "&nbsp;&nbsp;$captain: $tenille<br>";
 								}
 						    }
@@ -7452,7 +7452,7 @@ class nusoap_client extends nusoap_base  {
 			$this->return = $return;
 			$this->debug('sent message successfully and got a(n) '.gettype($return));
            	$this->appendDebug('return=' . $this->varDump($return));
-			
+
 			// fault?
 			if(is_array($return) && isset($return['faultcode'])){
 				$this->debug('got fault');
@@ -7621,7 +7621,7 @@ class nusoap_client extends nusoap_base  {
 						$this->persistentConnection = $http;
 					}
 				}
-				
+
 				if($err = $http->getError()){
 					$this->setError('HTTP Error: '.$err);
 					return false;

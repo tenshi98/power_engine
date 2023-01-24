@@ -1590,7 +1590,7 @@ class Crypt_Base
      *    |                                                 // encrypt the content of the $in variable   |
      *    |                                                                                              |
      *    |                 $plaintext .= $in;                                                           |
-     *    |             }                                                                                |
+     *    |             }                                                      |
      *    |             return $plaintext;                                                               |
      *    |                                                                                              |
      *    |         case 'decrypt':                                                                      |
@@ -1609,10 +1609,10 @@ class Crypt_Base
      *    |                                                 // $cipher_code['decrypt_block'] has to      |
      *    |                                                 // decrypt the content of the $in variable   |
      *    |                 $ciphertext .= $in;                                                          |
-     *    |             }                                                                                |
+     *    |             }                                                      |
      *    |             return $ciphertext;                                                              |
-     *    |     }                                                                                        |
-     *    | }                                                                                            |
+     *    |     }                                                              |
+     *    | }                                                                  |
      *    +----------------------------------------------------------------------------------------------+
      *    </code>
      *

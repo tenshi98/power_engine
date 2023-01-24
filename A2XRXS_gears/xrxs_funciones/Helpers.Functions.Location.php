@@ -13,15 +13,15 @@ if( ! defined('XMBCXRXSKGC')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Distancia
-* 
+*
 *===========================     Detalles    ===========================
-* Esta funcion permte obtener la distancia (en metros) entre dos 
+* Esta funcion permte obtener la distancia (en metros) entre dos
 * puntos georeferenciados
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se ejecuta codigo
 * 	obtenerDistancia(-40.807289, -72.634907, -42.176560, -73.425923);
-* 
+*
 *===========================    Parametros   ===========================
 * Decimal  $latitude1     Latitud posicion 1
 * Decimal  $longitude1    Longitud posicion 1
@@ -30,28 +30,28 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  Integer
 ************************************************************************/
 //Funcion
-function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {  
-    
+function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
+
     //radio de la tierra
     $earth_radius = 6371;
 
-    $dLat = deg2rad( $latitude2 - $latitude1 );  
-    $dLon = deg2rad( $longitude2 - $longitude1 );  
+    $dLat = deg2rad( $latitude2 - $latitude1 );
+    $dLon = deg2rad( $longitude2 - $longitude1 );
 
-    $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);  
-    $c = 2 * asin(sqrt($a));  
-    $d = $earth_radius * $c;  
+    $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);
+    $c = 2 * asin(sqrt($a));
+    $d = $earth_radius * $c;
 
-    return $d;  
+    return $d;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Verificar si esta dentro de zona
-* 
+*
 *===========================     Detalles    ===========================
 * Permite verificar si punto de georeferencia se ubica dentro de una geocerca referenciada
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se ejecuta codigo
 * 	//Se crea geocerca
 * 	$polygon = array();
@@ -65,9 +65,9 @@ function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
 * 	//$c_chek =  $pointLocation->pointInPolygon(-40.807289 -72.634907, $polygon);
 * 	$c_chek =  $pointLocation->pointInPolygon($point, $polygon);
 * 	if($c_chek=='inside'){
-* 
-* 	}		
-* 
+*
+* 	}
+*
 *===========================    Parametros   ===========================
 * Object   $polygon   Geocerca definida
 * String   $point     Latitud y longitus separado por un espacio
@@ -76,31 +76,31 @@ function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
 //Funcion
 class subpointLocation {
     var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
- 
+
     function pointLocation() {
     }
- 
+
     function pointInPolygon($point, $polygon, $pointOnVertex = true) {
         $this->pointOnVertex = $pointOnVertex;
- 
+
         // Transform string coordinates into arrays with x and y values
         $point = $this->pointStringToCoordinates($point);
-        $vertices = array(); 
+        $vertices = array();
         foreach ($polygon as $vertex) {
-            $vertices[] = $this->pointStringToCoordinates($vertex); 
+            $vertices[] = $this->pointStringToCoordinates($vertex);
         }
- 
+
         // Check if the point sits exactly on a vertex
         if ($this->pointOnVertex == true and $this->pointOnVertex($point, $vertices) == true) {
             return "vertex";
         }
- 
+
         // Check if the point is inside the polygon or on the boundary
-        $intersections = 0; 
+        $intersections = 0;
         $vertices_count = count($vertices);
- 
+
         for ($i=1; $i < $vertices_count; $i++) {
-            $vertex1 = $vertices[$i-1]; 
+            $vertex1 = $vertices[$i-1];
             $vertex2 = $vertices[$i];
             if ($vertex1['y'] == $vertex2['y'] and $vertex1['y'] == $point['y'] and $point['x'] > min($vertex1['x'], $vertex2['x']) and $point['x'] < max($vertex1['x'], $vertex2['x'])) { // Check if point is on an horizontal polygon boundary
                 return "boundary";
@@ -111,10 +111,10 @@ class subpointLocation {
                     return "boundary";
                 }
                 if ($vertex1['x'] == $vertex2['x'] || $point['x'] <= $xinters) {
-                    $intersections++; 
+                    $intersections++;
                 }
-            } 
-        } 
+            }
+        }
         // If the number of edges we passed through is odd, then it's in the polygon. 
         if ($intersections % 2 != 0) {
             return "inside";
@@ -122,52 +122,52 @@ class subpointLocation {
             return "outside";
         }
     }
- 
+
     function pointOnVertex($point, $vertices) {
         foreach($vertices as $vertex) {
             if ($point == $vertex) {
                 return true;
             }
         }
- 
+
     }
- 
+
     function pointStringToCoordinates($pointString) {
         $coordinates = explode(" ", $pointString);
         return array("x" => $coordinates[0], "y" => $coordinates[1]);
     }
- 
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener latitud y longitud
-* 
+*
 *===========================     Detalles    ===========================
-* Esta función devuelve la información transmitida por Google y se la 
-* asigna a una variable. Si esta variable contiene información, 
-* entonces lo que hacemos es sacar la latitud, la longitud y la 
+* Esta función devuelve la información transmitida por Google y se la
+* asigna a una variable. Si esta variable contiene información,
+* entonces lo que hacemos es sacar la latitud, la longitud y la
 * dirección que se mostrará en el mapa.
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se ejecuta codigo
 * 	$geocodeData = getGeocodeData($address, $ApiKey);
-* 	if($geocodeData) {   
+* 	if($geocodeData) {
 * 		$latitude  = $geocodeData[0];
 * 		$longitude = $geocodeData[1];
-* 		$address   = $geocodeData[2]; 
+* 		$address   = $geocodeData[2];
 * 	}else{
 * 		echo "Detalles incorrectos!";
-* 	}		
-* 
+* 	}
+*
 *===========================    Parametros   ===========================
 * String   $address    La direccion a consultar
 * String   $ApiKey     La Api Key de Google Maps
 * @return  Object
 ************************************************************************/
 //Funcion
-function getGeocodeData($address, $ApiKey) { 
+function getGeocodeData($address, $ApiKey) {
     //Obtengo la direccion
-    $address = urlencode($address);     
+    $address = urlencode($address);
     //consulto a google
     $googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=".$address."&key=".$ApiKey;
     //obtengo la respuesta
@@ -179,23 +179,23 @@ function getGeocodeData($address, $ApiKey) {
         //datos obtenidos
         $latitude         = isset($responseData['results'][0]['geometry']['location']['lat']) ? $responseData['results'][0]['geometry']['location']['lat'] : "";
         $longitude        = isset($responseData['results'][0]['geometry']['location']['lng']) ? $responseData['results'][0]['geometry']['location']['lng'] : "";
-        $formattedAddress = isset($responseData['results'][0]['formatted_address']) ? $responseData['results'][0]['formatted_address'] : "";         
+        $formattedAddress = isset($responseData['results'][0]['formatted_address']) ? $responseData['results'][0]['formatted_address'] : "";
         //si existen todos los datos
-        if($latitude && $longitude && $formattedAddress) {         
+        if($latitude && $longitude && $formattedAddress) {
             //creo arreglo
-            $geocodeData = array();                         
+            $geocodeData = array();
             //lleno los datos
             array_push(
-                $geocodeData, 
-                $latitude, 
-                $longitude, 
+                $geocodeData,
+                $latitude,
+                $longitude,
                 $formattedAddress
-            ); 
-            //devuelvo arreglo            
-            return $geocodeData;             
+            );
+            //devuelvo arreglo
+            return $geocodeData;
         } else {
             return false;
-        }         
+        }
     } else {
         echo "ERROR: {$responseData['status']}";
         return false;

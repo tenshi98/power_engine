@@ -16,20 +16,19 @@ function preview_pdf($name, $route){
 			.pdfobject-container { height: 500px;}
 			.pdfobject { border: 1px solid #666; }
 		</style>';
-	
 
 	return $input;
 
 }/*******************************************************************************************************************/
 //permite ver un preview de los documentos
 function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
-	
+
 	/****************************************/
 	//Definicion de directorio y carpeta contenedora
 	$destination_path = '';
-	if($mainSite!=''){  $destination_path = $mainSite; }   //directorio raiz
+	if($mainSite!=''){  $destination_path  = $mainSite; }  //directorio raiz
 	if($EmpPath!=''){   $destination_path .= $EmpPath;  }  //carpeta contenedora
-	
+
 	/****************************************/
 	//se verifican las extensiones admitidas
 	if($extensions!=''){
@@ -42,16 +41,15 @@ function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 		$exten .= ',mp3,oga';                       //Audio
 		$exten .= ',mp4,webm,ogv';                  //Video
 		$exten .= ',txt';                           //texto plano
-			
 	}
-	
+
 	/****************************************/
 	//Se verifica si el archivo dado esta dentro de los permitidos
 	$path       = $destination_path.$file_path.'/'.$file;
 	$ext        = pathinfo($path, PATHINFO_EXTENSION);
 	$num_files  = glob($path.".{".$exten."}", GLOB_BRACE);
 	//$Filesize   = filesize($path);
-	
+
 	/****************************************/
 	//Si existen archivos
 	if($num_files > 0){
@@ -78,42 +76,34 @@ function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 			case 'oga':  $aplication = 'audio/ogg'; break;
 			case 'ogv':  $aplication = 'video/ogg'; break;
 			case 'txt':  $aplication = 'text/plain'; break;
-			
+
 			default:   $aplication = 'application/octet-stream';
-							
+
 		}
 
 		//header ("Content-Disposition: attachment; filename=".$file." ");
 		//header ("Content-Type: ".$aplication." ");
 		//header ("Content-Length: ".$Filesize);
 		//readfile($path);
-		
+
 		//echo $file.'<br/>';
 		//echo $aplication.'<br/>';
-		
-	
+
 		header ("Content-Disposition: attachment; filename=".$file." ");
 		header ("Content-Type: application/octet-stream");
 		header ("Content-Length: ".filesize($path));
 		readfile($path);
 
-		
+
 	}else{
 		$Alert_Text  = 'Tipo de archivo no soportado';
 		alert_post_data(4,2,2, $Alert_Text);
 	}
-	
-	
-	
-	
-
-
-	
 }
 /*******************************************************************************************************************/
 //permite ver un preview de los documentos
 function preview_docs($Root, $File, $ExtraData){
-	
+
 	/****************************************/
 	//se verifican las extensiones
 	$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
@@ -124,12 +114,12 @@ function preview_docs($Root, $File, $ExtraData){
 	$exten .= ',mp4,webm,ogv,mp2,mpeg,mpg,mov,avi'; //Video
 	$exten .= ',txt,rtf';                           //texto plano
 	$exten .= ',gz,gzip,7Z,zip,rar';                //Archivos Comprimidos
-	
+
 	/****************************************/
 	//Se verifica si el archivo dado esta dentro de los permitidos
 	$Extension  = pathinfo($File, PATHINFO_EXTENSION);
 	$num_files  = glob($File.".{".$exten."}", GLOB_BRACE);
-	
+
 	/****************************************/
 	//Se genera ruta del archivo
 	$RutaCompleta = '';
@@ -144,15 +134,15 @@ function preview_docs($Root, $File, $ExtraData){
 		iframe {width: 100%;height: 100%;padding: 0;margin: 0;}
 		iframe{float:right;height: 600px;}
 	</style>';
-	
+
 	//Si existen archivos
 	if($num_files > 0){
-		
+
 		switch($Extension){
 			/**************************************************/
 			//Si son imagenes
 			case 'JPG'; case 'jpg'; case 'jpeg'; case 'gif'; case 'png'; case 'bmp';
-				$input .= '<img src="'.$RutaCompleta.'" />';  
+				$input .= '<img src="'.$RutaCompleta.'" />';
 			break;
 			/**************************************************/
 			//Si son archivos microsoft office
@@ -176,12 +166,12 @@ function preview_docs($Root, $File, $ExtraData){
 					<div class="loading">
 						<div class="spinner"></div>
 					</div>
-					<div class="play-pause-btn">  
+					<div class="play-pause-btn">
 						<svg xmlns="https://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
 							<path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
 						</svg>
 					</div>
-					  
+
 					<div class="controls">
 						<span class="current-time">0:00</span>
 						<div class="slider" data-direction="horizontal">
@@ -191,7 +181,7 @@ function preview_docs($Root, $File, $ExtraData){
 						</div>
 						<span class="total-time">0:00</span>
 					</div>
-					  
+
 					<div class="volume">
 						<div class="volume-btn">
 							<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -206,7 +196,7 @@ function preview_docs($Root, $File, $ExtraData){
 							</div>
 						</div>
 					</div>
-					  
+
 					<audio crossorigin>
 						<source src="'.$RutaCompleta.'">
 					</audio>
@@ -217,17 +207,14 @@ function preview_docs($Root, $File, $ExtraData){
 			//Si son archivos de video
 			case 'mp4'; case 'webm'; case 'ogv';
 				$input .= '
-			
 				<link href="'.DB_SITE_REPO.'/LIBS_js/video_player/video-js.min.css" rel="stylesheet">
 				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/ie8/videojs-ie8.min.js"></script>
 				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/video.min.js"></script>
 				<style>
-				.video-js .vjs-big-play-button {
-					visibility: hidden !important;
-				}
-				
+					.video-js .vjs-big-play-button {
+						visibility: hidden !important;
+					}
 				</style>
-				
 				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/Legacy/gestion_modular/img/video-thumbnail.png" data-setup="{}">';
 					switch ($Extension) {
 						case 'mp4':
@@ -240,7 +227,7 @@ function preview_docs($Root, $File, $ExtraData){
 							$input .= '<source src="'.$RutaCompleta.'" type="video/ogg">';
 							break;
 					}
-					$input .= '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+					$input .= '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank" rel="noopener noreferrer">supports HTML5 video</a></p>
 				</video>';
 			break;
 			/**************************************************/
@@ -264,7 +251,7 @@ function preview_docs($Root, $File, $ExtraData){
 			/**************************************************/
 			//Si son mapas
 			case 'kml'; case 'kmz';
-				
+
 				/**************************************/
 				if($Extension=='kmz'){
 					//Nombre del archivo
@@ -272,9 +259,9 @@ function preview_docs($Root, $File, $ExtraData){
 
 					//Ruta dentro del servidor
 					$path = pathinfo(realpath($File), PATHINFO_DIRNAME);
-					
-					chmod($path.'/doc.kml', 0755); 
-					
+
+					chmod($path.'/doc.kml', 0755);
+
 					//Eliminar archivo antes de descomprimir
 					try {
 						/*if(!is_writable($path.'/doc.kml')){
@@ -282,10 +269,10 @@ function preview_docs($Root, $File, $ExtraData){
 						}else{*/
 							unlink($path.'/doc.kml');
 						//}
-					}catch(Exception $e) { 
+					}catch(Exception $e) {
 						//guardar el dato en un archivo log
 					}
-					
+
 					//Descomprimir
 					$zip = new ZipArchive;
 					$res = $zip->open($file_in);
@@ -295,29 +282,28 @@ function preview_docs($Root, $File, $ExtraData){
 						$zip->close();
 					} else {
 					}
-					
+
 					//indico el nombre del archivo a abrir
 					$FileUbic = 'upload/doc.kml';
-					
+
 				/**************************************/
 				}elseif($Extension=='kml'){
 					//indico el nombre del archivo a abrir
 					$FileUbic = $RutaCompleta;
 				}
-				
+
 				$input = '
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-				
+
 				<link rel="stylesheet" type="text/css"  href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-            
+
 				<div style="width: 100%; height: 500px" id="mapContainer"></div>
 
 				<script>
-					
 					function renderKML(map) {
 						//URL
 						var URL = "'.$FileUbic.'?dummy="+(new Date()).getTime();
@@ -332,14 +318,14 @@ function preview_docs($Root, $File, $ExtraData){
 								});
 							}
 							if (evt.state === H.data.AbstractReader.State.ERROR) {
-								  
-							}	
+
+							}
 						});
 
 						// Parse the document
 						reader.parse();
 					}
-					
+
 					// Initialize the platform object
 					var platform = new H.service.Platform({
 					\'apikey\': \'kAgcV1Pjxt64ufyybbLaGHuCmIHwzxZXTNoitOiAC0I\'
@@ -360,79 +346,74 @@ function preview_docs($Root, $File, $ExtraData){
 					window.addEventListener(\'resize\', () => map.getViewPort().resize());
 					var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 					var ui = H.ui.UI.createDefault(map, defaultLayers, \'es-ES\');
-					
+
 					renderKML(map);
-					
-
-function geocode(platform) {
-  var geocoder = platform.getSearchService(),
-      geocodingParameters = {
-        q: "'.$ExtraData.'"
-      };
-
-  geocoder.geocode(
-    geocodingParameters,
-    onSuccess,
-    onError
-  );
-}
-function onSuccess(result) {
-  var locations = result.items;
-  addLocationsToMap(locations);
-}
-function onError(error) {
-  alert(\'Can t reach the remote server\');
-}
-
-var bubble;
-
-function openBubble(position, text){
- if(!bubble){
-    bubble =  new H.ui.InfoBubble(
-      position,
-      {content: text});
-    ui.addBubble(bubble);
-  } else {
-    bubble.setPosition(position);
-    bubble.setContent(text);
-    bubble.open();
-  }
-}
 
 
+					function geocode(platform) {
+						var geocoder = platform.getSearchService(),
+							geocodingParameters = {
+								q: "'.$ExtraData.'"
+							};
 
+						geocoder.geocode(
+							geocodingParameters,
+							onSuccess,
+							onError
+						);
+					}
+					function onSuccess(result) {
+						var locations = result.items;
+						addLocationsToMap(locations);
+					}
+					function onError(error) {
+						alert(\'Can t reach the remote server\');
+					}
 
-function addLocationsToMap(locations){
-  var group = new  H.map.Group(),
-      position,
-      i;
+					var bubble;
 
-  // Add a marker for each location found
-  for (i = 0;  i < locations.length; i += 1) {
-    let location = locations[i];
-    marker = new H.map.Marker(location.position);
-    marker.label = location.address.label;
-    group.addObject(marker);
-  }
+					function openBubble(position, text){
+						if(!bubble){
+							bubble =  new H.ui.InfoBubble(
+							position,
+							{content: text});
+							ui.addBubble(bubble);
+						} else {
+							bubble.setPosition(position);
+							bubble.setContent(text);
+							bubble.open();
+						}
+					}
 
-  group.addEventListener(\'tap\', function (evt) {
-    map.setCenter(evt.target.getGeometry());
-    openBubble(evt.target.getGeometry(), evt.target.label);
-  }, false);
+					function addLocationsToMap(locations){
+					var group = new  H.map.Group(),
+						position,
+						i;
 
-  // Add the locations group to the map
-  //map.addObject(group);
-  map.setCenter(group.getBoundingBox().getCenter());
+					// Add a marker for each location found
+					for (i = 0;  i < locations.length; i += 1) {
+						let location = locations[i];
+						marker = new H.map.Marker(location.position);
+						marker.label = location.address.label;
+						group.addObject(marker);
+					}
 
-}
+					group.addEventListener(\'tap\', function (evt) {
+						map.setCenter(evt.target.getGeometry());
+						openBubble(evt.target.getGeometry(), evt.target.label);
+					}, false);
 
-// Now use the map as required...
-geocode(platform);
+					// Add the locations group to the map
+					//map.addObject(group);
+					map.setCenter(group.getBoundingBox().getCenter());
 
+					}
+
+					// Now use the map as required...
+					geocode(platform);
 
 				</script>';
-					
-				 
+
 			break;
 			/**************************************************/
 			//excepcion
@@ -440,7 +421,7 @@ geocode(platform);
 				$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion para los archivos '.$Extension.', para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
 			break;
 		}
-		
+
 	}else{
 		if(isset($RutaCompleta)&&$RutaCompleta!=''){
 			$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
@@ -454,8 +435,8 @@ geocode(platform);
 }
 /*******************************************************************************************************************/
 //permite ver un preview de los documentos
-function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions, $mainSite, $EmpPath){
-	
+function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainSite, $EmpPath){
+
 	/****************************************/
 	//se verifican las extensiones
 	$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
@@ -466,19 +447,17 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 	$exten .= ',mp4,webm,ogv,mp2,mpeg,mpg,mov,avi'; //Video
 	$exten .= ',txt,rtf';                           //texto plano
 	$exten .= ',gz,gzip,7Z,zip,rar';                //Archivos Comprimidos
-	
+
 	/****************************************/
 	//Definicion de directorio y carpeta contenedora
 	if($mainSite!=''){  $site     = $mainSite; }else{ $site     = DB_SITE_REPO; }    //directorio raiz
 	if($EmpPath!=''){   $emp_path = $EmpPath;  }else{ $emp_path = DB_SITE_MAIN_PATH; } //carpeta contenedora
-	
-	
+
 	/****************************************/
 	//Se verifica si el archivo dado esta dentro de los permitidos
-	$path       = $file_path.'/'.$file;
+	$path       = $file_path.'/'.$File;
 	$ext        = pathinfo($path, PATHINFO_EXTENSION);
 	$num_files  = glob($path.".{".$exten."}", GLOB_BRACE);
-	
 
 	$input = '
 	<style>
@@ -486,15 +465,15 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 		iframe {width: 100%;height: 100%;padding: 0;margin: 0;}
 		iframe{float:right;height: 600px;}
 	</style>';
-	
+
 	//Si existen archivos
 	if($num_files > 0){
-		
+
 		switch($ext){
 			/**************************************************/
 			//Si son imagenes
 			case 'JPG'; case 'jpg'; case 'jpeg'; case 'gif'; case 'png'; case 'bmp';
-				$input .= '<img src="'.$site.'/'.$emp_path.'/'.$path.'" />';  
+				$input .= '<img src="'.$site.'/'.$emp_path.'/'.$path.'" />';
 			break;
 			/**************************************************/
 			//Si son archivos microsoft office
@@ -518,12 +497,12 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 					<div class="loading">
 						<div class="spinner"></div>
 					</div>
-					<div class="play-pause-btn">  
+					<div class="play-pause-btn">
 						<svg xmlns="https://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
 							<path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
 						</svg>
 					</div>
-					  
+
 					<div class="controls">
 						<span class="current-time">0:00</span>
 						<div class="slider" data-direction="horizontal">
@@ -533,7 +512,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 						</div>
 						<span class="total-time">0:00</span>
 					</div>
-					  
+
 					<div class="volume">
 						<div class="volume-btn">
 							<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -548,7 +527,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 							</div>
 						</div>
 					</div>
-					  
+
 					<audio crossorigin>
 						<source src="'.$site.'/'.$emp_path.'/'.$path.'">
 					</audio>
@@ -559,7 +538,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 			//Si son archivos de video
 			case 'mp4'; case 'webm'; case 'ogv';
 				$input .= '
-			
+
 				<link href="'.DB_SITE_REPO.'/LIBS_js/video_player/video-js.min.css" rel="stylesheet">
 				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/ie8/videojs-ie8.min.js"></script>
 				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/video.min.js"></script>
@@ -567,9 +546,8 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 				.video-js .vjs-big-play-button {
 					visibility: hidden !important;
 				}
-				
 				</style>
-				
+
 				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/Legacy/gestion_modular/img/video-thumbnail.png" data-setup="{}">';
 					switch ($ext) {
 						case 'mp4':
@@ -582,7 +560,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 							$input .= '<source src="'.$site.'/'.$emp_path.'/'.$path.'" type="video/ogg">';
 							break;
 					}
-					$input .= '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+					$input .= '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank" rel="noopener noreferrer">supports HTML5 video</a></p>
 				</video>';
 			break;
 			/**************************************************/
@@ -603,7 +581,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 			/**************************************************/
 			//Si son mapas
 			case 'kml'; case 'kmz';
-				
+
 				// assuming file.zip is in the same directory as the executing script.
 				$file = $path;
 
@@ -621,109 +599,101 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $file, $extensions,
 					//echo "Doh! I couldn't open $file";
 				}
 
-
-				
-				
 				$input = '
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-data.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
 				<script type="text/javascript" charset="utf-8" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-				
+
 				<link rel="stylesheet" type="text/css"  href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-            
+
 				<div style="width: 100%; height: 500px" id="mapContainer"></div>
 
 				<script>
-			
-// Initialize the platform object
-var platform = new H.service.Platform({
-\'apikey\': \'kAgcV1Pjxt64ufyybbLaGHuCmIHwzxZXTNoitOiAC0I\'
-});
 
-// Obtain the default map types from the platform object
-var maptypes = platform.createDefaultLayers();
+				// Initialize the platform object
+				var platform = new H.service.Platform({
+				\'apikey\': \'kAgcV1Pjxt64ufyybbLaGHuCmIHwzxZXTNoitOiAC0I\'
+				});
 
-// Instantiate (and display) the map
-var map = new H.Map(
-document.getElementById(\'mapContainer\'),
-maptypes.raster.satellite.map,
-{
-zoom: 1,
-  pixelRatio: window.devicePixelRatio || 1
-});
+				// Obtain the default map types from the platform object
+				var maptypes = platform.createDefaultLayers();
 
-// Create reader object initializing it with a document:
-var reader = new H.data.kml.Reader(\'upload/doc.kml\');
+				// Instantiate (and display) the map
+				var map = new H.Map(
+				document.getElementById(\'mapContainer\'),
+				maptypes.raster.satellite.map,
+				{
+				zoom: 1,
+				pixelRatio: window.devicePixelRatio || 1
+				});
 
-// Parse the document:
-reader.parse();
+				// Create reader object initializing it with a document:
+				var reader = new H.data.kml.Reader(\'upload/doc.kml\');
 
-// Get KML layer from the reader object and add it to the map:
-layer = reader.getLayer();
-map.addLayer(layer);
+				// Parse the document:
+				reader.parse();
 
-
-reader.addEventListener(\'statechange\', function () {
-	// Wait till the KML document is fully loaded and parsed
-	if (this.getState() === H.data.AbstractReader.State.READY) {
-		// So lets zoom to them by default
-		//alert("listo");
-		
-	
-		var parsedObjects = reader.getParsedObjects();
-		console.log("object: " + parsedObjects[0]);
-		
-		var output = \'\';
-		for (var property in parsedObjects[0]) {
-		  output += property + \': \' + parsedObjects[0][property]+\'; \';
-		}
-		console.log(output);
-
-		
-		str = JSON.stringify(parsedObjects, null, 4); // (Optional) beautiful indented output.
-		console.log(str); // Logs output to dev tools console.
-		
-		map.setViewBounds(parsedObjects[0].getBounds());
-		alert("zoom");
-		map.setCenter(parsedObjects[0].getBounds().getCenter());
-		alert("centrar");
-		console.log(parsedObjects[0].getBounds().getCenter());	
-		alert("consola");
-							
-	}
-});
+				// Get KML layer from the reader object and add it to the map:
+				layer = reader.getLayer();
+				map.addLayer(layer);
 
 
-// KML objects receive regular map events, so add an event listener to the 
-// KML layer:
-layer.getProvider().addEventListener(\'tap\', function(ev) {
-    // Log map object data. They contain name, description (if present in 
-    // KML) and the KML node itself.
-    //console.log("target:" + ev.target.getData());
-    alert(ev.target.getData()["name"]);
-});
+				reader.addEventListener(\'statechange\', function () {
+					// Wait till the KML document is fully loaded and parsed
+					if (this.getState() === H.data.AbstractReader.State.READY) {
+						// So lets zoom to them by default
+						//alert("listo");
 
-// add a resize listener to make sure that the map occupies the whole container
-window.addEventListener(\'resize\', () => map.getViewPort().resize());
+						var parsedObjects = reader.getParsedObjects();
+						console.log("object: " + parsedObjects[0]);
+
+						var output = \'\';
+						for (var property in parsedObjects[0]) {
+						output += property + \': \' + parsedObjects[0][property]+\'; \';
+						}
+						console.log(output);
+
+						str = JSON.stringify(parsedObjects, null, 4); // (Optional) beautiful indented output.
+						console.log(str); // Logs output to dev tools console.
+
+						map.setViewBounds(parsedObjects[0].getBounds());
+						alert("zoom");
+						map.setCenter(parsedObjects[0].getBounds().getCenter());
+						alert("centrar");
+						console.log(parsedObjects[0].getBounds().getCenter());
+						alert("consola");
+
+					}
+				});
 
 
- // Get the default map types from the Platform object:
-var defaultLayers = platform.createDefaultLayers();
+				// KML objects receive regular map events, so add an event listener to the
+				// KML layer:
+				layer.getProvider().addEventListener(\'tap\', function(ev) {
+					// Log map object data. They contain name, description (if present in
+					// KML) and the KML node itself.
+					//console.log("target:" + ev.target.getData());
+					alert(ev.target.getData()["name"]);
+				});
 
-var ui = H.ui.UI.createDefault(map, defaultLayers, \'es-ES\');
+				// add a resize listener to make sure that the map occupies the whole container
+				window.addEventListener(\'resize\', () => map.getViewPort().resize());
 
-var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+				// Get the default map types from the Platform object:
+				var defaultLayers = platform.createDefaultLayers();
+
+				var ui = H.ui.UI.createDefault(map, defaultLayers, \'es-ES\');
+
+				var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 
-//map.setCenter(LocationOfMarker);
+				//map.setCenter(LocationOfMarker);
 
-</script>
-				
-				';
-					
-				 
+			</script>';
+
 			break;
 			/**************************************************/
 			//excepcion
@@ -731,7 +701,7 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 				$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion para los archivos '.$ext.', para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 			break;
 		}
-		
+
 	}else{
 		if(isset($file_path)&&$file_path!=''&&isset($file)&&$file!=''){
 			$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
@@ -746,18 +716,18 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 /*******************************************************************************************************************/
 //Muestra las imagenes animadas
 function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccion){
-	
+
 	//cadena
 	$widget = '';
-	//se identifica el tipo de imagen								  
+	//se identifica el tipo de imagen
 	switch ($tipoImagen) {
 		//Si no esta configurada
 		case 0:
-			$widget .= '<img src="'.$content_folder.'/'.$direccion.'" style="margin-top:10px;" class="media-object img-thumbnail user-img width100" alt="User Picture"  >';
+			$widget .= '<img src="'.$content_folder.'/'.$direccion.'" style="margin-top:10px;" class="media-object img-thumbnail user-img width100" alt="Imagen Referencia"  >';
 			break;
 		//Normal
 		case 1:
-			$widget .= '<img src="'.$content_folder.'/'.$direccion.'" style="margin-top:10px;" class="media-object img-thumbnail user-img width100" alt="User Picture"  >';
+			$widget .= '<img src="'.$content_folder.'/'.$direccion.'" style="margin-top:10px;" class="media-object img-thumbnail user-img width100" alt="Imagen Referencia"  >';
 			break;
 		//Tambor
 		case 2:
@@ -873,7 +843,7 @@ function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccio
 /*******************************************************************************************************************/
 //Muestra el cuadro de dialogo
 function widget_avgrund(){
-	require_once '../LIBS_js/avgrund/avgrund.php';							  	
+	require_once '../LIBS_js/avgrund/avgrund.php';
 }
 /*******************************************************************************************************************/
 //Muestra un explorador de archivos personalizado
@@ -885,12 +855,12 @@ function file_explorer($type, $conector, $emp_path, $id_emp, $prm){
 			.iframe_elfinder{height: 700px;}
 			iframe{float:right;width: 100%;height: 100%;padding: 0;margin: 0;border:none;}
 		</style>
-			
+
 		<div class="iframe_elfinder">
 			<iframe class="embed-responsive-item" src="'.DB_SITE_REPO.'/LIBS_js/elFinder/index.php?type='.$type.'&conector='.$conector.'&emp_path='.$emp_path.'&id_emp='.$id_emp.'&prm='.$prm.'" allowfullscreen></iframe>
 		</div>';
-		
-	//Imprimir dato	
+
+	//Imprimir dato
 	return $input;
 }
 /*******************************************************************************************************************/
@@ -902,22 +872,21 @@ function widget_modal($width, $height){
 			//Examples of how to assign the Colorbox event to elements
 			$(\".iframe\").colorbox({iframe:true, width:\"".$width."%\", height:\"".$height."%\"});
 			$(\".callbacks\").colorbox({
-				onOpen:function(){ alert('onOpen: colorbox is about to open'); },
-				onLoad:function(){ alert('onLoad: colorbox has started to load the targeted content'); },
-				onComplete:function(){ alert('onComplete: colorbox has displayed the loaded content'); },
-				onCleanup:function(){ alert('onCleanup: colorbox has begun the close process'); },
-				onClosed:function(){ alert('onClosed: colorbox has completely closed'); }
+				onOpen:function(){ alert('onOpen: colorbox is about to open');},
+				onLoad:function(){ alert('onLoad: colorbox has started to load the targeted content');},
+				onComplete:function(){ alert('onComplete: colorbox has displayed the loaded content');},
+				onCleanup:function(){ alert('onCleanup: colorbox has begun the close process');},
+				onClosed:function(){ alert('onClosed: colorbox has completely closed');}
 			});
 
-					
 			//Example of preserving a JavaScript event for inline calls.
-			$(\"#click\").click(function(){ 
+			$(\"#click\").click(function(){
 				$('#click').css({\"background-color\":\"#f00\", \"color\":\"#fff\", \"cursor\":\"inherit\"}).text(\"Open this window again and this message will still be here.\");
 				return false;
 			});
 		});
 	</script>
-	";							  	
+	";
 }
 /*******************************************************************************************************************/
 //Muestra un explorador de archivos personalizado
@@ -930,38 +899,38 @@ function widget_rainloop($id, $extra){
 				<iframe id="'.$id.'" style="width: 100%;height: 100vh;" src="'.DB_SITE_REPO.'/LIBS_js/rainloop/'.$extra.'" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
-			
+
 		<script>
 			$(function () {
-				document.getElementById(\''.$id.'\').style.height = \'calc(100vh - \' + ($(\'#myIframe\').offset().top + 25) + \'px)\';            
+				document.getElementById(\''.$id.'\').style.height = \'calc(100vh - \' + ($(\'#myIframe\').offset().top + 25) + \'px)\';
 			});
 		</script>';
-		
-	//Imprimir dato	
+
+	//Imprimir dato
 	return $widget;
 }
 /*******************************************************************************************************************/
 //Muestra la Burbuja de ayuda
 function widget_tooltipster(){
-	require_once '../LIBS_js/tooltipster/tooltipster.php';							  	
+	require_once '../LIBS_js/tooltipster/tooltipster.php';
 }
 /*******************************************************************************************************************/
 //Ejecuta el validador de formularios
 function widget_validator(){
-	require_once '../LIBS_js/validator/form_validator.php';						  	
+	require_once '../LIBS_js/validator/form_validator.php';
 }
 /*******************************************************************************************************************/
 //se muestra informacion como planilla excel
 function widget_excel($identificador, $tabla, $extraconfig){
-	
+
 	//generacion del widget
 	$widget = '
 		<link href="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.min.css" rel="stylesheet" />
 		<script src="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.toolbar.min.js"></script>
 		<script src="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.js"></script>
-						
+
 		<div id="'.$identificador.'"></div>
-		
+
 		<script>
 			var tipsData = ['.$tabla.'];
 			var pivot = new WebDataRocks({
@@ -980,9 +949,9 @@ function widget_excel($identificador, $tabla, $extraconfig){
 			});
 		</script>
 		';
-		
-	//Imprimir dato	
-	return $widget;					  	
+
+	//Imprimir dato
+	return $widget;
 }
 /*******************************************************************************************************************/
 //se muestra el buscador dentro de una tabla
@@ -992,11 +961,10 @@ function widget_sherlock($type, $colspan, $idTable){
 		case 1: $html_obj = 'th'; break;
 		case 2: $html_obj = 'td'; break;
 	}
-	
+
 	//variables internas
-	$random_int = rand(1, 999);
-	$InputName  = 'InputTableFilter_'.$random_int;
-			
+	$InputName  = 'InputTableFilter_'. rand(1, 999);
+
 	//generacion del widget
 	$widget = '
 	<tr role="row">
@@ -1013,9 +981,9 @@ function widget_sherlock($type, $colspan, $idTable){
 		});
 	</script>
 	';
-	
-	//Imprimir dato	
-	return $widget;				  	
+
+	//Imprimir dato
+	return $widget;
 }
 /*******************************************************************************************************************/
 //se muestra el buscador dentro de una tabla
@@ -1026,14 +994,14 @@ function widget_table_filter($id_table){
 	<script src="'.DB_SITE_REPO.'/LIBS_js/Dropdown_Table_Filter/ddtf.js"></script>
 	<script>jQuery(\'#'.$id_table.'\').ddTableFilter();</script>
 	';
-	
-	//Imprimir dato	
-	return $widget;				  	
+
+	//Imprimir dato
+	return $widget;
 }
 /*******************************************************************************************************************/
 //se muestra el visualizador de codigo fuente
 function widget_code_block($type, $code){
-	
+
 	/********************************************************/
 	//Definicion de errores
 	$errorn = 0;
@@ -1048,74 +1016,22 @@ function widget_code_block($type, $code){
 	//Ejecucion si no hay errores
 	if($errorn==0){
 		switch ($type) {
-			//HTML Code Example
-			case 1:
-				$tittle = 'Codigo HTML';
-				$class  = 'language-markup';
-				break;
-			//CSS Code Example
-			case 2:
-				$tittle = 'Codigo CSS';
-				$class  = 'language-css';
-				break;
-			//JavaScript Code Example
-			case 3:
-				$tittle = 'Codigo JavaScript';
-				$class  = 'language-javascript';
-				break;
-			//Python Code Example
-			case 4:
-				$tittle = 'Codigo Python';
-				$class  = 'language-python';
-				break;
-			//PHP Code Example
-			case 5:
-				$tittle = 'Codigo PHP';
-				$class  = 'language-php';
-				break;
-			//Handlebars Code Example
-			case 6:
-				$tittle = 'Codigo Handlebars';
-				$class  = 'language-handlebars';
-				break;
-			//Git Code Example
-			case 7:
-				$tittle = 'Codigo Git';
-				$class  = 'language-git';
-				break;
-			//JAVA Code Example
-			case 8:
-				$tittle = 'Codigo Java';
-				$class  = 'language-java';
-				break;
-			//C Like Code Example
-			case 9:
-				$tittle = 'Codigo C Like';
-				$class  = 'language-clike';
-				break;
-			//C Code Example
-			case 10:
-				$tittle = 'Codigo C';
-				$class  = 'language-c';
-				break;
-			//CSharp Code Example
-			case 11:
-				$tittle = 'Codigo CSharp';
-				$class  = 'language-csharp';
-				break;
-			//SQL Code Example
-			case 12:
-				$tittle = 'Codigo SQL';
-				$class  = 'language-sql';
-				break;
-			//PLSQL Code Example
-			case 13:
-				$tittle = 'Codigo PLSQL';
-				$class  = 'language-plsql';
-				break;	
+			case 1:  $tittle = 'Codigo HTML';       $class  = 'language-markup';     break;//HTML Code Example
+			case 2:  $tittle = 'Codigo CSS';        $class  = 'language-css';        break;//CSS Code Example
+			case 3:  $tittle = 'Codigo JavaScript'; $class  = 'language-javascript'; break;//JavaScript Code Example
+			case 4:  $tittle = 'Codigo Python';     $class  = 'language-python';     break;//Python Code Example
+			case 5:  $tittle = 'Codigo PHP';        $class  = 'language-php';        break;//PHP Code Example
+			case 6:  $tittle = 'Codigo Handlebars'; $class  = 'language-handlebars'; break;//Handlebars Code Example
+			case 7:  $tittle = 'Codigo Git';        $class  = 'language-git';        break;//Git Code Example
+			case 8:  $tittle = 'Codigo Java';       $class  = 'language-java';       break;//JAVA Code Example
+			case 9:  $tittle = 'Codigo C Like';     $class  = 'language-clike';      break;//C Like Code Example
+			case 10: $tittle = 'Codigo C';          $class  = 'language-c';          break;//C Code Example
+			case 11: $tittle = 'Codigo CSharp';     $class  = 'language-csharp';     break;//CSharp Code Example
+			case 12: $tittle = 'Codigo SQL';        $class  = 'language-sql';        break;//SQL Code Example
+			case 13: $tittle = 'Codigo PLSQL';      $class  = 'language-plsql';      break;//PLSQL Code Example
 		}
 		//Limpieza
-		$code = str_replace('<','&lt;',$code);	
+		$code = str_replace('<','&lt;',$code);
 		$code = str_replace('>','&gt;',$code);
 		$code = str_replace('"','&quot;',$code);
 		$widget = '
@@ -1124,16 +1040,16 @@ function widget_code_block($type, $code){
 			<pre style="padding-top: 0px;"><code class="'.$class.'">'.$code.'</code></pre>
 		</div>
 		';
-		
-		//Imprimir dato	
-		return $widget;	
-		
-	}		
+
+		//Imprimir dato
+		return $widget;
+
+	}
 }
 /*******************************************************************************************************************/
 //Muestra un explorador de archivos personalizado
 function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
-	
+
 	//opciones de configuracion
 	$opciones  = 'FeedUrl: \''.$URL.'\'';                //URL de los datos
 	$opciones .= ',MaxCount: '.$MaxCount;                //cantidad de post a mostrar
@@ -1141,14 +1057,13 @@ function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
 	$opciones .= ',ShowPubDate: '.$ShowPubDate;          //mostrar fecha de publicacion (true-false)
 	//$opciones .= ',DescCharacterLimit: '.$DescCharLimit; //limitar caracteres
 	$opciones .= ',imgDirection: "'.DB_SITE_REPO.'/LIB_assets/img/loader.gif"';          //Direccion del loader
-	
-	
+
 	//despliegue
 	$input = '
 	<link href="'.DB_SITE_REPO.'/LIBS_js/atom_feed/css/FeedEk.css" rel="stylesheet" type="text/css" />
-	
+
 	<div id="divRss" style="height:'.$height.'px;overflow:auto;"></div>
-	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/atom_feed/js/FeedEk.js?v2"></script>
 	<script type="text/javascript">
@@ -1159,29 +1074,23 @@ function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
 		});
 	</script>
 	';
-	
-	
 
-
-
-
-		
-	//Imprimir dato	
+	//Imprimir dato
 	return $input;
 }
 /*******************************************************************************************************************/
 //Muestra los ultimos temblores
 function widget_sismologia(){
-	
+
 	//Se da permiso para el acceso remoto
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
-	if( ini_get('allow_url_fopen') ) {
-		
+	if( ini_get('allow_url_fopen')){
+
 		try {
 			//Obtengo los datos
 			$sismologia = file_get_contents('http://www.sismologia.cl/ultimos_sismos.html');
-			
+
 			//modifico el html obtenido
 			$sismologia = str_replace('<!DOCTYPE html>','', $sismologia);
 			$sismologia = str_replace('<html>','', $sismologia);
@@ -1241,7 +1150,7 @@ function widget_sismologia(){
 			$sismologia = str_replace('<a href="mailto:contacto@csn.uchile.cl">contacto@csn.uchile.cl</a>','', $sismologia);
 			$sismologia = str_replace('</p><!--class="datos"-->','', $sismologia);
 			$sismologia = str_replace('<p class="rs">Síguenos en:','', $sismologia);
-			$sismologia = str_replace('<a href="http://www.twitter.com/sismos_csn" target="_blank"><span class="tt" id="none"></span></a>','', $sismologia);
+			$sismologia = str_replace('<a href="http://www.twitter.com/sismos_csn" target="_blank" rel="noopener noreferrer"><span class="tt" id="none"></span></a>','', $sismologia);
 			$sismologia = str_replace('<a href="https://www.facebook.com/pages/Centro-Sismol%C3%B3gico-Nacional-Universidad-de-Chile/195079254010666"><span class="fb" id="none"></span></a>','', $sismologia);
 			$sismologia = str_replace('</div><!--class="footer"-->','', $sismologia);
 			$sismologia = str_replace('</div><!--id="footer-container"-->','', $sismologia);
@@ -1251,7 +1160,7 @@ function widget_sismologia(){
 			$sismologia = str_replace('<br />','', $sismologia);
 			$sismologia = str_replace('</p>','', $sismologia);
 			$sismologia = str_replace('<a href="/', '<a target="_blank" rel="noopener noreferrer" href="http://www.sismologia.cl/', $sismologia);
-			
+
 			//genero cuerpo
 			$s_body = '
 				<div class="box">
@@ -1260,37 +1169,35 @@ function widget_sismologia(){
 					</header>
 					<div class="external_page">
 						'.$sismologia.'
-					</div> 
+					</div>
 				</div>';
-			
-			//devuelvo cuerpo								
-			return $s_body;	
+
+			//devuelvo cuerpo
+			return $s_body;
 		} catch (Exception $e) {
 			//echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 			return alert_post_data(4,1,1, 'No se obtuvieron datos');
 		}
-		
-		
+
 	//si no fue concedido
 	} else {
 		return alert_post_data(4,1,1, 'La funcion allow_url_fopen no esta activa');
 	}
-														
-								
+
 }
 /*******************************************************************************************************************/
 //Muestra los dias feriados del año
 function widget_feriados(){
-	
+
 	//Se da permiso para el acceso remoto
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
-	if( ini_get('allow_url_fopen') ) {
-		
+	if( ini_get('allow_url_fopen')){
+
 		try {
 			//Obtengo los datos
 			$feriado = file_get_contents('https://www.feriados.cl/');
-			
+
 			//modifico el html obtenido
 			$feriado = str_replace('<!DOCTYPE html>','', $feriado);
 			$feriado = str_replace('<html lang="es">','', $feriado);
@@ -1371,7 +1278,7 @@ function widget_feriados(){
 			$feriado = str_replace('<p style="padding: 0px 6px 0px 6px;">En Feriados de Chile creemos que la familia y comunidad son la base de la sociedad,','', $feriado);
 			$feriado = str_replace('y que cada momento que pasan juntas, contribuye a una sociedad más fuerte. Nosotros te contamos cuándo es feriado, para que','', $feriado);
 			$feriado = str_replace('disfrutes junto a los tuyos. Fuente de información:','', $feriado);
-			$feriado = str_replace('<a class="navblack" style="font-weight: normal;" href="https://www.bcn.cl/" target="_blank">Biblioteca Congreso Nacional</a>.</p>','', $feriado);
+			$feriado = str_replace('<a class="navblack" style="font-weight: normal;" href="https://www.bcn.cl/" target="_blank" rel="noopener noreferrer">Biblioteca Congreso Nacional</a>.</p>','', $feriado);
 			$feriado = str_replace('<p><span style=" color: #004080; font-weight: bold;">Otros sitios </span></p>','', $feriado);
 			$feriado = str_replace('<p>','', $feriado);
 			$feriado = str_replace('</p>','', $feriado);
@@ -1389,7 +1296,7 @@ function widget_feriados(){
 			$feriado = str_replace('<div id="sobre">','', $feriado);
 			$feriado = str_replace('<br>','', $feriado);
 			$feriado = str_replace('<tr style="background-color:#004080;">','<tr style="background-color:#cbced0;">', $feriado);
-			
+
 			//genero cuerpo
 			$s_body = '
 				<div class="box">
@@ -1398,21 +1305,21 @@ function widget_feriados(){
 					</header>
 					<div class="external_page">
 						'.$feriado.'
-					</div> 
+					</div>
 				</div>';
-			
-			//devuelvo cuerpo								
+
+			//devuelvo cuerpo
 			return $s_body;
 		} catch (Exception $e) {
 			//echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 			return alert_post_data(4,1,1, 'No se obtuvieron datos');
 		}
-		
+
 	//si no fue concedido
 	} else {
 		return alert_post_data(4,1,1, 'La funcion allow_url_fopen no esta activa');
 	}
-	
+
 }
 /*******************************************************************************************************************/
 //Muestra los dias feriados del año
@@ -1543,10 +1450,10 @@ function widget_radio_player(){
 	$arr[] = array('https://mdstrm.com/audio/5d013e4bc8a64d0da420ced6/live.m3u8',                                                '63579.v10.png',        'Súbela Radio');
 	$arr[] = array('https://cp.streamchileno.cl/radio/8130/radio.mp3',                                                           '3251.v6.png',          'Radio Pinamar');
 
-	
-	//Hoja de estilo		
+
+	//Hoja de estilo
 	$input ='<link rel="stylesheet prefetch" href="'.DB_SITE_REPO.'/LIBS_js/mejs-player-master/build/mediaelementplayer.css">';
-	
+
 	//se crea widget
 	$input .='
 	<div id="main-wrapper">
@@ -1555,9 +1462,9 @@ function widget_radio_player(){
 			<audio id="audio" class="mejs__player" controls="controls" src="">
 				Your browser does not support the audio format.
 			</audio>
-			
+
 			<ul class="playlist custom-counter" id="list">';
-				
+
 				foreach ($arr as $prod) {
 					$input .='
 					<li>
@@ -1567,16 +1474,15 @@ function widget_radio_player(){
 						</div>
 					</li>';
 				}
-				
-				
-			$input .='	
+
+			$input .='
 			</ul>
-		 
+
 		</div>
 	</div>';
-	
+
 	//script
-	$input .='<script src="'.DB_SITE_REPO.'/LIBS_js/mejs-player-master/build/mediaelement-and-player.js"></script>';		
+	$input .='<script src="'.DB_SITE_REPO.'/LIBS_js/mejs-player-master/build/mediaelement-and-player.js"></script>';
 	$input .='
 	<script >
 		// Dynamic URL change
@@ -1593,7 +1499,7 @@ function widget_radio_player(){
 		  audio.play(); //call this to play the song right away
 		};
 	 </script>';
-	
+
 	$input .='<style>
 		/* Radio Player */
 		#main-wrapper{padding:30px 0;}
@@ -1611,7 +1517,7 @@ function widget_radio_player(){
 		.mejs__button > button  {display: block;padding: 0;border: 0;font-family: FontAwesome;font-size: 20px;color: #444;background: transparent!important;}
 		.mejs__button.mejs__playpause-button.mejs__play button:before {content: "\f04b";color:#fff;}
 		.mejs__button.mejs__playpause-button.mejs__pause button:before {content: "\f04c";color:#fff;}
-		.mejs__button.mejs__playpause-button.mejs__replay button:before {content: "\f01e";color:#fff;} 
+		.mejs__button.mejs__playpause-button.mejs__replay button:before {content: "\f01e";color:#fff;}
 		.mejs__button.mejs__volume-button.mejs__mute button:before {content: "\f028";}
 		.mejs__button.mejs__volume-button.mejs__unmute button:before {content: "\f026";}
 		.mejs__container {font-family: Segui Ui,Arial,serif;background-size: cover;position: relative;background:#fff;text-align: left;text-indent: 0;vertical-align: top;height: 80px!important;width: 100%!important;}
@@ -1622,10 +1528,10 @@ function widget_radio_player(){
 		.mejs__time-handle-content {border: 4px solid rgba(255, 255, 255, 0.9);border-radius: 0;height: 10px;left: -5px;top: -4px;-webkit-transform: scale(0);-ms-transform: scale(0);transform: scale(0);width: 1px;}
 		.mejs__horizontal-volume-total {background: rgb(41, 207, 84);height: 10px;top:14px;border-radius:0;}
 	</style>';
-	
-	//devuelvo cuerpo								
+
+	//devuelvo cuerpo
 	return $input;
-  
+
 }
 /*******************************************************************************************************************/
 

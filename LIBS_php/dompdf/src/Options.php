@@ -142,7 +142,7 @@ class Options
      * Enable embedded PHP
      *
      * If this setting is set to true then DOMPDF will automatically evaluate
-     * embedded PHP contained within <script type="text/php"> ... </script> tags.
+     * embedded PHP contained within <script type="text/php"> ... </script>tags.
      *
      * ==== IMPORTANT ====
      * Enabling this for documents you do not trust (e.g. arbitrary remote html
@@ -185,7 +185,7 @@ class Options
      * Enable inline Javascript
      *
      * If this setting is set to true then DOMPDF will automatically insert
-     * JavaScript code contained within <script type="text/javascript"> ... </script> tags.
+     * JavaScript code contained within <script type="text/javascript"> ... </script>tags.
      *
      * @var bool
      */

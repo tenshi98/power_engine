@@ -174,7 +174,7 @@ class nusoap_xmlschema extends nusoap_base  {
 	* @access   private
 	*/
 	function schemaStartElement($parser, $name, $attrs) {
-		
+
 		// position in the total number of elements, starting from 0
 		$pos = $this->position++;
 		$depth = $this->depth++;

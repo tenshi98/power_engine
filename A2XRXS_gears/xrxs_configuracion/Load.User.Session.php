@@ -16,7 +16,7 @@ mysqli_query($dbConn, "SET SESSION sql_mode = ''");
 
 /***************************************************************/
 //Se revisa siel usuario cerro voluntariamente la sesion
-if ( !empty($_GET['salir']) ) {
+if (!empty($_GET['salir'])){
 	//Se borra todos los datos relacionados a las sesiones
 	session_unset();
 	session_destroy();
@@ -27,9 +27,9 @@ if ( !empty($_GET['salir']) ) {
 
 /***************************************************************/
 //Se verifica si el usuario esta conectado
-if ( !empty( $_SESSION['usuario'] ) ) {
-	
-//en caso de que no sea ninguno de los anteriores			
+if (!empty( $_SESSION['usuario'] )&&(isset($_SESSION['usuario']['basic_data']['password'])&&$_SESSION['usuario']['basic_data']['password']!='')){
+
+//en caso de que no sea ninguno de los anteriores
 }else{
 	//Se borra todos los datos relacionados a las sesiones
 	session_unset();
@@ -49,7 +49,5 @@ if ( !empty( $_SESSION['usuario'] ) ) {
 	header( 'Location: index.php' );
 	die;
 }*/
-
-
 
 ?>

@@ -613,7 +613,7 @@ class TCPDF_FONTS {
 									$c = $i;
 									$g = $glyphIndexArray[0];
 									$ctg[$c] = $g;
-								} else {
+								}else {
 									// two bytes code
 									$start_byte = $subHeaders[$k]['firstCode'];
 									$end_byte = $start_byte + $subHeaders[$k]['entryCount'];
@@ -669,7 +669,7 @@ class TCPDF_FONTS {
 								for ($c = $startCount[$k]; $c <= $endCount[$k]; ++$c) {
 									if ($idRangeOffset[$k] == 0) {
 										$g = ($idDelta[$k] + $c) % 65536;
-									} else {
+									}else {
 										$gid = (floor($idRangeOffset[$k] / 2) + ($c - $startCount[$k]) - ($segCount - $k));
 										$g = ($glyphIdArray[$gid] + $idDelta[$k]) % 65536;
 									}
@@ -714,7 +714,7 @@ class TCPDF_FONTS {
 									$is32idx = floor($c / 8);
 									if ((isset($is32[$is32idx])) AND (($is32[$is32idx] & (1 << (7 - ($c % 8)))) == 0)) {
 										$c = $k;
-									} else {
+									}else {
 										// 32 bit format
 										// convert to decimal (http://www.unicode.org/faq//utf_bom.html#utf16-4)
 										//LEAD_OFFSET = (0xD800 - (0x10000 >> 10)) = 55232
@@ -1139,7 +1139,7 @@ class TCPDF_FONTS {
 							if (isset($subsetchars[$c])) {
 								if ($idRangeOffset[$k] == 0) {
 									$g = ($idDelta[$k] + $c) % 65536;
-								} else {
+								}else {
 									$gid = (floor($idRangeOffset[$k] / 2) + ($c - $startCount[$k]) - ($segCount - $k));
 									$g = ($glyphIdArray[$gid] + $idDelta[$k]) % 65536;
 								}
@@ -1149,7 +1149,7 @@ class TCPDF_FONTS {
 								$subsetglyphs[$g] = true;
 							}
 						}
-					}	
+					}
 					break;
 				}
 				case 6: { // Format 6: Trimmed table mapping
@@ -1743,7 +1743,7 @@ class TCPDF_FONTS {
 	 * @public static
 	 */
 	public static function arrUTF8ToUTF16BE($unicode, $setbom=false) {
-		$outstr = ''; // string to be returned
+		$outstr = '';// string to be returned
 		if ($setbom) {
 			$outstr .= "\xFE\xFF"; // Byte Order Mark (BOM)
 		}
@@ -1863,7 +1863,7 @@ class TCPDF_FONTS {
 	 * @public static
 	 */
 	public static function UTF8ArrToLatin1($unicode) {
-		$outstr = ''; // string to be returned
+		$outstr = '';// string to be returned
 		foreach ($unicode as $char) {
 			if ($char < 256) {
 				$outstr .= chr($char);

@@ -8,21 +8,21 @@ if( ! defined('XMBCXRXSKGC')) {
 /*******************************************************************************************************************/
 //Despliega un mapa en base a los datos entregados
 function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $IDGoogle, $zoom_map, $MapTypeId){
-	
+
 	//Si no existe una ID se envia mensaje
-	if(!isset($IDGoogle) OR $IDGoogle==''){	
-		$mapa  = '<div class="col-sm-12" style="margin-top:10px;">';
+	if(!isset($IDGoogle) OR $IDGoogle==''){
+		$mapa  = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">';
 		$mapa .= alert_post_data(4,1,1, 'No ha ingresado Una API de Google Maps.');
 		$mapa .= '</div>';
 	}else{
 		$google = $IDGoogle;
-		
+
 		//Si no existe el titulo
 		if(!isset($Titulo) OR $Titulo==''){       $S_titulo    = 'Sin Titulo';    }else{ $S_titulo    = $Titulo;}
 		//Si no existe el subtitulo
-		if(!isset($SubTitulo) OR $SubTitulo==''){ $S_Subtitulo = 'Sin SubTitulo'; }else{ $S_Subtitulo = $SubTitulo;}
+		if(!isset($SubTitulo) OR $SubTitulo==''){ $S_Subtitulo = 'Sin SubTitulo';}else{ $S_Subtitulo = $SubTitulo;}
 		//Si no existe el titulo
-		if(!isset($Contenido) OR $Contenido==''){ $S_contenido = 'Sin Contenido'; }else{ $S_contenido = $Contenido;}
+		if(!isset($Contenido) OR $Contenido==''){ $S_contenido = 'Sin Contenido';}else{ $S_contenido = $Contenido;}
 		//Si no existe zoom de mapa
 		if(!isset($zoom_map) OR $zoom_map=='' OR $zoom_map==0){ $int_map = 18; }else{ $int_map = $zoom_map;}
 		//si no existe un tipo de mapa
@@ -36,8 +36,7 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 				case 4: $int_map_type = 'TERRAIN';   break;//muestra un mapa físico basado en la información del terreno.
 			}
 		}
-		
-	
+
 		$mapa = '
 			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key='.$google.'&sensor=false"></script>
 			<script type="text/javascript">
@@ -50,8 +49,7 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 						mapTypeId: google.maps.MapTypeId.'.$int_map_type.'
 					}
 					var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-					
-					
+
 					// marker position
 					var factory = new google.maps.LatLng('.$Latitud.', '.$Longitud.');
 
@@ -70,7 +68,7 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 						content: content,
 						maxWidth: 350
 					});
-							   
+
 					// marker options
 					var marker = new google.maps.Marker({
 						position	: factory,
@@ -142,48 +140,41 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 							$(this).css({opacity: \'1\'});
 						});
 					});
-							
+
 					//muestro la infowindow al inicio
 					infowindow.open(map,marker);
-							
-					
-				}  
+
+				}
 			</script>
 			<div id="map_canvas" style="width:100%; height:500px">
 				<script type="text/javascript">initialize();</script>
 			</div>
-		';	
-		
+		';
+
 	}
-	
-	
 
 	return $mapa;
 }
 /*******************************************************************************************************************/
 //Despliega un mapa en base a los datos entregados
-function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $MapTypeId){	
-	
+function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $MapTypeId){
+
 	//Si no existe una ID se envia mensaje
 	if(!isset($IDGoogle) OR $IDGoogle==''){
-		$mapa  = '<div class="col-sm-12" style="margin-top:10px;">';
+		$mapa  = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">';
 		$mapa .= alert_post_data(4,1,1, 'No ha ingresado Una API de Google Maps.');
 		$mapa .= '</div>';
 	}else{
-		
+
 		//Se limpian los nombres
 		$Ubicacion = str_replace('Nº', '', $Ubicacion);
 		$Ubicacion = str_replace('nº', '', $Ubicacion);
 		$Ubicacion = str_replace(' n ', '', $Ubicacion);
-		
 		$Ubicacion = str_replace("'", '', $Ubicacion);
-		
 		$Ubicacion = str_replace("Av.", 'Avenida', $Ubicacion);
 		$Ubicacion = str_replace("av.", 'Avenida', $Ubicacion);
-		
 		$google = $IDGoogle;
-		
-		
+
 		//Verifico si lleva datos extras
 		if(isset($explanation)&&$explanation!=''&&$explanation!=0){ $datasig = $explanation; }else{$datasig = $Ubicacion; }
 		//Si no existe zoom de mapa
@@ -208,9 +199,9 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 				var geocoder = new google.maps.Geocoder();
 				var map;
 				var myLatlng = new google.maps.LatLng(-33.4372, -70.6506);
-				
+
 				var _infoBox;
-						
+
 				function initialize() {
 
 					var mapOptions = {
@@ -223,10 +214,10 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 				}
 
 				function codeAddress() {
-						  
+
 					geocoder.geocode( { \'address\': \''.$Ubicacion.'\'}, function(results, status) {
 						if (status == google.maps.GeocoderStatus.OK) {
-							
+
 							// marker position
 							var factory = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 
@@ -245,7 +236,7 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 								content: content,
 								maxWidth: 350
 							});
-							   
+
 							// marker options
 							var marker = new google.maps.Marker({
 								position	: factory,
@@ -317,17 +308,16 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 									$(this).css({opacity: \'1\'});
 								});
 							});
-							
+
 							//muestro la infowindow al inicio
 							infowindow.open(map,marker);
 
-											  
+
 						} else {
 							alert(\'Geocode was not successful for the following reason: \' + status);
 						}
 					});
 				}
-				
 
 			</script>
 			<div id="map_canvas" style="width:100%; height:500px">
@@ -339,11 +329,11 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 }
 /*******************************************************************************************************************/
 //Despliega un mapa en base a los datos entregados
-function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $explanation_2, $IDGoogle, $identificador){	
-	
+function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $explanation_2, $IDGoogle, $identificador){
+
 	//Si no existe una ID se envia mensaje
 	if(!isset($IDGoogle) OR $IDGoogle==''){
-		$mapa  = '<div class="col-sm-12" style="margin-top:10px;">';
+		$mapa  = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">';
 		$mapa .= alert_post_data(4,1,1, 'No ha ingresado Una API de Google Maps.');
 		$mapa .= '</div>';
 	}else{
@@ -351,25 +341,19 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 		$Ubicacion_1 = str_replace('Nº', '', $Ubicacion_1);
 		$Ubicacion_1 = str_replace('nº', '', $Ubicacion_1);
 		$Ubicacion_1 = str_replace(' n ', '', $Ubicacion_1);
-		
 		$Ubicacion_1 = str_replace("'", '', $Ubicacion_1);
-		
 		$Ubicacion_1 = str_replace("Av.", 'Avenida', $Ubicacion_1);
 		$Ubicacion_1 = str_replace("av.", 'Avenida', $Ubicacion_1);
 		/****/
 		$Ubicacion_2 = str_replace('Nº', '', $Ubicacion_2);
 		$Ubicacion_2 = str_replace('nº', '', $Ubicacion_2);
 		$Ubicacion_2 = str_replace(' n ', '', $Ubicacion_2);
-		
 		$Ubicacion_2 = str_replace("'", '', $Ubicacion_2);
-		
 		$Ubicacion_2 = str_replace("Av.", 'Avenida', $Ubicacion_2);
 		$Ubicacion_2 = str_replace("av.", 'Avenida', $Ubicacion_2);
-		
-		
+
 		$google = $IDGoogle;
-		
-		
+
 		//Verifico si lleva datos extras
 		if(isset($explanation_1)&&$explanation_1!=''&&$explanation_1!=0){
 			$datasig_1 = $explanation_1;
@@ -391,9 +375,9 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 
 		var geocoder;
 		var map_'.$identificador.';
-		
+
 		var myLatlng = new google.maps.LatLng(-33.4372, -70.6506);
-		
+
 		function initialize_'.$identificador.'() {
 		  geocoder = new google.maps.Geocoder();
 		  var mapOptions = {
@@ -405,10 +389,10 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 
 		function codeAddress_'.$identificador.'() {
 			bounds  = new google.maps.LatLngBounds();
-			
+
 			geocoder.geocode( { \'address\': \''.$Ubicacion_1.'\'}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
-					
+
 					// marker position
 					var factory_1 = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 
@@ -427,7 +411,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 						content: content,
 						maxWidth: 350
 					});
-						   
+
 					// marker options
 					var marker_1 = new google.maps.Marker({
 						position	: factory_1,
@@ -499,12 +483,10 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 							$(this).css({opacity: \'1\'});
 						});
 					});
-						
+
 					//muestro la infowindow al inicio
 					infowindow.open(map_'.$identificador.',marker_1);
-						
-						
-						
+
 					/*var marker_1 = new google.maps.Marker({
 								  position:  new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
 								  map: map_'.$identificador.',
@@ -518,19 +500,18 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 						infowindow.open(map_'.$identificador.', marker_1);
 					});
 					infowindow.open(map_'.$identificador.', marker_1);*/
-					
-					
+
 					loc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 					bounds.extend(loc);
-					  
+
 				} else {
 					alert(\'Geocode was not successful for the following reason: \' + status);
 				}
 			});
-			
+
 			geocoder.geocode( { \'address\': \''.$Ubicacion_2.'\'}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
-					
+
 					// marker position
 					var factory_2 = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 
@@ -549,7 +530,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 						content: content,
 						maxWidth: 350
 					});
-						   
+
 					// marker options
 					var marker_2 = new google.maps.Marker({
 						position	: factory_2,
@@ -621,11 +602,10 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 							$(this).css({opacity: \'1\'});
 						});
 					});
-						
+
 					//muestro la infowindow al inicio
 					infowindow.open(map_'.$identificador.',marker_2);
-						
-					
+
 					/*var marker_2 = new google.maps.Marker({
 								  position:  new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
 								  map: map_'.$identificador.',
@@ -639,14 +619,13 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 						infowindow.open(map_'.$identificador.', marker_2);
 					});
 					infowindow.open(map_'.$identificador.', marker_2);*/
-					
-					
+
 					loc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 					bounds.extend(loc);
 					//centralizado y redimensionado del mapa
-					map_'.$identificador.'.fitBounds(bounds);      
+					map_'.$identificador.'.fitBounds(bounds);
 					map_'.$identificador.'.panToBounds(bounds);
-				  
+
 				} else {
 					alert(\'Geocode was not successful for the following reason: \' + status);
 				}

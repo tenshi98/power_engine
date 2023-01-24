@@ -893,11 +893,11 @@ class PDF417 {
 									if ($s == 3) {
 										// shift to puntuaction
 										$txtarr[] = 29;
-									} else {
+									}else {
 										// shift from lower to alpha
 										$txtarr[] = 27;
 									}
-								} else {
+								}else {
 									// latch
 									$txtarr	= array_merge($txtarr, $this->textlatch[''.$submode.$s]);
 									// set new submode

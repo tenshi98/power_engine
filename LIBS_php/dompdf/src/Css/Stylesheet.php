@@ -1664,7 +1664,7 @@ class Stylesheet
                     continue;
                 }
                 if ($DEBUGCSS) print '#' . $selector . '#';
-                //if ($DEBUGCSS) { if (strpos($selector,'p') !== false) print '!!!p!!!#'; }
+                //if ($DEBUGCSS) { if (strpos($selector,'p') !== false) print '!!!p!!!#';}
 
                 //FIXME: tag the selector with a hash of the media query to separate it from non-conditional styles (?), xpath comments are probably not what we want to do here
                 if (count($media_queries) > 0) {

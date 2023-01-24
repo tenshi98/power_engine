@@ -571,7 +571,7 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function convertHexStringToString($bs) {
-		$string = ''; // string to be returned
+		$string = '';// string to be returned
 		$bslength = strlen($bs);
 		if (($bslength % 2) != 0) {
 			// padding
@@ -1280,7 +1280,7 @@ class TCPDF_STATIC {
 										case '|=': {
 											if ($dom[$key]['attribute'][$att] == $val) {
 												$valid = true;
-											} elseif (preg_match('/'.$val.'[\-]{1}/i', $dom[$key]['attribute'][$att]) > 0) {
+											}elseif (preg_match('/'.$val.'[\-]{1}/i', $dom[$key]['attribute'][$att]) > 0) {
 												$valid = true;
 											}
 											break;
@@ -1317,7 +1317,7 @@ class TCPDF_STATIC {
 								if (self::isValidCSSSelectorForTag($dom, $dom[$key]['parent'], $selector)) {
 									$valid = true;
 									break;
-								} else {
+								}else {
 									$key = $dom[$key]['parent'];
 								}
 							}
@@ -1408,7 +1408,7 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function getTagStyleFromCSSarray($css) {
-		$tagstyle = ''; // value to be returned
+		$tagstyle = '';// value to be returned
 		foreach ($css as $style) {
 			// split single css commands
 			$csscmds = explode(';', $style['c']);

@@ -153,7 +153,7 @@ class DateTimeParser {
         }
 
         $newDur = ($matches['plusminus']==='-'?'-':'+') . trim($newDur);
-        if ($newDur === '+') { $newDur = '+0 seconds'; };
+        if ($newDur === '+') { $newDur = '+0 seconds';};
         return $newDur;
 
     }

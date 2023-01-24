@@ -13,17 +13,17 @@ if( ! defined('XMBCXRXSKGC')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Generar un password aleatorio
-* 
+*
 *===========================     Detalles    ===========================
 * Permite generar un pasword aleatorio de dos tipos, numerico o alfanumerico,
 * seleccionando el largo del password aleatorio
 *===========================    Modo de uso  ===========================
 * 	//Numerico:
 * 	genera_password(10,'numerico');
-* 
+*
 * 	//Alfanumerico:
 * 	genera_password(10,'alfanumerico');
-* 
+*
 *===========================    Parametros   ===========================
 * Integer    $longitud   Largo de la password generada
 * String     $tipo       Tipo de password a generar
@@ -31,17 +31,16 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function genera_password($longitud,$tipo){
-	
 	//verifico si los datos estan bien entregados
 	if (validarNumero($longitud)&&($tipo=="alfanumerico" || $tipo=="numerico")){
-		
+
 		//selecciono el tipo de password
 		if ($tipo=="alfanumerico"){
 			$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 		} elseif ($tipo=="numerico"){
 			$alphabet = '1234567890';
 		}
-		
+
 		//creo la password
 		$password = substr(str_shuffle($alphabet), 0, $longitud);
 
@@ -53,22 +52,22 @@ function genera_password($longitud,$tipo){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Generar un password unica
-* 
+*
 *===========================     Detalles    ===========================
 * Se genera una password unica en base a la fecha y a la hora del servidor, de
 * esta forma no hay probabilidades de que esta se repita, tener en cuenta su
 * uso en caso de ser utilizada reiteradamente (2 veces en el mismo segundo)
 *===========================    Modo de uso  ===========================
-* 	
-* 	//generar una password		
+*
+* 	//generar una password
 * 	genera_password_unica();
-* 
+*
 *===========================    Parametros   ===========================
 * @return    String
 ************************************************************************/
 //Funcion
 function genera_password_unica(){
-	
+
 	//inicializo variable
 	$password = '';
 	// Establecer la zona horaria predeterminada a usar.
@@ -79,35 +78,35 @@ function genera_password_unica(){
 	$password.= date("His");
 	//devuelvo valor
     return $password;
-    
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Genera una palabra con caracteres random
-* 
+*
 *===========================     Detalles    ===========================
 * Permite generar palabras con caracteres random, con varias opciones
 * disponibles
 *===========================    Modo de uso  ===========================
-* 	
-* 	//Caracteres Random	
+*
+* 	//Caracteres Random
 * 	caracteresRandom(16, true, false, false);
-* 
+*
 *===========================    Parametros   ===========================
 * integer    $longitud          Define el largo de la palabra generada
-* boolean    $lecturaAmigable   Remueve los caracteres similares a otro, 
+* boolean    $lecturaAmigable   Remueve los caracteres similares a otro,
 *                               tales como O y 0, l y 1, etc(true - false)
-* boolean    $incluirSimbolos   Permite incluir simbolos en la palabra 
-*                               generada, no debe estar activadasi lectura 
+* boolean    $incluirSimbolos   Permite incluir simbolos en la palabra
+*                               generada, no debe estar activadasi lectura
 *                               amigable esta activa(true - false)
-* boolean    $sinDuplicados     Da la opcion de que la palabra generada 
+* boolean    $sinDuplicados     Da la opcion de que la palabra generada
 *                               no contenga caracteres repetidos(true - false)
-* 
+*
 * @return    String
 ************************************************************************/
 //Funcion
 function caracteresRandom($longitud = 16, $lecturaAmigable = true, $incluirSimbolos = false, $sinDuplicados = false){
-        
+
     $caracteres_legibles = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefhjkmnprstuvwxyz23456789';
     $caracteres_todos    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
     $simbolos            = '!@#$%^&*()~_-=+{}[]|:;<>,.?/"\'\\`';
@@ -123,7 +122,7 @@ function caracteresRandom($longitud = 16, $lecturaAmigable = true, $incluirSimbo
             $cola .= $simbolos;
         }
     }
-	
+
 	//elimino los duplicados
     if (!$sinDuplicados) {
         return substr(str_shuffle(str_repeat($cola, $longitud)), 0, $longitud);

@@ -25,12 +25,10 @@ function sim80x_dht($TipoShield, $rowdata) {
 	$SensDigPortBegin = '';
 $saltoLinea = '
 ';
-	
 
-	
 	/*******************************************************************/
-	//si esta configurado para usar sensores, mostrar la cantidad de sensores 
-	if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){ 
+	//si esta configurado para usar sensores, mostrar la cantidad de sensores
+	if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
 		$SensCant     = ' * Numero Sensores: '.$rowdata['cantSensores'].$saltoLinea;
 		/***********************************************/
 		//recorro la cantidad de sensores existentes
@@ -39,9 +37,9 @@ $saltoLinea = '
 			$SensListPrint .= $saltoLinea.'	Serial.print("s'.$i.': ");';
 			$SensListPrint .= $saltoLinea.'	Serial.println(s'.$i.');';
 			$SensListSend  .= $saltoLinea.'	datos += "&s'.$i.'=";';
-			$SensListSend  .= $saltoLinea.'	datos += s'.$i.';';	
+			$SensListSend  .= $saltoLinea.'	datos += s'.$i.';';
 		}
-		
+
 		//se divide el total de sensores en 2
 		$totSens  = ceil($rowdata['cantSensores']/2);
 		$initPort = 26;
@@ -69,13 +67,12 @@ $saltoLinea = '
 			//Validacion mediciones
 			$SensListValMed .= $saltoLinea.'	if  (s'.$initSens.' < -40 || s'.$initSens.' > 120){s'.$initSens.', s'.$finalSens.' = 99900;}';
 			//sumo 2 al sensor de inicio
-			$initSens = $initSens + 2;			
+			$initSens = $initSens + 2;
 		}
 	}
-	
-			
-////////////////////////////////////////////////////////////////////////////////////////////// 
-//Encabezado con informacion Basica           
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//Encabezado con informacion Basica
 $code = '
 /* Equipo '.$rowdata['nombre_equipo'].'
  * Creado por: '.$rowdata['nombre_usuario'].'
@@ -85,7 +82,7 @@ $code = '
  * Master '.$rowdata['Tab'].'
  * Placa: '.$rowdata['Dispositivo'].'
  * Comunicacion: '.$rowdata['Shield'].'
- * Datos Moviles: 
+ * Datos Moviles:
  * Uso GPS: '.$rowdata['Geo'].'
  * Uso Sensores: '.$rowdata['Sensores'].$saltoLinea;
 $code .= $SensCant;
@@ -96,13 +93,13 @@ $code .= '#include <avr/wdt.h>'.$saltoLinea;
 //SIM 800
 if($TipoShield=='sim800'){
 	$code .= '#define TINY_GSM_MODEM_SIM800'.$saltoLinea;
-//SIM 808	
+//SIM 808
 }elseif($TipoShield=='sim808'){
 	$code .= '#define TINY_GSM_MODEM_SIM808'.$saltoLinea;
 }
 $code .= '#define TINY_GSM_RX_BUFFER 650'.$saltoLinea;
 $code .= '#include <TinyGsmClient.h>'.$saltoLinea;
-//Identificacion APN 
+//Identificacion APN
 $code .= '
 const char apn[]      = "'.$rowdata['APN_direction'].'"; //Direccion APN
 const char gprsUser[] = "";
@@ -130,9 +127,9 @@ $code .= 'HttpClient http(client, server, port);'.$saltoLinea;
 //DHT Se definen instancias y puertos digitales
 $code .= $SensDigPortDef;
 $code .= '
-//Configuracion inicial de la placa 
+//Configuracion inicial de la placa
 void setup(){
-	Serial.begin(9600);   
+	Serial.begin(9600);
 	'.$TipoShield.'.begin(9600);
 	Serial.println("Initializing modem...");
 	modem.restart();
@@ -140,15 +137,15 @@ void setup(){
 	String modemInfo = modem.getModemInfo();
 	Serial.println(cop);
 	Serial.print("Modem Info: ");
-	Serial.println(modemInfo);'; 
+	Serial.println(modemInfo);';
 	$code .= $SensDigPortBegin;
 	$code .= '
-	pinMode('.$rowdata['pinMode'].', OUTPUT); 
-	digitalWrite('.$rowdata['pinMode'].', LOW); 
+	pinMode('.$rowdata['pinMode'].', OUTPUT);
+	digitalWrite('.$rowdata['pinMode'].', LOW);
 	delay(1000);
 }'.$saltoLinea;
 //si hay sensores configurados, se toma la medicion de estos
-if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){ 
+if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
 	$code .= $saltoLinea.'void medicion(){';
 	$code .= $saltoLinea.'	digitalWrite('.$rowdata['pinMode'].', HIGH)';
 	$code .= $SensListMed;
@@ -166,13 +163,13 @@ void imp(){
 	Serial.println(csq);
 	Serial.print("Telco: ");
 	Serial.println(cop);
-	delay(1000); '; 
+	delay(1000); ';
 	$code .= $SensListPrint;
 	$code .= '
 	Serial.println("************************************************************************************");
 }'.$saltoLinea;
 //si hay sensores configurados, se verifica para corregir las mediciones
-if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){ 
+if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
 	$code .= $saltoLinea.'// Lee nuevamente errores de medicion';
 	$code .= $saltoLinea.'void NaN(){ ';
 	$code .= $saltoLinea.'	Serial.println("Revision Errores");';
@@ -181,11 +178,11 @@ if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
 	$code .= $saltoLinea.'		Serial.print("Ciclo: ");';
 	$code .= $saltoLinea.'		Serial.println(i);';
 	$code .= $saltoLinea.'		delay(2000);';
-	$code .= $saltoLinea.'		//Error DHT22'; 
+	$code .= $saltoLinea.'		//Error DHT22';
 	$code .= $SensListError;
 	$code .= $saltoLinea.'		digitalWrite('.$rowdata['pinMode'].', LOW);';
 	$code .= $saltoLinea.'		delay(1000);';
-	$code .= $saltoLinea.'	}'; 
+	$code .= $saltoLinea.'	}';
 	$code .= $SensListValMed;
 	$code .= $saltoLinea.'	Serial.println("Termino Revision Errores");';
 	$code .= $saltoLinea.'}';
@@ -197,18 +194,18 @@ void url() {';
 	//Get GSM
 	if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
 		$code .= $saltoLinea.'	datos  = "/crosstech/ardu.php?id=";';
-	//AT envio	
+	//AT envio
 	}elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
 		$code .= $saltoLinea.'	datos  = "AT+HTTPPARA=\"URL\",\http://webapp.crosstech.cl/crosstech/ardu.php?id=";';
 	}
 	$code .= '
 	datos += id;
 	datos += "&csq=";
-	datos += csq; 
+	datos += csq;
 	datos += "&cop=";
-	datos += cop;  
+	datos += cop;
 	datos += "&ver=";
-	datos += "'.$rowdata['Version'].'";'; 
+	datos += "'.$rowdata['Version'].'";';
 	$code .= $SensListSend;
 	//AT envio
 	if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
@@ -220,7 +217,7 @@ void url() {';
 
 //Get GSM
 if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
-$code .= $saltoLinea.' 
+$code .= $saltoLinea.'
 void GSMGET() {
 	apagado = "3";
 	Serial.print("URL: ");
@@ -261,7 +258,7 @@ void GSMGET() {
 	modem.gprsDisconnect();
 	Serial.println(F("GPRS disconnected"));
 }';
-//AT envio	
+//AT envio
 }elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
 $code .= $saltoLinea.'
 void envioAT(){
@@ -286,7 +283,7 @@ void envioAT(){
 	'.$TipoShield.'.println(F("AT+CIPCLOSE"));//close the connection delay(100);
 	delay(100);
 	Serial.println(F("Enviado"));
-}';	
+}';
 }
 
 
@@ -297,17 +294,17 @@ void loop(){';
 		$code .= $saltoLinea.'	NaN();';
 	}
 	$code .= '
-	imp(); //Muestra los datos por pantalla (Comentar en produccion) 
+	imp(); //Muestra los datos por pantalla (Comentar en produccion)
 	url(); //Genera la URL';
 	//Get GSM
 	if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
 		$code .= $saltoLinea.'	GSMGET();';
-	//AT envio	
+	//AT envio
 	}elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
 		$code .= $saltoLinea.'	envioAT();';
 	}
 	$code .= $saltoLinea.'
-	/* 
+	/*
 	if (apagado == "1"){
 		Serial.println("Conectado");
 		digitalWrite(13, HIGH);
@@ -327,7 +324,7 @@ void loop(){';
 	//delay(210000);  // 4 minutos
 	//delay(270000);  // 5 minutos
 }
-			
+
 ';
 
 	return $code;
@@ -337,9 +334,9 @@ void loop(){';
 function aaaa($rowdata) {
 	$saltoLinea = '
 ';
-
-////////////////////////////////////////////////////////////////////////////////////////////// 
-//Encabezado con informacion Basica           
+$SensCant = 0;
+//////////////////////////////////////////////////////////////////////////////////////////////
+//Encabezado con informacion Basica
 $code = '
 /* Equipo '.$rowdata['nombre_equipo'].'
  * Creado por: '.$rowdata['nombre_usuario'].'
@@ -349,7 +346,7 @@ $code = '
  * Master '.$rowdata['Tab'].'
  * Placa: '.$rowdata['Dispositivo'].'
  * Comunicacion: '.$rowdata['Shield'].'
- * Datos Moviles: 
+ * Datos Moviles:
  * Uso GPS: '.$rowdata['Geo'].'
  * Uso Sensores: '.$rowdata['Sensores'].$saltoLinea;
 $code .= $SensCant;
@@ -374,17 +371,17 @@ float v0, v3, voltage;
 
 //volt
 float voltageSampleRead  = 0;
-float voltageSampleCount = 0;        
-float voltageLastSample  = 0;               
-float voltageSampleSum   = 0;              
-float voltageMean ;                         
-float RMSVoltageMean ;                    
+float voltageSampleCount = 0;
+float voltageLastSample  = 0;
+float voltageSampleSum   = 0;
+float voltageMean ;
+float RMSVoltageMean ;
 float adjustRMSVoltageMean;
 float FinalRMSVoltage;
-float voltageOffset1 =0.00 ;          
-float voltageOffset2 = -4.00;         
+float voltageOffset1 =0.00 ;
+float voltageOffset2 = -4.00;
 
- 
+
 
 String id = "200";  //ingresar ID
 String datos ="";
@@ -394,19 +391,19 @@ void setup() {
 	Bridge.begin(115200);
 	Console.begin();
 	//Calibracion AMP
-	emon1.current(A1,  183.65);             
-	emon2.current(A2,  183.65);         
-	emon3.current(A3,  183.65); 
+	emon1.current(A1,  183.65);
+	emon2.current(A2,  183.65);
+	emon3.current(A3,  183.65);
 	Console.println("Inizializando Sensores AMP");
 	for (int x = 0; x <= 5; x++){
 		Console.println(x);
-		Irms1 =  emon1.calcIrms(5588); 
-		Irms2 =  emon2.calcIrms(5588);  
-		Irms3 =  emon3.calcIrms(5588);  
+		Irms1 =  emon1.calcIrms(5588);
+		Irms2 =  emon2.calcIrms(5588);
+		Irms3 =  emon3.calcIrms(5588);
 	}
 }
 
- 
+
 
 void mediciones() {
 	Irms1 =  emon1.calcIrms(5588);   //Alimentacion U
@@ -425,10 +422,10 @@ void volt(){
 	Console.println(i);
 	while (x < 1000) {
 		if(micros() >= voltageLastSample + 1000 )  {
-			voltageSampleRead = (analogRead(A4)- 512)+ voltageOffset1;                             
-			voltageSampleSum = voltageSampleSum + sq(voltageSampleRead) ;                                             
-			voltageSampleCount = voltageSampleCount + 1;                                                              
-			voltageLastSample = micros() ;  
+			voltageSampleRead = (analogRead(A4)- 512)+ voltageOffset1;
+			voltageSampleSum = voltageSampleSum + sq(voltageSampleRead) ;
+			voltageSampleCount = voltageSampleCount + 1;
+			voltageLastSample = micros() ;
 			x++;
 		}
 	}
@@ -436,24 +433,24 @@ void volt(){
 	Console.println(voltageSampleCount);
 	if(voltageSampleCount == 1000){
 		Console.println(voltageSampleCount);
-		voltageMean = voltageSampleSum/voltageSampleCount;                                                        
-		RMSVoltageMean = (sqrt(voltageMean))*1.5;                                                                 
-		adjustRMSVoltageMean = RMSVoltageMean + voltageOffset2;                                                   
-		FinalRMSVoltage = RMSVoltageMean + voltageOffset2;                                                 
+		voltageMean = voltageSampleSum/voltageSampleCount;
+		RMSVoltageMean = (sqrt(voltageMean))*1.5;
+		adjustRMSVoltageMean = RMSVoltageMean + voltageOffset2;
+		FinalRMSVoltage = RMSVoltageMean + voltageOffset2;
 		if(FinalRMSVoltage <= 2.5){
 			FinalRMSVoltage = 0;
 		}
 		v0 = FinalRMSVoltage;
 		v3 = v0 * sqrt(3);
 		if (v3 < 40){v3 = 99900;}
-		voltageSampleSum =0;                                                                               
+		voltageSampleSum =0;
 		voltageSampleCount=0;
 		Console.println(i);
 		i=0;
 	}
 }
 
- 
+
 
 void nivel(){
 	// read the input on analog pin 5:
@@ -517,7 +514,7 @@ void envio() {
 	Console.println(apagado);
 }
 
- 
+
 
 void loop() {
 	mediciones();
@@ -525,7 +522,7 @@ void loop() {
 	url();
 	envio();
 	delay(3000);
-}	
+}
 ';
 
 

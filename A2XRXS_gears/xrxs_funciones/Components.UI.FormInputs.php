@@ -9,64 +9,69 @@ if( ! defined('XMBCXRXSKGC')) {
 /*                                                    Clases                                                       */
 /*******************************************************************************************************************/
 class Basic_Form_Inputs{
-	
+
 	/////////////////////////////        PRIVADAS        /////////////////////////////
 	/****************************************************************************************/
 	//Crea el input en base a los datos
 	private function chosen_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos){
-		
+
 		/******************************************/
-		//se llama por obligacion libreria javascript desde aqui, porque en el head da problemas		
+		//se llama por obligacion libreria javascript desde aqui, porque en el head da problemas
 		$data = '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chosen/chosen.jquery.js"></script>';
-					
-		//se crea formulario
+
+		/******************************************/
+		//generacion del input
 		$data .= '
 			<div class="form-group" id="div_'.$name.'">
-				<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-				<div class="col-sm-8 field">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 					<select name="'.$name.'" id="'.$name.'" '.$requerido.' data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.' " tabindex="2" >
 						<option value=""></option>';
-													
+
 						/******************************************/
-						//se recorren las opciones	
+						//se recorren las opciones
 						foreach ( $arrSelect as $select ) {
-										
+
+							/******************************************/
+							//Variables
+							$selected     = '';
+							$data_writing = '';
+
 							/******************************************/
 							//si la opcion actual esta seleccionada
-							if($value==$select['idData']){
-								$selected = 'selected="selected"';
-							}else{ 
-								$selected = '';
-							}	
-										
+							if($value==$select['idData']){$selected = 'selected="selected"';}
+
 							/******************************************/
 							//Escribo los datos solicitados
 							if(count($datos)==1){
 								$data_writing = $select[$datos[0]].' ';
 							}else{
-								$data_writing = '';
+								//se crea cadena
 								foreach($datos as $dato){
 									$data_writing .= $select[$dato].' ';
 								}
 							}
-										
+
 							/******************************************/
-							//se crea cadena
+							//se escribe
 							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
-						} 
-												
-												
+						}
+
 				$data .= '
 					</select>
 				</div>
 			</div>';
-			
+
+		/******************************************/
 		//devuelvo
-		return $data;	
+		return $data;
 	}
 	/****************************************************************************************/
 	//Funcionalidad de chosen
 	private function chosen_select_script($name){
+
+		/******************************************/
+		//ejecucion script
 		$data = '
 		<script type="text/javascript">
 			$.fn.oldChosen = $.fn.chosen;
@@ -83,99 +88,107 @@ class Basic_Form_Inputs{
 					selectcz_'.$name.'.attr(\'style\',\'display:visible; position:absolute; clip:rect(0,0,0,0)\');
 					selectcz_'.$name.'.attr(\'tabindex\', -1);
 				}
-										
+
 				return ret_'.$name.';
 			}
 			$(\'selectcz_'.$name.'\').chosen({allow_single_deselect: true});
 
 		</script>';
-		
+
+		/******************************************/
 		//devuelvo
 		return $data;
 	}
 	/****************************************************************************************/
 	//si chosen es obligatorio chosen
 	private function chosen_required($name, $required){
-		
+
 		//validacion si es requerido
-		if($required==2){	
+		if($required==2){
 			$data ='<style>#div_'.$name.' .chosen-single {background:url('.DB_SITE_REPO.'/LIB_assets/img/required.png) no-repeat 5px center !important;background-color: #fff !important;}</style>';
 		}else{
 			$data = '';
 		}
-					
+
+		/******************************************/
 		//devuelvo
 		return $data;
 	}
 	/****************************************************************************************/
 	//Crea el input en base a los datos
 	private function select_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos){
-				
+
+		/******************************************/
 		//generacion del input
 		$data = '
 			<div class="form-group" id="div_'.$name.'">
-				<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-				<div class="col-sm-8 field">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 					<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' >';
 						//Recorro
-						$selectedx = 'selected="selected"';	
+						$selectedx = 'selected="selected"';
 						foreach ( $arrSelect as $select ) {
 							if($value==$select['idData']){
 								$selectedx = '';
 							}
 						}
-						
+
 						$data .= '<option value="" '.$selectedx.'>Seleccione una Opcion</option>';
-							
+
 						/******************************************/
 						//Recorro
 						foreach ( $arrSelect as $select ) {
-									
+
+							/******************************************/
+							//Variables
+							$selected     = '';
+							$data_writing = '';
+
 							/******************************************/
 							//si la opcion actual esta seleccionada
-							if($value==$select['idData']){
-								$selected = 'selected="selected"';
-							}else{ 
-								$selected = '';
-							}	
-									
+							if($value==$select['idData']){$selected = 'selected="selected"';}
+
 							/******************************************/
 							//Escribo los datos solicitados
 							if(count($datos)==1){
 								$data_writing = $select[$datos[0]].' ';
 							}else{
-								$data_writing = '';
+								//se crea cadena
 								foreach($datos as $dato){
 									$data_writing .= $select[$dato].' ';
 								}
 							}
-									
+
 							/******************************************/
+							//se escribe
 							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
-						} 
+						}
 					$data .= '
 					</select>
 				</div>
 			</div>';
-					
+
+		/******************************************/
 		//devuelvo
 		return $data;
 	}
 	/****************************************************************************************/
 	//Crea el input en base a los datos
 	private function select_input_empty($name, $placeholder, $requerido){
-				
+
+		/******************************************/
 		//generacion del input
 		$data = '
 			<div class="form-group" id="div_'.$name.'">
-				<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-				<div class="col-sm-8 field">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 					<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' >
 						<option value="" selected>Seleccione una Opcion</option>
 					</select>
 				</div>
 			</div>';
-					
+
+		/******************************************/
 		//devuelvo
 		return $data;
 	}
@@ -183,15 +196,17 @@ class Basic_Form_Inputs{
 	//Funcionalidad de select depend
 	private function select_input_script($arrSelect, $Value, $name_1, $name_2, $datos, $form_name){
 		//para corregir consulta en caso de vacio
-		if(!isset($Value) OR $Value == ''){ $Value = 0;}
-		
+		if(!isset($Value) OR $Value == ''){$Value = 0;}
+
+		/******************************************/
+		//ejecucion script
 		$data = '<script>';
-		
+
 		//Filtro el segundo select con el id del primer select
 		filtrar($arrSelect, 'idDataFilter');
 		//caracteres prohibidos
 		$vowels = array(" ", "´", "-");
-		//recorro 
+		//recorro
 		foreach($arrSelect as $tipo=>$componentes){
 			//creo variable
 			$Int_id_data = 'let id_data_'.$name_1.'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
@@ -213,23 +228,21 @@ class Basic_Form_Inputs{
 			}
 			//cierro variable
 			$Int_id_data .= ');';
-			$Int_data .= ');';
+			$Int_data    .= ');';
 			//traspaso los datos
 			$data .= $Int_id_data;
 			$data .= $Int_data;
-					
+
 		}
-		
-		
+
 		$data .= '
-					
 			//Se ocultan los select
 			document.getElementById("div_'.$name_2.'").style.display = "none";
 			//Si el select cambio
 			document.getElementById("'.$name_1.'").onchange = function() {cngFnc_'.$name_1.'()};
 			//Valor preseleccionado
 			let slected_'.$name_2.' = 0;
-					
+
 			//Funcion cambio de estado
 			function cngFnc_'.$name_1.'() {
 				//Obtengo valor
@@ -269,8 +282,8 @@ class Basic_Form_Inputs{
 				//reposiciono el selected al primer elemento
 				document.getElementById("'.$name_2.'").selectedIndex = "0";
 			}
-			
-			//al cargar pagina		
+
+			//al cargar pagina
 			$(document).ready(function(){
 				//Obtengo valor
 				let Componente = document.getElementById("'.$name_1.'").value;
@@ -293,49 +306,47 @@ class Basic_Form_Inputs{
 					//muestro el select
 					document.getElementById("div_'.$name_2.'").style.display = "block";
 					//indico el selectedIndex que tiene asignado
-					document.getElementById("'.$name_2.'").selectedIndex = slected_'.$name_2.'; 
+					document.getElementById("'.$name_2.'").selectedIndex = slected_'.$name_2.';
 				}
 			});';
-					
-				
+
 		$data .= '</script>';
-		
-		
+
+		/******************************************/
 		//devuelvo
 		return $data;
-	}	
-	
+	}
+
 	/******************************************/
-								
-	
+
 	/////////////////////////////        PUBLICAS        /////////////////////////////
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un titulo
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite un titulo para los formularios
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_tittle(1, 'dato' );
 	* 	$Form->form_tittle(2, '<strong>Dato:</strong>explicacion' );
 	* 	$Form->form_tittle(3, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
 	* 	$Form->form_tittle(4, 'bla' );
 	* 	$Form->form_tittle(5, 'bla' );
 	* 	$Form->form_tittle(6, 'bla' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type      Tipo de titulo
 	* String   $Text      Texto del titulo
 	* @return  String
 	************************************************************************/
 	public function form_tittle($type, $Text){
-		
+
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
-		$tipos = array(1, 2, 3, 4, 5, 6);
+		$tipos = array(1, 2, 3, 4, 5, 6, 7);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($type, $tipos)) {
 			alert_post_data(4,1,1, 'La configuracion $type ('.$type.') entregada no esta dentro de las opciones');
@@ -345,45 +356,40 @@ class Basic_Form_Inputs{
 		//Ejecucion si no hay errores
 		if($errorn==0){
 			//Selecciono el tipo de mensaje
-			switch ($type) {
-				case 1: $tipo = 'h1'; break;
-				case 2: $tipo = 'h2'; break;
-				case 3: $tipo = 'h3'; break;
-				case 4: $tipo = 'h4'; break;
-				case 5: $tipo = 'h5'; break;
-				case 6: $tipo = 'p';  break;
-			}
+			$options = ['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'strong'];
+			$tipo    = $options[$type-1];
 
-			//generacion del mensaje
-			$input = '<'.$tipo.'>'.$Text.'</'.$tipo.'>';	
-				
 			/******************************************/
-			//Imprimir dato	
+			//generacion del input
+			$input = '<'.$tipo.'>'.$Text.'</'.$tipo.'>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un cuadro de mensaje
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un cuadro de alerta mostrando mensajes de explicacion 
+	* Permite crear un cuadro de alerta mostrando mensajes de explicacion
 	* para los inputs
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_post_data(1, 'dato' );
 	* 	$Form->form_post_data(2, '<strong>Dato:</strong>explicacion' );
 	* 	$Form->form_post_data(3, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
 	* 	$Form->form_post_data(4, 'bla' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $type      Tipo de mensaje
 	* String   $Text      Texto del mensaje
 	* @return  String
 	************************************************************************/
 	public function form_post_data($type, $Text){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -399,22 +405,22 @@ class Basic_Form_Inputs{
 		if($errorn==0){
 			alert_post_data($type,1,1, $Text);
 		}
-		
+
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input invisible
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que no es mostrado por el navegador, 
+	* Permite crear un input que no es mostrado por el navegador,
 	* permite pasar datos ocultos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_hidden('idCategoria', 1, 1 );
 	* 	$Form->form_input_hidden('Categoria', 'Categoria', 1 );
 	* 	$Form->form_input_hidden('idCategoria', 1, 2 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $name       Nombre del identificador del Input
 	* String   $value      Valor por defecto, puede ser texto o valor
@@ -422,7 +428,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_hidden($name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -436,46 +442,47 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
-			$input = '<input type="hidden" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' >';	
-			
+			$input = '<input type="hidden" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' >';
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_text('Categoria','idCategoria', 1, 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -484,7 +491,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_text($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -498,53 +505,54 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
-						<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$w.'"  '.$requerido.' onkeypress="return soloLetras(event)">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$valor.'"  '.$requerido.' onkeypress="return soloLetras(event)">
 					</div>
-				</div>';	
-			
+				</div>';
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo password
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo password, el cual oculta los datos 
+	* Permite crear un input tipo password, el cual oculta los datos
 	* ingresados, pero que permite verlos si se presiona el boton configurado
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_password('Password','password', '', 2 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -553,7 +561,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_password($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -567,40 +575,42 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4" id="label_'.$name.'" >'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="password" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
+							<input type="password" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
 							<span class="pass_impt" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
-							<span class="input-group-addon add-on" ><i class="fa fa-key" aria-hidden="true"></i></span> 
+							<span class="input-group-addon add-on" ><i class="fa fa-key" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-					
+
+			/******************************************/
 			//ejecucion script
 			$input .= '
 				<script>
@@ -612,25 +622,25 @@ class Basic_Form_Inputs{
 							$("#'.$name.'").attr("type", "password");
 						})
 					});
-				</script>';	
-					
+				</script>';
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input desactivado
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input desactivado, el cual no puede ser modificado 
+	* Permite crear un input desactivado, el cual no puede ser modificado
 	* por el usuario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_disabled('Dia actual','dia', '2018-02-02');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -638,49 +648,45 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_disabled($placeholder,$name, $value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '<div class="form-group" id="div_'.$name.'">
-						<label class="control-label col-sm-4">'.$placeholder.'</label>
-						<div class="col-sm-8 field">
-							<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.$w.'"  disabled="disabled">
+						<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+							<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control input_disabled" value="'.$valor.'"  disabled="disabled">
 						</div>
-					</div>';	
-			
+					</div>';
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un tipo texto con la opcion de poner un icono
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo texto, con un icono en el lado derecho, 
+	* Permite crear un input tipo texto, con un icono en el lado derecho,
 	* el icono es tomado de la libreria de fontawesome
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_icon('Categoria','idCategoria', 1, 1,'fa fa-map');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -690,7 +696,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_icon($placeholder,$name, $value, $required, $icon){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -704,57 +710,58 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4" id="label_'.$name.'" >'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
-							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span> 
+							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
+							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
 						</div>
 					</div>
-				</div>';		
-			
+				</div>';
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo texto que solo admite Rut
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo texto en el cual solo se pueden ingresar 
-	* Rut chilenos, estos son formateados (puntos separador de miles) y 
+	* Permite crear un input tipo texto en el cual solo se pueden ingresar
+	* Rut chilenos, estos son formateados (puntos separador de miles) y
 	* validados como rut
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_rut('Rut','rut', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -763,7 +770,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_rut($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -777,62 +784,61 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4" id="label_'.$name.'" >'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloRut(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span> 
+							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloRut(event)">
+							<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-			
-			//ejecucion script
-			$input.='
-				<script>
-					$("#'.$name.'").rut();
-				</script>';
-					
+
 			/******************************************/
-			//Imprimir dato	
+			//ejecucion script
+			$input.='<script>$("#'.$name.'").rut();</script>';
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros 
+	* Permite crear un input que solo permite el ingreso de numeros
 	* enteros positivos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_values('Valores Enteros','valores', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -841,7 +847,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_values($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -853,68 +859,69 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-usd" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)">
+							<span class="input-group-addon add-on"><i class="fa fa-usd" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
 
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros, 
+	* Permite crear un input que solo permite el ingreso de numeros,
 	* permite valores decimales y numeros negativos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_number('Numeros','numeros', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -923,7 +930,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_number($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -937,56 +944,57 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input ='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
+							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-				
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros 
+	* Permite crear un input que solo permite el ingreso de numeros
 	* enteros
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_number_integer('Enteros','enteros', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -995,7 +1003,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_number_integer($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1007,68 +1015,69 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input ='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloNumeroNaturalReal(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-superscript" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNaturalReal(event)"  >
+							<span class="input-group-addon add-on"><i class="fa fa-superscript" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-					
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros, 
+	* Permite crear un input que solo permite el ingreso de numeros,
 	* permite valores decimales y numeros negativos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_number_alt('Numeros','numeros', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1077,7 +1086,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_number_alt($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1089,64 +1098,65 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input ='<div class="form-group" id="div_'.$name.'">
-						<label class="control-label col-sm-12" style="text-align: left;">'.$placeholder.'</label>
-						<div class="col-sm-12 field">
+						<label class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;">'.$placeholder.'</label>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
 							<div class="input-group bootstrap-timepicker">
-								<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
-								<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span> 
+								<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
+								<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 							</div>
 						</div>
 					</div>';
-					
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros, 
-	* permite valores decimales y numeros negativos, agregando botones 
-	* en ambos lados, que aumentan o disminuyen los valores ingresados, 
+	* Permite crear un input que solo permite el ingreso de numeros,
+	* permite valores decimales y numeros negativos, agregando botones
+	* en ambos lados, que aumentan o disminuyen los valores ingresados,
 	* en los rangos preestablecido
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_number_spinner('Numeros','numeros', '', 1, 50, 1, 2, 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1159,7 +1169,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_number_spinner($placeholder,$name, $value, $min, $max, $step, $ndecimal, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1171,71 +1181,73 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($min)&&$min!=''){ 
+		if (!validarNumero($min)&&$min!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $min ('.$min.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($max)&&$max!=''){ 
+		if (!validarNumero($max)&&$max!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $max ('.$max.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($step)&&$step!=''){ 
+		if (!validarNumero($step)&&$step!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $step ('.$step.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($ndecimal)&&$ndecimal!=''){ 
+		if (!validarNumero($ndecimal)&&$ndecimal!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero entero lo que se recibe
-		if (!validaEntero($ndecimal)&&$ndecimal!=''){ 
+		if (!validaEntero($ndecimal)&&$ndecimal!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input ='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$name.'" value="'.str_replace(',','.',$value).'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)">
+							<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$name.'" value="'.str_replace(',','.',$valor).'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)">
 						</div>
 					</div>
 				</div>';
-								
-			//ejecucion script		
+
+			/******************************************/
+			//ejecucion script
 			$input .= '
 				<script>
 					//se inicializa el plugin
@@ -1248,24 +1260,24 @@ class Basic_Form_Inputs{
 						maxboostedstep: 10
 					});
 				</script>';
-								
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros 
+	* Permite crear un input que solo permite el ingreso de numeros
 	* enteros positivos, agregando un icono de telefono
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_phone('Telefono','fono', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1274,7 +1286,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_phone($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1286,68 +1298,69 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+							<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
 
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
-		}	
+		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input que solo admite numeros
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que solo permite el ingreso de numeros 
+	* Permite crear un input que solo permite el ingreso de numeros
 	* enteros positivos, agregando un icono de fax
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_fax('Fax','fax', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1356,7 +1369,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_fax($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1368,69 +1381,70 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+							<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
 
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de fechas
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que muestra un calendario al tratar de escribir 
-	* dentro de este, una vez seleccionada la fecha, el calendario 
+	* Permite crear un input que muestra un calendario al tratar de escribir
+	* dentro de este, una vez seleccionada la fecha, el calendario
 	* traspasa la fecha al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_date('Fecha','fecha', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1439,7 +1453,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_date($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1451,74 +1465,69 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validaFecha($value)&&$value!=''){ 
+		if (!validaFecha($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una fecha');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-				
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				if($value!='0000-00-00'){
-					$w = $value;
-				}else{
-					$w = '';
-				}
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0&&$value!='0000-00-00'){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input ='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="date" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$requerido.' >
-							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="date" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' >
+							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-						
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
-	}    
+	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de fechas
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que muestra un calendario al tratar de escribir 
-	* dentro de este, una vez seleccionada la fecha, el calendario 
+	* Permite crear un input que muestra un calendario al tratar de escribir
+	* dentro de este, una vez seleccionada la fecha, el calendario
 	* traspasa la fecha al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_date('Fecha','fecha', '', 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1527,7 +1536,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_date($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1539,57 +1548,53 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validaFecha($value)&&$value!=''){ 
+		if (!validaFecha($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una fecha');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//variables internas
-			$random_int = rand(1, 999);
-			$EXname     = str_replace('[]', '', $name);
-			$EXname     = $EXname.'_'.$random_int;
-				
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=0){
-				if($value!='0000-00-00'){
-					$w = $value;
-				}else{
-					$w = '';
-				}
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=0&&$value!='0000-00-00'){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input ='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$w.'" '.$requerido.'>
-							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
+							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-				
-			//ejecucion script	
+
+			/******************************************/
+			//ejecucion script
 			$input .='
 				<script type="text/javascript">
 					$(document).ready(function(){
@@ -1604,25 +1609,25 @@ class Basic_Form_Inputs{
 						});
 					});
 				</script>';
-						
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
-	}       
+	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de seleccion de hora
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input dentro del cual se selecciona la hora que se 
-	* desea ingresar, el selector de hora aparece al presionar dentro del 
+	* Permite crear un input dentro del cual se selecciona la hora que se
+	* desea ingresar, el selector de hora aparece al presionar dentro del
 	* input, una vez seleccionada la hora esta sera traspasada al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_time('Hora', 'hora','', 1,1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1632,7 +1637,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_time($placeholder,$name, $value, $required, $position){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1649,53 +1654,53 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		/*if (!validaHora($value)&&$value!=''){ 
+		/*if (!validaHora($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
 			$errorn++;
 		}*/
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-					
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//Posicion de la burbuja
-			switch ($position) {
-				case 1: $x_pos = 'top'; break;
-				case 2: $x_pos = 'bottom'; break;
-			}
-					
+			$options = ['top', 'bottom'];
+			$x_pos   = $options[$position-1];
+
 			/******************************************/
 			//generacion del input
 			$input ='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.'   >
-							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.'   >
+							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-					
+
+			/******************************************/
 			//ejecucion script
 			$input .='
 				<script type="text/javascript">
@@ -1705,25 +1710,25 @@ class Basic_Form_Inputs{
 						donetext: "Listo"
 					});
 				</script>';
-					
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input de seleccion de hora
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input dentro del cual se selecciona la hora que se 
-	* desea ingresar, el selector de hora aparece al presionar dentro del 
+	* Permite crear un input dentro del cual se selecciona la hora que se
+	* desea ingresar, el selector de hora aparece al presionar dentro del
 	* input, una vez seleccionada la hora esta sera traspasada al input
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_time_popover('Hora Inspeccion','H_inspeccion', '', 1, 1, 24);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1734,7 +1739,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_time_popover($placeholder,$name, $value, $required, $position, $limit){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1751,59 +1756,59 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($limit)&&$limit!=''){ 
+		if (!validarNumero($limit)&&$limit!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $limit ('.$limit.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($limit)&&$limit!=''){ 
+		if (!validaEntero($limit)&&$limit!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $limit ('.$limit.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es superior a 24
-		if ($limit!=''&&$limit>24){ 
+		if ($limit!=''&&$limit>24){
 			alert_post_data(4,1,1, 'El valor ingresado en $limit ('.$limit.') en <strong>'.$placeholder.'</strong> es superior a 24');
 			$errorn++;
 		}
 		//valido la hora
-		if(!validaHora($value)&&$value!=''){ 
+		if(!validaHora($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El dato ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-						
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//Posicion de la burbuja
-			switch ($position) {
-				case 1: $x_pos = 'top'; break;
-				case 2: $x_pos = 'bottom'; break;
-			}
-						
+			$options = ['top', 'bottom'];
+			$x_pos   = $options[$position-1];
+
 			/******************************************/
 			//solicitud recursos
 			$input  ='<script src="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/js/timepicki_'.$x_pos.'.js"></script>';
 			$input .='<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/popover_timepicker/css/timepicki_'.$x_pos.'.css">';
-						
+
+			/******************************************/
 			//ejecucion script
 			$input .='
 			<script>
@@ -1821,35 +1826,35 @@ class Basic_Form_Inputs{
 				});
 			</script>';
 
-						
+			/******************************************/
 			//generacion del input
 			$input .='
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.'   >
-							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span> 
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.'   >
+							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-						
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo color
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo selector de colores
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_color_picker('Categoria','idCategoria', 1, 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1858,7 +1863,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_color_picker($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1872,42 +1877,42 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w      = $value;
-				$bcolor = 'style="background-color: '.$value.'!important;"';
-			//Si no existe se deja en blanco
-			}else{
-				$w      = '';
-				$bcolor = '';
-			}
-			
+			$valor  = '';
+			$bcolor = '';
+			if($value!=''){$valor = $value;$bcolor = 'style="background-color: '.$value.'!important;"';}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$w.'" '.$requerido.' '.$bcolor.' onkeypress="return soloLetras(event)">
-							<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span> 
+							<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' '.$bcolor.' onkeypress="return soloLetras(event)">
+							<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
 						</div>
 					</div>
 				</div>';
-					
-			//Ejecucion Javascript
+
+			/******************************************/
+			//ejecucion script
 			$input .= '
 				<script type="text/javascript">
 					$(function(){
@@ -1921,24 +1926,24 @@ class Basic_Form_Inputs{
 					});
 				</script>
 			';
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un textarea
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo text, en el cual podemos definir su 
+	* Permite crear un input tipo text, en el cual podemos definir su
 	* altura a mostrar en el navegador
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_textarea('Observaciones','observaciones', '', 1);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -1948,7 +1953,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_textarea($placeholder,$name, $value, $required){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -1962,52 +1967,53 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Si existe un valor entregado
-			if($value!=''){
-				$w = $value;
-			//Si no existe se deja en blanco
-			}else{
-				$w = '';
-			}
-			
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
 			/******************************************/
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
-						<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal;" '.$requerido.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal;" '.$requerido.' onkeypress="return soloLetrasTextArea(event)" >'.$valor.'</textarea>
 					</div>
-				</div>';	
-				
+				</div>';
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Inserta un editor de texto completo
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un editor de texto completo
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_ckeditor('Observaciones','observaciones', '', 1, 1 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2037,17 +2043,22 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//generacion del input
 			$input = '
@@ -2055,57 +2066,57 @@ class Basic_Form_Inputs{
 					<h3>'.$placeholder.'</h3>
 					<textarea id="ckeditor_'.$name.'" class="ckeditor" name="'.$name.'" '.$requerido.'>'.$value.'</textarea>
 				</div>';
-			
-			//ejecucion de script
+
+			/******************************************/
+			//ejecucion script
 			$input .= '<script>';
-			
 				//se selecciona el tipo de editor a mostrar
 				switch ($tipo) {
 					case 1:
-						$input .= "CKEDITOR.replace( 'ckeditor_".$name."', {				
-									toolbar: [										
-									[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],					
-									{ name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule' ] },						
-									{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ], 
-									items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },					
+						$input .= "CKEDITOR.replace( 'ckeditor_".$name."', {
+									toolbar: [
+									[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
+									{ name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule' ] },
+									{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ],
+									items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
 									'/',
-									{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },					
+									{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
 									{ name: 'styles', items: [ 'Styles', 'Format' ] }]})";
 						break;
 					case 2:
-						$input .= "CKEDITOR.replace( 'ckeditor_".$name."', {				
-									toolbar: [										
-									[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],											
-									{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ], 
-									items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },					
+						$input .= "CKEDITOR.replace( 'ckeditor_".$name."', {
+									toolbar: [
+									[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
+									{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ],
+									items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
 									'/',
-									{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },					
+									{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
 									{ name: 'styles', items: [ 'Styles', 'Format' ] }]})";
 						break;
 					case 3:
 						break;
-				}  
-				         
+				}
+
 			$input .= '</script>';
-					
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input para subir archivos
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input que permite subir multiples archivos 
-	* simultaneamente, con validacion y previsualizacion para algunos 
+	* Permite crear un input que permite subir multiples archivos
+	* simultaneamente, con validacion y previsualizacion para algunos
 	* tipos de archivo
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_multiple_upload('Subir Archivos','archivos', 10, '"jpg", "png", "gif", "jpeg"' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2114,24 +2125,24 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_multiple_upload($placeholder, $name, $max_files, $type_files){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($max_files)&&$max_files!=''){ 
+		if (!validarNumero($max_files)&&$max_files!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $max_files ('.$max_files.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($max_files)&&$max_files!=''){ 
+		if (!validaEntero($max_files)&&$max_files!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $max_files ('.$max_files.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Verifico si es mas de un archivo
 			if(isset($max_files)&&$max_files!=1){
@@ -2139,27 +2150,29 @@ class Basic_Form_Inputs{
 			}else{
 				$ndat = '';
 			}
-			
+
 			/******************************************/
 			//Mostrar Maximo de archivos
 			$s_msg  = '<strong><i class="fa fa-file-o" aria-hidden="true"></i> Maximo de Archivos Permitidos: </strong>'.$max_files.'<br/>';
 			$s_msg .= '<strong><i class="fa fa-file-o" aria-hidden="true"></i> Extensiones de Archivos Permitidos: </strong><br/>'.$type_files;
-			$input = alert_post_data(2,1,1,$s_msg );
-			
+			$input  = alert_post_data(2,1,1,$s_msg );
+
+			/******************************************/
 			//generacion del input
 			$input .= '
 				<div class="form-group" id="div_'.$name.'">
-					<div class="col-sm-12" style="margin-bottom:10px;">
-						<label class="control-label col-sm-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
+						<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					</div>
-					<div class="col-sm-12">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<input id="kv-'.$name.'" name="'.$name.$ndat.'" type="file" multiple>
 					</div>
 				</div>
-			';			
-								
-			//ejecucion de codigo
-			$input .= '			
+			';
+
+			/******************************************/
+			//ejecucion script
+			$input .= '
 				<script>
 					$(document).ready(function () {
 						$("#kv-'.$name.'").fileinput({
@@ -2171,27 +2184,27 @@ class Basic_Form_Inputs{
 							initialPreviewAsData: true,
 							showUpload: false
 						});
-					});		
+					});
 				</script>
 			';
 
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
-	
+
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo checkbox
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo checkbox
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_input_checkbox('Opciones','opciones', '');
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2199,7 +2212,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_input_checkbox($placeholder,$name,$value){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -2208,45 +2221,46 @@ class Basic_Form_Inputs{
 		if($errorn==0){
 			//Si el tab correspondiente esta seleccionado
 			if(isset($value)&&$value==2){
-				$w = 'checked'; 
-				$m = '2'; 
-			}else{ 
-				$w = ''; 
-				$m = '2'; 
+				$check = 'checked';
+				$valor = '2';
+			}else{
+				$check = '';
+				$valor = '2';
 			}
-									
+
+			/******************************************/
 			//generacion del input
 			$input = '
-			<div class="form-group" id="div_'.$name.'">			
-				<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
-				<div class="col-sm-8 field">
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 					<div class="checkbox checkbox-primary">
-						<input                type="hidden"   value="1"      '.$w.' name="'.$name.'" >
-						<input class="styled" type="checkbox" value="'.$m.'" '.$w.' name="'.$name.'" id="'.$name.'">
+						<input                type="hidden"   value="1"          '.$check.' name="'.$name.'" >
+						<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'">
 						<label for="'.$name.'">
 							'.$placeholder.'
 						</label>
 					</div>
 				</div>
 			</div>';
-									
-			
-			//Imprimir dato	
+
+			/******************************************/
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo checkbox
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo checkbox en base a datos de la base de 
+	* Permite crear un input tipo checkbox en base a datos de la base de
 	* datos, que lleva por defecto opciones activas
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_checkbox_active('Opciones','opciones', '', 1, 'ID', 'Nombre', 'tabla_opciones', '', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2274,14 +2288,14 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Variables
 			$filtro        = '';
 			$data_required = '';
 			$arrValTab     = array();
 			$y             = 1;
-			
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
@@ -2297,7 +2311,7 @@ class Basic_Form_Inputs{
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-			
+
 			/******************************************/
 			//Ordenar por el dato requerido
 			$order_by = $datos[0].' ASC ';
@@ -2309,40 +2323,44 @@ class Basic_Form_Inputs{
 				//que exista un dato
 				$filtro .= $datos[0]."!='' ";
 			}
-				
+
 			/******************************************/
 			//Valores de cada tab
 			$datos2 = explode(",", $value);
 			foreach($datos2 as $dato){
 				$arrValTab[$y] = $dato;
-				$y++;	
+				$y++;
 			}
-			
+
 			/******************************************/
 			//consulto
 			$arrSelect = array();
 			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox_active', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-											
+
 			//si hay resultados
-			if($arrSelect!=false){								
-				
+			if($arrSelect!=false){
+
+				/******************************************/
+				//generacion del input
 				$input = '
-						<div class="form-group" id="div_'.$name.'">			
-							<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
-							<div class="col-sm-8 field">';
-								
+						<div class="form-group" id="div_'.$name.'">
+							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">';
+
 								/******************************************/
 								//Recorro
 								foreach ( $arrSelect as $select ) {
-									
+
 									/******************************************/
 									//Si el tab correspondiente esta seleccionado
 									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-										$w = 'checked'; $m = '2'; 
-									}else{ 
-										$w = ''; $m = '2'; 
-									}	
-									
+										$check = 'checked';
+										$valor = '2';
+									}else{
+										$check = '';
+										$valor = '2';
+									}
+
 									/******************************************/
 									//Escribo los datos solicitados
 									if(count($datos)==1){
@@ -2353,51 +2371,52 @@ class Basic_Form_Inputs{
 											$data_writing .= $select[$dato].' ';
 										}
 									}
-								
+
 									/******************************************/
-									$input .= '			
+									$input .= '
 									<div class="checkbox checkbox-primary">
-										<input                type="hidden"   value="1"      '.$w.' name="'.$name.'_'.$select['idData'].'" >
-										<input class="styled" type="checkbox" value="'.$m.'" '.$w.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'">
+										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
+										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'">
 										<label for="'.$name.'_'.$select['idData'].'">
 											'.$data_writing.'
 										</label>
 									</div>';
-										
+
 								}
-								
-								$input .= '		
-							</div>		
+
+								$input .= '
+							</div>
 						</div>';
-						
+
 				/******************************************/
+				//Imprimir dato
 				echo $input;
-				
+
 			//si no hay datos
 			}elseif(empty($arrSelect) OR $arrSelect==''){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			//si existe un error
 			}elseif($arrSelect==false){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea una linea con un checkbox de terminos y condiciones
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear una linea en donde muestra la opcion de terminos y 
-	* condiciones, al tener esta opcion presente deshabilita el boton 
-	* submit del formulario, impidiendo su ejecucion hasta que no se 
+	* Permite crear una linea en donde muestra la opcion de terminos y
+	* condiciones, al tener esta opcion presente deshabilita el boton
+	* submit del formulario, impidiendo su ejecucion hasta que no se
 	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_terms_and_conditions('terminos','He leido los ','www.google.cl','terminos y condiciones', 'submit_btn' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $name         Nombre del identificador del Input
 	* String   $inicio       Texto inicio
@@ -2407,24 +2426,23 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_terms_and_conditions($name, $inicio, $link, $fin, $submit_name){
-		
+
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-sm-12 field">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-8">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"></div>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 					<div class="checkbox checkbox-primary">
 						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
-						<label>
-							'.$inicio.'  <a class="iframe" href="'.$link.'">'.$fin.'</a> 
-						</label>
+						<label>'.$inicio.'  <a class="iframe" href="'.$link.'">'.$fin.'</a></label>
 					</div>
 				</div>
 			</div>
 		';
-			
-		//ejecucion script	
+
+		/******************************************/
+		//ejecucion script
 		$input .= '
 			<script>
 				//se desactiva el boton f5
@@ -2447,47 +2465,46 @@ class Basic_Form_Inputs{
 			';
 
 		/******************************************/
-		//Imprimir dato	
+		//Imprimir dato
 		echo $input;
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea una linea con un checkbox de terminos y condiciones
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear una linea en donde muestra la opcion de terminos y 
-	* condiciones, al tener esta opcion presente deshabilita el boton 
-	* submit del formulario, impidiendo su ejecucion hasta que no se 
+	* Permite crear una linea en donde muestra la opcion de terminos y
+	* condiciones, al tener esta opcion presente deshabilita el boton
+	* submit del formulario, impidiendo su ejecucion hasta que no se
 	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_conditional_submit('terminos','He leido los terminos y condiciones', 'submit_btn' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $name         Nombre del identificador del Input
-	* String   $text       Texto 
+	* String   $text         Texto
 	* String   $submit_name  Identificador del boton submit del formulario
 	* @return  String
 	************************************************************************/
 	public function form_conditional_submit($name, $text, $submit_name){
-		
+
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-sm-12 field">
-				<div class="col-sm-8">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 					<div class="checkbox checkbox-primary">
 						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
-						<label>
-							'.$text.' 
-						</label>
+						<label>'.$text.'</label>
 					</div>
 				</div>
 			</div>
 		';
-			
-		//ejecucion script	
+
+		/******************************************/
+		//ejecucion script
 		$input .= '
 			<script>
 				//se desactiva el boton f5
@@ -2510,27 +2527,27 @@ class Basic_Form_Inputs{
 			';
 
 		/******************************************/
-		//Imprimir dato	
+		//Imprimir dato
 		echo $input;
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un cuadro con texto interno
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un cuadro de texto
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_text_box('www.google.cl', 400);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $link         Enlace con el documento a mostrar en el popup
 	* String   $height       Altura del div
 	* @return  String
 	************************************************************************/
 	public function form_text_box($link, $height, $arrCambios){
-		
+
 		//Obtengo datos
 		$content = file_get_contents($link);
 		//Elimina acentos
@@ -2539,7 +2556,7 @@ class Basic_Form_Inputs{
 		$content = str_replace('í','i',$content);
 		$content = str_replace('ó','o',$content);
 		$content = str_replace('ú','u',$content);
-		
+
 		foreach($arrCambios as $cambios=>$cambio){
 			$content = str_replace($cambio['Original'],$cambio['Cambio'],$content);
 		}
@@ -2547,29 +2564,29 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-sm-12">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div style="overflow-y: auto;padding:10px;height: '.$height.'px;">
 					'.$content.'
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		';
-		
+
 		/******************************************/
-		//Imprimir dato	
+		//Imprimir dato
 		echo $input;
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select('Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', 'idMes>2', 'ORDER BY Nombre ASC', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2598,22 +2615,27 @@ class Basic_Form_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Variables
 			$filtro        = '';
 			$data_required = '';
-			
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
@@ -2629,7 +2651,7 @@ class Basic_Form_Inputs{
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter!='0' && $filter!=''){
@@ -2639,45 +2661,53 @@ class Basic_Form_Inputs{
 				//que exista un dato
 				$filtro .= $datos[0]."!='' ";
 			}
-			
+
 			/******************************************/
 			//Verifica si se enviaron comandos extras
 			if(!isset($extrafilter) OR $extrafilter==''){
 				$extrafilter = $datos[0].' ASC ';
 			}
-			
+
 			/******************************************/
 			//consulto
 			$arrSelect = array();
 			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $extrafilter, $dbConn, 'form_select', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-											
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect!=false){
-				
+
 				/******************************************/
 				//generacion del input
-				$input = $this->select_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);		
-						
+				$input = $this->select_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);
+
 				/******************************************/
-				//Imprimir dato	
+				//Imprimir dato
 				echo $input;
-			}	
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			}
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_filter('Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', 'idMes>2', 'ORDER BY Nombre ASC', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2704,12 +2734,12 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
@@ -2720,22 +2750,27 @@ class Basic_Form_Inputs{
 			if(validaDispositivoMovil()){
 				$input = $this->form_select($placeholder,$name, $value, $required, $data1, $data2, $table, $filter, $extrafilter, $dbConn);
 			}else{
-				
+
 				/******************************************/
-				//Si el dato no es requerido
-				if($required==1){
-					$requerido = '';//variable vacia
-				//Si el dato es requerido
-				}elseif($required==2){
-					$requerido = 'required';//se marca como requerido
-					$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-				}	
-				
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
+
 				/******************************************/
 				//Variables
 				$filtro        = '';
 				$data_required = '';
-				
+
 				/******************************************/
 				//Se separan los datos a mostrar
 				$datos = explode(",", $data2);
@@ -2751,7 +2786,7 @@ class Basic_Form_Inputs{
 						$data_required .= ','.$dato.' AS '.$dato;
 					}
 				}
-				
+
 				/******************************************/
 				//Si se envia filtro desde afuera
 				if($filter!='0' && $filter!=''){
@@ -2761,7 +2796,7 @@ class Basic_Form_Inputs{
 					//que exista un dato
 					$filtro .= $datos[0]."!='' ";
 				}
-				
+
 				/******************************************/
 				//Verifica si se enviaron mas datos
 				if(!isset($extrafilter) OR $extrafilter==''){
@@ -2772,31 +2807,31 @@ class Basic_Form_Inputs{
 				//consulto
 				$arrSelect = array();
 				$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $extrafilter, $dbConn, 'form_select_filter', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-				
+
 				/******************************************/
-				//si hay resultados							
+				//si hay resultados
 				if($arrSelect!=false){
-					
+
 					/******************************************/
 					//generacion del input
-					$input  = $this->chosen_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);		
+					$input  = $this->chosen_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);
 					//funcionalidad
-					$input .= $this->chosen_select_script($name);		
+					$input .= $this->chosen_select_script($name);
 					//si es requerido
-					$input .= $this->chosen_required($name, $required);		
-					
+					$input .= $this->chosen_required($name, $required);
+
 					/******************************************/
-					//Imprimir dato	
+					//Imprimir dato
 					echo $input;
-							
+
 				//si no hay datos
 				}elseif(empty($arrSelect) OR $arrSelect==''){
 					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+					alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 				//si existe un error
 				}elseif($arrSelect==false){
 					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+					alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
 				}
 			}
 		}
@@ -2804,15 +2839,15 @@ class Basic_Form_Inputs{
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
+	* Permite crear un input tipo select en base a datos de la base de datos,
 	* que tambien obtiene datos desde otras tablas
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_join('Empresas','empresas', 1, 1, 'idEmpresa', 'Nombre,Tipo', 'tabla_empresas', 'tabla_tipo','', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2839,34 +2874,39 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Variables
 			$filtro        = '';
 			$data_required = '';
-			
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
@@ -2882,7 +2922,7 @@ class Basic_Form_Inputs{
 					$data_required .= ','.$dato;
 				}
 			}
-			
+
 			/******************************************/
 			//Ordenar por el dato requerido
 			$order_by = $table1.'.'.$datos[0].' ASC ';
@@ -2894,51 +2934,51 @@ class Basic_Form_Inputs{
 				//que exista un dato
 				$filtro .= $datos[0]."!='' ";
 			}
-			
+
 			//Agrupo los datos
 			$filtro .= ' GROUP BY '.$table1.'.'.$data1;
-			
+
 			/******************************************/
 			//consulto
 			$arrSelect = array();
 			$arrSelect = db_select_array (false, $table1.'.'.$data1.' AS idData '.$data_required, $table1, 'INNER JOIN '.$table2.' ON '.$table2.'.'.$data1.' = '.$table1.'.'.$data1, $filtro, $order_by, $dbConn, 'form_select_join', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-			
+
 			/******************************************/
-			//si hay resultados							
+			//si hay resultados
 			if($arrSelect!=false){
-				
+
 				/******************************************/
 				//se crea formulario
-				$input = $this->select_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);		
-								
+				$input = $this->select_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);
+
 				/******************************************/
-				//Imprimir dato	
+				//Imprimir dato
 				echo $input;
-						
+
 			//si no hay datos
 			}elseif(empty($arrSelect) OR $arrSelect==''){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			//si existe un error
 			}elseif($arrSelect==false){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* que tambien obtiene datos desde otras tablas, agregando un filtro 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* que tambien obtiene datos desde otras tablas, agregando un filtro
 	* para encontrar datos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_join_filter('Empresas','empresas', 1, 1, 'idEmpresa', 'Nombre,Tipo', 'tabla_empresas', 'tabla_tipo','', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -2965,12 +3005,12 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
@@ -2981,22 +3021,27 @@ class Basic_Form_Inputs{
 			if(validaDispositivoMovil()){
 				$input = $this->form_select_join($placeholder,$name, $value, $required, $data1, $data2, $table1, $table2, $filter, $dbConn);
 			}else{
-				
+
 				/******************************************/
-				//Si el dato no es requerido
-				if($required==1){
-					$requerido = '';//variable vacia
-				//Si el dato es requerido
-				}elseif($required==2){
-					$requerido = 'required';//se marca como requerido
-					$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-				}	
-				
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
+
 				/******************************************/
 				//Variables
 				$filtro        = '';
 				$data_required = '';
-				
+
 				/******************************************/
 				//Se separan los datos a mostrar
 				$datos = explode(",", $data2);
@@ -3012,7 +3057,7 @@ class Basic_Form_Inputs{
 						$data_required .= ','.$dato;
 					}
 				}
-				
+
 				/******************************************/
 				//Ordenar por el dato requerido
 				$order_by = $table1.'.'.$datos[0].' ASC ';
@@ -3024,55 +3069,55 @@ class Basic_Form_Inputs{
 					//que exista un dato
 					$filtro .= $datos[0]."!='' ";
 				}
-				
+
 				//Agrupo los datos
 				$filtro .= ' GROUP BY '.$table1.'.'.$data1;
-				
+
 				/******************************************/
 				//consulto
 				$arrSelect = array();
 				$arrSelect = db_select_array (false, $table1.'.'.$data1.' AS idData '.$data_required, $table1, 'INNER JOIN '.$table2.' ON '.$table2.'.'.$data1.' = '.$table1.'.'.$data1, $filtro, $order_by, $dbConn, 'form_select_join_filter', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
-												
+
 				/******************************************/
-				//si hay resultados							
+				//si hay resultados
 				if($arrSelect!=false){
-				
+
 					/******************************************/
 					//generacion del input
-					$input  = $this->chosen_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);		
+					$input  = $this->chosen_input_gen($name, $placeholder, $requerido, $arrSelect, $value, $datos);
 					//funcionalidad
-					$input .= $this->chosen_select_script($name);		
+					$input .= $this->chosen_select_script($name);
 					//si es requerido
-					$input .= $this->chosen_required($name, $required);		
-									
+					$input .= $this->chosen_required($name, $required);
+
 					/******************************************/
-					//Imprimir dato	
+					//Imprimir dato
 					echo $input;
-							
+
 				//si no hay datos
 				}elseif(empty($arrSelect) OR $arrSelect==''){
 					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+					alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 				//si existe un error
 				}elseif($arrSelect==false){
 					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+					alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
 				}
-				
+
 			}
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input descativado
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input desactivado con datos desde la base de datos
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_disabled('Categoria','idCategoria', 1, 1,'idCategoria','Nombre','tabla_categorias','', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -3086,7 +3131,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_select_disabled($placeholder,$name, $value, $required, $data1, $data2, $table, $filter, $dbConn){
-		
+
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -3098,34 +3143,39 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Variables
 			$filtro        = '';
 			$data_required = '';
-			
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos = explode(",", $data2);
@@ -3141,7 +3191,7 @@ class Basic_Form_Inputs{
 					$data_required .= ','.$dato.' AS '.$dato;
 				}
 			}
-			
+
 			/******************************************/
 			//Ordenar por el dato requerido
 			$order_by = $datos[0].' ASC ';
@@ -3153,15 +3203,15 @@ class Basic_Form_Inputs{
 				//que exista un dato
 				$filtro .= $datos[0]."!='' ";
 			}
-			
+
 			/******************************************/
 			//se hace consulta
 			$rowselect = db_select_data (false, $data1.' AS idData '.$data_required, $table, '', $data1.'='.$value.' AND '.$filtro.' ORDER BY '.$order_by, $dbConn, 'form_select_disabled', basename($_SERVER["REQUEST_URI"], ".php"), 'rowselect');
-				
+
 			/******************************************/
-			//si hay resultados							
+			//si hay resultados
 			if($rowselect!=false){
-				
+
 				/******************************************/
 				//Escribo los datos solicitados
 				if(count($datos)==1){
@@ -3172,42 +3222,42 @@ class Basic_Form_Inputs{
 						$data_writing .= $rowselect[$dato].' ';
 					}
 				}
-									
+
 				/******************************************/
+				//generacion del input
 				$input = '<div class="form-group" id="div_'.$name.'">
-							<label class="control-label col-sm-4">'.$placeholder.'</label>
-							<div class="col-sm-8 field">
-								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" 
-								value="'.$data_writing.'"   disabled="disabled">
+							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.$data_writing.'"   disabled="disabled">
 							</div>
-						</div>';	
-				
+						</div>';
+
 				/******************************************/
-				//Imprimir dato	
-				echo $input;	
-							
+				//Imprimir dato
+				echo $input;
+
 			//si no hay datos
 			}elseif(empty($rowselect) OR $rowselect==''){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				alert_post_data(4,1,1, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			//si existe un error
 			}elseif($rowselect==false){
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');	
-			}	
+				alert_post_data(4,1,1, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			}
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input numerico
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input que contiene numeros enteros secuenciales
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_n_auto('Notas','notas', '', 1, 1, 7 );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -3230,62 +3280,67 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($valor_ini)&&$valor_ini!=''){ 
+		if (!validarNumero($valor_ini)&&$valor_ini!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $valor_ini ('.$valor_ini.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($valor_ini)&&$valor_ini!=''){ 
+		if (!validaEntero($valor_ini)&&$valor_ini!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $valor_ini ('.$valor_ini.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($valor_fin)&&$valor_fin!=''){ 
+		if (!validarNumero($valor_fin)&&$valor_fin!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $valor_fin ('.$valor_fin.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($valor_fin)&&$valor_fin!=''){ 
+		if (!validaEntero($valor_fin)&&$valor_fin!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $valor_fin ('.$valor_fin.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">			
-					<label for="text2" class="control-label col-sm-4">'.$placeholder.'</label>			
-					<div class="col-sm-8 field">				
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<select class="form-control" name="'.$name.'" id="'.$name.'" '.$requerido.'>
 							<option value="">Seleccione una Opcion</option>';
-							
+
 							/******************************************/
 							//Recorro
 							for ($i = $valor_ini; $i <= $valor_fin; $i++) {
-									
+
 								/******************************************/
 								//si la opcion actual esta seleccionada
 								if(isset($value)&&$value==$i) {
@@ -3293,30 +3348,30 @@ class Basic_Form_Inputs{
 								}else{
 									$j = '';
 								}
-								
+
 								/******************************************/
-								$input .= '<option value="'.$i.'" '.$j.'>'.$i.'</option>';					
-							} 	       				
-				$input .= '</select>			
-					</div>		
+								$input .= '<option value="'.$i.'" '.$j.'>'.$i.'</option>';
+							}
+				$input .= '</select>
+					</div>
 				</div>';
-									
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input select con los paises
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input select que trae los paises
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_country('Pais','idPais', '', 2, $dbConn);
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -3338,29 +3393,34 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value)&&$value!=''){ 
+		if (!validarNumero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value)&&$value!=''){ 
+		if (!validaEntero($value)&&$value!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required==1){
-				$requerido = '';//variable vacia
-			//Si el dato es requerido
-			}elseif($required==2){
-				$requerido = 'required';//se marca como requerido
-				$_SESSION['form_require'].=','.$name;//se guarda en la sesion para la validacion al guardar formulario
-			}	
-			
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Pais por defecto
 			if(isset($value)&&$value!=''){
@@ -3373,31 +3433,31 @@ class Basic_Form_Inputs{
 			//generacion del input
 			$input = '
 				<div class="form-group" id="div_'.$name.'">
-					<label for="text2" class="control-label col-sm-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-sm-8 field">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<select name="'.$name.'" id="'.$name.'" class="form-control frm_country selectpicker countrypicker" '.$requerido.'  data-live-search="true" data-default="'.$pais.'" data-flag="true"></select>
 					</div>
 				</div>';
-					
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select dependiente
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos,
 	* dependiente uno de otro
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*
+	* 	//se imprime input
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC',
 	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
 	*                              $dbConn, 'form1' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
 	* String   $name_x          Nombre del identificador del Input
@@ -3408,13 +3468,12 @@ class Basic_Form_Inputs{
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
-	* 
 	* Object   $dbConn          Puntero a la base de datos
 	* String   $form_name       Nombre del formulario actual
 	* @return  String
 	************************************************************************/
 	public function form_select_join_depend1($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $join_1,  $filter_1,   $extracomand_1,
-											 $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $join_2,  $filter_2,   $extracomand_2, 
+											 $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $join_2,  $filter_2,   $extracomand_2,
 											 $dbConn, $form_name){
 
 		/********************************************************/
@@ -3432,34 +3491,34 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -3467,70 +3526,70 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) {case 1:$requerido[1] = '';break;case 2:$requerido[1] = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) {case 1:$requerido[2] = '';break;case 2:$requerido[2] = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1] = explode(",", $dataB_1);
 			$datos[2] = explode(",", $dataB_2);
-			
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
 			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
-			
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			
+			if(!isset($extracomand_1) OR $extracomand_1==''){$extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_1 = array();
 			$arrSelect_2 = array();
 			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, $join_1, $filtro[1], $extracomand_1, $dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, $join_2, $filtro[2], $extracomand_2, $dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
-			
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, $join_2, $filtro[2], $extracomand_2,$dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
-			
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select dependiente
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos,
 	* dependiente uno de otro
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*
+	* 	//se imprime input
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC',
 	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
 	*                              $dbConn, 'form1' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
 	* String   $name_x          Nombre del identificador del Input
@@ -3541,13 +3600,12 @@ class Basic_Form_Inputs{
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
-	* 
 	* Object   $dbConn          Puntero a la base de datos
 	* String   $form_name       Nombre del formulario actual
 	* @return  String
 	************************************************************************/
 	public function form_select_depend1($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
-										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
 										$dbConn, $form_name){
 
 		/********************************************************/
@@ -3565,34 +3623,34 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -3600,70 +3658,70 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) {case 1:$requerido[1] = '';break;case 2:$requerido[1] = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) {case 1:$requerido[2] = '';break;case 2:$requerido[2] = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1] = explode(",", $dataB_1);
 			$datos[2] = explode(",", $dataB_2);
-			
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
 			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
-			
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			
+			if(!isset($extracomand_1) OR $extracomand_1==''){$extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_1 = array();
 			$arrSelect_2 = array();
 			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
-			
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2,$dbConn, 'form_select_depend1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
-			
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select dependiente
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos,
 	* dependiente uno de otro
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*
+	* 	//se imprime input
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC',
 	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
 	*                              $dbConn, 'form1' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
 	* String   $name_x          Nombre del identificador del Input
@@ -3674,13 +3732,12 @@ class Basic_Form_Inputs{
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
-	* 
 	* Object   $dbConn          Puntero a la base de datos
 	* String   $form_name       Nombre del formulario actual
 	* @return  String
 	************************************************************************/
 	public function form_select_depend2($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
-										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
 										$placeholder_3, $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,   $extracomand_3,
 										$dbConn, $form_name){
 
@@ -3703,42 +3760,42 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_3)&&$value_3!=''){ 
+		if (!validarNumero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_3)&&$value_3!=''){ 
+		if (!validaEntero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -3746,81 +3803,82 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			if($required_3==1){$requerido[3]=''; }elseif($required_3==2){$requerido[3]='required';$_SESSION['form_require'].=','.$name_3;}
-			
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) {case 1:$requerido[1] = '';break;case 2:$requerido[1] = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) {case 1:$requerido[2] = '';break;case 2:$requerido[2] = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+			switch ($required_3) {case 1:$requerido[3] = '';break;case 2:$requerido[3] = 'required';$_SESSION['form_require'].= ','.$name_3;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1] = explode(",", $dataB_1);
 			$datos[2] = explode(",", $dataB_2);
 			$datos[3] = explode(",", $dataB_3);
-			
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[3])==1){$data_required[3] .= ','.$datos[3][0].' AS '.$datos[3][0];}else{foreach($datos[3] as $dato){$data_required[3] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
 			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
 			if($filter_3!='0' && $filter_3!=''){$filtro[3] .= $filter_3." AND ".$datos[3][0]."!='' ";}elseif($filter_3=='' OR $filter_3==0){$filtro[3] .= $datos[3][0]."!='' ";}
-			
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC '; }
-			
+			if(!isset($extracomand_1) OR $extracomand_1==''){$extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+			if(!isset($extracomand_3) OR $extracomand_3==''){$extracomand_3 = $datos[3][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_1 = array();
 			$arrSelect_2 = array();
 			$arrSelect_3 = array();
 			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend2', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend2', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2,$dbConn, 'form_select_depend2', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
 			$arrSelect_3 = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3], $table_3, '', $filtro[3], $extracomand_3, $dbConn, 'form_select_depend2', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
-			
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_3!=false){
-				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);
 				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
 			}
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select dependiente
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos,
 	* dependiente uno de otro
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*
+	* 	//se imprime input
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC',
 	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
 	*                              $dbConn, 'form1' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
 	* String   $name_x          Nombre del identificador del Input
@@ -3831,13 +3889,12 @@ class Basic_Form_Inputs{
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
-	* 
 	* Object   $dbConn          Puntero a la base de datos
 	* String   $form_name       Nombre del formulario actual
 	* @return  String
 	************************************************************************/
 	public function form_select_depend3($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
-										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
 										$placeholder_3, $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,   $extracomand_3,
 										$placeholder_4, $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,   $extracomand_4,
 										$dbConn, $form_name){
@@ -3865,50 +3922,50 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_3)&&$value_3!=''){ 
+		if (!validarNumero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_4)&&$value_4!=''){ 
+		if (!validarNumero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_3)&&$value_3!=''){ 
+		if (!validaEntero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_4)&&$value_4!=''){ 
+		if (!validaEntero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -3916,42 +3973,43 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			if($required_3==1){$requerido[3]=''; }elseif($required_3==2){$requerido[3]='required';$_SESSION['form_require'].=','.$name_3;}
-			if($required_4==1){$requerido[4]=''; }elseif($required_4==2){$requerido[4]='required';$_SESSION['form_require'].=','.$name_4;}
-			
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) {case 1:$requerido[1] = '';break;case 2:$requerido[1] = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) {case 1:$requerido[2] = '';break;case 2:$requerido[2] = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+			switch ($required_3) {case 1:$requerido[3] = '';break;case 2:$requerido[3] = 'required';$_SESSION['form_require'].= ','.$name_3;break;}
+			switch ($required_4) {case 1:$requerido[4] = '';break;case 2:$requerido[4] = 'required';$_SESSION['form_require'].= ','.$name_4;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1] = explode(",", $dataB_1);
 			$datos[2] = explode(",", $dataB_2);
 			$datos[3] = explode(",", $dataB_3);
 			$datos[4] = explode(",", $dataB_4);
-			
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[3])==1){$data_required[3] .= ','.$datos[3][0].' AS '.$datos[3][0];}else{foreach($datos[3] as $dato){$data_required[3] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[4])==1){$data_required[4] .= ','.$datos[4][0].' AS '.$datos[4][0];}else{foreach($datos[4] as $dato){$data_required[4] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
 			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
 			if($filter_3!='0' && $filter_3!=''){$filtro[3] .= $filter_3." AND ".$datos[3][0]."!='' ";}elseif($filter_3=='' OR $filter_3==0){$filtro[3] .= $datos[3][0]."!='' ";}
 			if($filter_4!='0' && $filter_4!=''){$filtro[4] .= $filter_4." AND ".$datos[4][0]."!='' ";}elseif($filter_4=='' OR $filter_4==0){$filtro[4] .= $datos[4][0]."!='' ";}
-			
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC '; }
-			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4 = $datos[4][0].' ASC '; }
-			
+			if(!isset($extracomand_1) OR $extracomand_1==''){$extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+			if(!isset($extracomand_3) OR $extracomand_3==''){$extracomand_3 = $datos[3][0].' ASC ';}
+			if(!isset($extracomand_4) OR $extracomand_4==''){$extracomand_4 = $datos[4][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_1 = array();
@@ -3959,49 +4017,49 @@ class Basic_Form_Inputs{
 			$arrSelect_3 = array();
 			$arrSelect_4 = array();
 			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend3', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend3', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2,$dbConn, 'form_select_depend3', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
 			$arrSelect_3 = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3], $table_3, '', $filtro[3], $extracomand_3, $dbConn, 'form_select_depend3', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
 			$arrSelect_4 = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4], $table_4, '', $filtro[4], $extracomand_4, $dbConn, 'form_select_depend3', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
-			
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_3!=false){
-				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);
 				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_4!=false){
-				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);
 				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
 			}
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_filter('Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -4016,7 +4074,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_select_depend4($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
-										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
 										$placeholder_3, $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,   $extracomand_3,
 										$placeholder_4, $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,   $extracomand_4,
 										$placeholder_5, $name_5,  $value_5,  $required_5,  $dataA_5,  $dataB_5,  $table_5,  $filter_5,   $extracomand_5,
@@ -4049,58 +4107,58 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_3)&&$value_3!=''){ 
+		if (!validarNumero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_4)&&$value_4!=''){ 
+		if (!validarNumero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_5)&&$value_5!=''){ 
+		if (!validarNumero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_3)&&$value_3!=''){ 
+		if (!validaEntero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_4)&&$value_4!=''){ 
+		if (!validaEntero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_5)&&$value_5!=''){ 
+		if (!validaEntero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -4108,15 +4166,16 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			if($required_3==1){$requerido[3]=''; }elseif($required_3==2){$requerido[3]='required';$_SESSION['form_require'].=','.$name_3;}
-			if($required_4==1){$requerido[4]=''; }elseif($required_4==2){$requerido[4]='required';$_SESSION['form_require'].=','.$name_4;}
-			if($required_5==1){$requerido[5]=''; }elseif($required_5==2){$requerido[5]='required';$_SESSION['form_require'].=','.$name_5;}
-												
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) {case 1:$requerido[1] = '';break;case 2:$requerido[1] = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) {case 1:$requerido[2] = '';break;case 2:$requerido[2] = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+			switch ($required_3) {case 1:$requerido[3] = '';break;case 2:$requerido[3] = 'required';$_SESSION['form_require'].= ','.$name_3;break;}
+			switch ($required_4) {case 1:$requerido[4] = '';break;case 2:$requerido[4] = 'required';$_SESSION['form_require'].= ','.$name_4;break;}
+			switch ($required_5) {case 1:$requerido[5] = '';break;case 2:$requerido[5] = 'required';$_SESSION['form_require'].= ','.$name_5;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1] = explode(",", $dataB_1);
@@ -4124,7 +4183,7 @@ class Basic_Form_Inputs{
 			$datos[3] = explode(",", $dataB_3);
 			$datos[4] = explode(",", $dataB_4);
 			$datos[5] = explode(",", $dataB_5);
-			
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
@@ -4132,7 +4191,7 @@ class Basic_Form_Inputs{
 			if(count($datos[3])==1){$data_required[3] .= ','.$datos[3][0].' AS '.$datos[3][0];}else{foreach($datos[3] as $dato){$data_required[3] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[4])==1){$data_required[4] .= ','.$datos[4][0].' AS '.$datos[4][0];}else{foreach($datos[4] as $dato){$data_required[4] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[5])==1){$data_required[5] .= ','.$datos[5][0].' AS '.$datos[5][0];}else{foreach($datos[5] as $dato){$data_required[5] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
@@ -4143,11 +4202,11 @@ class Basic_Form_Inputs{
 
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC '; }
-			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4 = $datos[4][0].' ASC '; }
-			if(!isset($extracomand_5) OR $extracomand_5==''){ $extracomand_5 = $datos[5][0].' ASC '; }
+			if(!isset($extracomand_1) OR $extracomand_1==''){$extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+			if(!isset($extracomand_3) OR $extracomand_3==''){$extracomand_3 = $datos[3][0].' ASC ';}
+			if(!isset($extracomand_4) OR $extracomand_4==''){$extracomand_4 = $datos[4][0].' ASC ';}
+			if(!isset($extracomand_5) OR $extracomand_5==''){$extracomand_5 = $datos[5][0].' ASC ';}
 
 			/******************************************/
 			//consulto
@@ -4157,55 +4216,55 @@ class Basic_Form_Inputs{
 			$arrSelect_4 = array();
 			$arrSelect_5 = array();
 			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2,$dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
 			$arrSelect_3 = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3], $table_3, '', $filtro[3], $extracomand_3, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
 			$arrSelect_4 = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4], $table_4, '', $filtro[4], $extracomand_4, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
 			$arrSelect_5 = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5], $table_5, '', $filtro[5], $extracomand_5, $dbConn, 'form_select_depend4', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
-									
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_3!=false){
-				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);
 				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_4!=false){
-				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);
 				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_5!=false){
-				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);
 				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
 			}
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_filter('Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -4220,7 +4279,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_select_depend5($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
-										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
 										$placeholder_3, $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,   $extracomand_3,
 										$placeholder_4, $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,   $extracomand_4,
 										$placeholder_5, $name_5,  $value_5,  $required_5,  $dataA_5,  $dataB_5,  $table_5,  $filter_5,   $extracomand_5,
@@ -4258,66 +4317,66 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_3)&&$value_3!=''){ 
+		if (!validarNumero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_4)&&$value_4!=''){ 
+		if (!validarNumero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_5)&&$value_5!=''){ 
+		if (!validarNumero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_6)&&$value_6!=''){ 
+		if (!validarNumero($value_6)&&$value_6!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_3)&&$value_3!=''){ 
+		if (!validaEntero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_4)&&$value_4!=''){ 
+		if (!validaEntero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_5)&&$value_5!=''){ 
+		if (!validaEntero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_6)&&$value_6!=''){ 
+		if (!validaEntero($value_6)&&$value_6!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -4325,16 +4384,17 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){$requerido[1]=''; }elseif($required_1==2){$requerido[1]='required';$_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			if($required_3==1){$requerido[3]=''; }elseif($required_3==2){$requerido[3]='required';$_SESSION['form_require'].=','.$name_3;}
-			if($required_4==1){$requerido[4]=''; }elseif($required_4==2){$requerido[4]='required';$_SESSION['form_require'].=','.$name_4;}
-			if($required_5==1){$requerido[5]=''; }elseif($required_5==2){$requerido[5]='required';$_SESSION['form_require'].=','.$name_5;}
-			if($required_6==1){$requerido[6]=''; }elseif($required_6==2){$requerido[6]='required';$_SESSION['form_require'].=','.$name_6;}
-													
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) {case 1:$requerido[1] = '';break;case 2:$requerido[1] = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) {case 1:$requerido[2] = '';break;case 2:$requerido[2] = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+			switch ($required_3) {case 1:$requerido[3] = '';break;case 2:$requerido[3] = 'required';$_SESSION['form_require'].= ','.$name_3;break;}
+			switch ($required_4) {case 1:$requerido[4] = '';break;case 2:$requerido[4] = 'required';$_SESSION['form_require'].= ','.$name_4;break;}
+			switch ($required_5) {case 1:$requerido[5] = '';break;case 2:$requerido[5] = 'required';$_SESSION['form_require'].= ','.$name_5;break;}
+			switch ($required_6) {case 1:$requerido[6] = '';break;case 2:$requerido[6] = 'required';$_SESSION['form_require'].= ','.$name_6;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1] = explode(",", $dataB_1);
@@ -4343,7 +4403,7 @@ class Basic_Form_Inputs{
 			$datos[4] = explode(",", $dataB_4);
 			$datos[5] = explode(",", $dataB_5);
 			$datos[6] = explode(",", $dataB_6);
-				
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[1])==1){$data_required[1] .= ','.$datos[1][0].' AS '.$datos[1][0];}else{foreach($datos[1] as $dato){$data_required[1] .= ','.$dato.' AS '.$dato;}}
@@ -4352,7 +4412,7 @@ class Basic_Form_Inputs{
 			if(count($datos[4])==1){$data_required[4] .= ','.$datos[4][0].' AS '.$datos[4][0];}else{foreach($datos[4] as $dato){$data_required[4] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[5])==1){$data_required[5] .= ','.$datos[5][0].' AS '.$datos[5][0];}else{foreach($datos[5] as $dato){$data_required[5] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[6])==1){$data_required[6] .= ','.$datos[6][0].' AS '.$datos[6][0];}else{foreach($datos[6] as $dato){$data_required[6] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_1!='0' && $filter_1!=''){$filtro[1] .= $filter_1." AND ".$datos[1][0]."!='' ";}elseif($filter_1=='' OR $filter_1==0){$filtro[1] .= $datos[1][0]."!='' ";}
@@ -4361,15 +4421,15 @@ class Basic_Form_Inputs{
 			if($filter_4!='0' && $filter_4!=''){$filtro[4] .= $filter_4." AND ".$datos[4][0]."!='' ";}elseif($filter_4=='' OR $filter_4==0){$filtro[4] .= $datos[4][0]."!='' ";}
 			if($filter_5!='0' && $filter_5!=''){$filtro[5] .= $filter_5." AND ".$datos[5][0]."!='' ";}elseif($filter_5=='' OR $filter_5==0){$filtro[5] .= $datos[5][0]."!='' ";}
 			if($filter_6!='0' && $filter_6!=''){$filtro[6] .= $filter_6." AND ".$datos[6][0]."!='' ";}elseif($filter_6=='' OR $filter_6==0){$filtro[6] .= $datos[6][0]."!='' ";}
-									
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC '; }
-			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4 = $datos[4][0].' ASC '; }
-			if(!isset($extracomand_5) OR $extracomand_5==''){ $extracomand_5 = $datos[5][0].' ASC '; }
-			if(!isset($extracomand_6) OR $extracomand_6==''){ $extracomand_6 = $datos[6][0].' ASC '; }
+			if(!isset($extracomand_1) OR $extracomand_1==''){$extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+			if(!isset($extracomand_3) OR $extracomand_3==''){$extracomand_3 = $datos[3][0].' ASC ';}
+			if(!isset($extracomand_4) OR $extracomand_4==''){$extracomand_4 = $datos[4][0].' ASC ';}
+			if(!isset($extracomand_5) OR $extracomand_5==''){$extracomand_5 = $datos[5][0].' ASC ';}
+			if(!isset($extracomand_6) OR $extracomand_6==''){$extracomand_6 = $datos[6][0].' ASC ';}
 
 			/******************************************/
 			//consulto
@@ -4380,61 +4440,61 @@ class Basic_Form_Inputs{
 			$arrSelect_5 = array();
 			$arrSelect_6 = array();
 			$arrSelect_1 = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2,$dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
 			$arrSelect_3 = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3], $table_3, '', $filtro[3], $extracomand_3, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
 			$arrSelect_4 = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4], $table_4, '', $filtro[4], $extracomand_4, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
 			$arrSelect_5 = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5], $table_5, '', $filtro[5], $extracomand_5, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
 			$arrSelect_6 = db_select_array (false, $dataA_6.' AS idData ,'.$dataA_5.' AS idDataFilter '.$data_required[6], $table_6, '', $filtro[6], $extracomand_6, $dbConn, 'form_select_depend5', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_6');
-									
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_3!=false){
-				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);
 				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_4!=false){
-				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);
 				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_5!=false){
-				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);
 				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_6!=false){
-				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);		
+				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);
 				$input .= $this->select_input_script($arrSelect_6, $value_6, $name_5, $name_6, $datos[6], $form_name);
 			}
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_filter('Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -4449,7 +4509,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_select_depend25($placeholder_1,  $name_1,   $value_1,   $required_1,   $dataA_1,   $dataB_1,   $table_1,   $filter_1,   $extracomand_1,
-										$placeholder_2,  $name_2,   $value_2,   $required_2,   $dataA_2,   $dataB_2,   $table_2,   $filter_2,   $extracomand_2, 
+										$placeholder_2,  $name_2,   $value_2,   $required_2,   $dataA_2,   $dataB_2,   $table_2,   $filter_2,   $extracomand_2,
 										$placeholder_3,  $name_3,   $value_3,   $required_3,   $dataA_3,   $dataB_3,   $table_3,   $filter_3,   $extracomand_3,
 										$placeholder_4,  $name_4,   $value_4,   $required_4,   $dataA_4,   $dataB_4,   $table_4,   $filter_4,   $extracomand_4,
 										$placeholder_5,  $name_5,   $value_5,   $required_5,   $dataA_5,   $dataB_5,   $table_5,   $filter_5,   $extracomand_5,
@@ -4582,218 +4642,218 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_3)&&$value_3!=''){ 
+		if (!validarNumero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_4)&&$value_4!=''){ 
+		if (!validarNumero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_5)&&$value_5!=''){ 
+		if (!validarNumero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_6)&&$value_6!=''){ 
+		if (!validarNumero($value_6)&&$value_6!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_7)&&$value_7!=''){ 
+		if (!validarNumero($value_7)&&$value_7!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_8)&&$value_8!=''){ 
+		if (!validarNumero($value_8)&&$value_8!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_9)&&$value_9!=''){ 
+		if (!validarNumero($value_9)&&$value_9!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_10)&&$value_10!=''){ 
+		if (!validarNumero($value_10)&&$value_10!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_11)&&$value_11!=''){ 
+		if (!validarNumero($value_11)&&$value_11!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_12)&&$value_12!=''){ 
+		if (!validarNumero($value_12)&&$value_12!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_13)&&$value_13!=''){ 
+		if (!validarNumero($value_13)&&$value_13!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_14)&&$value_14!=''){ 
+		if (!validarNumero($value_14)&&$value_14!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_15)&&$value_15!=''){ 
+		if (!validarNumero($value_15)&&$value_15!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_16)&&$value_16!=''){ 
+		if (!validarNumero($value_16)&&$value_16!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_17)&&$value_17!=''){ 
+		if (!validarNumero($value_17)&&$value_17!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_18)&&$value_18!=''){ 
+		if (!validarNumero($value_18)&&$value_18!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_19)&&$value_19!=''){ 
+		if (!validarNumero($value_19)&&$value_19!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_20)&&$value_20!=''){ 
+		if (!validarNumero($value_20)&&$value_20!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_21)&&$value_21!=''){ 
+		if (!validarNumero($value_21)&&$value_21!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_22)&&$value_22!=''){ 
+		if (!validarNumero($value_22)&&$value_22!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_23)&&$value_23!=''){ 
+		if (!validarNumero($value_23)&&$value_23!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_24)&&$value_24!=''){ 
+		if (!validarNumero($value_24)&&$value_24!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_25)&&$value_25!=''){ 
+		if (!validarNumero($value_25)&&$value_25!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_3)&&$value_3!=''){ 
+		if (!validaEntero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_4)&&$value_4!=''){ 
+		if (!validaEntero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_5)&&$value_5!=''){ 
+		if (!validaEntero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_6)&&$value_6!=''){ 
+		if (!validaEntero($value_6)&&$value_6!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_7)&&$value_7!=''){ 
+		if (!validaEntero($value_7)&&$value_7!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_8)&&$value_8!=''){ 
+		if (!validaEntero($value_8)&&$value_8!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_9)&&$value_9!=''){ 
+		if (!validaEntero($value_9)&&$value_9!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_10)&&$value_10!=''){ 
+		if (!validaEntero($value_10)&&$value_10!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_11)&&$value_11!=''){ 
+		if (!validaEntero($value_11)&&$value_11!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_12)&&$value_12!=''){ 
+		if (!validaEntero($value_12)&&$value_12!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_13)&&$value_13!=''){ 
+		if (!validaEntero($value_13)&&$value_13!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_14)&&$value_14!=''){ 
+		if (!validaEntero($value_14)&&$value_14!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_15)&&$value_15!=''){ 
+		if (!validaEntero($value_15)&&$value_15!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_16)&&$value_16!=''){ 
+		if (!validaEntero($value_16)&&$value_16!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_17)&&$value_17!=''){ 
+		if (!validaEntero($value_17)&&$value_17!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_18)&&$value_18!=''){ 
+		if (!validaEntero($value_18)&&$value_18!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_19)&&$value_19!=''){ 
+		if (!validaEntero($value_19)&&$value_19!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_20)&&$value_20!=''){ 
+		if (!validaEntero($value_20)&&$value_20!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_21)&&$value_21!=''){ 
+		if (!validaEntero($value_21)&&$value_21!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_22)&&$value_22!=''){ 
+		if (!validaEntero($value_22)&&$value_22!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_23)&&$value_23!=''){ 
+		if (!validaEntero($value_23)&&$value_23!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_24)&&$value_24!=''){ 
+		if (!validaEntero($value_24)&&$value_24!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_25)&&$value_25!=''){ 
+		if (!validaEntero($value_25)&&$value_25!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -4801,35 +4861,36 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){ $requerido[1]='';  }elseif($required_1==2){ $requerido[1]='required'; $_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){ $requerido[2]='';  }elseif($required_2==2){ $requerido[2]='required'; $_SESSION['form_require'].=','.$name_2;}
-			if($required_3==1){ $requerido[3]='';  }elseif($required_3==2){ $requerido[3]='required'; $_SESSION['form_require'].=','.$name_3;}
-			if($required_4==1){ $requerido[4]='';  }elseif($required_4==2){ $requerido[4]='required'; $_SESSION['form_require'].=','.$name_4;}
-			if($required_5==1){ $requerido[5]='';  }elseif($required_5==2){ $requerido[5]='required'; $_SESSION['form_require'].=','.$name_5;}
-			if($required_6==1){ $requerido[6]='';  }elseif($required_6==2){ $requerido[6]='required'; $_SESSION['form_require'].=','.$name_6;}
-			if($required_7==1){ $requerido[7]='';  }elseif($required_7==2){ $requerido[7]='required'; $_SESSION['form_require'].=','.$name_7;}
-			if($required_8==1){ $requerido[8]='';  }elseif($required_8==2){ $requerido[8]='required'; $_SESSION['form_require'].=','.$name_8;}
-			if($required_9==1){ $requerido[9]='';  }elseif($required_9==2){ $requerido[9]='required'; $_SESSION['form_require'].=','.$name_9;}
-			if($required_10==1){$requerido[10]=''; }elseif($required_10==2){$requerido[10]='required';$_SESSION['form_require'].=','.$name_10;}
-			if($required_11==1){$requerido[11]=''; }elseif($required_11==2){$requerido[11]='required';$_SESSION['form_require'].=','.$name_11;}
-			if($required_12==1){$requerido[12]=''; }elseif($required_12==2){$requerido[12]='required';$_SESSION['form_require'].=','.$name_12;}
-			if($required_13==1){$requerido[13]=''; }elseif($required_13==2){$requerido[13]='required';$_SESSION['form_require'].=','.$name_13;}
-			if($required_14==1){$requerido[14]=''; }elseif($required_14==2){$requerido[14]='required';$_SESSION['form_require'].=','.$name_14;}
-			if($required_15==1){$requerido[15]=''; }elseif($required_15==2){$requerido[15]='required';$_SESSION['form_require'].=','.$name_15;}
-			if($required_16==1){$requerido[16]=''; }elseif($required_16==2){$requerido[16]='required';$_SESSION['form_require'].=','.$name_16;}
-			if($required_17==1){$requerido[17]=''; }elseif($required_17==2){$requerido[17]='required';$_SESSION['form_require'].=','.$name_17;}
-			if($required_18==1){$requerido[18]=''; }elseif($required_18==2){$requerido[18]='required';$_SESSION['form_require'].=','.$name_18;}
-			if($required_19==1){$requerido[19]=''; }elseif($required_19==2){$requerido[19]='required';$_SESSION['form_require'].=','.$name_19;}
-			if($required_20==1){$requerido[20]=''; }elseif($required_20==2){$requerido[20]='required';$_SESSION['form_require'].=','.$name_20;}
-			if($required_21==1){$requerido[21]=''; }elseif($required_21==2){$requerido[21]='required';$_SESSION['form_require'].=','.$name_21;}
-			if($required_22==1){$requerido[22]=''; }elseif($required_22==2){$requerido[22]='required';$_SESSION['form_require'].=','.$name_22;}
-			if($required_23==1){$requerido[23]=''; }elseif($required_23==2){$requerido[23]='required';$_SESSION['form_require'].=','.$name_23;}
-			if($required_24==1){$requerido[24]=''; }elseif($required_24==2){$requerido[24]='required';$_SESSION['form_require'].=','.$name_24;}
-			if($required_25==1){$requerido[25]=''; }elseif($required_25==2){$requerido[25]='required';$_SESSION['form_require'].=','.$name_25;}
-												
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) { case 1:$requerido[1]  = '';break;case 2:$requerido[1]  = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) { case 1:$requerido[2]  = '';break;case 2:$requerido[2]  = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+			switch ($required_3) { case 1:$requerido[3]  = '';break;case 2:$requerido[3]  = 'required';$_SESSION['form_require'].= ','.$name_3;break;}
+			switch ($required_4) { case 1:$requerido[4]  = '';break;case 2:$requerido[4]  = 'required';$_SESSION['form_require'].= ','.$name_4;break;}
+			switch ($required_5) { case 1:$requerido[5]  = '';break;case 2:$requerido[5]  = 'required';$_SESSION['form_require'].= ','.$name_5;break;}
+			switch ($required_6) { case 1:$requerido[6]  = '';break;case 2:$requerido[6]  = 'required';$_SESSION['form_require'].= ','.$name_6;break;}
+			switch ($required_7) { case 1:$requerido[7]  = '';break;case 2:$requerido[7]  = 'required';$_SESSION['form_require'].= ','.$name_7;break;}
+			switch ($required_8) { case 1:$requerido[8]  = '';break;case 2:$requerido[8]  = 'required';$_SESSION['form_require'].= ','.$name_8;break;}
+			switch ($required_9) { case 1:$requerido[9]  = '';break;case 2:$requerido[9]  = 'required';$_SESSION['form_require'].= ','.$name_9;break;}
+			switch ($required_10) {case 1:$requerido[10] = '';break;case 2:$requerido[10] = 'required';$_SESSION['form_require'].= ','.$name_10;break;}
+			switch ($required_11) {case 1:$requerido[11] = '';break;case 2:$requerido[11] = 'required';$_SESSION['form_require'].= ','.$name_11;break;}
+			switch ($required_12) {case 1:$requerido[12] = '';break;case 2:$requerido[12] = 'required';$_SESSION['form_require'].= ','.$name_12;break;}
+			switch ($required_13) {case 1:$requerido[13] = '';break;case 2:$requerido[13] = 'required';$_SESSION['form_require'].= ','.$name_13;break;}
+			switch ($required_14) {case 1:$requerido[14] = '';break;case 2:$requerido[14] = 'required';$_SESSION['form_require'].= ','.$name_14;break;}
+			switch ($required_15) {case 1:$requerido[15] = '';break;case 2:$requerido[15] = 'required';$_SESSION['form_require'].= ','.$name_15;break;}
+			switch ($required_16) {case 1:$requerido[16] = '';break;case 2:$requerido[16] = 'required';$_SESSION['form_require'].= ','.$name_16;break;}
+			switch ($required_17) {case 1:$requerido[17] = '';break;case 2:$requerido[17] = 'required';$_SESSION['form_require'].= ','.$name_17;break;}
+			switch ($required_18) {case 1:$requerido[18] = '';break;case 2:$requerido[18] = 'required';$_SESSION['form_require'].= ','.$name_18;break;}
+			switch ($required_19) {case 1:$requerido[19] = '';break;case 2:$requerido[19] = 'required';$_SESSION['form_require'].= ','.$name_19;break;}
+			switch ($required_20) {case 1:$requerido[20] = '';break;case 2:$requerido[20] = 'required';$_SESSION['form_require'].= ','.$name_20;break;}
+			switch ($required_21) {case 1:$requerido[21] = '';break;case 2:$requerido[21] = 'required';$_SESSION['form_require'].= ','.$name_21;break;}
+			switch ($required_22) {case 1:$requerido[22] = '';break;case 2:$requerido[22] = 'required';$_SESSION['form_require'].= ','.$name_22;break;}
+			switch ($required_23) {case 1:$requerido[23] = '';break;case 2:$requerido[23] = 'required';$_SESSION['form_require'].= ','.$name_23;break;}
+			switch ($required_24) {case 1:$requerido[24] = '';break;case 2:$requerido[24] = 'required';$_SESSION['form_require'].= ','.$name_24;break;}
+			switch ($required_25) {case 1:$requerido[25] = '';break;case 2:$requerido[25] = 'required';$_SESSION['form_require'].= ','.$name_25;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1]  = explode(",", $dataB_1);
@@ -4838,9 +4899,9 @@ class Basic_Form_Inputs{
 			$datos[4]  = explode(",", $dataB_4);
 			$datos[5]  = explode(",", $dataB_5);
 			$datos[6]  = explode(",", $dataB_6);
-			$datos[7]  = explode(",", $dataB_7);			
-			$datos[8]  = explode(",", $dataB_8);			
-			$datos[9]  = explode(",", $dataB_9);			
+			$datos[7]  = explode(",", $dataB_7);
+			$datos[8]  = explode(",", $dataB_8);
+			$datos[9]  = explode(",", $dataB_9);
 			$datos[10] = explode(",", $dataB_10);
 			$datos[11] = explode(",", $dataB_11);
 			$datos[12] = explode(",", $dataB_12);
@@ -4857,18 +4918,18 @@ class Basic_Form_Inputs{
 			$datos[23] = explode(",", $dataB_23);
 			$datos[24] = explode(",", $dataB_24);
 			$datos[25] = explode(",", $dataB_25);
-				
+
 			/******************************************/
 			//Se arman los datos requeridos
-			if(count($datos[1])==1){ $data_required[1]  .= ','.$datos[1][0].' AS '.$datos[1][0];  }else{foreach($datos[1] as $dato){ $data_required[1]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[2])==1){ $data_required[2]  .= ','.$datos[2][0].' AS '.$datos[2][0];  }else{foreach($datos[2] as $dato){ $data_required[2]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[3])==1){ $data_required[3]  .= ','.$datos[3][0].' AS '.$datos[3][0];  }else{foreach($datos[3] as $dato){ $data_required[3]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[4])==1){ $data_required[4]  .= ','.$datos[4][0].' AS '.$datos[4][0];  }else{foreach($datos[4] as $dato){ $data_required[4]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[5])==1){ $data_required[5]  .= ','.$datos[5][0].' AS '.$datos[5][0];  }else{foreach($datos[5] as $dato){ $data_required[5]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[6])==1){ $data_required[6]  .= ','.$datos[6][0].' AS '.$datos[6][0];  }else{foreach($datos[6] as $dato){ $data_required[6]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[7])==1){ $data_required[7]  .= ','.$datos[7][0].' AS '.$datos[7][0];  }else{foreach($datos[7] as $dato){ $data_required[7]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[8])==1){ $data_required[8]  .= ','.$datos[8][0].' AS '.$datos[8][0];  }else{foreach($datos[8] as $dato){ $data_required[8]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[9])==1){ $data_required[9]  .= ','.$datos[9][0].' AS '.$datos[9][0];  }else{foreach($datos[9] as $dato){ $data_required[9]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[1])==1){$data_required[1]   .= ','.$datos[1][0].' AS '.$datos[1][0];  }else{foreach($datos[1] as $dato){$data_required[1]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){$data_required[2]   .= ','.$datos[2][0].' AS '.$datos[2][0];  }else{foreach($datos[2] as $dato){$data_required[2]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[3])==1){$data_required[3]   .= ','.$datos[3][0].' AS '.$datos[3][0];  }else{foreach($datos[3] as $dato){$data_required[3]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[4])==1){$data_required[4]   .= ','.$datos[4][0].' AS '.$datos[4][0];  }else{foreach($datos[4] as $dato){$data_required[4]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[5])==1){$data_required[5]   .= ','.$datos[5][0].' AS '.$datos[5][0];  }else{foreach($datos[5] as $dato){$data_required[5]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[6])==1){$data_required[6]   .= ','.$datos[6][0].' AS '.$datos[6][0];  }else{foreach($datos[6] as $dato){$data_required[6]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[7])==1){$data_required[7]   .= ','.$datos[7][0].' AS '.$datos[7][0];  }else{foreach($datos[7] as $dato){$data_required[7]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[8])==1){$data_required[8]   .= ','.$datos[8][0].' AS '.$datos[8][0];  }else{foreach($datos[8] as $dato){$data_required[8]   .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[9])==1){$data_required[9]   .= ','.$datos[9][0].' AS '.$datos[9][0];  }else{foreach($datos[9] as $dato){$data_required[9]   .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[10])==1){$data_required[10] .= ','.$datos[10][0].' AS '.$datos[10][0];}else{foreach($datos[10] as $dato){$data_required[10] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[11])==1){$data_required[11] .= ','.$datos[11][0].' AS '.$datos[11][0];}else{foreach($datos[11] as $dato){$data_required[11] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[12])==1){$data_required[12] .= ','.$datos[12][0].' AS '.$datos[12][0];}else{foreach($datos[12] as $dato){$data_required[12] .= ','.$dato.' AS '.$dato;}}
@@ -4885,18 +4946,18 @@ class Basic_Form_Inputs{
 			if(count($datos[23])==1){$data_required[23] .= ','.$datos[23][0].' AS '.$datos[23][0];}else{foreach($datos[23] as $dato){$data_required[23] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[24])==1){$data_required[24] .= ','.$datos[24][0].' AS '.$datos[24][0];}else{foreach($datos[24] as $dato){$data_required[24] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[25])==1){$data_required[25] .= ','.$datos[25][0].' AS '.$datos[25][0];}else{foreach($datos[25] as $dato){$data_required[25] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
-			if($filter_1!='0' && $filter_1!=''){  $filtro[1]  .= $filter_1." AND ".$datos[1][0]."!='' ";  }elseif($filter_1=='' OR $filter_1==0){  $filtro[1]  .= $datos[1][0]."!='' ";}
-			if($filter_2!='0' && $filter_2!=''){  $filtro[2]  .= $filter_2." AND ".$datos[2][0]."!='' ";  }elseif($filter_2=='' OR $filter_2==0){  $filtro[2]  .= $datos[2][0]."!='' ";}
-			if($filter_3!='0' && $filter_3!=''){  $filtro[3]  .= $filter_3." AND ".$datos[3][0]."!='' ";  }elseif($filter_3=='' OR $filter_3==0){  $filtro[3]  .= $datos[3][0]."!='' ";}
-			if($filter_4!='0' && $filter_4!=''){  $filtro[4]  .= $filter_4." AND ".$datos[4][0]."!='' ";  }elseif($filter_4=='' OR $filter_4==0){  $filtro[4]  .= $datos[4][0]."!='' ";}
-			if($filter_5!='0' && $filter_5!=''){  $filtro[5]  .= $filter_5." AND ".$datos[5][0]."!='' ";  }elseif($filter_5=='' OR $filter_5==0){  $filtro[5]  .= $datos[5][0]."!='' ";}
-			if($filter_6!='0' && $filter_6!=''){  $filtro[6]  .= $filter_6." AND ".$datos[6][0]."!='' ";  }elseif($filter_6=='' OR $filter_6==0){  $filtro[6]  .= $datos[6][0]."!='' ";}
-			if($filter_7!='0' && $filter_7!=''){  $filtro[7]  .= $filter_7." AND ".$datos[7][0]."!='' ";  }elseif($filter_7=='' OR $filter_7==0){  $filtro[7]  .= $datos[7][0]."!='' ";}
-			if($filter_8!='0' && $filter_8!=''){  $filtro[8]  .= $filter_8." AND ".$datos[8][0]."!='' ";  }elseif($filter_8=='' OR $filter_8==0){  $filtro[8]  .= $datos[8][0]."!='' ";}
-			if($filter_9!='0' && $filter_9!=''){  $filtro[9]  .= $filter_9." AND ".$datos[9][0]."!='' ";  }elseif($filter_9=='' OR $filter_9==0){  $filtro[9]  .= $datos[9][0]."!='' ";}
+			if($filter_1!='0' && $filter_1!=''){$filtro[1]   .= $filter_1." AND ".$datos[1][0]."!='' ";  }elseif($filter_1=='' OR $filter_1==0){ $filtro[1]   .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){$filtro[2]   .= $filter_2." AND ".$datos[2][0]."!='' ";  }elseif($filter_2=='' OR $filter_2==0){ $filtro[2]   .= $datos[2][0]."!='' ";}
+			if($filter_3!='0' && $filter_3!=''){$filtro[3]   .= $filter_3." AND ".$datos[3][0]."!='' ";  }elseif($filter_3=='' OR $filter_3==0){ $filtro[3]   .= $datos[3][0]."!='' ";}
+			if($filter_4!='0' && $filter_4!=''){$filtro[4]   .= $filter_4." AND ".$datos[4][0]."!='' ";  }elseif($filter_4=='' OR $filter_4==0){ $filtro[4]   .= $datos[4][0]."!='' ";}
+			if($filter_5!='0' && $filter_5!=''){$filtro[5]   .= $filter_5." AND ".$datos[5][0]."!='' ";  }elseif($filter_5=='' OR $filter_5==0){ $filtro[5]   .= $datos[5][0]."!='' ";}
+			if($filter_6!='0' && $filter_6!=''){$filtro[6]   .= $filter_6." AND ".$datos[6][0]."!='' ";  }elseif($filter_6=='' OR $filter_6==0){ $filtro[6]   .= $datos[6][0]."!='' ";}
+			if($filter_7!='0' && $filter_7!=''){$filtro[7]   .= $filter_7." AND ".$datos[7][0]."!='' ";  }elseif($filter_7=='' OR $filter_7==0){ $filtro[7]   .= $datos[7][0]."!='' ";}
+			if($filter_8!='0' && $filter_8!=''){$filtro[8]   .= $filter_8." AND ".$datos[8][0]."!='' ";  }elseif($filter_8=='' OR $filter_8==0){ $filtro[8]   .= $datos[8][0]."!='' ";}
+			if($filter_9!='0' && $filter_9!=''){$filtro[9]   .= $filter_9." AND ".$datos[9][0]."!='' ";  }elseif($filter_9=='' OR $filter_9==0){ $filtro[9]   .= $datos[9][0]."!='' ";}
 			if($filter_10!='0' && $filter_10!=''){$filtro[10] .= $filter_10." AND ".$datos[10][0]."!='' ";}elseif($filter_10=='' OR $filter_10==0){$filtro[10] .= $datos[10][0]."!='' ";}
 			if($filter_11!='0' && $filter_11!=''){$filtro[11] .= $filter_11." AND ".$datos[11][0]."!='' ";}elseif($filter_11=='' OR $filter_11==0){$filtro[11] .= $datos[11][0]."!='' ";}
 			if($filter_12!='0' && $filter_12!=''){$filtro[12] .= $filter_12." AND ".$datos[12][0]."!='' ";}elseif($filter_12=='' OR $filter_12==0){$filtro[12] .= $datos[12][0]."!='' ";}
@@ -4913,35 +4974,35 @@ class Basic_Form_Inputs{
 			if($filter_23!='0' && $filter_23!=''){$filtro[23] .= $filter_23." AND ".$datos[23][0]."!='' ";}elseif($filter_23=='' OR $filter_23==0){$filtro[23] .= $datos[23][0]."!='' ";}
 			if($filter_24!='0' && $filter_24!=''){$filtro[24] .= $filter_24." AND ".$datos[24][0]."!='' ";}elseif($filter_24=='' OR $filter_24==0){$filtro[24] .= $datos[24][0]."!='' ";}
 			if($filter_25!='0' && $filter_25!=''){$filtro[25] .= $filter_25." AND ".$datos[25][0]."!='' ";}elseif($filter_25=='' OR $filter_25==0){$filtro[25] .= $datos[25][0]."!='' ";}
-									
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){   $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){   $extracomand_2 = $datos[2][0].' ASC '; }
-			if(!isset($extracomand_3) OR $extracomand_3==''){   $extracomand_3 = $datos[3][0].' ASC '; }
-			if(!isset($extracomand_4) OR $extracomand_4==''){   $extracomand_4 = $datos[4][0].' ASC '; }
-			if(!isset($extracomand_5) OR $extracomand_5==''){   $extracomand_5 = $datos[5][0].' ASC '; }
-			if(!isset($extracomand_6) OR $extracomand_6==''){   $extracomand_6 = $datos[6][0].' ASC '; }
-			if(!isset($extracomand_7) OR $extracomand_7==''){   $extracomand_7 = $datos[7][0].' ASC '; }
-			if(!isset($extracomand_8) OR $extracomand_8==''){   $extracomand_8 = $datos[8][0].' ASC '; }
-			if(!isset($extracomand_9) OR $extracomand_9==''){   $extracomand_9 = $datos[9][0].' ASC '; }
-			if(!isset($extracomand_10) OR $extracomand_10==''){ $extracomand_10 = $datos[10][0].' ASC '; }
-			if(!isset($extracomand_11) OR $extracomand_11==''){ $extracomand_11 = $datos[11][0].' ASC '; }
-			if(!isset($extracomand_12) OR $extracomand_12==''){ $extracomand_12 = $datos[12][0].' ASC '; }
-			if(!isset($extracomand_13) OR $extracomand_13==''){ $extracomand_13 = $datos[13][0].' ASC '; }
-			if(!isset($extracomand_14) OR $extracomand_14==''){ $extracomand_14 = $datos[14][0].' ASC '; }
-			if(!isset($extracomand_15) OR $extracomand_15==''){ $extracomand_15 = $datos[15][0].' ASC '; }
-			if(!isset($extracomand_16) OR $extracomand_16==''){ $extracomand_16 = $datos[16][0].' ASC '; }
-			if(!isset($extracomand_17) OR $extracomand_17==''){ $extracomand_17 = $datos[17][0].' ASC '; }
-			if(!isset($extracomand_18) OR $extracomand_18==''){ $extracomand_18 = $datos[18][0].' ASC '; }
-			if(!isset($extracomand_19) OR $extracomand_19==''){ $extracomand_19 = $datos[19][0].' ASC '; }
-			if(!isset($extracomand_20) OR $extracomand_20==''){ $extracomand_20 = $datos[20][0].' ASC '; }
-			if(!isset($extracomand_21) OR $extracomand_21==''){ $extracomand_21 = $datos[21][0].' ASC '; }
-			if(!isset($extracomand_22) OR $extracomand_22==''){ $extracomand_22 = $datos[22][0].' ASC '; }
-			if(!isset($extracomand_23) OR $extracomand_23==''){ $extracomand_23 = $datos[23][0].' ASC '; }
-			if(!isset($extracomand_24) OR $extracomand_24==''){ $extracomand_24 = $datos[24][0].' ASC '; }
-			if(!isset($extracomand_25) OR $extracomand_25==''){ $extracomand_25 = $datos[25][0].' ASC '; }
-			
+			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1  = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2  = $datos[2][0].' ASC ';}
+			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3  = $datos[3][0].' ASC ';}
+			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4  = $datos[4][0].' ASC ';}
+			if(!isset($extracomand_5) OR $extracomand_5==''){ $extracomand_5  = $datos[5][0].' ASC ';}
+			if(!isset($extracomand_6) OR $extracomand_6==''){ $extracomand_6  = $datos[6][0].' ASC ';}
+			if(!isset($extracomand_7) OR $extracomand_7==''){ $extracomand_7  = $datos[7][0].' ASC ';}
+			if(!isset($extracomand_8) OR $extracomand_8==''){ $extracomand_8  = $datos[8][0].' ASC ';}
+			if(!isset($extracomand_9) OR $extracomand_9==''){ $extracomand_9  = $datos[9][0].' ASC ';}
+			if(!isset($extracomand_10) OR $extracomand_10==''){$extracomand_10 = $datos[10][0].' ASC ';}
+			if(!isset($extracomand_11) OR $extracomand_11==''){$extracomand_11 = $datos[11][0].' ASC ';}
+			if(!isset($extracomand_12) OR $extracomand_12==''){$extracomand_12 = $datos[12][0].' ASC ';}
+			if(!isset($extracomand_13) OR $extracomand_13==''){$extracomand_13 = $datos[13][0].' ASC ';}
+			if(!isset($extracomand_14) OR $extracomand_14==''){$extracomand_14 = $datos[14][0].' ASC ';}
+			if(!isset($extracomand_15) OR $extracomand_15==''){$extracomand_15 = $datos[15][0].' ASC ';}
+			if(!isset($extracomand_16) OR $extracomand_16==''){$extracomand_16 = $datos[16][0].' ASC ';}
+			if(!isset($extracomand_17) OR $extracomand_17==''){$extracomand_17 = $datos[17][0].' ASC ';}
+			if(!isset($extracomand_18) OR $extracomand_18==''){$extracomand_18 = $datos[18][0].' ASC ';}
+			if(!isset($extracomand_19) OR $extracomand_19==''){$extracomand_19 = $datos[19][0].' ASC ';}
+			if(!isset($extracomand_20) OR $extracomand_20==''){$extracomand_20 = $datos[20][0].' ASC ';}
+			if(!isset($extracomand_21) OR $extracomand_21==''){$extracomand_21 = $datos[21][0].' ASC ';}
+			if(!isset($extracomand_22) OR $extracomand_22==''){$extracomand_22 = $datos[22][0].' ASC ';}
+			if(!isset($extracomand_23) OR $extracomand_23==''){$extracomand_23 = $datos[23][0].' ASC ';}
+			if(!isset($extracomand_24) OR $extracomand_24==''){$extracomand_24 = $datos[24][0].' ASC ';}
+			if(!isset($extracomand_25) OR $extracomand_25==''){$extracomand_25 = $datos[25][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_1 = array();
@@ -4970,7 +5031,7 @@ class Basic_Form_Inputs{
 			$arrSelect_24 = array();
 			$arrSelect_25 = array();
 			$arrSelect_1  = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2  = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2],    $table_2,  '', $filtro[2],  $extracomand_2,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_2  = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2],    $table_2,  '', $filtro[2],  $extracomand_2, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
 			$arrSelect_3  = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3],    $table_3,  '', $filtro[3],  $extracomand_3,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
 			$arrSelect_4  = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4],    $table_4,  '', $filtro[4],  $extracomand_4,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
 			$arrSelect_5  = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5],    $table_5,  '', $filtro[5],  $extracomand_5,  $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
@@ -4994,151 +5055,151 @@ class Basic_Form_Inputs{
 			$arrSelect_23 = db_select_array (false, $dataA_23.' AS idData ,'.$dataA_22.' AS idDataFilter '.$data_required[23], $table_23, '', $filtro[23], $extracomand_23, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_23');
 			$arrSelect_24 = db_select_array (false, $dataA_24.' AS idData ,'.$dataA_23.' AS idDataFilter '.$data_required[24], $table_24, '', $filtro[24], $extracomand_24, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_24');
 			$arrSelect_25 = db_select_array (false, $dataA_25.' AS idData ,'.$dataA_24.' AS idDataFilter '.$data_required[25], $table_25, '', $filtro[25], $extracomand_25, $dbConn, 'form_select_depend25', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_25');
-									
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_3!=false){
-				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);
 				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_4!=false){
-				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);
 				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_5!=false){
-				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);
 				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_6!=false){
-				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);		
+				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);
 				$input .= $this->select_input_script($arrSelect_6, $value_6, $name_5, $name_6, $datos[6], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_7!=false){
-				$input .= $this->select_input_empty($name_7, $placeholder_7, $requerido[7]);		
+				$input .= $this->select_input_empty($name_7, $placeholder_7, $requerido[7]);
 				$input .= $this->select_input_script($arrSelect_7, $value_7, $name_6, $name_7, $datos[7], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_8!=false){
-				$input .= $this->select_input_empty($name_8, $placeholder_8, $requerido[8]);		
+				$input .= $this->select_input_empty($name_8, $placeholder_8, $requerido[8]);
 				$input .= $this->select_input_script($arrSelect_8, $value_8, $name_7, $name_8, $datos[8], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_9!=false){
-				$input .= $this->select_input_empty($name_9, $placeholder_9, $requerido[9]);		
+				$input .= $this->select_input_empty($name_9, $placeholder_9, $requerido[9]);
 				$input .= $this->select_input_script($arrSelect_9, $value_9, $name_8, $name_9, $datos[9], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_10!=false){
-				$input .= $this->select_input_empty($name_10, $placeholder_10, $requerido[10]);		
+				$input .= $this->select_input_empty($name_10, $placeholder_10, $requerido[10]);
 				$input .= $this->select_input_script($arrSelect_10, $value_10, $name_9, $name_10, $datos[10], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_11!=false){
-				$input .= $this->select_input_empty($name_11, $placeholder_11, $requerido[11]);		
+				$input .= $this->select_input_empty($name_11, $placeholder_11, $requerido[11]);
 				$input .= $this->select_input_script($arrSelect_11, $value_11, $name_10, $name_11, $datos[11], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_12!=false){
-				$input .= $this->select_input_empty($name_12, $placeholder_12, $requerido[12]);		
+				$input .= $this->select_input_empty($name_12, $placeholder_12, $requerido[12]);
 				$input .= $this->select_input_script($arrSelect_12, $value_12, $name_11, $name_12, $datos[12], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_13!=false){
-				$input .= $this->select_input_empty($name_13, $placeholder_13, $requerido[13]);		
+				$input .= $this->select_input_empty($name_13, $placeholder_13, $requerido[13]);
 				$input .= $this->select_input_script($arrSelect_13, $value_13, $name_12, $name_13, $datos[13], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_14!=false){
-				$input .= $this->select_input_empty($name_14, $placeholder_14, $requerido[14]);		
+				$input .= $this->select_input_empty($name_14, $placeholder_14, $requerido[14]);
 				$input .= $this->select_input_script($arrSelect_14, $value_14, $name_13, $name_14, $datos[14], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_15!=false){
-				$input .= $this->select_input_empty($name_15, $placeholder_15, $requerido[15]);		
+				$input .= $this->select_input_empty($name_15, $placeholder_15, $requerido[15]);
 				$input .= $this->select_input_script($arrSelect_15, $value_15, $name_14, $name_15, $datos[15], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_16!=false){
-				$input .= $this->select_input_empty($name_16, $placeholder_16, $requerido[16]);		
+				$input .= $this->select_input_empty($name_16, $placeholder_16, $requerido[16]);
 				$input .= $this->select_input_script($arrSelect_16, $value_16, $name_15, $name_16, $datos[16], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_17!=false){
-				$input .= $this->select_input_empty($name_17, $placeholder_17, $requerido[17]);		
+				$input .= $this->select_input_empty($name_17, $placeholder_17, $requerido[17]);
 				$input .= $this->select_input_script($arrSelect_17, $value_17, $name_16, $name_17, $datos[17], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_18!=false){
-				$input .= $this->select_input_empty($name_18, $placeholder_18, $requerido[18]);		
+				$input .= $this->select_input_empty($name_18, $placeholder_18, $requerido[18]);
 				$input .= $this->select_input_script($arrSelect_18, $value_18, $name_17, $name_18, $datos[18], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_19!=false){
-				$input .= $this->select_input_empty($name_19, $placeholder_19, $requerido[19]);		
+				$input .= $this->select_input_empty($name_19, $placeholder_19, $requerido[19]);
 				$input .= $this->select_input_script($arrSelect_19, $value_19, $name_18, $name_19, $datos[19], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_20!=false){
-				$input .= $this->select_input_empty($name_20, $placeholder_20, $requerido[20]);		
+				$input .= $this->select_input_empty($name_20, $placeholder_20, $requerido[20]);
 				$input .= $this->select_input_script($arrSelect_20, $value_20, $name_19, $name_20, $datos[20], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_21!=false){
-				$input .= $this->select_input_empty($name_21, $placeholder_21, $requerido[21]);		
+				$input .= $this->select_input_empty($name_21, $placeholder_21, $requerido[21]);
 				$input .= $this->select_input_script($arrSelect_21, $value_21, $name_20, $name_21, $datos[21], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_22!=false){
-				$input .= $this->select_input_empty($name_22, $placeholder_22, $requerido[22]);		
+				$input .= $this->select_input_empty($name_22, $placeholder_22, $requerido[22]);
 				$input .= $this->select_input_script($arrSelect_22, $value_22, $name_21, $name_22, $datos[22], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_23!=false){
-				$input .= $this->select_input_empty($name_23, $placeholder_23, $requerido[23]);		
+				$input .= $this->select_input_empty($name_23, $placeholder_23, $requerido[23]);
 				$input .= $this->select_input_script($arrSelect_23, $value_23, $name_22, $name_23, $datos[23], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_24!=false){
-				$input .= $this->select_input_empty($name_24, $placeholder_24, $requerido[24]);		
+				$input .= $this->select_input_empty($name_24, $placeholder_24, $requerido[24]);
 				$input .= $this->select_input_script($arrSelect_24, $value_24, $name_23, $name_24, $datos[24], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_25!=false){
-				$input .= $this->select_input_empty($name_25, $placeholder_25, $requerido[25]);		
+				$input .= $this->select_input_empty($name_25, $placeholder_25, $requerido[25]);
 				$input .= $this->select_input_script($arrSelect_25, $value_25, $name_24, $name_25, $datos[25], $form_name);
 			}
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select con filtro
-	* 
+	*
 	*===========================     Detalles    ===========================
-	* Permite crear un input tipo select en base a datos de la base de datos, 
-	* el cual tiene un filtrode texto que permite encontrar facilmente el 
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* el cual tiene un filtrode texto que permite encontrar facilmente el
 	* dato necesario
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
+	*
+	* 	//se imprime input
 	* 	$Form->form_select_filter('Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC', $dbConn );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
@@ -5153,7 +5214,7 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_select_depend50($placeholder_1,  $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,  $extracomand_1,
-										$placeholder_2,  $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,  $extracomand_2, 
+										$placeholder_2,  $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,  $extracomand_2,
 										$placeholder_3,  $name_3,  $value_3,  $required_3,  $dataA_3,  $dataB_3,  $table_3,  $filter_3,  $extracomand_3,
 										$placeholder_4,  $name_4,  $value_4,  $required_4,  $dataA_4,  $dataB_4,  $table_4,  $filter_4,  $extracomand_4,
 										$placeholder_5,  $name_5,  $value_5,  $required_5,  $dataA_5,  $dataB_5,  $table_5,  $filter_5,  $extracomand_5,
@@ -5177,10 +5238,10 @@ class Basic_Form_Inputs{
 										$placeholder_23, $name_23, $value_23, $required_23, $dataA_23, $dataB_23, $table_23, $filter_23, $extracomand_23,
 										$placeholder_24, $name_24, $value_24, $required_24, $dataA_24, $dataB_24, $table_24, $filter_24, $extracomand_24,
 										$placeholder_25, $name_25, $value_25, $required_25, $dataA_25, $dataB_25, $table_25, $filter_25, $extracomand_25,
-										$placeholder_26, $name_26, $value_26, $required_26, $dataA_26, $dataB_26, $table_26, $filter_26, $extracomand_26, 
-										$placeholder_27, $name_27, $value_27, $required_27, $dataA_27, $dataB_27, $table_27, $filter_27, $extracomand_27, 
-										$placeholder_28, $name_28, $value_28, $required_28, $dataA_28, $dataB_28, $table_28, $filter_28, $extracomand_28, 
-										$placeholder_29, $name_29, $value_29, $required_29, $dataA_29, $dataB_29, $table_29, $filter_29, $extracomand_29, 
+										$placeholder_26, $name_26, $value_26, $required_26, $dataA_26, $dataB_26, $table_26, $filter_26, $extracomand_26,
+										$placeholder_27, $name_27, $value_27, $required_27, $dataA_27, $dataB_27, $table_27, $filter_27, $extracomand_27,
+										$placeholder_28, $name_28, $value_28, $required_28, $dataA_28, $dataB_28, $table_28, $filter_28, $extracomand_28,
+										$placeholder_29, $name_29, $value_29, $required_29, $dataA_29, $dataB_29, $table_29, $filter_29, $extracomand_29,
 										$placeholder_30, $name_30, $value_30, $required_30, $dataA_30, $dataB_30, $table_30, $filter_30, $extracomand_30,
 										$placeholder_31, $name_31, $value_31, $required_31, $dataA_31, $dataB_31, $table_31, $filter_31, $extracomand_31,
 										$placeholder_32, $name_32, $value_32, $required_32, $dataA_32, $dataB_32, $table_32, $filter_32, $extracomand_32,
@@ -5411,418 +5472,418 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_1)&&$value_1!=''){ 
+		if (!validarNumero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_3)&&$value_3!=''){ 
+		if (!validarNumero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_4)&&$value_4!=''){ 
+		if (!validarNumero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_5)&&$value_5!=''){ 
+		if (!validarNumero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_6)&&$value_6!=''){ 
+		if (!validarNumero($value_6)&&$value_6!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_7)&&$value_7!=''){ 
+		if (!validarNumero($value_7)&&$value_7!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_8)&&$value_8!=''){ 
+		if (!validarNumero($value_8)&&$value_8!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_9)&&$value_9!=''){ 
+		if (!validarNumero($value_9)&&$value_9!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_10)&&$value_10!=''){ 
+		if (!validarNumero($value_10)&&$value_10!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_11)&&$value_11!=''){ 
+		if (!validarNumero($value_11)&&$value_11!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_12)&&$value_12!=''){ 
+		if (!validarNumero($value_12)&&$value_12!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_13)&&$value_13!=''){ 
+		if (!validarNumero($value_13)&&$value_13!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_14)&&$value_14!=''){ 
+		if (!validarNumero($value_14)&&$value_14!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_15)&&$value_15!=''){ 
+		if (!validarNumero($value_15)&&$value_15!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_16)&&$value_16!=''){ 
+		if (!validarNumero($value_16)&&$value_16!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_17)&&$value_17!=''){ 
+		if (!validarNumero($value_17)&&$value_17!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_18)&&$value_18!=''){ 
+		if (!validarNumero($value_18)&&$value_18!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_19)&&$value_19!=''){ 
+		if (!validarNumero($value_19)&&$value_19!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_20)&&$value_20!=''){ 
+		if (!validarNumero($value_20)&&$value_20!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_21)&&$value_21!=''){ 
+		if (!validarNumero($value_21)&&$value_21!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_22)&&$value_22!=''){ 
+		if (!validarNumero($value_22)&&$value_22!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_23)&&$value_23!=''){ 
+		if (!validarNumero($value_23)&&$value_23!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_24)&&$value_24!=''){ 
+		if (!validarNumero($value_24)&&$value_24!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_25)&&$value_25!=''){ 
+		if (!validarNumero($value_25)&&$value_25!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_26)&&$value_26!=''){ 
+		if (!validarNumero($value_26)&&$value_26!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_26 ('.$value_26.') en <strong>'.$placeholder_26.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_27)&&$value_27!=''){ 
+		if (!validarNumero($value_27)&&$value_27!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_27 ('.$value_27.') en <strong>'.$placeholder_27.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_28)&&$value_28!=''){ 
+		if (!validarNumero($value_28)&&$value_28!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_28 ('.$value_28.') en <strong>'.$placeholder_28.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_29)&&$value_29!=''){ 
+		if (!validarNumero($value_29)&&$value_29!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_29 ('.$value_29.') en <strong>'.$placeholder_29.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_30)&&$value_30!=''){ 
+		if (!validarNumero($value_30)&&$value_30!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_30 ('.$value_30.') en <strong>'.$placeholder_30.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_31)&&$value_31!=''){ 
+		if (!validarNumero($value_31)&&$value_31!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_31 ('.$value_31.') en <strong>'.$placeholder_31.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_32)&&$value_32!=''){ 
+		if (!validarNumero($value_32)&&$value_32!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_32 ('.$value_32.') en <strong>'.$placeholder_32.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_33)&&$value_33!=''){ 
+		if (!validarNumero($value_33)&&$value_33!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_33 ('.$value_33.') en <strong>'.$placeholder_33.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_34)&&$value_34!=''){ 
+		if (!validarNumero($value_34)&&$value_34!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_34 ('.$value_34.') en <strong>'.$placeholder_34.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_35)&&$value_35!=''){ 
+		if (!validarNumero($value_35)&&$value_35!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_35 ('.$value_35.') en <strong>'.$placeholder_35.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_36)&&$value_36!=''){ 
+		if (!validarNumero($value_36)&&$value_36!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_36 ('.$value_36.') en <strong>'.$placeholder_36.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_37)&&$value_37!=''){ 
+		if (!validarNumero($value_37)&&$value_37!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_37 ('.$value_37.') en <strong>'.$placeholder_37.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_38)&&$value_38!=''){ 
+		if (!validarNumero($value_38)&&$value_38!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_38 ('.$value_38.') en <strong>'.$placeholder_38.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_39)&&$value_39!=''){ 
+		if (!validarNumero($value_39)&&$value_39!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_39 ('.$value_39.') en <strong>'.$placeholder_39.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_40)&&$value_40!=''){ 
+		if (!validarNumero($value_40)&&$value_40!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_40 ('.$value_40.') en <strong>'.$placeholder_40.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_41)&&$value_41!=''){ 
+		if (!validarNumero($value_41)&&$value_41!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_41 ('.$value_41.') en <strong>'.$placeholder_41.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_42)&&$value_42!=''){ 
+		if (!validarNumero($value_42)&&$value_42!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_42 ('.$value_42.') en <strong>'.$placeholder_42.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_43)&&$value_43!=''){ 
+		if (!validarNumero($value_43)&&$value_43!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_43 ('.$value_43.') en <strong>'.$placeholder_43.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_44)&&$value_44!=''){ 
+		if (!validarNumero($value_44)&&$value_44!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_44 ('.$value_44.') en <strong>'.$placeholder_44.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_45)&&$value_45!=''){ 
+		if (!validarNumero($value_45)&&$value_45!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_45 ('.$value_45.') en <strong>'.$placeholder_45.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_46)&&$value_46!=''){ 
+		if (!validarNumero($value_46)&&$value_46!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_46 ('.$value_46.') en <strong>'.$placeholder_46.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_47)&&$value_47!=''){ 
+		if (!validarNumero($value_47)&&$value_47!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_47 ('.$value_47.') en <strong>'.$placeholder_47.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_48)&&$value_48!=''){ 
+		if (!validarNumero($value_48)&&$value_48!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_48 ('.$value_48.') en <strong>'.$placeholder_48.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_49)&&$value_49!=''){ 
+		if (!validarNumero($value_49)&&$value_49!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_49 ('.$value_49.') en <strong>'.$placeholder_49.'</strong> no es un numero');
 			$errorn++;
 		}
-		if (!validarNumero($value_50)&&$value_50!=''){ 
+		if (!validarNumero($value_50)&&$value_50!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_50 ('.$value_50.') en <strong>'.$placeholder_50.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_1)&&$value_1!=''){ 
+		if (!validaEntero($value_1)&&$value_1!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_3)&&$value_3!=''){ 
+		if (!validaEntero($value_3)&&$value_3!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_3 ('.$value_3.') en <strong>'.$placeholder_3.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_4)&&$value_4!=''){ 
+		if (!validaEntero($value_4)&&$value_4!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_4 ('.$value_4.') en <strong>'.$placeholder_4.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_5)&&$value_5!=''){ 
+		if (!validaEntero($value_5)&&$value_5!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_5 ('.$value_5.') en <strong>'.$placeholder_5.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_6)&&$value_6!=''){ 
+		if (!validaEntero($value_6)&&$value_6!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_6 ('.$value_6.') en <strong>'.$placeholder_6.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_7)&&$value_7!=''){ 
+		if (!validaEntero($value_7)&&$value_7!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_7 ('.$value_7.') en <strong>'.$placeholder_7.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_8)&&$value_8!=''){ 
+		if (!validaEntero($value_8)&&$value_8!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_8 ('.$value_8.') en <strong>'.$placeholder_8.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_9)&&$value_9!=''){ 
+		if (!validaEntero($value_9)&&$value_9!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_9 ('.$value_9.') en <strong>'.$placeholder_9.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_10)&&$value_10!=''){ 
+		if (!validaEntero($value_10)&&$value_10!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_10 ('.$value_10.') en <strong>'.$placeholder_10.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_11)&&$value_11!=''){ 
+		if (!validaEntero($value_11)&&$value_11!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_11 ('.$value_11.') en <strong>'.$placeholder_11.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_12)&&$value_12!=''){ 
+		if (!validaEntero($value_12)&&$value_12!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_12 ('.$value_12.') en <strong>'.$placeholder_12.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_13)&&$value_13!=''){ 
+		if (!validaEntero($value_13)&&$value_13!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_13 ('.$value_13.') en <strong>'.$placeholder_13.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_14)&&$value_14!=''){ 
+		if (!validaEntero($value_14)&&$value_14!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_14 ('.$value_14.') en <strong>'.$placeholder_14.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_15)&&$value_15!=''){ 
+		if (!validaEntero($value_15)&&$value_15!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_15 ('.$value_15.') en <strong>'.$placeholder_15.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_16)&&$value_16!=''){ 
+		if (!validaEntero($value_16)&&$value_16!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_16 ('.$value_16.') en <strong>'.$placeholder_16.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_17)&&$value_17!=''){ 
+		if (!validaEntero($value_17)&&$value_17!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_17 ('.$value_17.') en <strong>'.$placeholder_17.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_18)&&$value_18!=''){ 
+		if (!validaEntero($value_18)&&$value_18!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_18 ('.$value_18.') en <strong>'.$placeholder_18.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_19)&&$value_19!=''){ 
+		if (!validaEntero($value_19)&&$value_19!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_19 ('.$value_19.') en <strong>'.$placeholder_19.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_20)&&$value_20!=''){ 
+		if (!validaEntero($value_20)&&$value_20!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_20 ('.$value_20.') en <strong>'.$placeholder_20.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_21)&&$value_21!=''){ 
+		if (!validaEntero($value_21)&&$value_21!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_21 ('.$value_21.') en <strong>'.$placeholder_21.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_22)&&$value_22!=''){ 
+		if (!validaEntero($value_22)&&$value_22!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_22 ('.$value_22.') en <strong>'.$placeholder_22.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_23)&&$value_23!=''){ 
+		if (!validaEntero($value_23)&&$value_23!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_23 ('.$value_23.') en <strong>'.$placeholder_23.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_24)&&$value_24!=''){ 
+		if (!validaEntero($value_24)&&$value_24!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_24 ('.$value_24.') en <strong>'.$placeholder_24.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_25)&&$value_25!=''){ 
+		if (!validaEntero($value_25)&&$value_25!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_25 ('.$value_25.') en <strong>'.$placeholder_25.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_26)&&$value_26!=''){ 
+		if (!validaEntero($value_26)&&$value_26!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_26 ('.$value_26.') en <strong>'.$placeholder_26.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_27)&&$value_27!=''){ 
+		if (!validaEntero($value_27)&&$value_27!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_27 ('.$value_27.') en <strong>'.$placeholder_27.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_28)&&$value_28!=''){ 
+		if (!validaEntero($value_28)&&$value_28!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_28 ('.$value_28.') en <strong>'.$placeholder_28.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_29)&&$value_29!=''){ 
+		if (!validaEntero($value_29)&&$value_29!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_29 ('.$value_29.') en <strong>'.$placeholder_29.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_30)&&$value_30!=''){ 
+		if (!validaEntero($value_30)&&$value_30!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_30 ('.$value_30.') en <strong>'.$placeholder_30.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_31)&&$value_31!=''){ 
+		if (!validaEntero($value_31)&&$value_31!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_31 ('.$value_31.') en <strong>'.$placeholder_31.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_32)&&$value_32!=''){ 
+		if (!validaEntero($value_32)&&$value_32!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_32 ('.$value_32.') en <strong>'.$placeholder_32.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_33)&&$value_33!=''){ 
+		if (!validaEntero($value_33)&&$value_33!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_33 ('.$value_33.') en <strong>'.$placeholder_33.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_34)&&$value_34!=''){ 
+		if (!validaEntero($value_34)&&$value_34!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_34 ('.$value_34.') en <strong>'.$placeholder_34.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_35)&&$value_35!=''){ 
+		if (!validaEntero($value_35)&&$value_35!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_35 ('.$value_35.') en <strong>'.$placeholder_35.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_36)&&$value_36!=''){ 
+		if (!validaEntero($value_36)&&$value_36!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_36 ('.$value_36.') en <strong>'.$placeholder_36.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_37)&&$value_37!=''){ 
+		if (!validaEntero($value_37)&&$value_37!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_37 ('.$value_37.') en <strong>'.$placeholder_37.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_38)&&$value_38!=''){ 
+		if (!validaEntero($value_38)&&$value_38!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_38 ('.$value_38.') en <strong>'.$placeholder_38.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_39)&&$value_39!=''){ 
+		if (!validaEntero($value_39)&&$value_39!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_39 ('.$value_39.') en <strong>'.$placeholder_39.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_40)&&$value_40!=''){ 
+		if (!validaEntero($value_40)&&$value_40!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_40 ('.$value_40.') en <strong>'.$placeholder_40.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_41)&&$value_41!=''){ 
+		if (!validaEntero($value_41)&&$value_41!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_41 ('.$value_41.') en <strong>'.$placeholder_41.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_42)&&$value_42!=''){ 
+		if (!validaEntero($value_42)&&$value_42!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_42 ('.$value_42.') en <strong>'.$placeholder_42.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_43)&&$value_43!=''){ 
+		if (!validaEntero($value_43)&&$value_43!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_43 ('.$value_43.') en <strong>'.$placeholder_43.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_44)&&$value_44!=''){ 
+		if (!validaEntero($value_44)&&$value_44!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_44 ('.$value_44.') en <strong>'.$placeholder_44.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_45)&&$value_45!=''){ 
+		if (!validaEntero($value_45)&&$value_45!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_45 ('.$value_45.') en <strong>'.$placeholder_45.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_46)&&$value_46!=''){ 
+		if (!validaEntero($value_46)&&$value_46!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_46 ('.$value_46.') en <strong>'.$placeholder_46.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_47)&&$value_47!=''){ 
+		if (!validaEntero($value_47)&&$value_47!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_47 ('.$value_47.') en <strong>'.$placeholder_47.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_48)&&$value_48!=''){ 
+		if (!validaEntero($value_48)&&$value_48!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_48 ('.$value_48.') en <strong>'.$placeholder_48.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_49)&&$value_49!=''){ 
+		if (!validaEntero($value_49)&&$value_49!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_49 ('.$value_49.') en <strong>'.$placeholder_49.'</strong> no es un numero entero');
 			$errorn++;
 		}
-		if (!validaEntero($value_50)&&$value_50!=''){ 
+		if (!validaEntero($value_50)&&$value_50!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_50 ('.$value_50.') en <strong>'.$placeholder_50.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
 			$input = '';
 			//recorro
@@ -5830,60 +5891,61 @@ class Basic_Form_Inputs{
 				$data_required[$i] = '';
 				$filtro[$i]        = '';
 			}
-			
+
 			/******************************************/
 			//Si el dato no es requerido
-			if($required_1==1){ $requerido[1]='';  }elseif($required_1==2){ $requerido[1]='required'; $_SESSION['form_require'].=','.$name_1;}
-			if($required_2==1){ $requerido[2]='';  }elseif($required_2==2){ $requerido[2]='required'; $_SESSION['form_require'].=','.$name_2;}
-			if($required_3==1){ $requerido[3]='';  }elseif($required_3==2){ $requerido[3]='required'; $_SESSION['form_require'].=','.$name_3;}
-			if($required_4==1){ $requerido[4]='';  }elseif($required_4==2){ $requerido[4]='required'; $_SESSION['form_require'].=','.$name_4;}
-			if($required_5==1){ $requerido[5]='';  }elseif($required_5==2){ $requerido[5]='required'; $_SESSION['form_require'].=','.$name_5;}
-			if($required_6==1){ $requerido[6]='';  }elseif($required_6==2){ $requerido[6]='required'; $_SESSION['form_require'].=','.$name_6;}
-			if($required_7==1){ $requerido[7]='';  }elseif($required_7==2){ $requerido[7]='required'; $_SESSION['form_require'].=','.$name_7;}
-			if($required_8==1){ $requerido[8]='';  }elseif($required_8==2){ $requerido[8]='required'; $_SESSION['form_require'].=','.$name_8;}
-			if($required_9==1){ $requerido[9]='';  }elseif($required_9==2){ $requerido[9]='required'; $_SESSION['form_require'].=','.$name_9;}
-			if($required_10==1){$requerido[10]=''; }elseif($required_10==2){$requerido[10]='required';$_SESSION['form_require'].=','.$name_10;}
-			if($required_11==1){$requerido[11]=''; }elseif($required_11==2){$requerido[11]='required';$_SESSION['form_require'].=','.$name_11;}
-			if($required_12==1){$requerido[12]=''; }elseif($required_12==2){$requerido[12]='required';$_SESSION['form_require'].=','.$name_12;}
-			if($required_13==1){$requerido[13]=''; }elseif($required_13==2){$requerido[13]='required';$_SESSION['form_require'].=','.$name_13;}
-			if($required_14==1){$requerido[14]=''; }elseif($required_14==2){$requerido[14]='required';$_SESSION['form_require'].=','.$name_14;}
-			if($required_15==1){$requerido[15]=''; }elseif($required_15==2){$requerido[15]='required';$_SESSION['form_require'].=','.$name_15;}
-			if($required_16==1){$requerido[16]=''; }elseif($required_16==2){$requerido[16]='required';$_SESSION['form_require'].=','.$name_16;}
-			if($required_17==1){$requerido[17]=''; }elseif($required_17==2){$requerido[17]='required';$_SESSION['form_require'].=','.$name_17;}
-			if($required_18==1){$requerido[18]=''; }elseif($required_18==2){$requerido[18]='required';$_SESSION['form_require'].=','.$name_18;}
-			if($required_19==1){$requerido[19]=''; }elseif($required_19==2){$requerido[19]='required';$_SESSION['form_require'].=','.$name_19;}
-			if($required_20==1){$requerido[20]=''; }elseif($required_20==2){$requerido[20]='required';$_SESSION['form_require'].=','.$name_20;}
-			if($required_21==1){$requerido[21]=''; }elseif($required_21==2){$requerido[21]='required';$_SESSION['form_require'].=','.$name_21;}
-			if($required_22==1){$requerido[22]=''; }elseif($required_22==2){$requerido[22]='required';$_SESSION['form_require'].=','.$name_22;}
-			if($required_23==1){$requerido[23]=''; }elseif($required_23==2){$requerido[23]='required';$_SESSION['form_require'].=','.$name_23;}
-			if($required_24==1){$requerido[24]=''; }elseif($required_24==2){$requerido[24]='required';$_SESSION['form_require'].=','.$name_24;}
-			if($required_25==1){$requerido[25]=''; }elseif($required_25==2){$requerido[25]='required';$_SESSION['form_require'].=','.$name_25;}
-			if($required_26==1){$requerido[26]=''; }elseif($required_26==2){$requerido[26]='required';$_SESSION['form_require'].=','.$name_26;}
-			if($required_27==1){$requerido[27]=''; }elseif($required_27==2){$requerido[27]='required';$_SESSION['form_require'].=','.$name_27;}
-			if($required_28==1){$requerido[28]=''; }elseif($required_28==2){$requerido[28]='required';$_SESSION['form_require'].=','.$name_28;}
-			if($required_29==1){$requerido[29]=''; }elseif($required_29==2){$requerido[29]='required';$_SESSION['form_require'].=','.$name_29;}
-			if($required_30==1){$requerido[30]=''; }elseif($required_30==2){$requerido[30]='required';$_SESSION['form_require'].=','.$name_30;}
-			if($required_31==1){$requerido[31]=''; }elseif($required_31==2){$requerido[31]='required';$_SESSION['form_require'].=','.$name_31;}
-			if($required_32==1){$requerido[32]=''; }elseif($required_32==2){$requerido[32]='required';$_SESSION['form_require'].=','.$name_32;}
-			if($required_33==1){$requerido[33]=''; }elseif($required_33==2){$requerido[33]='required';$_SESSION['form_require'].=','.$name_33;}
-			if($required_34==1){$requerido[34]=''; }elseif($required_34==2){$requerido[34]='required';$_SESSION['form_require'].=','.$name_34;}
-			if($required_35==1){$requerido[35]=''; }elseif($required_35==2){$requerido[35]='required';$_SESSION['form_require'].=','.$name_35;}
-			if($required_36==1){$requerido[36]=''; }elseif($required_36==2){$requerido[36]='required';$_SESSION['form_require'].=','.$name_36;}
-			if($required_37==1){$requerido[37]=''; }elseif($required_37==2){$requerido[37]='required';$_SESSION['form_require'].=','.$name_37;}
-			if($required_38==1){$requerido[38]=''; }elseif($required_38==2){$requerido[38]='required';$_SESSION['form_require'].=','.$name_38;}
-			if($required_39==1){$requerido[39]=''; }elseif($required_39==2){$requerido[39]='required';$_SESSION['form_require'].=','.$name_39;}
-			if($required_40==1){$requerido[40]=''; }elseif($required_40==2){$requerido[40]='required';$_SESSION['form_require'].=','.$name_40;}
-			if($required_41==1){$requerido[41]=''; }elseif($required_41==2){$requerido[41]='required';$_SESSION['form_require'].=','.$name_41;}
-			if($required_42==1){$requerido[42]=''; }elseif($required_42==2){$requerido[42]='required';$_SESSION['form_require'].=','.$name_42;}
-			if($required_43==1){$requerido[43]=''; }elseif($required_43==2){$requerido[43]='required';$_SESSION['form_require'].=','.$name_43;}
-			if($required_44==1){$requerido[44]=''; }elseif($required_44==2){$requerido[44]='required';$_SESSION['form_require'].=','.$name_44;}
-			if($required_45==1){$requerido[45]=''; }elseif($required_45==2){$requerido[45]='required';$_SESSION['form_require'].=','.$name_45;}
-			if($required_46==1){$requerido[46]=''; }elseif($required_46==2){$requerido[46]='required';$_SESSION['form_require'].=','.$name_46;}
-			if($required_47==1){$requerido[47]=''; }elseif($required_47==2){$requerido[47]='required';$_SESSION['form_require'].=','.$name_47;}
-			if($required_48==1){$requerido[48]=''; }elseif($required_48==2){$requerido[48]='required';$_SESSION['form_require'].=','.$name_48;}
-			if($required_49==1){$requerido[49]=''; }elseif($required_49==2){$requerido[49]='required';$_SESSION['form_require'].=','.$name_49;}
-			if($required_50==1){$requerido[50]=''; }elseif($required_50==2){$requerido[50]='required';$_SESSION['form_require'].=','.$name_50;}
-												
+			if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+			switch ($required_1) { case 1:$requerido[1]  = '';break;case 2:$requerido[1]  = 'required';$_SESSION['form_require'].= ','.$name_1;break;}
+			switch ($required_2) { case 1:$requerido[2]  = '';break;case 2:$requerido[2]  = 'required';$_SESSION['form_require'].= ','.$name_2;break;}
+			switch ($required_3) { case 1:$requerido[3]  = '';break;case 2:$requerido[3]  = 'required';$_SESSION['form_require'].= ','.$name_3;break;}
+			switch ($required_4) { case 1:$requerido[4]  = '';break;case 2:$requerido[4]  = 'required';$_SESSION['form_require'].= ','.$name_4;break;}
+			switch ($required_5) { case 1:$requerido[5]  = '';break;case 2:$requerido[5]  = 'required';$_SESSION['form_require'].= ','.$name_5;break;}
+			switch ($required_6) { case 1:$requerido[6]  = '';break;case 2:$requerido[6]  = 'required';$_SESSION['form_require'].= ','.$name_6;break;}
+			switch ($required_7) { case 1:$requerido[7]  = '';break;case 2:$requerido[7]  = 'required';$_SESSION['form_require'].= ','.$name_7;break;}
+			switch ($required_8) { case 1:$requerido[8]  = '';break;case 2:$requerido[8]  = 'required';$_SESSION['form_require'].= ','.$name_8;break;}
+			switch ($required_9) { case 1:$requerido[9]  = '';break;case 2:$requerido[9]  = 'required';$_SESSION['form_require'].= ','.$name_9;break;}
+			switch ($required_10) {case 1:$requerido[10] = '';break;case 2:$requerido[10] = 'required';$_SESSION['form_require'].= ','.$name_10;break;}
+			switch ($required_11) {case 1:$requerido[11] = '';break;case 2:$requerido[11] = 'required';$_SESSION['form_require'].= ','.$name_11;break;}
+			switch ($required_12) {case 1:$requerido[12] = '';break;case 2:$requerido[12] = 'required';$_SESSION['form_require'].= ','.$name_12;break;}
+			switch ($required_13) {case 1:$requerido[13] = '';break;case 2:$requerido[13] = 'required';$_SESSION['form_require'].= ','.$name_13;break;}
+			switch ($required_14) {case 1:$requerido[14] = '';break;case 2:$requerido[14] = 'required';$_SESSION['form_require'].= ','.$name_14;break;}
+			switch ($required_15) {case 1:$requerido[15] = '';break;case 2:$requerido[15] = 'required';$_SESSION['form_require'].= ','.$name_15;break;}
+			switch ($required_16) {case 1:$requerido[16] = '';break;case 2:$requerido[16] = 'required';$_SESSION['form_require'].= ','.$name_16;break;}
+			switch ($required_17) {case 1:$requerido[17] = '';break;case 2:$requerido[17] = 'required';$_SESSION['form_require'].= ','.$name_17;break;}
+			switch ($required_18) {case 1:$requerido[18] = '';break;case 2:$requerido[18] = 'required';$_SESSION['form_require'].= ','.$name_18;break;}
+			switch ($required_19) {case 1:$requerido[19] = '';break;case 2:$requerido[19] = 'required';$_SESSION['form_require'].= ','.$name_19;break;}
+			switch ($required_20) {case 1:$requerido[20] = '';break;case 2:$requerido[20] = 'required';$_SESSION['form_require'].= ','.$name_20;break;}
+			switch ($required_21) {case 1:$requerido[21] = '';break;case 2:$requerido[21] = 'required';$_SESSION['form_require'].= ','.$name_21;break;}
+			switch ($required_22) {case 1:$requerido[22] = '';break;case 2:$requerido[22] = 'required';$_SESSION['form_require'].= ','.$name_22;break;}
+			switch ($required_23) {case 1:$requerido[23] = '';break;case 2:$requerido[23] = 'required';$_SESSION['form_require'].= ','.$name_23;break;}
+			switch ($required_24) {case 1:$requerido[24] = '';break;case 2:$requerido[24] = 'required';$_SESSION['form_require'].= ','.$name_24;break;}
+			switch ($required_25) {case 1:$requerido[25] = '';break;case 2:$requerido[25] = 'required';$_SESSION['form_require'].= ','.$name_25;break;}
+			switch ($required_26) {case 1:$requerido[26] = '';break;case 2:$requerido[26] = 'required';$_SESSION['form_require'].= ','.$name_26;break;}
+			switch ($required_27) {case 1:$requerido[27] = '';break;case 2:$requerido[27] = 'required';$_SESSION['form_require'].= ','.$name_27;break;}
+			switch ($required_28) {case 1:$requerido[28] = '';break;case 2:$requerido[28] = 'required';$_SESSION['form_require'].= ','.$name_28;break;}
+			switch ($required_29) {case 1:$requerido[29] = '';break;case 2:$requerido[29] = 'required';$_SESSION['form_require'].= ','.$name_29;break;}
+			switch ($required_30) {case 1:$requerido[30] = '';break;case 2:$requerido[30] = 'required';$_SESSION['form_require'].= ','.$name_30;break;}
+			switch ($required_31) {case 1:$requerido[31] = '';break;case 2:$requerido[31] = 'required';$_SESSION['form_require'].= ','.$name_31;break;}
+			switch ($required_32) {case 1:$requerido[32] = '';break;case 2:$requerido[32] = 'required';$_SESSION['form_require'].= ','.$name_32;break;}
+			switch ($required_33) {case 1:$requerido[33] = '';break;case 2:$requerido[33] = 'required';$_SESSION['form_require'].= ','.$name_33;break;}
+			switch ($required_34) {case 1:$requerido[34] = '';break;case 2:$requerido[34] = 'required';$_SESSION['form_require'].= ','.$name_34;break;}
+			switch ($required_35) {case 1:$requerido[35] = '';break;case 2:$requerido[35] = 'required';$_SESSION['form_require'].= ','.$name_35;break;}
+			switch ($required_36) {case 1:$requerido[36] = '';break;case 2:$requerido[36] = 'required';$_SESSION['form_require'].= ','.$name_36;break;}
+			switch ($required_37) {case 1:$requerido[37] = '';break;case 2:$requerido[37] = 'required';$_SESSION['form_require'].= ','.$name_37;break;}
+			switch ($required_38) {case 1:$requerido[38] = '';break;case 2:$requerido[38] = 'required';$_SESSION['form_require'].= ','.$name_38;break;}
+			switch ($required_39) {case 1:$requerido[39] = '';break;case 2:$requerido[39] = 'required';$_SESSION['form_require'].= ','.$name_39;break;}
+			switch ($required_40) {case 1:$requerido[40] = '';break;case 2:$requerido[40] = 'required';$_SESSION['form_require'].= ','.$name_40;break;}
+			switch ($required_41) {case 1:$requerido[41] = '';break;case 2:$requerido[41] = 'required';$_SESSION['form_require'].= ','.$name_41;break;}
+			switch ($required_42) {case 1:$requerido[42] = '';break;case 2:$requerido[42] = 'required';$_SESSION['form_require'].= ','.$name_42;break;}
+			switch ($required_43) {case 1:$requerido[43] = '';break;case 2:$requerido[43] = 'required';$_SESSION['form_require'].= ','.$name_43;break;}
+			switch ($required_44) {case 1:$requerido[44] = '';break;case 2:$requerido[44] = 'required';$_SESSION['form_require'].= ','.$name_44;break;}
+			switch ($required_45) {case 1:$requerido[45] = '';break;case 2:$requerido[45] = 'required';$_SESSION['form_require'].= ','.$name_45;break;}
+			switch ($required_46) {case 1:$requerido[46] = '';break;case 2:$requerido[46] = 'required';$_SESSION['form_require'].= ','.$name_46;break;}
+			switch ($required_47) {case 1:$requerido[47] = '';break;case 2:$requerido[47] = 'required';$_SESSION['form_require'].= ','.$name_47;break;}
+			switch ($required_48) {case 1:$requerido[48] = '';break;case 2:$requerido[48] = 'required';$_SESSION['form_require'].= ','.$name_48;break;}
+			switch ($required_49) {case 1:$requerido[49] = '';break;case 2:$requerido[49] = 'required';$_SESSION['form_require'].= ','.$name_49;break;}
+			switch ($required_50) {case 1:$requerido[50] = '';break;case 2:$requerido[50] = 'required';$_SESSION['form_require'].= ','.$name_50;break;}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[1]  = explode(",", $dataB_1);
@@ -5892,9 +5954,9 @@ class Basic_Form_Inputs{
 			$datos[4]  = explode(",", $dataB_4);
 			$datos[5]  = explode(",", $dataB_5);
 			$datos[6]  = explode(",", $dataB_6);
-			$datos[7]  = explode(",", $dataB_7);			
-			$datos[8]  = explode(",", $dataB_8);			
-			$datos[9]  = explode(",", $dataB_9);			
+			$datos[7]  = explode(",", $dataB_7);
+			$datos[8]  = explode(",", $dataB_8);
+			$datos[9]  = explode(",", $dataB_9);
 			$datos[10] = explode(",", $dataB_10);
 			$datos[11] = explode(",", $dataB_11);
 			$datos[12] = explode(",", $dataB_12);
@@ -5936,18 +5998,18 @@ class Basic_Form_Inputs{
 			$datos[48] = explode(",", $dataB_48);
 			$datos[49] = explode(",", $dataB_49);
 			$datos[50] = explode(",", $dataB_50);
-				
+
 			/******************************************/
 			//Se arman los datos requeridos
-			if(count($datos[1])==1){ $data_required[1]  .= ','.$datos[1][0].' AS '.$datos[1][0];  }else{foreach($datos[1] as $dato){ $data_required[1]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[2])==1){ $data_required[2]  .= ','.$datos[2][0].' AS '.$datos[2][0];  }else{foreach($datos[2] as $dato){ $data_required[2]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[3])==1){ $data_required[3]  .= ','.$datos[3][0].' AS '.$datos[3][0];  }else{foreach($datos[3] as $dato){ $data_required[3]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[4])==1){ $data_required[4]  .= ','.$datos[4][0].' AS '.$datos[4][0];  }else{foreach($datos[4] as $dato){ $data_required[4]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[5])==1){ $data_required[5]  .= ','.$datos[5][0].' AS '.$datos[5][0];  }else{foreach($datos[5] as $dato){ $data_required[5]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[6])==1){ $data_required[6]  .= ','.$datos[6][0].' AS '.$datos[6][0];  }else{foreach($datos[6] as $dato){ $data_required[6]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[7])==1){ $data_required[7]  .= ','.$datos[7][0].' AS '.$datos[7][0];  }else{foreach($datos[7] as $dato){ $data_required[7]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[8])==1){ $data_required[8]  .= ','.$datos[8][0].' AS '.$datos[8][0];  }else{foreach($datos[8] as $dato){ $data_required[8]  .= ','.$dato.' AS '.$dato;}}
-			if(count($datos[9])==1){ $data_required[9]  .= ','.$datos[9][0].' AS '.$datos[9][0];  }else{foreach($datos[9] as $dato){ $data_required[9]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[1])==1){$data_required[1]  .= ','.$datos[1][0].' AS '.$datos[1][0];  }else{foreach($datos[1] as $dato){$data_required[1]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[2])==1){$data_required[2]  .= ','.$datos[2][0].' AS '.$datos[2][0];  }else{foreach($datos[2] as $dato){$data_required[2]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[3])==1){$data_required[3]  .= ','.$datos[3][0].' AS '.$datos[3][0];  }else{foreach($datos[3] as $dato){$data_required[3]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[4])==1){$data_required[4]  .= ','.$datos[4][0].' AS '.$datos[4][0];  }else{foreach($datos[4] as $dato){$data_required[4]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[5])==1){$data_required[5]  .= ','.$datos[5][0].' AS '.$datos[5][0];  }else{foreach($datos[5] as $dato){$data_required[5]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[6])==1){$data_required[6]  .= ','.$datos[6][0].' AS '.$datos[6][0];  }else{foreach($datos[6] as $dato){$data_required[6]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[7])==1){$data_required[7]  .= ','.$datos[7][0].' AS '.$datos[7][0];  }else{foreach($datos[7] as $dato){$data_required[7]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[8])==1){$data_required[8]  .= ','.$datos[8][0].' AS '.$datos[8][0];  }else{foreach($datos[8] as $dato){$data_required[8]  .= ','.$dato.' AS '.$dato;}}
+			if(count($datos[9])==1){$data_required[9]  .= ','.$datos[9][0].' AS '.$datos[9][0];  }else{foreach($datos[9] as $dato){$data_required[9]  .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[10])==1){$data_required[10] .= ','.$datos[10][0].' AS '.$datos[10][0];}else{foreach($datos[10] as $dato){$data_required[10] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[11])==1){$data_required[11] .= ','.$datos[11][0].' AS '.$datos[11][0];}else{foreach($datos[11] as $dato){$data_required[11] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[12])==1){$data_required[12] .= ','.$datos[12][0].' AS '.$datos[12][0];}else{foreach($datos[12] as $dato){$data_required[12] .= ','.$dato.' AS '.$dato;}}
@@ -5989,18 +6051,18 @@ class Basic_Form_Inputs{
 			if(count($datos[48])==1){$data_required[48] .= ','.$datos[48][0].' AS '.$datos[48][0];}else{foreach($datos[48] as $dato){$data_required[48] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[49])==1){$data_required[49] .= ','.$datos[49][0].' AS '.$datos[49][0];}else{foreach($datos[49] as $dato){$data_required[49] .= ','.$dato.' AS '.$dato;}}
 			if(count($datos[50])==1){$data_required[50] .= ','.$datos[50][0].' AS '.$datos[50][0];}else{foreach($datos[50] as $dato){$data_required[50] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
-			if($filter_1!='0' && $filter_1!=''){  $filtro[1]  .= $filter_1." AND ".$datos[1][0]."!='' ";  }elseif($filter_1=='' OR $filter_1==0){  $filtro[1]  .= $datos[1][0]."!='' ";}
-			if($filter_2!='0' && $filter_2!=''){  $filtro[2]  .= $filter_2." AND ".$datos[2][0]."!='' ";  }elseif($filter_2=='' OR $filter_2==0){  $filtro[2]  .= $datos[2][0]."!='' ";}
-			if($filter_3!='0' && $filter_3!=''){  $filtro[3]  .= $filter_3." AND ".$datos[3][0]."!='' ";  }elseif($filter_3=='' OR $filter_3==0){  $filtro[3]  .= $datos[3][0]."!='' ";}
-			if($filter_4!='0' && $filter_4!=''){  $filtro[4]  .= $filter_4." AND ".$datos[4][0]."!='' ";  }elseif($filter_4=='' OR $filter_4==0){  $filtro[4]  .= $datos[4][0]."!='' ";}
-			if($filter_5!='0' && $filter_5!=''){  $filtro[5]  .= $filter_5." AND ".$datos[5][0]."!='' ";  }elseif($filter_5=='' OR $filter_5==0){  $filtro[5]  .= $datos[5][0]."!='' ";}
-			if($filter_6!='0' && $filter_6!=''){  $filtro[6]  .= $filter_6." AND ".$datos[6][0]."!='' ";  }elseif($filter_6=='' OR $filter_6==0){  $filtro[6]  .= $datos[6][0]."!='' ";}
-			if($filter_7!='0' && $filter_7!=''){  $filtro[7]  .= $filter_7." AND ".$datos[7][0]."!='' ";  }elseif($filter_7=='' OR $filter_7==0){  $filtro[7]  .= $datos[7][0]."!='' ";}
-			if($filter_8!='0' && $filter_8!=''){  $filtro[8]  .= $filter_8." AND ".$datos[8][0]."!='' ";  }elseif($filter_8=='' OR $filter_8==0){  $filtro[8]  .= $datos[8][0]."!='' ";}
-			if($filter_9!='0' && $filter_9!=''){  $filtro[9]  .= $filter_9." AND ".$datos[9][0]."!='' ";  }elseif($filter_9=='' OR $filter_9==0){  $filtro[9]  .= $datos[9][0]."!='' ";}
+			if($filter_1!='0' && $filter_1!=''){$filtro[1]  .= $filter_1." AND ".$datos[1][0]."!='' ";  }elseif($filter_1=='' OR $filter_1==0){ $filtro[1]  .= $datos[1][0]."!='' ";}
+			if($filter_2!='0' && $filter_2!=''){$filtro[2]  .= $filter_2." AND ".$datos[2][0]."!='' ";  }elseif($filter_2=='' OR $filter_2==0){ $filtro[2]  .= $datos[2][0]."!='' ";}
+			if($filter_3!='0' && $filter_3!=''){$filtro[3]  .= $filter_3." AND ".$datos[3][0]."!='' ";  }elseif($filter_3=='' OR $filter_3==0){ $filtro[3]  .= $datos[3][0]."!='' ";}
+			if($filter_4!='0' && $filter_4!=''){$filtro[4]  .= $filter_4." AND ".$datos[4][0]."!='' ";  }elseif($filter_4=='' OR $filter_4==0){ $filtro[4]  .= $datos[4][0]."!='' ";}
+			if($filter_5!='0' && $filter_5!=''){$filtro[5]  .= $filter_5." AND ".$datos[5][0]."!='' ";  }elseif($filter_5=='' OR $filter_5==0){ $filtro[5]  .= $datos[5][0]."!='' ";}
+			if($filter_6!='0' && $filter_6!=''){$filtro[6]  .= $filter_6." AND ".$datos[6][0]."!='' ";  }elseif($filter_6=='' OR $filter_6==0){ $filtro[6]  .= $datos[6][0]."!='' ";}
+			if($filter_7!='0' && $filter_7!=''){$filtro[7]  .= $filter_7." AND ".$datos[7][0]."!='' ";  }elseif($filter_7=='' OR $filter_7==0){ $filtro[7]  .= $datos[7][0]."!='' ";}
+			if($filter_8!='0' && $filter_8!=''){$filtro[8]  .= $filter_8." AND ".$datos[8][0]."!='' ";  }elseif($filter_8=='' OR $filter_8==0){ $filtro[8]  .= $datos[8][0]."!='' ";}
+			if($filter_9!='0' && $filter_9!=''){$filtro[9]  .= $filter_9." AND ".$datos[9][0]."!='' ";  }elseif($filter_9=='' OR $filter_9==0){ $filtro[9]  .= $datos[9][0]."!='' ";}
 			if($filter_10!='0' && $filter_10!=''){$filtro[10] .= $filter_10." AND ".$datos[10][0]."!='' ";}elseif($filter_10=='' OR $filter_10==0){$filtro[10] .= $datos[10][0]."!='' ";}
 			if($filter_11!='0' && $filter_11!=''){$filtro[11] .= $filter_11." AND ".$datos[11][0]."!='' ";}elseif($filter_11=='' OR $filter_11==0){$filtro[11] .= $datos[11][0]."!='' ";}
 			if($filter_12!='0' && $filter_12!=''){$filtro[12] .= $filter_12." AND ".$datos[12][0]."!='' ";}elseif($filter_12=='' OR $filter_12==0){$filtro[12] .= $datos[12][0]."!='' ";}
@@ -6042,60 +6104,60 @@ class Basic_Form_Inputs{
 			if($filter_48!='0' && $filter_48!=''){$filtro[48] .= $filter_48." AND ".$datos[48][0]."!='' ";}elseif($filter_48=='' OR $filter_48==0){$filtro[48] .= $datos[48][0]."!='' ";}
 			if($filter_49!='0' && $filter_49!=''){$filtro[49] .= $filter_49." AND ".$datos[49][0]."!='' ";}elseif($filter_49=='' OR $filter_49==0){$filtro[49] .= $datos[49][0]."!='' ";}
 			if($filter_50!='0' && $filter_50!=''){$filtro[50] .= $filter_50." AND ".$datos[50][0]."!='' ";}elseif($filter_50=='' OR $filter_50==0){$filtro[50] .= $datos[50][0]."!='' ";}
-									
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_1) OR $extracomand_1==''){   $extracomand_1 = $datos[1][0].' ASC '; }
-			if(!isset($extracomand_2) OR $extracomand_2==''){   $extracomand_2 = $datos[2][0].' ASC '; }
-			if(!isset($extracomand_3) OR $extracomand_3==''){   $extracomand_3 = $datos[3][0].' ASC '; }
-			if(!isset($extracomand_4) OR $extracomand_4==''){   $extracomand_4 = $datos[4][0].' ASC '; }
-			if(!isset($extracomand_5) OR $extracomand_5==''){   $extracomand_5 = $datos[5][0].' ASC '; }
-			if(!isset($extracomand_6) OR $extracomand_6==''){   $extracomand_6 = $datos[6][0].' ASC '; }
-			if(!isset($extracomand_7) OR $extracomand_7==''){   $extracomand_7 = $datos[7][0].' ASC '; }
-			if(!isset($extracomand_8) OR $extracomand_8==''){   $extracomand_8 = $datos[8][0].' ASC '; }
-			if(!isset($extracomand_9) OR $extracomand_9==''){   $extracomand_9 = $datos[9][0].' ASC '; }
-			if(!isset($extracomand_10) OR $extracomand_10==''){ $extracomand_10 = $datos[10][0].' ASC '; }
-			if(!isset($extracomand_11) OR $extracomand_11==''){ $extracomand_11 = $datos[11][0].' ASC '; }
-			if(!isset($extracomand_12) OR $extracomand_12==''){ $extracomand_12 = $datos[12][0].' ASC '; }
-			if(!isset($extracomand_13) OR $extracomand_13==''){ $extracomand_13 = $datos[13][0].' ASC '; }
-			if(!isset($extracomand_14) OR $extracomand_14==''){ $extracomand_14 = $datos[14][0].' ASC '; }
-			if(!isset($extracomand_15) OR $extracomand_15==''){ $extracomand_15 = $datos[15][0].' ASC '; }
-			if(!isset($extracomand_16) OR $extracomand_16==''){ $extracomand_16 = $datos[16][0].' ASC '; }
-			if(!isset($extracomand_17) OR $extracomand_17==''){ $extracomand_17 = $datos[17][0].' ASC '; }
-			if(!isset($extracomand_18) OR $extracomand_18==''){ $extracomand_18 = $datos[18][0].' ASC '; }
-			if(!isset($extracomand_19) OR $extracomand_19==''){ $extracomand_19 = $datos[19][0].' ASC '; }
-			if(!isset($extracomand_20) OR $extracomand_20==''){ $extracomand_20 = $datos[20][0].' ASC '; }
-			if(!isset($extracomand_21) OR $extracomand_21==''){ $extracomand_21 = $datos[21][0].' ASC '; }
-			if(!isset($extracomand_22) OR $extracomand_22==''){ $extracomand_22 = $datos[22][0].' ASC '; }
-			if(!isset($extracomand_23) OR $extracomand_23==''){ $extracomand_23 = $datos[23][0].' ASC '; }
-			if(!isset($extracomand_24) OR $extracomand_24==''){ $extracomand_24 = $datos[24][0].' ASC '; }
-			if(!isset($extracomand_25) OR $extracomand_25==''){ $extracomand_25 = $datos[25][0].' ASC '; }
-			if(!isset($extracomand_26) OR $extracomand_26==''){ $extracomand_26 = $datos[26][0].' ASC '; }
-			if(!isset($extracomand_27) OR $extracomand_27==''){ $extracomand_27 = $datos[27][0].' ASC '; }
-			if(!isset($extracomand_28) OR $extracomand_28==''){ $extracomand_28 = $datos[28][0].' ASC '; }
-			if(!isset($extracomand_29) OR $extracomand_29==''){ $extracomand_29 = $datos[29][0].' ASC '; }
-			if(!isset($extracomand_30) OR $extracomand_30==''){ $extracomand_30 = $datos[30][0].' ASC '; }
-			if(!isset($extracomand_31) OR $extracomand_31==''){ $extracomand_31 = $datos[31][0].' ASC '; }
-			if(!isset($extracomand_32) OR $extracomand_32==''){ $extracomand_32 = $datos[32][0].' ASC '; }
-			if(!isset($extracomand_33) OR $extracomand_33==''){ $extracomand_33 = $datos[33][0].' ASC '; }
-			if(!isset($extracomand_34) OR $extracomand_34==''){ $extracomand_34 = $datos[34][0].' ASC '; }
-			if(!isset($extracomand_35) OR $extracomand_35==''){ $extracomand_35 = $datos[35][0].' ASC '; }
-			if(!isset($extracomand_36) OR $extracomand_36==''){ $extracomand_36 = $datos[36][0].' ASC '; }
-			if(!isset($extracomand_37) OR $extracomand_37==''){ $extracomand_37 = $datos[37][0].' ASC '; }
-			if(!isset($extracomand_38) OR $extracomand_38==''){ $extracomand_38 = $datos[38][0].' ASC '; }
-			if(!isset($extracomand_39) OR $extracomand_39==''){ $extracomand_39 = $datos[39][0].' ASC '; }
-			if(!isset($extracomand_40) OR $extracomand_40==''){ $extracomand_40 = $datos[40][0].' ASC '; }
-			if(!isset($extracomand_41) OR $extracomand_41==''){ $extracomand_41 = $datos[41][0].' ASC '; }
-			if(!isset($extracomand_42) OR $extracomand_42==''){ $extracomand_42 = $datos[42][0].' ASC '; }
-			if(!isset($extracomand_43) OR $extracomand_43==''){ $extracomand_43 = $datos[43][0].' ASC '; }
-			if(!isset($extracomand_44) OR $extracomand_44==''){ $extracomand_44 = $datos[44][0].' ASC '; }
-			if(!isset($extracomand_45) OR $extracomand_45==''){ $extracomand_45 = $datos[45][0].' ASC '; }
-			if(!isset($extracomand_46) OR $extracomand_46==''){ $extracomand_46 = $datos[46][0].' ASC '; }
-			if(!isset($extracomand_47) OR $extracomand_47==''){ $extracomand_47 = $datos[47][0].' ASC '; }
-			if(!isset($extracomand_48) OR $extracomand_48==''){ $extracomand_48 = $datos[48][0].' ASC '; }
-			if(!isset($extracomand_49) OR $extracomand_49==''){ $extracomand_49 = $datos[49][0].' ASC '; }
-			if(!isset($extracomand_50) OR $extracomand_50==''){ $extracomand_50 = $datos[50][0].' ASC '; }
-			
+			if(!isset($extracomand_1) OR $extracomand_1==''){ $extracomand_1 = $datos[1][0].' ASC ';}
+			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC ';}
+			if(!isset($extracomand_3) OR $extracomand_3==''){ $extracomand_3 = $datos[3][0].' ASC ';}
+			if(!isset($extracomand_4) OR $extracomand_4==''){ $extracomand_4 = $datos[4][0].' ASC ';}
+			if(!isset($extracomand_5) OR $extracomand_5==''){ $extracomand_5 = $datos[5][0].' ASC ';}
+			if(!isset($extracomand_6) OR $extracomand_6==''){ $extracomand_6 = $datos[6][0].' ASC ';}
+			if(!isset($extracomand_7) OR $extracomand_7==''){ $extracomand_7 = $datos[7][0].' ASC ';}
+			if(!isset($extracomand_8) OR $extracomand_8==''){ $extracomand_8 = $datos[8][0].' ASC ';}
+			if(!isset($extracomand_9) OR $extracomand_9==''){ $extracomand_9 = $datos[9][0].' ASC ';}
+			if(!isset($extracomand_10) OR $extracomand_10==''){$extracomand_10 = $datos[10][0].' ASC ';}
+			if(!isset($extracomand_11) OR $extracomand_11==''){$extracomand_11 = $datos[11][0].' ASC ';}
+			if(!isset($extracomand_12) OR $extracomand_12==''){$extracomand_12 = $datos[12][0].' ASC ';}
+			if(!isset($extracomand_13) OR $extracomand_13==''){$extracomand_13 = $datos[13][0].' ASC ';}
+			if(!isset($extracomand_14) OR $extracomand_14==''){$extracomand_14 = $datos[14][0].' ASC ';}
+			if(!isset($extracomand_15) OR $extracomand_15==''){$extracomand_15 = $datos[15][0].' ASC ';}
+			if(!isset($extracomand_16) OR $extracomand_16==''){$extracomand_16 = $datos[16][0].' ASC ';}
+			if(!isset($extracomand_17) OR $extracomand_17==''){$extracomand_17 = $datos[17][0].' ASC ';}
+			if(!isset($extracomand_18) OR $extracomand_18==''){$extracomand_18 = $datos[18][0].' ASC ';}
+			if(!isset($extracomand_19) OR $extracomand_19==''){$extracomand_19 = $datos[19][0].' ASC ';}
+			if(!isset($extracomand_20) OR $extracomand_20==''){$extracomand_20 = $datos[20][0].' ASC ';}
+			if(!isset($extracomand_21) OR $extracomand_21==''){$extracomand_21 = $datos[21][0].' ASC ';}
+			if(!isset($extracomand_22) OR $extracomand_22==''){$extracomand_22 = $datos[22][0].' ASC ';}
+			if(!isset($extracomand_23) OR $extracomand_23==''){$extracomand_23 = $datos[23][0].' ASC ';}
+			if(!isset($extracomand_24) OR $extracomand_24==''){$extracomand_24 = $datos[24][0].' ASC ';}
+			if(!isset($extracomand_25) OR $extracomand_25==''){$extracomand_25 = $datos[25][0].' ASC ';}
+			if(!isset($extracomand_26) OR $extracomand_26==''){$extracomand_26 = $datos[26][0].' ASC ';}
+			if(!isset($extracomand_27) OR $extracomand_27==''){$extracomand_27 = $datos[27][0].' ASC ';}
+			if(!isset($extracomand_28) OR $extracomand_28==''){$extracomand_28 = $datos[28][0].' ASC ';}
+			if(!isset($extracomand_29) OR $extracomand_29==''){$extracomand_29 = $datos[29][0].' ASC ';}
+			if(!isset($extracomand_30) OR $extracomand_30==''){$extracomand_30 = $datos[30][0].' ASC ';}
+			if(!isset($extracomand_31) OR $extracomand_31==''){$extracomand_31 = $datos[31][0].' ASC ';}
+			if(!isset($extracomand_32) OR $extracomand_32==''){$extracomand_32 = $datos[32][0].' ASC ';}
+			if(!isset($extracomand_33) OR $extracomand_33==''){$extracomand_33 = $datos[33][0].' ASC ';}
+			if(!isset($extracomand_34) OR $extracomand_34==''){$extracomand_34 = $datos[34][0].' ASC ';}
+			if(!isset($extracomand_35) OR $extracomand_35==''){$extracomand_35 = $datos[35][0].' ASC ';}
+			if(!isset($extracomand_36) OR $extracomand_36==''){$extracomand_36 = $datos[36][0].' ASC ';}
+			if(!isset($extracomand_37) OR $extracomand_37==''){$extracomand_37 = $datos[37][0].' ASC ';}
+			if(!isset($extracomand_38) OR $extracomand_38==''){$extracomand_38 = $datos[38][0].' ASC ';}
+			if(!isset($extracomand_39) OR $extracomand_39==''){$extracomand_39 = $datos[39][0].' ASC ';}
+			if(!isset($extracomand_40) OR $extracomand_40==''){$extracomand_40 = $datos[40][0].' ASC ';}
+			if(!isset($extracomand_41) OR $extracomand_41==''){$extracomand_41 = $datos[41][0].' ASC ';}
+			if(!isset($extracomand_42) OR $extracomand_42==''){$extracomand_42 = $datos[42][0].' ASC ';}
+			if(!isset($extracomand_43) OR $extracomand_43==''){$extracomand_43 = $datos[43][0].' ASC ';}
+			if(!isset($extracomand_44) OR $extracomand_44==''){$extracomand_44 = $datos[44][0].' ASC ';}
+			if(!isset($extracomand_45) OR $extracomand_45==''){$extracomand_45 = $datos[45][0].' ASC ';}
+			if(!isset($extracomand_46) OR $extracomand_46==''){$extracomand_46 = $datos[46][0].' ASC ';}
+			if(!isset($extracomand_47) OR $extracomand_47==''){$extracomand_47 = $datos[47][0].' ASC ';}
+			if(!isset($extracomand_48) OR $extracomand_48==''){$extracomand_48 = $datos[48][0].' ASC ';}
+			if(!isset($extracomand_49) OR $extracomand_49==''){$extracomand_49 = $datos[49][0].' ASC ';}
+			if(!isset($extracomand_50) OR $extracomand_50==''){$extracomand_50 = $datos[50][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_1 = array();
@@ -6149,7 +6211,7 @@ class Basic_Form_Inputs{
 			$arrSelect_49 = array();
 			$arrSelect_50 = array();
 			$arrSelect_1  = db_select_array (false, $dataA_1.' AS idData '.$data_required[1], $table_1, '', $filtro[1], $extracomand_1, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_1');
-			$arrSelect_2  = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2],    $table_2,  '', $filtro[2],  $extracomand_2,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+			$arrSelect_2  = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2],    $table_2,  '', $filtro[2],  $extracomand_2, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
 			$arrSelect_3  = db_select_array (false, $dataA_3.' AS idData ,'.$dataA_2.' AS idDataFilter '.$data_required[3],    $table_3,  '', $filtro[3],  $extracomand_3,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_3');
 			$arrSelect_4  = db_select_array (false, $dataA_4.' AS idData ,'.$dataA_3.' AS idDataFilter '.$data_required[4],    $table_4,  '', $filtro[4],  $extracomand_4,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_4');
 			$arrSelect_5  = db_select_array (false, $dataA_5.' AS idData ,'.$dataA_4.' AS idDataFilter '.$data_required[5],    $table_5,  '', $filtro[5],  $extracomand_5,  $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_5');
@@ -6198,277 +6260,277 @@ class Basic_Form_Inputs{
 			$arrSelect_48 = db_select_array (false, $dataA_48.' AS idData ,'.$dataA_47.' AS idDataFilter '.$data_required[48], $table_48, '', $filtro[48], $extracomand_48, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_48');
 			$arrSelect_49 = db_select_array (false, $dataA_49.' AS idData ,'.$dataA_48.' AS idDataFilter '.$data_required[49], $table_49, '', $filtro[49], $extracomand_49, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_49');
 			$arrSelect_50 = db_select_array (false, $dataA_50.' AS idData ,'.$dataA_49.' AS idDataFilter '.$data_required[50], $table_50, '', $filtro[50], $extracomand_50, $dbConn, 'form_select_depend50', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_50');
-									
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_1!=false){
-				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);		
+				$input .= $this->select_input_gen($name_1, $placeholder_1, $requerido[1], $arrSelect_1, $value_1, $datos[1]);
 			}
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_3!=false){
-				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);		
+				$input .= $this->select_input_empty($name_3, $placeholder_3, $requerido[3]);
 				$input .= $this->select_input_script($arrSelect_3, $value_3, $name_2, $name_3, $datos[3], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_4!=false){
-				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);		
+				$input .= $this->select_input_empty($name_4, $placeholder_4, $requerido[4]);
 				$input .= $this->select_input_script($arrSelect_4, $value_4, $name_3, $name_4, $datos[4], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_5!=false){
-				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);		
+				$input .= $this->select_input_empty($name_5, $placeholder_5, $requerido[5]);
 				$input .= $this->select_input_script($arrSelect_5, $value_5, $name_4, $name_5, $datos[5], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_6!=false){
-				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);		
+				$input .= $this->select_input_empty($name_6, $placeholder_6, $requerido[6]);
 				$input .= $this->select_input_script($arrSelect_6, $value_6, $name_5, $name_6, $datos[6], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_7!=false){
-				$input .= $this->select_input_empty($name_7, $placeholder_7, $requerido[7]);		
+				$input .= $this->select_input_empty($name_7, $placeholder_7, $requerido[7]);
 				$input .= $this->select_input_script($arrSelect_7, $value_7, $name_6, $name_7, $datos[7], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_8!=false){
-				$input .= $this->select_input_empty($name_8, $placeholder_8, $requerido[8]);		
+				$input .= $this->select_input_empty($name_8, $placeholder_8, $requerido[8]);
 				$input .= $this->select_input_script($arrSelect_8, $value_8, $name_7, $name_8, $datos[8], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_9!=false){
-				$input .= $this->select_input_empty($name_9, $placeholder_9, $requerido[9]);		
+				$input .= $this->select_input_empty($name_9, $placeholder_9, $requerido[9]);
 				$input .= $this->select_input_script($arrSelect_9, $value_9, $name_8, $name_9, $datos[9], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_10!=false){
-				$input .= $this->select_input_empty($name_10, $placeholder_10, $requerido[10]);		
+				$input .= $this->select_input_empty($name_10, $placeholder_10, $requerido[10]);
 				$input .= $this->select_input_script($arrSelect_10, $value_10, $name_9, $name_10, $datos[10], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_11!=false){
-				$input .= $this->select_input_empty($name_11, $placeholder_11, $requerido[11]);		
+				$input .= $this->select_input_empty($name_11, $placeholder_11, $requerido[11]);
 				$input .= $this->select_input_script($arrSelect_11, $value_11, $name_10, $name_11, $datos[11], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_12!=false){
-				$input .= $this->select_input_empty($name_12, $placeholder_12, $requerido[12]);		
+				$input .= $this->select_input_empty($name_12, $placeholder_12, $requerido[12]);
 				$input .= $this->select_input_script($arrSelect_12, $value_12, $name_11, $name_12, $datos[12], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_13!=false){
-				$input .= $this->select_input_empty($name_13, $placeholder_13, $requerido[13]);		
+				$input .= $this->select_input_empty($name_13, $placeholder_13, $requerido[13]);
 				$input .= $this->select_input_script($arrSelect_13, $value_13, $name_12, $name_13, $datos[13], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_14!=false){
-				$input .= $this->select_input_empty($name_14, $placeholder_14, $requerido[14]);		
+				$input .= $this->select_input_empty($name_14, $placeholder_14, $requerido[14]);
 				$input .= $this->select_input_script($arrSelect_14, $value_14, $name_13, $name_14, $datos[14], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_15!=false){
-				$input .= $this->select_input_empty($name_15, $placeholder_15, $requerido[15]);		
+				$input .= $this->select_input_empty($name_15, $placeholder_15, $requerido[15]);
 				$input .= $this->select_input_script($arrSelect_15, $value_15, $name_14, $name_15, $datos[15], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_16!=false){
-				$input .= $this->select_input_empty($name_16, $placeholder_16, $requerido[16]);		
+				$input .= $this->select_input_empty($name_16, $placeholder_16, $requerido[16]);
 				$input .= $this->select_input_script($arrSelect_16, $value_16, $name_15, $name_16, $datos[16], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_17!=false){
-				$input .= $this->select_input_empty($name_17, $placeholder_17, $requerido[17]);		
+				$input .= $this->select_input_empty($name_17, $placeholder_17, $requerido[17]);
 				$input .= $this->select_input_script($arrSelect_17, $value_17, $name_16, $name_17, $datos[17], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_18!=false){
-				$input .= $this->select_input_empty($name_18, $placeholder_18, $requerido[18]);		
+				$input .= $this->select_input_empty($name_18, $placeholder_18, $requerido[18]);
 				$input .= $this->select_input_script($arrSelect_18, $value_18, $name_17, $name_18, $datos[18], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_19!=false){
-				$input .= $this->select_input_empty($name_19, $placeholder_19, $requerido[19]);		
+				$input .= $this->select_input_empty($name_19, $placeholder_19, $requerido[19]);
 				$input .= $this->select_input_script($arrSelect_19, $value_19, $name_18, $name_19, $datos[19], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_20!=false){
-				$input .= $this->select_input_empty($name_20, $placeholder_20, $requerido[20]);		
+				$input .= $this->select_input_empty($name_20, $placeholder_20, $requerido[20]);
 				$input .= $this->select_input_script($arrSelect_20, $value_20, $name_19, $name_20, $datos[20], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_21!=false){
-				$input .= $this->select_input_empty($name_21, $placeholder_21, $requerido[21]);		
+				$input .= $this->select_input_empty($name_21, $placeholder_21, $requerido[21]);
 				$input .= $this->select_input_script($arrSelect_21, $value_21, $name_20, $name_21, $datos[21], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_22!=false){
-				$input .= $this->select_input_empty($name_22, $placeholder_22, $requerido[22]);		
+				$input .= $this->select_input_empty($name_22, $placeholder_22, $requerido[22]);
 				$input .= $this->select_input_script($arrSelect_22, $value_22, $name_21, $name_22, $datos[22], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_23!=false){
-				$input .= $this->select_input_empty($name_23, $placeholder_23, $requerido[23]);		
+				$input .= $this->select_input_empty($name_23, $placeholder_23, $requerido[23]);
 				$input .= $this->select_input_script($arrSelect_23, $value_23, $name_22, $name_23, $datos[23], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_24!=false){
-				$input .= $this->select_input_empty($name_24, $placeholder_24, $requerido[24]);		
+				$input .= $this->select_input_empty($name_24, $placeholder_24, $requerido[24]);
 				$input .= $this->select_input_script($arrSelect_24, $value_24, $name_23, $name_24, $datos[24], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_25!=false){
-				$input .= $this->select_input_empty($name_25, $placeholder_25, $requerido[25]);		
+				$input .= $this->select_input_empty($name_25, $placeholder_25, $requerido[25]);
 				$input .= $this->select_input_script($arrSelect_25, $value_25, $name_24, $name_25, $datos[25], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_26!=false){
-				$input .= $this->select_input_empty($name_26, $placeholder_26, $requerido[26]);		
+				$input .= $this->select_input_empty($name_26, $placeholder_26, $requerido[26]);
 				$input .= $this->select_input_script($arrSelect_26, $value_26, $name_25, $name_26, $datos[26], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_27!=false){
-				$input .= $this->select_input_empty($name_27, $placeholder_27, $requerido[27]);		
+				$input .= $this->select_input_empty($name_27, $placeholder_27, $requerido[27]);
 				$input .= $this->select_input_script($arrSelect_27, $value_27, $name_26, $name_27, $datos[27], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_28!=false){
-				$input .= $this->select_input_empty($name_28, $placeholder_28, $requerido[28]);		
+				$input .= $this->select_input_empty($name_28, $placeholder_28, $requerido[28]);
 				$input .= $this->select_input_script($arrSelect_28, $value_28, $name_27, $name_28, $datos[28], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_29!=false){
-				$input .= $this->select_input_empty($name_29, $placeholder_29, $requerido[29]);		
+				$input .= $this->select_input_empty($name_29, $placeholder_29, $requerido[29]);
 				$input .= $this->select_input_script($arrSelect_29, $value_29, $name_28, $name_29, $datos[29], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_30!=false){
-				$input .= $this->select_input_empty($name_30, $placeholder_30, $requerido[30]);		
+				$input .= $this->select_input_empty($name_30, $placeholder_30, $requerido[30]);
 				$input .= $this->select_input_script($arrSelect_30, $value_30, $name_29, $name_30, $datos[30], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_31!=false){
-				$input .= $this->select_input_empty($name_31, $placeholder_31, $requerido[31]);		
+				$input .= $this->select_input_empty($name_31, $placeholder_31, $requerido[31]);
 				$input .= $this->select_input_script($arrSelect_31, $value_31, $name_30, $name_31, $datos[31], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_32!=false){
-				$input .= $this->select_input_empty($name_32, $placeholder_32, $requerido[32]);		
+				$input .= $this->select_input_empty($name_32, $placeholder_32, $requerido[32]);
 				$input .= $this->select_input_script($arrSelect_32, $value_32, $name_31, $name_32, $datos[32], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_33!=false){
-				$input .= $this->select_input_empty($name_33, $placeholder_33, $requerido[33]);		
+				$input .= $this->select_input_empty($name_33, $placeholder_33, $requerido[33]);
 				$input .= $this->select_input_script($arrSelect_33, $value_33, $name_32, $name_33, $datos[33], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_34!=false){
-				$input .= $this->select_input_empty($name_34, $placeholder_34, $requerido[34]);		
+				$input .= $this->select_input_empty($name_34, $placeholder_34, $requerido[34]);
 				$input .= $this->select_input_script($arrSelect_34, $value_34, $name_33, $name_34, $datos[34], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_35!=false){
-				$input .= $this->select_input_empty($name_35, $placeholder_35, $requerido[35]);		
+				$input .= $this->select_input_empty($name_35, $placeholder_35, $requerido[35]);
 				$input .= $this->select_input_script($arrSelect_35, $value_35, $name_34, $name_35, $datos[35], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_36!=false){
-				$input .= $this->select_input_empty($name_36, $placeholder_36, $requerido[36]);		
+				$input .= $this->select_input_empty($name_36, $placeholder_36, $requerido[36]);
 				$input .= $this->select_input_script($arrSelect_36, $value_36, $name_35, $name_36, $datos[36], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_37!=false){
-				$input .= $this->select_input_empty($name_37, $placeholder_37, $requerido[37]);		
+				$input .= $this->select_input_empty($name_37, $placeholder_37, $requerido[37]);
 				$input .= $this->select_input_script($arrSelect_37, $value_37, $name_36, $name_37, $datos[37], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_38!=false){
-				$input .= $this->select_input_empty($name_38, $placeholder_38, $requerido[38]);		
+				$input .= $this->select_input_empty($name_38, $placeholder_38, $requerido[38]);
 				$input .= $this->select_input_script($arrSelect_38, $value_38, $name_37, $name_38, $datos[38], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_39!=false){
-				$input .= $this->select_input_empty($name_39, $placeholder_39, $requerido[39]);		
+				$input .= $this->select_input_empty($name_39, $placeholder_39, $requerido[39]);
 				$input .= $this->select_input_script($arrSelect_39, $value_39, $name_38, $name_39, $datos[39], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_40!=false){
-				$input .= $this->select_input_empty($name_40, $placeholder_40, $requerido[40]);		
+				$input .= $this->select_input_empty($name_40, $placeholder_40, $requerido[40]);
 				$input .= $this->select_input_script($arrSelect_40, $value_40, $name_39, $name_40, $datos[40], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_41!=false){
-				$input .= $this->select_input_empty($name_41, $placeholder_41, $requerido[41]);		
+				$input .= $this->select_input_empty($name_41, $placeholder_41, $requerido[41]);
 				$input .= $this->select_input_script($arrSelect_41, $value_41, $name_40, $name_41, $datos[41], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_42!=false){
-				$input .= $this->select_input_empty($name_42, $placeholder_42, $requerido[42]);		
+				$input .= $this->select_input_empty($name_42, $placeholder_42, $requerido[42]);
 				$input .= $this->select_input_script($arrSelect_42, $value_42, $name_41, $name_42, $datos[42], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_43!=false){
-				$input .= $this->select_input_empty($name_43, $placeholder_43, $requerido[43]);		
+				$input .= $this->select_input_empty($name_43, $placeholder_43, $requerido[43]);
 				$input .= $this->select_input_script($arrSelect_43, $value_43, $name_42, $name_43, $datos[43], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_44!=false){
-				$input .= $this->select_input_empty($name_44, $placeholder_44, $requerido[44]);		
+				$input .= $this->select_input_empty($name_44, $placeholder_44, $requerido[44]);
 				$input .= $this->select_input_script($arrSelect_44, $value_44, $name_43, $name_44, $datos[44], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_45!=false){
-				$input .= $this->select_input_empty($name_45, $placeholder_45, $requerido[45]);		
+				$input .= $this->select_input_empty($name_45, $placeholder_45, $requerido[45]);
 				$input .= $this->select_input_script($arrSelect_45, $value_45, $name_44, $name_45, $datos[45], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_46!=false){
-				$input .= $this->select_input_empty($name_46, $placeholder_46, $requerido[46]);		
+				$input .= $this->select_input_empty($name_46, $placeholder_46, $requerido[46]);
 				$input .= $this->select_input_script($arrSelect_46, $value_46, $name_45, $name_46, $datos[16], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_47!=false){
-				$input .= $this->select_input_empty($name_47, $placeholder_47, $requerido[47]);		
+				$input .= $this->select_input_empty($name_47, $placeholder_47, $requerido[47]);
 				$input .= $this->select_input_script($arrSelect_47, $value_47, $name_46, $name_47, $datos[47], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_48!=false){
-				$input .= $this->select_input_empty($name_48, $placeholder_48, $requerido[48]);		
+				$input .= $this->select_input_empty($name_48, $placeholder_48, $requerido[48]);
 				$input .= $this->select_input_script($arrSelect_48, $value_48, $name_47, $name_48, $datos[48], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_49!=false){
-				$input .= $this->select_input_empty($name_49, $placeholder_49, $requerido[49]);		
+				$input .= $this->select_input_empty($name_49, $placeholder_49, $requerido[49]);
 				$input .= $this->select_input_script($arrSelect_49, $value_49, $name_48, $name_49, $datos[49], $form_name);
 			}
 			//si hay resultados
 			if($arrSelect_50!=false){
-				$input .= $this->select_input_empty($name_50, $placeholder_50, $requerido[50]);		
+				$input .= $this->select_input_empty($name_50, $placeholder_50, $requerido[50]);
 				$input .= $this->select_input_script($arrSelect_50, $value_50, $name_49, $name_50, $datos[50], $form_name);
 			}
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
-	}	
+	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo select dependiente
-	* 
+	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo select en base a datos de la base de datos,
 	* dependiente uno de otro
 	*===========================    Modo de uso  ===========================
-	* 	
-	* 	//se imprime input	
-	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC', 
+	*
+	* 	//se imprime input
+	* 	$Form->form_select_depend1('Año','idMeses', 1, 1, 'idAno', 'Nombre', 'tabla_anos', '', 'Nombre ASC',
 	*                              'Meses del año','idMeses', 1, 1, 'idMes', 'Nombre', 'tabla_meses', '', 'Nombre ASC',
 	*                              $dbConn, 'form1' );
-	* 
+	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder_x   Nombre o texto a mostrar en el navegador
 	* String   $name_x          Nombre del identificador del Input
@@ -6479,13 +6541,12 @@ class Basic_Form_Inputs{
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
-	* 
 	* Object   $dbConn          Puntero a la base de datos
 	* String   $form_name       Nombre del formulario actual
 	* @return  String
 	************************************************************************/
-	public function form_select_independ1($name_1, $dataA_1, 
-										  $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2, 
+	public function form_select_independ1($name_1, $dataA_1,
+										  $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
 										  $dbConn, $form_name){
 
 		/********************************************************/
@@ -6499,67 +6560,76 @@ class Basic_Form_Inputs{
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
-		if (!validarNumero($value_2)&&$value_2!=''){ 
+		if (!validarNumero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
-		if (!validaEntero($value_2)&&$value_2!=''){ 
+		if (!validaEntero($value_2)&&$value_2!=''){
 			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			
+
 			/******************************************/
 			//Arreglos
 			$requerido     = array();
 			$datos         = array();
 			$data_required = array();
 			$filtro        = array();
-			
+
 			//Variables Vacias
-			$input = '';
-			//recorro
+			$input            = '';
 			$data_required[2] = '';
 			$filtro[2]        = '';
-			
+
 			/******************************************/
-			//Si el dato no es requerido
-			if($required_2==1){$requerido[2]=''; }elseif($required_2==2){$requerido[2]='required';$_SESSION['form_require'].=','.$name_2;}
-			
+			//Valido si es requerido
+			switch ($required_2) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido[2] = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido[2]             = 'required';   //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name_2;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
 			/******************************************/
 			//Se separan los datos a mostrar
 			$datos[2] = explode(",", $dataB_2);
-			
+
 			/******************************************/
 			//Se arman los datos requeridos
 			if(count($datos[2])==1){$data_required[2] .= ','.$datos[2][0].' AS '.$datos[2][0];}else{foreach($datos[2] as $dato){$data_required[2] .= ','.$dato.' AS '.$dato;}}
-			
+
 			/******************************************/
 			//Si se envia filtro desde afuera
 			if($filter_2!='0' && $filter_2!=''){$filtro[2] .= $filter_2." AND ".$datos[2][0]."!='' ";}elseif($filter_2=='' OR $filter_2==0){$filtro[2] .= $datos[2][0]."!='' ";}
-			
+
 			/******************************************/
 			//Verifica si se enviaron mas datos
-			if(!isset($extracomand_2) OR $extracomand_2==''){ $extracomand_2 = $datos[2][0].' ASC '; }
-			
+			if(!isset($extracomand_2) OR $extracomand_2==''){$extracomand_2 = $datos[2][0].' ASC ';}
+
 			/******************************************/
 			//consulto
 			$arrSelect_2 = array();
-			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2, $dbConn, 'form_select_independ1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
-			
+			$arrSelect_2 = db_select_array (false, $dataA_2.' AS idData ,'.$dataA_1.' AS idDataFilter '.$data_required[2], $table_2, '', $filtro[2], $extracomand_2,$dbConn, 'form_select_independ1', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect_2');
+
 			/******************************************/
 			//si hay resultados
 			if($arrSelect_2!=false){
-				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);		
+				$input .= $this->select_input_empty($name_2, $placeholder_2, $requerido[2]);
 				$input .= $this->select_input_script($arrSelect_2, $value_2, $name_1, $name_2, $datos[2], $form_name);
 			}
-			
-			
+
 			/******************************************/
-			//Imprimir dato	
+			//Imprimir dato
 			echo $input;
 		}
 	}

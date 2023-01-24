@@ -6,7 +6,7 @@ if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) ){
 
 	define( 'DB_SITE', 'http://localhost/power_engine' );
 	
-//si estoy en ambiente de produccion	
+//si estoy en ambiente de produccion
 }else{
 	
 	define( 'DB_SITE', 'https://repositorio.exilon360.com' );
@@ -583,7 +583,7 @@ if ($table_options['age']) {
 }
 
 // Set table body
-if(($folder_list) || ($file_list) ) {
+if(($folder_list) || ($file_list)){
    $table_body = null;
 
     if($folder_list):    
@@ -696,10 +696,10 @@ if(($folder_list) || ($file_list) ) {
 	</head>
 	<body>
 		
-<div class="col-sm-12 breadcrumb-bar">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 breadcrumb-bar">
 
 	<ul class="btn-group btn-breadcrumb pull-left">
-		<li class="btn btn-default tooltip" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" title="Presionar para desplegar Formulario de Busqueda" style="font-size: 14px;"><i class="fa fa-search faa-vertical animated" aria-hidden="true"></i></li>
+		<li class="btn btn-default tooltip" role="button" data-toggle="collapse" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm" title="Presionar para desplegar Formulario de Busqueda" style="font-size: 14px;"><i class="fa fa-search faa-vertical animated" aria-hidden="true"></i></li>
 		<li class="btn btn-default"><a href="<?php echo DB_SITE_REPO ?>/LIB_Programs/index.php" style="color:#333;" >Principal</a></li>
 		<?php
 		foreach($dir_name as $dir => $name){
@@ -713,9 +713,9 @@ if(($folder_list) || ($file_list) ) {
 	
 	
 </div>
-<div class="clearfix"></div> 
+<div class="clearfix"></div>
 
-		<div class="col-sm-12">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="box">
 				<header>
 					<div class="icons"><i class="fa fa-table" aria-hidden="true"></i></div><h5>Listado de Programas</h5>

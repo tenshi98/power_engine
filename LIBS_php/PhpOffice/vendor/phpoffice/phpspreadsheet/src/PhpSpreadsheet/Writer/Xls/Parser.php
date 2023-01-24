@@ -479,10 +479,10 @@ class Parser
         $this->spreadsheet = $spreadsheet;
 
         $this->currentCharacter = 0;
-        $this->currentToken = ''; // The token we are working on.
-        $this->formula = ''; // The formula to parse.
-        $this->lookAhead = ''; // The character ahead of the current char.
-        $this->parseTree = ''; // The parse tree to be generated.
+        $this->currentToken = '';// The token we are working on.
+        $this->formula = '';// The formula to parse.
+        $this->lookAhead = '';// The character ahead of the current char.
+        $this->parseTree = '';// The parse tree to be generated.
         $this->externalSheets = [];
         $this->references = [];
     }
@@ -1365,7 +1365,7 @@ class Parser
     {
         $num_args = 0; // number of arguments received
         $function = strtoupper($this->currentToken);
-        $result = ''; // initialize result
+        $result = '';// initialize result
         $this->advance();
         $this->advance(); // eat the "("
         while ($this->currentToken !== ')') {
@@ -1442,7 +1442,7 @@ class Parser
      */
     public function toReversePolish($tree = [])
     {
-        $polish = ''; // the string we are going to return
+        $polish = '';// the string we are going to return
         if (empty($tree)) { // If it's the first call use parseTree
             $tree = $this->parseTree;
         }

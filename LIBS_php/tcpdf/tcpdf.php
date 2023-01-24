@@ -5098,7 +5098,7 @@ class TCPDF {
 		$prev_cell_margin = $this->cell_margin;
 		$prev_cell_padding = $this->cell_padding;
 		$txt = TCPDF_STATIC::removeSHY($txt, $this->isunicode);
-		$rs = ''; //string to be returned
+		$rs = '';//string to be returned
 		$this->adjustCellPadding($border);
 		if (!$ignore_min_height) {
 			$min_cell_height = $this->getCellHeight($this->FontSize);
@@ -5289,59 +5289,59 @@ class TCPDF {
 										if (in_array($ch1, $longtail)) {
 											// tonemark at upper left
 											$output[] = $this->replaceChar($ch0, (0xf713 + $ch0 - 0x0e48));
-										} else {
+										}else {
 											// tonemark at upper right (normal position)
 											$output[] = $ch0;
 										}
-									} elseif (in_array($ch1, $longtail) OR (in_array($ch2, $longtail) AND in_array($ch1, $lowvowel))) {
+									}elseif (in_array($ch1, $longtail) OR (in_array($ch2, $longtail) AND in_array($ch1, $lowvowel))) {
 										// tonemark at lower left
 										$output[] = $this->replaceChar($ch0, (0xf705 + $ch0 - 0x0e48));
-									} elseif (in_array($ch1, $upvowel)) {
+									}elseif (in_array($ch1, $upvowel)) {
 										if (in_array($ch2, $longtail)) {
 											// tonemark at upper left
 											$output[] = $this->replaceChar($ch0, (0xf713 + $ch0 - 0x0e48));
-										} else {
+										}else {
 											// tonemark at upper right (normal position)
 											$output[] = $ch0;
 										}
-									} else {
+									}else {
 										// tonemark at lower right
 										$output[] = $this->replaceChar($ch0, (0xf70a + $ch0 - 0x0e48));
 									}
-								} elseif (($ch0 == 0x0e33) AND (in_array($ch1, $longtail) OR (in_array($ch2, $longtail) AND in_array($ch1, $tonemark)))) {
+								}elseif (($ch0 == 0x0e33) AND (in_array($ch1, $longtail) OR (in_array($ch2, $longtail) AND in_array($ch1, $tonemark)))) {
 									// add lower left nikhahit and sara aa
 									if ($this->isCharDefined(0xf711) AND $this->isCharDefined(0x0e32)) {
 										$output[] = 0xf711;
 										$this->CurrentFont['subsetchars'][0xf711] = true;
 										$output[] = 0x0e32;
 										$this->CurrentFont['subsetchars'][0x0e32] = true;
-									} else {
+									}else {
 										$output[] = $ch0;
 									}
-								} elseif (in_array($ch1, $longtail)) {
+								}elseif (in_array($ch1, $longtail)) {
 									if ($ch0 == 0x0e31) {
 										// lower left mai hun arkad
 										$output[] = $this->replaceChar($ch0, 0xf710);
-									} elseif (in_array($ch0, $upvowel)) {
+									}elseif (in_array($ch0, $upvowel)) {
 										// lower left
 										$output[] = $this->replaceChar($ch0, (0xf701 + $ch0 - 0x0e34));
-									} elseif ($ch0 == 0x0e47) {
+									}elseif ($ch0 == 0x0e47) {
 										// lower left mai tai koo
 										$output[] = $this->replaceChar($ch0, 0xf712);
-									} else {
+									}else {
 										// normal character
 										$output[] = $ch0;
 									}
-								} elseif (in_array($ch1, $lowtail) AND in_array($ch0, $lowvowel)) {
+								}elseif (in_array($ch1, $lowtail) AND in_array($ch0, $lowvowel)) {
 									// lower vowel
 									$output[] = $this->replaceChar($ch0, (0xf718 + $ch0 - 0x0e38));
-								} elseif (($ch0 == 0x0e0d) AND in_array($chn, $lowvowel)) {
+								}elseif (($ch0 == 0x0e0d) AND in_array($chn, $lowvowel)) {
 									// yo ying without lower part
 									$output[] = $this->replaceChar($ch0, 0xf70f);
-								} elseif (($ch0 == 0x0e10) AND in_array($chn, $lowvowel)) {
+								}elseif (($ch0 == 0x0e10) AND in_array($chn, $lowvowel)) {
 									// tho santan without lower part
 									$output[] = $this->replaceChar($ch0, 0xf700);
-								} else {
+								}else {
 									$output[] = $ch0;
 								}
 							} else {
@@ -5584,7 +5584,7 @@ class TCPDF {
 	 * @since 5.7.000 (2010-08-02)
 	 */
 	protected function getCellBorder($x, $y, $w, $h, $brd) {
-		$s = ''; // string to be returned
+		$s = '';// string to be returned
 		if (empty($brd)) {
 			return $s;
 		}
@@ -6520,7 +6520,7 @@ class TCPDF {
 								unset($tmparr);
 								if ($this->rtl) {
 									$this->endlinex = $startx - $linew;
-								} else {
+								}else {
 									$this->endlinex = $startx + $linew;
 								}
 								$w = $linew;
@@ -6564,7 +6564,7 @@ class TCPDF {
 								unset($tmparr);
 								if ($this->rtl) {
 									$this->endlinex = ($startx - $linew);
-								} else {
+								}else {
 									$this->endlinex = ($startx + $linew);
 								}
 								$w = $linew;
@@ -6592,7 +6592,7 @@ class TCPDF {
 								if ($this->rtl) {
 									$shy_char_left = $tmp_shy_replacement_char;
 									$shy_char_right = '';
-								} else {
+								}else {
 									$shy_char_left = '';
 									$shy_char_right = $tmp_shy_replacement_char;
 								}
@@ -6612,7 +6612,7 @@ class TCPDF {
 								unset($tmparr);
 								if ($this->rtl) {
 									$this->endlinex = $startx - $linew - $shy_width;
-								} else {
+								}else {
 									$this->endlinex = $startx + $linew + $shy_width;
 								}
 								$w = $linew;
@@ -6864,7 +6864,7 @@ class TCPDF {
 		}
 		// check page for no-write regions and adapt page margins if necessary
 		list($x, $y) = $this->checkPageRegions($h, $x, $y);
-		$exurl = ''; // external streams
+		$exurl = '';// external streams
 		$imsize = FALSE;
 		// check if we are passing an image as file or string
 		if ($file[0] === '@') {
@@ -7105,7 +7105,7 @@ class TCPDF {
 									$ow = $this->getHTMLUnitToUnits($tmp[1], 1, $this->svgunit, false);
 									$owu = sprintf('%F', ($ow * $dpi / 72)).$this->pdfunit;
 									$svgtag = preg_replace('/[\s]+width[\s]*=[\s]*"[^"]*"/si', ' width="'.$owu.'"', $svgtag, 1);
-								} else {
+								}else {
 									$ow = $w;
 								}
 								$tmp = array();
@@ -7113,7 +7113,7 @@ class TCPDF {
 									$oh = $this->getHTMLUnitToUnits($tmp[1], 1, $this->svgunit, false);
 									$ohu = sprintf('%F', ($oh * $dpi / 72)).$this->pdfunit;
 									$svgtag = preg_replace('/[\s]+height[\s]*=[\s]*"[^"]*"/si', ' height="'.$ohu.'"', $svgtag, 1);
-								} else {
+								}else {
 									$oh = $h;
 								}
 								$tmp = array();
@@ -8279,7 +8279,7 @@ class TCPDF {
 										$annots .= ' /'.$apstate.' '.$apsobjid.' 0 R';
 									}
 									$annots .= ' >>';
-								} else {
+								}else {
 									// reference to XObject that define the appearance for this mode
 									$apsobjid = $this->_putAPXObject($c, $d, $apdef);
 									$annots .= ' '.$apsobjid.' 0 R';
@@ -8396,7 +8396,7 @@ class TCPDF {
 							} else {
 								if ($pl['opt']['statemodel'] == 'Marked') {
 									$annots .= ' /State /Unmarked';
-								} else {
+								}else {
 									$annots .= ' /State /None';
 								}
 							}
@@ -8407,16 +8407,16 @@ class TCPDF {
 								if ($pl['txt'][0] == '#') {
 									// internal destination
 									$annots .= ' /A <</S /GoTo /D '.TCPDF_STATIC::encodeNameObject(substr($pl['txt'], 1)).'>>';
-								} elseif ($pl['txt'][0] == '%') {
+								}elseif ($pl['txt'][0] == '%') {
 									// embedded PDF file
 									$filename = basename(substr($pl['txt'], 1));
 									$annots .= ' /A << /S /GoToE /D [0 /Fit] /NewWindow true /T << /R /C /P '.($n - 1).' /A '.$this->embeddedfiles[$filename]['a'].' >> >>';
-								} elseif ($pl['txt'][0] == '*') {
+								}elseif ($pl['txt'][0] == '*') {
 									// embedded generic file
 									$filename = basename(substr($pl['txt'], 1));
 									$jsa = 'var D=event.target.doc;var MyData=D.dataObjects;for (var i in MyData) if (MyData[i].path=="'.$filename.'") D.exportDataObject( { cName : MyData[i].name, nLaunch : 2});';
 									$annots .= ' /A << /S /JavaScript /JS '.$this->_textstring($jsa, $annot_obj_id).'>>';
-								} else {
+								}else {
 									$parsedUrl = parse_url($pl['txt']);
 									if (empty($parsedUrl['scheme']) AND (!empty($parsedUrl['path']) && strtolower(substr($parsedUrl['path'], -4)) == '.pdf')) {
 										// relative link to a PDF file
@@ -8427,7 +8427,7 @@ class TCPDF {
 											$dest = '('.((count($tmp) == 2) ? $tmp[1] : $tmp[0]).')';
 										}
 										$annots .= ' /A <</S /GoToR /D '.$dest.' /F '.$this->_datastring($this->unhtmlentities($parsedUrl['path']), $annot_obj_id).' /NewWindow true>>';
-									} else {
+									}else {
 										// external URI link
 										$annots .= ' /A <</S /URI /URI '.$this->_datastring($this->unhtmlentities($pl['txt']), $annot_obj_id).'>>';
 									}
@@ -8538,7 +8538,7 @@ class TCPDF {
 								$iconsapp = array('Graph', 'Paperclip', 'PushPin', 'Tag');
 								if (isset($pl['opt']['name']) AND in_array($pl['opt']['name'], $iconsapp)) {
 									$annots .= ' /Name /'.$pl['opt']['name'];
-								} else {
+								}else {
 									$annots .= ' /Name /PushPin';
 								}
 								// index (zero-based) of the annotation in the Annots array of this page
@@ -8558,7 +8558,7 @@ class TCPDF {
 								$iconsapp = array('Speaker', 'Mic');
 								if (isset($pl['opt']['name']) AND in_array($pl['opt']['name'], $iconsapp)) {
 									$annots .= ' /Name /'.$pl['opt']['name'];
-								} else {
+								}else {
 									$annots .= ' /Name /Speaker';
 								}
 							}
@@ -8654,7 +8654,7 @@ class TCPDF {
 									foreach($pl['opt']['ff'] as $val) {
 										$flag += 1 << ($val - 1);
 									}
-								} else {
+								}else {
 									$flag = intval($pl['opt']['ff']);
 								}
 								$annots .= ' /Ff '.$flag;
@@ -8671,7 +8671,7 @@ class TCPDF {
 										}
 										$annots .= ' '.$optval;
 									}
-								} else {
+								}else {
 									$annots .= ' '.$this->_textstring($pl['opt']['v'], $annot_obj_id);
 								}
 							}
@@ -8684,7 +8684,7 @@ class TCPDF {
 										}
 										$annots .= ' '.$optval;
 									}
-								} else {
+								}else {
 									$annots .= ' '.$this->_textstring($pl['opt']['dv'], $annot_obj_id);
 								}
 							}
@@ -8697,7 +8697,7 @@ class TCPDF {
 										}
 										$annots .= ' '.$optval;
 									}
-								} else {
+								}else {
 									$annots .= ' '.$this->_textstring($pl['opt']['rv'], $annot_obj_id);
 								}
 							}
@@ -8718,7 +8718,7 @@ class TCPDF {
 								foreach($pl['opt']['opt'] AS $copt) {
 									if (is_array($copt)) {
 										$annots .= ' ['.$this->_textstring($copt[0], $annot_obj_id).' '.$this->_textstring($copt[1], $annot_obj_id).']';
-									} else {
+									}else {
 										$annots .= ' '.$this->_textstring($copt, $annot_obj_id);
 									}
 								}
@@ -10761,7 +10761,7 @@ class TCPDF {
 	 * @author Nicola Asuni
 	 */
 	protected function _fixAES256Password($password) {
-		$psw = ''; // password to be returned
+		$psw = '';// password to be returned
 		$psw_array = TCPDF_FONTS::utf8Bidi(TCPDF_FONTS::UTF8StringToArray($password, $this->isunicode, $this->CurrentFont), $password, $this->rtl, $this->isunicode, $this->CurrentFont);
 		foreach ($psw_array as $c) {
 			$psw .= TCPDF_FONTS::unichr($c, $this->isunicode);
@@ -11377,7 +11377,7 @@ class TCPDF {
 	 * @since 2.1.000 (2008-01-08)
 	 */
 	public function SetLineStyle($style, $ret=false) {
-		$s = ''; // string to be returned
+		$s = '';// string to be returned
 		if (!is_array($style)) {
 			return;
 		}
@@ -16688,7 +16688,7 @@ class TCPDF {
 									if (substr($lineheight, -1) !== '%') {
 										if ($dom[$key]['fontsize'] <= 0) {
 											$dom[$key]['line-height'] = 1;
-										} else {
+										}else {
 											$dom[$key]['line-height'] = (($dom[$key]['line-height'] - $this->cell_padding['T'] - $this->cell_padding['B']) / $dom[$key]['fontsize']);
 										}
 									}
@@ -16727,10 +16727,10 @@ class TCPDF {
 									if ($dec[0] == 'u') {
 										// underline
 										$dom[$key]['fontstyle'] .= 'U';
-									} elseif ($dec[0] == 'l') {
+									}elseif ($dec[0] == 'l') {
 										// line-through
 										$dom[$key]['fontstyle'] .= 'D';
-									} elseif ($dec[0] == 'o') {
+									}elseif ($dec[0] == 'o') {
 										// overline
 										$dom[$key]['fontstyle'] .= 'O';
 									}
@@ -16915,9 +16915,9 @@ class TCPDF {
 							if ($key > 0) {
 								if ($dom[$key]['attribute']['size'][0] == '+') {
 									$dom[$key]['fontsize'] = $dom[($dom[$key]['parent'])]['fontsize'] + intval(substr($dom[$key]['attribute']['size'], 1));
-								} elseif ($dom[$key]['attribute']['size'][0] == '-') {
+								}elseif ($dom[$key]['attribute']['size'][0] == '-') {
 									$dom[$key]['fontsize'] = $dom[($dom[$key]['parent'])]['fontsize'] - intval(substr($dom[$key]['attribute']['size'], 1));
-								} else {
+								}else {
 									$dom[$key]['fontsize'] = intval($dom[$key]['attribute']['size']);
 								}
 							} else {
@@ -16970,7 +16970,7 @@ class TCPDF {
 					if (($dom[$key]['value'] == 'table')) {
 						$dom[$key]['rows'] = 0; // number of rows
 						$dom[$key]['trids'] = array(); // IDs of TR elements
-						$dom[$key]['thead'] = ''; // table header rows
+						$dom[$key]['thead'] = '';// table header rows
 					}
 					if (($dom[$key]['value'] == 'tr')) {
 						$dom[$key]['cols'] = 0;
@@ -17521,7 +17521,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 								// shift the annotations and links
 								if (isset($this->PageAnnots[$this->page])) {
 									$next_pask = count($this->PageAnnots[$this->page]);
-								} else {
+								}else {
 									$next_pask = 0;
 								}
 								if (isset($this->PageAnnots[$startlinepage])) {
@@ -17551,7 +17551,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									if (isset($line_align_data) AND (($line_align_data[0] == ($key - 1)) OR (($line_align_data[0] == ($key - 2)) AND (isset($dom[($key - 1)])) AND (preg_match('/^([\s]+)$/', $dom[($key - 1)]['value']) > 0)))) {
 										$minstartliney = min($this->y, $line_align_data[1]);
 										$maxbottomliney = max(($this->y + $this->getCellHeight($fontsize / $this->k)), $line_align_data[2]);
-									} else {
+									}else {
 										$minstartliney = min($this->y, $minstartliney);
 										$maxbottomliney = max(($this->y + $this->getCellHeight($fontsize / $this->k)), $maxbottomliney);
 									}
@@ -17677,7 +17677,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 								if ($this->isUnicodeFont()) {
 									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr(0).chr(32)));
 									$spacelen = 2;
-								} else {
+								}else {
 									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, '[('.chr(32)));
 									$spacelen = 1;
 								}
@@ -17685,7 +17685,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$pmid = substr($pmid, 0, ($pos1 + 2)).substr($pmid, ($pos1 + 2 + $spacelen));
 									if (substr($pmid, $pos1, 4) == '[()]') {
 										$linew -= $one_space_width;
-									} elseif ($pos1 == strpos($pmid, '[(')) {
+									}elseif ($pos1 == strpos($pmid, '[(')) {
 										$no = 1;
 									}
 								}
@@ -17698,7 +17698,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 								if ($this->isUnicodeFont()) {
 									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr(0).chr(32).')]')) + 2;
 									$spacelen = 2;
-								} else {
+								}else {
 									$pos2 = intval(TCPDF_STATIC::revstrpos($pmid, chr(32).')]')) + 1;
 									$spacelen = 1;
 								}
@@ -17786,7 +17786,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									}
 									if ($this->isRTLTextDir()) {
 										$spacew = ($spacewidth * ($nsmax - $ns));
-									} else {
+									}else {
 										$spacew = ($spacewidth * $ns);
 									}
 									$offset = $strpiece[2][1] + strlen($strpiece[2][0]);
@@ -17855,19 +17855,19 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 												if ($currentxpos < $textpos) {
 													$x_diff = ($spacewidth * ($nsmax - $lnstring[3][$strcount]));
 													$w_diff = ($spacewidth * $lnstring[2][$strcount]);
-												} else {
+												}else {
 													if ($strcount > 0) {
 														$x_diff = ($spacewidth * ($nsmax - $lnstring[3][($strcount - 1)]));
 														$w_diff = ($spacewidth * $lnstring[2][($strcount - 1)]);
 													}
 												}
-											} else { // LTR
+											}else { // LTR
 												if ($currentxpos > $textpos) {
 													if ($strcount > 0) {
 														$x_diff = ($spacewidth * $lnstring[3][($strcount - 1)]);
 													}
 													$w_diff = ($spacewidth * $lnstring[2][$strcount]);
-												} else {
+												}else {
 													if ($strcount > 1) {
 														$x_diff = ($spacewidth * $lnstring[3][($strcount - 2)]);
 													}
@@ -17914,26 +17914,26 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 												if ($cxpos > $lmpos) {
 													$this->xobjects[$this->xobjid]['annotations'][$pak]['x'] += ($spacew / $this->k);
 													$this->xobjects[$this->xobjid]['annotations'][$pak]['w'] += (($spacewidth * $pac['numspaces']) / $this->k);
-												} else {
+												}else {
 													$this->xobjects[$this->xobjid]['annotations'][$pak]['w'] += (($spacewidth * $pac['numspaces']) / $this->k);
 												}
 												break;
 											}
 										}
-									} elseif (isset($this->PageAnnots[$this->page])) {
+									}elseif (isset($this->PageAnnots[$this->page])) {
 										foreach ($this->PageAnnots[$this->page] as $pak => $pac) {
 											if (($pac['y'] >= $minstartliney) AND (($pac['x'] * $this->k) >= ($currentxpos - $this->feps)) AND (($pac['x'] * $this->k) <= ($currentxpos + $this->feps))) {
 												if ($cxpos > $lmpos) {
 													$this->PageAnnots[$this->page][$pak]['x'] += ($spacew / $this->k);
 													$this->PageAnnots[$this->page][$pak]['w'] += (($spacewidth * $pac['numspaces']) / $this->k);
-												} else {
+												}else {
 													$this->PageAnnots[$this->page][$pak]['w'] += (($spacewidth * $pac['numspaces']) / $this->k);
 												}
 												break;
 											}
 										}
 									}
-								} // end of while
+								}// end of while
 								// remove markers
 								$pmid = str_replace('x*#!#*x', '', $pmid);
 								if ($this->isUnicodeFont()) {
@@ -17964,11 +17964,11 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									if ($this->inxobj) {
 										// we are inside an XObject template
 										$this->xobjects[$this->xobjid]['outdata'] = $pstart."\n".$pmid."\n".$pend;
-									} else {
+									}else {
 										$this->setPageBuffer($startlinepage, $pstart."\n".$pmid."\n".$pend);
 									}
 									$endlinepos = strlen($pstart."\n".$pmid."\n");
-								} else {
+								}else {
 									// non-unicode (single-byte characters)
 									if ($this->font_stretching != 100) {
 										// word spacing (Tw) is affected by stretching
@@ -17979,7 +17979,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									if ($this->inxobj) {
 										// we are inside an XObject template
 										$this->xobjects[$this->xobjid]['outdata'] = $pstart."\n".$pmid."\nBT 0 Tw ET\n".$pend;
-									} else {
+									}else {
 										$this->setPageBuffer($startlinepage, $pstart."\n".$pmid."\nBT 0 Tw ET\n".$pend);
 									}
 									$endlinepos = strlen($pstart."\n".$pmid."\nBT 0 Tw ET\n");
@@ -18201,7 +18201,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$dl = ($this->pagedim[$this->page]['orm'] - $this->pagedim[$trwsp['startpage']]['orm']);
 										$rsstartx -= $dl;
 										$rsendx -= $dl;
-									} elseif ((!$this->rtl) AND ($this->pagedim[$this->page]['olm'] != $this->pagedim[$trwsp['startpage']]['olm'])) {
+									}elseif ((!$this->rtl) AND ($this->pagedim[$this->page]['olm'] != $this->pagedim[$trwsp['startpage']]['olm'])) {
 										$dl = ($this->pagedim[$this->page]['olm'] - $this->pagedim[$trwsp['startpage']]['olm']);
 										$rsstartx += $dl;
 										$rsendx += $dl;
@@ -18226,7 +18226,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$dom[$trid]['endy'] = $dom[$table_el]['rowspans'][$rsk]['endy'];
 									}
 									$rsk = 0;
-								} else {
+								}else {
 									++$rsk;
 								}
 							}
@@ -18285,7 +18285,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							if (isset($dom[$trid]['endy'])) {
 								if (($this->page == $dom[$trid]['endpage']) AND ($this->current_column == $dom[$trid]['endcolumn'])) {
 									$dom[$trid]['endy'] = max($this->y, $dom[$trid]['endy']);
-								} elseif (($this->page > $dom[$trid]['endpage']) OR ($this->current_column > $dom[$trid]['endcolumn'])) {
+								}elseif (($this->page > $dom[$trid]['endpage']) OR ($this->current_column > $dom[$trid]['endcolumn'])) {
 									$dom[$trid]['endy'] = $this->y;
 								}
 							} else {
@@ -18315,11 +18315,11 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									if (isset($dom[$trid]['endpage'])) {
 										if (($trwsp['endpage'] == $dom[$trid]['endpage']) AND ($trwsp['endcolumn'] == $dom[$trid]['endcolumn'])) {
 											$dom[$table_el]['rowspans'][$k]['endy'] = max($dom[$trid]['endy'], $trwsp['endy']);
-										} elseif (($trwsp['endpage'] < $dom[$trid]['endpage']) OR ($trwsp['endcolumn'] < $dom[$trid]['endcolumn'])) {
+										}elseif (($trwsp['endpage'] < $dom[$trid]['endpage']) OR ($trwsp['endcolumn'] < $dom[$trid]['endcolumn'])) {
 											$dom[$table_el]['rowspans'][$k]['endy'] = $dom[$trid]['endy'];
 											$dom[$table_el]['rowspans'][$k]['endpage'] = $dom[$trid]['endpage'];
 											$dom[$table_el]['rowspans'][$k]['endcolumn'] = $dom[$trid]['endcolumn'];
-										} else {
+										}else {
 											$dom[$trid]['endy'] = $this->pagedim[$dom[$trid]['endpage']]['hk'] - $this->pagedim[$dom[$trid]['endpage']]['bm'];
 										}
 									}
@@ -18336,7 +18336,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							} elseif (!$this->InFooter) {
 								if (isset($this->footerlen[$this->page])) {
 									$this->footerpos[$this->page] = $this->pagelen[$this->page] - $this->footerlen[$this->page];
-								} else {
+								}else {
 									$this->footerpos[$this->page] = $this->pagelen[$this->page];
 								}
 								$opentagpos = $this->footerpos[$this->page];
@@ -18380,8 +18380,8 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				$isRTLString = preg_match(TCPDF_FONT_DATA::$uni_RE_PATTERN_RTL, $dom[$key]['value']) || preg_match(TCPDF_FONT_DATA::$uni_RE_PATTERN_ARABIC, $dom[$key]['value']);
 				if ((!$this->premode) AND $this->isRTLTextDir() AND !$isRTLString) {
 					// reverse spaces order
-					$lsp = ''; // left spaces
-					$rsp = ''; // right spaces
+					$lsp = '';// left spaces
+					$rsp = '';// right spaces
 					if (preg_match('/^('.$this->re_space['p'].'+)/'.$this->re_space['m'], $dom[$key]['value'], $matches)) {
 						$lsp = $matches[1];
 					}
@@ -18456,7 +18456,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$tmp_fontstyle = isset($dom[$nkey]['fontstyle']) ? $dom[$nkey]['fontstyle'] : $this->FontStyle;
 									$tmp_fontsize = isset($dom[$nkey]['fontsize']) ? $dom[$nkey]['fontsize'] : $this->FontSizePt;
 									$same_textdir = ($dom[$nkey]['dir'] == $dom[$key]['dir']);
-								} else {
+								}else {
 									$nextstr = TCPDF_STATIC::pregSplit('/'.$this->re_space['p'].'+/', $this->re_space['m'], $dom[$nkey]['value']);
 									if (isset($nextstr[0]) AND $same_textdir) {
 										$wadj += $this->GetStringWidth($nextstr[0], $tmp_fontname, $tmp_fontstyle, $tmp_fontsize);
@@ -19652,7 +19652,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							if ($page > $startpage) {
 								if (($this->rtl) AND ($this->pagedim[$page]['orm'] != $this->pagedim[$startpage]['orm'])) {
 									$this->x -= ($this->pagedim[$page]['orm'] - $this->pagedim[$startpage]['orm']);
-								} elseif ((!$this->rtl) AND ($this->pagedim[$page]['olm'] != $this->pagedim[$startpage]['olm'])) {
+								}elseif ((!$this->rtl) AND ($this->pagedim[$page]['olm'] != $this->pagedim[$startpage]['olm'])) {
 									$this->x += ($this->pagedim[$page]['olm'] - $this->pagedim[$startpage]['olm']);
 								}
 							}
@@ -19666,24 +19666,24 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$h = $endy - $parent['starty'];
 										$this->y = $y;
 										$this->x = $x;
-									} elseif ($column == $startcolumn) { // first column
+									}elseif ($column == $startcolumn) { // first column
 										$cborder = $border_start;
 										$this->y = $starty;
 										$this->x = $x;
 										$h = $this->h - $this->y - $this->bMargin;
 										if ($this->rtl) {
 											$deltacol = $this->x + $this->rMargin - $this->w;
-										} else {
+										}else {
 											$deltacol = $this->x - $this->lMargin;
 										}
-									} elseif ($column == $endcolumn) { // end column
+									}elseif ($column == $endcolumn) { // end column
 										$cborder = $border_end;
 										if (isset($this->columns[$column]['th']['\''.$page.'\''])) {
 											$this->y = $this->columns[$column]['th']['\''.$page.'\''];
 										}
 										$this->x += $deltacol;
 										$h = $endy - $this->y;
-									} else { // middle column
+									}else { // middle column
 										$cborder = $border_middle;
 										if (isset($this->columns[$column]['th']['\''.$page.'\''])) {
 											$this->y = $this->columns[$column]['th']['\''.$page.'\''];
@@ -19692,7 +19692,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$h = $this->h - $this->y - $this->bMargin;
 									}
 									$ccode .= $this->getCellCode($w, $h, '', $cborder, 1, '', $fill, '', 0, true)."\n";
-								} // end for each column
+								}// end for each column
 							} elseif ($page == $startpage) { // first page
 								$deltacol = 0;
 								$deltath = 0;
@@ -19705,10 +19705,10 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$h = $this->h - $this->y - $this->bMargin;
 										if ($this->rtl) {
 											$deltacol = $this->x + $this->rMargin - $this->w;
-										} else {
+										}else {
 											$deltacol = $this->x - $this->lMargin;
 										}
-									} else { // middle column
+									}else { // middle column
 										$cborder = $border_middle;
 										if (isset($this->columns[$column]['th']['\''.$page.'\''])) {
 											$this->y = $this->columns[$column]['th']['\''.$page.'\''];
@@ -19717,7 +19717,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$h = $this->h - $this->y - $this->bMargin;
 									}
 									$ccode .= $this->getCellCode($w, $h, '', $cborder, 1, '', $fill, '', 0, true)."\n";
-								} // end for each column
+								}// end for each column
 							} elseif ($page == $endpage) { // last page
 								$deltacol = 0;
 								$deltath = 0;
@@ -19730,7 +19730,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										}
 										$this->x += $deltacol;
 										$h = $endy - $this->y;
-									} else { // middle column
+									}else { // middle column
 										$cborder = $border_middle;
 										if (isset($this->columns[$column]['th']['\''.$page.'\''])) {
 											$this->y = $this->columns[$column]['th']['\''.$page.'\''];
@@ -19739,7 +19739,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$h = $this->h - $this->y - $this->bMargin;
 									}
 									$ccode .= $this->getCellCode($w, $h, '', $cborder, 1, '', $fill, '', 0, true)."\n";
-								} // end for each column
+								}// end for each column
 							} else { // middle page
 								$deltacol = 0;
 								$deltath = 0;
@@ -19752,7 +19752,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$this->x += $deltacol;
 									$h = $this->h - $this->y - $this->bMargin;
 									$ccode .= $this->getCellCode($w, $h, '', $cborder, 1, '', $fill, '', 0, true)."\n";
-								} // end for each column
+								}// end for each column
 							}
 							if (!empty($cborder) OR !empty($fill)) {
 								$offsetlen = strlen($ccode);
@@ -19763,7 +19763,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$pagemarkkey = key($this->xobjects[$this->xobjid]['transfmrk']);
 										$pagemark = $this->xobjects[$this->xobjid]['transfmrk'][$pagemarkkey];
 										$this->xobjects[$this->xobjid]['transfmrk'][$pagemarkkey] += $offsetlen;
-									} else {
+									}else {
 										$pagemark = $this->xobjects[$this->xobjid]['intmrk'];
 										$this->xobjects[$this->xobjid]['intmrk'] += $offsetlen;
 									}
@@ -19771,14 +19771,14 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$pstart = substr($pagebuff, 0, $pagemark);
 									$pend = substr($pagebuff, $pagemark);
 									$this->xobjects[$this->xobjid]['outdata'] = $pstart.$ccode.$pend;
-								} else {
+								}else {
 									// draw border and fill
 									if (end($this->transfmrk[$this->page]) !== false) {
 										$pagemarkkey = key($this->transfmrk[$this->page]);
 										$pagemark = $this->transfmrk[$this->page][$pagemarkkey];
-									} elseif ($this->InFooter) {
+									}elseif ($this->InFooter) {
 										$pagemark = $this->footerpos[$this->page];
-									} else {
+									}else {
 										$pagemark = $this->intmrk[$this->page];
 									}
 									$pagebuff = $this->getPageBuffer($this->page);
@@ -23477,7 +23477,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$firstcmd = false;
 									$xinitial = $x;
 									$yinitial = $y;
-								} else {
+								}else {
 									$this->_outLine($x, $y);
 								}
 								$x0 = $x;
@@ -23699,7 +23699,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 								$numerator = (($rx2 * $ry2) - ($rx2 * $ya2) - ($ry2 * $xa2));
 								if ($numerator < 0) {
 									$root = 0;
-								} else {
+								}else {
 									$root = sqrt($numerator / (($rx2 * $ya2) + ($ry2 * $xa2)));
 								}
 								if ($fa == $fs){
@@ -23715,7 +23715,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 								$dang = TCPDF_STATIC::getVectorsAngle((($xa - $cax) / $rx), (($ya - $cay) / $ry), ((-$xa - $cax) / $rx), ((-$ya - $cay) / $ry));
 								if (($fs == 0) AND ($dang > 0)) {
 									$dang -= (2 * M_PI);
-								} elseif (($fs == 1) AND ($dang < 0)) {
+								}elseif (($fs == 1) AND ($dang < 0)) {
 									$dang += (2 * M_PI);
 								}
 								$angf = $angs - $dang;
@@ -24287,7 +24287,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							if (($findroot === false) OR ($findroot > 1)) {
 								if (substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
 									$img = substr($_SERVER['DOCUMENT_ROOT'], 0, -1).$img;
-								} else {
+								}else {
 									$img = $_SERVER['DOCUMENT_ROOT'].$img;
 								}
 							}

@@ -13,13 +13,13 @@ if( ! defined('XMBCXRXSKGC')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Se encarga de generar un array multinivel
-* 
+*
 *===========================     Detalles    ===========================
-* Al ingresar un Array, se selecciona una de las columnas, dicha columna generara un 
+* Al ingresar un Array, se selecciona una de las columnas, dicha columna generara un
 * nuevo nivel dentro del arreglo, reordenando los datos
 *===========================    Modo de uso  ===========================
-* 	
-* 	//se filtran los datos		
+*
+* 	//se filtran los datos
 * 	filtrar($arreglo, 'categoria' );
 * 	//se recorre el nuevo arreglo
 * 	foreach ($arreglo AS $categoria=>$arr1){
@@ -30,7 +30,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * 			//imprimimos los datos dentro de la categoria
 * 		}
 * 	}
-* 
+*
 *===========================    Parametros   ===========================
 * Array    $arreglo   Arreglo a reordenar
 * String   categoria  Dato desde el cual se va a reordenar el arreglo
@@ -39,7 +39,7 @@ if( ! defined('XMBCXRXSKGC')) {
 //Funcion
 function filtrar(&$array, $clave_orden ) {
 	// inicializamos un nuevo array
-	$array_filtrado = array(); 
+	$array_filtrado = array();
 	// creamos un bucle foreach para recorrer el array original y “acomodar” los datos
 	foreach($array as $index=>$array_value) {
 		// guardamos temporalmente el nombre de la categoría
@@ -50,20 +50,20 @@ function filtrar(&$array, $clave_orden ) {
 		$array_filtrado[$value][] = $array_value;
 	}
 	// modificamos automáticamente nuestro array global $row
-	$array = $array_filtrado; 
+	$array = $array_filtrado;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtiene la extension de un archivo
-* 
+*
 *===========================     Detalles    ===========================
-* Permite obtener la extension del archivo solicitado, hay que tener en 
+* Permite obtener la extension del archivo solicitado, hay que tener en
 * cuenta el otorgar la ruta completa de acceso al archivo
 *===========================    Modo de uso  ===========================
-* 	
-* 	//obtener extension		
+*
+* 	//obtener extension
 * 	obtenerExtensionArchivo('nombre del archivo');
-* 
+*
 *===========================    Parametros   ===========================
 * String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 *                             de acceso a este

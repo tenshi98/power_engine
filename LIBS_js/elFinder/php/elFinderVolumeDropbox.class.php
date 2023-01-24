@@ -140,7 +140,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 			if (! $this->dropbox_phpFound || empty($options['consumerKey']) || empty($options['consumerSecret']) || !class_exists('PDO', false)) {
 				return array('exit' => true, 'body' => '{msg:errNetMountNoDriver}');
 			}
-			
+
 			if (defined('ELFINDER_DROPBOX_USE_CURL_PUT')) {
 				$this->oauth = new Dropbox_OAuth_Curl($options['consumerKey'], $options['consumerSecret']);
 			} else {
@@ -156,7 +156,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 					}
 				}
 			}
-			
+
 			if (! $this->oauth) {
 				return array('exit' => true, 'body' => '{msg:errNetMountNoDriver}');
 			}
@@ -574,7 +574,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 					}
 				}
 			} while (! empty($_info['has_more']));
-			
+
 			// update time stamp of parent holder
 			foreach ($ptimes as $_p => $_t) {
 				if ($praw = $this->getDBdat($_p)) {
@@ -1169,7 +1169,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 			if ($contents === false) {
 				return false;
 			}
-			
+
 			if ($local = $this->getTempFile($path)) {
 				if (file_put_contents($local, $contents, LOCK_EX) !== false) {
 					return fopen($local, $mode);

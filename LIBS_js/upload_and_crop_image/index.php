@@ -2,7 +2,7 @@
     <head>  
         <title>Make Price Range Slider using JQuery with PHP Ajax</title>  
 		
-		<script src="jquery.min.js"></script>  
+		<script src="jquery.min.js"></script> 
 		<script src="bootstrap.min.js"></script>
 		<script src="croppie.js"></script>
 		<link rel="stylesheet" href="bootstrap.min.css" />

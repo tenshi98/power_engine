@@ -13,14 +13,14 @@ if( ! defined('XMBCXRXSKGC')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Fecha Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la fecha actual de chile
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	fecha_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Date
 ************************************************************************/
@@ -34,14 +34,14 @@ function fecha_actual(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Hora Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la hora actual de chile
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	hora_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Time
 ************************************************************************/
@@ -55,14 +55,14 @@ function hora_actual(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Hora Actual (alternativa)
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la hora actual de chile
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	hora_actual_val();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Time
 ************************************************************************/
@@ -76,14 +76,14 @@ function hora_actual_val(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Dia Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener el dia actual de chile, de 1 a 31 sin ceros
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	dia_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Integer
 ************************************************************************/
@@ -97,14 +97,14 @@ function dia_actual(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Semana Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la semana actual de chile
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	semana_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Integer
 ************************************************************************/
@@ -118,14 +118,14 @@ function semana_actual(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Mes Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener el mes actual de chile, de 1 a 12
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	mes_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Integer
 ************************************************************************/
@@ -139,14 +139,14 @@ function mes_actual(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Año Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener el año actual de chile
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	ano_actual();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Integer
 ************************************************************************/
@@ -160,95 +160,95 @@ function ano_actual(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Directorio
-* 
+*
 *===========================     Detalles    ===========================
 * Nombre de la funcion: MeDir
-* Version de la funcion:  1.0.0.11  
-* Fecha de la funcion (Creacion):  01/06/2006  
-* Fecha de la funcion (revision 1.0.0.4):  19/08/2006    
-* Fecha de la funcion (ultima revision):  16/09/2006   
-* 
+* Version de la funcion:  1.0.0.11
+* Fecha de la funcion (Creacion):  01/06/2006
+* Fecha de la funcion (revision 1.0.0.4):  19/08/2006
+* Fecha de la funcion (ultima revision):  16/09/2006
+*
 * Autor: SERBice(r)
-* 
-* Descripcion de la funcion: Recorre un directorio midiendo todos los      
-*                            archivos que contiene (incluso en sus          
-*                            subdirectorios, hasta el ultimo).               
-*                                                                            
+*
+* Descripcion de la funcion: Recorre un directorio midiendo todos los
+*                            archivos que contiene (incluso en sus
+*                            subdirectorios, hasta el ultimo).
+*
 * Parametros de la funcion: El parametro $dir, establece el directorio sobre el
-*                           cual actuara la funcion, es decir, que establece  
-*                           el directorio del cual se obtendra informacion de 
-*                           su tamaño.                                        
+*                           cual actuara la funcion, es decir, que establece
+*                           el directorio del cual se obtendra informacion de
+*                           su tamaño.
 *                           Si $dir no se establece se utilizara el directorio
-*                           donde se encuentra el archivo que llamo a la     
-*                           funcion $subdirs es el parametro que establece si vamos   
-*                           o no a medir en subdirectorios o no. Si $subdirs  
-*                           no se establece su valor por defaul sera 1 y   
-*                           medira los subdirectorios                  
-*                                                                            
-* Este Software se distribuye bajo Licencia GPL, por lo cual se solicita que  
-* se utilice con fines no lucrativos, es decir, que sea de uso Personal y No  
-* Comercial. Que se conserven los derechos de autor y que cualquier           
-* modificacion le sea notifiacda al autor, para saber y estar al tanto de     
-* los avances del software en cuestion; y de esta manera enriquezer aun mas   
-* esta peque?a herramienta                                                   
-*                                                                            
-* Atentamente: SERBice(r)                                                    
-* 
+*                           donde se encuentra el archivo que llamo a la
+*                           funcion $subdirs es el parametro que establece si vamos
+*                           o no a medir en subdirectorios o no. Si $subdirs
+*                           no se establece su valor por defaul sera 1 y
+*                           medira los subdirectorios
+*
+* Este Software se distribuye bajo Licencia GPL, por lo cual se solicita que
+* se utilice con fines no lucrativos, es decir, que sea de uso Personal y No
+* Comercial. Que se conserven los derechos de autor y que cualquier
+* modificacion le sea notifiacda al autor, para saber y estar al tanto de
+* los avances del software en cuestion; y de esta manera enriquezer aun mas
+* esta peque?a herramienta
+*
+* Atentamente: SERBice(r)
+*
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	MeDir('./backups', 1);
-* 
+*
 *===========================    Parametros   ===========================
 * @return  Decimal
 ************************************************************************/
 //Funcion
-function MeDir($dir,$subdirs){ 
-        /* Creamos un array con todos los nombres de directorios y 
-        archivos contenidos dentro del directorio inicial */ 
-        $arr = scandir($dir); 
+function MeDir($dir,$subdirs){
+        /* Creamos un array con todos los nombres de directorios y
+        archivos contenidos dentro del directorio inicial */
+        $arr = scandir($dir);
 
-        /* establecemos que la variable $sizedir es igual a cero */ 
-        $sizedir = 0; 
+        /* establecemos que la variable $sizedir es igual a cero */
+        $sizedir = 0;
 
-        /* YA NO Recorremos el array saltando los directorios . y .. */ 
+        /* YA NO Recorremos el array saltando los directorios . y .. */
         for ($i=0; $i<count($arr); $i++)
             {
                 /* Comprobamos que el archivo/directorio actual no sea "." ni ".." */
               if ($arr[$i]!="." && $arr[$i]!="..")
               	{
-	                /* Si es un directorio hacer..... */ 
-	                if (is_dir($dir ."/". $arr[$i])) 
-	                    { 
-	                        /* Establecemos que la variable $sizedir es igual 
-	                        a ella misma m?s el valor devuelto por MeDir */ 
-	                        if (isset($subdirs)&&$subdirs==1) $sizedir += MeDir($dir . "/" . $arr[$i],1); 
-	                    } 
-	                /* Si es un archivo hacer ... */ 
-	                else 
-	                    { 
-	                        /* Establecemos que la variable $sizedir es igual 
-	                        a ella misma m?s el tama?o del fichero $dir ."/". $arr[$i] */ 
-	                        $sizedir += filesize($dir ."/". $arr[$i]); 
-	                    } 
+	                /* Si es un directorio hacer..... */
+	                if (is_dir($dir ."/". $arr[$i]))
+	                    {
+	                        /* Establecemos que la variable $sizedir es igual
+	                        a ella misma m?s el valor devuelto por MeDir */
+	                        if (isset($subdirs)&&$subdirs==1) $sizedir += MeDir($dir . "/" . $arr[$i],1);
+	                    }
+	                /* Si es un archivo hacer ... */
+	                else
+	                    {
+	                        /* Establecemos que la variable $sizedir es igual
+	                        a ella misma m?s el tama?o del fichero $dir ."/". $arr[$i] */
+	                        $sizedir += filesize($dir ."/". $arr[$i]);
+	                    }
                }
-            } 
-        /* Devolvemos el valor total de $sizedir */ 
-        return $sizedir; 
+            }
+        /* Devolvemos el valor total de $sizedir */
+        return $sizedir;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener Uso Memoria Servidor
-* 
+*
 *===========================     Detalles    ===========================
-* Permite obtener el uso de la memoria en el servidor,calculando la 
+* Permite obtener el uso de la memoria en el servidor,calculando la
 * carga de trabajo en el servidor
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	obtenerUsoMemoriaServidor(true);
 * 	obtenerUsoMemoriaServidor(false);
-* 
+*
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
@@ -345,14 +345,14 @@ function getNiceFileSize($bytes, $binaryPrefix) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener URL Raiz
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la URL Raiz del sitio
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	getRootURL();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
@@ -374,14 +374,14 @@ function getRootURL(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Obtener URL Actual
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener la URL Actual
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	getCurrentURL();
-* 
+*
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
@@ -421,18 +421,18 @@ function getCurrentURL(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Entregar tarea al servidor
-* 
+*
 *===========================     Detalles    ===========================
-* Permite entregar una tarea al servidor para que la ejecute de forma 
-* separada a los tiempos de ejecucion de el programa desde donde 
+* Permite entregar una tarea al servidor para que la ejecute de forma
+* separada a los tiempos de ejecucion de el programa desde donde
 * se llama
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	tareasServer(https://www.ejemplo.com?param1=1&param2=2&param3=3);
-* 
+*
 *===========================    Parametros   ===========================
-* String    $tarea    Direccion web con lo que se tiene que ejecutar 
+* String    $tarea    Direccion web con lo que se tiene que ejecutar
 *                     en el servidor, entregar URL completas
 ************************************************************************/
 //Funcion
@@ -446,14 +446,14 @@ function tareasServer($tarea){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Devuelve los errores de subida de archivos
-* 
+*
 *===========================     Detalles    ===========================
 * Permite obtener el error exacto que da el servidor al subir archivos
 *===========================    Modo de uso  ===========================
-* 	
+*
 * 	//se obtiene dato
 * 	uploadPHPError($error);
-* 
+*
 *===========================    Parametros   ===========================
 * @return  String
 ************************************************************************/
@@ -475,22 +475,22 @@ function uploadPHPError($error) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Guardar log
-* 
+*
 *===========================     Detalles    ===========================
 * Permite guardar el log del correo correo ingresado
 *===========================    Modo de uso  ===========================
-* 	//se imprime input	
+* 	//se imprime input
 * 	log_response(1,$response, 'malvarez@mail.com' );//Email log
 * 	log_response(1,$response, 'malvarez@mail.com' );//Error SQL
 * 	log_response(1,$response, 'malvarez@mail.com' );//Log de Error log PHP
-* 
+*
 *===========================    Parametros   ===========================
 * String  $response         Arreglo con la respuesta del correo (0-1)
 * String  $email            Email a utilizar
 ************************************************************************/
 //Funcion
 function log_response($TipoCuerpo, $RespuestaServidor, $Data){
-	
+
 	//Definicion de errores
 	$errorn = 0;
 	//se definen las opciones disponibles
@@ -505,7 +505,7 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 	if($errorn==0){
 		//variable
 		$noti = "";
-		
+
 		///////////////////////////////////////////////////////////////////////////
 		switch ($TipoCuerpo) {
 			/**************************************************************/
@@ -529,7 +529,7 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 				//archivo de respaldo
 				$Archivo = '1_logs_sql_error.txt';
 				$noti = $Data." \n";
-				
+
 				break;
 			/**************************************************************/
 			//Log de Error log PHP
@@ -563,28 +563,28 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 		}else{
 			error_log("No existe el archivo (".$Archivo.")", 0);
 		}
-			
+
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Guardar log
-* 
+*
 *===========================     Detalles    ===========================
 * Permite guardar el log del correo correo ingresado
 *===========================    Modo de uso  ===========================
-* 	//se imprime input	
+* 	//se imprime input
 * 	log_response(1,$response, 'malvarez@mail.com' );//Email log
 * 	log_response(1,$response, 'malvarez@mail.com' );//Error SQL
 * 	log_response(1,$response, 'malvarez@mail.com' );//Log de Error log PHP
-* 
+*
 *===========================    Parametros   ===========================
 * String  $response         Arreglo con la respuesta del correo (0-1)
 * String  $email            Email a utilizar
 ************************************************************************/
 //Funcion
 function php_error_log($Usuario, $Transaccion, $Tarea, $ErrorCode, $ErrorDescription, $ErrorQuery ){
-	
+
 	/***************************************/
 	//Se escribe el log estandar
 	error_log("========================================================================================================================================", 0);
@@ -594,11 +594,11 @@ function php_error_log($Usuario, $Transaccion, $Tarea, $ErrorCode, $ErrorDescrip
 	if(isset($ErrorCode)&&$ErrorCode!=''){                error_log("Error code: ". $ErrorCode, 0);}
 	if(isset($ErrorDescription)&&$ErrorDescription!=''){  error_log("Error description: ". $ErrorDescription, 0);}
 	if(isset($ErrorQuery)&&$ErrorQuery!=''){              error_log("Error query: ". $ErrorQuery, 0);}
-	
+
 	/***************************************/
 	//se limpia la cadena antes de guardarla
 	$ErrorQuery = preg_replace("/[\r\n|\n|\r]+/", " ", $ErrorQuery);
-	
+
 	//Se respalda en el archivo designado
 	$rmail         = '';
 	$sesion_texto  = '';
@@ -610,31 +610,31 @@ function php_error_log($Usuario, $Transaccion, $Tarea, $ErrorCode, $ErrorDescrip
 	if(isset($ErrorCode)&&$ErrorCode!=''){	               $sesion_texto .= ' /\ '.$ErrorCode;         }else{$sesion_texto .= ' /\ Ninguna';}
 	if(isset($ErrorDescription)&&$ErrorDescription!=''){   $sesion_texto .= ' /\ '.$ErrorDescription;  }else{$sesion_texto .= ' /\ Ninguna';}
 	if(isset($ErrorQuery)&&$ErrorQuery!=''){	           $sesion_texto .= ' /\ '.$ErrorQuery;        }else{$sesion_texto .= ' /\ Ninguna';}
-						
+
 	//se guarda el log
-	log_response(3, $rmail, $sesion_texto);	
+	log_response(3, $rmail, $sesion_texto);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Devuelve info del servidor
-* 
+*
 *===========================     Detalles    ===========================
 * Devuelve toda la info del servidor
 *===========================    Modo de uso  ===========================
-* 	//se imprime input	
+* 	//se imprime input
 * 	echo indicesServer()->PHP_SELF;
 * 	echo indicesServer()->GATEWAY_INTERFACE;
 * 	echo indicesServer()->SERVER_NAME;
 * 	echo indicesServer()->SERVER_PROTOCOL;
 * 	echo indicesServer()->REQUEST_TIME;
-* 
+*
 *===========================    Parametros   ===========================
 * String  $response         Arreglo con la respuesta del correo (0-1)
 * String  $email            Email a utilizar
 ************************************************************************/
 //Funcion
 function indicesServer(){
-	
+
 	$object = (object) [
 		'PHP_SELF' => $_SERVER['PHP_SELF'],
 		'argv' => $_SERVER['argv'],
@@ -676,8 +676,8 @@ function indicesServer(){
 		'AUTH_TYPE' => $_SERVER['AUTH_TYPE'],
 		'PATH_INFO' => $_SERVER['PATH_INFO'],
 		'ORIG_PATH_INFO' => $_SERVER['ORIG_PATH_INFO'],
-	];	
-	
+	];
+
 	return $object;
 }
 ?>
