@@ -81,7 +81,8 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 		$json = json_encode($data); // Encode data to JSON
 		// URL for request POST /message
 
-		$url = 'https://api.chat-api.com/instance'.$InstanceId.'/sendMessage?token='.$Token;
+		//$url = 'https://api.chat-api.com/instance'.$InstanceId.'/sendMessage?token='.$Token;
+		$url = 'https://api.1msg.io/'.$InstanceId.'/sendMessage?token='.$Token;
 
 		// Make a POST request
 		$options = stream_context_create(['http' => [
@@ -173,5 +174,6 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 	}
 
 }
+
 
 ?>
