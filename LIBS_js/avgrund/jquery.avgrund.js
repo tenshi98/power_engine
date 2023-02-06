@@ -77,7 +77,6 @@
                 } else if ($(e.target).is('.avgrund-cierra')) {
                         e.preventDefault();
                         deactivate();
-                
 				}
             }
 
@@ -90,16 +89,13 @@
                     body.addClass('avgrund-active');
                 }, 100);
 
-                var $popin = $('<div class="avgrund-popin ' + options.holderClass + '"></div>');
+                var $popin = $('<div class="avgrund-popin col-xs-12 col-sm-9 col-md-6 col-lg-4 ' + options.holderClass + '"></div>');
                 $popin.append(template);
                 body.append($popin);
 
                 $('.avgrund-popin').css({
-                    'width': maxWidth + 'px',
-                    'height': maxHeight + 'px',
                     'top': (maxHeight + document.body.scrollTop) + "px",
                     'left': Math.max(0, (($(window).width() - maxWidth) / 2) +  $(window).scrollLeft()) + "px",
-                    
                 });
 
                 if (options.showClose) {

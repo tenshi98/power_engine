@@ -2,7 +2,7 @@
 
 
 .avgrund-popin a {
-	color: #ED5E2F;
+	/*color: #ED5E2F;*/
 }
 
 .avgrund-popin a:hover {
@@ -89,7 +89,7 @@
 	text-align: center;
 }
 .avgrund-popin.custom .to_bottom{
-position:absolute;                  /* added */
+
    bottom:0;                           /* added */
    right:0;
    margin-bottom:10px;

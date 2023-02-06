@@ -71,10 +71,7 @@ body.avgrund-active {
 	-ms-transform: scale(1.1);
 	-o-transform: scale(1.1);
 	transform: scale(1.1);
-	
 
-
-	
 }
 
 .avgrund-active .avgrund-overlay {
@@ -117,5 +114,6 @@ body.avgrund-active {
 	text-transform: uppercase;
 	position: absolute;
 	top: 6px;
-	right: 10px;
+	right: 20px;
+	color: #ED5E2F;
 }
