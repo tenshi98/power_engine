@@ -2378,7 +2378,7 @@ class Basic_Form_Inputs{
 										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
 										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'">
 										<label for="'.$name.'_'.$select['idData'].'">
-											'.$data_writing.'
+											'.TituloMenu($data_writing).'
 										</label>
 									</div>';
 
