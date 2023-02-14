@@ -33,7 +33,7 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 	echo '
 	<div style="background: #fff;">
 
-        <div class="col-md-9 col-sm-12">';
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">';
 
 			//Errores PHP
 			if (file_exists($Archivo3)) {
@@ -143,7 +143,7 @@ if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 
         echo '</div>
 
-        <div class="col-md-3 col-sm-6">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
             <div class="info-box-main">
 
 				<div class="info-box-box">
