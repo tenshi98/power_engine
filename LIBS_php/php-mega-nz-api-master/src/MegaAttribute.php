@@ -61,5 +61,5 @@ class MegaAttribute
 	{
 		return $this->_name;
 	}
-	
+
 }

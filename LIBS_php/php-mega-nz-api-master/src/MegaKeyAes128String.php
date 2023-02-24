@@ -63,5 +63,5 @@ class MegaKeyAes128String implements IMegaKeyAes128
 	{
 		return $this->_value;
 	}
-	
+
 }

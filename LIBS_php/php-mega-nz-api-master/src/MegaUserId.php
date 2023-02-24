@@ -42,5 +42,5 @@ class MegaUserId
 	{
 		return $this->_value;
 	}
-	
+
 }

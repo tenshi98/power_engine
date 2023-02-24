@@ -2505,7 +2505,7 @@
 	class QRmask {
 	
 		public $runLength = array();
-		
+
 		//----------------------------------------------------------------------
 		public function __construct() 
         {

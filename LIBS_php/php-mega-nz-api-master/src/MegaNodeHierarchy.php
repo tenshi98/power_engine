@@ -130,9 +130,9 @@ class MegaNodeHierarchy
 	{
 		if(isset($this->_known_nodes[$node_id->getValue()]))
 			return $this->_known_nodes[$node_id->getValue()];
-		
+
 		// no need of recursive searching, we know it's not there
 		return null;
 	}
-	
+
 }

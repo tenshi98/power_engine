@@ -97,5 +97,5 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 	{
 		return serialize($this->_values);
 	}
-	
+
 }

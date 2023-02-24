@@ -73,5 +73,5 @@ class MegaException extends \Exception
 			$message = self::$_std_err_msg[$code];
 		parent::__construct($message, $code, $previous);
 	}
-	
+
 }

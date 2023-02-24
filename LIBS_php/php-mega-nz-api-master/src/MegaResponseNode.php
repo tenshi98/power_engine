@@ -208,5 +208,5 @@ class MegaResponseNode
 	{
 		return $this->_ts;
 	}
-	
+
 }

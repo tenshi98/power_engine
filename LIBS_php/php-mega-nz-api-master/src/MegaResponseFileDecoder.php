@@ -43,5 +43,5 @@ class MegaResponseFileDecoder
 			$this->_node->getInitializationVector()->toRawString()->__toString()
 		);
 	}
-	
+
 }

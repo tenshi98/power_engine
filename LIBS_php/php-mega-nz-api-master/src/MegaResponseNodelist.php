@@ -88,7 +88,7 @@ class MegaResponseNodelist
 		// normally, the root folder is the first of the list.
 		// double check in case all the other folders are not rooted to this one
 		$supposed_root = $this->_f[0];
-		
+
 		// TODO disabled as we use the recursive mode in Mega class, and all
 		// nodes in the hierarchy are given flat, we need more complex checks
 // 		foreach($this->_f as $node)
@@ -123,5 +123,5 @@ class MegaResponseNodelist
 		}
 		return $nodes;
 	}
-	
+
 }

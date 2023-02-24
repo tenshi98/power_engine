@@ -177,7 +177,7 @@ class MegaResponseNodeDecoder
 		);
 		if(substr($decoded_data, 0, 6) !== 'MEGA{"')
 			throw new MegaException('Impossible to decrypt attribute, do you have the right key ?', MegaException::EKEY);
-		
+
 		// sometimes, there is some'\0' at the end of the string
 		$fpos = strpos($decoded_data, '{');
 		$lpos = strrpos($decoded_data, '}');
@@ -193,5 +193,5 @@ class MegaResponseNodeDecoder
 		
 		return new MegaAttribute($json_decoded);
 	}
-	
+
 }

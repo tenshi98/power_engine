@@ -101,5 +101,5 @@ class MegaEncryptedFileLocation
 	{
 		return $this->_e;
 	}
-	
+
 }

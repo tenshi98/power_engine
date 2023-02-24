@@ -60,5 +60,5 @@ class MegaClearString implements IMegaString
 	{
 		return $this->_value;
 	}
-	
+
 }

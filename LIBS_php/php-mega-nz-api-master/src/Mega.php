@@ -172,7 +172,7 @@ class Mega
 	public function getFileInfo(MegaNodeId $node_id)
 	{
 		$this->init();
-		
+
 		// inner hierarchy cache
 		if($this->_node_hierarchy !== null && $this->_node_hierarchy !== false)
 		{
@@ -200,7 +200,7 @@ class Mega
 			'r' => 1,	// recursive
 			'ca' => 1,	// ???
 		);
-		
+
 		// dont need the node id the first time we want the root folder
 		if(!$this->_container_id->equals($node_id))
 			$args['n'] = $node_id->getValue();
@@ -285,7 +285,7 @@ class Mega
 		$response = $this->requestJson($url, $args);
 		
 		$encrypted_response = new MegaEncryptedFileLocation($response);
-		
+
 		// TODO change to be able to stream data instead
 		$encoded_data = $this->request($encrypted_response->g(), null);
 		
@@ -370,5 +370,5 @@ class Mega
 		
 		return $contents;
 	}
-	
+
 }

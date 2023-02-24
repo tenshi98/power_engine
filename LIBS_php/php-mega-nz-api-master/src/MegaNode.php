@@ -228,5 +228,5 @@ class MegaNode
 	{
 		return $this->_meta_mac;
 	}
-	
+
 }

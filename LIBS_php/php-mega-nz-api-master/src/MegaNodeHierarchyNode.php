@@ -113,5 +113,5 @@ class MegaNodeHierarchyNode
 	{
 		return $this->_children;
 	}
-	
+
 }

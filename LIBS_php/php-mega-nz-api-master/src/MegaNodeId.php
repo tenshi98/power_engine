@@ -63,5 +63,5 @@ class MegaNodeId
 	{
 		return $this->_value;
 	}
-	
+
 }

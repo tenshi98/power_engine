@@ -63,5 +63,5 @@ class MegaKeyAes64String implements IMegaKeyAes64
 	{
 		return $this->_value;
 	}
-	
+
 }

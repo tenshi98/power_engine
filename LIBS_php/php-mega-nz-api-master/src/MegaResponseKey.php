@@ -63,5 +63,5 @@ class MegaResponseKey
 	{
 		return $this->_node_key;
 	}
-	
+
 }

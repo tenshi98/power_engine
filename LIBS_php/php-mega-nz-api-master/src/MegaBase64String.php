@@ -70,5 +70,5 @@ class MegaBase64String implements IMegaString
 	{
 		return $this->_value;
 	}
-	
+
 }
