@@ -18,7 +18,7 @@ class MegaClearString implements IMegaString
 	 * @var string
 	 */
 	private $_value = null;
-	
+
 	/**
 	 * Builds a new MegaClearString
 	 *
@@ -33,7 +33,7 @@ class MegaClearString implements IMegaString
 				array('{thing}' => gettype($string))), MegaException::EARGS);
 		$this->_value = $string;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaString::toBase64()
@@ -42,7 +42,7 @@ class MegaClearString implements IMegaString
 	{
 		return new MegaBase64String(base64_encode($this->_value));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaString::toClear()
@@ -51,7 +51,7 @@ class MegaClearString implements IMegaString
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaString::__toString()

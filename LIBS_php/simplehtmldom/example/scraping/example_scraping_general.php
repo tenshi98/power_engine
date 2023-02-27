@@ -41,8 +41,8 @@ if (isset($_POST['search']))
 }
 ?>
 <form method="post">
-	URL: <input name="url" type="text" value="<?=$url;?>"/><br/>
-	Search: <input name="search" type="text" value="<?=$search;?>"/>
+	URL: <input name="url" type="text" value="<?=$url; ?>"/><br/>
+	Search: <input name="search" type="text" value="<?=$search; ?>"/>
 	<input name="submit" type="submit" value="Submit"/>
 </form>
 <?php

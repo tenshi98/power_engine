@@ -18,7 +18,7 @@ class MegaKeyAes128String implements IMegaKeyAes128
 	 * @var string
 	 */
 	private $_value = null;
-	
+
 	/**
 	 * Builds a new MegaKey for AES 128 bits with the given string.
 	 *
@@ -32,7 +32,7 @@ class MegaKeyAes128String implements IMegaKeyAes128
 				array('{n}' => 8 * strlen($string), '{c}' => strlen($string))));
 		$this->_value = $string;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes128::toArray32()
@@ -45,7 +45,7 @@ class MegaKeyAes128String implements IMegaKeyAes128
 		if($padding > 0) $string .= str_repeat("\0", $padding);
 		return new MegaKeyAes128Array32(array_values(unpack('N*', $string)));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes128::toRawString()
@@ -54,7 +54,7 @@ class MegaKeyAes128String implements IMegaKeyAes128
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes128::__toString()

@@ -177,4 +177,5 @@ phptopdf($pdf_options);
 
 // OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
 echo ("<a href='pdf_invoice.pdf'>Download Your PDF</a>");
+
 ?>

@@ -7,4 +7,5 @@
   
  // OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
  echo ("<a href='legacy_html_example.pdf'>Download Your PDF</a>");
+
 ?> 

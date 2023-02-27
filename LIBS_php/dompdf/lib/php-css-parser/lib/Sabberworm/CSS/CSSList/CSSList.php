@@ -123,7 +123,7 @@ abstract class CSSList implements Renderable, Commentable {
 
 		return $sResult;
 	}
-	
+
 	/**
 	* Return true if the list can not be further outdented. Only important when rendering.
 	*/

@@ -19,14 +19,14 @@ class MegaResponseKey
 	 * @var MegaNodeId
 	 */
 	private $_node_id = null;
-	
+
 	/**
 	 * The encrypted key, in base64 string.
 	 *
 	 * @var MegaBase64String
 	 */
 	private $_node_key = null;
-	
+
 	/**
 	 * Builds a new MegaResponseKey with the string given by the API.
 	 *
@@ -43,7 +43,7 @@ class MegaResponseKey
 		$this->_node_id = new MegaNodeId(substr($string, 0, $pos));
 		$this->_node_key = new MegaBase64String(substr($string, $pos+1));
 	}
-	
+
 	/**
 	 * Gets the id of the node able to decrypt this node's key.
 	 *
@@ -53,7 +53,7 @@ class MegaResponseKey
 	{
 		return $this->_node_id;
 	}
-	
+
 	/**
 	 * Gets the node encrypted key, base64.
 	 *

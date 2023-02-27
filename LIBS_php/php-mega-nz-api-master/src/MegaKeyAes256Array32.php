@@ -18,7 +18,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 	 * @var integer
 	 */
 	private $_values = array();
-	
+
 	/**
 	 * Builds a new MegaKeyAes256Array32 with the given integer data.
 	 *
@@ -38,7 +38,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 		
 		$this->_values = $values;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::toArray32()
@@ -47,7 +47,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::toRawString()
@@ -56,7 +56,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 	{
 		return new MegaKeyAes256String(call_user_func_array('pack', array_merge(array('N*'), $this->_values)));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::reduceAes128()
@@ -70,7 +70,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 			$this->_values[3] ^ $this->_values[7],
 		));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::getInitializationVector()
@@ -79,7 +79,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 	{
 		return new MegaKeyAes128Array32(array($this->_values[4], $this->_values[5], 0, 0));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::getMetaMac()
@@ -88,7 +88,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 	{
 		return new MegaKeyAes64Array32(array($this->_values[6], $this->_values[7]));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::__toString()

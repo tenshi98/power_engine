@@ -18,63 +18,63 @@ class MegaResponseNode
 	 * @var MegaNodeId
 	 */
 	private $_h = null;
-	
+
 	/**
 	 * The id of parent node.
 	 *
 	 * @var MegaNodeId
 	 */
 	private $_p = null;
-	
+
 	/**
 	 * The id of the owner user.
 	 *
 	 * @var MegaUserId
 	 */
 	private $_u = null;
-	
+
 	/**
 	 * The type of the node
 	 *
 	 * @var string
 	 */
 	private $_t = null;
-	
+
 	/**
 	 *The attributes of the node, encrypted, base64.
 	 *
 	 * @var MegaBase64String
 	 */
 	private $_a = null;
-	
+
 	/**
 	 * The key of the node, encrypted, base64.
 	 *
 	 * @var MegaBase64String
 	 */
 	private $_k = null;
-	
+
 	/**
 	 * The size of the node, in octets.
 	 *
 	 * @var integer
 	 */
 	private $_s = null;
-	
+
 	/**
 	 * The timestamp of the last modification of the node.
 	 *
 	 * @var \DateTime
 	 */
 	private $_ts = null;
-	
+
 	/**
 	 * unknown data
 	 *
 	 * @var string
 	 */
 	private $_fa = null;
-	
+
 	/**
 	 * Build a new MegaResponseNode with the given json data.
 	 *
@@ -128,7 +128,7 @@ class MegaResponseNode
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets this node id.
 	 *
@@ -138,7 +138,7 @@ class MegaResponseNode
 	{
 		return $this->_h;
 	}
-	
+
 	/**
 	 * Gets the parent node id.
 	 *
@@ -148,7 +148,7 @@ class MegaResponseNode
 	{
 		return $this->_p;
 	}
-	
+
 	/**
 	 * Gets the owner user id.
 	 *
@@ -158,7 +158,7 @@ class MegaResponseNode
 	{
 		return $this->_u;
 	}
-	
+
 	/**
 	 * Gets this node type.
 	 *
@@ -168,7 +168,7 @@ class MegaResponseNode
 	{
 		return $this->_t;
 	}
-	
+
 	/**
 	 * Gets the attributes, as encrypted string.
 	 *
@@ -178,7 +178,7 @@ class MegaResponseNode
 	{
 		return $this->_a;
 	}
-	
+
 	/**
 	 * Gets the key, as encrypted string.
 	 *
@@ -188,7 +188,7 @@ class MegaResponseNode
 	{
 		return $this->_k;
 	}
-	
+
 	/**
 	 * Gets the node size, in octets.
 	 *
@@ -198,7 +198,7 @@ class MegaResponseNode
 	{
 		return $this->_s;
 	}
-	
+
 	/**
 	 * Gets the last modified date and time.
 	 *

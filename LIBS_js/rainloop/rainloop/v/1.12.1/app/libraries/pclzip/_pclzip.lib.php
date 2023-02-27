@@ -1826,7 +1826,7 @@
   function privOptionDefaultThreshold(&$p_options)
   {
     $v_result=1;
-    
+
     if (isset($p_options[PCLZIP_OPT_TEMP_FILE_THRESHOLD])
         || isset($p_options[PCLZIP_OPT_TEMP_FILE_OFF])) {
       return $v_result;

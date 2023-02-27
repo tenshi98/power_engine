@@ -8,7 +8,7 @@ abstract class AbstractProvider
 	 * @var \RainLoop\Model\Account
 	 */
 	protected $oAccount;
-	
+
 	/**
 	 * @var \MailSo\Log\Logger
 	 */

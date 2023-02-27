@@ -22,7 +22,7 @@ class LenientParsingTest extends \PHPUnit_Framework_TestCase {
 		$oResult = $oParser->parse();
 		$this->assertSame('.test1 {}'."\n".'.test2 {hello: 2.2;hello: 2000000000000.2;}'."\n".'#test {}'."\n".'#test2 {help: none;}', $oResult->render());
 	}
-	
+
 	/**
 	* @expectedException Sabberworm\CSS\Parsing\UnexpectedTokenException
 	*/

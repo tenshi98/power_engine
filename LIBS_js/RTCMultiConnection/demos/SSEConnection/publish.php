@@ -9,7 +9,7 @@ require('enableCORS.php');
 
 if (getParam('data') && getParam('receiver') && getParam('sender')) {
     $response = writeJSON(getParam('data'), getParam('receiver'), getParam('sender'));
-    
+
     if ($response != true) {
         echo $response;
     }

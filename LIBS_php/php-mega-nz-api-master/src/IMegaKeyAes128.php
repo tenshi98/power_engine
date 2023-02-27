@@ -18,14 +18,14 @@ interface IMegaKeyAes128
 	 * @return MegaKeyAes128Array32
 	 */
 	public function toArray32();
-	
+
 	/**
 	 * Gets a version of that key in pure form.
 	 *
 	 * @return MegaKeyAes128String
 	 */
 	public function toRawString();
-	
+
 	/**
 	 * Gets a string representation of this object in current state.
 	 *

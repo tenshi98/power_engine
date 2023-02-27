@@ -29,7 +29,7 @@ class MegaException extends \Exception
 	const EBLOCKED = -16;
 	const EOVERQUOTA = -17;
 	const ETEMPUNAVAIL = -18;
-	
+
 	/**
 	 * All standard error messages.
 	 *
@@ -56,7 +56,7 @@ class MegaException extends \Exception
 		self::EOVERQUOTA   => 'Request over quota',
 		self::ETEMPUNAVAIL => 'Resource temporarily not available, please try again later',
 	);
-	
+
 	/**
 	 * Builds a new MegaException. This method will given a standard error message
 	 * based on the code that is used.

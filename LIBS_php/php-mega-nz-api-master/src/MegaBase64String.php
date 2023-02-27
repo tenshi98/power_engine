@@ -18,7 +18,7 @@ class MegaBase64String implements IMegaString
 	 * @var string
 	 */
 	private $_value = null;
-	
+
 	/**
 	 * Builds a new MegaBase64String base64
 	 *
@@ -43,7 +43,7 @@ class MegaBase64String implements IMegaString
 		
 		$this->_value = $string;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaString::toBase64()
@@ -52,7 +52,7 @@ class MegaBase64String implements IMegaString
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaString::toClear()
@@ -61,7 +61,7 @@ class MegaBase64String implements IMegaString
 	{
 		return new MegaClearString(base64_decode($this->_value));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaString::__toString()

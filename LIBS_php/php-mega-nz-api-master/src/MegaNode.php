@@ -20,77 +20,77 @@ class MegaNode
 	const TYPE_TRASH  = 4;
 	const TYPE_CONTACT = 8;
 	const TYPE_NETWORK = 9;
-	
+
 	/**
 	 * The id of this node.
 	 *
 	 * @var MegaNodeId
 	 */
 	private $_node_id = null;
-	
+
 	/**
 	 * The id of parent node.
 	 *
 	 * @var MegaNodeId
 	 */
 	private $_parent_node_id = null;
-	
+
 	/**
 	 * The id of owner user.
 	 *
 	 * @var MegaUserId
 	 */
 	private $_owner_id = null;
-	
+
 	/**
 	 * The attributes of this node.
 	 *
 	 * @var MegaAttribute
 	 */
 	private $_attributes = null;
-	
+
 	/**
 	 * The type of this node. One of the MegaNode::TYPE_* constants.
 	 *
 	 * @var integer
 	 */
 	private $_node_type = null;
-	
+
 	/**
 	 * The size of this node, in octets.
 	 *
 	 * @var integer
 	 */
 	private $_node_size = null;
-	
+
 	/**
 	 * The date when this node was last modified.
 	 *
 	 * @var \DateTime
 	 */
 	private $_last_modified_date = null;
-	
+
 	/**
 	 * The private key to decrypt this node's content.
 	 *
 	 * @var IMegaKeyAes128
 	 */
 	private $_node_key = null;
-	
+
 	/**
 	 * The initialization vector, to decrypt this node's content.
 	 *
 	 * @var IMegaKeyAes128
 	 */
 	private $_init_vec = null;
-	
+
 	/**
 	 * The meta mac, to check the integrity of this node's content.
 	 *
 	 * @var IMegaKeyAes64
 	 */
 	private $_meta_mac = null;
-	
+
 	/**
 	 * Builds a new MegaNode with the right elements
 	 *
@@ -128,7 +128,7 @@ class MegaNode
 		$this->_init_vec = $init_vec;
 		$this->_meta_mac = $meta_mac;
 	}
-	
+
 	/**
 	 * Gets this node's id.
 	 *
@@ -138,7 +138,7 @@ class MegaNode
 	{
 		return $this->_node_id;
 	}
-	
+
 	/**
 	 * Gets this node parent's id.
 	 *
@@ -148,7 +148,7 @@ class MegaNode
 	{
 		return $this->_parent_node_id;
 	}
-	
+
 	/**
 	 * Gets this node owner's user id.
 	 *
@@ -158,7 +158,7 @@ class MegaNode
 	{
 		return $this->_owner_id;
 	}
-	
+
 	/**
 	 * Gets the attributes for this node.
 	 *
@@ -168,7 +168,7 @@ class MegaNode
 	{
 		return $this->_attributes;
 	}
-	
+
 	/**
 	 * Gets this node's type. Only one of MegaNode::TYPE_* constants.
 	 *
@@ -178,7 +178,7 @@ class MegaNode
 	{
 		return $this->_node_type;
 	}
-	
+
 	/**
 	 * Gets the node size. Only set when nodes represents files.
 	 *
@@ -188,7 +188,7 @@ class MegaNode
 	{
 		return $this->_node_size;
 	}
-	
+
 	/**
 	 * Gets the last modified date of this node.
 	 *
@@ -198,7 +198,7 @@ class MegaNode
 	{
 		return $this->_last_modified_date;
 	}
-	
+
 	/**
 	 * Gets the encryption key for this node.
 	 *
@@ -208,7 +208,7 @@ class MegaNode
 	{
 		return $this->_node_key;
 	}
-	
+
 	/**
 	 * Gets the initialization vector for this node.
 	 *
@@ -218,7 +218,7 @@ class MegaNode
 	{
 		return $this->_init_vec;
 	}
-	
+
 	/**
 	 * Gets the meta mac for this node.
 	 *

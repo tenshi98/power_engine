@@ -8,7 +8,7 @@ class Property
 	 * @var string
 	 */
 	private $sName;
-	
+
 	/**
 	 * @var string
 	 */
@@ -18,7 +18,7 @@ class Property
 	 * @var string
 	 */
 	private $sDesc;
-	
+
 	/**
 	 * @var int
 	 */
@@ -28,7 +28,7 @@ class Property
 	 * @var bool
 	 */
 	private $bAllowedInJs;
-	
+
 	/**
 	 * @var mixed
 	 */
@@ -49,7 +49,7 @@ class Property
 		$this->bAllowedInJs = false;
 		$this->sPlaceholder = '';
 	}
-	
+
 	/**
 	 * @param string $sName
 	 * 
@@ -59,7 +59,7 @@ class Property
 	{
 		return new self($sName);
 	}
-	
+
 	/**
 	 * @param int $iType
 	 * 
@@ -71,7 +71,7 @@ class Property
 		
 		return $this;
 	}
-	
+
 	/**
 	 * @param mixed $mDefaultValue
 	 * 
@@ -95,7 +95,7 @@ class Property
 
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $sLabel
 	 * 
@@ -130,7 +130,7 @@ class Property
 
 		return $this;
 	}
-	
+
 	/**
 	 * @return string
 	 */
@@ -146,7 +146,7 @@ class Property
 	{
 		return $this->bAllowedInJs;
 	}
-	
+
 	/**
 	 * @return string
 	 */
@@ -162,7 +162,7 @@ class Property
 	{
 		return $this->sLabel;
 	}
-	
+
 	/**
 	 * @return int
 	 */
@@ -170,7 +170,7 @@ class Property
 	{
 		return $this->iType;
 	}
-	
+
 	/**
 	 * @return mixed
 	 */
@@ -186,7 +186,7 @@ class Property
 	{
 		return $this->sPlaceholder;
 	}
-	
+
 	/**
 	 * @return array
 	 */

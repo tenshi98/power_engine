@@ -695,7 +695,7 @@ if(($folder_list) || ($file_list)){
 		</style>
 	</head>
 	<body>
-		
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 breadcrumb-bar">
 
 	<ul class="btn-group btn-breadcrumb pull-left">
@@ -708,10 +708,9 @@ if(($folder_list) || ($file_list)){
 			}
 		}
 		?>
-		
+
 	</ul>
-	
-	
+
 </div>
 <div class="clearfix"></div>
 

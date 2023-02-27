@@ -12,13 +12,13 @@ class OutputFormat {
 	public $sStringQuotingType = '"';
 	// Output RGB colors in hash notation if possible
 	public $bRGBHashNotation = true;
-	
+
 	/**
 	* Declaration format
 	*/
 	// Semicolon after the last rule of a declaration block can be omitted. To do that, set this false.
 	public $bSemicolonAfterLastRule = true;
-	
+
 	/**
 	* Spacing
 	* Note that these strings are not sanity-checked: the value should only consist of whitespace
@@ -43,13 +43,13 @@ class OutputFormat {
 	public $sSpaceAfterListArgumentSeparator = '';
 	
 	public $sSpaceBeforeOpeningBrace = ' ';
-	
+
 	/**
 	* Indentation
 	*/
 	// Indentation character(s) per level. Only applicable if newlines are used in any of the spacing settings.
 	public $sIndentation = "\t";
-	
+
 	/**
 	* Output exceptions.
 	*/

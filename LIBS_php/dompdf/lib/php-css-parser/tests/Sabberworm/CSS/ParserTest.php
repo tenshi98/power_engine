@@ -353,7 +353,7 @@ foo|test {gaga: 1;}
 		$this->assertSame('@media screen {html {some: -test(val2);}}
 #unrelated {other: yes;}', $oDoc->render());
 	}
-	
+
 	/**
 	* @expectedException Sabberworm\CSS\Parsing\OutputException
 	*/

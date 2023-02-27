@@ -25,4 +25,5 @@ $html->set_callback('my_callback');
 
 // 4. Callback function will be invoked while dumping
 echo $html;
+
 ?>

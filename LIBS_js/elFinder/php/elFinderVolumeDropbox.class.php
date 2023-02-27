@@ -55,14 +55,14 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	 * @var string
 	 **/
 	protected $tmp = '';
-	
+
 	/**
 	 * Dropbox.com uid
 	 *
 	 * @var string
 	 **/
 	protected $dropboxUid = '';
-	
+
 	/**
 	 * Dropbox download host, replaces 'www.dropbox.com' of shares URL
 	 * 
@@ -94,7 +94,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 				$this->dropbox_phpFound = in_array('Dropbox_autoload', spl_autoload_functions());
 			}
 		}
-		
+
 		$opts = array(
 			'consumerKey'       => '',
 			'consumerSecret'    => '',
@@ -200,7 +200,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 					} catch (Dropbox_Exception $e) {
 						return array('exit' => true, 'body' => '{msg:errAccess}');
 					}
-					
+
 					$this->session->set('DropboxAuthTokens', $tokens);
 					$html = '<input id="elf-volumedriver-dropbox-host-btn" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="{msg:btnApprove}" type="button" onclick="window.open(\''.$url.'\')">';
 					$html .= '<script>
@@ -258,7 +258,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return true;
 	}
-	
+
 	/*********************************************************************/
 	/*                        INIT AND CONFIGURE                         */
 	/*********************************************************************/
@@ -286,7 +286,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		if (empty($this->options['metaCachePath']) && defined('ELFINDER_DROPBOX_META_CACHE_PATH')) {
 			$this->options['metaCachePath'] = ELFINDER_DROPBOX_META_CACHE_PATH;
 		}
-		
+
 		// make net mount key
 		$this->netMountKey = md5(join('-', array('dropbox', $this->options['path'])));
 
@@ -328,7 +328,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 			$this->session->remove('DropboxTokens');
 			return $this->setError('Dropbox error: '.$e->getMessage());
 		}
-		
+
 		// user
 		if (empty($this->options['dropboxUid'])) {
 			try {
@@ -339,7 +339,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 				return $this->setError('Dropbox error: '.$e->getMessage());
 			}
 		}
-		
+
 		$this->dropboxUid = $this->options['dropboxUid'];
 		$this->tmbPrefix = 'dropbox'.base_convert($this->dropboxUid, 10, 32);
 
@@ -367,7 +367,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		if (!$this->metaCache) {
 			return $this->setError('Cache dirctory (metaCachePath or tmp) is require.');
 		}
-		
+
 		// setup PDO
 		if (! $this->options['PDO_DSN']) {
 			$this->options['PDO_DSN'] = 'sqlite:'.$this->metaCache.DIRECTORY_SEPARATOR.'.elFinder_dropbox_db_'.md5($this->dropboxUid.$this->options['consumerSecret']);
@@ -383,7 +383,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		} catch (PDOException $e) {
 			return $this->setError('PDO connection failed: '.$e->getMessage());
 		}
-		
+
 		$res = $this->deltaCheck($this->isMyReload());
 		if ($res !== true) {
 			if (is_string($res)) {
@@ -420,7 +420,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		$this->disabled[] = 'archive';
 		$this->disabled[] = 'extract';
 	}
-	
+
 	/**
 	 * Check DB for delta cache
 	 * 
@@ -448,7 +448,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * DB query and fetchAll
 	 * 
@@ -463,7 +463,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return $res;
 	}
-	
+
 	/**
 	 * Get dat(dropbox metadata) from DB
 	 * 
@@ -477,7 +477,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 			return array();
 		}
 	}
-	
+
 	/**
 	 * Update DB dat(dropbox metadata)
 	 * 
@@ -503,7 +503,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	public function umount() {
 
 	}
-	
+
 	/**
 	 * Get delta data and DB update
 	 * 
@@ -522,7 +522,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		try {
 			$more = true;
 			$this->DB->beginTransaction();
-			
+
 			if ($res = $this->query('select dat from '.$this->DB_TableName.' where path=\'\' and fname=\'\' limit 1')) {
 				$res = unserialize($res[0]);
 				$cursor = $res['cursor'];
@@ -552,7 +552,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 				foreach($_info['entries'] as $entry) {
 					$key = strtolower($entry[0]);
 					$pkey = strtolower($this->_dirname($key));
-					
+
 					$path = $this->DB->quote($pkey);
 					$fname = $this->DB->quote(strtolower($this->_basename($key)));
 					$where = 'where path='.$path.' and fname='.$fname;
@@ -607,7 +607,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Parse line from dropbox metadata output and return file stat (array)
 	 *
@@ -697,7 +697,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 					$this->setError(elFinder::ERROR_SEARCH_TIMEOUT, $this->path($this->encode($path)));
 					break;
 				}
-				
+
 				$raw = unserialize($raw);
 				if ($stat = $this->parseRaw($raw)) {
 					if (!isset($this->cache[$raw['path']])) {
@@ -714,7 +714,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return $result;
 	}
-	
+
 	/**
 	* Copy file/recursive copy dir only in current volume.
 	* Return new file path or false.
@@ -840,7 +840,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	
 		return $name;
 	}
-	
+
 	/**
 	 * Return thumbnail file name for required file
 	 *
@@ -851,7 +851,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	protected function tmbname($stat) {
 		return $this->tmbPrefix.$stat['rev'].'.png';
 	}
-	
+
 	/**
 	 * Get thumbnail from dropbox.com
 	 * @param string $path
@@ -865,7 +865,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 			return false;
 		}
 	}
-	
+
 	/**
 	* Return content URL
 	*
@@ -911,7 +911,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return $file['url'];
 	}
-	
+
 	/**
 	 * Get HTTP request response header string
 	 * 
@@ -957,7 +957,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 		return $res;
 	}
-	
+
 	/*********************** paths/urls *************************/
 
 	/**
@@ -1165,7 +1165,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		
 		if ($this->tmp) {
 			$contents = $this->_getContents($path);
-			
+
 			if ($contents === false) {
 				return false;
 			}

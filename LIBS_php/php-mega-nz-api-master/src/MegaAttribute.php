@@ -18,14 +18,14 @@ class MegaAttribute
 	 * @var string
 	 */
 	private $_name = null;
-	
+
 	/**
 	 * unknown data
 	 *
 	 * @var string
 	 */
 	private $_c = null;
-	
+
 	/**
 	 * Builds a new attribute bag for given node.
 	 *
@@ -51,7 +51,7 @@ class MegaAttribute
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets the name of the node.
 	 *

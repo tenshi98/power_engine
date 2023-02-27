@@ -17,4 +17,5 @@ phptopdf($pdf_options);
 
 // OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
 echo ("<a href='printer_friendly.pdf'>Download Your PDF</a>");
+
 ?>

@@ -69,7 +69,7 @@ class nusoap_client_mime extends nusoap_client {
 	 * @access private
 	 */
 	var $mimeContentType;
-	
+
 	/**
 	* adds a MIME attachment to the current request.
 	*
@@ -140,7 +140,7 @@ class nusoap_client_mime extends nusoap_client {
 			$params['encoding']     = '8bit';
 			$params['charset']      = $this->soap_defencoding;
 			$mimeMessage->addSubpart($soapmsg, $params);
-			
+
 			foreach ($this->requestAttachments as $att) {
 				unset($params);
 
@@ -180,7 +180,7 @@ class nusoap_client_mime extends nusoap_client {
 
 		return parent::getHTTPBody($soapmsg);
 	}
-	
+
 	/**
 	* gets the HTTP content type for the current request.
 	*
@@ -195,7 +195,7 @@ class nusoap_client_mime extends nusoap_client {
 		}
 		return parent::getHTTPContentType();
 	}
-	
+
 	/**
 	* gets the HTTP content type charset for the current request.
 	* returns false for non-text content types.
@@ -299,7 +299,7 @@ class nusoap_server_mime extends nusoap_server {
 	 * @access private
 	 */
 	var $mimeContentType;
-	
+
 	/**
 	* adds a MIME attachment to the current response.
 	*
@@ -370,7 +370,7 @@ class nusoap_server_mime extends nusoap_server {
 			$params['encoding']     = '8bit';
 			$params['charset']      = $this->soap_defencoding;
 			$mimeMessage->addSubpart($soapmsg, $params);
-			
+
 			foreach ($this->responseAttachments as $att) {
 				unset($params);
 
@@ -410,7 +410,7 @@ class nusoap_server_mime extends nusoap_server {
 
 		return parent::getHTTPBody($soapmsg);
 	}
-	
+
 	/**
 	* gets the HTTP content type for the current response.
 	*
@@ -425,7 +425,7 @@ class nusoap_server_mime extends nusoap_server {
 		}
 		return parent::getHTTPContentType();
 	}
-	
+
 	/**
 	* gets the HTTP content type charset for the current response.
 	* returns false for non-text content types.

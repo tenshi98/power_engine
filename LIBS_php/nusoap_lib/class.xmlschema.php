@@ -13,7 +13,7 @@
 * @access   public
 */
 class nusoap_xmlschema extends nusoap_base  {
-	
+
 	// files
 	var $schema = '';
 	var $xml = '';
@@ -164,7 +164,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		}
 		return $scope . $ename . '_ContainedType';
 	}
-	
+
 	/**
 	* start-element handler
 	*
@@ -861,7 +861,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		}
 		return $buffer;
 	}
-	
+
 	/**
 	* adds a complex type to the schema
 	* 
@@ -918,7 +918,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		$this->xdebug("addComplexType $name:");
 		$this->appendDebug($this->varDump($this->complexTypes[$name]));
 	}
-	
+
 	/**
 	* adds a simple type to the schema
 	*

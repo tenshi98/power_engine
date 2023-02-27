@@ -16,14 +16,14 @@ class Mega
 	
 	const SERVER_GLOBAL = 'g.api.mega.co.nz';
 	const SERVER_EUROPE = 'eu.api.mega.co.nz';
-	
+
 	/**
 	 * The default server, for unspecified new Mega objects.
 	 *
 	 * @var string one of Mega::SERVER_* constants.
 	 */
 	private static $_default_server = self::SERVER_GLOBAL;
-	
+
 	/**
 	 * Sets the default server for each time a new connection is required.
 	 *
@@ -38,49 +38,49 @@ class Mega
 				self::$_default_server = $server;
 		}
 	}
-	
+
 	/**
 	 * The folder id where the connection lands.
 	 *
 	 * @var MegaNodeId
 	 */
 	private $_container_id = null;
-	
+
 	/**
 	 * The decryption key where for the folder.
 	 *
 	 * @var IMegaKeyAes128
 	 */
 	private $_container_key = null;
-	
+
 	/**
 	 * The node hierarchy for this target folder.
 	 *
 	 * @var MegaNodeHierarchy
 	 */
 	private $_node_hierarchy = null;
-	
+
 	/**
 	 * Which server to use.
 	 *
 	 * @var string one of the Mega::SERVER_* constants.
 	 */
 	private $_server = null;
-	
+
 	/**
 	 * The sequence number.
 	 *
 	 * @var integer
 	 */
 	private $_seqno = null;
-	
+
 	/**
 	 * The user session id.
 	 *
 	 * @var string
 	 */
 	private $_user_session_id = null;
-	
+
 	/**
 	 * Builds a new Mega client API.
 	 *
@@ -118,7 +118,7 @@ class Mega
 		
 		$this->_seqno = rand(0, PHP_INT_MAX);
 	}
-	
+
 	/**
 	 * Initializes the known folders and the root folder by fetching information
 	 * from the api.
@@ -130,7 +130,7 @@ class Mega
 		$this->_node_hierarchy = false;
 		$this->getFileInfo($this->_container_id);
 	}
-	
+
 	/**
 	 * Sets the default server for this instance of Mega.
 	 *
@@ -149,7 +149,7 @@ class Mega
 				break;
 		}
 	}
-	
+
 	/**
 	 * Gets the root node of this folder.
 	 *
@@ -162,7 +162,7 @@ class Mega
 		
 		return $this->_node_hierarchy->getRoot();
 	}
-	
+
 	/**
 	 * Gets file information from hierarchy, if not found, searches the server.
 	 *
@@ -183,7 +183,7 @@ class Mega
 		
 		return $this->getFileInfoWithChildren($node_id);
 	}
-	
+
 	/**
 	 * Gets the file information from the server, and sets up the known
 	 * node hierarchy.
@@ -239,7 +239,7 @@ class Mega
 		
 		return $this->_node_hierarchy->retrieve($node_id);
 	}
-	
+
 	/**
 	 * Gets the children of given node.
 	 *
@@ -256,7 +256,7 @@ class Mega
 		}
 		return $children;
 	}
-	
+
 	/**
 	 * Gets the raw data for the file represented by given node.
 	 *
@@ -295,7 +295,7 @@ class Mega
 		
 		return $clear_data;
 	}
-	
+
 	/**
 	 *
 	 * @param string $url
@@ -330,7 +330,7 @@ class Mega
 		
 		return $response[0];
 	}
-	
+
 	/**
 	 * Executes a given request to megaupload via cURL.
 	 *

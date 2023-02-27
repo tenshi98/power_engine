@@ -11,7 +11,7 @@ abstract class AbstractTwoFactorAuth
 	{
 		return 'Two Factor Authenticator Code';
 	}
-	
+
 	/**
 	 * @param string $sSecret
 	 * @param string $sCode

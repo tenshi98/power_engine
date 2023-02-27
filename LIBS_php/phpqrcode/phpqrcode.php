@@ -89,7 +89,7 @@
 	define('QR_ECLEVEL_M', 1);
 	define('QR_ECLEVEL_Q', 2);
 	define('QR_ECLEVEL_H', 3);
-	
+
 	// Supported output formats
 	
 	define('QR_FORMAT_TEXT', 0);
@@ -220,7 +220,7 @@
                     $fileName = QR_CACHE_DIR.'frame_'.$a.'.png';
                     QRimage::png(self::binarize($frame), $fileName, 1, 0);
                 }
-				
+
 				$width = count($frame);
 				$bitMask = array_fill(0, $width, array_fill(0, $width, 0));
 				for ($maskNo=0; $maskNo<8; $maskNo++)

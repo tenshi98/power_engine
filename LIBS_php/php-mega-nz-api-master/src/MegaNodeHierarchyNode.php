@@ -22,21 +22,21 @@ class MegaNodeHierarchyNode
 	 * @var MegaNode
 	 */
 	private $_inner_node = null;
-	
+
 	/**
 	 * The parent node object.
 	 *
 	 * @var MegaNodeHierarchyNode
 	 */
 	private $_parent = null;
-	
+
 	/**
 	 * The children node objects.
 	 *
 	 * @var MegaNodeHierarchyNode[]
 	 */
 	private $_children = array();
-	
+
 	/**
 	 * Builds a new MegaNodeHierarchyNode with the given node.
 	 *
@@ -46,7 +46,7 @@ class MegaNodeHierarchyNode
 	{
 		$this->_inner_node = $node;
 	}
-	
+
 	/**
 	 * Sets the parent of this node. Once the parent is set, it cannot move.
 	 *
@@ -62,11 +62,11 @@ class MegaNodeHierarchyNode
 			
 			throw new MegaException('Impossible to set another parent for this node.');
 		}
-		
+
 		$this->_parent = $parent;
 		$parent->addChild($this);
 	}
-	
+
 	/**
 	 * Adds a child node to the collection of this one.
 	 *
@@ -83,7 +83,7 @@ class MegaNodeHierarchyNode
 		$this->_children[$child->getNode()->getNodeId()->__toString()] = $child;
 		$child->setParent($this);
 	}
-	
+
 	/**
 	 * Gets the real node.
 	 *
@@ -93,7 +93,7 @@ class MegaNodeHierarchyNode
 	{
 		return $this->_inner_node;
 	}
-	
+
 	/**
 	 * Gets the parent node.
 	 *
@@ -103,7 +103,7 @@ class MegaNodeHierarchyNode
 	{
 		return $this->_parent;
 	}
-	
+
 	/**
 	 * Gets the children nodes.
 	 *

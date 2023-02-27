@@ -16,4 +16,5 @@ phptopdf($pdf_options);
 
 // OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
 echo ("<a href='url_google.pdf'>Download Your PDF</a>");
+
 ?>

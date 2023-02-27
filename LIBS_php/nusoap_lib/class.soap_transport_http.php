@@ -122,12 +122,12 @@ class soap_transport_http extends nusoap_base {
 			$this->debug("parsed URL $k = $v");
 			$this->$k = $v;
 		}
-		
+
 		// add any GET params to path
 		if(isset($u['query']) && $u['query'] != ''){
             $this->path .= '?' . $u['query'];
 		}
-		
+
 		// set default port
 		if(!isset($u['port'])){
 			if($u['scheme'] == 'https'){
@@ -136,7 +136,7 @@ class soap_transport_http extends nusoap_base {
 				$this->port = 80;
 			}
 		}
-		
+
 		$this->uri = $this->path;
 		$this->digest_uri = $this->uri;
 
@@ -219,7 +219,7 @@ class soap_transport_http extends nusoap_base {
 		} else {
 			$this->fp = @fsockopen( $host, $this->port, $this->errno, $this->error_str);
 		}
-		
+
 		// test pointer
 		if(!$this->fp) {
 			$msg = 'Couldn\'t open socket connection to server ' . $this->url;
@@ -232,7 +232,7 @@ class soap_transport_http extends nusoap_base {
 			$this->setError($msg);
 			return false;
 		}
-		
+
 		// set response timeout
 		$this->debug('set response timeout to ' . $response_timeout);
 		socket_set_timeout( $this->fp, $response_timeout);
@@ -454,7 +454,7 @@ class soap_transport_http extends nusoap_base {
 	function sendHTTPS($data, $timeout=0, $response_timeout=30, $cookies) {
 		return $this->send($data, $timeout, $response_timeout, $cookies);
 	}
-	
+
 	/**
 	* if authenticating, set user credentials here
 	*
@@ -532,7 +532,7 @@ class soap_transport_http extends nusoap_base {
 		$this->authtype = $authtype;
 		$this->digestRequest = $digestRequest;
 	}
-	
+
 	/**
 	* set the soapaction value
 	*
@@ -542,7 +542,7 @@ class soap_transport_http extends nusoap_base {
 	function setSOAPAction($soapaction) {
 		$this->setHeader('SOAPAction', '"' . $soapaction . '"');
 	}
-	
+
 	/**
 	* use http encoding
 	*
@@ -562,7 +562,7 @@ class soap_transport_http extends nusoap_base {
 			$this->encoding = $enc;
 		}
 	}
-	
+
 	/**
 	* set proxy info here
 	*
@@ -676,7 +676,7 @@ class soap_transport_http extends nusoap_base {
 		}
 		return $new;
 	}
-	
+
 	/**
 	 * Writes the payload, including HTTP headers, to $this->outgoing_payload.
 	 *
@@ -864,7 +864,7 @@ class soap_transport_http extends nusoap_base {
 				$this->incoming_headers[$header_name] .= $lb . ' ' . $header_line;
 			}
 		}
-		
+
 		// loop until msg has been received
 		if (isset($this->incoming_headers['transfer-encoding']) && strtolower($this->incoming_headers['transfer-encoding']) == 'chunked') {
 			$content_length =  2147483647;	// ignore any content-length header
@@ -939,13 +939,13 @@ class soap_transport_http extends nusoap_base {
 			$this->fp = false;
 			$this->debug('closed socket');
 		}
-		
+
 		// connection was closed unexpectedly
 		if($this->incoming_payload == ''){
 			$this->setError('no response from server');
 			return false;
 		}
-		
+
 		// decode transfer-encoding
 //		if(isset($this->incoming_headers['transfer-encoding']) && strtolower($this->incoming_headers['transfer-encoding']) == 'chunked'){
 //			if(!$data = $this->decodeChunked($data, $lb)){
@@ -1005,7 +1005,7 @@ class soap_transport_http extends nusoap_base {
 				}
 			}
 		}
-		
+
 		// separate content from HTTP headers
 		if ($pos = strpos($data,"\r\n\r\n")) {
 			$lb = "\r\n";

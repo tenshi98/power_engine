@@ -18,7 +18,7 @@ class MegaNodeId
 	 * @var string
 	 */
 	private $_value = null;
-	
+
 	/**
 	 * Builds a new MegaNodeId from the given string.
 	 *
@@ -32,7 +32,7 @@ class MegaNodeId
 				array('{id}' => $id)));
 		$this->_value = $id;
 	}
-	
+
 	/**
 	 * Gets the value of the id.
 	 *
@@ -42,7 +42,7 @@ class MegaNodeId
 	{
 		return $this->_value;
 	}
-	
+
 	/**
 	 * Gets whether two ids are equals. They are equals if they share the same
 	 * id value.
@@ -53,7 +53,7 @@ class MegaNodeId
 	{
 		return 0 === strcmp($this->getValue(), $other->getValue());
 	}
-	
+
 	/**
 	 * Returns a string representation of this node id : the id value.
 	 *

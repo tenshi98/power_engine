@@ -19,7 +19,7 @@ class MegaResponseNodeDecoder
 	 * @var IMegaKeyAes128
 	 */
 	private $_key = null;
-	
+
 	/**
 	 * Builds a new MegaResponseNodeDecoder object with the given master key.
 	 *
@@ -29,7 +29,7 @@ class MegaResponseNodeDecoder
 	{
 		$this->_key = $decoding_key;
 	}
-	
+
 	/**
 	 * Decodes the response node and gives a clear node.
 	 *
@@ -50,7 +50,7 @@ class MegaResponseNodeDecoder
 		throw new MegaException('Unsupported node type to decode ({t}).',
 			array('{t}' => $node->getNodeType()), MegaException::EINTERNAL);
 	}
-	
+
 	/**
 	 * Decodes a folder node.
 	 *
@@ -80,7 +80,7 @@ class MegaResponseNodeDecoder
 			$meta_mac
 		);
 	}
-	
+
 	/**
 	 * Decodes a file node.
 	 *
@@ -110,7 +110,7 @@ class MegaResponseNodeDecoder
 			$meta_mac
 		);
 	}
-	
+
 	/**
 	 * Decrypts a 128 bits AES key encrypted with another 128 bits AES key,
 	 * i.e. decrypts the children key for a folder with the parent's key.
@@ -130,7 +130,7 @@ class MegaResponseNodeDecoder
 		);
 		return new MegaKeyAes128String($decoded_key);
 	}
-	
+
 	/**
 	 * Decrypts a 256 bits AES key encrypted with a 128 bits AES key, i.e.
 	 * decrypts the children key for a file with the parent's folder key.
@@ -156,7 +156,7 @@ class MegaResponseNodeDecoder
 		}
 		return new MegaKeyAes256String($decoded_key);
 	}
-	
+
 	/**
 	 * Decrypts a string with the key, i.e. decrypts the attributes for a node
 	 * with it's own key.

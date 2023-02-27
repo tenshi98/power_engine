@@ -18,14 +18,14 @@ class MegaNodeHierarchy
 	 * @var MegaNodeHierarchyNode
 	 */
 	private $_root = null;
-	
+
 	/**
 	 * A hashmap of all known nodes to have insert and searching in O(1)
 	 *
 	 * @var [string => MegaNodeHierarchyNode]
 	 */
 	private $_known_nodes = array();
-	
+
 	/**
 	 * Builds a new MegaNodeHierarchy with the given root node.
 	 *
@@ -36,7 +36,7 @@ class MegaNodeHierarchy
 		$this->_root = new MegaNodeHierarchyNode($root_node);
 		$this->_known_nodes[$root_node->getNodeId()->__toString()] = $this->_root;
 	}
-	
+
 	/**
 	 * Gets the root node of the folder hierarchy.
 	 *
@@ -46,7 +46,7 @@ class MegaNodeHierarchy
 	{
 		return $this->_root->getNode();
 	}
-	
+
 	/**
 	 * Inserts a new node in the hierarchy.
 	 *
@@ -68,7 +68,7 @@ class MegaNodeHierarchy
 		$hnode->setParent($pnode);
 		$this->_known_nodes[$node->getNodeId()->__toString()] = $hnode;
 	}
-	
+
 	/**
 	 * Gets the node metadata for the node defined by given node id.
 	 *
@@ -82,7 +82,7 @@ class MegaNodeHierarchy
 			return null;
 		return $hnode->getNode();
 	}
-	
+
 	/**
 	 * Gets the parent node of the node defined by given node id.
 	 *
@@ -100,7 +100,7 @@ class MegaNodeHierarchy
 			return null;
 		return $hnode->getParent()->getNode();
 	}
-	
+
 	/**
 	 * Gets the children of the node defined by given node id.
 	 *
@@ -119,7 +119,7 @@ class MegaNodeHierarchy
 			$children[] = $hchild->getNode();
 		return $children;
 	}
-	
+
 	/**
 	 * Gets the node hierarchy node which contains the node with the given id.
 	 *

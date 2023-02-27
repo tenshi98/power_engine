@@ -18,7 +18,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 	 * @var string
 	 */
 	private $_value = null;
-	
+
 	/**
 	 * Builds a new MegaKey for AES 256 bits with the given string.
 	 *
@@ -32,7 +32,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 				array('{n}' => 8 * strlen($string), '{c}' => strlen($string))));
 		$this->_value = $string;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::toArray32()
@@ -45,7 +45,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 		if($padding > 0) $string .= str_repeat("\0", $padding);
 		return new MegaKeyAes256Array32(array_values(unpack('N*', $string)));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::toRawString()
@@ -54,7 +54,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::reduceAes128()
@@ -63,7 +63,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 	{
 		return $this->toArray32()->reduceAes128();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::getInitializationVector()
@@ -72,7 +72,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 	{
 		return $this->toArray32()->getInitializationVector();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::getMetaMac()
@@ -81,7 +81,7 @@ class MegaKeyAes256String implements IMegaKeyAes256
 	{
 		return $this->toArray32()->getMetaMac();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes256::__toString()

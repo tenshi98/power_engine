@@ -53,4 +53,5 @@ phptopdf($pdf_options);
 
 // OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
 echo ("<a href='internal_LAN.pdf'>Download Your PDF</a>");
+
 ?>

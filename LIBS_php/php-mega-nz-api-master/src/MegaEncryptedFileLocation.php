@@ -26,7 +26,7 @@ class MegaEncryptedFileLocation
 	private $_fa = null;
 	
 	private $_e = null;
-	
+
 	/**
 	 * Builds a new Mega Encrypted File Location object.
 	 *

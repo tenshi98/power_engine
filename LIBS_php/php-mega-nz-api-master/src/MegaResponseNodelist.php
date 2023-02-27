@@ -18,21 +18,21 @@ class MegaResponseNodelist
 	 * @var MegaResponseNode[]
 	 */
 	private $_f = array();
-	
+
 	/**
 	 * unknown data
 	 *
 	 * @var string
 	 */
 	private $_sn = null;
-	
+
 	/**
 	 * unknown data
 	 *
 	 * @var string
 	 */
 	private $_noc = null;
-	
+
 	/**
 	 * Builds a new MegaNodeResponse with the given json data.
 	 *
@@ -67,7 +67,7 @@ class MegaResponseNodelist
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets the node list.
 	 *
@@ -77,7 +77,7 @@ class MegaResponseNodelist
 	{
 		return $this->_f;
 	}
-	
+
 	/**
 	 * Gets the node which is the root amongst the nodes given in the list.
 	 *
@@ -97,14 +97,14 @@ class MegaResponseNodelist
 // 				continue;
 // 			if($node->getParentNodeId()->equals($supposed_root->getNodeId()))
 // 				continue;
-			
+
 // 			throw new MegaException(strtr('The supposed root element "{pkey}" is not the parent of node "{ckey}".',
 // 				array('{pkey}' => $supposed_root->getNodeId(), '{ckey}' => $node->getNodeId())));
 // 		}
 		
 		return $supposed_root;
 	}
-	
+
 	/**
 	 * Gets all the other non-root nodes.
 	 *

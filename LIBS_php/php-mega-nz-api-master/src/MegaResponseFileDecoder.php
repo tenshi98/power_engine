@@ -18,7 +18,7 @@ class MegaResponseFileDecoder
 	 * @var MegaNode
 	 */
 	private $_node = null;
-	
+
 	/**
 	 * Builds a new MegaResponseFileDecoder object with the given node.
 	 *
@@ -28,7 +28,7 @@ class MegaResponseFileDecoder
 	{
 		return $this->_node = $node;
 	}
-	
+
 	/**
 	 * Decodes the given data according to the keys in the node.
 	 *

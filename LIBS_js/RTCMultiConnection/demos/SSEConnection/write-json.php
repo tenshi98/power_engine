@@ -9,7 +9,7 @@ function writeJSON($json, $receiver, $sender)
 {
     $path = './rooms/' . $receiver . '.json';
     $data = array();
-    
+
     if (file_exists($path)) {
         // read file if already created
         $handle = fopen($path, 'r');
@@ -40,7 +40,7 @@ function writeJSON($json, $receiver, $sender)
     
     $handle = fopen($path, 'w');
     $fwrite = fwrite($handle, json_encode($data));
-    
+
     if ($fwrite === false) {
         return 'fwrite failed';
     }
@@ -56,7 +56,7 @@ function removeJSON($receiver, $sender)
 {
     $path = './rooms/' . $receiver . '.json';
     $data = array();
-    
+
     if (file_exists($path)) {
         $handle = fopen($path, 'r');
         $data   = fread($handle, filesize($path));
@@ -65,7 +65,7 @@ function removeJSON($receiver, $sender)
     }
     
     $data = json_decode($data, true);
-    
+
     if ($data == false) {
         return true;
     }
@@ -80,7 +80,7 @@ function removeJSON($receiver, $sender)
     
     $handle = fopen($path, 'w');
     $fwrite = fwrite($handle, json_encode($data));
-    
+
     if ($fwrite === false) {
         return 'fwrite failed';
     }

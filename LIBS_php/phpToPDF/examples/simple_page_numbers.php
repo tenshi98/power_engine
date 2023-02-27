@@ -34,4 +34,5 @@ phptopdf($pdf_options);
 
 // OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
 echo ("<a href='simple_page_nums.pdf'>Download Your PDF</a>");
+
 ?>

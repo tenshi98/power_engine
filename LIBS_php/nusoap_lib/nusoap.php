@@ -1093,7 +1093,7 @@ class soap_fault extends nusoap_fault {
 * @access   public
 */
 class nusoap_xmlschema extends nusoap_base  {
-	
+
 	// files
 	var $schema = '';
 	var $xml = '';
@@ -1244,7 +1244,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		}
 		return $scope . $ename . '_ContainedType';
 	}
-	
+
 	/**
 	* start-element handler
 	*
@@ -1941,7 +1941,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		}
 		return $buffer;
 	}
-	
+
 	/**
 	* adds a complex type to the schema
 	* 
@@ -1998,7 +1998,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		$this->xdebug("addComplexType $name:");
 		$this->appendDebug($this->varDump($this->complexTypes[$name]));
 	}
-	
+
 	/**
 	* adds a simple type to the schema
 	*
@@ -2276,12 +2276,12 @@ class soap_transport_http extends nusoap_base {
 			$this->debug("parsed URL $k = $v");
 			$this->$k = $v;
 		}
-		
+
 		// add any GET params to path
 		if(isset($u['query']) && $u['query'] != ''){
             $this->path .= '?' . $u['query'];
 		}
-		
+
 		// set default port
 		if(!isset($u['port'])){
 			if($u['scheme'] == 'https'){
@@ -2290,7 +2290,7 @@ class soap_transport_http extends nusoap_base {
 				$this->port = 80;
 			}
 		}
-		
+
 		$this->uri = $this->path;
 		$this->digest_uri = $this->uri;
 
@@ -2373,7 +2373,7 @@ class soap_transport_http extends nusoap_base {
 		} else {
 			$this->fp = @fsockopen( $host, $this->port, $this->errno, $this->error_str);
 		}
-		
+
 		// test pointer
 		if(!$this->fp) {
 			$msg = 'Couldn\'t open socket connection to server ' . $this->url;
@@ -2386,7 +2386,7 @@ class soap_transport_http extends nusoap_base {
 			$this->setError($msg);
 			return false;
 		}
-		
+
 		// set response timeout
 		$this->debug('set response timeout to ' . $response_timeout);
 		socket_set_timeout( $this->fp, $response_timeout);
@@ -2608,7 +2608,7 @@ class soap_transport_http extends nusoap_base {
 	function sendHTTPS($data, $timeout=0, $response_timeout=30, $cookies) {
 		return $this->send($data, $timeout, $response_timeout, $cookies);
 	}
-	
+
 	/**
 	* if authenticating, set user credentials here
 	*
@@ -2686,7 +2686,7 @@ class soap_transport_http extends nusoap_base {
 		$this->authtype = $authtype;
 		$this->digestRequest = $digestRequest;
 	}
-	
+
 	/**
 	* set the soapaction value
 	*
@@ -2696,7 +2696,7 @@ class soap_transport_http extends nusoap_base {
 	function setSOAPAction($soapaction) {
 		$this->setHeader('SOAPAction', '"' . $soapaction . '"');
 	}
-	
+
 	/**
 	* use http encoding
 	*
@@ -2716,7 +2716,7 @@ class soap_transport_http extends nusoap_base {
 			$this->encoding = $enc;
 		}
 	}
-	
+
 	/**
 	* set proxy info here
 	*
@@ -2830,7 +2830,7 @@ class soap_transport_http extends nusoap_base {
 		}
 		return $new;
 	}
-	
+
 	/**
 	 * Writes the payload, including HTTP headers, to $this->outgoing_payload.
 	 *
@@ -3018,7 +3018,7 @@ class soap_transport_http extends nusoap_base {
 				$this->incoming_headers[$header_name] .= $lb . ' ' . $header_line;
 			}
 		}
-		
+
 		// loop until msg has been received
 		if (isset($this->incoming_headers['transfer-encoding']) && strtolower($this->incoming_headers['transfer-encoding']) == 'chunked') {
 			$content_length =  2147483647;	// ignore any content-length header
@@ -3093,13 +3093,13 @@ class soap_transport_http extends nusoap_base {
 			$this->fp = false;
 			$this->debug('closed socket');
 		}
-		
+
 		// connection was closed unexpectedly
 		if($this->incoming_payload == ''){
 			$this->setError('no response from server');
 			return false;
 		}
-		
+
 		// decode transfer-encoding
 //		if(isset($this->incoming_headers['transfer-encoding']) && strtolower($this->incoming_headers['transfer-encoding']) == 'chunked'){
 //			if(!$data = $this->decodeChunked($data, $lb)){
@@ -3159,7 +3159,7 @@ class soap_transport_http extends nusoap_base {
 				}
 			}
 		}
-		
+
 		// separate content from HTTP headers
 		if ($pos = strpos($data,"\r\n\r\n")) {
 			$lb = "\r\n";
@@ -4362,7 +4362,7 @@ class nusoap_server extends nusoap_base {
 	function getHTTPBody($soapmsg) {
 		return $soapmsg;
 	}
-	
+
 	/**
 	* gets the HTTP content type for the current response.
 	*
@@ -4374,7 +4374,7 @@ class nusoap_server extends nusoap_base {
 	function getHTTPContentType() {
 		return 'text/xml';
 	}
-	
+
 	/**
 	* gets the HTTP content type charset for the current response.
 	* returns false for non-text content types.
@@ -5064,7 +5064,7 @@ class wsdl extends nusoap_base {
 			    		$this->currentBinding = $this->getLocalPart($attrs['name']);
 					} else {
 			    		$this->currentBinding = $attrs['name'];
-					} 
+					}
 					$this->status = 'binding';
 					$this->bindings[$this->currentBinding]['portType'] = $this->getLocalPart($attrs['type']);
 					$this->debug("current binding: $this->currentBinding of portType: " . $attrs['type']);
@@ -5081,8 +5081,8 @@ class wsdl extends nusoap_base {
 				} 
 				break;
 			} 
-		} 
-	} 
+		}
+	}
 
 	/**
 	* end-element handler
@@ -5111,8 +5111,8 @@ class wsdl extends nusoap_base {
 			//TODO: track the node to which documentation should be assigned; it can be a part, message, etc.
 			//$this->portTypes[$this->currentPortType][$this->currentPortOperation]['documentation'] = $this->documentation;
 			$this->documentation = false;
-		} 
-	} 
+		}
+	}
 
 	/**
 	 * element content handler
@@ -5129,8 +5129,8 @@ class wsdl extends nusoap_base {
 		} 
 		if ($this->documentation) {
 			$this->documentation .= $data;
-		} 
-	} 
+		}
+	}
 
 	/**
 	* if authenticating, set user credentials here
@@ -5154,9 +5154,9 @@ class wsdl extends nusoap_base {
 	{
 		if (is_array($this->bindings[$binding])) {
 			return $this->bindings[$binding];
-		} 
+		}
 	}
-	
+
 	/**
 	 * returns an assoc array of operation names => operation data
 	 * 
@@ -5195,8 +5195,8 @@ class wsdl extends nusoap_base {
 			$this->debug("getOperations found no operations for port '$portName' bindingType $bindingType");
 		}
 		return $ops;
-	} 
-	
+	}
+
 	/**
 	 * returns an associative array of data necessary for calling an operation
 	 * 
@@ -5226,9 +5226,9 @@ class wsdl extends nusoap_base {
 					} 
 				} 
 			}
-		} 
+		}
 	}
-	
+
 	/**
 	 * returns an associative array of data necessary for calling an operation
 	 * 
@@ -5254,9 +5254,9 @@ class wsdl extends nusoap_base {
 					} 
 				} 
 			}
-		} 
+		}
 	}
-	
+
 	/**
     * returns an array of information about a given type
     * returns false if no type exists by the given name
@@ -5482,7 +5482,7 @@ class wsdl extends nusoap_base {
 		} 
 		if (isset($this->namespaces['tns'])) {
 			$xml .= " targetNamespace=\"" . $this->namespaces['tns'] . "\"";
-		} 
+		}
 		$xml .= '>'; 
 		// imports
 		if (sizeof($this->import) > 0) {
@@ -5572,7 +5572,7 @@ class wsdl extends nusoap_base {
 					$portType_xml .= "\n" . '  <operation name="' . $opParts['name'] . '"';
 					if (isset($opParts['parameterOrder'])) {
 					    $portType_xml .= ' parameterOrder="' . $opParts['parameterOrder'] . '"';
-					} 
+					}
 					$portType_xml .= '>';
 					if(isset($opParts['documentation']) && $opParts['documentation'] != '') {
 						$portType_xml .= "\n" . '    <documentation>' . htmlspecialchars($opParts['documentation']) . '</documentation>';
@@ -5580,7 +5580,7 @@ class wsdl extends nusoap_base {
 					$portType_xml .= "\n" . '    <input message="tns:' . $opParts['input']['message'] . '"/>';
 					$portType_xml .= "\n" . '    <output message="tns:' . $opParts['output']['message'] . '"/>';
 					$portType_xml .= "\n" . '  </operation>';
-				} 
+				}
 				$portType_xml .= "\n" . '</portType>';
 				$binding_xml .= "\n" . '</binding>';
 			} 
@@ -5594,10 +5594,10 @@ class wsdl extends nusoap_base {
 				$xml .= "\n" . '    <soap:address location="' . $attrs['location'] . ($debug ? '?debug=1' : '') . '"/>';
 				$xml .= "\n" . '  </port>';
 			} 
-		} 
+		}
 		$xml .= "\n" . '</service>';
 		return $xml . "\n</definitions>";
-	} 
+	}
 
 	/**
 	 * determine whether a set of parameters are unwrapped
@@ -5776,8 +5776,8 @@ class wsdl extends nusoap_base {
 		}
 		$this->debug("serializeRPCParameters returning: $xml");
 		return $xml;
-	} 
-	
+	}
+
 	/**
 	 * serialize a PHP value according to a WSDL message definition
 	 * 
@@ -5816,7 +5816,7 @@ class wsdl extends nusoap_base {
 			$encodingStyle = $opData['output']['encodingStyle'];
 			$enc_style = $encodingStyle;
 		}
-		
+
 		// set input params
 		$xml = '';
 		if (isset($opData[$direction]['parts']) && sizeof($opData[$direction]['parts']) > 0) {
@@ -5857,8 +5857,8 @@ class wsdl extends nusoap_base {
 		}
 		$this->debug("serializeParameters returning: $xml");
 		return $xml;
-	} 
-	
+	}
+
 	/**
 	 * serializes a PHP value according a given type definition
 	 * 
@@ -6120,7 +6120,7 @@ class wsdl extends nusoap_base {
 				foreach($value as $v) {
 					$cols = ',' . sizeof($v);
 					$nv = array_merge($nv, $v);
-				} 
+				}
 				$value = $nv;
 			} else {
 				$cols = '';
@@ -6179,7 +6179,7 @@ class wsdl extends nusoap_base {
 		$this->debug("in serializeType: returning: $xml");
 		return $xml;
 	}
-	
+
 	/**
 	 * serializes the attributes for a complexType
 	 *
@@ -6834,7 +6834,7 @@ class nusoap_parser extends nusoap_base {
 			// get unqualified name
 			$name = substr(strstr($name,':'),1);
 		}
-		
+
 		// build to native type
 		if(isset($this->body_position) && $pos > $this->body_position){
 			// deal w/ multirefs
@@ -7785,7 +7785,7 @@ class nusoap_client extends nusoap_base  {
 		$this->authtype = $authtype;
 		$this->certRequest = $certRequest;
 	}
-	
+
 	/**
 	* use HTTP encoding
 	*
@@ -7796,7 +7796,7 @@ class nusoap_client extends nusoap_base  {
 		$this->debug("setHTTPEncoding(\"$enc\")");
 		$this->http_encoding = $enc;
 	}
-	
+
 	/**
 	* Set whether to try to use cURL connections if possible
 	*
@@ -7817,7 +7817,7 @@ class nusoap_client extends nusoap_base  {
 		$this->debug("useHTTPPersistentConnection");
 		$this->persistentConnection = true;
 	}
-	
+
 	/**
 	* gets the default RPC parameter setting.
 	* If true, default is that call params are like RPC even for document style.
@@ -7847,7 +7847,7 @@ class nusoap_client extends nusoap_base  {
 	function setDefaultRpcParams($rpcParams) {
 		$this->defaultRpcParams = $rpcParams;
 	}
-	
+
 	/**
 	* dynamically creates an instance of a proxy class,
 	* allowing user to directly call methods from wsdl
@@ -7977,7 +7977,7 @@ class nusoap_client extends nusoap_base  {
 	function getHTTPBody($soapmsg) {
 		return $soapmsg;
 	}
-	
+
 	/**
 	* gets the HTTP content type for the current request.
 	*
@@ -7989,7 +7989,7 @@ class nusoap_client extends nusoap_base  {
 	function getHTTPContentType() {
 		return 'text/xml';
 	}
-	
+
 	/**
 	* gets the HTTP content type charset for the current request.
 	* returns false for non-text content types.

@@ -18,7 +18,7 @@ class MegaKeyAes128Array32 implements IMegaKeyAes128
 	 * @var integer
 	 */
 	private $_values = array();
-	
+
 	/**
 	 * Builds a new MegaKeyAes128Array32 with the given integer data.
 	 *
@@ -38,7 +38,7 @@ class MegaKeyAes128Array32 implements IMegaKeyAes128
 		
 		$this->_values = $values;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes128::toArray32()
@@ -47,7 +47,7 @@ class MegaKeyAes128Array32 implements IMegaKeyAes128
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes128::toRawString()
@@ -56,7 +56,7 @@ class MegaKeyAes128Array32 implements IMegaKeyAes128
 	{
 		return new MegaKeyAes128String(call_user_func_array('pack', array_merge(array('N*'), $this->_values)));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \PhpExtended\Mega\IMegaKeyAes128::__toString()

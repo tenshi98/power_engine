@@ -53,7 +53,7 @@ class TwoFactorAuth extends \RainLoop\Providers\AbstractProvider
 
 		return $sResult;
 	}
-	
+
 	/**
 	 * @param string $sSecret
 	 * @param string $sCode

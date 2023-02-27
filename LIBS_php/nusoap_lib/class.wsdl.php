@@ -482,7 +482,7 @@ class wsdl extends nusoap_base {
 			    		$this->currentBinding = $this->getLocalPart($attrs['name']);
 					} else {
 			    		$this->currentBinding = $attrs['name'];
-					} 
+					}
 					$this->status = 'binding';
 					$this->bindings[$this->currentBinding]['portType'] = $this->getLocalPart($attrs['type']);
 					$this->debug("current binding: $this->currentBinding of portType: " . $attrs['type']);
@@ -499,8 +499,8 @@ class wsdl extends nusoap_base {
 				} 
 				break;
 			} 
-		} 
-	} 
+		}
+	}
 
 	/**
 	* end-element handler
@@ -529,8 +529,8 @@ class wsdl extends nusoap_base {
 			//TODO: track the node to which documentation should be assigned; it can be a part, message, etc.
 			//$this->portTypes[$this->currentPortType][$this->currentPortOperation]['documentation'] = $this->documentation;
 			$this->documentation = false;
-		} 
-	} 
+		}
+	}
 
 	/**
 	 * element content handler
@@ -547,8 +547,8 @@ class wsdl extends nusoap_base {
 		} 
 		if ($this->documentation) {
 			$this->documentation .= $data;
-		} 
-	} 
+		}
+	}
 
 	/**
 	* if authenticating, set user credentials here
@@ -572,9 +572,9 @@ class wsdl extends nusoap_base {
 	{
 		if (is_array($this->bindings[$binding])) {
 			return $this->bindings[$binding];
-		} 
+		}
 	}
-	
+
 	/**
 	 * returns an assoc array of operation names => operation data
 	 * 
@@ -613,8 +613,8 @@ class wsdl extends nusoap_base {
 			$this->debug("getOperations found no operations for port '$portName' bindingType $bindingType");
 		}
 		return $ops;
-	} 
-	
+	}
+
 	/**
 	 * returns an associative array of data necessary for calling an operation
 	 * 
@@ -644,9 +644,9 @@ class wsdl extends nusoap_base {
 					} 
 				} 
 			}
-		} 
+		}
 	}
-	
+
 	/**
 	 * returns an associative array of data necessary for calling an operation
 	 * 
@@ -672,9 +672,9 @@ class wsdl extends nusoap_base {
 					} 
 				} 
 			}
-		} 
+		}
 	}
-	
+
 	/**
     * returns an array of information about a given type
     * returns false if no type exists by the given name
@@ -900,7 +900,7 @@ class wsdl extends nusoap_base {
 		} 
 		if (isset($this->namespaces['tns'])) {
 			$xml .= " targetNamespace=\"" . $this->namespaces['tns'] . "\"";
-		} 
+		}
 		$xml .= '>'; 
 		// imports
 		if (sizeof($this->import) > 0) {
@@ -990,7 +990,7 @@ class wsdl extends nusoap_base {
 					$portType_xml .= "\n" . '  <operation name="' . $opParts['name'] . '"';
 					if (isset($opParts['parameterOrder'])) {
 					    $portType_xml .= ' parameterOrder="' . $opParts['parameterOrder'] . '"';
-					} 
+					}
 					$portType_xml .= '>';
 					if(isset($opParts['documentation']) && $opParts['documentation'] != '') {
 						$portType_xml .= "\n" . '    <documentation>' . htmlspecialchars($opParts['documentation']) . '</documentation>';
@@ -998,7 +998,7 @@ class wsdl extends nusoap_base {
 					$portType_xml .= "\n" . '    <input message="tns:' . $opParts['input']['message'] . '"/>';
 					$portType_xml .= "\n" . '    <output message="tns:' . $opParts['output']['message'] . '"/>';
 					$portType_xml .= "\n" . '  </operation>';
-				} 
+				}
 				$portType_xml .= "\n" . '</portType>';
 				$binding_xml .= "\n" . '</binding>';
 			} 
@@ -1012,10 +1012,10 @@ class wsdl extends nusoap_base {
 				$xml .= "\n" . '    <soap:address location="' . $attrs['location'] . ($debug ? '?debug=1' : '') . '"/>';
 				$xml .= "\n" . '  </port>';
 			} 
-		} 
+		}
 		$xml .= "\n" . '</service>';
 		return $xml . "\n</definitions>";
-	} 
+	}
 
 	/**
 	 * determine whether a set of parameters are unwrapped
@@ -1194,8 +1194,8 @@ class wsdl extends nusoap_base {
 		}
 		$this->debug("serializeRPCParameters returning: $xml");
 		return $xml;
-	} 
-	
+	}
+
 	/**
 	 * serialize a PHP value according to a WSDL message definition
 	 * 
@@ -1234,7 +1234,7 @@ class wsdl extends nusoap_base {
 			$encodingStyle = $opData['output']['encodingStyle'];
 			$enc_style = $encodingStyle;
 		}
-		
+
 		// set input params
 		$xml = '';
 		if (isset($opData[$direction]['parts']) && sizeof($opData[$direction]['parts']) > 0) {
@@ -1275,8 +1275,8 @@ class wsdl extends nusoap_base {
 		}
 		$this->debug("serializeParameters returning: $xml");
 		return $xml;
-	} 
-	
+	}
+
 	/**
 	 * serializes a PHP value according a given type definition
 	 * 
@@ -1538,7 +1538,7 @@ class wsdl extends nusoap_base {
 				foreach($value as $v) {
 					$cols = ',' . sizeof($v);
 					$nv = array_merge($nv, $v);
-				} 
+				}
 				$value = $nv;
 			} else {
 				$cols = '';
@@ -1597,7 +1597,7 @@ class wsdl extends nusoap_base {
 		$this->debug("in serializeType: returning: $xml");
 		return $xml;
 	}
-	
+
 	/**
 	 * serializes the attributes for a complexType
 	 *

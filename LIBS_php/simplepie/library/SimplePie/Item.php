@@ -412,7 +412,7 @@ class SimplePie_Item
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Get the media:thumbnail of the item
 	 *

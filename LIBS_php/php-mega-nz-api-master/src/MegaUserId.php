@@ -18,7 +18,7 @@ class MegaUserId
 	 * @var string
 	 */
 	private $_value = null;
-	
+
 	/**
 	 * Builds a new MegaFolderId from the given string.
 	 *
@@ -32,7 +32,7 @@ class MegaUserId
 				array('{id}' => $id)));
 		$this->_value = $id;
 	}
-	
+
 	/**
 	 * Gets the value of the id.
 	 *

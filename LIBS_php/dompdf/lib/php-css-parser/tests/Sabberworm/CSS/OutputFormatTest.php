@@ -145,7 +145,7 @@ background-color: #fff;
 		$this->assertSame('.main, .test{font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
 @media screen{.main{background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceBeforeOpeningBrace('')));
 	}
-	
+
 	/**
 	* @expectedException Sabberworm\CSS\Parsing\OutputException
 	*/

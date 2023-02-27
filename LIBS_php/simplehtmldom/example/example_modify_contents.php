@@ -15,4 +15,5 @@ foreach($html->find('input') as $e)
 
 // dump contents
 echo $html;
+
 ?>

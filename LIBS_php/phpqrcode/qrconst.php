@@ -41,7 +41,7 @@
 	define('QR_ECLEVEL_M', 1);
 	define('QR_ECLEVEL_Q', 2);
 	define('QR_ECLEVEL_H', 3);
-	
+
 	// Supported output formats
 	
 	define('QR_FORMAT_TEXT', 0);
