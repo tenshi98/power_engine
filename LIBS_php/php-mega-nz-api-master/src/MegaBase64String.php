@@ -40,7 +40,7 @@ class MegaBase64String implements IMegaString
 		if(!preg_match('#^([A-Za-z0-9+/]{4})+([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$#', $string))
 			throw new MegaException(strtr('The given value is not base64 encoded ("{val}").',
 				array('{val}' => $string)));
-		
+
 		$this->_value = $string;
 	}
 

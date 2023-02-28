@@ -1994,7 +1994,7 @@ class nusoap_xmlschema extends nusoap_base  {
 	    'attrs'		=> $attrs,
 	    'arrayType'	=> $arrayType
 		);
-		
+
 		$this->xdebug("addComplexType $name:");
 		$this->appendDebug($this->varDump($this->complexTypes[$name]));
 	}
@@ -2019,7 +2019,7 @@ class nusoap_xmlschema extends nusoap_base  {
 	    'type'			=> $restrictionBase,
 	    'enumeration'	=> $enumeration
 		);
-		
+
 		$this->xdebug("addSimpleType $name:");
 		$this->appendDebug($this->varDump($this->simpleTypes[$name]));
 	}
@@ -2037,7 +2037,7 @@ class nusoap_xmlschema extends nusoap_base  {
 		}
 		$this->elements[ $attrs['name'] ] = $attrs;
 		$this->elements[ $attrs['name'] ]['typeClass'] = 'element';
-		
+
 		$this->xdebug("addElement " . $attrs['name']);
 		$this->appendDebug($this->varDump($this->elements[ $attrs['name'] ]));
 	}
@@ -2565,7 +2565,7 @@ class soap_transport_http extends nusoap_base {
 	* @access   public
 	*/
 	function send($data, $timeout=0, $response_timeout=30, $cookies=NULL) {
-		
+
 		$this->debug('entered send() with data of length: '.strlen($data));
 
 		$this->tryagain = true;
@@ -5091,7 +5091,7 @@ class wsdl extends nusoap_base {
 	* @param string $name element name
 	* @access private 
 	*/
-	function end_element($parser, $name){ 
+	function end_element($parser, $name){
 		// unset schema status
 		if (/*preg_match('/types$/', $name) ||*/ preg_match('/schema$/', $name)) {
 			$this->status = "";
@@ -5526,7 +5526,7 @@ class wsdl extends nusoap_base {
 						    } 
 						    if (!isset($typePrefix)) {
 						        die("$partType has no namespace!");
-						    } 
+						    }
 						}
 						$ns = $this->getNamespaceFromPrefix($typePrefix);
 						$localPart = $this->getLocalPart($partType);
@@ -7321,7 +7321,7 @@ class nusoap_client extends nusoap_base  {
 		$this->faultstring = '';
 		$this->faultcode = '';
 		$this->opData = array();
-		
+
 		$this->debug("call: operation=$operation, namespace=$namespace, soapAction=$soapAction, rpcParams=$rpcParams, style=$style, use=$use, endpointType=$this->endpointType");
 		$this->appendDebug('params=' . $this->varDump($params));
 		$this->appendDebug('headers=' . $this->varDump($headers));

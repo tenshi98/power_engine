@@ -79,7 +79,7 @@ class MegaNodeHierarchyNode
 		// check using isset in O(1)
 		if(isset($this->_children[$child->getNode()->getNodeId()->__toString()]))
 			return;
-		
+
 		$this->_children[$child->getNode()->getNodeId()->__toString()] = $child;
 		$child->setParent($this);
 	}

@@ -98,14 +98,14 @@ class Mega
 		
 		if(!is_string($target_folder_url))
 			throw new MegaException('The given url is not a string.', MegaException::EARGS);
-		
+
 		$parts = parse_url($target_folder_url);
 		if(isset($parts['host']))
 			$this->setServer($parts['host']);
 		if(!isset($parts['fragment']))
 			throw new MegaException(strtr('Impossible to parse fragment from url "{url}".',
 				array('{url}' => $target_folder_url)), MegaException::EARGS);
-		
+
 		$matches = array();
 		if(preg_match('#^F!([a-zA-Z0-9]{8})!([a-zA-Z0-9_,\\-]{22})#', $parts['fragment'], $matches))
 		{
@@ -115,7 +115,7 @@ class Mega
 		}
 		else throw new MegaException(strtr('Impossible to parse fragment values "{frg}".',
 			array('{frg}' => $parts['fragment'])), MegaException::EARGS);
-		
+
 		$this->_seqno = rand(0, PHP_INT_MAX);
 	}
 
@@ -204,21 +204,21 @@ class Mega
 		// dont need the node id the first time we want the root folder
 		if(!$this->_container_id->equals($node_id))
 			$args['n'] = $node_id->getValue();
-		
+
 		$url = 'https://'.$this->_server.'/cs?id='.($this->_seqno++);
 		if(!empty($this->_user_session_id))
 			$url .= '&sid='.$this->_user_session_id;
 		$url .= '&n='.$this->_container_id->getValue();
 		$url .= '&lang=en&domain=meganz';
-		
+
 		$response_json = $this->requestJson($url, $args);
-		
+
 		$response = new MegaResponseNodelist($response_json);
-		
+
 		$rootFolder = $response->getRootNode();
-		
+
 		$decoder = new MegaResponseNodeDecoder($this->_container_key);
-		
+
 		$clearFolder = $decoder->decode($rootFolder);
 		
 		if($this->_node_hierarchy === false)
@@ -268,29 +268,29 @@ class Mega
 	{
 		if($node->getNodeType() !== MegaNode::TYPE_FILE)
 			throw new MegaException(strtr('Only files are downloadable.', MegaException::EINTERNAL));
-		
+
 		$args = array(
 			'a' => 'g',
 			'g' => 1,
 			'n' => $node->getNodeId()->getValue(),
 			'ssl' => 2,
 		);
-		
+
 		$url = 'https://'.$this->_server.'/cs?id='.($this->_seqno++);
 		if(!empty($this->_user_session_id))
 			$url .= '&sid='.$this->_user_session_id;
 		$url .= '&n='.$this->_container_id->__toString();
 		$url .= '&lang=en&domain=meganz';
-		
+
 		$response = $this->requestJson($url, $args);
-		
+
 		$encrypted_response = new MegaEncryptedFileLocation($response);
 
 		// TODO change to be able to stream data instead
 		$encoded_data = $this->request($encrypted_response->g(), null);
-		
+
 		$file_decoder = new MegaResponseFileDecoder($node);
-		
+
 		$clear_data = $file_decoder->decode($encoded_data);
 		
 		return $clear_data;
@@ -306,12 +306,12 @@ class Mega
 	protected function requestJson($url, array $json_data)
 	{
 		$payload = json_encode(array($json_data));
-		
+
 		$json_response = $this->request($url, $payload);
 		
 		if(is_numeric($json_response))
 			throw new MegaException(null, $json_response);
-		
+
 		$response = json_decode($json_response, true);
 		if($response === false)
 			throw new MegaException('Impossible to decode the json response from the server.', MegaException::EINTERNAL);
@@ -349,14 +349,14 @@ class Mega
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($ch, CURLOPT_ENCODING, "gzip");
-		
+
 		$cacert_path = CacertBundle::getFilePath();
 		curl_setopt($ch, CURLOPT_CAINFO, $cacert_path);
 		curl_setopt($ch, CURLOPT_CAPATH, $cacert_path);
 		
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type' => 'application/json'));
-		
+
 		$contents = curl_exec($ch);
 		if($contents === false)
 		{

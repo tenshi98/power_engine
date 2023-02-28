@@ -91,7 +91,7 @@ class GoogleImageSearch {
      */
     public function getSearchResults(simple_html_dom $dom) {
         $result = array();
-		
+
 		$count = count($dom->find('div.srg'));
 		if($count) { // if found div.srg
 			$c = $count > 1 ? 1 : 0; // if this is first page, we have 2 divs, first with some irrelevant

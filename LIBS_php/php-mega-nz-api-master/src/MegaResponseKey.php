@@ -39,7 +39,7 @@ class MegaResponseKey
 		if($pos === false)
 			throw new MegaException(strtr('Impossible to find semicolon from string "{key}".',
 				array('{key}' => $string)));
-		
+
 		$this->_node_id = new MegaNodeId(substr($string, 0, $pos));
 		$this->_node_key = new MegaBase64String(substr($string, $pos+1));
 	}

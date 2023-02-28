@@ -78,7 +78,7 @@ class Pop3Client extends \MailSo\Net\NetClient
 		$this->iRequestTime = microtime(true);
 
 		parent::Connect($sServerName, $iPort, $iSecurityType, $bVerifySsl, $bAllowSelfSigned);
-		
+
 		$this->validateResponse();
 
 		if (\MailSo\Net\Enumerations\ConnectionSecurityType::UseStartTLS(

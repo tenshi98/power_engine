@@ -21,7 +21,7 @@ class Helper
 	static public function ValidateWildcardValues($sString, $sWildcardValues, &$sFoundedValue = '')
 	{
 		$sFoundedValue = '';
-		
+
 		$sString = \trim($sString);
 		if ('' === $sString)
 		{

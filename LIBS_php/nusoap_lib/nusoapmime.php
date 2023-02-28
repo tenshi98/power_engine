@@ -94,7 +94,7 @@ class nusoap_client_mime extends nusoap_client {
 		$info['filename'] = $filename;
 		$info['contenttype'] = $contenttype;
 		$info['cid'] = $cid;
-		
+
 		$this->requestAttachments[] = $info;
 
 		return $cid;
@@ -255,7 +255,7 @@ class nusoap_client_mime extends nusoap_client {
 				$this->responseData = $root;
 				return $return;
 			}
-			
+
 			$this->setError('No root part found in multipart/related content');
 			return '';
 		}
@@ -324,7 +324,7 @@ class nusoap_server_mime extends nusoap_server {
 		$info['filename'] = $filename;
 		$info['contenttype'] = $contenttype;
 		$info['cid'] = $cid;
-		
+
 		$this->responseAttachments[] = $info;
 
 		return $cid;
@@ -483,7 +483,7 @@ class nusoap_server_mime extends nusoap_server {
 			if (isset($return)) {
 				return $return;
 			}
-			
+
 			$this->setError('No root part found in multipart/related content');
 			return;
 		}

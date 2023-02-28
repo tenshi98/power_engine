@@ -61,7 +61,7 @@ class MegaResponseNodeDecoder
 	{
 		$node_key_str = $node->getNodeKey()->getNodeKey()->toClear();
 		$node_key_raw = new MegaKeyAes128String($node_key_str->__toString());
-		
+
 		$key = $this->decryptKey($node_key_raw, $this->_key);
 		$iv = new MegaKeyAes128Array32(array(0, 0, 0, 0));
 		$meta_mac = null;
@@ -90,12 +90,12 @@ class MegaResponseNodeDecoder
 	{
 		$node_key_str = $node->getNodeKey()->getNodeKey()->toClear();
 		$node_key_raw = new MegaKeyAes256String($node_key_str->__toString());
-		
+
 		$decrypted_256 = $this->decryptKey256($node_key_raw, $this->_key);
 		$key = $decrypted_256->reduceAes128();
 		$iv = $decrypted_256->getInitializationVector();
 		$meta_mac = $decrypted_256->getMetaMac();
-		
+
 		$attributes = $this->decryptAttributes($node->getNodeAttributes(), $key);
 		return new MegaNode(
 			$node->getNodeId(),
@@ -143,7 +143,7 @@ class MegaResponseNodeDecoder
 	{
 		$keysize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
 		$iv = str_repeat("\0", $keysize);
-		
+
 		$rawstring = $encoded_key_to_decode->toRawString()->__toString();
 		$decoded_key = '';
 		foreach(array(substr($rawstring, 0, 16), substr($rawstring, 16)) as $chunk)
@@ -184,7 +184,7 @@ class MegaResponseNodeDecoder
 		if($fpos === false || $lpos === false)
 			throw new MegaException(strtr('Impossible to decode the json attribute data "{val}".',
 				array('{val}' => $decoded_data)), MegaException::EINTERNAL);
-		
+
 		$substr_data = substr($decoded_data, $fpos, $lpos - $fpos + 1);
 		$json_decoded = json_decode($substr_data, true);
 		if($json_decoded === false || $json_decoded === null)

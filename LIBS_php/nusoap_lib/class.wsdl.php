@@ -509,7 +509,7 @@ class wsdl extends nusoap_base {
 	* @param string $name element name
 	* @access private 
 	*/
-	function end_element($parser, $name){ 
+	function end_element($parser, $name){
 		// unset schema status
 		if (/*preg_match('/types$/', $name) ||*/ preg_match('/schema$/', $name)) {
 			$this->status = "";
@@ -944,7 +944,7 @@ class wsdl extends nusoap_base {
 						    } 
 						    if (!isset($typePrefix)) {
 						        die("$partType has no namespace!");
-						    } 
+						    }
 						}
 						$ns = $this->getNamespaceFromPrefix($typePrefix);
 						$localPart = $this->getLocalPart($partType);

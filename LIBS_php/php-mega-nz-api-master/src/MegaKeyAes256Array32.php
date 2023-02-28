@@ -35,7 +35,7 @@ class MegaKeyAes256Array32 implements IMegaKeyAes256
 			if(!is_int($value))
 				throw new MegaException(strtr('Impossible to read the {k}th value, not an integer.',
 					array('{k}' => $k)));
-		
+
 		$this->_values = $values;
 	}
 

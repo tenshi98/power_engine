@@ -113,7 +113,7 @@ class MegaResponseNodelist
 	public function getNonrootNodes()
 	{
 		$root = $this->getRootNode();
-		
+
 		$nodes = array();
 		foreach($this->_f as $node)
 		{

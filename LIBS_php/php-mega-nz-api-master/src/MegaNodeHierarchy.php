@@ -58,12 +58,12 @@ class MegaNodeHierarchy
 		$alreadyin = $this->searchNode($node->getNodeId());
 		if($alreadyin !== null)
 			return;
-		
+
 		$pnode = $this->searchNode($node->getParentId());
 		if($pnode === null)
 			throw new MegaException(strtr('Impossible to find parent node with given id "{id}".',
 				array('{id}' => $node->getParentId())));
-		
+
 		$hnode = new MegaNodeHierarchyNode($node);
 		$hnode->setParent($pnode);
 		$this->_known_nodes[$node->getNodeId()->__toString()] = $hnode;

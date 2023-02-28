@@ -213,7 +213,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 				$this->session->remove('DropboxAuthTokens');
 				$tokens = $this->oauth->getAccessToken();
 				$this->session->set('DropboxTokens', array($_GET['uid'], $tokens['token'], $tokens['token_secret']));
-				
+
 				$out = array(
 					'node' => $_GET['node'],
 					'json' => '{"protocol": "dropbox", "mode": "done"}',
@@ -416,7 +416,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	 **/
 	protected function configure() {
 		parent::configure();
-		
+
 		$this->disabled[] = 'archive';
 		$this->disabled[] = 'extract';
 	}
@@ -548,7 +548,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 					$reset = true;
 				}
 				$cursor = $_info['cursor'];
-				
+
 				foreach($_info['entries'] as $entry) {
 					$key = strtolower($entry[0]);
 					$pkey = strtolower($this->_dirname($key));
@@ -593,7 +593,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 					}
 				}
 			}
-			
+
 			$this->DB->exec('update '.$this->DB_TableName.' set dat='.$this->DB->quote(serialize(array('cursor'=>$cursor, 'mtime'=>$_SERVER['REQUEST_TIME']))).' where path=\'\' and fname=\'\'');
 			if (! $this->DB->commit()) {
 				$e = $this->DB->errorInfo();
@@ -650,7 +650,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	protected function cacheDir($path) {
 		$this->dirsCache[$path] = array();
 		$hasDir = false;
-		
+
 		$res = $this->query('select dat from '.$this->DB_TableName.' where path='.$this->DB->quote(strtolower($path)));
 		
 		if ($res) {
@@ -929,7 +929,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 			curl_setopt( $c, CURLOPT_NOBODY, true );
 			curl_setopt( $c, CURLOPT_URL, $url );
 			$res = curl_exec( $c );
-			
+
 		} else {
 			
 			require_once 'HTTP/Request2.php';

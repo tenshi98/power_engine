@@ -154,16 +154,16 @@ function tareas_envio_correo($De_correo, $De_nombre,
 
 		}else{
 			error_log("/***************************************************************/", 0);
-			if(!validarEmail($De_correo)){    $error = 'Mail Error:El Email (De: '.$De_correo.') ingresado no es valido';        error_log("Mail Error:El Email (De: ".$De_correo.") ingresado no es valido", 0);}
-			if(!validarEmail($Hacia_correo)){ $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';  error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($De_correo)){    $error = 'Mail Error:El Email (De: '.$De_correo.') ingresado no es valido';        error_log("Mail Error:El Email (De: ".$De_correo.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
+			if(!validarEmail($Hacia_correo)){ $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';  error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
 			error_log("/***************************************************************/", 0);
 
 			return $error;
 		}
 	}else{
 		error_log("/***************************************************************/", 0);
-		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De)", 0);}
-		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
+		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De), con el asunto (".$Asunto.")", 0);}
+		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia), con el asunto (".$Asunto.")", 0);}
 
 		error_log("/***************************************************************/", 0);
 
@@ -317,16 +317,16 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 
 		}else{
 			error_log("/***************************************************************/", 0);
-			if(!validarEmail($SMTP_mailUsername)){    $error = 'Mail Error:El Email (De: '.$SMTP_mailUsername.') ingresado no es valido'; error_log("Mail Error:El Email (De: ".$SMTP_mailUsername.") ingresado no es valido", 0);}
-			if(!validarEmail($Hacia_correo)){         $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';   error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($SMTP_mailUsername)){    $error = 'Mail Error:El Email (De: '.$SMTP_mailUsername.') ingresado no es valido'; error_log("Mail Error:El Email (De: ".$SMTP_mailUsername.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
+			if(!validarEmail($Hacia_correo)){         $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';   error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
 			error_log("/***************************************************************/", 0);
 
 			return $error;
 		}
 	}else{
 		error_log("/***************************************************************/", 0);
-		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De)", 0);}
-		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
+		if(!isset($SMTP_mailUsername)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De), con el asunto (".$Asunto.")", 0);}
+		if(!isset($Hacia_correo)){         $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia), con el asunto (".$Asunto.")", 0);}
 
 		error_log("/***************************************************************/", 0);
 
@@ -476,16 +476,16 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 
 		}else{
 			error_log("/***************************************************************/", 0);
-			if(!validarEmail($GmailUsername)){    $error = 'Mail Error:El Email (De: '.$GmailUsername.') ingresado no es valido';      error_log("Mail Error:El Email (De: ".$GmailUsername.") ingresado no es valido", 0);}
-			if(!validarEmail($Hacia_correo)){     $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';    error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido", 0);}
+			if(!validarEmail($GmailUsername)){    $error = 'Mail Error:El Email (De: '.$GmailUsername.') ingresado no es valido';      error_log("Mail Error:El Email (De: ".$GmailUsername.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
+			if(!validarEmail($Hacia_correo)){     $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';    error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
 			error_log("/***************************************************************/", 0);
 
 			return $error;
 		}
 	}else{
 		error_log("/***************************************************************/", 0);
-		if(!isset($De_correo)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De)", 0);}
-		if(!isset($Hacia_correo)){ $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia)", 0);}
+		if(!isset($GmailUsername)){    $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De), con el asunto (".$Asunto.")", 0);}
+		if(!isset($Hacia_correo)){     $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia), con el asunto (".$Asunto.")", 0);}
 
 		error_log("/***************************************************************/", 0);
 
