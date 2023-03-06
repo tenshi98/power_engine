@@ -87,7 +87,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 
 		// check with composer
 		$this->dropbox_phpFound = class_exists('Dropbox_API');
-		
+
 		if (! $this->dropbox_phpFound) {
 			// check with pear
 			if (include_once 'Dropbox/autoload.php') {
@@ -134,7 +134,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 	public function netmountPrepare($options) {
 		if (empty($options['consumerKey']) && defined('ELFINDER_DROPBOX_CONSUMERKEY')) $options['consumerKey'] = ELFINDER_DROPBOX_CONSUMERKEY;
 		if (empty($options['consumerSecret']) && defined('ELFINDER_DROPBOX_CONSUMERSECRET')) $options['consumerSecret'] = ELFINDER_DROPBOX_CONSUMERSECRET;
-		
+
 		if ($options['user'] === 'init') {
 
 			if (! $this->dropbox_phpFound || empty($options['consumerKey']) || empty($options['consumerSecret']) || !class_exists('PDO', false)) {
@@ -652,7 +652,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		$hasDir = false;
 
 		$res = $this->query('select dat from '.$this->DB_TableName.' where path='.$this->DB->quote(strtolower($path)));
-		
+
 		if ($res) {
 			foreach($res as $raw) {
 				$raw = unserialize($raw);
@@ -690,7 +690,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		$sth->execute(array((($path === '/')? '' : strtolower($path)).'%', '%'.strtolower($q).'%'));
 		$res = $sth->fetchAll(PDO::FETCH_COLUMN);
 		$timeout = $this->options['searchTimeout']? $this->searchStart + $this->options['searchTimeout'] : 0;
-		
+
 		if ($res) {
 			foreach($res as $raw) {
 				if ($timeout && $timeout < time()) {
@@ -810,7 +810,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		/* If image smaller or equal thumbnail size - just fitting to thumbnail square */
 		if ($s[0] <= $tmbSize && $s[1]  <= $tmbSize) {
 			$result = $this->imgSquareFit($tmb, $tmbSize, $tmbSize, 'center', 'middle', $this->options['tmbBgColor'], 'png' );
-	
+
 		} else {
 	
 			if ($this->options['tmbCrop']) {

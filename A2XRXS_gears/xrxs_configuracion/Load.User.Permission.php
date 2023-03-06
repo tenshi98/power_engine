@@ -63,4 +63,5 @@ if(isset($_SESSION['usuario']['Permisos'][$original]['level']) && $_SESSION['usu
 	header( 'Location: principal.php' );
 	die;
 }
+
 ?>

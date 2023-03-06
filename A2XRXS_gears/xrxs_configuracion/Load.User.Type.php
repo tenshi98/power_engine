@@ -14,4 +14,5 @@ if (isset($_SESSION['usuario']['basic_data']['tipo'])&&$_SESSION['usuario']['bas
 	header( 'Location: principal.php' );
 	die;
 }
+
 ?>

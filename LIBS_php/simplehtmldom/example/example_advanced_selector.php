@@ -51,4 +51,5 @@ foreach($html->find('input[type=checkbox]') as $checkbox) {
     else
         echo $checkbox->name . ' is not checked<br>';
 }
+
 ?>

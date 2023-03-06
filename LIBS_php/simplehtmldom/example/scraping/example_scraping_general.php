@@ -39,6 +39,7 @@ if (isset($_POST['search']))
 {
 	$search = $_POST['search'];
 }
+
 ?>
 <form method="post">
 	URL: <input name="url" type="text" value="<?=$url; ?>"/><br/>
@@ -56,4 +57,5 @@ if (isset ($_POST['submit']))
 		echo "Did not find any: " . $_POST['search'] . "<br />";
 	}
 }
+
 ?>

@@ -300,4 +300,5 @@ function getEntorno(){
 		return false;
 	}
 }
+
 ?>

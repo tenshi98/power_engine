@@ -609,4 +609,5 @@ function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options)
 	return $graph;
 
 }
+
 ?>

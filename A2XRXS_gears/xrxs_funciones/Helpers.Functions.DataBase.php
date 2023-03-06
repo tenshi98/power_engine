@@ -475,4 +475,5 @@ function db_insert_data ($showQuery, $columns, $data, $table, $dbConn, $Usuario,
 		}
 	}
 }
+
 ?>

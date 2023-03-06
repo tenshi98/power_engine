@@ -396,4 +396,5 @@ function validaPermisoUser($nivel_usuario, $nivel_requerido, $dbConn){
 		}
 	}
 }
+
 ?>

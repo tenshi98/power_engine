@@ -680,4 +680,5 @@ function indicesServer(){
 
 	return $object;
 }
+
 ?>

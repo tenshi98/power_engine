@@ -720,4 +720,5 @@ class TTFParser
 		throw new Exception($msg);
 	}
 }
+
 ?>

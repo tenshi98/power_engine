@@ -21,4 +21,5 @@ if (getParam('roomid')) {
         ));
     }
 }
+
 ?>

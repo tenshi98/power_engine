@@ -32,4 +32,5 @@ function find_contains($html, $selector, $keyword, $index=-1) {
     if ($index<0) return $ret;
     return (isset($ret[$index])) ? $ret[$index] : null;
 }
+
 ?>

@@ -95,7 +95,7 @@ class Mega
 			throw new MegaException('The curl extension should be enabled.', MegaException::EINTERNAL);
 		if(!extension_loaded('openssl'))
 			throw new MegaException('The openssl extension should be enabled.', MegaException::EINTERNAL);
-		
+
 		if(!is_string($target_folder_url))
 			throw new MegaException('The given url is not a string.', MegaException::EARGS);
 
@@ -220,7 +220,7 @@ class Mega
 		$decoder = new MegaResponseNodeDecoder($this->_container_key);
 
 		$clearFolder = $decoder->decode($rootFolder);
-		
+
 		if($this->_node_hierarchy === false)
 		{
 			$this->_node_hierarchy = new MegaNodeHierarchy($clearFolder);
@@ -229,7 +229,7 @@ class Mega
 		{
 			$this->_node_hierarchy->add($clearFolder);
 		}
-		
+
 		foreach($response->getNonrootNodes() as $otherFolder)
 		{
 			$other_clear = $decoder->decode($otherFolder);
@@ -308,23 +308,23 @@ class Mega
 		$payload = json_encode(array($json_data));
 
 		$json_response = $this->request($url, $payload);
-		
+
 		if(is_numeric($json_response))
 			throw new MegaException(null, $json_response);
 
 		$response = json_decode($json_response, true);
 		if($response === false)
 			throw new MegaException('Impossible to decode the json response from the server.', MegaException::EINTERNAL);
-		
+
 		if(!isset($response[0]))
 			throw new MegaException('Impossible to decode the json data from the server.', MegaException::EINTERNAL);
-		
+
 		if(is_int($response[0]))
 			throw new MegaException(null, $response[0]);
-		
+
 		if(isset($response['e']))
 			throw new MegaException(null, $response['e']);
-		
+
 		if(isset($response[0]['e']))
 			throw new MegaException(null, $response[0]['e']);
 		

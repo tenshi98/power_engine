@@ -17,4 +17,5 @@ if (getParam('data') && getParam('receiver') && getParam('sender')) {
     echo $response;
     exit();
 }
+
 ?>

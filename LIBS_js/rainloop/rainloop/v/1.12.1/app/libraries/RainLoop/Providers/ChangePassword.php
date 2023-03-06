@@ -54,7 +54,7 @@ class ChangePassword extends \RainLoop\Providers\AbstractProvider
 	public function ChangePassword(\RainLoop\Account $oAccount, $sPrevPassword, $sNewPassword)
 	{
 		$mResult = false;
-		
+
 		if ($this->oDriver instanceof \RainLoop\Providers\ChangePassword\ChangePasswordInterface &&
 			$this->PasswordChangePossibility($oAccount))
 		{
