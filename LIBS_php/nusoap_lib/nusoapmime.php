@@ -233,7 +233,7 @@ class nusoap_client_mime extends nusoap_client {
 			$params['include_bodies'] = true;
 			$params['decode_bodies'] = true;
 			$params['decode_headers'] = true;
-			
+
 			$structure = Mail_mimeDecode::decode($params);
 
 			foreach ($structure->parts as $part) {
@@ -463,7 +463,7 @@ class nusoap_server_mime extends nusoap_server {
 			$params['include_bodies'] = true;
 			$params['decode_bodies'] = true;
 			$params['decode_headers'] = true;
-			
+
 			$structure = Mail_mimeDecode::decode($params);
 
 			foreach ($structure->parts as $part) {

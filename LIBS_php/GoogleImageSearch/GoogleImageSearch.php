@@ -107,7 +107,7 @@ class GoogleImageSearch {
 			//Get original image url
 			$originalImg = $div->find('div.th a', 0);
 			preg_match('/imgurl=(.+?)&/', $originalImg->href, $matches);
-			
+
 			$result[] = array(htmlspecialchars_decode($a->plaintext, ENT_QUOTES), $a->href, $matches[1]);
 			
         }

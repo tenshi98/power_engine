@@ -233,7 +233,7 @@ class Mega
 		foreach($response->getNonrootNodes() as $otherFolder)
 		{
 			$other_clear = $decoder->decode($otherFolder);
-			
+
 			$this->_node_hierarchy->add($other_clear);
 		}
 		

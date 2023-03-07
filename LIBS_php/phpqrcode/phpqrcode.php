@@ -212,7 +212,7 @@
         public static function buildCache()
         {
 			QRtools::markTime('before_build_cache');
-			
+
 			$mask = new QRmask();
             for ($a=1; $a <= QRSPEC_VERSION_MAX; $a++) {
                 $frame = QRspec::newFrame($a);

@@ -67,7 +67,7 @@ function download(Mega $mega, MegaNode $node, $path)
 			download($mega, $childNode, $filepath);
 		}
 	}
-	
+
 	if($node->getNodeType() === MegaNode::TYPE_FILE)
 	{
 		echo "Downloading file ".$node->getAttributes()->getName()."\n";

@@ -814,7 +814,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		} else {
 	
 			if ($this->options['tmbCrop']) {
-	
+
 				/* Resize and crop if image bigger than thumbnail */
 				if (!(($s[0] > $tmbSize && $s[1] <= $tmbSize) || ($s[0] <= $tmbSize && $s[1] > $tmbSize) ) || ($s[0] > $tmbSize && $s[1] > $tmbSize)) {
 					$result = $this->imgResize($tmb, $tmbSize, $tmbSize, true, false, 'png');

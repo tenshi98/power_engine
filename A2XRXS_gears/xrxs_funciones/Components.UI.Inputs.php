@@ -2123,7 +2123,7 @@ class Basic_Inputs{
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
 
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');	
+				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
