@@ -49,7 +49,7 @@ class MegaResponseNodelist
 					if(!is_array($value))
 						throw new MegaException(strtr('The folder value is supposed to be an array, {type} given.',
 							array('{type}' => gettype($value))), MegaException::EINTERNAL);
-					
+
 					foreach($value as $metanode)
 					{
 						$this->_f[] = new MegaResponseNode($metanode);
