@@ -60,6 +60,8 @@ function tareas_envio_correo($De_correo, $De_nombre,
                              $lvl,
 							 $GmailUsername,
 							 $GmailPassword){
+	//Variables
+	$error  = '';
 
 	//valido que exista correo
 	if(isset($De_correo)&&isset($Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
@@ -218,6 +220,9 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
                             	  $CuerpoHTML, $CuerpoNoHTML,
                             	  $Adjuntos,
                             	  $lvl){
+
+	//Variables
+	$error  = '';
 
 	//valido que exista correo
 	if(isset($SMTP_mailUsername)&&isset($Hacia_correo)&&$SMTP_mailUsername!=''&&$Hacia_correo!=''){
@@ -380,6 +385,9 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 									$CuerpoHTML,$CuerpoNoHTML,
 									$Adjuntos,
 									$lvl){
+
+	//Variables
+	$error  = '';
 
 	//valido que exista correo
 	if(isset($GmailUsername)&&isset($Hacia_correo)&&$GmailUsername!=''&&$Hacia_correo!=''){
