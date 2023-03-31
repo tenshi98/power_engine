@@ -1988,7 +1988,7 @@ class Basic_Inputs{
 											$data_writing .= $select[$dato].' ';
 										}
 									}
-									$input .= '<option value="'.$select['idData'].'" >'.$data_writing.'</option>';
+									$input .= '<option value="'.$select['idData'].'" >'.TituloMenu($data_writing).'</option>';
 								}
 				$input .= '</select></div>';
 
@@ -2104,7 +2104,7 @@ class Basic_Inputs{
 								}
 							}
 							//imprimo
-							$input .= '<option value="'.$select['idData'].'" '.$w.' >'.$data_writing.'</option>';
+							$input .= '<option value="'.$select['idData'].'" '.$w.' >'.TituloMenu($data_writing).'</option>';
 						}
 				$input .= '</select></div>';
 
@@ -2253,7 +2253,7 @@ class Basic_Inputs{
 													$data_writing .= $select[$dato].' ';
 												}
 											}
-											$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+											$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 										 }
 
 					$input .= '</select>';
@@ -2419,7 +2419,7 @@ class Basic_Inputs{
 									}
 								}
 								//imprimo
-								$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+								$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 							}
 				$input .= '</select>';
 
@@ -2566,7 +2566,7 @@ class Basic_Inputs{
 											}
 										}
 										//imprimo
-										$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+										$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 									 }
 
 				$input .= '</select>';
@@ -2904,7 +2904,7 @@ class Basic_Inputs{
 									}
 									$selected = '';
 									if($value[1]==$seleccion['idData']){ $selected = 'selected="selected"';}
-									$input .= '<option value="'.$seleccion['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+									$input .= '<option value="'.$seleccion['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 								}
 				$input .= '</select>
 						</div>
@@ -2969,7 +2969,7 @@ class Basic_Inputs{
 
 											$selected = '';
 											if($value[$i]==$seleccion['idData']){ $selected = 'selected="selected"';}
-											$input .= '<option value="'.$seleccion['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+											$input .= '<option value="'.$seleccion['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 										}
 									}
 					$input .= '</select>

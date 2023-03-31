@@ -54,7 +54,7 @@ class Basic_Form_Inputs{
 
 							/******************************************/
 							//se escribe
-							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 						}
 
 				$data .= '
@@ -161,7 +161,7 @@ class Basic_Form_Inputs{
 
 							/******************************************/
 							//se escribe
-							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.$data_writing.'</option>';
+							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
 						}
 					$data .= '
 					</select>
@@ -3228,7 +3228,7 @@ class Basic_Form_Inputs{
 				$input = '<div class="form-group" id="div_'.$name.'">
 							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.$data_writing.'"   disabled="disabled">
+								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.TituloMenu($data_writing).'"   disabled="disabled">
 							</div>
 						</div>';
 
