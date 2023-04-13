@@ -800,7 +800,7 @@ class elFinderVolumeDropbox extends elFinderVolumeDriver {
 		}
 	
 		$result = false;
-	
+
 		$tmbSize = $this->tmbSize;
 	
 		if (($s = getimagesize($tmb)) == false) {

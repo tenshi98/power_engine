@@ -563,7 +563,7 @@ class nusoap_xmlschema extends nusoap_base  {
 						$xml .= " <$schemaPrefix:import namespace=\"" . $ns . "\" />\n";
 					}
 				}
-			} 
+			}
 		} 
 		// complex types
 		foreach($this->complexTypes as $typeName => $attrs){

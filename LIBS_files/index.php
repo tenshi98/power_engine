@@ -10,7 +10,7 @@ if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) ){
 }else{
 	
 	define( 'DB_SITE', 'https://repositorio.exilon360.com' );
-	
+
 }
 
 error_reporting(E_ERROR);

@@ -153,7 +153,7 @@ class wsdl extends nusoap_base {
 						}
 					}
 				}
-            } 
+            }
 		}
         // add new data to operation data
         foreach($this->bindings as $binding => $bindingData) {
@@ -498,7 +498,7 @@ class wsdl extends nusoap_base {
 					$this->wsdl_info[$name] = $value;
 				} 
 				break;
-			} 
+			}
 		}
 	}
 
@@ -517,7 +517,7 @@ class wsdl extends nusoap_base {
             $this->currentSchema->clearDebug();
 			$this->schemas[$this->currentSchema->schemaTargetNamespace][] = $this->currentSchema;
         	$this->debug('Parsing WSDL schema done');
-		} 
+		}
 		if ($this->status == 'schema') {
 			$this->currentSchema->schemaEndElement($parser, $name);
 		} else {
@@ -544,7 +544,7 @@ class wsdl extends nusoap_base {
 		$pos = isset($this->depth_array[$this->depth]) ? $this->depth_array[$this->depth] : 0;
 		if (isset($this->message[$pos]['cdata'])) {
 			$this->message[$pos]['cdata'] .= $data;
-		} 
+		}
 		if ($this->documentation) {
 			$this->documentation .= $data;
 		}
@@ -642,7 +642,7 @@ class wsdl extends nusoap_base {
 						$opData = $this->bindings[ $portData['binding'] ]['operations'][$operation];
 					    return $opData;
 					} 
-				} 
+				}
 			}
 		}
 	}
@@ -670,7 +670,7 @@ class wsdl extends nusoap_base {
 					if ($opData['soapAction'] == $soapAction) {
 					    return $opData;
 					} 
-				} 
+				}
 			}
 		}
 	}
@@ -897,7 +897,7 @@ class wsdl extends nusoap_base {
 		// 10.9.02 - add poulter fix for wsdl and tns declarations
 		if (isset($this->namespaces['wsdl'])) {
 			$xml .= " xmlns=\"" . $this->namespaces['wsdl'] . "\"";
-		} 
+		}
 		if (isset($this->namespaces['tns'])) {
 			$xml .= " targetNamespace=\"" . $this->namespaces['tns'] . "\"";
 		}
@@ -912,7 +912,7 @@ class wsdl extends nusoap_base {
 						$xml .= '<import namespace="' . $ns . '" />';
 					}
 				}
-			} 
+			}
 		} 
 		// types
 		if (count($this->schemas)>=1) {
@@ -961,7 +961,7 @@ class wsdl extends nusoap_base {
 					}
 				}
 				$xml .= '</message>';
-			} 
+			}
 		} 
 		// bindings & porttypes
 		if (count($this->bindings) >= 1) {
@@ -1011,7 +1011,7 @@ class wsdl extends nusoap_base {
 				$xml .= "\n" . '  <port name="' . $pName . '" binding="tns:' . $attrs['binding'] . '">';
 				$xml .= "\n" . '    <soap:address location="' . $attrs['location'] . ($debug ? '?debug=1' : '') . '"/>';
 				$xml .= "\n" . '  </port>';
-			} 
+			}
 		}
 		$xml .= "\n" . '</service>';
 		return $xml . "\n</definitions>";
@@ -1117,7 +1117,7 @@ class wsdl extends nusoap_base {
 			$this->debug('The value of the \$direction argument needs to be either "input" or "output"');
 			$this->setError('The value of the \$direction argument needs to be either "input" or "output"');
 			return false;
-		} 
+		}
 		if (!$opData = $this->getOperationData($operation, $bindingType)) {
 			$this->debug('Unable to retrieve WSDL data for operation: ' . $operation . ' bindingType: ' . $bindingType);
 			$this->setError('Unable to retrieve WSDL data for operation: ' . $operation . ' bindingType: ' . $bindingType);
@@ -1219,7 +1219,7 @@ class wsdl extends nusoap_base {
 			$this->debug('The value of the \$direction argument needs to be either "input" or "output"');
 			$this->setError('The value of the \$direction argument needs to be either "input" or "output"');
 			return false;
-		} 
+		}
 		if (!$opData = $this->getOperationData($operation)) {
 			$this->debug('Unable to retrieve WSDL data for operation: ' . $operation);
 			$this->setError('Unable to retrieve WSDL data for operation: ' . $operation);
@@ -1652,7 +1652,7 @@ class wsdl extends nusoap_base {
 				if ($xname) {
 					$xml .=  " $aName=\"" . $this->expandEntities($xvalue[$xname]) . "\"";
 				}
-			} 
+			}
 		} else {
 			$this->debug("no attributes to serialize for XML Schema type $ns:$uqType");
 		}
@@ -1758,7 +1758,7 @@ class wsdl extends nusoap_base {
 						}
 					}
 				}
-			} 
+			}
 		} else {
 			$this->debug("no elements to serialize for XML Schema type $ns:$uqType");
 		}

@@ -32,5 +32,5 @@ interface IMegaString
 	 * @return string
 	 */
 	public function __toString();
-	
+
 }

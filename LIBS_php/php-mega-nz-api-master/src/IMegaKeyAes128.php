@@ -32,5 +32,5 @@ interface IMegaKeyAes128
 	 * @return string
 	 */
 	public function __toString();
-	
+
 }
