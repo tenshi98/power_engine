@@ -161,7 +161,6 @@ define('HIDE_EXTENSION', false);
 header("Content-Type: text/html; charset=utf-8");
 header("Cache-Control: no-cache, must-revalidate");
 
-
 /*** DIRECTORY LOGIC ***/
 
 // Get this folder and files name.

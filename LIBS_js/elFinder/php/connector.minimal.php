@@ -140,7 +140,6 @@ function access($attr, $path, $data, $volume, $isDir, $relpath) {
 		:  null;                                 // else elFinder decide it itself
 }
 
-
 // Documentation for connector options:
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 $opts = array(

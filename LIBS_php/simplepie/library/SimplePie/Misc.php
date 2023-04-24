@@ -98,7 +98,7 @@ class SimplePie_Misc
 	{
 		$return = array();
 		$name = preg_quote($realname, '/');
-		if (preg_match_all("/<($name)" . SIMPLEPIE_PCRE_HTML_ATTRIBUTE . "(>(.*)<\/$name>|(\/)?>)/siU", $string, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE))
+		if (preg_match_all("/<($name)" . SIMPLEPIE_PCRE_HTML_ATTRIBUTE . "(>(.*)<\/$name>|(\/); ?>)/siU", $string, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE))
 		{
 			for ($i = 0, $total_matches = count($matches); $i < $total_matches; $i++)
 			{

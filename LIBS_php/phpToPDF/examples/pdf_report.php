@@ -501,7 +501,6 @@ $my_html_header="
   <br style=\"clear:left;\"/>
 </div>";
 
-
 // PUT YOUR HTML FOOTER IN A VARIABLE (AND I USE PAGE NUMBERS)
 $my_html_footer="
 <div style=\"display:block;\">
@@ -529,7 +528,6 @@ $pdf_options = array(
   "file_name" => 'sample_pdf_report.pdf',
   "header" => $my_html_header,
   "footer" => $my_html_footer);
-
 
 // CALL THE phpToPDF FUNCTION WITH THE OPTIONS SET ABOVE
 phptopdf($pdf_options);

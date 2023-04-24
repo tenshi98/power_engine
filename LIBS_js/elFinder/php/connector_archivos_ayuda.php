@@ -152,7 +152,6 @@ if(isset($_GET['prm'])&&$_GET['prm']!=''){
     $x_rm     = true;
 }
 
-
 // Documentation for connector options:
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 $opts = array(

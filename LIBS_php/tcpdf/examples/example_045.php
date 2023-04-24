@@ -103,7 +103,6 @@ $pdf->Cell(0, 10, 'Paragraph 1.3', 0, 1, 'L');
 $html = '<a href="#*1" style="color:blue;">link to INDEX (page 1)</a>';
 $pdf->writeHTML($html, true, false, true, false, '');
 
-
 // add some pages and bookmarks
 for ($i = 2; $i < 12; $i++) {
 	$pdf->AddPage();

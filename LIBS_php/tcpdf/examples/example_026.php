@@ -88,7 +88,6 @@ $pdf->Write(0, 'Fill, then stroke text', '', 0, '', true, 0, false, false, 0);
 $pdf->setTextRenderingMode($stroke=0, $fill=false, $clip=false);
 $pdf->Write(0, 'Neither fill nor stroke text (invisible)', '', 0, '', true, 0, false, false, 0);
 
-
 // * * * CLIPPING MODES  * * * * * * * * * * * * * * * * * *
 
 $pdf->StartTransform();

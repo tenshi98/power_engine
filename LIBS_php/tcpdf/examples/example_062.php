@@ -115,7 +115,6 @@ $pdf->Cell(60, 60, 'Template', 0, 0, 'C', false, '', 0, false, 'T', 'M');
 // end the current Template
 $pdf->endTemplate();
 
-
 // print the selected Template various times using various transparencies
 
 $pdf->SetAlpha(0.4);

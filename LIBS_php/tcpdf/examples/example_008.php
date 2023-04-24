@@ -86,7 +86,6 @@ $pdf->SetTextColor(0, 63, 127);
 // write the text
 $pdf->Write(5, $utf8text, '', 0, '', false, 0, false, false, 0);
 
-
 // ---------------------------------------------------------
 
 //Close and output PDF document

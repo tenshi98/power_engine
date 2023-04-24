@@ -30,7 +30,6 @@ require_once('tcpdf_include.php');
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-
 // *** Set PDF protection (encryption) *********************
 
 /*
@@ -122,7 +121,6 @@ EOD;
 
 // print a block of text using Write()
 $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
-
 
 // ---------------------------------------------------------
 

@@ -27,7 +27,6 @@
 // Include the main TCPDF library (search for installation path).
 require_once('tcpdf_include.php');
 
-
 /**
  * Extend TCPDF to work with multiple columns
  */

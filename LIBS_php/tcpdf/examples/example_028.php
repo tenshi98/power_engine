@@ -90,7 +90,6 @@ $pdf->Cell(0, 0, 'A7 PORTRAIT', 1, 1, 'C');
 $pdf->AddPage('L', 'A7');
 $pdf->Cell(0, 0, 'A7 LANDSCAPE', 1, 1, 'C');
 
-
 // --- test backward editing ---
 
 

@@ -5,7 +5,6 @@ namespace SabreForRainLoop\CardDAV;
 use SabreForRainLoop\DAVACL;
 use SabreForRainLoop\DAV;
 
-
 /**
  * The Card object represents a single Card from an addressbook
  *

@@ -26,7 +26,6 @@ function scraping_generic($url, $search) {
     return $return;
 }
 
-
 // ------------------------------------------
 error_log ("post:" . print_r($_POST, true));
 $url = "";

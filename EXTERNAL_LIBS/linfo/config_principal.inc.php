@@ -114,7 +114,6 @@ $settings['additional_paths'] = array(
 	 //'/opt/bin' # for example
 );
 
-
 /*
  * Services. It works by specifying locations to PID files, which then get checked
  * Either that or specifying a path to the executable, which we'll try to find a running

@@ -86,13 +86,11 @@ $pdf->Write(0, 'Example of booklet mode', '', 0, 'L', true, 0, false, false, 0);
 // print a line using Cell()
 $pdf->Cell(0, 0, 'PAGE 1', 1, 1, 'C');
 
-
 // add a page (right page)
 $pdf->AddPage();
 
 // print a line using Cell()
 $pdf->Cell(0, 0, 'PAGE 2', 1, 1, 'C');
-
 
 // add a page (left page)
 $pdf->AddPage();

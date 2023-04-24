@@ -80,7 +80,6 @@ $pdf->Ln(5);
 $fonts = array('times', 'dejavuserif');
 $alignments = array('L' => 'LEFT', 'C' => 'CENTER', 'R' => 'RIGHT', 'J' => 'JUSTIFY');
 
-
 // Test all cases using direct stretching/spacing methods
 foreach ($fonts as $fkey => $font) {
 	$pdf->SetFont($font, '', 14);
@@ -97,7 +96,6 @@ foreach ($fonts as $fkey => $font) {
 	$pdf->AddPage();
 }
 
-
 // Test all cases using CSS stretching/spacing properties
 foreach ($fonts as $fkey => $font) {
 	$pdf->SetFont($font, '', 11);
@@ -113,7 +111,6 @@ foreach ($fonts as $fkey => $font) {
 		}
 	}
 }
-
 
 // reset font stretching
 $pdf->setFontStretching(100);

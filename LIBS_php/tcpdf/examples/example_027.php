@@ -156,7 +156,6 @@ $pdf->Ln();
 $pdf->Cell(0, 0, 'Interleaved 2 of 5 + CHECKSUM', 0, 1);
 $pdf->write1DBarcode('1234567', 'I25+', '', '', '', 18, 0.4, $style, 'N');
 
-
 // add a page ----------
 $pdf->AddPage();
 

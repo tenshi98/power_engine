@@ -214,7 +214,6 @@ void url() {';
 	$code .= '
 }';
 
-
 //Get GSM
 if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
 $code .= $saltoLinea.'

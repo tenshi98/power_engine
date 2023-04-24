@@ -41,7 +41,6 @@ function scraping_IMDB($url) {
     return $ret;
 }
 
-
 // -----------------------------------------------------------------------------
 // test it!
 $ret = scraping_IMDB('http://imdb.com/title/tt0335266/');

@@ -194,7 +194,6 @@ $pdf->Ellipse($xc, $yc, 30, 15, 45, 0, 360, 'D', array(), array(), 2);
 $pdf->SetDrawColor(255, 0, 0);
 $pdf->Ellipse($xc, $yc, 30, 15, 45, 45, 90, 'D', array(), array(), 2);
 
-
 // ---------------------------------------------------------
 
 //Close and output PDF document

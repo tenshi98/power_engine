@@ -27,7 +27,6 @@
 // Include the main TCPDF library (search for installation path).
 require_once('tcpdf_include.php');
 
-
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 	//Page header
@@ -97,7 +96,6 @@ $html = '<span style="background-color:yellow;color:blue;">&nbsp;PAGE 1&nbsp;</s
 <p stroke="0.2" fill="true" strokecolor="yellow" color="blue" style="font-family:helvetica;font-weight:bold;font-size:26pt;">You can set a full page background.</p>';
 $pdf->writeHTML($html, true, false, true, false, '');
 
-
 // add a page
 $pdf->AddPage();
 
@@ -112,7 +110,6 @@ $pdf->setPrintHeader(false);
 
 // add a page
 $pdf->AddPage();
-
 
 // -- set new background ---
 
@@ -129,7 +126,6 @@ $pdf->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false,
 $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
 // set the starting point for the page content
 $pdf->setPageMark();
-
 
 // Print a text
 $html = '<span style="color:white;text-align:center;font-weight:bold;font-size:80pt;">PAGE 3</span>';

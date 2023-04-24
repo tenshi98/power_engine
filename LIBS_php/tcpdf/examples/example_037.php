@@ -114,7 +114,6 @@ $pdf->SetFillSpotColor('My TCPDF Light Yellow', 100);
 $pdf->Rect(30, $starty, 40, 20, 'DF');
 $pdf->Text(73, $starty + 8, 'My TCPDF Light Yellow');
 
-
 // --- default values defined on spotcolors.php ---
 
 $starty += 24;

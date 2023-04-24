@@ -72,7 +72,6 @@ $pdf->SetFont('helvetica', '', 10);
 // add a page
 $pdf->AddPage();
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 IMPORTANT:
@@ -106,7 +105,6 @@ $html .= '<tcpdf method="SetDrawColor" params="'.$params.'" />';
 
 $params = $pdf->serializeTCPDFtagParameters(array(50, 50, 40, 10, 'DF', array(), array(0,128,255)));
 $html .= '<tcpdf method="Rect" params="'.$params.'" />';
-
 
 // output the HTML content
 $pdf->writeHTML($html, true, 0, true, 0);
