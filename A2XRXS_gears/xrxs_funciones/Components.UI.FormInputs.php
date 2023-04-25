@@ -215,11 +215,11 @@ class Basic_Form_Inputs{
 			foreach ($componentes as $idcomp) {
 				//Escribo los datos solicitados
 				if(count($datos)==1){
-					$data_writing = $idcomp[$datos[0]].' ';
+					$data_writing = TituloMenu($idcomp[$datos[0]]).' ';
 				}else{
 					$data_writing = '';
 					foreach($datos as $dato){
-						$data_writing .= $idcomp[$dato].' ';
+						$data_writing .= TituloMenu($idcomp[$dato]).' ';
 					}
 				}
 				//Guardo los datos
