@@ -2341,6 +2341,21 @@ class Basic_Form_Inputs{
 			if($arrSelect!=false){
 
 				/******************************************/
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
+
+				/******************************************/
 				//generacion del input
 				$input = '
 						<div class="form-group" id="div_'.$name.'">
@@ -2375,8 +2390,8 @@ class Basic_Form_Inputs{
 									/******************************************/
 									$input .= '
 									<div class="checkbox checkbox-primary">
-										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
-										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'">
+										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
+										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
 										<label for="'.$name.'_'.$select['idData'].'">
 											'.TituloMenu($data_writing).'
 										</label>

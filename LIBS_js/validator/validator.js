@@ -17,10 +17,10 @@ function FormValidator(texts, settings){
 FormValidator.prototype = {
     // Validation error texts
     texts : {
-        invalid         : 'inupt is not as expected',
-        short           : 'input is too short',
-        long            : 'input is too long',
-        checked         : 'must be checked',
+        invalid         : 'Dato no es el esperado',
+        short           : 'Dato demasiado corto',
+        long            : 'Dato demasiado largo',
+        checked         : 'Debe estar marcado',
         empty           : 'Ingrese dato obligatorio',
         select          : 'Seleccione una opcion',
         number_min      : 'Muy bajo',
@@ -28,8 +28,8 @@ FormValidator.prototype = {
         url             : 'URL invalida',
         number          : 'no es un numero',
         email           : 'Direccion email no valida',
-        email_repeat    : 'emails do not match',
-        date            : 'invalid date',
+        email_repeat    : 'Direccion email no coincide',
+        date            : 'Fecha invalida',
         password_repeat : 'passwords do not match',
         no_match        : 'no match',
         complete        : 'input is not complete'
