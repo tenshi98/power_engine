@@ -82,10 +82,10 @@ class Basic_Inputs{
 	*===========================    Modo de uso  ===========================
 	*
 	* 	//se imprime input
-	* 	$Form->form_post_data(1, 'dato' );
-	* 	$Form->form_post_data(2, '<strong>Dato:</strong>explicacion' );
-	* 	$Form->form_post_data(3, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-	* 	$Form->form_post_data(4, 'bla' );
+	* 	$Form->form_post_data(1,1,1, 'dato' );
+	* 	$Form->form_post_data(2,1,1, '<strong>Dato:</strong>explicacion' );
+	* 	$Form->form_post_data(3,1,1, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+	* 	$Form->form_post_data(4,1,1, 'bla' );
 	*
 	*===========================    Parametros   ===========================
 	* String   $type      Tipo de mensaje

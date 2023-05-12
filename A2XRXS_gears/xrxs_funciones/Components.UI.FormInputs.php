@@ -378,32 +378,44 @@ class Basic_Form_Inputs{
 	*===========================    Modo de uso  ===========================
 	*
 	* 	//se imprime input
-	* 	$Form->form_post_data(1, 'dato' );
-	* 	$Form->form_post_data(2, '<strong>Dato:</strong>explicacion' );
-	* 	$Form->form_post_data(3, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-	* 	$Form->form_post_data(4, 'bla' );
+	* 	$Form->form_post_data(1,1,1, 'dato' );
+	* 	$Form->form_post_data(2,1,1, '<strong>Dato:</strong>explicacion' );
+	* 	$Form->form_post_data(3,1,1, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+	* 	$Form->form_post_data(4,1,1, 'bla' );
 	*
 	*===========================    Parametros   ===========================
 	* String   $type      Tipo de mensaje
 	* String   $Text      Texto del mensaje
 	* @return  String
 	************************************************************************/
-	public function form_post_data($type, $Text){
+	public function form_post_data($type, $icon, $iconAnimation, $Text){
 
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
-		$tipos = array(1, 2, 3, 4);
+		$requerido_1 = array(1,2,3,4);
+		$requerido_2 = array(0,1,2,3);
+		$requerido_3 = array(0,1,2,3);
 		//verifico si el dato ingresado existe dentro de las opciones
-		if (!in_array($type, $tipos)) {
-			alert_post_data(4,1,1, 'La configuracion $type ('.$type.') entregada no esta dentro de las opciones');
+		if (!in_array($type, $requerido_1)) {
+			alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($icon, $requerido_2)) {
+			alert_post_data(4,1,1, 'La configuracion $icon entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($iconAnimation, $requerido_3)) {
+			alert_post_data(4,1,1, 'La configuracion $iconAnimation entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			alert_post_data($type,1,1, $Text);
+			alert_post_data($type, $icon, $iconAnimation, $Text);
 		}
 
 	}
