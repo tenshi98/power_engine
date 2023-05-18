@@ -160,5 +160,93 @@ if (!function_exists('base_url')) {
 function getFavicon($url){
 	return sprintf('<img src="https://www.google.com/s2/favicons?domain=%s"/>',urlencode($url));
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Obtener un indicador
+*
+*===========================     Detalles    ===========================
+* Permite obtener los indicadores
+*===========================    Modo de uso  ===========================
+*
+* 	//se obtiene dato
+* 	indicadores();
+*
+*===========================    Parametros   ===========================
+* String   $url    Direccion web desde donde se obtendra el favicon
+* @return  HTML
+************************************************************************/
+//Funcion
+function indicadores($type){
+
+	/********************************************************/
+	//Definicion de errores
+	$errorn = 0;
+	//se definen las opciones disponibles
+	$requerido = array('vertical', 'horizontal');
+	//verifico si el dato ingresado existe dentro de las opciones
+	if (!in_array($type, $requerido)) {
+		alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
+		$errorn++;
+	}
+	/********************************************************/
+	//Ejecucion si no hay errores
+	if($errorn==0){
+
+		//Variables
+		$arrColors = array();
+		$counter   = 1;
+
+		//declaro
+		$arrColors[1]['color'] = 'color-blue';
+		$arrColors[2]['color'] = 'color-green';
+		$arrColors[3]['color'] = 'color-yellow';
+		$arrColors[4]['color'] = 'color-red';
+
+		//enlace
+		$XMLData = simplexml_load_file('https://zeus.sii.cl/admin/rss/sii_ind_rss.xml');
+
+		//valido
+		if(!$XMLData){
+			alert_post_data(4,1,1, 'Error en cargar los datos');
+		}else{
+			echo '
+			<div class="panel-heading">
+				<span class="panel-title pull-left" style="color: #666;font-weight: 700 !important;">Indicadores</span>
+			</div>';
+
+			//dependiendo de la forma
+			switch ($type) {
+				/***************************************/
+				case 'vertical':
+
+					break;
+				/***************************************/
+				case 'horizontal':
+					echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 info-buttons block">';
+						echo '<div class="row">';
+							//recorro
+							foreach($XMLData as $data_lvl1){
+								foreach($data_lvl1 as $data_lvl2){
+									//Verifico que el dato exista
+									if($data_lvl2->title!=''){
+										//Imprimo los datos
+										echo '
+										<a href="'.$data_lvl2->link.'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+											<span class="'.$arrColors[$counter]['color'].'">'.$data_lvl2->description.'</span>
+											<span>'.$data_lvl2->title.'</span>
+										</a>
+										';
+										//sumo
+										$counter++;
+									}
+								}
+							}
+						echo '</div>';
+					echo '</div>';
+					break;
+			}
+		}
+	}
+}
 
 ?>
