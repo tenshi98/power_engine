@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 interface IMegaKeyAes128
 {
-	
+
 	/**
 	 * Gets a version of that key encoded in an array of four 32 bits values.
 	 *

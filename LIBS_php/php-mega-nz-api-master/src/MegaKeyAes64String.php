@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaKeyAes64String implements IMegaKeyAes64
 {
-	
+
 	/**
 	 * The key value, packed in string format.
 	 *

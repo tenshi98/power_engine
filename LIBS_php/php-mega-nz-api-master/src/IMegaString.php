@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 interface IMegaString
 {
-	
+
 	/**
 	 * Gets a version of that string encoded base64.
 	 *

@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaUserId
 {
-	
+
 	/**
 	 * The value of the id.
 	 *

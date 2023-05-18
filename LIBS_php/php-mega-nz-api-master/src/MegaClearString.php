@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaClearString implements IMegaString
 {
-	
+
 	/**
 	 * The value, a clear string.
 	 *

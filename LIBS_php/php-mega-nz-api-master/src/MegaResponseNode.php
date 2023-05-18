@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaResponseNode
 {
-	
+
 	/**
 	 * The id of the node.
 	 *

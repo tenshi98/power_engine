@@ -15,7 +15,7 @@ namespace PhpExtended\Mega;
  */
 class MegaNodeHierarchyNode
 {
-	
+
 	/**
 	 * The actual node object.
 	 *

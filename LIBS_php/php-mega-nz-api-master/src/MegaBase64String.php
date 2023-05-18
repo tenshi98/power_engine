@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaBase64String implements IMegaString
 {
-	
+
 	/**
 	 * The value, a string encoded base64.
 	 *

@@ -12,7 +12,7 @@ namespace PhpExtended\Mega;
  */
 class MegaResponseKey
 {
-	
+
 	/**
 	 * The id of the node which contains the key to decode this node's key.
 	 *

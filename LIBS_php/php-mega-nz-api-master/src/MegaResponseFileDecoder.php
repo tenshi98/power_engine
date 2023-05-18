@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaResponseFileDecoder
 {
-	
+
 	/**
 	 * The node which holds the key to decode the data.
 	 *

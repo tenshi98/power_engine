@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaKeyAes64Array32 implements IMegaKeyAes64
 {
-	
+
 	/**
 	 * The integer values, packed. Array of 2 elements.
 	 *

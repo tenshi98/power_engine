@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaNodeHierarchy
 {
-	
+
 	/**
 	 * The linked-tree-node for the root node of the hierarchy.
 	 *

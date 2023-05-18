@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaResponseNodelist
 {
-	
+
 	/**
 	 * The nodes inside the response.
 	 *

@@ -12,7 +12,7 @@ namespace PhpExtended\Mega;
  */
 class MegaResponseNodeDecoder
 {
-	
+
 	/**
 	 * The key to decode the other nodes.
 	 *

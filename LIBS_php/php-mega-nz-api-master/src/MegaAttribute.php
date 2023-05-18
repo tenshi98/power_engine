@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaAttribute
 {
-	
+
 	/**
 	 * The name of the node.
 	 *

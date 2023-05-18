@@ -11,7 +11,7 @@ namespace PhpExtended\Mega;
  */
 class MegaNodeId
 {
-	
+
 	/**
 	 * The value of the id.
 	 *
