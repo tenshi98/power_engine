@@ -289,24 +289,30 @@ class Basic_Form_Inputs{
 				let Componente = document.getElementById("'.$name_1.'").value;
 				//Verifico que valor exista
 				if (Componente != "") {
-					//Obtengo las variables con los id y los datos
-					slectId_'.$name_1.'   = eval("id_data_'.$name_1.'_" + Componente);
-					slectData_'.$name_1.' = eval("data_'.$name_1.'_" + Componente);
-					//indico al select el numero de elementos
-					document.'.$form_name.'.'.$name_2.'.length = slectId_'.$name_1.'.length;
-					//recorro elementos y lo inserto al select
-					for(i=0;i<slectId_'.$name_1.'.length;i++){
-						document.'.$form_name.'.'.$name_2.'.options[i].value = slectId_'.$name_1.'[i];
-						document.'.$form_name.'.'.$name_2.'.options[i].text  = slectData_'.$name_1.'[i];
-						//guardo el id del index en caso de que coincidan los id de los elementos
-						if(slectId_'.$name_1.'[i] == '.$Value.'){
-							slected_'.$name_2.' = i;
+					//actualizo los datos del select
+					try {
+						//Obtengo las variables con los id y los datos
+						slectId_'.$name_1.'   = eval("id_data_'.$name_1.'_" + Componente);
+						slectData_'.$name_1.' = eval("data_'.$name_1.'_" + Componente);
+						//indico al select el numero de elementos
+						document.'.$form_name.'.'.$name_2.'.length = slectId_'.$name_1.'.length;
+						//recorro elementos y lo inserto al select
+						for(i=0;i<slectId_'.$name_1.'.length;i++){
+							document.'.$form_name.'.'.$name_2.'.options[i].value = slectId_'.$name_1.'[i];
+							document.'.$form_name.'.'.$name_2.'.options[i].text  = slectData_'.$name_1.'[i];
+							//guardo el id del index en caso de que coincidan los id de los elementos
+							if(slectId_'.$name_1.'[i] == '.$Value.'){
+								slected_'.$name_2.' = i;
+							}
 						}
+						//muestro el select
+						document.getElementById("div_'.$name_2.'").style.display = "block";
+						//indico el selectedIndex que tiene asignado
+						document.getElementById("'.$name_2.'").selectedIndex = slected_'.$name_2.';
+					//si el select previo da error
+					} catch (error) {
+						//nada
 					}
-					//muestro el select
-					document.getElementById("div_'.$name_2.'").style.display = "block";
-					//indico el selectedIndex que tiene asignado
-					document.getElementById("'.$name_2.'").selectedIndex = slected_'.$name_2.';
 				}
 			});';
 
