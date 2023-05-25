@@ -21,7 +21,7 @@ if (!empty($_GET['salir'])){
 	session_unset();
 	session_destroy();
 	//Se redirije al inicio del sitio
-	header( 'Location: index.php' );
+	header( 'Location: index.php?exit=true' );
 	die;
 }
 
