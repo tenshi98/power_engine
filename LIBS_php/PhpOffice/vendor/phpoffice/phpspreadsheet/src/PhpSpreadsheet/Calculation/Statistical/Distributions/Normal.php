@@ -138,25 +138,25 @@ class Normal
             4 => 3.754408661907416e+00,
         ];
 
-        //    Define lower and upper region break-points.
-        $p_low = 0.02425; //Use lower region approx. below this
-        $p_high = 1 - $p_low; //Use upper region approx. above this
+        //    Define lower and upper región break-points.
+        $p_low = 0.02425; //Use lower región approx. below this
+        $p_high = 1 - $p_low; //Use upper región approx. above this
 
         if (0 < $p && $p < $p_low) {
-            //    Rational approximation for lower region.
+            //    Rational approximation for lower región.
             $q = sqrt(-2 * log($p));
 
             return ((((($c[1] * $q + $c[2]) * $q + $c[3]) * $q + $c[4]) * $q + $c[5]) * $q + $c[6]) /
                 (((($d[1] * $q + $d[2]) * $q + $d[3]) * $q + $d[4]) * $q + 1);
         } elseif ($p_high < $p && $p < 1) {
-            //    Rational approximation for upper region.
+            //    Rational approximation for upper región.
             $q = sqrt(-2 * log(1 - $p));
 
             return -((((($c[1] * $q + $c[2]) * $q + $c[3]) * $q + $c[4]) * $q + $c[5]) * $q + $c[6]) /
                 (((($d[1] * $q + $d[2]) * $q + $d[3]) * $q + $d[4]) * $q + 1);
         }
 
-        //    Rational approximation for central region.
+        //    Rational approximation for central región.
         $q = $p - 0.5;
         $r = $q * $q;
 

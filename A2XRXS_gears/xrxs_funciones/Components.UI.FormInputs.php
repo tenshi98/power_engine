@@ -25,7 +25,7 @@ class Basic_Form_Inputs{
 			<div class="form-group" id="div_'.$name.'">
 				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-					<select name="'.$name.'" id="'.$name.'" '.$requerido.' data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.' " tabindex="2" >
+					<select name="'.$name.'" id="'.$name.'" '.$requerido.' data-placeholder="Seleccione una Opción" class="form-control chosen-select chosendiv_'.$name.' " tabindex="2" >
 						<option value=""></option>';
 
 						/******************************************/
@@ -38,7 +38,7 @@ class Basic_Form_Inputs{
 							$data_writing = '';
 
 							/******************************************/
-							//si la opcion actual esta seleccionada
+							//si la opción actual esta seleccionada
 							if($value==$select['idData']){$selected = 'selected="selected"';}
 
 							/******************************************/
@@ -133,7 +133,7 @@ class Basic_Form_Inputs{
 							}
 						}
 
-						$data .= '<option value="" '.$selectedx.'>Seleccione una Opcion</option>';
+						$data .= '<option value="" '.$selectedx.'>Seleccione una Opción</option>';
 
 						/******************************************/
 						//Recorro
@@ -145,7 +145,7 @@ class Basic_Form_Inputs{
 							$data_writing = '';
 
 							/******************************************/
-							//si la opcion actual esta seleccionada
+							//si la opción actual esta seleccionada
 							if($value==$select['idData']){$selected = 'selected="selected"';}
 
 							/******************************************/
@@ -183,7 +183,7 @@ class Basic_Form_Inputs{
 				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 					<select name="'.$name.'" id="'.$name.'" class="form-control" '.$requerido.' >
-						<option value="" selected>Seleccione una Opcion</option>
+						<option value="" selected>Seleccione una Opción</option>
 					</select>
 				</div>
 			</div>';
@@ -210,7 +210,7 @@ class Basic_Form_Inputs{
 		foreach($arrSelect as $tipo=>$componentes){
 			//creo variable
 			$Int_id_data = 'let id_data_'.$name_1.'_'.str_replace($vowels, '_',$tipo).'=new Array(""';
-			$Int_data    = 'let data_'.$name_1.'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+			$Int_data    = 'let data_'.$name_1.'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opción"';
 			//recorro los datos
 			foreach ($componentes as $idcomp) {
 				//Escribo los datos solicitados
@@ -271,7 +271,7 @@ class Basic_Form_Inputs{
 						//Ingreso dato
 						document.'.$form_name.'.'.$name_2.'.length = 1;
 						document.'.$form_name.'.'.$name_2.'.options[0].value = 0;
-						document.'.$form_name.'.'.$name_2.'.options[0].text  = "Seleccione una Opcion";
+						document.'.$form_name.'.'.$name_2.'.options[0].text  = "Seleccione una Opción";
 					}
 				//si el select previo no tiene datos
 				}else{
@@ -695,7 +695,7 @@ class Basic_Form_Inputs{
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
-	* Crea un tipo texto con la opcion de poner un icono
+	* Crea un tipo texto con la opción de poner un icono
 	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto, con un icono en el lado derecho,
@@ -2285,7 +2285,7 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* Object   $dbConn        Puntero a la base de datos
@@ -2441,8 +2441,8 @@ class Basic_Form_Inputs{
 	* Crea una linea con un checkbox de terminos y condiciones
 	*
 	*===========================     Detalles    ===========================
-	* Permite crear una linea en donde muestra la opcion de terminos y
-	* condiciones, al tener esta opcion presente deshabilita el boton
+	* Permite crear una linea en donde muestra la opción de terminos y
+	* condiciones, al tener esta opción presente deshabilita el boton
 	* submit del formulario, impidiendo su ejecucion hasta que no se
 	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
 	*===========================    Modo de uso  ===========================
@@ -2506,8 +2506,8 @@ class Basic_Form_Inputs{
 	* Crea una linea con un checkbox de terminos y condiciones
 	*
 	*===========================     Detalles    ===========================
-	* Permite crear una linea en donde muestra la opcion de terminos y
-	* condiciones, al tener esta opcion presente deshabilita el boton
+	* Permite crear una linea en donde muestra la opción de terminos y
+	* condiciones, al tener esta opción presente deshabilita el boton
 	* submit del formulario, impidiendo su ejecucion hasta que no se
 	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
 	*===========================    Modo de uso  ===========================
@@ -2626,7 +2626,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $extrafilter   Comandos extras, tales como ORDER BY - GROUP BY
@@ -2747,7 +2747,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $extrafilter   Comandos extras, tales como ORDER BY - GROUP BY
@@ -2887,7 +2887,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table1        Tabla desde donde tomar los datos
 	* String   $table2        Tabla a fucionar para tener los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
@@ -3018,7 +3018,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table1        Tabla desde donde tomar los datos
 	* String   $table2        Tabla a fucionar para tener los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
@@ -3157,7 +3157,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* Object   $dbConn        Puntero a la base de datos
@@ -3368,14 +3368,14 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<select class="form-control" name="'.$name.'" id="'.$name.'" '.$requerido.'>
-							<option value="">Seleccione una Opcion</option>';
+							<option value="">Seleccione una Opción</option>';
 
 							/******************************************/
 							//Recorro
 							for ($i = $valor_ini; $i <= $valor_fin; $i++) {
 
 								/******************************************/
-								//si la opcion actual esta seleccionada
+								//si la opción actual esta seleccionada
 								if(isset($value)&&$value==$i) {
 									$j = 'selected="selected"';
 								}else{
@@ -3497,7 +3497,7 @@ class Basic_Form_Inputs{
 	* Integer  $value_x         Valor por defecto, debe ser un numero entero
 	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA_x         Identificador de la base de datos
-	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $dataB_x         Texto a mostrar en la opción del input
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
@@ -3629,7 +3629,7 @@ class Basic_Form_Inputs{
 	* Integer  $value_x         Valor por defecto, debe ser un numero entero
 	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA_x         Identificador de la base de datos
-	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $dataB_x         Texto a mostrar en la opción del input
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
@@ -3761,7 +3761,7 @@ class Basic_Form_Inputs{
 	* Integer  $value_x         Valor por defecto, debe ser un numero entero
 	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA_x         Identificador de la base de datos
-	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $dataB_x         Texto a mostrar en la opción del input
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
@@ -3918,7 +3918,7 @@ class Basic_Form_Inputs{
 	* Integer  $value_x         Valor por defecto, debe ser un numero entero
 	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA_x         Identificador de la base de datos
-	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $dataB_x         Texto a mostrar en la opción del input
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico
@@ -4099,7 +4099,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $orderby       Ordenamiento de los datos, si no hay nada ordena automatico
@@ -4304,7 +4304,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $orderby       Ordenamiento de los datos, si no hay nada ordena automatico
@@ -4534,7 +4534,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $orderby       Ordenamiento de los datos, si no hay nada ordena automatico
@@ -5239,7 +5239,7 @@ class Basic_Form_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $orderby       Ordenamiento de los datos, si no hay nada ordena automatico
@@ -6570,7 +6570,7 @@ class Basic_Form_Inputs{
 	* Integer  $value_x         Valor por defecto, debe ser un numero entero
 	* Integer  $required_x      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA_x         Identificador de la base de datos
-	* String   $dataB_x         Texto a mostrar en la opcion del input
+	* String   $dataB_x         Texto a mostrar en la opción del input
 	* String   $table_x         Tabla desde donde tomar los datos
 	* String   $filter_x        Filtro de la seleccion de la base de datos
 	* String   $extracomand_x   Ordenamiento de los datos, si no hay nada ordena automatico

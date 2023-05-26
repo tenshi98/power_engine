@@ -73,7 +73,7 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 					var marker = new google.maps.Marker({
 						position	: factory,
 						map			: map,
-						title		: "Direccion",
+						title		: "Dirección",
 						animation 	: google.maps.Animation.DROP,
 						icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_orange.png"
 					});
@@ -223,7 +223,7 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 
 							// InfoWindow content
 							var content = 	\'<div id="iw-container">\' +
-											\'<div class="iw-title">Direccion</div>\' +
+											\'<div class="iw-title">Dirección</div>\' +
 											\'<div class="iw-content">\' +
 											\'<div class="iw-subTitle">Calle</div>\' +
 											\'<p>'.$datasig.'</p>\' +
@@ -241,7 +241,7 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 							var marker = new google.maps.Marker({
 								position	: factory,
 								map			: map,
-								title		: "Direccion",
+								title		: "Dirección",
 								animation 	: google.maps.Animation.DROP,
 								icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_orange.png"
 							});
@@ -398,7 +398,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 
 					// InfoWindow content
 					var content = 	\'<div id="iw-container">\' +
-									\'<div class="iw-title">Direccion</div>\' +
+									\'<div class="iw-title">Dirección</div>\' +
 									\'<div class="iw-content">\' +
 									\'<div class="iw-subTitle">Calle</div>\' +
 									\'<p>'.$datasig_1.'</p>\' +
@@ -416,7 +416,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 					var marker_1 = new google.maps.Marker({
 						position	: factory_1,
 						map			: map_'.$identificador.',
-						title		: "Direccion",
+						title		: "Dirección",
 						animation 	: google.maps.Animation.DROP,
 						icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_orange.png"
 					});
@@ -517,7 +517,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 
 					// InfoWindow content
 					var content = 	\'<div id="iw-container">\' +
-									\'<div class="iw-title">Direccion</div>\' +
+									\'<div class="iw-title">Dirección</div>\' +
 									\'<div class="iw-content">\' +
 									\'<div class="iw-subTitle">Calle</div>\' +
 									\'<p>'.$datasig_2.'</p>\' +
@@ -535,7 +535,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 					var marker_2 = new google.maps.Marker({
 						position	: factory_2,
 						map			: map_'.$identificador.',
-						title		: "Direccion",
+						title		: "Dirección",
 						animation 	: google.maps.Animation.DROP,
 						icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_green.png"
 					});

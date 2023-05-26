@@ -16,7 +16,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *
 *===========================     Detalles    ===========================
 * Permite codificar un texto para que quede ilegible a la lectura normal,
-* con la opcion de la utilizacion de una palabra clave para su codificacion
+* con la opción de la utilizacion de una palabra clave para su codificacion
 *===========================    Modo de uso  ===========================
 *
 * 	//se codifica texto
@@ -60,7 +60,7 @@ function simpleEncode($value, $passkey) {
 *
 *===========================     Detalles    ===========================
 * Permite decodificar un texto para que quede legible a la lectura normal,
-* con la opcion de la utilizacion de una palabra clave para su
+* con la opción de la utilizacion de una palabra clave para su
 * decodificacion
 *===========================    Modo de uso  ===========================
 *
@@ -100,7 +100,7 @@ function simpleDecode($value, $passkey) {
     return $decrypttext;
 }
 
-//Codificacion propia por cada servidor, esto impide el copiado de informacion entre servidores
+//Codificacion propia por cada servidor, esto impide el copiado de información entre servidores
 function generateServerSpecificHash(){
 	return (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME']))
             ? md5($_SERVER['SERVER_NAME'])
@@ -112,7 +112,7 @@ function generateServerSpecificHash(){
 *
 *===========================     Detalles    ===========================
 * Permite decodificar un texto para que quede legible a la lectura normal,
-* con la opcion de la utilizacion de una palabra clave para su
+* con la opción de la utilizacion de una palabra clave para su
 * decodificacion
 *===========================    Modo de uso  ===========================
 *

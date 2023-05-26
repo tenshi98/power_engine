@@ -896,7 +896,7 @@ class TCPDF_STATIC {
 		if (isset($prop['doNotSpellCheck']) AND ($prop['doNotSpellCheck'] == 'true')) {
 			$ff += 1 << 22;
 		}
-		// doNotScroll: If true, the text field does not scroll and the user, therefore, is limited by the rectangular region designed for the field.
+		// doNotScroll: If true, the text field does not scroll and the user, therefore, is limited by the rectangular región designed for the field.
 		if (isset($prop['doNotScroll']) AND ($prop['doNotScroll'] == 'true')) {
 			$ff += 1 << 23;
 		}
@@ -1550,12 +1550,12 @@ class TCPDF_STATIC {
 	 * <ul>
 	 *   <li>S or D: Stroke the path.</li>
 	 *   <li>s or d: Close and stroke the path.</li>
-	 *   <li>f or F: Fill the path, using the nonzero winding number rule to determine the region to fill.</li>
-	 *   <li>f* or F*: Fill the path, using the even-odd rule to determine the region to fill.</li>
-	 *   <li>B or FD or DF: Fill and then stroke the path, using the nonzero winding number rule to determine the region to fill.</li>
-	 *   <li>B* or F*D or DF*: Fill and then stroke the path, using the even-odd rule to determine the region to fill.</li>
-	 *   <li>b or fd or df: Close, fill, and then stroke the path, using the nonzero winding number rule to determine the region to fill.</li>
-	 *   <li>b or f*d or df*: Close, fill, and then stroke the path, using the even-odd rule to determine the region to fill.</li>
+	 *   <li>f or F: Fill the path, using the nonzero winding number rule to determine the región to fill.</li>
+	 *   <li>f* or F*: Fill the path, using the even-odd rule to determine the región to fill.</li>
+	 *   <li>B or FD or DF: Fill and then stroke the path, using the nonzero winding number rule to determine the región to fill.</li>
+	 *   <li>B* or F*D or DF*: Fill and then stroke the path, using the even-odd rule to determine the región to fill.</li>
+	 *   <li>b or fd or df: Close, fill, and then stroke the path, using the nonzero winding number rule to determine the región to fill.</li>
+	 *   <li>b or f*d or df*: Close, fill, and then stroke the path, using the even-odd rule to determine the región to fill.</li>
 	 *   <li>CNZ: Clipping mode using the even-odd rule to determine which regions lie inside the clipping path.</li>
 	 *   <li>CEO: Clipping mode using the nonzero winding number rule to determine which regions lie inside the clipping path</li>
 	 *   <li>n: End the path object without filling or stroking it.</li>
@@ -2495,7 +2495,7 @@ class TCPDF_STATIC {
 	/**
 	 * Set page boundaries.
 	 * @param $page (int) page number
-	 * @param $type (string) valid values are: <ul><li>'MediaBox' : the boundaries of the physical medium on which the page shall be displayed or printed;</li><li>'CropBox' : the visible region of default user space;</li><li>'BleedBox' : the region to which the contents of the page shall be clipped when output in a production environment;</li><li>'TrimBox' : the intended dimensions of the finished page after trimming;</li><li>'ArtBox' : the page's meaningful content (including potential white space).</li></ul>
+	 * @param $type (string) valid values are: <ul><li>'MediaBox' : the boundaries of the physical medium on which the page shall be displayed or printed;</li><li>'CropBox' : the visible región of default user space;</li><li>'BleedBox' : the región to which the contents of the page shall be clipped when output in a production environment;</li><li>'TrimBox' : the intended dimensions of the finished page after trimming;</li><li>'ArtBox' : the page's meaningful content (including potential white space).</li></ul>
 	 * @param $llx (float) lower-left x coordinate in user units.
 	 * @param $lly (float) lower-left y coordinate in user units.
 	 * @param $urx (float) upper-right x coordinate in user units.

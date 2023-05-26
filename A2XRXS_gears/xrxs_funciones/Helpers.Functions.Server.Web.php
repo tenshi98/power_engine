@@ -32,7 +32,7 @@ function getGoogleImage($consulta, $max_img){
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
 	if( ini_get('allow_url_fopen')){
-		//Direccion con la consulta a google image
+		//Dirección con la consulta a google image
 		$url = "https://www.google.com/search?q=".$consulta."&tbm=isch&source=hp&biw=1366&bih=636&ei=NWOAYIeGIpDJ1sQPjcYQ&oq=".$consulta."&gs_lcp=CgNpbWcQAzoCCAA6CAgAELEDEIMBOgUIABCxAzoECAAQE1CqHFjAlQFgo5gBaABwAHgAgAFiiAGTB5IBAjE1mAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ved=0ahUKEwjH9L_O8I_wAhWQpJUCHQ0jBAAQ4dUDCAY&uact=5";
 
 		//obtengo el contenido
@@ -74,7 +74,7 @@ function getGoogleImage($consulta, $max_img){
 *
 * 	//se obtiene dato
 * 	obtenerInfoIp('200.120.163.36', "city");
-*   obtenerInfoIp('200.120.163.36', "region");
+*   obtenerInfoIp('200.120.163.36', "región");
 *   obtenerInfoIp('200.120.163.36', "regionCode");
 *   obtenerInfoIp('200.120.163.36', "countryCode");
 *   obtenerInfoIp('200.120.163.36', "countryName");
@@ -153,7 +153,7 @@ if (!function_exists('base_url')) {
 * 	getFavicon("https://youtube.com/");
 *
 *===========================    Parametros   ===========================
-* String   $url    Direccion web desde donde se obtendra el favicon
+* String   $url    Dirección web desde donde se obtendra el favicon
 * @return  Image
 ************************************************************************/
 //Funcion
@@ -172,7 +172,7 @@ function getFavicon($url){
 * 	indicadores();
 *
 *===========================    Parametros   ===========================
-* String   $url    Direccion web desde donde se obtendra el favicon
+* String   $url    Dirección web desde donde se obtendra el favicon
 * @return  HTML
 ************************************************************************/
 //Funcion

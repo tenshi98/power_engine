@@ -72,7 +72,7 @@ $saltoLinea = '
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-//Encabezado con informacion Basica
+//Encabezado con información Basica
 $code = '
 /* Equipo '.$rowdata['nombre_equipo'].'
  * Creado por: '.$rowdata['nombre_usuario'].'
@@ -101,7 +101,7 @@ $code .= '#define TINY_GSM_RX_BUFFER 650'.$saltoLinea;
 $code .= '#include <TinyGsmClient.h>'.$saltoLinea;
 //Identificacion APN
 $code .= '
-const char apn[]      = "'.$rowdata['APN_direction'].'"; //Direccion APN
+const char apn[]      = "'.$rowdata['APN_direction'].'"; //Dirección APN
 const char gprsUser[] = "";
 const char gprsPass[] = "";
 
@@ -335,7 +335,7 @@ function aaaa($rowdata) {
 ';
 $SensCant = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////
-//Encabezado con informacion Basica
+//Encabezado con información Basica
 $code = '
 /* Equipo '.$rowdata['nombre_equipo'].'
  * Creado por: '.$rowdata['nombre_usuario'].'

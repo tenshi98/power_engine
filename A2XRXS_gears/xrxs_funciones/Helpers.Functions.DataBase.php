@@ -23,7 +23,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * 	conectar ();
 *
 *===========================    Parametros   ===========================
-* Constantes  DB_SERVER  Ubicacion o direccion web donde se ubica la base de datos
+* Constantes  DB_SERVER  Ubicación o dirección web donde se ubica la base de datos
 * Constantes  DB_USER    Usuario de acceso a la BD
 * Constantes  DB_PASS    Contraseña de acceso a la BD
 * Constantes  DB_NAME    Nombre de la BD
@@ -40,7 +40,7 @@ function conectar () {
 * Seleccionar datos
 *
 *===========================     Detalles    ===========================
-* Funcion para seleccionar informacion desde la base de datos
+* Funcion para seleccionar información desde la base de datos
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta codigo
@@ -192,7 +192,7 @@ function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Us
 * Eliminar datos
 *
 *===========================     Detalles    ===========================
-* Funcion para eliminar informacion en la base de datos
+* Funcion para eliminar información en la base de datos
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta codigo
@@ -330,7 +330,7 @@ function db_update_data ($showQuery, $data, $table, $where, $dbConn, $Usuario, $
 * Seleccionar array de datos
 *
 *===========================     Detalles    ===========================
-* Funcion para seleccionar informacion desde la base de datos
+* Funcion para seleccionar información desde la base de datos
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta codigo
@@ -410,7 +410,7 @@ function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $
 * Seleccionar array de datos
 *
 *===========================     Detalles    ===========================
-* Funcion para seleccionar informacion desde la base de datos
+* Funcion para seleccionar información desde la base de datos
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta codigo

@@ -99,7 +99,7 @@ function genera_password_unica(){
 * boolean    $incluirSimbolos   Permite incluir simbolos en la palabra
 *                               generada, no debe estar activadasi lectura
 *                               amigable esta activa(true - false)
-* boolean    $sinDuplicados     Da la opcion de que la palabra generada
+* boolean    $sinDuplicados     Da la opción de que la palabra generada
 *                               no contenga caracteres repetidos(true - false)
 *
 * @return    String

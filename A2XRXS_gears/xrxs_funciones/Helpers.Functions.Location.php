@@ -160,13 +160,13 @@ class subpointLocation {
 * 	}
 *
 *===========================    Parametros   ===========================
-* String   $address    La direccion a consultar
+* String   $address    La dirección a consultar
 * String   $ApiKey     La Api Key de Google Maps
 * @return  Object
 ************************************************************************/
 //Funcion
 function getGeocodeData($address, $ApiKey) {
-    //Obtengo la direccion
+    //Obtengo la dirección
     $address = urlencode($address);
     //consulto a google
     $googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=".$address."&key=".$ApiKey;

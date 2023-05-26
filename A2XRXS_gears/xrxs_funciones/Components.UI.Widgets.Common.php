@@ -920,7 +920,7 @@ function widget_validator(){
 	require_once '../LIBS_js/validator/form_validator.php';
 }
 /*******************************************************************************************************************/
-//se muestra informacion como planilla excel
+//se muestra información como planilla excel
 function widget_excel($identificador, $tabla, $extraconfig){
 
 	//generacion del widget
@@ -1056,7 +1056,7 @@ function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
 	$opciones .= ',ShowDesc: '.$ShowDesc;                //Mostrar descripcion (true-false)
 	$opciones .= ',ShowPubDate: '.$ShowPubDate;          //mostrar fecha de publicacion (true-false)
 	//$opciones .= ',DescCharacterLimit: '.$DescCharLimit; //limitar caracteres
-	$opciones .= ',imgDirection: "'.DB_SITE_REPO.'/LIB_assets/img/loader.gif"';          //Direccion del loader
+	$opciones .= ',imgDirection: "'.DB_SITE_REPO.'/LIB_assets/img/loader.gif"';          //Dirección del loader
 
 	//despliegue
 	$input = '

@@ -110,8 +110,8 @@ class Cell extends Border
     /**
      * rowspan (restart, continue)
      *
-     * - restart: Start/restart merged region
-     * - continue: Continue merged region
+     * - restart: Start/restart merged región
+     * - continue: Continue merged región
      *
      * @var string
      */

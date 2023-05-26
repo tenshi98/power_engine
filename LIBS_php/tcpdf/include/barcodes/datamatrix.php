@@ -127,10 +127,10 @@ class Datamatrix {
 	 * <li>total matrix cols (including finder pattern)</li>
 	 * <li>total matrix rows (without finder pattern)</li>
 	 * <li>total matrix cols (without finder pattern)</li>
-	 * <li>region data rows (with finder pattern)</li>
-	 * <li>region data col (with finder pattern)</li>
-	 * <li>region data rows (without finder pattern)</li>
-	 * <li>region data col (without finder pattern)</li>
+	 * <li>región data rows (with finder pattern)</li>
+	 * <li>región data col (with finder pattern)</li>
+	 * <li>región data rows (without finder pattern)</li>
+	 * <li>región data col (without finder pattern)</li>
 	 * <li>horizontal regions</li>
 	 * <li>vertical regions</li>
 	 * <li>regions</li>
@@ -286,19 +286,19 @@ class Datamatrix {
 		// fill the grid with data
 		$grid = array();
 		$i = 0;
-		// region data row max index
+		// región data row max index
 		$rdri = ($params[4] - 1);
-		// region data column max index
+		// región data column max index
 		$rdci = ($params[5] - 1);
-		// for each vertical region
+		// for each vertical región
 		for ($vr = 0; $vr < $params[9]; ++$vr) {
-			// for each row on region
+			// for each row on región
 			for ($r = 0; $r < $params[4]; ++$r) {
 				// get row
 				$row = (($vr * $params[4]) + $r);
-				// for each horizontal region
+				// for each horizontal región
 				for ($hr = 0; $hr < $params[8]; ++$hr) {
-					// for each column on region
+					// for each column on región
 					for ($c = 0; $c < $params[5]; ++$c) {
 						// get column
 						$col = (($hr * $params[5]) + $c);

@@ -272,17 +272,17 @@ class Style extends Supervisor
 
                 // loop through up to 3 x 3 = 9 regions
                 for ($x = 1; $x <= $xMax; ++$x) {
-                    // start column index for region
+                    // start column index for región
                     $colStart = ($x == 3) ?
                         Coordinate::stringFromColumnIndex($rangeEndIndexes[0])
                         : Coordinate::stringFromColumnIndex($rangeStartIndexes[0] + $x - 1);
-                    // end column index for region
+                    // end column index for región
                     $colEnd = ($x == 1) ?
                         Coordinate::stringFromColumnIndex($rangeStartIndexes[0])
                         : Coordinate::stringFromColumnIndex($rangeEndIndexes[0] - $xMax + $x);
 
                     for ($y = 1; $y <= $yMax; ++$y) {
-                        // which edges are touching the region
+                        // which edges are touching the región
                         $edges = [];
                         if ($x == 1) {
                             // are we at left edge
@@ -301,25 +301,25 @@ class Style extends Supervisor
                             $edges[] = 'bottom';
                         }
 
-                        // start row index for region
+                        // start row index for región
                         $rowStart = ($y == 3) ?
                             $rangeEndIndexes[1] : $rangeStartIndexes[1] + $y - 1;
 
-                        // end row index for region
+                        // end row index for región
                         $rowEnd = ($y == 1) ?
                             $rangeStartIndexes[1] : $rangeEndIndexes[1] - $yMax + $y;
 
-                        // build range for region
+                        // build range for región
                         $range = $colStart . $rowStart . ':' . $colEnd . $rowEnd;
 
-                        // retrieve relevant style array for region
+                        // retrieve relevant style array for región
                         $regionStyles = $styleArray;
                         unset($regionStyles['borders']['inside']);
 
-                        // what are the inner edges of the region when looking at the selection
+                        // what are the inner edges of the región when looking at the selection
                         $innerEdges = array_diff(['top', 'right', 'bottom', 'left'], $edges);
 
-                        // inner edges that are not touching the region should take the 'inside' border properties if they have been set
+                        // inner edges that are not touching the región should take the 'inside' border properties if they have been set
                         foreach ($innerEdges as $innerEdge) {
                             switch ($innerEdge) {
                                 case 'top':
@@ -345,7 +345,7 @@ class Style extends Supervisor
                             }
                         }
 
-                        // apply region style to region by calling applyFromArray() in simple mode
+                        // apply región style to región by calling applyFromArray() in simple mode
                         $this->getActiveSheet()->getStyle($range)->applyFromArray($regionStyles, false);
                     }
                 }

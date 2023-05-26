@@ -1234,8 +1234,8 @@ class Basic_Inputs{
 	* Crea una linea con un checkbox de terminos y condiciones
 	*
 	*===========================     Detalles    ===========================
-	* Permite crear una linea en donde muestra la opcion de terminos y
-	* condiciones, al tener esta opcion presente deshabilita el boton
+	* Permite crear una linea en donde muestra la opción de terminos y
+	* condiciones, al tener esta opción presente deshabilita el boton
 	* submit del formulario, impidiendo su ejecucion hasta que no se
 	* acepte, el enlace abre un popup con lo que el usuario debe aceptar
 	*===========================    Modo de uso  ===========================
@@ -1800,7 +1800,7 @@ class Basic_Inputs{
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
-	* Crea un tipo texto con la opcion de poner un icono
+	* Crea un tipo texto con la opción de poner un icono
 	*
 	*===========================     Detalles    ===========================
 	* Permite crear un input tipo texto, con un icono en el lado derecho,
@@ -1888,7 +1888,7 @@ class Basic_Inputs{
 	* String   $name          Nombre del identificador del Input
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $style         Permite escribir directamente un estilo css
@@ -2015,7 +2015,7 @@ class Basic_Inputs{
 	* String   $name          Nombre del identificador del Input
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $style         Permite escribir directamente un estilo css
@@ -2145,7 +2145,7 @@ class Basic_Inputs{
 	* String   $name          Nombre del identificador del Input
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $style         Permite escribir directamente un estilo css
@@ -2237,7 +2237,7 @@ class Basic_Inputs{
 
 					/******************************************/
 					//generacion del input
-					$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
+					$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opción" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
 									<option value=""></option>';
 
 										foreach ( $arrSelect as $select ) {
@@ -2318,7 +2318,7 @@ class Basic_Inputs{
 	* String   $name          Nombre del identificador del Input
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $style         Permite escribir directamente un estilo css
@@ -2460,7 +2460,7 @@ class Basic_Inputs{
 	* String   $name          Nombre del identificador del Input
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
 	* String   $style         Permite escribir directamente un estilo css
@@ -2549,7 +2549,7 @@ class Basic_Inputs{
 
 				/******************************************/
 				//generacion del input
-				$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opcion" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
+				$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opción" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
 								<option value=""></option>';
 
 									foreach ( $arrSelect as $select ) {
@@ -2632,7 +2632,7 @@ class Basic_Inputs{
 	* Integer  $value         Valor por defecto, debe ser un numero entero
 	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
-	* String   $data2         Texto a mostrar en la opcion del input
+	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table1        Tabla desde donde tomar los datos
 	* String   $table2        Tabla a fucionar para tener los datos
 	* String   $filter        Filtro de la seleccion de la base de datos
@@ -2757,7 +2757,7 @@ class Basic_Inputs{
 	* Integer  $value1         Valor por defecto, debe ser un numero entero
 	* Integer  $required1      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA1         Identificador de la base de datos
-	* String   $dataB1         Texto a mostrar en la opcion del input
+	* String   $dataB1         Texto a mostrar en la opción del input
 	* String   $table1         Tabla desde donde tomar los datos
 	* String   $filter1        Filtro de la seleccion de la base de datos
 	* String   $extracomand1   Ordenamiento de los datos, si no hay nada ordena automatico
@@ -2766,7 +2766,7 @@ class Basic_Inputs{
 	* Integer  $value2         Valor por defecto, debe ser un numero entero
 	* Integer  $required2      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA2         Identificador de la base de datos
-	* String   $dataB2         Texto a mostrar en la opcion del input
+	* String   $dataB2         Texto a mostrar en la opción del input
 	* String   $table2         Tabla desde donde tomar los datos
 	* String   $filter2        Filtro de la seleccion de la base de datos
 	* String   $extracomand2   Ordenamiento de los datos, si no hay nada ordena automatico
@@ -2891,7 +2891,7 @@ class Basic_Inputs{
 					<div class="form-group" id="div_'.$name[1].'">
 						<div class="field">
 							<select name="'.$name[1].'" id="'.$name[1].'" class="form-control" '.$required[1].' onChange="cambia_'.$name[1].'()" >
-								<option value="" selected>Seleccione una Opcion</option>';
+								<option value="" selected>Seleccione una Opción</option>';
 
 								foreach ( $arrSeleccion as $seleccion ) {
 									if(count($datosA)==1){
@@ -2955,7 +2955,7 @@ class Basic_Inputs{
 						<div class="form-group" id="div_'.$name[$i].'" '.$display[$i].'>
 							<div class="field">
 								<select name="'.$name[$i].'" id="'.$name[$i].'" class="form-control" '.$required[$i].' '.$onchange.' >
-									<option value="" selected>Seleccione una Opcion</option>';
+									<option value="" selected>Seleccione una Opción</option>';
 									if ($value[$i-1]!=0&&$value[$i-1]!=''){
 										foreach ( $arrSeleccion as $seleccion ) {
 											if(count($datosB)==1){
@@ -2993,7 +2993,7 @@ class Basic_Inputs{
 				}
 
 				foreach($arrTodos as $tipo=>$componentes){
-					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opcion"';
+					$input .= 'let data_'.$name[$i-1].'_'.str_replace($vowels, '_',$tipo).'=new Array("Seleccione una Opción"';
 					foreach ($componentes as $comp) {
 						if(count($datosB)==1){
 							$data_writing = $comp[$datosB[0]].' ';
@@ -3031,7 +3031,7 @@ class Basic_Inputs{
 									$input .= '
 										document.'.$form_name.'.'.$name[$xxx].'.length = 1;
 										document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
+										document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opción";
 										document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 									';
 
@@ -3044,7 +3044,7 @@ class Basic_Inputs{
 								$input .= '
 									document.'.$form_name.'.'.$name[$xxx].'.length = 1;
 									document.'.$form_name.'.'.$name[$xxx].'.options[0].value = "";
-									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opcion";
+									document.'.$form_name.'.'.$name[$xxx].'.options[0].text = "Seleccione una Opción";
 									document.getElementById("div_'.$name[$xxx].'").style.display = "none";
 								';
 

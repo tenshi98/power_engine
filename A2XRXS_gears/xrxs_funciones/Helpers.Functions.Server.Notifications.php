@@ -524,7 +524,7 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 *	}
 *
 *===========================    Parametros   ===========================
-* String    $tarea    Direccion web con lo que se tiene que ejecutar
+* String    $tarea    Dirección web con lo que se tiene que ejecutar
 *                     en el servidor, entregar URL completas
 ************************************************************************/
 //Funcion

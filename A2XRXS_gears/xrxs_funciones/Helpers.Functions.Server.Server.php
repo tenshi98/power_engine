@@ -176,7 +176,7 @@ function ano_actual(){
 *
 * Parametros de la funcion: El parametro $dir, establece el directorio sobre el
 *                           cual actuara la funcion, es decir, que establece
-*                           el directorio del cual se obtendra informacion de
+*                           el directorio del cual se obtendra información de
 *                           su tamaño.
 *                           Si $dir no se establece se utilizara el directorio
 *                           donde se encuentra el archivo que llamo a la
@@ -432,7 +432,7 @@ function getCurrentURL(){
 * 	tareasServer(https://www.ejemplo.com?param1=1&param2=2&param3=3);
 *
 *===========================    Parametros   ===========================
-* String    $tarea    Direccion web con lo que se tiene que ejecutar
+* String    $tarea    Dirección web con lo que se tiene que ejecutar
 *                     en el servidor, entregar URL completas
 ************************************************************************/
 //Funcion
