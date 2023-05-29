@@ -74,7 +74,7 @@ function getGoogleImage($consulta, $max_img){
 *
 * 	//se obtiene dato
 * 	obtenerInfoIp('200.120.163.36', "city");
-*   obtenerInfoIp('200.120.163.36', "región");
+*   obtenerInfoIp('200.120.163.36', "region");
 *   obtenerInfoIp('200.120.163.36', "regionCode");
 *   obtenerInfoIp('200.120.163.36', "countryCode");
 *   obtenerInfoIp('200.120.163.36', "countryName");
