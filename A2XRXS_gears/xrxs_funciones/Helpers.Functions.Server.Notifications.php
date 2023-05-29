@@ -276,16 +276,16 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 					$mail->Port         = $SMTP_Port;
 					$mail->SMTPSecure   = $SMTP_Secure;
 					$mail->SMTPAuth     = true;
-					$mail->Username     = $SMTP_mailUsername;
+					$mail->Username     = DeSanitizar($SMTP_mailUsername);
 					$mail->Password     = $SMTP_mailPassword;
 
 					//Datos de envio
 					$mail->CharSet = 'UTF-8';
-					$mail->setFrom($De_correo, $De_nombre);                           //Quien envia el correo
-					$mail->addAddress($Hacia_correo, $Hacia_nombre);                  //Destinatario
-					$mail->addReplyTo($De_correo, $De_nombre);                        //A quien responder el correo
-					if($CopiaCarbon!=''){       $mail->addCC($CopiaCarbon);}          //Copia Carbon
-					if($CopiaCarbonOculta!=''){ $mail->addBCC($CopiaCarbonOculta);}   //Copia Carbon oculta
+					$mail->setFrom(DeSanitizar($De_correo), DeSanitizar($De_nombre));          //Quien envia el correo
+					$mail->addAddress(DeSanitizar($Hacia_correo), DeSanitizar($Hacia_nombre)); //Destinatario
+					$mail->addReplyTo(DeSanitizar($De_correo), DeSanitizar($De_nombre));       //A quien responder el correo
+					if($CopiaCarbon!=''){       $mail->addCC($CopiaCarbon);}                   //Copia Carbon
+					if($CopiaCarbonOculta!=''){ $mail->addBCC($CopiaCarbonOculta);}            //Copia Carbon oculta
 
 					//Adjuntos
 					if($Adjuntos!=''){
@@ -609,13 +609,13 @@ function envio_sendinblue($De_correo, $De_nombre,
 
 	$data = array(
 		"sender" => array(
-			"email" => $De_correo,
-			"name" => $De_nombre
+			"email" => DeSanitizar($De_correo),
+			"name" => DeSanitizar($De_nombre)
 		),
 		"to" => array(
 			array(
-				"email" => $Hacia_correo,
-				"name" => $Hacia_nombre
+				"email" => DeSanitizar($Hacia_correo),
+				"name" => DeSanitizar($Hacia_nombre)
 			)
 		),
 		"subject" => $Asunto,
