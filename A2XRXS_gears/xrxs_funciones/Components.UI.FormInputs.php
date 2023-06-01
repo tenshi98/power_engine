@@ -54,7 +54,7 @@ class Basic_Form_Inputs{
 
 							/******************************************/
 							//se escribe
-							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
+							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu(DeSanitizar($data_writing)).'</option>';
 						}
 
 				$data .= '
@@ -161,7 +161,7 @@ class Basic_Form_Inputs{
 
 							/******************************************/
 							//se escribe
-							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu($data_writing).'</option>';
+							$data .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu(DeSanitizar($data_writing)).'</option>';
 						}
 					$data .= '
 					</select>
@@ -215,11 +215,11 @@ class Basic_Form_Inputs{
 			foreach ($componentes as $idcomp) {
 				//Escribo los datos solicitados
 				if(count($datos)==1){
-					$data_writing = TituloMenu($idcomp[$datos[0]]).' ';
+					$data_writing = TituloMenu(DeSanitizar($idcomp[$datos[0]])).' ';
 				}else{
 					$data_writing = '';
 					foreach($datos as $dato){
-						$data_writing .= TituloMenu($idcomp[$dato]).' ';
+						$data_writing .= TituloMenu(DeSanitizar($idcomp[$dato])).' ';
 					}
 				}
 				//Guardo los datos
@@ -2411,7 +2411,7 @@ class Basic_Form_Inputs{
 										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
 										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
 										<label for="'.$name.'_'.$select['idData'].'">
-											'.TituloMenu($data_writing).'
+											'.TituloMenu(DeSanitizar($data_writing)).'
 										</label>
 									</div>';
 
@@ -3261,7 +3261,7 @@ class Basic_Form_Inputs{
 				$input = '<div class="form-group" id="div_'.$name.'">
 							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.TituloMenu($data_writing).'"   disabled="disabled">
+								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.TituloMenu(DeSanitizar($data_writing)).'"   disabled="disabled">
 							</div>
 						</div>';
 
