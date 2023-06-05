@@ -74,11 +74,21 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 			$iconType = $options[$icon];
 
 			//generacion del mensaje
-			$input  = '<div class="alert alert-'.$tipo.' alert-white rounded alert_box_correction" role="alert">';
-			if($icon!=0){$input .= $iconType;}
-			$input .= '<span id="alert_post_data">'.$Text.'</span>';
-			$input .= '<div class="clearfix"></div>';
-			$input .= '</div>';
+			if($icon!=0){
+				$input  = '<div class="alert alert-'.$tipo.' alert-white rounded alert_box_correction" role="alert">';
+					$input .= $iconType;
+					$input .= '<span id="alert_post_data">'.$Text.'</span>';
+					$input .= '<div class="clearfix"></div>';
+				$input .= '</div>';
+			}else{
+				$input  = '<div class="alert alert-'.$tipo.' alert-white rounded alert_box_correction" role="alert" style="padding-left: 15px;">';
+					$input .= $iconType;
+					$input .= '<span id="alert_post_data">'.$Text.'</span>';
+					$input .= '<div class="clearfix"></div>';
+				$input .= '</div>';
+			}
+
+
 
 			//Imprimir dato
 			echo $input;
