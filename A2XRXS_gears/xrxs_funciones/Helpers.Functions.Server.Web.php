@@ -202,49 +202,55 @@ function indicadores($type){
 		$arrColors[3]['color'] = 'color-yellow';
 		$arrColors[4]['color'] = 'color-red';
 
-		//enlace
-		$XMLData = simplexml_load_file('https://zeus.sii.cl/admin/rss/sii_ind_rss.xml');
+		//Intento
+		try {
+			//enlace
+			$XMLData = simplexml_load_file('https://zeus.sii.cl/admin/rss/sii_ind_rss.xml');
 
-		//valido
-		if(!$XMLData){
-			alert_post_data(4,1,1, 'Error en cargar los datos');
-		}else{
-			echo '
-			<div class="panel-heading">
-				<span class="panel-title pull-left" style="color: #666;font-weight: 700 !important;">Indicadores</span>
-			</div>';
+			//valido
+			if(!$XMLData){
+				alert_post_data(4,1,1, 'Error en cargar los datos');
+			}else{
+				echo '
+				<div class="panel-heading">
+					<span class="panel-title pull-left" style="color: #666;font-weight: 700 !important;">Indicadores</span>
+				</div>';
 
-			//dependiendo de la forma
-			switch ($type) {
-				/***************************************/
-				case 'vertical':
+				//dependiendo de la forma
+				switch ($type) {
+					/***************************************/
+					case 'vertical':
 
-					break;
-				/***************************************/
-				case 'horizontal':
-					echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 info-buttons block">';
-						echo '<div class="row">';
-							//recorro
-							foreach($XMLData as $data_lvl1){
-								foreach($data_lvl1 as $data_lvl2){
-									//Verifico que el dato exista
-									if($data_lvl2->title!=''){
-										//Imprimo los datos
-										echo '
-										<a href="'.$data_lvl2->link.'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-											<span class="'.$arrColors[$counter]['color'].'">'.$data_lvl2->description.'</span>
-											<span>'.$data_lvl2->title.'</span>
-										</a>
-										';
-										//sumo
-										$counter++;
+						break;
+					/***************************************/
+					case 'horizontal':
+						echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 info-buttons block">';
+							echo '<div class="row">';
+								//recorro
+								foreach($XMLData as $data_lvl1){
+									foreach($data_lvl1 as $data_lvl2){
+										//Verifico que el dato exista
+										if($data_lvl2->title!=''){
+											//Imprimo los datos
+											echo '
+											<a href="'.$data_lvl2->link.'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+												<span class="'.$arrColors[$counter]['color'].'">'.$data_lvl2->description.'</span>
+												<span>'.$data_lvl2->title.'</span>
+											</a>
+											';
+											//sumo
+											$counter++;
+										}
 									}
 								}
-							}
+							echo '</div>';
 						echo '</div>';
-					echo '</div>';
-					break;
+						break;
+				}
 			}
+		//Si hay errores
+		} catch (Exception $e) {
+			alert_post_data(4,1,1, 'Excepción capturada: '.$e->getMessage());
 		}
 	}
 }

@@ -92,17 +92,20 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 			]
 		]);
 		// Send a request
-		$result = file_get_contents($url, false, $options);
+		try {
+			$result = file_get_contents($url, false, $options);
+			//return $result;
+		} catch (Exception $e) {
+			error_log("===============================================", 0);
+			error_log("myPhone:".$myPhone, 0);
+			error_log("Body:".$Body, 0);
+			error_log("InstanceId:".$InstanceId, 0);
+			error_log("Token:".$Token, 0);
+			error_log("url:".$url, 0);
+			error_log("Excepción capturada:".$e->getMessage(), 0);
+			error_log("===============================================", 0);
+		}
 
-		/*error_log("===============================================", 0);
-		error_log("myPhone:".$myPhone, 0);
-		error_log("InstanceId:".$InstanceId, 0);
-		error_log("Token:".$Token, 0);
-		error_log("url:".$url, 0);
-		error_log("result:".$result, 0);
-		error_log("===============================================", 0);*/
-
-		//return $result;
 	//guardo el log
 	}else{
 		error_log("===============================================", 0);
