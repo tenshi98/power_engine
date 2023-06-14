@@ -91,10 +91,25 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 				'content' => $json
 			]
 		]);
+
 		// Send a request
 		try {
-			$result = file_get_contents($url, false, $options);
-			//return $result;
+			$result = @file_get_contents($url, false, $options);
+			//Si hay errores
+			if ($result === FALSE) {
+				error_log("===============================================", 0);
+				error_log("myPhone:".$myPhone, 0);
+				error_log("Body:".$Body, 0);
+				error_log("InstanceId:".$InstanceId, 0);
+				error_log("Token:".$Token, 0);
+				error_log("url:".$url, 0);
+				error_log("Excepción capturada: No hay acceso a ".$url." para leer");
+				error_log("===============================================", 0);
+			//Si no hay errores
+			} else {
+				//return $result;
+			}
+		//return $result;
 		} catch (Exception $e) {
 			error_log("===============================================", 0);
 			error_log("myPhone:".$myPhone, 0);
@@ -177,6 +192,32 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 	}
 
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Ob
+*
+*===========================     Detalles    ===========================
+* Permite el envio de mensajes a grupos de whatsapp a traves de chat-api
+*===========================    Modo de uso  ===========================
+*
+* 	//se obtiene dato
+* 	WhatsappGroupSendMessage('asdertcvbtrtr', '356644', 'groupTest', 'test');
+*
+*===========================    Parametros   ===========================
+* String   $Token        Token de la plataforma
+* String   $InstanceId   Instancia a utilizar
+* String   $Phone        Telefono a enviar el mensaje
+* String   $Body         mensaje
+* @return  Date
+************************************************************************/
+//Funcion
+function file_contents($path) {
+	$str = @file_get_contents($path);
+	if ($str === FALSE) {
+		throw new Exception("Cannot access '$path' to read contents.");
+	} else {
+		return $str;
+	}
+}
 
 ?>
