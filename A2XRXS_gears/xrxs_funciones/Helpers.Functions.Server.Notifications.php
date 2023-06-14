@@ -66,7 +66,7 @@ function tareas_envio_correo($De_correo, $De_nombre,
 	//valido que exista correo
 	if(isset($De_correo)&&isset($Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
-		if(validarEmail($De_correo)&&validarEmail($Hacia_correo)){
+		if(validarEmail(DeSanitizar($De_correo))&&validarEmail(DeSanitizar($Hacia_correo))){
 			//verifico si los envio por gmail
 			if(isset($GmailUsername)&&$GmailUsername!=''&&isset($GmailPassword)&&$GmailPassword!=''){
 
@@ -115,11 +115,11 @@ function tareas_envio_correo($De_correo, $De_nombre,
 					try {
 						//Datos de envio
 						$mail->CharSet = 'UTF-8';
-						$mail->setFrom($De_correo, $De_nombre);                            //Quien envia el correo
-						$mail->addAddress($Hacia_correo, $Hacia_nombre);                   //Destinatario
-						$mail->addReplyTo($De_correo, $De_nombre);                         //A quien responder el correo
-						if($CopiaCarbon!=''){        $mail->addCC($CopiaCarbon);}          //Copia Carbon
-						if($CopiaCarbonOculta!=''){  $mail->addBCC($CopiaCarbonOculta);}   //Copia Carbon oculta
+						$mail->setFrom(DeSanitizar($De_correo), DeSanitizar($De_nombre));               //Quien envia el correo
+						$mail->addAddress(DeSanitizar($Hacia_correo), DeSanitizar($Hacia_nombre));      //Destinatario
+						$mail->addReplyTo(DeSanitizar($De_correo), DeSanitizar($De_nombre));            //A quien responder el correo
+						if($CopiaCarbon!=''){        $mail->addCC(DeSanitizar($CopiaCarbon));}          //Copia Carbon
+						if($CopiaCarbonOculta!=''){  $mail->addBCC(DeSanitizar($CopiaCarbonOculta));}   //Copia Carbon oculta
 
 						//Adjuntos
 						if($Adjuntos!=''){
@@ -227,7 +227,7 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 	//valido que exista correo
 	if(isset($SMTP_mailUsername)&&isset($Hacia_correo)&&$SMTP_mailUsername!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
-		if(validarEmail($SMTP_mailUsername)&&validarEmail($Hacia_correo)){
+		if(validarEmail(DeSanitizar($SMTP_mailUsername))&&validarEmail(DeSanitizar($Hacia_correo))){
 
 			/********************************************************/
 			//Definicion de errores
@@ -392,7 +392,7 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 	//valido que exista correo
 	if(isset($GmailUsername)&&isset($Hacia_correo)&&$GmailUsername!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
-		if(validarEmail($GmailUsername)&&validarEmail($Hacia_correo)){
+		if(validarEmail(DeSanitizar($GmailUsername))&&validarEmail(DeSanitizar($Hacia_correo))){
 
 			/********************************************************/
 			//Definicion de errores
@@ -441,11 +441,11 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 					$mail->Password = $GmailPassword;
 
 					//Datos de envio
-					$mail->setFrom($GmailUsername, $De_nombre);                       //Quien envia el correo
-					$mail->addAddress($Hacia_correo, $Hacia_nombre);                  //Destinatario
-					$mail->addReplyTo($GmailUsername, $De_nombre);                    //A quien responder el correo
-					if($CopiaCarbon!=''){       $mail->addCC($CopiaCarbon);}          //Copia Carbon
-					if($CopiaCarbonOculta!=''){ $mail->addBCC($CopiaCarbonOculta);}   //Copia Carbon oculta
+					$mail->setFrom(DeSanitizar($GmailUsername), DeSanitizar($De_nombre));          //Quien envia el correo
+					$mail->addAddress(DeSanitizar($Hacia_correo), DeSanitizar($Hacia_nombre));     //Destinatario
+					$mail->addReplyTo(DeSanitizar($GmailUsername), DeSanitizar($De_nombre));       //A quien responder el correo
+					if($CopiaCarbon!=''){       $mail->addCC(DeSanitizar($CopiaCarbon));}          //Copia Carbon
+					if($CopiaCarbonOculta!=''){ $mail->addBCC(DeSanitizar($CopiaCarbonOculta));}   //Copia Carbon oculta
 
 					//Adjuntos
 					if($Adjuntos!=''){
@@ -602,11 +602,11 @@ function envio_mensaje_push($title, $message, $action, $firebase_token, $firebas
 ************************************************************************/
 //Funcion
 function envio_sendinblue($De_correo, $De_nombre,
-                             $Hacia_correo, $Hacia_nombre,
-                             $Asunto,$CuerpoHTML,
-							 $APIKEY){
+                          $Hacia_correo, $Hacia_nombre,
+                          $Asunto,$CuerpoHTML,
+						  $APIKEY){
 
-
+	//Se crea arreglo para adjuntar datos
 	$data = array(
 		"sender" => array(
 			"email" => DeSanitizar($De_correo),
@@ -622,6 +622,7 @@ function envio_sendinblue($De_correo, $De_nombre,
 		"htmlContent" => '<html><head></head><body>'.$CuerpoHTML.'</body></html>'
 	);
 
+	//envio de los datos
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
