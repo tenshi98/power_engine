@@ -27,7 +27,7 @@ if (!empty($_GET['salir'])){
 
 /***************************************************************/
 //Se verifica si el usuario esta conectado
-if (!empty( $_SESSION['usuario'] )&&(isset($_SESSION['usuario']['basic_data']['password'])&&$_SESSION['usuario']['basic_data']['password']!='')){
+if (!empty( $_SESSION['usuario'] )&&(isset($_SESSION['usuario']['basic_data']['password'])&&$_SESSION['usuario']['basic_data']['password']!='')&&(isset($_SESSION['usuario']['basic_data']['idSistema'])&&$_SESSION['usuario']['basic_data']['idSistema']!='')){
 
 //en caso de que no sea ninguno de los anteriores
 }else{
