@@ -92,7 +92,7 @@ class Basic_Inputs{
 	* String   $Text      Texto del mensaje
 	* @return  String
 	************************************************************************/
-	public function form_post_data($type, $Text){
+	public function form_post_data($type, $icon, $iconAnimation, $Text){
 
 		/********************************************************/
 		//Definicion de errores
@@ -107,7 +107,7 @@ class Basic_Inputs{
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			alert_post_data($type,1,1, $Text);
+			alert_post_data($type,$icon, $iconAnimation, $Text);
 		}
 
 	}
