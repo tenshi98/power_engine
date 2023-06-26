@@ -550,7 +550,7 @@ class Basic_Form_Inputs{
 				<div class="form-group" id="div_'.$name.'">
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$valor.'"  '.$requerido.' onkeypress="return soloLetras(event)">
+						<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$valor.'"  '.$requerido.' onkeydown="return soloLetras(event)">
 					</div>
 				</div>';
 
@@ -621,7 +621,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="password" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
+							<input type="password" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
 							<span class="pass_impt" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
 							<span class="input-group-addon add-on" ><i class="fa fa-key" aria-hidden="true"></i></span>
 						</div>
@@ -756,7 +756,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
+							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
 							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
 						</div>
 					</div>
@@ -830,7 +830,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloRut(event)">
+							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloRut(event)">
 							<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -917,7 +917,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)">
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)">
 							<span class="input-group-addon add-on"><i class="fa fa-usd" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -990,7 +990,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
 							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -1073,7 +1073,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNaturalReal(event)"  >
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNaturalReal(event)"  >
 							<span class="input-group-addon add-on"><i class="fa fa-superscript" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -1150,7 +1150,7 @@ class Basic_Form_Inputs{
 						<label class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;">'.$placeholder.'</label>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
 							<div class="input-group bootstrap-timepicker">
-								<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
+								<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
 								<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 							</div>
 						</div>
@@ -1259,7 +1259,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$name.'" value="'.str_replace(',','.',$valor).'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)">
+							<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$name.'" value="'.str_replace(',','.',$valor).'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)">
 						</div>
 					</div>
 				</div>';
@@ -1356,7 +1356,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
 							<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -1439,7 +1439,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
 							<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -1923,7 +1923,7 @@ class Basic_Form_Inputs{
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' '.$bcolor.' onkeypress="return soloLetras(event)">
+							<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' '.$bcolor.' onkeydown="return soloLetras(event)">
 							<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
 						</div>
 					</div>
@@ -2012,7 +2012,7 @@ class Basic_Form_Inputs{
 				<div class="form-group" id="div_'.$name.'">
 					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal;" '.$requerido.' onkeypress="return soloLetrasTextArea(event)" >'.$valor.'</textarea>
+						<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal;" '.$requerido.' onkeydown="return soloLetrasTextArea(event)" >'.$valor.'</textarea>
 					</div>
 				</div>';
 

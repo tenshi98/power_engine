@@ -151,7 +151,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="text" placeholder="'.$placeholder.'" class="form-control top" name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
+					<input type="text" placeholder="'.$placeholder.'" class="form-control top" name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
 				</div>
 			';
 
@@ -201,7 +201,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="text" placeholder="'.$placeholder.'" class="form-control top" id="'.$name.'" name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloRut(event)">
+					<input type="text" placeholder="'.$placeholder.'" class="form-control top" id="'.$name.'" name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeydown="return soloRut(event)">
 				</div>';
 
 			/******************************************/
@@ -255,7 +255,7 @@ class Basic_Inputs{
 			$input = '
 				<div class="field" id="div_'.$name.'">
 					<div class="input-group col-sm-12 bootstrap-timepicker">
-						<input type="password" placeholder="'.$placeholder.'" class="form-control bottom border_fix" name="'.$name.'" id="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
+						<input type="password" placeholder="'.$placeholder.'" class="form-control bottom border_fix" name="'.$name.'" id="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
 						<span class="pass_view_log" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
 					</div>
 				</div>';
@@ -320,7 +320,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input type="email"  placeholder="'.$placeholder.'" class="form-control"    name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
+					<input type="email"  placeholder="'.$placeholder.'" class="form-control"    name="'.$name.'" autocomplete="off" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
 				</div>
 			';
 
@@ -391,8 +391,8 @@ class Basic_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="field">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
+				<div class="field" id="div_'.$name.'">
+					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
 				</div>
 			';
 
@@ -463,7 +463,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 				<div class="field">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)">
+					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
 				</div>';
 
 			/******************************************/
@@ -604,7 +604,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$name.'"  '.$requerido.' onkeypress="return soloNumeroNaturalReal(event)" value="'.$valor.'" >
+				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$name.'"  '.$requerido.' onkeydown="return soloNumeroNaturalReal(event)" value="'.$valor.'" >
 			</div>';
 
 			/******************************************/
@@ -671,7 +671,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$requerido.' onkeypress="return soloLetrasTextArea(event)" >'.$w.'</textarea>
+				<textarea placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal; '.$style.'" '.$requerido.' onkeydown="return soloLetrasTextArea(event)" >'.$w.'</textarea>
 			</div>';
 
 			/******************************************/
@@ -737,7 +737,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input class="form-control '.$extra_class.'" style="'.$style.'" "type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeypress="return soloLetras(event)">
+				<input class="form-control '.$extra_class.'" style="'.$style.'" "type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeydown="return soloLetras(event)">
 			</div>';
 
 			/******************************************/
@@ -809,7 +809,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$required.' onkeypress="return soloLetras(event)">
+				<input class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$required.' onkeydown="return soloLetras(event)">
 			</div>';
 
 			/******************************************/
@@ -881,7 +881,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeypress="return soloNumeros_'.$EXname.'(event)" value="'.$valor.'" >
+				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeydown="return soloNumeros_'.$EXname.'(event)" value="'.$valor.'" >
 			</div>';
 
 			/******************************************/
@@ -1391,7 +1391,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input ='
 			<div class="field">
-				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)">
+				<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)">
 			</div>';
 
 			/******************************************/
@@ -1487,7 +1487,7 @@ class Basic_Inputs{
 			$input = '
 			<div class="field">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
 					<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span>
 				</div>
 			</div>';
@@ -1570,7 +1570,7 @@ class Basic_Inputs{
 			$input = '
 			<div class="field">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroNatural(event)"  >
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
 					<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span>
 				</div>
 			</div>';
@@ -1647,7 +1647,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input ='<div class="field">
 						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloNumeroRealRacional(event)"  >
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
 							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 						</div>
 					</div>';
@@ -1782,16 +1782,34 @@ class Basic_Inputs{
 
 			/******************************************/
 			//generacion del input
-			$input = '<div class="field">
-							<div class="input-group bootstrap-timepicker">
-								<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloRut(event)"  >
-								<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
-							</div>
-						</div>';
+			$input = '
+			<div class="field" id="div_'.$name.'">
+				<div class="input-group bootstrap-timepicker">
+					<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloRut(event)" oninput="checkRut(this)"  >
+					<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
-			$input.='<script>$("#'.$EXname.'").rut();</script>';
+			$input.= "
+			<script>
+				function checkRut(rut) {
+					let value = rut.value.replace(/\./g, '').replace('-', '');
+					if (value.match(/^(\d{2})(\d{3}){2}(\w{1})$/)) {
+						value = value.replace(/^(\d{2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4');
+					}else if (value.match(/^(\d)(\d{3}){2}(\w{0,1})$/)) {
+						value = value.replace(/^(\d)(\d{3})(\d{3})(\w{0,1})$/, '$1.$2.$3-$4');
+					}else if (value.match(/^(\d)(\d{3})(\d{0,2})$/)) {
+						value = value.replace(/^(\d)(\d{3})(\d{0,2})$/, '$1.$2.$3');
+					}else if (value.match(/^(\d)(\d{0,2})$/)) {
+						value = value.replace(/^(\d)(\d{0,2})$/, '$1.$2');
+					}
+					rut.value = value;
+				}
+			</script>
+			";
+			//$input.='<script>$("#'.$EXname.'").rut();</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1862,7 +1880,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '<div class="field">
 						<div class="input-group bootstrap-timepicker">
-							<input type="'.$type.'" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeypress="return soloLetras(event)"  >
+							<input type="'.$type.'" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
 							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
 						</div>
 					</div>';
