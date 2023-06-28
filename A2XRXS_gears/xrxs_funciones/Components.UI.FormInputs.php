@@ -367,7 +367,7 @@ class Basic_Form_Inputs{
 
 			/******************************************/
 			//generacion del input
-			$input = '<'.$tipo.'>'.$Text.'</'.$tipo.'>';
+			$input = '<'.$tipo.' class="title_'.$tipo.'">'.$Text.'</'.$tipo.'>';
 
 			/******************************************/
 			//Imprimir dato
