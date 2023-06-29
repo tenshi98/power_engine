@@ -25,6 +25,15 @@ function soloLetras(e){
 	especiales.push(103); //numpad 7
 	especiales.push(104); //numpad 8
 	especiales.push(105); //numpad 9
+	especiales.push(109); //numpad guion
+	especiales.push(173); //guion
+	especiales.push(189); //guion - otros navegadores
+	especiales.push(110); //numpad punto
+	especiales.push(172); //°
+	especiales.push(188); //comma
+	especiales.push(190); //punto
+	especiales.push(221); //¿
+	especiales.push(222); //?
 
 	tecla_especial = false;
 	//reviso si alguna de las acciones es un caracter especial
@@ -50,7 +59,6 @@ function soloLetrasTextArea(e){
 	//caracteres especiales permitidos
 	const especiales = [];
 	especiales.push(8);   //backspace
-	especiales.push(13);  //enter
 	especiales.push(37);  //left arrow
 	especiales.push(38);  //up arrow
 	especiales.push(39);  //right arrow
@@ -67,13 +75,15 @@ function soloLetrasTextArea(e){
 	especiales.push(103); //numpad 7
 	especiales.push(104); //numpad 8
 	especiales.push(105); //numpad 9
-	
 	especiales.push(109); //numpad guion
 	especiales.push(173); //guion
 	especiales.push(189); //guion - otros navegadores
-
 	especiales.push(110); //numpad punto
+	especiales.push(172); //°
+	especiales.push(188); //comma
 	especiales.push(190); //punto
+	especiales.push(221); //¿
+	especiales.push(222); //?
 
 	tecla_especial = false;
 	//reviso si alguna de las acciones es un caracter especial
