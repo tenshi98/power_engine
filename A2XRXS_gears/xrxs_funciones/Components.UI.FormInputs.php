@@ -2211,7 +2211,6 @@ class Basic_Form_Inputs{
 			echo $input;
 		}
 	}
-
 	/*******************************************************************************************************************/
 	/***********************************************************************
 	* Crea un input tipo checkbox
@@ -2608,6 +2607,78 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//Imprimir dato
 		echo $input;
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un tipo texto que solo permite roles de terreno
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo texto
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_input_rol('Categoria','idCategoria', 1, 1 );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* @return  String
+	************************************************************************/
+	public function form_input_rol($placeholder,$name, $value, $required){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//generacion del input
+			$input = '
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<div class="input-group bootstrap-timepicker">
+							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return rolTerreno(event)"  >
+							<span class="input-group-addon add-on"><i class="fa fa-map-o" aria-hidden="true"></i></span>
+						</div>
+					</div>
+				</div>';
+
+			/******************************************/
+			//Imprimir dato
+			echo $input;
+		}
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
