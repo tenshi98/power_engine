@@ -40,7 +40,7 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
-		$requerido_1 = array(1,2,3,4);
+		$requerido_1 = array(1,2,3,4,5,6);
 		$requerido_2 = array(0,1,2,3);
 		$requerido_3 = array(0,1,2,3);
 		//verifico si el dato ingresado existe dentro de las opciones
@@ -62,7 +62,7 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 		//Ejecucion si no hay errores
 		if($errorn==0){
 			//Selecciono el tipo de mensaje
-			$options = ['success', 'info', 'warning', 'danger'];
+			$options = ['success', 'info', 'warning', 'danger', 'primary', 'default'];
 			$tipo    = $options[$type-1];
 
 			//Selecciono el tipo de mensaje
