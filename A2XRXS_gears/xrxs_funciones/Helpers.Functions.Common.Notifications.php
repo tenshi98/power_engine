@@ -42,7 +42,7 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 		//se definen las opciones disponibles
 		$requerido_1 = array(1,2,3,4,5,6);
 		$requerido_2 = array(0,1,2,3);
-		$requerido_3 = array(0,1,2,3);
+		$requerido_3 = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($type, $requerido_1)) {
 			alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
@@ -65,12 +65,39 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 			$options = ['success', 'info', 'warning', 'danger', 'primary', 'default'];
 			$tipo    = $options[$type-1];
 
-			//Selecciono el tipo de mensaje
-			$options   = ['', 'faa-bounce animated', 'faa-vertical animated', 'faa-flash animated'];
+			//Selecciono el icono del mensaje
+			$options  = [
+							'',
+							'faa-bounce animated',
+							'faa-vertical animated',
+							'faa-flash animated',
+							'faa-wrench',
+							'faa-ring',
+							'faa-horizontal',
+							'faa-horizontal faa-reverse',
+							'faa-bounce faa-reverse',
+							'faa-spin',
+							'faa-spin faa-reverse',
+							'faa-float',
+							'faa-pulse',
+							'faa-shake',
+							'faa-tada',
+							'faa-passing',
+							'faa-passing faa-reverse',
+							'faa-burst',
+							'faa-falling',
+							'faa-falling faa-reverse',
+							'faa-rising',
+						];
 			$Animation = $options[$iconAnimation];
 
 			//Selecciono el tipo de icono
-			$options  = ['', '<div class="icon"><i class="fa fa-info-circle '.$Animation.'" aria-hidden="true"></i></div>', '<div class="icon"><i class="fa fa-exclamation '.$Animation.'" aria-hidden="true"></i></div>', '<div class="icon"><i class="fa fa-exclamation-triangle '.$Animation.'" aria-hidden="true"></i></div>'];
+			$options  = [
+							'',
+							'<div class="icon"><i class="fa fa-info-circle '.$Animation.'" aria-hidden="true"></i></div>',
+							'<div class="icon"><i class="fa fa-exclamation '.$Animation.'" aria-hidden="true"></i></div>',
+							'<div class="icon"><i class="fa fa-exclamation-triangle '.$Animation.'" aria-hidden="true"></i></div>'
+						];
 			$iconType = $options[$icon];
 
 			//generacion del mensaje
@@ -87,8 +114,6 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 					$input .= '<div class="clearfix"></div>';
 				$input .= '</div>';
 			}
-
-
 
 			//Imprimir dato
 			echo $input;
