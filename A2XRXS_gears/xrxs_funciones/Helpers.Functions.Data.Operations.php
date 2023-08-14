@@ -273,6 +273,34 @@ function restarDias($Fecha,$nDias){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
+* Ver años transcurridos entre fechas
+*
+*===========================     Detalles    ===========================
+* Permite ver el numero de los años transcurridos entre dos fechas entregadas
+*===========================    Modo de uso  ===========================
+*
+* 	//se ejecuta operacion
+* 	obtener_edad('2019-01-02');
+*
+*===========================    Parametros   ===========================
+* Date     $fecha_i   Fecha de inicio
+* Date     $fecha_f   Fecha de termino
+* @return  Integer
+************************************************************************/
+//Funcion
+function obtener_edad($fecha_nacimiento){
+	//valido las fechas
+	if(validaFecha($fecha_nacimiento)){
+		$nacimiento = new DateTime($fecha_nacimiento);
+    	$ahora      = new DateTime(date("Y-m-d"));
+    	$diferencia = $ahora->diff($nacimiento);
+    	return $diferencia->format("%y").' años, '.$diferencia->format("%m").' meses';
+	}else{
+		return 'Las fechas ingresadas no tienen formato fecha';
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
 * Ver dias transcurridos entre fechas
 *
 *===========================     Detalles    ===========================
@@ -294,46 +322,6 @@ function dias_transcurridos($fecha_i,$fecha_f){
 		return floor(abs((strtotime($fecha_i)-strtotime($fecha_f))/86400));
 	}else{
 		return 'Las fechas ingresadas no tienen formato fecha';
-	}
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-/***********************************************************************
-* Se calcula la diferencia de meses
-*
-*===========================     Detalles    ===========================
-* Se calcula la diferencia de meses en base a dos fechas
-*===========================    Modo de uso  ===========================
-*
-* 	//se ejecuta operacion
-* 	diferencia_meses('2019-01-02', '2019-02-02');
-*
-*===========================    Parametros   ===========================
-* Date     $fechainicial   Fecha de inicio
-* Date     $fechafinal     Fecha de termino
-* @return  Integer
-************************************************************************/
-//Funcion
-function diferencia_meses( $fechainicial, $fechafinal ) {
-	//valido las fechas
-	if(validaFecha($fechainicial)&&validaFecha($fechafinal)){
-
-		$datetime1 = new DateTime($fechainicial);
-		$datetime2 = new DateTime($fechafinal);
-
-		// obtenemos la diferencia entre las dos fechas
-		$interval=$datetime2->diff($datetime1);
-
-		// obtenemos la diferencia en meses
-		$intervalMeses=$interval->format("%m");
-
-		// obtenemos la diferencia en años y la multiplicamos por 12 para tener los meses
-		$intervalAnos = $interval->format("%y")*12;
-
-		$meses = $intervalMeses+$intervalAnos+1;
-
-		return $meses;
-	}else{
-		return 'El dato ingresado no es una fecha ('.$fechainicial.' - '.$fechafinal.')';
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -376,6 +364,46 @@ function horas_transcurridas($diaInicio, $diaTermino, $horaInicio, $horaTermino)
 	//devuelvo la cantidad de horas transcurridas
 	return $HorasTrans;
 
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Se calcula la diferencia de meses
+*
+*===========================     Detalles    ===========================
+* Se calcula la diferencia de meses en base a dos fechas
+*===========================    Modo de uso  ===========================
+*
+* 	//se ejecuta operacion
+* 	diferencia_meses('2019-01-02', '2019-02-02');
+*
+*===========================    Parametros   ===========================
+* Date     $fechainicial   Fecha de inicio
+* Date     $fechafinal     Fecha de termino
+* @return  Integer
+************************************************************************/
+//Funcion
+function diferencia_meses( $fechainicial, $fechafinal ) {
+	//valido las fechas
+	if(validaFecha($fechainicial)&&validaFecha($fechafinal)){
+
+		$datetime1 = new DateTime($fechainicial);
+		$datetime2 = new DateTime($fechafinal);
+
+		// obtenemos la diferencia entre las dos fechas
+		$interval=$datetime2->diff($datetime1);
+
+		// obtenemos la diferencia en meses
+		$intervalMeses=$interval->format("%m");
+
+		// obtenemos la diferencia en años y la multiplicamos por 12 para tener los meses
+		$intervalAnos = $interval->format("%y")*12;
+
+		$meses = $intervalMeses+$intervalAnos+1;
+
+		return $meses;
+	}else{
+		return 'El dato ingresado no es una fecha ('.$fechainicial.' - '.$fechafinal.')';
+	}
 }
 
 ?>
