@@ -248,7 +248,7 @@ class Basic_Inputs{
 		$tipos = array(1, 2, 3, 4, 5, 6);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($type, $tipos)) {
-			alert_post_data(4,1,1, 'La configuracion $type ('.$type.') entregada no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $type ('.$type.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -300,15 +300,17 @@ class Basic_Inputs{
 		$errorn = 0;
 		//se definen las opciones disponibles
 		$tipos = array(1, 2, 3, 4);
+		//Definicion de errores
+		$autoClose = 0;
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($type, $tipos)) {
-			alert_post_data(4,1,1, 'La configuracion $type ('.$type.') entregada no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $type ('.$type.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
-			alert_post_data($type,$icon, $iconAnimation, $Text);
+			alert_post_data($type,$icon, $iconAnimation, $autoClose, $Text);
 		}
 
 	}
@@ -559,7 +561,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -630,7 +632,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -701,7 +703,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$name.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$name.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -765,17 +767,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -843,7 +845,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -915,7 +917,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -985,7 +987,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1052,7 +1054,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1133,12 +1135,12 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validaHora($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1220,12 +1222,12 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//valido la hora
 		if(!validaHora($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El dato ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
+			alert_post_data(4,1,1,0, 'El dato ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una hora');
 		}
 		/********************************************************/
 		//Ejecucion si no hay errores
@@ -1300,7 +1302,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($checked, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $checked ('.$checked.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $checked ('.$checked.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1312,7 +1314,7 @@ class Basic_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-			<div class="field">
+			<div class="field" id="div_'.$name.'">
 				<div class="radio">
 					<input type="radio" name="'.$name.'" id="'.$name.'" value="'.$value.'" '.$x.'>
 					<label>'.$placeholder.'</label>
@@ -1462,37 +1464,37 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($min)&&$min!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $min ('.$min.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $min ('.$min.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($max)&&$max!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $max ('.$max.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $max ('.$max.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($step)&&$step!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $step ('.$step.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $step ('.$step.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($ndecimal)&&$ndecimal!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//se verifica si es un numero entero lo que se recibe
 		if (!validaEntero($ndecimal)&&$ndecimal!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $ndecimal ('.$ndecimal.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1577,17 +1579,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1660,17 +1662,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1743,12 +1745,12 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1821,7 +1823,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1885,7 +1887,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -1981,7 +1983,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2061,7 +2063,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2185,7 +2187,7 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2276,7 +2278,7 @@ class Basic_Inputs{
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
 
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+				alert_post_data(4,1,1,0, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
@@ -2315,17 +2317,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2448,7 +2450,7 @@ class Basic_Inputs{
 					$_SESSION['ErrorListing'][$vardata]['query']        = $query;
 
 					//Devuelvo mensaje
-					alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+					alert_post_data(4,1,1,0, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 				}
 			}
 		}
@@ -2488,17 +2490,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2591,7 +2593,7 @@ class Basic_Inputs{
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
 
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+				alert_post_data(4,1,1,0, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
@@ -2630,17 +2632,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2763,7 +2765,7 @@ class Basic_Inputs{
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
 
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+				alert_post_data(4,1,1,0, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
@@ -2801,17 +2803,17 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value)&&$value!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2886,7 +2888,7 @@ class Basic_Inputs{
 				$_SESSION['ErrorListing'][$vardata]['query']        = $query;
 
 				//Devuelvo mensaje
-				alert_post_data(4,1,1, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+				alert_post_data(4,1,1,0, 'Error en la consulta en <strong>'.$placeholder.'</strong>, consulte con el administrador');
 			}
 		}
 	}
@@ -2938,29 +2940,29 @@ class Basic_Inputs{
 		$requerido = array(1, 2);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required_1, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required1 ('.$required_1.') entregada en '.$placeholder_1.' no esta dentro de las opciones');
 			$errorn++;
 		}
 		if (!in_array($required_2, $requerido)) {
-			alert_post_data(4,1,1, 'La configuracion $required2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $required2 ('.$required_2.') entregada en '.$placeholder_2.' no esta dentro de las opciones');
 			$errorn++;
 		}
 		//se verifica si es un numero lo que se recibe
 		if (!validarNumero($value_1)&&$value_1!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero');
 			$errorn++;
 		}
 		if (!validarNumero($value_2)&&$value_2!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero');
 			$errorn++;
 		}
 		//Verifica si el numero recibido es un entero
 		if (!validaEntero($value_1)&&$value_1!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value_1 ('.$value_1.') en <strong>'.$placeholder_1.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		if (!validaEntero($value_2)&&$value_2!=''){
-			alert_post_data(4,1,1, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value_2 ('.$value_2.') en <strong>'.$placeholder_2.'</strong> no es un numero entero');
 			$errorn++;
 		}
 		/********************************************************/

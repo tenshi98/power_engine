@@ -497,7 +497,7 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 	$tipos = array(1, 2, 3, 4);
 	//verifico si el dato ingresado existe dentro de las opciones
 	if (!in_array($TipoCuerpo, $tipos)) {
-		alert_post_data(4,1,1, 'La configuracion $TipoCuerpo ('.$TipoCuerpo.') entregada no esta dentro de las opciones');
+		alert_post_data(4,1,1,0, 'La configuracion $TipoCuerpo ('.$TipoCuerpo.') entregada no esta dentro de las opciones');
 		$errorn++;
 	}
 	/********************************************************/

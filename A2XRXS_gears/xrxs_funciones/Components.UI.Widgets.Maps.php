@@ -12,7 +12,7 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 	//Si no existe una ID se envia mensaje
 	if(!isset($IDGoogle) OR $IDGoogle==''){
 		$mapa  = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">';
-		$mapa .= alert_post_data(4,1,1, 'No ha ingresado Una API de Google Maps.');
+		$mapa .= alert_post_data(4,1,1,0, 'No ha ingresado Una API de Google Maps.');
 		$mapa .= '</div>';
 	}else{
 		$google = $IDGoogle;
@@ -162,7 +162,7 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 	//Si no existe una ID se envia mensaje
 	if(!isset($IDGoogle) OR $IDGoogle==''){
 		$mapa  = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">';
-		$mapa .= alert_post_data(4,1,1, 'No ha ingresado Una API de Google Maps.');
+		$mapa .= alert_post_data(4,1,1,0, 'No ha ingresado Una API de Google Maps.');
 		$mapa .= '</div>';
 	}else{
 
@@ -334,7 +334,7 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 	//Si no existe una ID se envia mensaje
 	if(!isset($IDGoogle) OR $IDGoogle==''){
 		$mapa  = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">';
-		$mapa .= alert_post_data(4,1,1, 'No ha ingresado Una API de Google Maps.');
+		$mapa .= alert_post_data(4,1,1,0, 'No ha ingresado Una API de Google Maps.');
 		$mapa .= '</div>';
 	}else{
 		//Se limpian los nombres

@@ -97,7 +97,7 @@ function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 
 	}else{
 		$Alert_Text  = 'Tipo de archivo no soportado';
-		alert_post_data(4,2,2, $Alert_Text);
+		alert_post_data(4,2,2,0, $Alert_Text);
 	}
 }
 /*******************************************************************************************************************/
@@ -241,12 +241,12 @@ function preview_docs($Root, $File, $ExtraData){
 			/**************************************************/
 			//Si son archivos comprimidos
 			case 'gz'; case 'gzip'; case '7Z'; case 'zip'; case 'rar';
-				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos comprimidos '.$Extension.', descarguelos presionando <a href="'.$RutaCompleta.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No se pueden previsualizar los archivos comprimidos '.$Extension.', descarguelos presionando <a href="'.$RutaCompleta.'" class="">aqui</a>');
 			break;
 			/**************************************************/
 			//Si son archivos no reproducibles por los reproductores
 			case 'mp2'; case 'mpeg'; case 'mpg'; case 'mov'; case 'avi'; case 'oga'; case 'wav';
-				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos multimedia '.$Extension.', descarguelos presionando <a href="'.$RutaCompleta.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No se pueden previsualizar los archivos multimedia '.$Extension.', descarguelos presionando <a href="'.$RutaCompleta.'" class="">aqui</a>');
 			break;
 			/**************************************************/
 			//Si son mapas
@@ -418,15 +418,15 @@ function preview_docs($Root, $File, $ExtraData){
 			/**************************************************/
 			//excepcion
 			default;
-				$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion para los archivos '.$Extension.', para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No esta soportada la previsualizacion para los archivos '.$Extension.', para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
 			break;
 		}
 
 	}else{
 		if(isset($RutaCompleta)&&$RutaCompleta!=''){
-			$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
+			$input = alert_post_data(4,1,1,0, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$RutaCompleta.'" class="">aqui</a>');
 		}else{
-			$input = alert_post_data(4,1,1, 'El Archivo a previsualizar no existe');
+			$input = alert_post_data(4,1,1,0, 'El Archivo a previsualizar no existe');
 		}
 	}
 
@@ -566,17 +566,17 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 			/**************************************************/
 			//Si son archivos de texto plano
 			case 'txt'; case 'rtf';
-				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos de texto '.$ext.', descarguelos presionando  <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No se pueden previsualizar los archivos de texto '.$ext.', descarguelos presionando  <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 			break;
 			/**************************************************/
 			//Si son archivos comprimidos
 			case 'gz'; case 'gzip'; case '7Z'; case 'zip'; case 'rar';
-				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos comprimidos '.$ext.', descarguelos presionando <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No se pueden previsualizar los archivos comprimidos '.$ext.', descarguelos presionando <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 			break;
 			/**************************************************/
 			//Si son archivos no reproducibles por los reproductores
 			case 'mp2'; case 'mpeg'; case 'mpg'; case 'mov'; case 'avi'; case 'oga'; case 'wav';
-				$input = alert_post_data(4,1,1, 'No se pueden previsualizar los archivos multimedia '.$ext.', descarguelos presionando <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No se pueden previsualizar los archivos multimedia '.$ext.', descarguelos presionando <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 			break;
 			/**************************************************/
 			//Si son mapas
@@ -698,15 +698,15 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 			/**************************************************/
 			//excepcion
 			default;
-				$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion para los archivos '.$ext.', para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
+				$input = alert_post_data(4,1,1,0, 'No esta soportada la previsualizacion para los archivos '.$ext.', para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 			break;
 		}
 
 	}else{
 		if(isset($file_path)&&$file_path!=''&&isset($file)&&$file!=''){
-			$input = alert_post_data(4,1,1, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
+			$input = alert_post_data(4,1,1,0, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 		}else{
-			$input = alert_post_data(4,1,1, 'El Archivo a previsualizar no existe');
+			$input = alert_post_data(4,1,1,0, 'El Archivo a previsualizar no existe');
 		}
 	}
 
@@ -1009,7 +1009,7 @@ function widget_code_block($type, $code){
 	$tipos = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 	//verifico si el dato ingresado existe dentro de las opciones
 	if (!in_array($type, $tipos)) {
-		alert_post_data(4,1,1, 'La configuracion $type entregada en el codeblock no esta dentro de las opciones');
+		alert_post_data(4,1,1,0, 'La configuracion $type entregada en el codeblock no esta dentro de las opciones');
 		$errorn++;
 	}
 	/********************************************************/
@@ -1176,12 +1176,12 @@ function widget_sismologia(){
 			return $s_body;
 		} catch (Exception $e) {
 			//echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-			return alert_post_data(4,1,1, 'No se obtuvieron datos');
+			return alert_post_data(4,1,1,0, 'No se obtuvieron datos');
 		}
 
 	//si no fue concedido
 	} else {
-		return alert_post_data(4,1,1, 'La funcion allow_url_fopen no esta activa');
+		return alert_post_data(4,1,1,0, 'La funcion allow_url_fopen no esta activa');
 	}
 
 }
@@ -1312,12 +1312,12 @@ function widget_feriados(){
 			return $s_body;
 		} catch (Exception $e) {
 			//echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-			return alert_post_data(4,1,1, 'No se obtuvieron datos');
+			return alert_post_data(4,1,1,0, 'No se obtuvieron datos');
 		}
 
 	//si no fue concedido
 	} else {
-		return alert_post_data(4,1,1, 'La funcion allow_url_fopen no esta activa');
+		return alert_post_data(4,1,1,0, 'La funcion allow_url_fopen no esta activa');
 	}
 
 }

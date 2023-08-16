@@ -185,7 +185,7 @@ function indicadores($type){
 	$requerido = array('vertical', 'horizontal');
 	//verifico si el dato ingresado existe dentro de las opciones
 	if (!in_array($type, $requerido)) {
-		alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
+		alert_post_data(4,1,1,0, 'La configuracion $type entregada no esta dentro de las opciones');
 		$errorn++;
 	}
 	/********************************************************/
@@ -209,7 +209,7 @@ function indicadores($type){
 
 			//valido
 			if(!$XMLData){
-				alert_post_data(4,1,1, 'Error en cargar los datos');
+				alert_post_data(4,1,1,0, 'Error en cargar los datos');
 			}else{
 				echo '
 				<div class="panel-heading">
@@ -250,7 +250,7 @@ function indicadores($type){
 			}
 		//Si hay errores
 		} catch (Exception $e) {
-			alert_post_data(4,1,1, 'Excepción capturada: '.$e->getMessage());
+			alert_post_data(4,1,1,0, 'Excepción capturada: '.$e->getMessage());
 		}
 	}
 }

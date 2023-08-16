@@ -18,10 +18,10 @@ if( ! defined('XMBCXRXSKGC')) {
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	alert_post_data(1,0,3, 'dato' );
-* 	alert_post_data(2,1,2, '<strong>Dato:</strong>explicacion' );
-* 	alert_post_data(3,2,1, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-* 	alert_post_data(4,3,0, 'bla' );
+* 	alert_post_data(1,0,3,0, 'dato' );
+* 	alert_post_data(2,1,2,0, '<strong>Dato:</strong>explicacion' );
+* 	alert_post_data(3,2,1,0, '<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	alert_post_data(4,3,0,0, 'bla' );
 *
 *===========================    Parametros   ===========================
 * Integer  $type            Tipo de mensaje (define el color de este)
@@ -31,10 +31,10 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  String
 ************************************************************************/
 //Funcion
-function alert_post_data($type, $icon, $iconAnimation, $Text){
+function alert_post_data($type, $icon, $iconAnimation, $autoClose, $Text){
 
 	//Valido si los datos ingresados estan correctos
-	if (validarNumero($type)&&validarNumero($icon)&&validarNumero($iconAnimation)){
+	if (validarNumero($type)&&validarNumero($icon)&&validarNumero($iconAnimation)&&validarNumero($autoClose)){
 
 		/********************************************************/
 		//Definicion de errores
@@ -43,19 +43,25 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 		$requerido_1 = array(1,2,3,4,5,6);
 		$requerido_2 = array(0,1,2,3);
 		$requerido_3 = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+		$requerido_4 = array(0,1);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($type, $requerido_1)) {
-			alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $type entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($icon, $requerido_2)) {
-			alert_post_data(4,1,1, 'La configuracion $icon entregada no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $icon entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($iconAnimation, $requerido_3)) {
-			alert_post_data(4,1,1, 'La configuracion $iconAnimation entregada no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $iconAnimation entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($autoClose, $requerido_4)) {
+			alert_post_data(4,1,1,0, 'La configuracion $autoClose entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -100,15 +106,25 @@ function alert_post_data($type, $icon, $iconAnimation, $Text){
 						];
 			$iconType = $options[$icon];
 
+			//Selecciono el tipo de mensaje
+			$options  = ['', 'alert-dismissible'];
+			$closeDiv = $options[$autoClose];
+
+			//Selecciono el tipo de mensaje
+			$options = ['', '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'];
+			$closeBtn = $options[$autoClose];
+
 			//generacion del mensaje
 			if($icon!=0){
-				$input  = '<div class="alert alert-'.$tipo.' alert-white rounded alert_box_correction" role="alert">';
+				$input  = '<div class="alert alert-'.$tipo.' '.$closeDiv.' alert-white rounded alert_box_correction" role="alert">';
+					$input .= $closeBtn;
 					$input .= $iconType;
 					$input .= '<span id="alert_post_data">'.$Text.'</span>';
 					$input .= '<div class="clearfix"></div>';
 				$input .= '</div>';
 			}else{
-				$input  = '<div class="alert alert-'.$tipo.' alert-white rounded alert_box_correction" role="alert" style="padding-left: 15px;">';
+				$input  = '<div class="alert alert-'.$tipo.' '.$closeDiv.' alert-white rounded alert_box_correction" role="alert" style="padding-left: 15px;">';
+					$input .= $closeBtn;
 					$input .= $iconType;
 					$input .= '<span id="alert_post_data">'.$Text.'</span>';
 					$input .= '<div class="clearfix"></div>';
@@ -151,7 +167,7 @@ function info_post_data($type, $Text){
 		$requerido_1 = array(1,2,3,4,5,6,7);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($type, $requerido_1)) {
-			alert_post_data(4,1,1, 'La configuracion $type entregada no esta dentro de las opciones');
+			alert_post_data(4,1,1,0, 'La configuracion $type entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
