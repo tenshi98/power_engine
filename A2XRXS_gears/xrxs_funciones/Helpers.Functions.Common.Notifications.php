@@ -185,5 +185,75 @@ function info_post_data($type, $Text){
 		}
 	}
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Genera un cuadro de alerta
+*
+*===========================     Detalles    ===========================
+* Permite generar un cuadro de alerta personalizado
+*===========================    Modo de uso  ===========================
+* 	//se imprime input
+* 	info_post_data(1,'dato' );
+* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_post_data(4,'bla' );
+*
+*===========================    Parametros   ===========================
+* Integer  $type            Tipo de mensaje (define el color de este)
+* String   $Text            Texto del mensaje (permite HTML)
+* @return  String
+************************************************************************/
+//Funcion
+function sweetalert2(int $icon = 0, String $title = '', String $text = '', String $html = '', String $footer = '',
+					String $imageUrl = '', int $imageHeight = 0, String $imageAlt = '',
+					bool $showCloseButton = false, bool $showConfirmButton = true, int $position = 4, int $timer = 0){
+
+	/********************************************************/
+	//Definicion de errores
+	$errorn = 0;
+	//se definen las opciones disponibles
+	$requerido = array(1,2,3,4,5);
+	//verifico si el dato ingresado existe dentro de las opciones
+	if (!in_array($icon, $requerido)) {
+		alert_post_data(4,1,1,0, 'La configuracion $icon entregada no esta dentro de las opciones');
+		$errorn++;
+	}
+	/********************************************************/
+	//Ejecucion si no hay errores
+	if($errorn==0){
+		//Selecciono el tipo de mensaje
+		$options = ['success', 'error', 'warning', 'info', 'question'];
+		$Icono = $options[$icon];
+
+		$options = ['top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', 'bottom-end'];
+		$Posicion = $options[$position];
+
+		//generacion del mensaje
+		$input = 'Swal.fire({';
+			if(isset($icon)&&$icon!=0){                $input.= 'icon: \''.$Icono.'\',';}
+			if(isset($title)&&$title!=''){             $input.= 'title: \''.$title.'\',';}
+			if(isset($text)&&$text!=''){               $input.= 'text: \''.$text.'\',';}
+			if(isset($html)&&$html!=''){               $input.= 'html: \''.$html.'\'';}
+			if(isset($footer)&&$footer!=''){           $input.= 'footer: \''.$footer.'\'';}
+			if(isset($imageUrl)&&$imageUrl!=''){       $input.= 'imageUrl: \''.$imageUrl.'\'';}
+			if(isset($imageHeight)&&$imageHeight!=0){  $input.= 'imageHeight: \''.$imageHeight.'\'';}
+			if(isset($imageAlt)&&$imageAlt!=''){       $input.= 'imageAlt: \''.$imageAlt.'\'';}
+			if(isset($position)&&$position!=0){        $input.= 'position: \''.$Posicion.'\'';}
+			if(isset($timer)&&$timer!=0){              $input.= 'timer: \''.$timer.'\'';}
+			//Botones
+			$input.= 'showCloseButton: \''.$showCloseButton.'\'';
+			$input.= 'showConfirmButton: \''.$showConfirmButton.'\'';
+		$input.= '})';
+
+		/*int $icon = 0, String $title = '', String $text = '', String $html = '', String $footer = '',
+		String $imageUrl = '', int $imageHeight = 0, String $imageAlt = '',
+		String $showCloseButton = false, String $showConfirmButton = true, String $position = false, String $timer = 0
+*/
+
+		//Imprimir dato
+		echo $input;
+	}
+
+}
 
 ?>
