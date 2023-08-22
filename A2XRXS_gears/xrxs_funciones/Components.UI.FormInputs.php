@@ -2230,14 +2230,38 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* @return  String
 	************************************************************************/
-	public function form_input_checkbox($placeholder,$name,$value){
+	public function form_input_checkbox($placeholder,$name,$value, $required){
 
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//Si el tab correspondiente esta seleccionado
 			if(isset($value)&&$value==2){
 				$check = 'checked';
@@ -2454,14 +2478,38 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* @return  String
 	************************************************************************/
-	public function form_input_radio($placeholder,$name,$value){
+	public function form_input_radio($placeholder,$name,$value, $required){
 
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//Si el tab correspondiente esta seleccionado
 			if(isset($value)&&$value==2){
 				$check = 'checked';
@@ -2676,21 +2724,51 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* @return  String
 	************************************************************************/
-	public function form_input_switch($placeholder,$name,$value){
+	public function form_input_switch($placeholder,$name,$value, $required){
 
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
 		/********************************************************/
 		//Ejecucion si no hay errores
 		if($errorn==0){
+
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
 			//Si el tab correspondiente esta seleccionado
 			if(isset($value)&&$value==2){
 				$check = 'checked';
 				$valor = '2';
+				$label = '<label class="label label-success">Activo</label>';
 			}else{
 				$check = '';
 				$valor = '2';
+				$label = '<label class="label label-danger">Inactivo</label>';
 			}
 
 			/******************************************/
@@ -2698,7 +2776,7 @@ class Basic_Form_Inputs{
 			$input = '
 			<div class="form-group" id="div_'.$name.'">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					'.$placeholder.'
+					'.$placeholder.' <span id="spn_'.$EXname.'">'.$label.'</span>
 					<div class="material-switch pull-right field">
 						<input type="hidden"   value="1"          '.$check.' name="'.$name.'" >
 						<input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'" />
@@ -2706,6 +2784,23 @@ class Basic_Form_Inputs{
 					</div>
 				</div>
 			</div>';
+
+			/******************************************/
+			//generacion del input
+			$input.= '
+			<script>
+				const checkbox_'.$EXname.' = $("#'.$name.'");
+
+				checkbox_'.$EXname.'.change(function(event) {
+					var checkbox_'.$EXname.' = event.target;
+					if (checkbox_'.$EXname.'.checked) {
+						document.getElementById("spn_'.$EXname.'").innerHTML="<label class=\"label label-success\">Activo</label>";
+					} else {
+						document.getElementById("spn_'.$EXname.'").innerHTML="<label class=\"label label-danger\">Inactivo</label>";
+					}
+				});
+			</script>
+			';
 
 			/******************************************/
 			//Imprimir dato
@@ -2834,9 +2929,11 @@ class Basic_Form_Inputs{
 									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
 										$check = 'checked';
 										$valor = '2';
+										$label = '<label class="label label-success">Activo</label>';
 									}else{
 										$check = '';
 										$valor = '2';
+										$label = '<label class="label label-danger">Inactivo</label>';
 									}
 
 									/******************************************/
@@ -2854,7 +2951,7 @@ class Basic_Form_Inputs{
 									$input .= '
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 30px;">
 										<div class="pull-left">
-											<label>'.TituloMenu(DeSanitizar($data_writing)).'</label>
+											<label>'.TituloMenu(DeSanitizar($data_writing)).'</label> <span id="spn_'.$name.'_'.$select['idData'].'">'.$label.'</span>
 										</div>
 										<div class="material-switch pull-right field">
 											<input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
@@ -2862,6 +2959,23 @@ class Basic_Form_Inputs{
 											<label for="'.$name.'_'.$select['idData'].'" class="label-primary"></label>
 										</div>
 									</div>';
+
+									/******************************************/
+									//generacion del input
+									$input.= '
+									<script>
+										const checkbox_'.$name.'_'.$select['idData'].' = $("#'.$name.'_'.$select['idData'].'");
+
+										checkbox_'.$name.'_'.$select['idData'].'.change(function(event) {
+											var checkbox_'.$name.'_'.$select['idData'].' = event.target;
+											if (checkbox_'.$name.'_'.$select['idData'].'.checked) {
+												document.getElementById("spn_'.$name.'_'.$select['idData'].'").innerHTML="<label class=\"label label-success\">Activo</label>";
+											} else {
+												document.getElementById("spn_'.$name.'_'.$select['idData'].'").innerHTML="<label class=\"label label-danger\">Inactivo</label>";
+											}
+										});
+									</script>
+									';
 
 								}
 
