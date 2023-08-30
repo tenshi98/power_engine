@@ -255,5 +255,63 @@ function sweetalert2(int $icon = 0, String $title = '', String $text = '', Strin
 	}
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Genera un cuadro de alerta
+*
+*===========================     Detalles    ===========================
+* Permite generar un cuadro de alerta personalizado
+*===========================    Modo de uso  ===========================
+* 	//se imprime input
+* 	info_post_data(1,'dato' );
+* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_post_data(4,'bla' );
+*
+*===========================    Parametros   ===========================
+* Integer  $type            Tipo de mensaje (define el color de este)
+* String   $Text            Texto del mensaje (permite HTML)
+* @return  String
+************************************************************************/
+//Funcion
+function info_popover_data($IdElemento, $Titulo, $Mensaje, $Ubicacion){
+
+	//Valido si los datos ingresados estan correctos
+	if (validarNumero($Ubicacion)){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1,2,3,4);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Ubicacion, $requerido_1)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Ubicacion entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			//Selecciono el tipo de mensaje
+			$options = ['top', 'bottom', 'left', 'right'];
+			$placement = $options[$Ubicacion-1];
+
+			//generacion del mensaje
+			$input  = '
+			<script>
+				$(document).ready(function(){
+					//se crea elemento
+					$("#'.$IdElemento.'").popover({html:true, title: "<strong>'.$Titulo.'</strong>", content: "'.$Mensaje.'", placement:"'.$placement.'" });
+					//se condiciona visualizacion
+					$("#'.$IdElemento.'").hover(function () {$("#'.$IdElemento.'").popover("show");},function () {$("#'.$IdElemento.'").popover("hide");});
+
+				});
+			</script>';
+
+			//Imprimir dato
+			echo $input;
+		}
+	}
+}
 
 ?>

@@ -606,35 +606,88 @@ function envio_sendinblue($De_correo, $De_nombre,
                           $Asunto,$CuerpoHTML,
 						  $APIKEY){
 
-	//Se crea arreglo para adjuntar datos
-	$data = array(
-		"sender" => array(
-			"email" => DeSanitizar($De_correo),
-			"name" => DeSanitizar($De_nombre)
-		),
-		"to" => array(
-			array(
-				"email" => DeSanitizar($Hacia_correo),
-				"name" => DeSanitizar($Hacia_nombre)
-			)
-		),
-		"subject" => $Asunto,
-		"htmlContent" => '<html><head></head><body>'.$CuerpoHTML.'</body></html>'
-	);
+	//valido que exista correo
+	if(isset($De_correo)&&isset($Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
+		//valido que los correos sean validos
+		if(validarEmail(DeSanitizar($De_correo))&&validarEmail(DeSanitizar($Hacia_correo))){
 
-	//envio de los datos
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-	$headers = array();
-	$headers[] = 'Accept: application/json';
-	$headers[] = 'Api-Key: '.$APIKEY;
-	$headers[] = 'Content-Type: application/json';
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	$result = curl_exec($ch);
-	curl_close($ch);
+			/********************************************************/
+			//Definicion de errores
+			$errorn = 0;
+			//se definen los errores
+			if($De_correo==''){      $errorn++;$error = 'No ha ingresado el correo de origen';}
+			if($De_nombre==''){      $errorn++;$error = 'No ha ingresado el nombre de origen';}
+			if($Hacia_correo==''){   $errorn++;$error = 'No ha ingresado el correo de destino';}
+			if($Hacia_nombre==''){   $errorn++;$error = 'No ha ingresado el nombre de destino';}
+			if($Asunto==''){         $errorn++;$error = 'No ha ingresado el asunto del mensaje';}
+			if($CuerpoHTML==''){     $errorn++;$error = 'No ha ingresado el cuerpo del mensaje';}
+
+			/********************************************************/
+			//Ejecucion si no hay errores
+			if($errorn==0){
+
+				try {
+					//Se crea arreglo para adjuntar datos
+					$data = array(
+						"sender" => array(
+							"email" => DeSanitizar($De_correo),
+							"name" => DeSanitizar($De_nombre)
+						),
+						"to" => array(
+							array(
+								"email" => DeSanitizar($Hacia_correo),
+								"name" => DeSanitizar($Hacia_nombre)
+							)
+						),
+						"subject" => $Asunto,
+						"htmlContent" => '<html><head></head><body>'.$CuerpoHTML.'</body></html>'
+					);
+
+					//envio de los datos
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+					$headers = array();
+					$headers[] = 'Accept: application/json';
+					$headers[] = 'Api-Key: '.$APIKEY;
+					$headers[] = 'Content-Type: application/json';
+					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+					$result = curl_exec($ch);
+					curl_close($ch);
+
+					return 1;
+				} catch (Exception $e) {
+					error_log("/***************************************************************/", 0);
+					error_log("GMail Error:".$result, 0);
+					error_log("/***************************************************************/", 0);
+					return $result;
+				}
+			}else{
+				error_log("/***************************************************************/", 0);
+				error_log("GMail Error:".$error, 0);
+				error_log("/***************************************************************/", 0);
+
+				return $error;
+			}
+		}else{
+			error_log("/***************************************************************/", 0);
+			if(!validarEmail($De_correo)){        $error = 'Mail Error:El Email (De: '.$De_correo.') ingresado no es valido';          error_log("Mail Error:El Email (De: ".$De_correo.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
+			if(!validarEmail($Hacia_correo)){     $error = 'Mail Error:El Email (Hacia: '.$Hacia_correo.') ingresado no es valido';    error_log("Mail Error:El Email (Hacia: ".$Hacia_correo.") ingresado no es valido, con el asunto (".$Asunto.")", 0);}
+			error_log("/***************************************************************/", 0);
+
+			return $error;
+		}
+	}else{
+		error_log("/***************************************************************/", 0);
+		if(!isset($De_correo)){        $error = 'Mail Error:No ha ingresado Email (De)';    error_log("Mail Error:No ha ingresado Email (De), con el asunto (".$Asunto.")", 0);}
+		if(!isset($Hacia_correo)){     $error = 'Mail Error:No ha ingresado Email (Hacia)'; error_log("Mail Error:No ha ingresado Email (Hacia), con el asunto (".$Asunto.")", 0);}
+		error_log("/***************************************************************/", 0);
+
+		return $error;
+	}
+
 }
 
 ?>

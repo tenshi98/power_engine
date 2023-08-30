@@ -429,6 +429,48 @@ class Basic_Form_Inputs{
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
+	* Genera una burbuja con informacion sobre el input seleccionado
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear una burbuja de informacion al pasar el cursor sobre
+	* el input seleccionada
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	*   $dataC = 'Theres no image Theres no image Theres no image Theres no image';
+	* 	$Form->form_info_data('usuario', 'Preview 1', $dataC, 1);
+	* 	$Form->form_info_data('usuario', 'Preview 2', $dataC, 2);
+	* 	$Form->form_info_data('usuario', 'Preview 3', $dataC, 3);
+	* 	$Form->form_info_data('usuario', 'Preview 4', $dataC, 4);
+	*
+	*===========================    Parametros   ===========================
+	* String   $IdElemento      ID del input
+	* String   $Titulo          Titulo del mensaje
+	* String   $Mensaje         Texto del mensaje
+	* int      $Ubicacion       Ubicacion a mostrar la burbuja
+	* @return  String
+	************************************************************************/
+	public function form_info_data($IdElemento, $Titulo, $Mensaje, $Ubicacion){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1,2,3,4);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Ubicacion, $requerido_1)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Ubicacion entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			info_popover_data($IdElemento, $Titulo, $Mensaje, $Ubicacion);
+		}
+
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
 	* Crea un input invisible
 	*
 	*===========================     Detalles    ===========================
@@ -2230,7 +2272,7 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* @return  String
 	************************************************************************/
-	public function form_input_checkbox($placeholder,$name,$value, $required){
+	public function form_input_checkbox($placeholder,$name,$value, $required, $color){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2240,6 +2282,13 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2272,12 +2321,17 @@ class Basic_Form_Inputs{
 			}
 
 			/******************************************/
+			//Selecciono el tipo de mensaje
+			$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+			$tipo    = $options[$color-1];
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="form-group" id="div_'.$name.'">
 				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-					<div class="checkbox checkbox-primary">
+					<div class="checkbox checkbox-'.$tipo.'">
 						<input                type="hidden"   value="1"          '.$check.' name="'.$name.'" >
 						<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'">
 						<label for="'.$name.'">
@@ -2316,7 +2370,7 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_checkbox_active($placeholder,$name, $value, $required, $data1, $data2, $table, $filter, $dbConn){
+	public function form_checkbox_active($placeholder,$name, $value, $required, $color, $data1, $data2, $table, $filter, $dbConn){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2326,6 +2380,13 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2399,6 +2460,11 @@ class Basic_Form_Inputs{
 				}
 
 				/******************************************/
+				//Selecciono el tipo de mensaje
+				$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+				$tipo    = $options[$color-1];
+
+				/******************************************/
 				//generacion del input
 				$input = '
 						<div class="form-group" id="div_'.$name.'">
@@ -2432,7 +2498,7 @@ class Basic_Form_Inputs{
 
 									/******************************************/
 									$input .= '
-									<div class="checkbox checkbox-primary">
+									<div class="checkbox checkbox-'.$tipo.'">
 										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
 										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
 										<label for="'.$name.'_'.$select['idData'].'">
@@ -2478,7 +2544,7 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* @return  String
 	************************************************************************/
-	public function form_input_radio($placeholder,$name,$value, $required){
+	public function form_input_radio($placeholder,$name,$value, $required, $color){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2488,6 +2554,13 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2520,12 +2593,17 @@ class Basic_Form_Inputs{
 			}
 
 			/******************************************/
+			//Selecciono el tipo de mensaje
+			$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+			$tipo    = $options[$color-1];
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="form-group" id="div_'.$name.'">
 				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-					<div class="radio radio-primary">
+					<div class="radio radio-'.$tipo.'">
 						<input  type="radio" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'">
 						<label for="'.$name.'">
 							'.$placeholder.'
@@ -2563,7 +2641,7 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_radio_active($placeholder,$name, $value, $required, $data1, $data2, $table, $filter, $dbConn){
+	public function form_radio_active($placeholder,$name, $value, $required, $color, $data1, $data2, $table, $filter, $dbConn){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2573,6 +2651,13 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2646,6 +2731,11 @@ class Basic_Form_Inputs{
 				}
 
 				/******************************************/
+				//Selecciono el tipo de mensaje
+				$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+				$tipo    = $options[$color-1];
+
+				/******************************************/
 				//generacion del input
 				$input = '
 						<div class="form-group" id="div_'.$name.'">
@@ -2679,7 +2769,7 @@ class Basic_Form_Inputs{
 
 									/******************************************/
 									$input .= '
-									<div class="radio radio-primary">
+									<div class="radio radio-'.$tipo.'">
 										<input type="radio" value="'.$valor.'" '.$check.' name="'.$name.'"  id="'.$name.'_'.$select['idData'].'">
 										<label for="'.$name.'">
 											'.TituloMenu(DeSanitizar($data_writing)).'
@@ -2724,7 +2814,7 @@ class Basic_Form_Inputs{
 	* String   $value         Valor por defecto, puede ser texto o valor
 	* @return  String
 	************************************************************************/
-	public function form_input_switch($placeholder,$name,$value, $required){
+	public function form_input_checkbox_funky($placeholder,$name,$value, $required, $color){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2734,6 +2824,555 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Si el tab correspondiente esta seleccionado
+			if(isset($value)&&$value==2){
+				$check = 'checked';
+				$valor = '2';
+			}else{
+				$check = '';
+				$valor = '2';
+			}
+
+			/******************************************/
+			//Selecciono el tipo de mensaje
+			$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+			$tipo    = $options[$color-1];
+
+			/******************************************/
+			//generacion del input
+			$input = '
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+                    <div class="funkyradio">
+                        <div class="funkyradio-'.$tipo.'">
+                            <input type="hidden"   value="1"          '.$check.' name="'.$name.'" >
+						    <input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'" />
+                            <label for="'.$name.'">'.$placeholder.'</label>
+                        </div>
+                    </div>
+				</div>
+			</div>';
+
+			/******************************************/
+			//Imprimir dato
+			echo $input;
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo checkbox
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo checkbox en base a datos de la base de
+	* datos, que lleva por defecto opciones activas
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_checkbox_active('Opciones','opciones', '', 1, 'ID', 'Nombre', 'tabla_opciones', '', $dbConn );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* String   $data1         Identificador de la base de datos
+	* String   $data2         Texto a mostrar en la opción del input
+	* String   $table         Tabla desde donde tomar los datos
+	* String   $filter        Filtro de la seleccion de la base de datos
+	* Object   $dbConn        Puntero a la base de datos
+	* @return  String
+	************************************************************************/
+	public function form_checkbox_active_funky($placeholder,$name, $value, $required, $color, $data1, $data2, $table, $filter, $dbConn){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Variables
+			$filtro        = '';
+			$data_required = '';
+			$arrValTab     = array();
+			$y             = 1;
+
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos = explode(",", $data2);
+			//Si es solo uno
+			if(count($datos)==1){
+				//datos requeridos
+				$data_required .= ','.$datos[0].' AS '.$datos[0];
+			//Si es mas de uno
+			}else{
+				//recorro todos los datos solicitados
+				foreach($datos as $dato){
+					//datos requeridos
+					$data_required .= ','.$dato.' AS '.$dato;
+				}
+			}
+
+			/******************************************/
+			//Ordenar por el dato requerido
+			$order_by = $datos[0].' ASC ';
+			//Si se envia filtro desde afuera
+			if($filter!='0' && $filter!=''){
+				//que exista un dato
+				$filtro .= $filter." AND ".$datos[0]."!='' ";
+			}elseif($filter=='' OR $filter==0){
+				//que exista un dato
+				$filtro .= $datos[0]."!='' ";
+			}
+
+			/******************************************/
+			//Valores de cada tab
+			$datos2 = explode(",", $value);
+			foreach($datos2 as $dato){
+				$arrValTab[$y] = $dato;
+				$y++;
+			}
+
+			/******************************************/
+			//consulto
+			$arrSelect = array();
+			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox_active', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+
+			//si hay resultados
+			if($arrSelect!=false){
+
+				/******************************************/
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
+
+				/******************************************/
+				//Selecciono el tipo de mensaje
+				$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+				$tipo    = $options[$color-1];
+
+				/******************************************/
+				//generacion del input
+				$input = '
+						<div class="form-group" id="div_'.$name.'">
+							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+                                <div class="funkyradio">';
+
+                                    /******************************************/
+                                    //Recorro
+                                    foreach ( $arrSelect as $select ) {
+
+                                        /******************************************/
+                                        //Si el tab correspondiente esta seleccionado
+                                        if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+                                            $check = 'checked';
+                                            $valor = '2';
+                                        }else{
+                                            $check = '';
+                                            $valor = '2';
+                                        }
+
+                                        /******************************************/
+                                        //Escribo los datos solicitados
+                                        if(count($datos)==1){
+                                            $data_writing = $select[$datos[0]].' ';
+                                        }else{
+                                            $data_writing = '';
+                                            foreach($datos as $dato){
+                                                $data_writing .= $select[$dato].' ';
+                                            }
+                                        }
+
+                                        /******************************************/
+                                        $input .= '
+                                        <div class="funkyradio-'.$tipo.'">
+                                            <input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
+                                            <input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
+                                            <label for="'.$name.'_'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</label>
+                                        </div>';
+
+                                    }
+
+                                    $input .= '
+                                </div>
+							</div>
+						</div>';
+
+				/******************************************/
+				//Imprimir dato
+				echo $input;
+
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			}
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo checkbox
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo checkbox
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_input_checkbox('Opciones','opciones', '');
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* @return  String
+	************************************************************************/
+	public function form_input_radio_funky($placeholder,$name,$value, $required, $color){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Si el tab correspondiente esta seleccionado
+			if(isset($value)&&$value==2){
+				$check = 'checked';
+				$valor = '2';
+			}else{
+				$check = '';
+				$valor = '2';
+			}
+
+			/******************************************/
+			//Selecciono el tipo de mensaje
+			$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+			$tipo    = $options[$color-1];
+
+			/******************************************/
+			//generacion del input
+			$input = '
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+                    <div class="funkyradio">
+                        <div class="funkyradio-'.$tipo.'">
+                            <input  type="radio" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'">
+                            <label for="'.$name.'">'.$placeholder.'</label>
+                        </div>
+                    </div>
+				</div>
+			</div>';
+
+			/******************************************/
+			//Imprimir dato
+			echo $input;
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo checkbox
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo checkbox en base a datos de la base de
+	* datos, que lleva por defecto opciones activas
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_checkbox_active('Opciones','opciones', '', 1, 'ID', 'Nombre', 'tabla_opciones', '', $dbConn );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* String   $data1         Identificador de la base de datos
+	* String   $data2         Texto a mostrar en la opción del input
+	* String   $table         Tabla desde donde tomar los datos
+	* String   $filter        Filtro de la seleccion de la base de datos
+	* Object   $dbConn        Puntero a la base de datos
+	* @return  String
+	************************************************************************/
+	public function form_radio_active_funky($placeholder,$name, $value, $required, $color, $data1, $data2, $table, $filter, $dbConn){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Variables
+			$filtro        = '';
+			$data_required = '';
+			$arrValTab     = array();
+			$y             = 1;
+
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos = explode(",", $data2);
+			//Si es solo uno
+			if(count($datos)==1){
+				//datos requeridos
+				$data_required .= ','.$datos[0].' AS '.$datos[0];
+			//Si es mas de uno
+			}else{
+				//recorro todos los datos solicitados
+				foreach($datos as $dato){
+					//datos requeridos
+					$data_required .= ','.$dato.' AS '.$dato;
+				}
+			}
+
+			/******************************************/
+			//Ordenar por el dato requerido
+			$order_by = $datos[0].' ASC ';
+			//Si se envia filtro desde afuera
+			if($filter!='0' && $filter!=''){
+				//que exista un dato
+				$filtro .= $filter." AND ".$datos[0]."!='' ";
+			}elseif($filter=='' OR $filter==0){
+				//que exista un dato
+				$filtro .= $datos[0]."!='' ";
+			}
+
+			/******************************************/
+			//Valores de cada tab
+			$datos2 = explode(",", $value);
+			foreach($datos2 as $dato){
+				$arrValTab[$y] = $dato;
+				$y++;
+			}
+
+			/******************************************/
+			//consulto
+			$arrSelect = array();
+			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox_active', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+
+			//si hay resultados
+			if($arrSelect!=false){
+
+				/******************************************/
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
+
+				/******************************************/
+				//Selecciono el tipo de mensaje
+				$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+				$tipo    = $options[$color-1];
+
+				/******************************************/
+				//generacion del input
+				$input = '
+						<div class="form-group" id="div_'.$name.'">
+							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+                                <div class="funkyradio">';
+
+                                    /******************************************/
+                                    //Recorro
+                                    foreach ( $arrSelect as $select ) {
+
+                                        /******************************************/
+                                        //Si el tab correspondiente esta seleccionado
+                                        if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+                                            $check = 'checked';
+                                            $valor = '2';
+                                        }else{
+                                            $check = '';
+                                            $valor = '2';
+                                        }
+
+                                        /******************************************/
+                                        //Escribo los datos solicitados
+                                        if(count($datos)==1){
+                                            $data_writing = $select[$datos[0]].' ';
+                                        }else{
+                                            $data_writing = '';
+                                            foreach($datos as $dato){
+                                                $data_writing .= $select[$dato].' ';
+                                            }
+                                        }
+
+                                        /******************************************/
+                                        $input .= '
+                                        <div class="funkyradio-'.$tipo.'">
+                                            <input type="radio" value="'.$valor.'" '.$check.' name="'.$name.'"  id="'.$name.'_'.$select['idData'].'">
+                                            <label for="'.$name.'_'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</label>
+                                        </div>';
+
+                                    }
+
+								    $input .= '
+                                </div>
+							</div>
+						</div>';
+
+				/******************************************/
+				//Imprimir dato
+				echo $input;
+
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			}
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo checkbox
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo checkbox
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_input_checkbox('Opciones','opciones', '');
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* @return  String
+	************************************************************************/
+	public function form_input_switch($placeholder,$name,$value, $required, $color){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2772,6 +3411,11 @@ class Basic_Form_Inputs{
 			}
 
 			/******************************************/
+			//Selecciono el tipo de mensaje
+			$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+			$tipo    = $options[$color-1];
+
+			/******************************************/
 			//generacion del input
 			$input = '
 			<div class="form-group" id="div_'.$name.'">
@@ -2780,7 +3424,7 @@ class Basic_Form_Inputs{
 					<div class="material-switch pull-right field">
 						<input type="hidden"   value="1"          '.$check.' name="'.$name.'" >
 						<input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'" id="'.$name.'" />
-						<label for="'.$name.'" class="label-primary"></label>
+						<label for="'.$name.'" class="label-'.$tipo.'"></label>
 					</div>
 				</div>
 			</div>';
@@ -2831,7 +3475,7 @@ class Basic_Form_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function form_switch_active($placeholder,$name, $value, $required, $data1, $data2, $table, $filter, $dbConn){
+	public function form_switch_active($placeholder,$name, $value, $required, $color, $data1, $data2, $table, $filter, $dbConn){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2841,6 +3485,13 @@ class Basic_Form_Inputs{
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($required, $requerido)) {
 			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
 			$errorn++;
 		}
 		/********************************************************/
@@ -2914,6 +3565,11 @@ class Basic_Form_Inputs{
 				}
 
 				/******************************************/
+				//Selecciono el tipo de mensaje
+				$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+				$tipo    = $options[$color-1];
+
+				/******************************************/
 				//generacion del input
 				$input = '
 						<div class="form-group" id="div_'.$name.'">
@@ -2956,7 +3612,7 @@ class Basic_Form_Inputs{
 										<div class="material-switch pull-right field">
 											<input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
 											<input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'" />
-											<label for="'.$name.'_'.$select['idData'].'" class="label-primary"></label>
+											<label for="'.$name.'_'.$select['idData'].'" class="label-'.$tipo.'"></label>
 										</div>
 									</div>';
 
@@ -2982,6 +3638,205 @@ class Basic_Form_Inputs{
 								$input .= '
 							</div>
 						</div>';
+
+				/******************************************/
+				//Imprimir dato
+				echo $input;
+
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			}
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo checkbox
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo checkbox en base a datos de la base de
+	* datos, que lleva por defecto opciones activas
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_checkbox_active('Opciones','opciones', '', 1, 'ID', 'Nombre', 'tabla_opciones', '', $dbConn );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* String   $data1         Identificador de la base de datos
+	* String   $data2         Texto a mostrar en la opción del input
+	* String   $table         Tabla desde donde tomar los datos
+	* String   $filter        Filtro de la seleccion de la base de datos
+	* Object   $dbConn        Puntero a la base de datos
+	* @return  String
+	************************************************************************/
+	public function form_radio_lateral($placeholder,$name, $value, $required, $color, $data1, $data2, $table, $filter, $dbConn){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se definen las opciones disponibles
+		$tipos = array(1, 2, 3, 4, 5, 6);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($color, $tipos)) {
+			alert_post_data(4,1,1,0, 'La configuracion $color ('.$color.') entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Variables
+			$filtro        = '';
+			$data_required = '';
+			$arrValTab     = array();
+			$y             = 1;
+
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos = explode(",", $data2);
+			//Si es solo uno
+			if(count($datos)==1){
+				//datos requeridos
+				$data_required .= ','.$datos[0].' AS '.$datos[0];
+			//Si es mas de uno
+			}else{
+				//recorro todos los datos solicitados
+				foreach($datos as $dato){
+					//datos requeridos
+					$data_required .= ','.$dato.' AS '.$dato;
+				}
+			}
+
+			/******************************************/
+			//Ordenar por el dato requerido
+			$order_by = $datos[0].' ASC ';
+			//Si se envia filtro desde afuera
+			if($filter!='0' && $filter!=''){
+				//que exista un dato
+				$filtro .= $filter." AND ".$datos[0]."!='' ";
+			}elseif($filter=='' OR $filter==0){
+				//que exista un dato
+				$filtro .= $datos[0]."!='' ";
+			}
+
+			/******************************************/
+			//Valores de cada tab
+			$datos2 = explode(",", $value);
+			foreach($datos2 as $dato){
+				$arrValTab[$y] = $dato;
+				$y++;
+			}
+
+			/******************************************/
+			//consulto
+			$arrSelect = array();
+			$arrSelect = db_select_array (false, $data1.' AS idData '.$data_required, $table, '', $filtro, $order_by, $dbConn, 'form_checkbox_active', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+
+			//si hay resultados
+			if($arrSelect!=false){
+
+				/******************************************/
+				//Valido si es requerido
+				switch ($required) {
+					//Si el dato no es requerido
+					case 1:
+						$requerido = '';//variable vacia
+						break;
+					//Si el dato es requerido
+					case 2:
+						$requerido = 'required'; //se marca como requerido
+						if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+						$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+						break;
+				}
+
+				/******************************************/
+				//Selecciono el tipo de mensaje
+				$options = ['default', 'primary', 'success', 'danger', 'warning', 'info'];
+				$tipo    = $options[$color-1];
+
+				/******************************************/
+				//generacion del input
+				$input = '
+
+						<div class="form-group" id="div_'.$name.'">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<div class="input-group">
+									<div id="'.$name.'_div" class="radioBtn btn-group">
+										<a class="btn btn-default btn-sm tittle" >'.$placeholder.'</a>';
+
+										/******************************************/
+										//contador
+										$x = 0;
+										//Recorro
+										foreach ( $arrSelect as $select ) {
+
+											/******************************************/
+											//si es el primer elemento
+											if($x==0){
+												$fItem = 'fItem';
+												$x++;
+											}else{
+												$fItem = '';
+											}
+
+											/******************************************/
+											//Si el tab correspondiente esta seleccionado
+											if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+												$check = 'active';
+											}else{
+												$check = 'notActive';
+											}
+
+											/******************************************/
+											//Escribo los datos solicitados
+											if(count($datos)==1){
+												$data_writing = $select[$datos[0]].' ';
+											}else{
+												$data_writing = '';
+												foreach($datos as $dato){
+													$data_writing .= $select[$dato].' ';
+												}
+											}
+
+											/******************************************/
+											$input .= '<a class="btn btn-'.$tipo.' btn-sm '.$check.' l_item '.$fItem.' Icon_'.$select['idData'].'" data-toggle="'.$name.'" data-title="'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</a>';
+
+										}
+										$input .= '
+									</div>
+									<input type="hidden" name="'.$name.'" id="'.$name.'">
+								</div>
+							</div>
+						</div>
+
+						<script>
+							$(\'#'.$name.'_div a\').on(\'click\', function(){
+								var sel = $(this).data(\'title\');
+								var tog = $(this).data(\'toggle\');
+								document.getElementById("'.$name.'").value = sel;
+								$(\'a[data-toggle="\'+tog+\'"]\').not(\'[data-title="\'+sel+\'"]\').removeClass(\'active\').addClass(\'notActive\');
+								$(\'a[data-toggle="\'+tog+\'"][data-title="\'+sel+\'"]\').removeClass(\'notActive\').addClass(\'active\');
+							})
+						</script>
+						';
 
 				/******************************************/
 				//Imprimir dato
@@ -3580,13 +4435,13 @@ class Basic_Form_Inputs{
 			//Si es solo uno
 			if(count($datos)==1){
 				//datos requeridos
-				$data_required .= ','.$datos[0];
+				$data_required .= ','.$table1.'.'.$datos[0];
 			//Si es mas de uno
 			}else{
 				//recorro todos los datos solicitados
 				foreach($datos as $dato){
 					//datos requeridos
-					$data_required .= ','.$dato;
+					$data_required .= ','.$table1.'.'.$dato;
 				}
 			}
 
@@ -3596,10 +4451,10 @@ class Basic_Form_Inputs{
 			//Si se envia filtro desde afuera
 			if($filter!='0' && $filter!=''){
 				//que exista un dato
-				$filtro .= $filter." AND ".$datos[0]."!='' ";
+				$filtro .= $filter." AND ".$table1.".".$datos[0]."!='' ";
 			}elseif($filter=='' OR $filter==0){
 				//que exista un dato
-				$filtro .= $datos[0]."!='' ";
+				$filtro .= $table1.".".$datos[0]."!='' ";
 			}
 
 			//Agrupo los datos
@@ -3715,13 +4570,13 @@ class Basic_Form_Inputs{
 				//Si es solo uno
 				if(count($datos)==1){
 					//datos requeridos
-					$data_required .= ','.$datos[0];
+					$data_required .= ','.$table1.'.'.$datos[0];
 				//Si es mas de uno
 				}else{
 					//recorro todos los datos solicitados
 					foreach($datos as $dato){
 						//datos requeridos
-						$data_required .= ','.$dato;
+						$data_required .= ','.$table1.'.'.$dato;
 					}
 				}
 
@@ -3734,7 +4589,7 @@ class Basic_Form_Inputs{
 					$filtro .= $filter." AND ".$table1.".".$datos[0]."!='' ";
 				}elseif($filter=='' OR $filter==0){
 					//que exista un dato
-					$filtro .= $datos[0]."!='' ";
+					$filtro .= $table1.".".$datos[0]."!='' ";
 				}
 
 				//Agrupo los datos
@@ -4109,6 +4964,211 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//Imprimir dato
 			echo $input;
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo select
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo select en base a datos de la base de datos,
+	* que tambien obtiene datos desde otras tablas
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_select_group('Empresas','empresas', 1, 1, 'idEmpresa', 'Nombre,Tipo', 'tabla_empresas', 'tabla_tipo','', $dbConn );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* Integer  $value         Valor por defecto, debe ser un numero entero
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* String   $data1         Identificador de la base de datos
+	* String   $data2         Texto a mostrar en la opción del input
+	* String   $table1        Tabla desde donde tomar los datos
+	* String   $table2        Tabla a fucionar para tener los datos
+	* String   $filter        Filtro de la seleccion de la base de datos
+	* Object   $dbConn        Puntero a la base de datos
+	* @return  String
+	************************************************************************/
+	public function form_select_group($placeholder,$name, $value, $required, $data1a, $data2a, $table1,
+																			 $data1b, $data2b, $table2,
+																			 $filter, $dbConn){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se verifica si es un numero lo que se recibe
+		if (!validarNumero($value)&&$value!=''){
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			$errorn++;
+		}
+		//Verifica si el numero recibido es un entero
+		if (!validaEntero($value)&&$value!=''){
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Variables
+			$filtro        = '';
+			$data_required = '';
+
+			/******************************************/
+			//Se separan los datos a mostrar
+			$datos1 = explode(",", $data2a);
+			$datos2 = explode(",", $data2b);
+			//Si es solo uno
+			if(count($datos1)==1){
+				//datos requeridos
+				$data_required .= ','.$table1.'.'.$datos1[0].' AS Data_A_0';
+			//Si es mas de uno
+			}else{
+				$xs = 0;
+				//recorro todos los datos solicitados
+				foreach($datos1 as $dato){
+					//datos requeridos
+					$data_required .= ','.$table1.'.'.$dato.' AS Data_A_'.$xs;
+					$xs++;
+				}
+			}
+			//Si es solo uno
+			if(count($datos2)==1){
+				//datos requeridos
+				$data_required .= ','.$table2.'.'.$datos2[0].' AS Data_B_0';
+			//Si es mas de uno
+			}else{
+				$xs = 0;
+				//recorro todos los datos solicitados
+				foreach($datos2 as $dato){
+					//datos requeridos
+					$data_required .= ','.$table2.'.'.$dato.' AS Data_B_'.$xs;
+					$xs++;
+				}
+			}
+
+			/******************************************/
+			//Ordenar por el dato requerido
+			$order_by = $table1.'.'.$datos1[0].' ASC ';
+			$order_by.= ','.$table2.'.'.$datos2[0].' ASC ';
+			//Si se envia filtro desde afuera
+			if($filter!='0' && $filter!=''){
+				//que exista un dato
+				$filtro .= $filter." AND ".$table1.".".$datos1[0]."!='' ";
+				$filtro .= " AND ".$table2.".".$datos2[0]."!='' ";
+			}elseif($filter=='' OR $filter==0){
+				//que exista un dato
+				$filtro .= $table1.".".$datos1[0]."!='' ";
+				$filtro .= " AND ".$table2.".".$datos2[0]."!='' ";
+			}
+
+			/******************************************/
+			//consulto
+			$arrSelect = array();
+			$arrSelect = db_select_array (false, $table1.'.'.$data1a.' AS idData1, '.$table2.'.'.$data1b.' AS idData2 '.$data_required, $table1, 'INNER JOIN '.$table2.' ON '.$table2.'.'.$data1a.' = '.$table1.'.'.$data1a, $filtro, $order_by, $dbConn, 'form_select_join', basename($_SERVER["REQUEST_URI"], ".php"), 'arrSelect');
+
+			/******************************************/
+			//si hay resultados
+			if($arrSelect!=false){
+
+				/******************************************/
+				//generacion del input
+				$input = '
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<select name="'.$name.'" id="'.$name.'" class="form-control select2" '.$requerido.' >';
+
+							/**************************************/
+							//Recorro
+							$selectedx = 'selected="selected"';
+							foreach ( $arrSelect as $select ) {
+								if($value==$select['idData2']){
+									$selectedx = '';
+								}
+							}
+
+							/**************************************/
+							//Recorro
+							$input .= '<option value="" '.$selectedx.'>Seleccione una Opción</option>';
+
+							/**************************************/
+							//Recorro
+							filtrar($arrSelect, 'idData1');
+							foreach($arrSelect as $categoria=>$selected){
+								$input .= '<optgroup label="'.$selected[0]['Data_A_0'].'">';
+									foreach ($selected as $select) {
+										/******************************************/
+										//Variables
+										$selected     = '';
+										$data_writing = '';
+
+										/******************************************/
+										//si la opción actual esta seleccionada
+										if($value==$select['idData2']){$selected = 'selected="selected"';}
+
+										/******************************************/
+										//Escribo los datos solicitados
+										if(count($datos2)==1){
+											$data_writing = $select['Data_B_0'].' ';
+										}else{
+											$xs = 0;
+											//se crea cadena
+											foreach($datos2 as $dato){
+												$data_writing .= $select['Data_B_'.$xs].' ';
+											}
+										}
+
+										/******************************************/
+										//se escribe
+										$input .= '<option value="'.$select['idData2'].'" '.$selected.' >'.TituloMenu(DeSanitizar($data_writing)).'</option>';
+									}
+								$input .= '</optgroup>';
+							}
+
+						$input .= '
+						</select>
+					</div>
+				</div>';
+
+				/******************************************/
+				//Imprimir dato
+				echo $input;
+
+			//si no hay datos
+			}elseif(empty($arrSelect) OR $arrSelect==''){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'No hay datos en <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			//si existe un error
+			}elseif($arrSelect==false){
+				//Devuelvo mensaje
+				alert_post_data(4,1,1,0, 'Hay un error en la consulta <strong>'.$placeholder.'</strong>, consulte con el administrador');
+			}
 		}
 	}
 	/*******************************************************************************************************************/
