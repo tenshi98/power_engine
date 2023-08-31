@@ -263,10 +263,10 @@ function sweetalert2(int $icon = 0, String $title = '', String $text = '', Strin
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	info_post_data(1,'dato' );
-* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
-* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-* 	info_post_data(4,'bla' );
+* 	info_popover_data(1,'dato' );
+* 	info_popover_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_popover_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_popover_data(4,'bla' );
 *
 *===========================    Parametros   ===========================
 * Integer  $type            Tipo de mensaje (define el color de este)
