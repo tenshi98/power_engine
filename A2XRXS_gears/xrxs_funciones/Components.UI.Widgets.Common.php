@@ -1557,6 +1557,49 @@ function widget_youtube_player($link){
 	return $input;
 }
 /*******************************************************************************************************************/
+//Muestra los dias feriados del año
+function widget_star_rating($max, $value, $text){
+	/********************************************************/
+	//Definicion de errores
+	$errorn = 0;
+	//se definen las opciones disponibles
+	$requerido = array(0, 1, 2, 3, 4, 5);
+	//verifico si el dato ingresado existe dentro de las opciones
+	if (!in_array($value, $requerido)) {
+		alert_post_data(4,1,1,0, 'La configuracion $value ('.$value.') entregada en <strong>widget_star_rating</strong> no esta dentro de las opciones');
+		$errorn++;
+	}
+	/********************************************************/
+	//Ejecucion si no hay errores
+	if($errorn==0){
+		//Genero el cuerpo
+		$input = '
+		<div class="d-flex justify-content-between align-items-center widget_star_rating">
+			<div class="ratings">';
+				//recorro las estrellas
+				for ($i = 1; $i <= $max; $i++) {
+					//verifico si esta marcado
+					if($i<=$value){
+						$input.= '<i class="fa fa-star rating-color"></i>';
+					}else{
+						$input.= '<i class="fa fa-star"></i>';
+					}
+				}
+				$input.= '
+			</div>
+			<h5 class="review-count">'.$text.'</h5>
+		</div>
+		';
+
+		//devuelvo cuerpo
+		return $input;
+	}
+}
+
+
+
+
+/*******************************************************************************************************************/
 
 
 ?>

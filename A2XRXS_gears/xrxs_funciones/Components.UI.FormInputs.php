@@ -1130,6 +1130,118 @@ class Basic_Form_Inputs{
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
+	* Genera una burbuja con informacion sobre el input seleccionado
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear una burbuja de informacion al pasar el cursor sobre
+	* el input seleccionada
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	*   $dataC = 'Theres no image Theres no image Theres no image Theres no image';
+	* 	$Form->form_info_data('usuario', 'Preview 1', $dataC, 1);
+	* 	$Form->form_info_data('usuario', 'Preview 2', $dataC, 2);
+	* 	$Form->form_info_data('usuario', 'Preview 3', $dataC, 3);
+	* 	$Form->form_info_data('usuario', 'Preview 4', $dataC, 4);
+	*
+	*===========================    Parametros   ===========================
+	* String   $IdElemento      ID del input
+	* String   $Titulo          Titulo del mensaje
+	* String   $Mensaje         Texto del mensaje
+	* int      $Ubicacion       Ubicacion a mostrar la burbuja
+	* @return  String
+	************************************************************************/
+	public function form_nEstrellas($placeholder,$name, $value, $min, $max, $required, $size){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1, 2);
+		$requerido_2 = array(0, 1, 2, 3, 4, 5);
+		$requerido_3 = array(1, 2, 3, 4, 5);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido_1)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($value, $requerido_2)) {
+			alert_post_data(4,1,1,0, 'La configuracion $value ('.$value.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($min, $requerido_2)) {
+			alert_post_data(4,1,1,0, 'La configuracion $min ('.$min.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($max, $requerido_2)) {
+			alert_post_data(4,1,1,0, 'La configuracion $max ('.$max.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($size, $requerido_3)) {
+			alert_post_data(4,1,1,0, 'La configuracion $size ('.$size.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		/************************************************/
+		//se verifica si es un numero lo que se recibe
+		if (!validarNumero($value)&&$value!=''){
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero');
+			$errorn++;
+		}
+		//Verifica si el numero recibido es un entero
+		if (!validaEntero($value)&&$value!=''){
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es un numero entero');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Selecciono el tipo de mensaje
+			$options = ['xs', 'sm', 'md', 'lg', 'xl'];
+			$tamano  = $options[$size-1];
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=0){$valor = $value;}
+
+			/******************************************/
+			//generacion del input
+			$input ='
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<input id="'.$name.'" name="'.$name.'" class="rating rating-loading" data-min="'.$min.'" data-max="'.$max.'" data-step="1" value="'.$valor.'" data-size="'.$tamano.'" '.$requerido.'>
+					</div>
+				</div>';
+
+			/******************************************/
+			//Imprimir dato
+			echo $input;
+		}
+
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
 	* Crea un input que solo admite numeros
 	*
 	*===========================     Detalles    ===========================
