@@ -111,7 +111,11 @@ function obtenerInfoIp($IP_Cliente, $purpose) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	base_url();
+* 	echo base_url();                                            //will produce something like: http://stackoverflow.com/questions/2820723/
+* 	echo base_url(TRUE);                                        //will produce something like: http://stackoverflow.com/
+* 	echo base_url(TRUE, TRUE); || echo base_url(NULL, TRUE);    //will produce something like: http://stackoverflow.com/questions/
+* 	//  and finally
+* 	echo base_url(NULL, NULL, TRUE);
 *
 *===========================    Parametros   ===========================
 * @return  String
