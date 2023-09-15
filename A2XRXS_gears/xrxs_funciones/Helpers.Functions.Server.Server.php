@@ -537,7 +537,7 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 				//archivo de respaldo
 				$Archivo = '1_logs_error_log_php.txt';
 				$noti = $Data." \n";
-				break;;
+				break;
 			/**************************************************************/
 			//Log de Hackeos
 			case 4:
