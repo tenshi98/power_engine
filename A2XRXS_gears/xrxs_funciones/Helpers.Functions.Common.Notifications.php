@@ -263,14 +263,16 @@ function sweetalert2(int $icon = 0, String $title = '', String $text = '', Strin
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	info_popover_data(1,'dato' );
-* 	info_popover_data(2,'<strong>Dato:</strong>explicacion' );
-* 	info_popover_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-* 	info_popover_data(4,'bla' );
+*   info_popover_data('usuario', 'Preview 1', $dataC, 1);
+* 	info_popover_data('usuario', 'Preview 2', $dataC, 2);
+* 	info_popover_data('usuario', 'Preview 3', $dataC, 3);
+* 	info_popover_data('usuario', 'Preview 4', $dataC, 4);
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
-* String   $Text            Texto del mensaje (permite HTML)
+* String   $IdElemento      ID del input
+* String   $Titulo          Titulo del mensaje
+* String   $Mensaje         Texto del mensaje
+* int      $Ubicacion       Ubicacion a mostrar la burbuja
 * @return  String
 ************************************************************************/
 //Funcion
