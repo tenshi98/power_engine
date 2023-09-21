@@ -899,7 +899,7 @@ class Basic_Inputs{
 
 			/******************************************/
 			//Si existe un valor entregado
-			$valor = '0';
+			$valor = '';
 			if($value!=''){$valor = $value;}
 
 			/******************************************/
@@ -921,7 +921,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 			<div class="field">
-				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeydown="return soloNumeros_'.$EXname.'(event)" value="'.$valor.'" >
+				<input placeholder="'.$placeholder.'"  class="form-control '.$extra_class.'" style="'.$style.'" type="'.$type.'" name="'.$name.'" id="'.$EXname.'"  '.$requerido.' onkeydown="return soloNumeroRealRacional(event)" value="'.$valor.'" >
 			</div>';
 
 			/******************************************/
