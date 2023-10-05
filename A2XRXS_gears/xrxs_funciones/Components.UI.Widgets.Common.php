@@ -703,7 +703,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 		}
 
 	}else{
-		if(isset($file_path)&&$file_path!=''&&isset($file)&&$file!=''){
+		if(isset($file_path, $file)&&$file_path!=''&&$file!=''){
 			$input = alert_post_data(4,1,1,0, 'No esta soportada la previsualizacion, para descargar el archivo presione <a href="'.$site.'/'.$emp_path.'/'.$path.'" class="">aqui</a>');
 		}else{
 			$input = alert_post_data(4,1,1,0, 'El Archivo a previsualizar no existe');

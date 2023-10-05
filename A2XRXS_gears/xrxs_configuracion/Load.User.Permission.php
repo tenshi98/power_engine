@@ -14,7 +14,7 @@ if( ! defined('XMBCXRXSKGC')) {
 $sesion_Activa = 0;
 
 //verifico si tiene sesion activa
-if(isset($_SESSION['usuario']['basic_data']['usuario'])&&$_SESSION['usuario']['basic_data']['usuario']!=''&&isset($_SESSION['usuario']['basic_data']['password'])&&$_SESSION['usuario']['basic_data']['password']!=''){
+if(isset($_SESSION['usuario']['basic_data']['usuario'], $_SESSION['usuario']['basic_data']['password'])&&$_SESSION['usuario']['basic_data']['usuario']!=''&&$_SESSION['usuario']['basic_data']['password']!=''){
 	$sesion_usuario  = $_SESSION['usuario']['basic_data']['usuario'];
 	$sesion_password = $_SESSION['usuario']['basic_data']['password'];
 	$sesion_Activa++;

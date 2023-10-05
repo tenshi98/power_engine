@@ -73,7 +73,7 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 
 	/**************************************/
 	//verifico la existencia de datos
-	if(isset($myPhone)&&$myPhone!=''&&isset($InstanceId)&&$InstanceId!=''&&isset($Token)&&$Token!=''){
+	if(isset($myPhone, $InstanceId, $Token)&&$myPhone!=''&&$InstanceId!=''&&$Token!=''){
 		$data = [
 			'phone' => $myPhone, // Receivers phone
 			'body' => $Body, // Message
@@ -154,7 +154,7 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 
 	/**************************************/
 	//verifico la existencia de datos
-	if(isset($Group)&&$Group!=''&&isset($InstanceId)&&$InstanceId!=''&&isset($Token)&&$Token!=''){
+	if(isset($Group, $InstanceId, $Token)&&$Group!=''&&$InstanceId!=''&&$Token!=''){
 		$data = [
 			'chatId' => $Group, // Receivers phone
 			'body' => $Body, // Message

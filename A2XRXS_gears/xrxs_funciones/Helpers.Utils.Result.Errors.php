@@ -83,7 +83,7 @@ if($err_count!=0){
 }
 
 //Si se genera cuerpo para el correo, se envia el mensaje a soporte
-if(isset($MailBody)&&$MailBody!=''&&$CountError!=0&&isset($idSistema)){
+if(isset($MailBody, $idSistema)&&$MailBody!=''&&$CountError!=0){
 
 	/*********************************/
 	//Busco al usuario en el sistema

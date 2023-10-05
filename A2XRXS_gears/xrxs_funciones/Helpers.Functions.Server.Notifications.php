@@ -64,11 +64,11 @@ function tareas_envio_correo($De_correo, $De_nombre,
 	$error  = '';
 
 	//valido que exista correo
-	if(isset($De_correo)&&isset($Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
+	if(isset($De_correo, $Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail(DeSanitizar($De_correo))&&validarEmail(DeSanitizar($Hacia_correo))){
 			//verifico si los envio por gmail
-			if(isset($GmailUsername)&&$GmailUsername!=''&&isset($GmailPassword)&&$GmailPassword!=''){
+			if(isset($GmailUsername, $GmailPassword)&&$GmailUsername!=''&&$GmailPassword!=''){
 
 				tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 											$Hacia_correo, $Hacia_nombre,
@@ -225,7 +225,7 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 	$error  = '';
 
 	//valido que exista correo
-	if(isset($SMTP_mailUsername)&&isset($Hacia_correo)&&$SMTP_mailUsername!=''&&$Hacia_correo!=''){
+	if(isset($SMTP_mailUsername, $Hacia_correo)&&$SMTP_mailUsername!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail(DeSanitizar($SMTP_mailUsername))&&validarEmail(DeSanitizar($Hacia_correo))){
 
@@ -390,7 +390,7 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 	$error  = '';
 
 	//valido que exista correo
-	if(isset($GmailUsername)&&isset($Hacia_correo)&&$GmailUsername!=''&&$Hacia_correo!=''){
+	if(isset($GmailUsername, $Hacia_correo)&&$GmailUsername!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail(DeSanitizar($GmailUsername))&&validarEmail(DeSanitizar($Hacia_correo))){
 
@@ -607,7 +607,7 @@ function envio_sendinblue($De_correo, $De_nombre,
 						  $APIKEY){
 
 	//valido que exista correo
-	if(isset($De_correo)&&isset($Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
+	if(isset($De_correo, $Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){
 		//valido que los correos sean validos
 		if(validarEmail(DeSanitizar($De_correo))&&validarEmail(DeSanitizar($Hacia_correo))){
 
