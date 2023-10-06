@@ -2521,26 +2521,28 @@ class Basic_Inputs{
 
 					/******************************************/
 					//generacion del input
-					$input .= '<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opción" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
-									<option value=""></option>';
-
-										foreach ( $arrSelect as $select ) {
-											$selected = '';
-											if($value==$select['idData']){
-												$selected = 'selected="selected"';
-											}
-											if(count($datos)==1){
-												$data_writing = $select[$datos[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datos as $dato){
-													$data_writing .= $select[$dato].' ';
-												}
-											}
-											$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu(DeSanitizar($data_writing)).'</option>';
-										 }
-
-					$input .= '</select>';
+					$input .= '
+					<div class="field">
+						<select name="'.$name.'" id="'.$name.'" '.$requerido.' style="'.$style.'" data-placeholder="Seleccione una Opción" class="form-control chosen-select chosendiv_'.$name.'" tabindex="2">
+							<option value=""></option>';
+							foreach ( $arrSelect as $select ) {
+								$selected = '';
+								if($value==$select['idData']){
+									$selected = 'selected="selected"';
+								}
+								if(count($datos)==1){
+									$data_writing = $select[$datos[0]].' ';
+								}else{
+									$data_writing = '';
+									foreach($datos as $dato){
+										$data_writing .= $select[$dato].' ';
+									}
+								}
+								$input .= '<option value="'.$select['idData'].'" '.$selected.' >'.TituloMenu(DeSanitizar($data_writing)).'</option>';
+							}
+					$input .= '
+						</select>
+					</div>';
 
 					/******************************************/
 					//ejecucion script
