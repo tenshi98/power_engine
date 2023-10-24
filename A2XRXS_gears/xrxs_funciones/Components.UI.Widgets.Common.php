@@ -1545,7 +1545,7 @@ function widget_youtube_player($link){
 	//Genero el cuerpo
 	$input = '
 	<style>
-		.yt_container {position: relative; width: 100%;height: 0;padding-bottom:56.25%; margin-bottom: 15px;;}
+		.yt_container {position: relative; width: 100%;height: 0;padding-bottom:56.25%; margin-bottom: 15px;}
 		.yt_container .video {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
 	</style>
 	<div class="yt_container">
