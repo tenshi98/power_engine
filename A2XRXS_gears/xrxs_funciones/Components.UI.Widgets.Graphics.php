@@ -609,5 +609,28 @@ function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options)
 	return $graph;
 
 }
+/*******************************************************************************************************************/
+//Crea un grafico lineal (Seleccion Normal)
+function Chartist_Line_1($idDiv, $titulo, $eje_x_titulo, $eje_y_titulo, $xData, $yData){
+
+	/*************************************************/
+	//imprime
+	$graph  = '<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/chartist/dist/chartist.min.css">';
+	$graph .= '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chartist/dist/chartist.min.js"></script>';
+	$graph .= '<div id="'.$idDiv.'" style="width:100%;height:100%;"></div>';
+	$graph .= '
+	<script>
+	new Chartist.Line("#'.$idDiv.'", {
+		labels: ['.$xData.'],
+		series: [ ['.$yData.']]
+	}, {
+		low: 0,
+		showArea: true
+	});
+	</script>';
+
+	return $graph;
+
+}
 
 ?>
