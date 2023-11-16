@@ -574,6 +574,146 @@ function filtrar_palabras_censuradas($oracion) {
 	return $oracion;
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Genera un cuadro de alerta
+*
+*===========================     Detalles    ===========================
+* Permite generar un cuadro de alerta personalizado
+*===========================    Modo de uso  ===========================
+* 	//se imprime input
+* 	info_post_data(1,'dato' );
+* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_post_data(4,'bla' );
+*
+*===========================    Parametros   ===========================
+* Integer  $type            Tipo de mensaje (define el color de este)
+* String   $Text            Texto del mensaje (permite HTML)
+* @return  String
+************************************************************************/
+//Funcion
+function super_title($Type, $Color, $Align, $Style, $Text){
+
+	//Valido si los datos ingresados estan correctos
+	if (validarNumero($Type)&&validarNumero($Color)){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1,2,3,4,5,6,7,8);
+		$requerido_2 = array(1,2,3,4,5,6,7);
+		$requerido_3 = array(1,2,3);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Type, $requerido_1)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Type entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Color, $requerido_2)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Color entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Align, $requerido_3)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Align entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			//Selecciono el tipo de titulo
+			$options = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'strong'];
+			$tipo    = $options[$Type-1];
+
+			//Selecciono el color
+			$options = ['', 'text-muted', 'text-primary', 'text-warning', 'text-danger', 'text-success', 'text-info'];
+			$color   = $options[$Color-1];
+
+			//Selecciono el tipo de mensaje
+			$options = ['text-align: left;', 'text-align: center;', 'text-align: right;'];
+			$align   = $options[$Align-1];
+
+			/******************************************/
+			//generacion del input
+			$input = '<'.$tipo.' class="'.$color.' '.$Style.'" style="'.$align.'">'.$Text.'</'.$tipo.'>';
+
+			//Imprimir dato
+			echo $input;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Genera un cuadro de alerta
+*
+*===========================     Detalles    ===========================
+* Permite generar un cuadro de alerta personalizado
+*===========================    Modo de uso  ===========================
+* 	//se imprime input
+* 	info_post_data(1,'dato' );
+* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_post_data(4,'bla' );
+*
+*===========================    Parametros   ===========================
+* Integer  $type            Tipo de mensaje (define el color de este)
+* String   $Text            Texto del mensaje (permite HTML)
+* @return  String
+************************************************************************/
+//Funcion
+function divider_line($Type, $Color, $InnerColor){
+
+	//Valido si los datos ingresados estan correctos
+	if (validarNumero($Type)&&validarNumero($Color)&&validarNumero($InnerColor)){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1,2,3,4,5);
+		$requerido_2 = array(1,2,3,4,5,6,7);
+		$requerido_3 = array(1);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Type, $requerido_1)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Type entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Color, $requerido_2)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Color entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($InnerColor, $requerido_3)) {
+			alert_post_data(4,1,1,0, 'La configuracion $InnerColor entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			//Selecciono el tipo de titulo
+			$options = ['', 'div-arrow-down', 'div-tab-down', 'div-stopper', 'div-dot'];
+			$tipo    = $options[$Type-1];
+
+			//Selecciono el tipo de titulo
+			$options = ['', 'div-muted', 'div-primary', 'div-warning', 'div-danger', 'div-success', 'div-info'];
+			$color   = $options[$Color-1];
+
+			//Selecciono el color
+			$options  = [''];
+			$colorInt = $options[$InnerColor-1];
+
+			/******************************************/
+			//generacion del input
+			$input = '<div class="'.$color.' divider div-transparent '.$tipo.' '.$colorInt.'"></div>';
+
+			//Imprimir dato
+			echo $input;
+		}
+	}
+}
 
 
 

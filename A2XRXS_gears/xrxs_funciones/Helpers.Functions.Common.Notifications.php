@@ -245,11 +245,6 @@ function sweetalert2(int $icon = 0, String $title = '', String $text = '', Strin
 			$input.= 'showConfirmButton: \''.$showConfirmButton.'\'';
 		$input.= '})';
 
-		/*int $icon = 0, String $title = '', String $text = '', String $html = '', String $footer = '',
-		String $imageUrl = '', int $imageHeight = 0, String $imageAlt = '',
-		String $showCloseButton = false, String $showConfirmButton = true, String $position = false, String $timer = 0
-*/
-
 		//Imprimir dato
 		echo $input;
 	}
