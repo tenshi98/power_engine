@@ -714,6 +714,61 @@ function divider_line($Type, $Color, $InnerColor){
 		}
 	}
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Genera un cuadro de alerta
+*
+*===========================     Detalles    ===========================
+* Permite generar un cuadro de alerta personalizado
+*===========================    Modo de uso  ===========================
+* 	//se imprime input
+* 	info_post_data(1,'dato' );
+* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
+* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
+* 	info_post_data(4,'bla' );
+*
+*===========================    Parametros   ===========================
+* Integer  $type            Tipo de mensaje (define el color de este)
+* String   $Text            Texto del mensaje (permite HTML)
+* @return  String
+************************************************************************/
+//Funcion
+function hr_line($Type, $Color){
+
+	//Valido si los datos ingresados estan correctos
+	if (validarNumero($Type)&&validarNumero($Color)){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido_1 = array(1,2,3,4,5,6,7,8,9);
+		$requerido_2 = array(1,2,3,4,5,6,7);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Type, $requerido_1)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Type entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($Color, $requerido_2)) {
+			alert_post_data(4,1,1,0, 'La configuracion $Color entregada no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+			//Selecciono el tipo de titulo
+			$options = ['', 'hr-muted', 'hr-primary', 'hr-warning', 'hr-danger', 'hr-success', 'hr-info'];
+			$color   = $options[$Color-1];
+			/******************************************/
+			//generacion del input
+			$input = '<hr class="'.$color.' hr_style-'.$Type.'">';
+
+			//Imprimir dato
+			echo $input;
+		}
+	}
+}
 
 
 
