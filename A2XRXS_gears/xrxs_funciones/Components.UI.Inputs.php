@@ -637,7 +637,7 @@ class Basic_Inputs{
 			//generacion del input
 			$input = '
 				<div class="field" id="div_'.$name.'">
-					<input class="form-control" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
+					<input class="form-control '.str_replace('[]', '', $name).'" type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)">
 				</div>
 			';
 
