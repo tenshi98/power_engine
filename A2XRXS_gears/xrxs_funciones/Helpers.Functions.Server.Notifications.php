@@ -510,12 +510,9 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 *===========================    Modo de uso  ===========================
 *
 * 	//Envio de correo
-*	$rmail = envio_mensaje_push('jperez@mail.com', 'Juan Perez',
-*                                'malvarez@mail.com', 'Marisol Alvarez',
-*                                'jefatura@mail.com', 'respaldo@mail.com',
-*                                'Notificacion',
-*                                '<p>Cuerpo mensaje</p>','Cuerpo mensaje',
-*                                'upload/archivo adjunto.jpg');
+*	$rmail = envio_mensaje_push('notificacion', 'mensaje','pantalla_push', 'xxxxxxxxxxxxxxx','xxxxxxxxxxxxxxxxxxx',
+*                                 'http:www.image.com/image.jpg','pantalla_destino');
+*
 *   //Envio del mensaje
 *	if ($rmail!=1) {
 
@@ -569,15 +566,10 @@ function envio_mensaje_push($title, $message, $action, $firebase_token, $firebas
 *===========================    Modo de uso  ===========================
 *
 * 	//Envio de correo
-*	$rmail = tareas_envio_correo('jperez@mail.com', 'Juan Perez',
-*                                'malvarez@mail.com', 'Marisol Alvarez',
-*                                'jefatura@mail.com', 'respaldo@mail.com',
-*                                'Notificacion',
-*                                '<p>Cuerpo mensaje</p>','Cuerpo mensaje',
-*                                'upload/archivo adjunto.jpg',
-* 								 1,
-* 								 '',
-* 								 '');
+*	$rmail = envio_sendinblue('jperez@mail.com', 'Juan Perez',
+*                             'malvarez@mail.com', 'Marisol Alvarez',
+*                             'Notificacion', '<p>Cuerpo mensaje</p>',
+* 							 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 *   //Envio del mensaje
 *	if ($rmail!=1) {
 *
@@ -590,15 +582,9 @@ function envio_mensaje_push($title, $message, $action, $firebase_token, $firebas
 * String    $De_nombre          Nombre del usuario del Correo Emisor
 * String    $Hacia_correo       Correo Receptor
 * String    $Hacia_nombre       Nombre del usuario del Correo Receptor
-* String    $CopiaCarbon        Correo Copia
-* String    $CopiaCarbonOculta  Correo Copia oculta
 * String    $Asunto             Asunto del correo
 * String    $CuerpoHTML         Cuerpo del correo, con tag html
-* String    $CuerpoNoHTML       Cuerpo del correo, sin tag html
-* String    $Adjuntos           Ruta del archivo adjunto
-* String    $lvl                Nivel
-* String    $GmailUsername      Usuario de gmail (reemplaza a $De_correo)
-* String    $GmailPassword      Contraseña del Usuario de gmail
+* String    $APIKEY             Contraseña
 ************************************************************************/
 //Funcion
 function envio_sendinblue($De_correo, $De_nombre,
