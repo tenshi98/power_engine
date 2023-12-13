@@ -618,6 +618,37 @@ function Fecha_ultimo_dia_mes($Fecha){
 		return 'Sin Fecha';
 	}
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Devuelve la fecha formateada
+*
+*===========================     Detalles    ===========================
+* Devuelve la fecha formateada: Diciembre 12 del 2023 13:17:59
+*===========================    Modo de uso  ===========================
+*
+* 	//se convierten los datos
+* 	fullDate('2023-12-12 13:17:59');
+*
+*===========================    Parametros   ===========================
+* Integer   $Fecha   Fecha a transformar
+* @return   String
+************************************************************************/
+//Funcion
+function fullDate($Fecha){
+
+	// Establecer la zona horaria predeterminada a usar.
+	date_default_timezone_set('America/Santiago');
+	//Se formatea
+	$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	$dia     = date("d", $Fecha);
+	$me      = date("m", $Fecha);
+	$ano     = date("Y", $Fecha);
+	$hora    = date("H:i:s", $Fecha);
+	$mes     = $options[$me-1];
+
+	return $mes.' '.$dia.' del '.$ano.' '.$hora;
+
+}
 
 
 
