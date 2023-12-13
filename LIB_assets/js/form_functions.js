@@ -59,6 +59,7 @@ function soloLetrasTextArea(e){
 	//caracteres especiales permitidos
 	const especiales = [];
 	especiales.push(8);   //backspace
+	especiales.push(13);  //enter
 	especiales.push(37);  //left arrow
 	especiales.push(38);  //up arrow
 	especiales.push(39);  //right arrow
