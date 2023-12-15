@@ -1,7 +1,5 @@
-<script src="<?php echo DB_SITE_REPO ?>/LIBS_js/validator/validator.js"></script>
 <script>
-	
-		
+
 	// initialize the validator
 	var validator = new FormValidator();
 
@@ -15,15 +13,13 @@
 		})
 		.on('keypress', 'input[required][pattern]', function(){
 			validator.checkField.call(validator, this)
-		})
-*/
+		})*/
 	// bind the validation to the form submit event
 	$('form').submit(function(e){
-		
 		var submit = true,
 			validatorResult = validator.checkAll(this);
 
 		return !!validatorResult.valid;
 	});
-	
-	</script>
+
+</script>
