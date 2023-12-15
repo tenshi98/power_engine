@@ -637,9 +637,7 @@ function Chartist_Line_1($idDiv, $titulo, $eje_x_titulo, $eje_y_titulo, $xData, 
 function Chartjs_Line_1($idDiv, $titulo, $xData, $yData){
 
 	/*************************************************/
-	$graph  = '<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/chart_js/Chart.min.js"></script>';
-	$graph .= '<link rel="stylesheet" type="text/css" href="'.DB_SITE_REPO.'/LIBS_js/chart_js/Chart.min.css">';
-	$graph .= '<canvas id="'.$idDiv.'" style="width:100%;max-width:600px"></canvas>';
+	$graph  = '<canvas id="'.$idDiv.'" style="width:100%;max-width:600px"></canvas>';
 	$graph .= '<script>';
 		$graph .=$xData;
 		$graph .=$yData;
