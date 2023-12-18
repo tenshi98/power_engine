@@ -1724,12 +1724,11 @@ class Basic_Inputs{
 			/******************************************/
 			//Nuevo Nombre
 			$EXname  = str_replace('[]', '', $name).'_'.rand(1, 999);
-			$EXvalor = str_replace(',','.',$valor);
 
 			/******************************************/
 			//Si existe un valor entregado
 			$valor = '';
-			if($value!=0){$valor = $value;}
+			if($value!=0){$valor = str_replace(',','.',$value);}
 
 			/******************************************/
 			//Valido si es requerido
@@ -1751,7 +1750,7 @@ class Basic_Inputs{
 			$input ='
 				<div class="field" id="div_'.$name.'">
 					<div class="input-group bootstrap-timepicker">
-						<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$EXvalor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)">
+						<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)" style="text-align: center;">
 					</div>
 				</div>';
 
@@ -1760,7 +1759,7 @@ class Basic_Inputs{
 			$input .= '
 				<script>
 					//se inicializa el plugin
-					$("input[name=\''.$EXname.'\']").TouchSpin({
+					$("input[name=\''.$name.'\']").TouchSpin({
 						min: '.$min.',
 						max: '.$max.',
 						step: '.$step.',
