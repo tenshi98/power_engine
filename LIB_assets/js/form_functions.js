@@ -32,6 +32,7 @@ function soloLetras(e){
 	especiales.push(172); //°
 	especiales.push(188); //comma
 	especiales.push(190); //punto
+	especiales.push(192); //letra ñ
 	especiales.push(221); //¿
 	especiales.push(222); //?
 
@@ -83,6 +84,7 @@ function soloLetrasTextArea(e){
 	especiales.push(172); //°
 	especiales.push(188); //comma
 	especiales.push(190); //punto
+	especiales.push(192); //letra ñ
 	especiales.push(221); //¿
 	especiales.push(222); //?
 
