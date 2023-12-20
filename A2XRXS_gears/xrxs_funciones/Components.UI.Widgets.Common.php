@@ -889,27 +889,6 @@ function widget_modal($width, $height){
 	";
 }
 /*******************************************************************************************************************/
-//Muestra un explorador de archivos personalizado
-function widget_rainloop($id, $extra){
-
-	//generacion del widget
-	$widget = '
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<iframe id="'.$id.'" style="width: 100%;height: 100vh;" src="'.DB_SITE_REPO.'/LIBS_js/rainloop/'.$extra.'" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div>
-
-		<script>
-			$(function () {
-				document.getElementById(\''.$id.'\').style.height = \'calc(100vh - \' + ($(\'#myIframe\').offset().top + 25) + \'px)\';
-			});
-		</script>';
-
-	//Imprimir dato
-	return $widget;
-}
-/*******************************************************************************************************************/
 //Muestra la Burbuja de ayuda
 function widget_tooltipster(){
 	require_once '../LIBS_js/tooltipster/tooltipster.php';
