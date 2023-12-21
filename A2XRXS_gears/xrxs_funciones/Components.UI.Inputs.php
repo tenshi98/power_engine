@@ -2608,7 +2608,9 @@ class Basic_Inputs{
 									$input .= 'dropdownParent: $("#'.$divContent.'"),';
 								}
 								$input .= '
-								width: "100%"
+								width: "100%",
+								language: "es",
+								tags: true
 						  	}
 						);
 					});

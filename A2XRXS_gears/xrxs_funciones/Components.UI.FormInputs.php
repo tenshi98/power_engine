@@ -4614,7 +4614,8 @@ class Basic_Form_Inputs{
 									$input .= 'dropdownParent: $("#'.$divContent.'"),';
 								}
 								$input .= '
-								width: "100%"
+								width: "100%",
+								language: "es"
 						  	}
 						);
 					});
@@ -6359,7 +6360,8 @@ class Basic_Form_Inputs{
 									$input .= 'dropdownParent: $("#'.$divContent.'"),';
 								}
 								$input .= '
-								width: "100%"
+								width: "100%",
+								language: "es"
 						  	}
 						);
 					});
