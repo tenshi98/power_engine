@@ -603,7 +603,7 @@ function super_title($Type, $Color, $Align, $Style, $Text){
 		$errorn = 0;
 		//se definen las opciones disponibles
 		$requerido_1 = array(1,2,3,4,5,6,7,8);
-		$requerido_2 = array(1,2,3,4,5,6,7);
+		$requerido_2 = array(1,2,3,4,5,6,7,8);
 		$requerido_3 = array(1,2,3);
 		//verifico si el dato ingresado existe dentro de las opciones
 		if (!in_array($Type, $requerido_1)) {
@@ -628,7 +628,7 @@ function super_title($Type, $Color, $Align, $Style, $Text){
 			$tipo    = $options[$Type-1];
 
 			//Selecciono el color
-			$options = ['', 'text-muted', 'text-primary', 'text-warning', 'text-danger', 'text-success', 'text-info'];
+			$options = ['', 'text-muted', 'text-primary', 'text-warning', 'text-danger', 'text-success', 'text-info', 'text-facture'];
 			$color   = $options[$Color-1];
 
 			//Selecciono el tipo de mensaje
