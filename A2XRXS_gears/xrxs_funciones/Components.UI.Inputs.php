@@ -2609,8 +2609,7 @@ class Basic_Inputs{
 								}
 								$input .= '
 								width: "100%",
-								language: "es",
-								tags: true
+								language: "es"
 						  	}
 						);
 					});
