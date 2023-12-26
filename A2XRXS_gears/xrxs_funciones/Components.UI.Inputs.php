@@ -2476,7 +2476,7 @@ class Basic_Inputs{
 	* Object   $dbConn        Puntero a la base de datos
 	* @return  String
 	************************************************************************/
-	public function select_filtro($placeholder,$name, $required, $data1, $data2, $table, $filter,$value, $dbConn, $divContent = ''){
+	public function select_filtrar($placeholder,$name,$value, $required, $data1, $data2, $table, $filter, $dbConn, $divContent = ''){
 
 		/********************************************************/
 		//Definicion de errores
@@ -2494,7 +2494,8 @@ class Basic_Inputs{
 
 			/******************************************/
 			//Nuevo Nombre
-			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+			$EXname  = str_replace('[]', '', $name).'_'.rand(1, 999);
+			$EXname2 = str_replace('[]', '', $name);
 
 			/******************************************/
 			//Valido si es requerido
@@ -2557,7 +2558,7 @@ class Basic_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '<div class="field" id="div_'.$EXname.'">
-							<select name="'.$name.'" id="'.$EXname.'" class="form-control select2_'.$EXname.'" '.$requerido.'>';
+							<select name="'.$name.'" id="'.$EXname.' uniqueID" class="form-control select2_'.$EXname.' select2_'.$EXname2.'" '.$requerido.'>';
 
 								//Recorro
 								$selectedx = 'selected="selected"';
