@@ -2047,6 +2047,107 @@ class Basic_Form_Inputs{
 	}
 	/*******************************************************************************************************************/
 	/***********************************************************************
+	* Crea un input de Hora
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input que muestra un reloj al tratar de escribir
+	* dentro de este, una vez seleccionada la Hora, el reloj
+	* traspasa la Hora al input
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->form_time_picker('Hora','Hora', '', 1 );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* Date     $value         Valor por defecto, debe tener formato fecha
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* @return  String
+	************************************************************************/
+	public function form_time_picker($placeholder,$name, $value, $required){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		//se verifica si es un numero lo que se recibe
+		if (!validaFecha($value)&&$value!=''){
+			alert_post_data(4,1,1,0, 'El valor ingresado en $value ('.$value.') en <strong>'.$placeholder.'</strong> no es una fecha');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Nuevo Nombre
+			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					if(!isset($_SESSION['form_require']) OR $_SESSION['form_require']==''){$_SESSION['form_require'] = 'required';}
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor = '';
+			if($value!=''){$valor = $value;}
+
+			/******************************************/
+			//generacion del input
+			$input ='
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<div class="input-group bootstrap-timepicker">
+							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
+							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+						</div>
+					</div>
+				</div>';
+
+			/******************************************/
+			//ejecucion script
+			$input .='
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#'.$EXname.'").bootstrapMaterialDatePicker
+						({
+							date: false,
+							shortTime: false,
+							format: "HH:mm",
+							lang: "es",
+							cancelText : "Cancelar",
+							clearButton: true,
+							clearText : "Limpiar",
+						});
+					});
+				</script>';
+
+			/******************************************/
+			//Imprimir dato
+			echo $input;
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
 	* Crea un input tipo color
 	*
 	*===========================     Detalles    ===========================
