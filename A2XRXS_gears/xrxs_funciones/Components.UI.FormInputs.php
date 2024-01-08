@@ -402,7 +402,7 @@ class Basic_Form_Inputs{
 		//Definicion de errores
 		$errorn = 0;
 		//se definen las opciones disponibles
-		$requerido_1 = array(1,2,3,4);
+		$requerido_1 = array(1,2,3,4,5);
 		$requerido_2 = array(0,1,2,3);
 		$requerido_3 = array(0,1,2,3);
 		//Definicion de errores
