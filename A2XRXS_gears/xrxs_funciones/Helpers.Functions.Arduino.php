@@ -107,7 +107,7 @@ const char gprsPass[] = "";
 
 /****** Configuracion Inicial ******/
 //Variables Constantes
-const String server = "webapp.crosstech.cl";
+const String server = "webapp.simplytech.cl";
 const int  port = 80;
 
 //Variables Normales
@@ -196,7 +196,7 @@ void url() {';
 		$code .= $saltoLinea.'	datos  = "/crosstech/ardu.php?id=";';
 	//AT envio
 	}elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
-		$code .= $saltoLinea.'	datos  = "AT+HTTPPARA=\"URL\",\http://webapp.crosstech.cl/crosstech/ardu.php?id=";';
+		$code .= $saltoLinea.'	datos  = "AT+HTTPPARA=\"URL\",\http://webapp.simplytech.cl/crosstech/ardu.php?id=";';
 	}
 	$code .= '
 	datos += id;
@@ -465,7 +465,7 @@ void nivel(){
 }
 
 void url() {
-	datos =http://webapp.crosstech.cl/crosstech/ardu.php?id=;
+	datos =http://webapp.simplytech.cl/crosstech/ardu.php?id=;
 	datos += id;
 	datos += "&s1=";
 	datos += Irms1;
