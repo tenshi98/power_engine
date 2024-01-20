@@ -1336,7 +1336,7 @@ class Basic_Inputs{
 	*===========================    Modo de uso  ===========================
 	*
 	* 	//se imprime input
-	* 	$Form->form_input_checkbox('Opciones','opciones', '');
+	* 	$Form->input_radio('Opciones','opciones', '');
 	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -1586,7 +1586,7 @@ class Basic_Inputs{
 	*===========================    Modo de uso  ===========================
 	*
 	* 	//se imprime input
-	* 	$Form->form_input_number('Numeros','numeros', '', 1 );
+	* 	$Form->input_number_change('Numeros','numeros', '', 1, 'OnChange' );
 	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
@@ -2031,6 +2031,91 @@ class Basic_Inputs{
 			</script>
 			";
 			//$input.='<script>$("#'.$EXname.'").rut();</script>';
+
+			/******************************************/
+			//Imprimir dato
+			echo $input;
+		}
+	}
+	/*******************************************************************************************************************/
+	/***********************************************************************
+	* Crea un input tipo color
+	*
+	*===========================     Detalles    ===========================
+	* Permite crear un input tipo selector de colores
+	*===========================    Modo de uso  ===========================
+	*
+	* 	//se imprime input
+	* 	$Form->color_picker('Categoria','idCategoria', 1, 1 );
+	*
+	*===========================    Parametros   ===========================
+	* String   $placeholder   Nombre o texto a mostrar en el navegador
+	* String   $name          Nombre del identificador del Input
+	* String   $value         Valor por defecto, puede ser texto o valor
+	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* @return  String
+	************************************************************************/
+	public function color_picker($placeholder,$name, $value, $required){
+
+		/********************************************************/
+		//Definicion de errores
+		$errorn = 0;
+		//se definen las opciones disponibles
+		$requerido = array(1, 2);
+		//verifico si el dato ingresado existe dentro de las opciones
+		if (!in_array($required, $requerido)) {
+			alert_post_data(4,1,1,0, 'La configuracion $required ('.$required.') entregada en <strong>'.$placeholder.'</strong> no esta dentro de las opciones');
+			$errorn++;
+		}
+		/********************************************************/
+		//Ejecucion si no hay errores
+		if($errorn==0){
+
+			/******************************************/
+			//Valido si es requerido
+			switch ($required) {
+				//Si el dato no es requerido
+				case 1:
+					$requerido = '';//variable vacia
+					break;
+				//Si el dato es requerido
+				case 2:
+					$requerido = 'required'; //se marca como requerido
+					$_SESSION['form_require'].= ','.$name;  //se guarda en la sesion para la validacion al guardar formulario
+					break;
+			}
+
+			/******************************************/
+			//Si existe un valor entregado
+			$valor  = '';
+			$bcolor = '';
+			if($value!=''){$valor = $value;$bcolor = 'style="background-color: '.$value.'!important;"';}
+
+			/******************************************/
+			//generacion del input
+			$input = '
+				<div class="field" id="div_'.$name.'">
+					<div class="input-group bootstrap-timepicker">
+						<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' '.$bcolor.' onkeydown="return soloLetras(event)">
+						<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
+					</div>
+				</div>';
+
+			/******************************************/
+			//ejecucion script
+			$input .= '
+				<script type="text/javascript">
+					$(function(){
+						$("#'.$name.'").colorpickerplus();
+						$("#'.$name.'").on("changeColor", function(e,color){
+							if(color==null)
+							$(this).val("transparent").css("background-color", "#fff");//tranparent
+							else
+							$(this).val(color).css("background-color", color);
+						});
+					});
+				</script>
+			';
 
 			/******************************************/
 			//Imprimir dato
