@@ -38,17 +38,23 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 		}
 
 		$mapa = '
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key='.$google.'&sensor=false"></script>
+			<script async src="https://maps.googleapis.com/maps/api/js?key='.$google.'&callback=initMap"></script>
 			<script type="text/javascript">
-				function initialize() {
+				let map;
+
+				async function initMap() {
+					const { Map } = await google.maps.importLibrary("maps");
+
 					var myLatlng = new google.maps.LatLng('.$Latitud.', '.$Longitud.');
-					var mapOptions = {
+
+					var myOptions = {
 						zoom: '.$int_map.',
 						scrollwheel: false,
 						center: myLatlng,
 						mapTypeId: google.maps.MapTypeId.'.$int_map_type.'
-					}
-					var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+					};
+
+					map = new Map(document.getElementById("map_canvas"), myOptions);
 
 					// marker position
 					var factory = new google.maps.LatLng('.$Latitud.', '.$Longitud.');
@@ -146,9 +152,7 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 
 				}
 			</script>
-			<div id="map_canvas" style="width:100%; height:500px">
-				<script type="text/javascript">initialize();</script>
-			</div>
+			<div id="map_canvas" style="width:100%; height:500px"></div>
 		';
 
 	}
@@ -193,24 +197,29 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 
 
 		$mapa = '
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key='.$google.'&sensor=false"></script>
-			<script type="text/javascript">
-
-				var geocoder = new google.maps.Geocoder();
-				var map;
-				var myLatlng = new google.maps.LatLng(-33.4372, -70.6506);
-
+			<script async src="https://maps.googleapis.com/maps/api/js?key='.$google.'&callback=initMap"></script>
+			<script>
+				let map;
+				var geocoder;
 				var _infoBox;
 
-				function initialize() {
+				async function initMap() {
+					const { Map } = await google.maps.importLibrary("maps");
 
-					var mapOptions = {
+					geocoder = new google.maps.Geocoder();
+
+					var myLatlng = new google.maps.LatLng(-33.477271996598965, -70.65170304882815);
+
+					var myOptions = {
 						zoom: '.$int_map.',
 						scrollwheel: false,
 						center: myLatlng,
 						mapTypeId: google.maps.MapTypeId.'.$int_map_type.'
-					}
-					map = new google.maps.Map(document.getElementById(\'map_canvas\'), mapOptions);
+					};
+
+					map = new Map(document.getElementById("map_canvas"), myOptions);
+
+					codeAddress();
 				}
 
 				function codeAddress() {
@@ -320,9 +329,7 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 				}
 
 			</script>
-			<div id="map_canvas" style="width:100%; height:500px">
-				<script type="text/javascript">initialize();codeAddress();</script>
-			</div>';
+			<div id="map_canvas" style="width:100%; height:500px"></div>';
 	}
 
 	return $mapa;
@@ -370,272 +377,275 @@ function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $e
 
 
 
-		$mapa = '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key='.$google.'&sensor=false"></script>
-		<script type="text/javascript">
+		$mapa = '
+		<script async src="https://maps.googleapis.com/maps/api/js?key='.$google.'&callback=initMap_'.$identificador.'"></script>
+		<script>
+			let map_'.$identificador.';
+			var geocoder;
 
-		var geocoder;
-		var map_'.$identificador.';
+			async function initMap_'.$identificador.'() {
+				const { Map } = await google.maps.importLibrary("maps");
 
-		var myLatlng = new google.maps.LatLng(-33.4372, -70.6506);
+				geocoder = new google.maps.Geocoder();
 
-		function initialize_'.$identificador.'() {
-		  geocoder = new google.maps.Geocoder();
-		  var mapOptions = {
-			zoom: 15,
-			center: myLatlng
-		  }
-		  map_'.$identificador.' = new google.maps.Map(document.getElementById(\''.$identificador.'\'), mapOptions);
-		}
+				var myLatlng = new google.maps.LatLng(-33.477271996598965, -70.65170304882815);
 
-		function codeAddress_'.$identificador.'() {
-			bounds  = new google.maps.LatLngBounds();
+				var myOptions = {
+					zoom: 15,
+					center: myLatlng
+				};
 
-			geocoder.geocode( { \'address\': \''.$Ubicacion_1.'\'}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
+				map_'.$identificador.' = new Map(document.getElementById("'.$identificador.'"), myOptions);
+				codeAddress_'.$identificador.'();
+			}
 
-					// marker position
-					var factory_1 = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+			function codeAddress_'.$identificador.'() {
+				bounds  = new google.maps.LatLngBounds();
 
-					// InfoWindow content
-					var content = 	\'<div id="iw-container">\' +
-									\'<div class="iw-title">Dirección</div>\' +
-									\'<div class="iw-content">\' +
-									\'<div class="iw-subTitle">Calle</div>\' +
-									\'<p>'.$datasig_1.'</p>\' +
-									\'</div>\' +
-									\'<div class="iw-bottom-gradient"></div>\' +
-									\'</div>\';
+				geocoder.geocode( { \'address\': \''.$Ubicacion_1.'\'}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
 
-					// A new Info Window is created and set content
-					var infowindow = new google.maps.InfoWindow({
-						content: content,
-						maxWidth: 350
-					});
+						// marker position
+						var factory_1 = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 
-					// marker options
-					var marker_1 = new google.maps.Marker({
-						position	: factory_1,
-						map			: map_'.$identificador.',
-						title		: "Dirección",
-						animation 	: google.maps.Animation.DROP,
-						icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_orange.png"
-					});
+						// InfoWindow content
+						var content = 	\'<div id="iw-container">\' +
+										\'<div class="iw-title">Dirección</div>\' +
+										\'<div class="iw-content">\' +
+										\'<div class="iw-subTitle">Calle</div>\' +
+										\'<p>'.$datasig_1.'</p>\' +
+										\'</div>\' +
+										\'<div class="iw-bottom-gradient"></div>\' +
+										\'</div>\';
 
-					// This event expects a click on a marker_1
-					// When this event is fired the Info Window is opened.
-					google.maps.event.addListener(marker_1, \'click\', function() {
+						// A new Info Window is created and set content
+						var infowindow = new google.maps.InfoWindow({
+							content: content,
+							maxWidth: 350
+						});
+
+						// marker options
+						var marker_1 = new google.maps.Marker({
+							position	: factory_1,
+							map			: map_'.$identificador.',
+							title		: "Dirección",
+							animation 	: google.maps.Animation.DROP,
+							icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_orange.png"
+						});
+
+						// This event expects a click on a marker_1
+						// When this event is fired the Info Window is opened.
+						google.maps.event.addListener(marker_1, \'click\', function() {
+							infowindow.open(map_'.$identificador.',marker_1);
+						});
+
+						// Event that closes the Info Window with a click on the map
+						google.maps.event.addListener(map, \'click\', function() {
+							infowindow.close();
+						});
+
+						// *
+						// START INFOWINDOW CUSTOMIZE.
+						// The google.maps.event.addListener() event expects
+						// the creation of the infowindow HTML structure \'domready\'
+						// and before the opening of the infowindow, defined styles are applied.
+						// *
+						google.maps.event.addListener(infowindow, \'domready\', function() {
+
+							// Reference to the DIV that wraps the bottom of infowindow
+							var iwOuter = $(\'.gm-style-iw\');
+
+							/* Since this div is in a position prior to .gm-div style-iw.
+							* We use jQuery and create a iwBackground variable,
+							* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+							*/
+							var iwBackground = iwOuter.prev();
+
+							// Removes background shadow DIV
+							iwBackground.children(\':nth-child(2)\').css({\'display\' : \'none\'});
+
+							// Removes white background DIV
+							iwBackground.children(\':nth-child(4)\').css({\'display\' : \'none\'});
+
+							// Moves the infowindow 25px to the right.
+							//iwOuter.parent().parent().css({left: \'5px\'});
+
+							// Moves the shadow of the arrow 76px to the left margin.
+							iwBackground.children(\':nth-child(1)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
+
+							// Moves the arrow 76px to the left margin.
+							iwBackground.children(\':nth-child(3)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
+
+							// Changes the desired tail shadow color.
+							iwBackground.children(\':nth-child(3)\').find(\'div\').children().css({\'box-shadow\': \'rgba(72, 181, 233, 0.6) 0px 1px 6px\', \'z-index\' : \'1\'});
+
+							// Reference to the div that groups the close button elements.
+							var iwCloseBtn = iwOuter.next();
+
+							// Apply the desired effect to the close button
+							iwCloseBtn.css({width: \'28px\',height: \'28px\', opacity: \'1\', right: \'38px\', top: \'3px\', border: \'7px solid #48b5e9\', \'border-radius\': \'13px\', \'box-shadow\': \'0 0 5px #3990B9\'});
+
+							// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+							if($(\'.iw-content\').height() < 140){
+								$(\'.iw-bottom-gradient\').css({display: \'none\'});
+							}
+
+							// The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+							iwCloseBtn.mouseout(function(){
+								$(this).css({opacity: \'1\'});
+							});
+						});
+
+						//muestro la infowindow al inicio
 						infowindow.open(map_'.$identificador.',marker_1);
-					});
 
-					// Event that closes the Info Window with a click on the map
-					google.maps.event.addListener(map, \'click\', function() {
-						infowindow.close();
-					});
+						/*var marker_1 = new google.maps.Marker({
+									position:  new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
+									map: map_'.$identificador.',
+									title:"Marcador"
 
-					// *
-					// START INFOWINDOW CUSTOMIZE.
-					// The google.maps.event.addListener() event expects
-					// the creation of the infowindow HTML structure \'domready\'
-					// and before the opening of the infowindow, defined styles are applied.
-					// *
-					google.maps.event.addListener(infowindow, \'domready\', function() {
-
-						// Reference to the DIV that wraps the bottom of infowindow
-						var iwOuter = $(\'.gm-style-iw\');
-
-						/* Since this div is in a position prior to .gm-div style-iw.
-						* We use jQuery and create a iwBackground variable,
-						* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-						*/
-						var iwBackground = iwOuter.prev();
-
-						// Removes background shadow DIV
-						iwBackground.children(\':nth-child(2)\').css({\'display\' : \'none\'});
-
-						// Removes white background DIV
-						iwBackground.children(\':nth-child(4)\').css({\'display\' : \'none\'});
-
-						// Moves the infowindow 25px to the right.
-						//iwOuter.parent().parent().css({left: \'5px\'});
-
-						// Moves the shadow of the arrow 76px to the left margin.
-						iwBackground.children(\':nth-child(1)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
-
-						// Moves the arrow 76px to the left margin.
-						iwBackground.children(\':nth-child(3)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
-
-						// Changes the desired tail shadow color.
-						iwBackground.children(\':nth-child(3)\').find(\'div\').children().css({\'box-shadow\': \'rgba(72, 181, 233, 0.6) 0px 1px 6px\', \'z-index\' : \'1\'});
-
-						// Reference to the div that groups the close button elements.
-						var iwCloseBtn = iwOuter.next();
-
-						// Apply the desired effect to the close button
-						iwCloseBtn.css({width: \'28px\',height: \'28px\', opacity: \'1\', right: \'38px\', top: \'3px\', border: \'7px solid #48b5e9\', \'border-radius\': \'13px\', \'box-shadow\': \'0 0 5px #3990B9\'});
-
-						// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-						if($(\'.iw-content\').height() < 140){
-							$(\'.iw-bottom-gradient\').css({display: \'none\'});
-						}
-
-						// The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-						iwCloseBtn.mouseout(function(){
-							$(this).css({opacity: \'1\'});
+								});
+						var infowindow = new google.maps.InfoWindow({
+							content: "'.$datasig_1.'"
 						});
-					});
+						marker_1.addListener(\'click\', function() {
+							infowindow.open(map_'.$identificador.', marker_1);
+						});
+						infowindow.open(map_'.$identificador.', marker_1);*/
 
-					//muestro la infowindow al inicio
-					infowindow.open(map_'.$identificador.',marker_1);
+						loc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+						bounds.extend(loc);
 
-					/*var marker_1 = new google.maps.Marker({
-								  position:  new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
-								  map: map_'.$identificador.',
-								  title:"Marcador"
+					} else {
+						alert(\'Geocode was not successful for the following reason: \' + status);
+					}
+				});
 
-							  });
-					var infowindow = new google.maps.InfoWindow({
-						content: "'.$datasig_1.'"
-					});
-					marker_1.addListener(\'click\', function() {
-						infowindow.open(map_'.$identificador.', marker_1);
-					});
-					infowindow.open(map_'.$identificador.', marker_1);*/
+				geocoder.geocode( { \'address\': \''.$Ubicacion_2.'\'}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
 
-					loc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-					bounds.extend(loc);
+						// marker position
+						var factory_2 = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 
-				} else {
-					alert(\'Geocode was not successful for the following reason: \' + status);
-				}
-			});
+						// InfoWindow content
+						var content = 	\'<div id="iw-container">\' +
+										\'<div class="iw-title">Dirección</div>\' +
+										\'<div class="iw-content">\' +
+										\'<div class="iw-subTitle">Calle</div>\' +
+										\'<p>'.$datasig_2.'</p>\' +
+										\'</div>\' +
+										\'<div class="iw-bottom-gradient"></div>\' +
+										\'</div>\';
 
-			geocoder.geocode( { \'address\': \''.$Ubicacion_2.'\'}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
+						// A new Info Window is created and set content
+						var infowindow = new google.maps.InfoWindow({
+							content: content,
+							maxWidth: 350
+						});
 
-					// marker position
-					var factory_2 = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+						// marker options
+						var marker_2 = new google.maps.Marker({
+							position	: factory_2,
+							map			: map_'.$identificador.',
+							title		: "Dirección",
+							animation 	: google.maps.Animation.DROP,
+							icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_green.png"
+						});
 
-					// InfoWindow content
-					var content = 	\'<div id="iw-container">\' +
-									\'<div class="iw-title">Dirección</div>\' +
-									\'<div class="iw-content">\' +
-									\'<div class="iw-subTitle">Calle</div>\' +
-									\'<p>'.$datasig_2.'</p>\' +
-									\'</div>\' +
-									\'<div class="iw-bottom-gradient"></div>\' +
-									\'</div>\';
+						// This event expects a click on a marker_2
+						// When this event is fired the Info Window is opened.
+						google.maps.event.addListener(marker_2, \'click\', function() {
+							infowindow.open(map_'.$identificador.',marker_2);
+						});
 
-					// A new Info Window is created and set content
-					var infowindow = new google.maps.InfoWindow({
-						content: content,
-						maxWidth: 350
-					});
+						// Event that closes the Info Window with a click on the map
+						google.maps.event.addListener(map, \'click\', function() {
+							infowindow.close();
+						});
 
-					// marker options
-					var marker_2 = new google.maps.Marker({
-						position	: factory_2,
-						map			: map_'.$identificador.',
-						title		: "Dirección",
-						animation 	: google.maps.Animation.DROP,
-						icon      	: "'.DB_SITE_REPO.'/LIB_assets/img/map-icons/1_series_green.png"
-					});
+						// *
+						// START INFOWINDOW CUSTOMIZE.
+						// The google.maps.event.addListener() event expects
+						// the creation of the infowindow HTML structure \'domready\'
+						// and before the opening of the infowindow, defined styles are applied.
+						// *
+						google.maps.event.addListener(infowindow, \'domready\', function() {
 
-					// This event expects a click on a marker_2
-					// When this event is fired the Info Window is opened.
-					google.maps.event.addListener(marker_2, \'click\', function() {
+							// Reference to the DIV that wraps the bottom of infowindow
+							var iwOuter = $(\'.gm-style-iw\');
+
+							/* Since this div is in a position prior to .gm-div style-iw.
+							* We use jQuery and create a iwBackground variable,
+							* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+							*/
+							var iwBackground = iwOuter.prev();
+
+							// Removes background shadow DIV
+							iwBackground.children(\':nth-child(2)\').css({\'display\' : \'none\'});
+
+							// Removes white background DIV
+							iwBackground.children(\':nth-child(4)\').css({\'display\' : \'none\'});
+
+							// Moves the infowindow 25px to the right.
+							//iwOuter.parent().parent().css({left: \'5px\'});
+
+							// Moves the shadow of the arrow 76px to the left margin.
+							iwBackground.children(\':nth-child(1)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
+
+							// Moves the arrow 76px to the left margin.
+							iwBackground.children(\':nth-child(3)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
+
+							// Changes the desired tail shadow color.
+							iwBackground.children(\':nth-child(3)\').find(\'div\').children().css({\'box-shadow\': \'rgba(72, 181, 233, 0.6) 0px 1px 6px\', \'z-index\' : \'1\'});
+
+							// Reference to the div that groups the close button elements.
+							var iwCloseBtn = iwOuter.next();
+
+							// Apply the desired effect to the close button
+							iwCloseBtn.css({width: \'28px\',height: \'28px\', opacity: \'1\', right: \'38px\', top: \'3px\', border: \'7px solid #48b5e9\', \'border-radius\': \'13px\', \'box-shadow\': \'0 0 5px #3990B9\'});
+
+							// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+							if($(\'.iw-content\').height() < 140){
+								$(\'.iw-bottom-gradient\').css({display: \'none\'});
+							}
+
+							// The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+							iwCloseBtn.mouseout(function(){
+								$(this).css({opacity: \'1\'});
+							});
+						});
+
+						//muestro la infowindow al inicio
 						infowindow.open(map_'.$identificador.',marker_2);
-					});
 
-					// Event that closes the Info Window with a click on the map
-					google.maps.event.addListener(map, \'click\', function() {
-						infowindow.close();
-					});
+						/*var marker_2 = new google.maps.Marker({
+									position:  new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
+									map: map_'.$identificador.',
+									title:"Marcador"
 
-					// *
-					// START INFOWINDOW CUSTOMIZE.
-					// The google.maps.event.addListener() event expects
-					// the creation of the infowindow HTML structure \'domready\'
-					// and before the opening of the infowindow, defined styles are applied.
-					// *
-					google.maps.event.addListener(infowindow, \'domready\', function() {
-
-						// Reference to the DIV that wraps the bottom of infowindow
-						var iwOuter = $(\'.gm-style-iw\');
-
-						/* Since this div is in a position prior to .gm-div style-iw.
-						* We use jQuery and create a iwBackground variable,
-						* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-						*/
-						var iwBackground = iwOuter.prev();
-
-						// Removes background shadow DIV
-						iwBackground.children(\':nth-child(2)\').css({\'display\' : \'none\'});
-
-						// Removes white background DIV
-						iwBackground.children(\':nth-child(4)\').css({\'display\' : \'none\'});
-
-						// Moves the infowindow 25px to the right.
-						//iwOuter.parent().parent().css({left: \'5px\'});
-
-						// Moves the shadow of the arrow 76px to the left margin.
-						iwBackground.children(\':nth-child(1)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
-
-						// Moves the arrow 76px to the left margin.
-						iwBackground.children(\':nth-child(3)\').attr(\'style\', function(i,s){ return s + \'left: 6px !important;\'});
-
-						// Changes the desired tail shadow color.
-						iwBackground.children(\':nth-child(3)\').find(\'div\').children().css({\'box-shadow\': \'rgba(72, 181, 233, 0.6) 0px 1px 6px\', \'z-index\' : \'1\'});
-
-						// Reference to the div that groups the close button elements.
-						var iwCloseBtn = iwOuter.next();
-
-						// Apply the desired effect to the close button
-						iwCloseBtn.css({width: \'28px\',height: \'28px\', opacity: \'1\', right: \'38px\', top: \'3px\', border: \'7px solid #48b5e9\', \'border-radius\': \'13px\', \'box-shadow\': \'0 0 5px #3990B9\'});
-
-						// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-						if($(\'.iw-content\').height() < 140){
-							$(\'.iw-bottom-gradient\').css({display: \'none\'});
-						}
-
-						// The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-						iwCloseBtn.mouseout(function(){
-							$(this).css({opacity: \'1\'});
+								});
+						var infowindow = new google.maps.InfoWindow({
+							content: "'.$datasig_2.'"
 						});
-					});
+						marker_2.addListener(\'click\', function() {
+							infowindow.open(map_'.$identificador.', marker_2);
+						});
+						infowindow.open(map_'.$identificador.', marker_2);*/
 
-					//muestro la infowindow al inicio
-					infowindow.open(map_'.$identificador.',marker_2);
+						loc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+						bounds.extend(loc);
+						//centralizado y redimensionado del mapa
+						map_'.$identificador.'.fitBounds(bounds);
+						map_'.$identificador.'.panToBounds(bounds);
 
-					/*var marker_2 = new google.maps.Marker({
-								  position:  new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
-								  map: map_'.$identificador.',
-								  title:"Marcador"
-
-							  });
-					var infowindow = new google.maps.InfoWindow({
-						content: "'.$datasig_2.'"
-					});
-					marker_2.addListener(\'click\', function() {
-						infowindow.open(map_'.$identificador.', marker_2);
-					});
-					infowindow.open(map_'.$identificador.', marker_2);*/
-
-					loc = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-					bounds.extend(loc);
-					//centralizado y redimensionado del mapa
-					map_'.$identificador.'.fitBounds(bounds);
-					map_'.$identificador.'.panToBounds(bounds);
-
-				} else {
-					alert(\'Geocode was not successful for the following reason: \' + status);
-				}
-			});
-		}
+					} else {
+						alert(\'Geocode was not successful for the following reason: \' + status);
+					}
+				});
+			}
 
 		</script>
-		<div id="'.$identificador.'" style="width:100%; height:500px">
-				<script type="text/javascript">initialize_'.$identificador.'();codeAddress_'.$identificador.'();</script>
-		</div>';
+		<div id="'.$identificador.'" style="width:100%; height:500px"></div>';
 	}
 
 	return $mapa;
