@@ -4123,7 +4123,7 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field '.$name.'">
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"></div>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 					<div class="checkbox checkbox-primary">
@@ -4186,7 +4186,7 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field '.$name.'">
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 					<div class="checkbox checkbox-primary">
 						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
