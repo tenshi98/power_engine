@@ -74,26 +74,21 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 	/**************************************/
 	//verifico la existencia de datos
 	if(isset($myPhone, $InstanceId, $Token)&&$myPhone!=''&&$InstanceId!=''&&$Token!=''){
-		$data = [
-			'phone' => $myPhone, // Receivers phone
-			'body' => $Body, // Message
-		];
-		$json = json_encode($data); // Encode data to JSON
-		// URL for request POST /message
 
-		//$url = 'https://api.chat-api.com/instance'.$InstanceId.'/sendMessage?token='.$Token;
-		$url = 'https://api.1msg.io/'.$InstanceId.'/sendMessage?token='.$Token;
+		$url = 'https://api.1msg.io/'.$InstanceId.'/sendMessage';
+		$data = array('token' => $Token,'phone' => $myPhone,'body'  => $Body,);
+		$data_string = json_encode($data);
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
 
-		// Make a POST request
-		$options = stream_context_create(['http' => [
-				'method'  => 'POST',
-				'header'  => 'Content-type: application/json',
-				'content' => $json
-			]
-		]);
 
 		// Send a request
-		try {
+		/*try {
 			$result = @file_get_contents($url, false, $options);
 			//Si hay errores
 			if ($result === FALSE) {
@@ -105,6 +100,7 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 				error_log("url:".$url, 0);
 				error_log("Excepción capturada: No hay acceso a ".$url." para leer");
 				error_log("===============================================", 0);
+				return $json;
 			//Si no hay errores
 			} else {
 				//return $result;
@@ -119,7 +115,8 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 			error_log("url:".$url, 0);
 			error_log("Excepción capturada:".$e->getMessage(), 0);
 			error_log("===============================================", 0);
-		}
+			return $e->getMessage();
+		}*/
 
 	//guardo el log
 	}else{
