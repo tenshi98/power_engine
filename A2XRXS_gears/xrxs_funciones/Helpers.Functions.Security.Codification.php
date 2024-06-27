@@ -28,31 +28,28 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleEncode($value, $passkey) {
-    if (!$value) {
+function simpleEncode($simple_string, $passkey) {
+    /**************************************/
+    if (!$simple_string) {
         return false;
     }
+    /**************************************/
     if (!isset($passkey) OR empty($passkey) OR $passkey=='') {
-        $key = sha1('EnCRypT10nK#Y!RiSRNn');
+        $encryption_key = sha1('EnCRypT10nK#Y!RiSRNn');
     }else{
-		$key = $passkey;
+		$encryption_key = $passkey;
 	}
-    $strLen = strlen($value);
-    $keyLen = strlen($key);
-    $j = 0;
-    $crypttext = '';
-
-    for ($i = 0; $i < $strLen; $i++) {
-        $ordStr = ord(substr($value, $i, 1));
-        if ($j == $keyLen) {
-            $j = 0;
-        }
-        $ordKey = ord(substr($key, $j, 1));
-        $j++;
-        $crypttext .= strrev(base_convert(dechex($ordStr + $ordKey), 16, 36));
-    }
-
-    return $crypttext;
+    /**************************************/
+    //variables
+    $ciphering     = "AES-128-CTR";// Store the cipher method
+    $iv_length     = openssl_cipher_iv_length($ciphering);// Use OpenSSl Encryption method
+    $options       = 0;
+    $encryption_iv = '1234567891011121';// Non-NULL Initialization Vector for encryption
+    // Use openssl_encrypt() function to encrypt the data
+    $encryption    = openssl_encrypt($simple_string, $ciphering, $encryption_key, $options, $encryption_iv);
+    /**************************************/
+    //devuelvo
+    return $encryption;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -73,31 +70,26 @@ function simpleEncode($value, $passkey) {
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleDecode($value, $passkey) {
-    if (!$value) {
+function simpleDecode($simple_string, $passkey) {
+    if (!$simple_string) {
         return false;
     }
     if (!isset($passkey) OR empty($passkey) OR $passkey=='') {
-        $key = sha1('EnCRypT10nK#Y!RiSRNn');
+        $decryption_key = sha1('EnCRypT10nK#Y!RiSRNn');
     }else{
-		$key = $passkey;
+		$decryption_key = $passkey;
 	}
-    $strLen = strlen($value);
-    $keyLen = strlen($key);
-    $j = 0;
-    $decrypttext = '';
-
-    for ($i = 0; $i < $strLen; $i += 2) {
-        $ordStr = hexdec(base_convert(strrev(substr($value, $i, 2)), 36, 16));
-        if ($j == $keyLen) {
-            $j = 0;
-        }
-        $ordKey = ord(substr($key, $j, 1));
-        $j++;
-        $decrypttext .= chr($ordStr - $ordKey);
-    }
-
-    return $decrypttext;
+    /**************************************/
+    //variables
+    $ciphering     = "AES-128-CTR";// Store the cipher method
+    $iv_length     = openssl_cipher_iv_length($ciphering);// Use OpenSSl Encryption method
+    $options       = 0;
+    $decryption_iv = '1234567891011121';// Non-NULL Initialization Vector for encryption
+    // Use openssl_encrypt() function to encrypt the data
+    $decryption    = openssl_decrypt ($simple_string, $ciphering, $decryption_key, $options, $decryption_iv);
+    /**************************************/
+    //devuelvo
+    return $decryption;
 }
 
 //Codificacion propia por cada servidor, esto impide el copiado de información entre servidores
