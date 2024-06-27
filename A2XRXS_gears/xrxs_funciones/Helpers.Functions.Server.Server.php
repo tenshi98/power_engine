@@ -33,6 +33,27 @@ function fecha_actual(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
+* Obtener Fecha Actual
+*
+*===========================     Detalles    ===========================
+* Permite obtener la fecha actual de chile
+*===========================    Modo de uso  ===========================
+*
+* 	//se obtiene dato
+* 	fecha_actual();
+*
+*===========================    Parametros   ===========================
+* @return  Date
+************************************************************************/
+//Funcion
+function fecha_actual_val(){
+	// Establecer la zona horaria predeterminada a usar.
+	date_default_timezone_set('America/Santiago');
+	//Devolvemos la fecha actual dandole un formato
+	return date("Ymd");
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
 * Obtener Hora Actual
 *
 *===========================     Detalles    ===========================
