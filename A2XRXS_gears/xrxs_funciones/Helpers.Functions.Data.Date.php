@@ -246,7 +246,7 @@ function Fecha_archivos($Fecha){
 *
 *===========================     Detalles    ===========================
 * Cambia el formato de fecha por uno mas utilizado:
-* enero 01 del 1900
+* Enero del 1900
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
