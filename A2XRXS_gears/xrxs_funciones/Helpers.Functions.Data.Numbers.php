@@ -31,27 +31,19 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function Cantidades($valor, $n_decimales){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)&&validarNumero($n_decimales)){
-			//Verifica si el numero recibido es un entero
-			if (validaEntero($n_decimales)){
-				//valido los valores en 0
-				if($valor!=0){
-					return number_format($valor,$n_decimales,',','.');
-				}else{
-					return 0;
-				}
-			} else {
-				return 'El dato ingresado no es un numero entero';
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){                    return '0';}
+	if($valor==0){                     return 0;}
+	if (!validarNumero($valor)){       return 'El dato ingresado no es un numero ('.$valor.')';}
+	if (!validarNumero($n_decimales)){ return 'El dato ingresado no es un numero ('.$n_decimales.')';}
+	if (!validaEntero($n_decimales)){  return 'El dato ingresado no es un numero entero ('.$n_decimales.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return number_format($valor,$n_decimales,',','.');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -73,22 +65,19 @@ function Cantidades($valor, $n_decimales){
 ************************************************************************/
 //Funcion
 function n_doc($valor, $n_ceros){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)&&validarNumero($n_ceros)){
-			//Verifica si el numero recibido es un entero
-			if (validaEntero($valor)&&validaEntero($n_ceros)){
-				return str_pad($valor, $n_ceros, "0", STR_PAD_LEFT);
-			} else {
-				return 'El dato ingresado no es un numero entero';
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){                return '0';}
+	if (!validarNumero($valor)){   return 'El dato ingresado no es un numero';}
+	if (!validarNumero($n_ceros)){ return 'El dato ingresado no es un numero';}
+	if (!validaEntero($valor)){    return 'El dato ingresado no es un numero entero';}
+	if (!validaEntero($n_ceros)){  return 'El dato ingresado no es un numero entero';}
+
+	/**********************/
+	//Si todo esta ok
+	return str_pad($valor, $n_ceros, "0", STR_PAD_LEFT);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -110,22 +99,18 @@ function n_doc($valor, $n_ceros){
 ************************************************************************/
 //Funcion
 function Valores($valor, $n_decimales){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)&&validarNumero($n_decimales)){
-			//Verifica si el numero recibido es un entero
-			if (validaEntero($n_decimales)){
-				return '$ '.number_format($valor,$n_decimales,',','.');
-			} else {
-				return 'El dato ingresado no es un numero entero';
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '$ 0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){                    return '$ 0';}
+	if (!validarNumero($valor)){       return 'El dato ingresado no es un numero';}
+	if (!validarNumero($n_decimales)){ return 'El dato ingresado no es un numero';}
+	if (!validaEntero($n_decimales)){  return 'El dato ingresado no es un numero entero';}
+
+	/**********************/
+	//Si todo esta ok
+	return '$ '.number_format($valor,$n_decimales,',','.');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -145,21 +130,17 @@ function Valores($valor, $n_decimales){
 ************************************************************************/
 //Funcion
 function valores_enteros($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)){
-			if($valor==0){
-				return 0;
-			}else{
-				return floatval(number_format($valor, 0, '.', ''));
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	return floatval(number_format($valor, 0, '.', ''));
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -179,21 +160,17 @@ function valores_enteros($valor){
 ************************************************************************/
 //Funcion
 function valores_comparables($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)){
-			if($valor==0){
-				return 0;
-			}else{
-				return ceil($valor);
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	return ceil($valor);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -214,21 +191,17 @@ function valores_comparables($valor){
 ************************************************************************/
 //Funcion
 function valores_truncados($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)){
-			if($valor==0){
-				return 0;
-			}else{
-				return floor($valor);
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	return floor($valor);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -253,27 +226,23 @@ function valores_truncados($valor){
 ************************************************************************/
 //Funcion
 function Cantidades_decimales_justos($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)){
-			if($valor==0){
-				return 0;
-			}else{
-				//valido si es un numero entero para eliminar el punto despues del valor
-				if (ctype_digit($valor)) {
-					return floatval(number_format($valor, 0, '.', ''));
-				}else{
-					$dec = strlen($valor) - strrpos($valor, '.') - 1;
-					return floatval(number_format($valor, $dec, '.', ''));
-				}
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	//valido si es un numero entero para eliminar el punto despues del valor
+	if (ctype_digit($valor)) {
+		return floatval(number_format($valor, 0, '.', ''));
 	}else{
-		return '0';
+		$dec = strlen($valor) - strrpos($valor, '.') - 1;
+		return floatval(number_format($valor, $dec, '.', ''));
 	}
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -297,26 +266,22 @@ function Cantidades_decimales_justos($valor){
 ************************************************************************/
 //Funcion
 function Cantidades_decimales_justos_alt($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)){
-			if($valor==0){
-				return 0;
-			}else{
-				//valido si es un numero entero para eliminar el punto despues del valor
-				if (ctype_digit($valor)) {
-					return floatval(number_format($valor, 0, '.', ''));
-				}else{
-					return rtrim(number_format($valor,6,'.',','), ',0');
-				}
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	//valido si es un numero entero para eliminar el punto despues del valor
+	if (ctype_digit($valor)) {
+		return floatval(number_format($valor, 0, '.', ''));
 	}else{
-		return '0';
+		return rtrim(number_format($valor,6,'.',','), ',0');
 	}
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -335,12 +300,15 @@ function Cantidades_decimales_justos_alt($valor){
 ************************************************************************/
 //Funcion
 function cantidades_excel($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		return str_replace('.', ',', $valor);
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){return '0';}
+
+	/**********************/
+	//Si todo esta ok
+	return str_replace('.', ',', $valor);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -359,21 +327,17 @@ function cantidades_excel($valor){
 ************************************************************************/
 //Funcion
 function cantidades_google($valor){
-	//Se verifica que se recibe algo
-	if($valor!=''){
-		//se verifica si es un numero lo que se recibe
-		if (validarNumero($valor)){
-			if($valor==0){
-				return 0;
-			}else{
-				return str_replace(',', '.', $valor);
-			}
-		} else {
-			return 'El dato ingresado no es un numero';
-		}
-	}else{
-		return '0';
-	}
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	return str_replace(',', '.', $valor);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -393,68 +357,61 @@ function cantidades_google($valor){
 //Funcion
 function formatPhone($Phone){
 
-	//Verifico si existe
-	if(isset($Phone)&&$Phone!=''){
-		//obtengo el largo
-		$largo = strlen($Phone);
+	/**********************/
+	//Validaciones
+	if(!isset($Phone) OR $Phone==''){ return 'No ha ingresado el Fono';}
+	$largo = strlen($Phone);
+	if($largo<=7){                    return 'Numero demasiado corto, tiene '.$largo.' numeros y debe tener al menos 9';}
 
-		//si tiene al menos 8 digitos como lo es obligatorio
-		if($largo>7){
+	/**********************/
+	//Si todo esta ok
+	//si solo tiene el formato antiguo se le agrega el 9
+	if($largo==8){$Phone = '9'.$Phone;}
+	/**************************************/
+	//verifico si numero comienza con +56 o con 56
+	$myNumber = $Phone;
+	$findme_1 = '+';
+	$findme_2 = '+56';
+	$findme_3 = '56';
 
-			//si solo tiene el formato antiguo se le agrega el 9
-			if($largo==8){$Phone = '9'.$Phone;}
-			/**************************************/
-			//verifico si numero comienza con +56 o con 56
-			$myNumber = $Phone;
-			$findme_1 = '+';
-			$findme_2 = '+56';
-			$findme_3 = '56';
+	$pos_1 = strpos($myNumber, $findme_1);
+	$pos_2 = strpos($myNumber, $findme_2);
+	$pos_3 = strpos($myNumber, $findme_3);
 
-			$pos_1 = strpos($myNumber, $findme_1);
-			$pos_2 = strpos($myNumber, $findme_2);
-			$pos_3 = strpos($myNumber, $findme_3);
-
-			//si comienza con el +
-			if ($pos_1 !== false && $pos_1==0) {
-				//comienza con el +56
-				if ($pos_2 !== false && $pos_2==0) {
-					$myPhone = $Phone;
-				//no comienza con el +56, es otro numero
-				} else {
-					$myPhone = '';
-				}
-			//no comienza por el +
-			} else {
-				//comienza con el 56
-				if ($pos_3 !== false && $pos_3==0) {
-					$myPhone = '+'.$Phone;
-				//no comienza con el 56, es otro numero
-				} else {
-
-					$myPhone = '+56'.$Phone;
-				}
-			}
-
-			/**************************************/
-			//verifico la existencia de datos
-			if(isset($myPhone)&&$myPhone!=''){
-
-				$result = sprintf("(%s) %s %s %s",
-					  substr($myPhone, 0, 3),
-					  substr($myPhone, 3, 1),
-					  substr($myPhone, 4, 4),
-					  substr($myPhone, 8, 4));
-
-				return $result;
-			}
-		//si no tiene el largo necesario
-		}else{
-			return 'Numero demasiado corto, tiene '.$largo.' numeros y debe tener al menos 9';
+	//si comienza con el +
+	if ($pos_1 !== false && $pos_1==0) {
+		//comienza con el +56
+		if ($pos_2 !== false && $pos_2==0) {
+			$myPhone = $Phone;
+		//no comienza con el +56, es otro numero
+		} else {
+			$myPhone = '';
 		}
-	//si no existe
-	}else{
-		return '';
+	//no comienza por el +
+	} else {
+		//comienza con el 56
+		if ($pos_3 !== false && $pos_3==0) {
+			$myPhone = '+'.$Phone;
+		//no comienza con el 56, es otro numero
+		} else {
+
+			$myPhone = '+56'.$Phone;
+		}
 	}
+
+	/**************************************/
+	//verifico la existencia de datos
+	if(isset($myPhone)&&$myPhone!=''){
+
+		$result = sprintf("(%s) %s %s %s",
+			  substr($myPhone, 0, 3),
+			  substr($myPhone, 3, 1),
+			  substr($myPhone, 4, 4),
+			  substr($myPhone, 8, 4));
+
+		return $result;
+	}
+
 }
 
 ?>

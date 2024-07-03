@@ -21,6 +21,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *
 * 	//se codifica texto
 * 	simpleEncode("php recipe");
+* 	simpleEncode("php recipe", "passkey");
 *
 *===========================    Parametros   ===========================
 * String   $string   Texto a transformar
@@ -63,6 +64,7 @@ function simpleEncode($simple_string, $passkey) {
 *
 * 	//se decodifica texto
 * 	simpleDecode("qcnVhqjKxpuilw==");
+* 	simpleDecode("qcnVhqjKxpuilw==", "passkey");
 *
 *===========================    Parametros   ===========================
 * String   $string   Texto a transformar
@@ -91,8 +93,22 @@ function simpleDecode($simple_string, $passkey) {
     //devuelvo
     return $decryption;
 }
-
-//Codificacion propia por cada servidor, esto impide el copiado de información entre servidores
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Generador Hash
+*
+*===========================     Detalles    ===========================
+* Codificacion propia por cada servidor, esto impide el copiado de
+* información entre servidores
+*===========================    Modo de uso  ===========================
+*
+* 	//se genera codigo
+* 	generateServerSpecificHash();
+*
+*===========================    Parametros   ===========================
+* @return  String
+************************************************************************/
+//Funcion
 function generateServerSpecificHash(){
 	return (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME']))
             ? md5($_SERVER['SERVER_NAME'])
@@ -126,7 +142,7 @@ function generateServerSpecificHash(){
 * @return  String
 ************************************************************************/
 function encrypt_decrypt($action, $string) :string {
-	$output = false;
+	$output         = false;
 	$encrypt_method = "AES-256-CBC";
 	$secret_key     = 'tu_clave_secreta';
 	$secret_iv      = 'salt_secreto';
@@ -142,7 +158,23 @@ function encrypt_decrypt($action, $string) :string {
 	}
 	return $output;
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Generador Hash
+*
+*===========================     Detalles    ===========================
+* Codificacion propia por cada servidor, esto impide el copiado de
+* información entre servidores
+*===========================    Modo de uso  ===========================
+*
+* 	//se genera codigo
+* 	token_bin2hex(25);
+*
+*===========================    Parametros   ===========================
+* String   $longitud  largo del codigo generado
+* @return  String
+************************************************************************/
+//Funcion
 function token_bin2hex($longitud) {
 	$token = bin2hex(openssl_random_pseudo_bytes(($longitud - ($longitud % 2)) / 2));
 	return $token;

@@ -166,14 +166,11 @@ class subpointLocation {
 ************************************************************************/
 //Funcion
 function getGeocodeData($address, $ApiKey) {
-    //Obtengo la dirección
-    $address = urlencode($address);
-    //consulto a google
-    $googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=".$address."&key=".$ApiKey;
-    //obtengo la respuesta
-    $geocodeResponseData = file_get_contents($googleMapUrl);
-    //decodifico la respuesta
-    $responseData        = json_decode($geocodeResponseData, true);
+    //Variables
+    $address             = urlencode($address);                                                                    //Obtengo la dirección
+    $googleMapUrl        = "https://maps.googleapis.com/maps/api/geocode/json?address=".$address."&key=".$ApiKey;  //consulto a google
+    $geocodeResponseData = file_get_contents($googleMapUrl);                                                       //obtengo la respuesta
+    $responseData        = json_decode($geocodeResponseData, true);                                                //decodifico la respuesta
     //si hay un resultado
     if($responseData['status']=='OK') {
         //datos obtenidos

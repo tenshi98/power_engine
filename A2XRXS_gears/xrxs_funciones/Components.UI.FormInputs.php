@@ -593,12 +593,12 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$valor.'"  '.$requerido.' onkeydown="return soloLetras(event)">
-					</div>
-				</div>';
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<input type="text" placeholder="'.$placeholder.'" class="form-control"  name="'.$name.'" id="'.$name.'" value="'.$valor.'"  '.$requerido.' onkeydown="return soloLetras(event)">
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -663,30 +663,30 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input type="password" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
-							<span class="pass_impt" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
-							<span class="input-group-addon add-on" ><i class="fa fa-key" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input type="password" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
+						<span class="pass_impt" id="view_button_'.$name.'"><i class="fa fa-eye" aria-hidden="true"></i></span>
+						<span class="input-group-addon add-on" ><i class="fa fa-key" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .= '
-				<script>
-					$(document).ready(function() {
-						$("#view_button_'.$name.'").bind("mousedown touchstart", function() {
-							$("#'.$name.'").attr("type", "text");
-						})
-						, $("#view_button_'.$name.'").bind("mouseup touchend", function() {
-							$("#'.$name.'").attr("type", "password");
-						})
-					});
-				</script>';
+			<script>
+				$(document).ready(function() {
+					$("#view_button_'.$name.'").bind("mousedown touchstart", function() {
+						$("#'.$name.'").attr("type", "text");
+					})
+					, $("#view_button_'.$name.'").bind("mouseup touchend", function() {
+						$("#'.$name.'").attr("type", "password");
+					})
+				});
+			</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -727,12 +727,13 @@ class Basic_Form_Inputs{
 
 			/******************************************/
 			//generacion del input
-			$input = '<div class="form-group" id="div_'.$name.'">
-						<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-							<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control input_disabled" value="'.$valor.'"  disabled="disabled">
-						</div>
-					</div>';
+			$input = '
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control input_disabled" value="'.$valor.'"  disabled="disabled">
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -802,15 +803,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
-							<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloLetras(event)"  >
+						<span class="input-group-addon add-on"><i class="'.$icon.'"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -876,15 +877,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloRut(event)">
-							<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'" >'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input type="text" placeholder="'.$placeholder.'"  class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloRut(event)">
+						<span class="input-group-addon add-on"><i class="fa fa-male" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
@@ -963,15 +964,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)">
-							<span class="input-group-addon add-on"><i class="fa fa-usd" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)">
+						<span class="input-group-addon add-on"><i class="fa fa-usd" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1040,15 +1041,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
+						<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1123,15 +1124,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNaturalReal(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-superscript" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNaturalReal(event)"  >
+						<span class="input-group-addon add-on"><i class="fa fa-superscript" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1239,12 +1240,12 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<input id="'.$name.'" name="'.$name.'" class="rating rating-loading" data-min="'.$min.'" data-max="'.$max.'" data-step="1" value="'.$valor.'" data-size="'.$tamano.'" '.$requerido.'>
-					</div>
-				</div>';
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<input id="'.$name.'" name="'.$name.'" class="rating rating-loading" data-min="'.$min.'" data-max="'.$max.'" data-step="1" value="'.$valor.'" data-size="'.$tamano.'" '.$requerido.'>
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1314,15 +1315,16 @@ class Basic_Form_Inputs{
 
 			/******************************************/
 			//generacion del input
-			$input ='<div class="form-group" id="div_'.$name.'">
-						<label class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;">'.$placeholder.'</label>
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
-							<div class="input-group bootstrap-timepicker">
-								<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
-								<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
-							</div>
-						</div>
-					</div>';
+			$input ='
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
+						<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
+					</div>
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1427,29 +1429,29 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)" style="text-align: center;">
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)" style="text-align: center;">
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .= '
-				<script>
-					//se inicializa el plugin
-					$("input[name=\''.$name.'\']").TouchSpin({
-						min: '.$min.',
-						max: '.$max.',
-						step: '.$step.',
-						decimals: '.$ndecimal.',
-						boostat: 5,
-						maxboostedstep: 10
-					});
-				</script>';
+			<script>
+				//se inicializa el plugin
+				$("input[name=\''.$name.'\']").TouchSpin({
+					min: '.$min.',
+					max: '.$max.',
+					step: '.$step.',
+					decimals: '.$ndecimal.',
+					boostat: 5,
+					maxboostedstep: 10
+				});
+			</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1528,15 +1530,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
+						<span class="input-group-addon add-on"><i class="fa fa-phone" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1615,15 +1617,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroNatural(event)"  >
+						<span class="input-group-addon add-on"><i class="fa fa-fax" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1698,15 +1700,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="date" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' >
-							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="date" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' >
+						<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1781,32 +1783,32 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
-							<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
+						<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .='
-				<script type="text/javascript">
-					$(document).ready(function(){
-						$("#'.$EXname.'").bootstrapMaterialDatePicker
-						({
-							time: false,
-							lang: "es",
-							weekStart: 1,
-							cancelText : "Cancelar",
-							clearButton: true,
-							clearText : "Limpiar",
-						});
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#'.$EXname.'").bootstrapMaterialDatePicker
+					({
+						time: false,
+						lang: "es",
+						weekStart: 1,
+						cancelText : "Cancelar",
+						clearButton: true,
+						clearText : "Limpiar",
 					});
-				</script>';
+				});
+			</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -1891,26 +1893,26 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'   >
-							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'   >
+						<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .='
-				<script type="text/javascript">
-					$("#'.$EXname.'").clockpicker({
-						placement: "'.$x_pos.'",
-						align: "left",
-						donetext: "Listo"
-					});
-				</script>';
+			<script type="text/javascript">
+				$("#'.$EXname.'").clockpicker({
+					placement: "'.$x_pos.'",
+					align: "left",
+					donetext: "Listo"
+				});
+			</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -2030,15 +2032,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input .='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.'   >
-							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.'   >
+						<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -2113,33 +2115,33 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input ='
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
-							<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
+						<span class="input-group-addon add-on"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .='
-				<script type="text/javascript">
-					$(document).ready(function(){
-						$("#'.$EXname.'").bootstrapMaterialDatePicker
-						({
-							date: false,
-							shortTime: false,
-							format: "HH:mm",
-							lang: "es",
-							cancelText : "Cancelar",
-							clearButton: true,
-							clearText : "Limpiar",
-						});
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#'.$EXname.'").bootstrapMaterialDatePicker
+					({
+						date: false,
+						shortTime: false,
+						format: "HH:mm",
+						lang: "es",
+						cancelText : "Cancelar",
+						clearButton: true,
+						clearText : "Limpiar",
 					});
-				</script>';
+				});
+			</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -2203,30 +2205,30 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' '.$bcolor.' onkeydown="return soloLetras(event)">
-							<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input type="text" placeholder="'.$placeholder.'" class="form-control timepicker-default" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' '.$bcolor.' onkeydown="return soloLetras(event)">
+						<span class="input-group-addon add-on"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .= '
-				<script type="text/javascript">
-					$(function(){
-						$("#'.$name.'").colorpickerplus();
-						$("#'.$name.'").on("changeColor", function(e,color){
-							if(color==null)
+			<script type="text/javascript">
+				$(function(){
+					$("#'.$name.'").colorpickerplus();
+					$("#'.$name.'").on("changeColor", function(e,color){
+						if(color==null)
 							$(this).val("transparent").css("background-color", "#fff");//tranparent
-							else
+						else
 							$(this).val(color).css("background-color", color);
-						});
 					});
-				</script>
+				});
+			</script>
 			';
 
 			/******************************************/
@@ -2292,12 +2294,12 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal;" '.$requerido.' onkeydown="return soloLetrasTextArea(event)" >'.$valor.'</textarea>
-					</div>
-				</div>';
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<textarea name="'.$name.'" id="'.$name.'" class="form-control" style="overflow: auto; word-wrap: break-word; resize: horizontal;" '.$requerido.' onkeydown="return soloLetrasTextArea(event)" >'.$valor.'</textarea>
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -2363,10 +2365,10 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="txtckedit field">
-					<h3>'.$placeholder.'</h3>
-					<textarea id="ckeditor_'.$name.'" class="ckeditor" name="'.$name.'" '.$requerido.'>'.$value.'</textarea>
-				</div>';
+			<div class="txtckedit field">
+				<h3>'.$placeholder.'</h3>
+				<textarea id="ckeditor_'.$name.'" class="ckeditor" name="'.$name.'" '.$requerido.'>'.$value.'</textarea>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
@@ -2461,33 +2463,31 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input .= '
-				<div class="form-group" id="div_'.$name.'">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
-						<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<input id="kv-'.$name.'" name="'.$name.$ndat.'" type="file" multiple>
-					</div>
+			<div class="form-group" id="div_'.$name.'">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 				</div>
-			';
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<input id="kv-'.$name.'" name="'.$name.$ndat.'" type="file" multiple>
+				</div>
+			</div>';
 
 			/******************************************/
 			//ejecucion script
 			$input .= '
-				<script>
-					$(document).ready(function () {
-						$("#kv-'.$name.'").fileinput({
-							\'theme\': \'explorer\',
-							language: "es",
-							allowedFileExtensions: ['.$type_files.'],
-							maxFileCount: '.$max_files.',
-							overwriteInitial: false,
-							initialPreviewAsData: true,
-							showUpload: false
-						});
+			<script>
+				$(document).ready(function () {
+					$("#kv-'.$name.'").fileinput({
+						\'theme\': \'explorer\',
+						language: "es",
+						allowedFileExtensions: ['.$type_files.'],
+						maxFileCount: '.$max_files.',
+						overwriteInitial: false,
+						initialPreviewAsData: true,
+						showUpload: false
 					});
-				</script>
-			';
+				});
+			</script>';
 
 			/******************************************/
 			//Imprimir dato
@@ -2708,50 +2708,50 @@ class Basic_Form_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '
-						<div class="form-group" id="div_'.$name.'">
-							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">';
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">';
 
-								/******************************************/
-								//Recorro
-								foreach ( $arrSelect as $select ) {
+						/******************************************/
+						//Recorro
+						foreach ( $arrSelect as $select ) {
 
-									/******************************************/
-									//Si el tab correspondiente esta seleccionado
-									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-										$check = 'checked';
-										$valor = '2';
-									}else{
-										$check = '';
-										$valor = '2';
-									}
+							/******************************************/
+							//Si el tab correspondiente esta seleccionado
+							if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+								$check = 'checked';
+								$valor = '2';
+							}else{
+								$check = '';
+								$valor = '2';
+							}
 
-									/******************************************/
-									//Escribo los datos solicitados
-									if(count($datos)==1){
-										$data_writing = $select[$datos[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datos as $dato){
-											$data_writing .= $select[$dato].' ';
-										}
-									}
-
-									/******************************************/
-									$input .= '
-									<div class="checkbox checkbox-'.$tipo.'">
-										<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
-										<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
-										<label for="'.$name.'_'.$select['idData'].'">
-											'.TituloMenu(DeSanitizar($data_writing)).'
-										</label>
-									</div>';
-
+							/******************************************/
+							//Escribo los datos solicitados
+							if(count($datos)==1){
+								$data_writing = $select[$datos[0]].' ';
+							}else{
+								$data_writing = '';
+								foreach($datos as $dato){
+									$data_writing .= $select[$dato].' ';
 								}
+							}
 
-								$input .= '
-							</div>
-						</div>';
+							/******************************************/
+							$input .= '
+							<div class="checkbox checkbox-'.$tipo.'">
+								<input                type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
+								<input class="styled" type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
+								<label for="'.$name.'_'.$select['idData'].'">
+									'.TituloMenu(DeSanitizar($data_writing)).'
+								</label>
+							</div>';
+
+						}
+
+						$input .= '
+					</div>
+				</div>';
 
 				/******************************************/
 				//Imprimir dato
@@ -2981,49 +2981,49 @@ class Basic_Form_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '
-						<div class="form-group" id="div_'.$name.'">
-							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">';
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">';
 
-								/******************************************/
-								//Recorro
-								foreach ( $arrSelect as $select ) {
+						/******************************************/
+						//Recorro
+						foreach ( $arrSelect as $select ) {
 
-									/******************************************/
-									//Si el tab correspondiente esta seleccionado
-									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-										$check = 'checked';
-										$valor = '2';
-									}else{
-										$check = '';
-										$valor = '2';
-									}
+							/******************************************/
+							//Si el tab correspondiente esta seleccionado
+							if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+								$check = 'checked';
+								$valor = '2';
+							}else{
+								$check = '';
+								$valor = '2';
+							}
 
-									/******************************************/
-									//Escribo los datos solicitados
-									if(count($datos)==1){
-										$data_writing = $select[$datos[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datos as $dato){
-											$data_writing .= $select[$dato].' ';
-										}
-									}
-
-									/******************************************/
-									$input .= '
-									<div class="radio radio-'.$tipo.'">
-										<input type="radio" value="'.$valor.'" '.$check.' name="'.$name.'"  id="'.$name.'_'.$select['idData'].'">
-										<label for="'.$name.'">
-											'.TituloMenu(DeSanitizar($data_writing)).'
-										</label>
-									</div>';
-
+							/******************************************/
+							//Escribo los datos solicitados
+							if(count($datos)==1){
+								$data_writing = $select[$datos[0]].' ';
+							}else{
+								$data_writing = '';
+								foreach($datos as $dato){
+									$data_writing .= $select[$dato].' ';
 								}
+							}
 
-								$input .= '
-							</div>
-						</div>';
+							/******************************************/
+							$input .= '
+							<div class="radio radio-'.$tipo.'">
+								<input type="radio" value="'.$valor.'" '.$check.' name="'.$name.'"  id="'.$name.'_'.$select['idData'].'">
+								<label for="'.$name.'">
+									'.TituloMenu(DeSanitizar($data_writing)).'
+								</label>
+							</div>';
+
+						}
+
+						$input .= '
+					</div>
+				</div>';
 
 				/******************************************/
 				//Imprimir dato
@@ -3252,50 +3252,50 @@ class Basic_Form_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '
-						<div class="form-group" id="div_'.$name.'">
-							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-                                <div class="funkyradio">';
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+                        <div class="funkyradio">';
 
-                                    /******************************************/
-                                    //Recorro
-                                    foreach ( $arrSelect as $select ) {
+                            /******************************************/
+                            //Recorro
+                            foreach ( $arrSelect as $select ) {
 
-                                        /******************************************/
-                                        //Si el tab correspondiente esta seleccionado
-                                        if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-                                            $check = 'checked';
-                                            $valor = '2';
-                                        }else{
-                                            $check = '';
-                                            $valor = '2';
-                                        }
+                                /******************************************/
+                                //Si el tab correspondiente esta seleccionado
+                                if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+                                    $check = 'checked';
+                                    $valor = '2';
+                                }else{
+                                    $check = '';
+                                    $valor = '2';
+                                }
 
-                                        /******************************************/
-                                        //Escribo los datos solicitados
-                                        if(count($datos)==1){
-                                            $data_writing = $select[$datos[0]].' ';
-                                        }else{
-                                            $data_writing = '';
-                                            foreach($datos as $dato){
-                                                $data_writing .= $select[$dato].' ';
-                                            }
-                                        }
-
-                                        /******************************************/
-                                        $input .= '
-                                        <div class="funkyradio-'.$tipo.'">
-                                            <input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
-                                            <input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
-                                            <label for="'.$name.'_'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</label>
-                                        </div>';
-
+                                /******************************************/
+                                //Escribo los datos solicitados
+                                if(count($datos)==1){
+                                    $data_writing = $select[$datos[0]].' ';
+                                }else{
+                                    $data_writing = '';
+                                    foreach($datos as $dato){
+                                        $data_writing .= $select[$dato].' ';
                                     }
+                                }
 
-                                    $input .= '
-                                </div>
-							</div>
-						</div>';
+                                /******************************************/
+                                $input .= '
+                                <div class="funkyradio-'.$tipo.'">
+                                    <input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'"  >
+                                    <input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'"  id="'.$name.'_'.$select['idData'].'">
+                                    <label for="'.$name.'_'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</label>
+                                </div>';
+
+                            }
+
+                            $input .= '
+                        </div>
+					</div>
+				</div>';
 
 				/******************************************/
 				//Imprimir dato
@@ -3523,49 +3523,49 @@ class Basic_Form_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '
-						<div class="form-group" id="div_'.$name.'">
-							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-                                <div class="funkyradio">';
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+                        <div class="funkyradio">';
 
-                                    /******************************************/
-                                    //Recorro
-                                    foreach ( $arrSelect as $select ) {
+                            /******************************************/
+                            //Recorro
+                            foreach ( $arrSelect as $select ) {
 
-                                        /******************************************/
-                                        //Si el tab correspondiente esta seleccionado
-                                        if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-                                            $check = 'checked';
-                                            $valor = '2';
-                                        }else{
-                                            $check = '';
-                                            $valor = '2';
-                                        }
+                                /******************************************/
+                                //Si el tab correspondiente esta seleccionado
+                                if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+                                    $check = 'checked';
+                                    $valor = '2';
+                                }else{
+                                    $check = '';
+                                    $valor = '2';
+                                }
 
-                                        /******************************************/
-                                        //Escribo los datos solicitados
-                                        if(count($datos)==1){
-                                            $data_writing = $select[$datos[0]].' ';
-                                        }else{
-                                            $data_writing = '';
-                                            foreach($datos as $dato){
-                                                $data_writing .= $select[$dato].' ';
-                                            }
-                                        }
-
-                                        /******************************************/
-                                        $input .= '
-                                        <div class="funkyradio-'.$tipo.'">
-                                            <input type="radio" value="'.$valor.'" '.$check.' name="'.$name.'"  id="'.$name.'_'.$select['idData'].'">
-                                            <label for="'.$name.'_'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</label>
-                                        </div>';
-
+                                /******************************************/
+                                //Escribo los datos solicitados
+                                if(count($datos)==1){
+                                    $data_writing = $select[$datos[0]].' ';
+                                }else{
+                                    $data_writing = '';
+                                    foreach($datos as $dato){
+                                        $data_writing .= $select[$dato].' ';
                                     }
+                                }
 
-								    $input .= '
-                                </div>
-							</div>
-						</div>';
+                                /******************************************/
+                                $input .= '
+                                <div class="funkyradio-'.$tipo.'">
+                                    <input type="radio" value="'.$valor.'" '.$check.' name="'.$name.'"  id="'.$name.'_'.$select['idData'].'">
+                                    <label for="'.$name.'_'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</label>
+                                </div>';
+
+                            }
+
+							$input .= '
+                        </div>
+					</div>
+				</div>';
 
 				/******************************************/
 				//Imprimir dato
@@ -3815,72 +3815,71 @@ class Basic_Form_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '
-						<div class="form-group" id="div_'.$name.'">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								'.$placeholder.'';
+				<div class="form-group" id="div_'.$name.'">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						'.$placeholder.'';
 
-								/******************************************/
-								//Recorro
-								foreach ( $arrSelect as $select ) {
+						/******************************************/
+						//Recorro
+						foreach ( $arrSelect as $select ) {
 
-									/******************************************/
-									//Si el tab correspondiente esta seleccionado
-									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-										$check = 'checked';
-										$valor = '2';
-										$label = '<label class="label label-success">Activo</label>';
-									}else{
-										$check = '';
-										$valor = '2';
-										$label = '<label class="label label-danger">Inactivo</label>';
-									}
+							/******************************************/
+							//Si el tab correspondiente esta seleccionado
+							if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+								$check = 'checked';
+								$valor = '2';
+								$label = '<label class="label label-success">Activo</label>';
+							}else{
+								$check = '';
+								$valor = '2';
+								$label = '<label class="label label-danger">Inactivo</label>';
+							}
 
-									/******************************************/
-									//Escribo los datos solicitados
-									if(count($datos)==1){
-										$data_writing = $select[$datos[0]].' ';
-									}else{
-										$data_writing = '';
-										foreach($datos as $dato){
-											$data_writing .= $select[$dato].' ';
-										}
-									}
-
-									/******************************************/
-									$input .= '
-									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 30px;">
-										<div class="pull-left">
-											<label>'.TituloMenu(DeSanitizar($data_writing)).'</label> <span id="spn_'.$name.'_'.$select['idData'].'">'.$label.'</span>
-										</div>
-										<div class="material-switch pull-right field">
-											<input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
-											<input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'" />
-											<label for="'.$name.'_'.$select['idData'].'" class="label-'.$tipo.'"></label>
-										</div>
-									</div>';
-
-									/******************************************/
-									//generacion del input
-									$input.= '
-									<script>
-										const checkbox_'.$name.'_'.$select['idData'].' = $("#'.$name.'_'.$select['idData'].'");
-
-										checkbox_'.$name.'_'.$select['idData'].'.change(function(event) {
-											var checkbox_'.$name.'_'.$select['idData'].' = event.target;
-											if (checkbox_'.$name.'_'.$select['idData'].'.checked) {
-												document.getElementById("spn_'.$name.'_'.$select['idData'].'").innerHTML="<label class=\"label label-success\">Activo</label>";
-											} else {
-												document.getElementById("spn_'.$name.'_'.$select['idData'].'").innerHTML="<label class=\"label label-danger\">Inactivo</label>";
-											}
-										});
-									</script>
-									';
-
+							/******************************************/
+							//Escribo los datos solicitados
+							if(count($datos)==1){
+								$data_writing = $select[$datos[0]].' ';
+							}else{
+								$data_writing = '';
+								foreach($datos as $dato){
+									$data_writing .= $select[$dato].' ';
 								}
+							}
 
-								$input .= '
-							</div>
-						</div>';
+							/******************************************/
+							$input .= '
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 30px;">
+								<div class="pull-left">
+									<label>'.TituloMenu(DeSanitizar($data_writing)).'</label> <span id="spn_'.$name.'_'.$select['idData'].'">'.$label.'</span>
+								</div>
+								<div class="material-switch pull-right field">
+									<input type="hidden"   value="1"          '.$check.' name="'.$name.'_'.$select['idData'].'" >
+									<input type="checkbox" value="'.$valor.'" '.$check.' name="'.$name.'_'.$select['idData'].'" id="'.$name.'_'.$select['idData'].'" />
+									<label for="'.$name.'_'.$select['idData'].'" class="label-'.$tipo.'"></label>
+								</div>
+							</div>';
+
+							/******************************************/
+							//generacion del input
+							$input.= '
+							<script>
+								const checkbox_'.$name.'_'.$select['idData'].' = $("#'.$name.'_'.$select['idData'].'");
+
+								checkbox_'.$name.'_'.$select['idData'].'.change(function(event) {
+									var checkbox_'.$name.'_'.$select['idData'].' = event.target;
+									if (checkbox_'.$name.'_'.$select['idData'].'.checked) {
+										document.getElementById("spn_'.$name.'_'.$select['idData'].'").innerHTML="<label class=\"label label-success\">Activo</label>";
+									} else {
+										document.getElementById("spn_'.$name.'_'.$select['idData'].'").innerHTML="<label class=\"label label-danger\">Inactivo</label>";
+									}
+								});
+							</script>';
+
+						}
+
+						$input .= '
+					</div>
+				</div>';
 
 				/******************************************/
 				//Imprimir dato
@@ -4018,68 +4017,66 @@ class Basic_Form_Inputs{
 				/******************************************/
 				//generacion del input
 				$input = '
+				<div class="form-group" id="div_'.$name.'">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="input-group">
+							<div id="'.$name.'_div" class="radioBtn btn-group">
+								<a class="btn btn-default btn-sm tittle" >'.$placeholder.'</a>';
 
-						<div class="form-group" id="div_'.$name.'">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<div class="input-group">
-									<div id="'.$name.'_div" class="radioBtn btn-group">
-										<a class="btn btn-default btn-sm tittle" >'.$placeholder.'</a>';
+								/******************************************/
+								//contador
+								$x = 0;
+								//Recorro
+								foreach ( $arrSelect as $select ) {
 
-										/******************************************/
-										//contador
-										$x = 0;
-										//Recorro
-										foreach ( $arrSelect as $select ) {
+									/******************************************/
+									//si es el primer elemento
+									if($x==0){
+										$fItem = 'fItem';
+										$x++;
+									}else{
+										$fItem = '';
+									}
 
-											/******************************************/
-											//si es el primer elemento
-											if($x==0){
-												$fItem = 'fItem';
-												$x++;
-											}else{
-												$fItem = '';
-											}
+									/******************************************/
+									//Si el tab correspondiente esta seleccionado
+									if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
+										$check = 'active';
+									}else{
+										$check = 'notActive';
+									}
 
-											/******************************************/
-											//Si el tab correspondiente esta seleccionado
-											if(isset($arrValTab[$select['idData']])&&$arrValTab[$select['idData']]==2){
-												$check = 'active';
-											}else{
-												$check = 'notActive';
-											}
-
-											/******************************************/
-											//Escribo los datos solicitados
-											if(count($datos)==1){
-												$data_writing = $select[$datos[0]].' ';
-											}else{
-												$data_writing = '';
-												foreach($datos as $dato){
-													$data_writing .= $select[$dato].' ';
-												}
-											}
-
-											/******************************************/
-											$input .= '<a class="btn btn-'.$tipo.' btn-sm '.$check.' l_item '.$fItem.' Icon_'.$select['idData'].'" data-toggle="'.$name.'" data-title="'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</a>';
-
+									/******************************************/
+									//Escribo los datos solicitados
+									if(count($datos)==1){
+										$data_writing = $select[$datos[0]].' ';
+									}else{
+										$data_writing = '';
+										foreach($datos as $dato){
+											$data_writing .= $select[$dato].' ';
 										}
-										$input .= '
-									</div>
-									<input type="hidden" name="'.$name.'" id="'.$name.'">
-								</div>
-							</div>
-						</div>
+									}
 
-						<script>
-							$(\'#'.$name.'_div a\').on(\'click\', function(){
-								var sel = $(this).data(\'title\');
-								var tog = $(this).data(\'toggle\');
-								document.getElementById("'.$name.'").value = sel;
-								$(\'a[data-toggle="\'+tog+\'"]\').not(\'[data-title="\'+sel+\'"]\').removeClass(\'active\').addClass(\'notActive\');
-								$(\'a[data-toggle="\'+tog+\'"][data-title="\'+sel+\'"]\').removeClass(\'notActive\').addClass(\'active\');
-							})
-						</script>
-						';
+									/******************************************/
+									$input .= '<a class="btn btn-'.$tipo.' btn-sm '.$check.' l_item '.$fItem.' Icon_'.$select['idData'].'" data-toggle="'.$name.'" data-title="'.$select['idData'].'">'.TituloMenu(DeSanitizar($data_writing)).'</a>';
+
+								}
+								$input .= '
+							</div>
+							<input type="hidden" name="'.$name.'" id="'.$name.'">
+						</div>
+					</div>
+				</div>
+
+				<script>
+					$(\'#'.$name.'_div a\').on(\'click\', function(){
+						var sel = $(this).data(\'title\');
+						var tog = $(this).data(\'toggle\');
+						document.getElementById("'.$name.'").value = sel;
+						$(\'a[data-toggle="\'+tog+\'"]\').not(\'[data-title="\'+sel+\'"]\').removeClass(\'active\').addClass(\'notActive\');
+						$(\'a[data-toggle="\'+tog+\'"][data-title="\'+sel+\'"]\').removeClass(\'notActive\').addClass(\'active\');
+					})
+				</script>';
 
 				/******************************************/
 				//Imprimir dato
@@ -4123,39 +4120,37 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field '.$name.'">
-				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"></div>
-				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-					<div class="checkbox checkbox-primary">
-						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
-						<label>'.$inicio.'  <a class="iframe" href="'.$link.'">'.$fin.'</a></label>
-					</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field '.$name.'">
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"></div>
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+				<div class="checkbox checkbox-primary">
+					<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
+					<label>'.$inicio.'  <a class="iframe" href="'.$link.'">'.$fin.'</a></label>
 				</div>
 			</div>
-		';
+		</div>';
 
 		/******************************************/
 		//ejecucion script
 		$input .= '
-			<script>
-				//se desactiva el boton f5
-				window.onload = function () {
-					disableSubmit();
-				}
-				//se desactiva el boton submit
-				function disableSubmit() {
+		<script>
+			//se desactiva el boton f5
+			window.onload = function () {
+				disableSubmit();
+			}
+			//se desactiva el boton submit
+			function disableSubmit() {
+				document.getElementById("'.$submit_name.'").disabled = true;
+			}
+			//si se esta de acuerdo se activa el boton submit
+			function acbtn_'.$name.'(element) {
+				if(element.checked) {
+					document.getElementById("'.$submit_name.'").disabled = false;
+				}else  {
 					document.getElementById("'.$submit_name.'").disabled = true;
 				}
-				//si se esta de acuerdo se activa el boton submit
-				function acbtn_'.$name.'(element) {
-					if(element.checked) {
-						document.getElementById("'.$submit_name.'").disabled = false;
-					}else  {
-						document.getElementById("'.$submit_name.'").disabled = true;
-					}
-				}
-			</script>
-			';
+			}
+		</script>';
 
 		/******************************************/
 		//Imprimir dato
@@ -4186,38 +4181,36 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field '.$name.'">
-				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-					<div class="checkbox checkbox-primary">
-						<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
-						<label>'.$text.'</label>
-					</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 field '.$name.'">
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+				<div class="checkbox checkbox-primary">
+					<input class="styled" type="checkbox" name="'.$name.'" id="'.$name.'" value="1" onchange="acbtn_'.$name.'(this)">
+					<label>'.$text.'</label>
 				</div>
 			</div>
-		';
+		</div>';
 
 		/******************************************/
 		//ejecucion script
 		$input .= '
-			<script>
-				//se desactiva el boton f5
-				window.onload = function () {
-					disableSubmit();
-				}
-				//se desactiva el boton submit
-				function disableSubmit() {
+		<script>
+			//se desactiva el boton f5
+			window.onload = function () {
+				disableSubmit();
+			}
+			//se desactiva el boton submit
+			function disableSubmit() {
+				document.getElementById("'.$submit_name.'").disabled = true;
+			}
+			//si se esta de acuerdo se activa el boton submit
+			function acbtn_'.$name.'(element) {
+				if(element.checked) {
+					document.getElementById("'.$submit_name.'").disabled = false;
+				}else{
 					document.getElementById("'.$submit_name.'").disabled = true;
 				}
-				//si se esta de acuerdo se activa el boton submit
-				function acbtn_'.$name.'(element) {
-					if(element.checked) {
-						document.getElementById("'.$submit_name.'").disabled = false;
-					}else  {
-						document.getElementById("'.$submit_name.'").disabled = true;
-					}
-				}
-			</script>
-			';
+			}
+		</script>';
 
 		/******************************************/
 		//Imprimir dato
@@ -4257,13 +4250,12 @@ class Basic_Form_Inputs{
 		/******************************************/
 		//generacion del input
 		$input = '
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div style="overflow-y: auto;padding:10px;height: '.$height.'px;">
-					'.$content.'
-				</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div style="overflow-y: auto;padding:10px;height: '.$height.'px;">
+				'.$content.'
 			</div>
-			<div class="clearfix"></div>
-		';
+		</div>
+		<div class="clearfix"></div>';
 
 		/******************************************/
 		//Imprimir dato
@@ -4326,15 +4318,15 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<div class="input-group bootstrap-timepicker">
-							<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return rolTerreno(event)"  >
-							<span class="input-group-addon add-on"><i class="fa fa-map-o" aria-hidden="true"></i></span>
-						</div>
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<div class="input-group bootstrap-timepicker">
+						<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$name.'" value="'.$valor.'" '.$requerido.' onkeydown="return rolTerreno(event)"  >
+						<span class="input-group-addon add-on"><i class="fa fa-map-o" aria-hidden="true"></i></span>
 					</div>
-				</div>';
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -5129,12 +5121,13 @@ class Basic_Form_Inputs{
 
 				/******************************************/
 				//generacion del input
-				$input = '<div class="form-group" id="div_'.$name.'">
-							<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-								<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.TituloMenu(DeSanitizar($data_writing)).'"   disabled="disabled">
-							</div>
-						</div>';
+				$input = '
+				<div class="form-group" id="div_'.$name.'">
+					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+						<input type="text" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$name.'" class="form-control" value="'.TituloMenu(DeSanitizar($data_writing)).'"   disabled="disabled">
+					</div>
+				</div>';
 
 				/******************************************/
 				//Imprimir dato
@@ -5235,30 +5228,31 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<select class="form-control" name="'.$name.'" id="'.$name.'" '.$requerido.'>
-							<option value="">Seleccione una Opción</option>';
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<select class="form-control" name="'.$name.'" id="'.$name.'" '.$requerido.'>
+						<option value="">Seleccione una Opción</option>';
+
+						/******************************************/
+						//Recorro
+						for ($i = $valor_ini; $i <= $valor_fin; $i++) {
 
 							/******************************************/
-							//Recorro
-							for ($i = $valor_ini; $i <= $valor_fin; $i++) {
-
-								/******************************************/
-								//si la opción actual esta seleccionada
-								if(isset($value)&&$value==$i) {
-									$j = 'selected="selected"';
-								}else{
-									$j = '';
-								}
-
-								/******************************************/
-								$input .= '<option value="'.$i.'" '.$j.'>'.$i.'</option>';
+							//si la opción actual esta seleccionada
+							if(isset($value)&&$value==$i) {
+								$j = 'selected="selected"';
+							}else{
+								$j = '';
 							}
-				$input .= '</select>
-					</div>
-				</div>';
+
+							/******************************************/
+							$input .= '<option value="'.$i.'" '.$j.'>'.$i.'</option>';
+						}
+					$input .= '
+					</select>
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -5336,12 +5330,12 @@ class Basic_Form_Inputs{
 			/******************************************/
 			//generacion del input
 			$input = '
-				<div class="form-group" id="div_'.$name.'">
-					<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
-						<select name="'.$name.'" id="'.$name.'" class="form-control frm_country selectpicker countrypicker" '.$requerido.'  data-live-search="true" data-default="'.$pais.'" data-flag="true"></select>
-					</div>
-				</div>';
+			<div class="form-group" id="div_'.$name.'">
+				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4" id="label_'.$name.'">'.$placeholder.'</label>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
+					<select name="'.$name.'" id="'.$name.'" class="form-control frm_country selectpicker countrypicker" '.$requerido.'  data-live-search="true" data-default="'.$pais.'" data-flag="true"></select>
+				</div>
+			</div>';
 
 			/******************************************/
 			//Imprimir dato
@@ -5701,7 +5695,7 @@ class Basic_Form_Inputs{
 				</div>';
 
 				$data .= '
-					<script>
+				<script>
 					$(document).ready(function() {
 						$("#'.$EXname.'").multiselect({
 						includeSelectAllOption: true,
@@ -6222,8 +6216,8 @@ class Basic_Form_Inputs{
 	* @return  String
 	************************************************************************/
 	public function form_select_depend1_filter($placeholder_1, $name_1,  $value_1,  $required_1,  $dataA_1,  $dataB_1,  $table_1,  $filter_1,   $extracomand_1,
-										$placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
-										$dbConn, $form_name){
+											   $placeholder_2, $name_2,  $value_2,  $required_2,  $dataA_2,  $dataB_2,  $table_2,  $filter_2,   $extracomand_2,
+											   $dbConn, $form_name){
 
 		/********************************************************/
 		//Definicion de errores

@@ -68,16 +68,10 @@ function genera_password($longitud,$tipo){
 //Funcion
 function genera_password_unica(){
 
-	//inicializo variable
-	$password = '';
-	// Establecer la zona horaria predeterminada a usar.
+    // Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
-	//Imprimimos la fecha actual dandole un formato
-	$password.= date("Ymd");
-	//Imprimimos la hora actual dandole un formato
-	$password.= date("His");
-	//devuelvo valor
-    return $password;
+    //devuelvo valor
+    return date("Ymd").date("His");
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////

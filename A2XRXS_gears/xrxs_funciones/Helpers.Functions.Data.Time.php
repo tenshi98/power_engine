@@ -27,17 +27,16 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function Hora_estandar($Hora){
-	//valido la hora
-	if(validaHora($Hora)){
-		if($Hora!='00:00:00'){
-			$date = date_create($Hora);
-			return date_format($date, 'H:i');
-		}else{
-			return 'Sin Hora';
-		}
-	}else{
-		return 'El dato ingresado no es una hora ('.$Hora.')';
-	}
+
+	/**********************/
+	//Validaciones
+	if(!validaHora($Hora)){ return 'El dato ingresado no es una hora ('.$Hora.')';}
+	if($Hora=='00:00:00'){  return 'Sin Hora';}
+
+	/**********************/
+	//Si todo esta ok
+	return date_format(date_create($Hora), 'H:i');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -56,16 +55,16 @@ function Hora_estandar($Hora){
 ************************************************************************/
 //Funcion
 function Hora_prog($Hora){
-	//valido la hora
-	//if(validaHora($Hora)){
-		if($Hora!='00:00:00'){
-			return date("H:i:s", strtotime($Hora));
-		}else{
-			return 'Sin Hora';
-		}
-	/*}else{
-		return 'El dato ingresado no es una hora ('.$Hora.')';
-	}*/
+
+	/**********************/
+	//Validaciones
+	//if(!validaHora($Hora)){ return 'El dato ingresado no es una hora ('.$Hora.')';}
+	if($Hora=='00:00:00'){  return 'Sin Hora';}
+
+	/**********************/
+	//Si todo esta ok
+	return date("H:i:s", strtotime($Hora));
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -84,16 +83,16 @@ function Hora_prog($Hora){
 ************************************************************************/
 //Funcion
 function Hora_archivos($Hora){
-	//valido la hora
-	//if(validaHora($Hora)){
-		if($Hora!='00:00:00'){
-			return date("His", strtotime($Hora));
-		}else{
-			return 'Sin Hora';
-		}
-	/*}else{
-		return 'El dato ingresado no es una hora ('.$Hora.')';
-	}*/
+
+	/**********************/
+	//Validaciones
+	//if(!validaHora($Hora)){ return 'El dato ingresado no es una hora ('.$Hora.')';}
+	if($Hora=='00:00:00'){  return 'Sin Hora';}
+
+	/**********************/
+	//Si todo esta ok
+	return date("His", strtotime($Hora));
+
 }
 
 ?>

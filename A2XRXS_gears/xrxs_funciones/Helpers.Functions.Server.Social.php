@@ -37,8 +37,8 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 
 	$vowels_1 = array('<br/>', '<br>', '</br>');
 	$vowels_2 = array('<strong>', '</strong>');
-	$Body = str_replace($vowels_1, $saltoLinea, $Body);
-	$Body = str_replace($vowels_2, '*', $Body);
+	$Body     = str_replace($vowels_1, $saltoLinea, $Body);
+	$Body     = str_replace($vowels_2, '*', $Body);
 
 	/**************************************/
 	//verifico si numero comienza con +56 o con 56

@@ -30,23 +30,22 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function cortar($texto, $cuantos){
-	//se verifica si es un numero lo que se recibe
-	if (validarNumero($cuantos)){
-		//Verifica si el numero recibido es un entero
-		if (validaEntero($cuantos)){
-			//si el largo texto es inferior a la cantidad a cortar
-			if (strlen($texto) <= $cuantos){
-				return $texto;
-			//si el largo texto es superior a la cantidad a cortar
-			}else{
-				return substr($texto, 0, $cuantos) . '...';
-			}
-		} else {
-			return 'El dato ingresado no es un numero entero';
-		}
-	} else {
-		return 'El dato ingresado no es un numero';
+
+	/**********************/
+	//Validaciones
+	if (!validarNumero($cuantos)){  return 'El dato ingresado no es un numero';}
+	if (!validaEntero($cuantos)){   return 'El dato ingresado no es un numero entero';}
+
+	/**********************/
+	//Si todo esta ok
+	//si el largo texto es inferior a la cantidad a cortar
+	if (strlen($texto) <= $cuantos){
+		return $texto;
+	//si el largo texto es superior a la cantidad a cortar
+	}else{
+		return substr($texto, 0, $cuantos) . '...';
 	}
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -97,20 +96,19 @@ function cortarRut($Rut){
 ************************************************************************/
 //Funcion
 function palabra_largo($oracion,$largo){
-	//se verifica si es un numero lo que se recibe
-	if (validarNumero($largo)){
-		//Verifica si el numero recibido es un entero
-		if (validaEntero($largo)){
-			//se verifica el largo
-			if (strlen($oracion) < $largo) {
-				return 'El dato ingresado debe tener al menos '.$largo.' caracteres';
-			}
-		} else {
-			return 'El dato ingresado no es un numero entero';
-		}
-	} else {
-			return 'El dato ingresado no es un numero';
+
+	/**********************/
+	//Validaciones
+	if (!validarNumero($largo)){ return 'El dato ingresado no es un numero';}
+	if (!validaEntero($largo)){  return 'El dato ingresado no es un numero entero';}
+
+	/**********************/
+	//Si todo esta ok
+	//se verifica el largo
+	if (strlen($oracion) < $largo) {
+		return 'El dato ingresado debe tener al menos '.$largo.' caracteres';
 	}
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -131,20 +129,19 @@ function palabra_largo($oracion,$largo){
 ************************************************************************/
 //Funcion
 function palabra_corto($oracion,$largo){
-	//se verifica si es un numero lo que se recibe
-	if (validarNumero($largo)){
-		//Verifica si el numero recibido es un entero
-		if (validaEntero($largo)){
-			//se verifica el corto
-			if (strlen($oracion) > $largo) {
-				return 'El dato ingresado debe tener no mas de '.$largo.' caracteres';
-			}
-		} else {
-			return 'El dato ingresado no es un numero entero';
-		}
-	} else {
-			return 'El dato ingresado no es un numero';
+
+	/**********************/
+	//Validaciones
+	if (!validarNumero($largo)){ return 'El dato ingresado no es un numero';}
+	if (!validaEntero($largo)){  return 'El dato ingresado no es un numero entero';}
+
+	/**********************/
+	//Si todo esta ok
+	//se verifica el corto
+	if (strlen($oracion) > $largo) {
+		return 'El dato ingresado debe tener no mas de '.$largo.' caracteres';
 	}
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -255,7 +252,6 @@ function DeSanitizar($dato) {
 * @return  String
 ************************************************************************/
 function EstandarizarInput($Data){
-
 	/******************************************/
 	//verifico si existe
 	if(isset($Data)&&$Data!=''){
@@ -596,7 +592,7 @@ function filtrar_palabras_censuradas($oracion) {
 function super_title($Type, $Color, $Align, $Style, $Text){
 
 	//Valido si los datos ingresados estan correctos
-	if (validarNumero($Type)&&validarNumero($Color)){
+	if (validarNumero($Type)&&validarNumero($Color)&&validarNumero($Align)){
 
 		/********************************************************/
 		//Definicion de errores

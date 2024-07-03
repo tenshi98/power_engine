@@ -28,24 +28,23 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function Fecha_completa($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-			$mes_c   = new DateTime($Fecha);
-			$dia     = $mes_c->format('d');
-			$me      = $mes_c->format('m');
-			$ano     = $mes_c->format('Y');
-			$mes     = $options[$me-1];
 
-			return $mes.' '.$dia.' del '.$ano;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	$mes_c   = new DateTime($Fecha);
+	$dia     = $mes_c->format('d');
+	$me      = $mes_c->format('m');
+	$ano     = $mes_c->format('Y');
+	$mes     = $options[$me-1];
+
+	return $mes.' '.$dia.' del '.$ano;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -65,24 +64,23 @@ function Fecha_completa($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_completa_alt($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-			$mes_c   = new DateTime($Fecha);
-			$dia     = $mes_c->format('d');
-			$me      = $mes_c->format('m');
-			$ano     = $mes_c->format('Y');
-			$mes     = $options[$me-1];
 
-			return $dia.' de '.$mes.' de '.$ano;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	$mes_c   = new DateTime($Fecha);
+	$dia     = $mes_c->format('d');
+	$me      = $mes_c->format('m');
+	$ano     = $mes_c->format('Y');
+	$mes     = $options[$me-1];
+
+	return $dia.' de '.$mes.' de '.$ano;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -102,23 +100,22 @@ function Fecha_completa_alt($Fecha){
 ************************************************************************/
 //Funcion
 function Dia_Mes($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-			$mes_c   = new DateTime($Fecha);
-			$dia     = $mes_c->format('d');
-			$me      = $mes_c->format('m');
-			$mes     = $options[$me-1];
 
-			return $dia.' '.$mes;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	$mes_c   = new DateTime($Fecha);
+	$dia     = $mes_c->format('d');
+	$me      = $mes_c->format('m');
+	$mes     = $options[$me-1];
+
+	return $dia.' '.$mes;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -138,17 +135,16 @@ function Dia_Mes($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_estandar($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			return date_format(date_create($Fecha), 'd-m-Y');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return date_format(date_create($Fecha), 'd-m-Y');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -168,17 +164,16 @@ function Fecha_estandar($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_estandar_c($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			return date_format(date_create($Fecha), 'd-m-y');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return date_format(date_create($Fecha), 'd-m-y');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -198,17 +193,16 @@ function Fecha_estandar_c($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_normalizada($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&($Fecha!='0000-00-00' OR $Fecha!='00-00-0000')){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			return date_format(date_create(str_replace('/', '-', $Fecha)), 'Y-m-d');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR ($Fecha=='0000-00-00' OR $Fecha=='00-00-0000')){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){                                         return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return date_format(date_create(str_replace('/', '-', $Fecha)), 'Y-m-d');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -228,17 +222,16 @@ function Fecha_normalizada($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_archivos($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&($Fecha!='0000-00-00' OR $Fecha!='00-00-0000')){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			return date_format(date_create(str_replace('/', '-', $Fecha)), 'Ymd');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR ($Fecha=='0000-00-00' OR $Fecha=='00-00-0000')){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){                                         return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return date_format(date_create(str_replace('/', '-', $Fecha)), 'Ymd');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -258,23 +251,22 @@ function Fecha_archivos($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_mes_ano($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-			$mes_c   = new DateTime($Fecha);
-			$me      = $mes_c->format('m');
-			$ano     = $mes_c->format('Y');
-			$mes     = $options[$me-1];
 
-			return $mes.' del '.$ano;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	$mes_c   = new DateTime($Fecha);
+	$me      = $mes_c->format('m');
+	$ano     = $mes_c->format('Y');
+	$mes     = $options[$me-1];
+
+	return $mes.' del '.$ano;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -294,19 +286,17 @@ function Fecha_mes_ano($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NdiaMes($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			//transformo el dato entregado al formato fecha
-			$subdato = new DateTime($Fecha);
-			return $subdato->format("j");
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$subdato = new DateTime($Fecha);
+	return $subdato->format("j");
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -326,18 +316,17 @@ function fecha2NdiaMes($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NdiaMesCon0($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$dia = new DateTime($Fecha);
-			return $dia->format('d');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$dia = new DateTime($Fecha);
+	return $dia->format('d');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -357,18 +346,17 @@ function fecha2NdiaMesCon0($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NDiaSemana($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$dias = new DateTime($Fecha);
-			return $dias->format('N');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$dias = new DateTime($Fecha);
+	return $dias->format('N');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -387,20 +375,19 @@ function fecha2NDiaSemana($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NombreDia($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
-			$me      = fecha2NDiaSemana($Fecha);
-			$dia     = $options[$me-1];
-			return $dia;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+	$me      = fecha2NDiaSemana($Fecha);
+	$dia     = $options[$me-1];
+	return $dia;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -419,18 +406,17 @@ function fecha2NombreDia($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NSemana($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$subdato = new DateTime($Fecha);
-			return $subdato->format("W");
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$subdato = new DateTime($Fecha);
+	return $subdato->format("W");
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -449,18 +435,17 @@ function fecha2NSemana($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NMes($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$subdato = new DateTime($Fecha);
-			return $subdato->format("n");
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$subdato = new DateTime($Fecha);
+	return $subdato->format("n");
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -479,20 +464,19 @@ function fecha2NMes($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NombreMes($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-			$me      = fecha2NMes($Fecha);
-			$mes     = $options[$me-1];
-			return $mes;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	$me      = fecha2NMes($Fecha);
+	$mes     = $options[$me-1];
+	return $mes;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -512,20 +496,19 @@ function fecha2NombreMes($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2NombreMesCorto($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$options = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-			$me      = fecha2NMes($Fecha);
-			$mes     = $options[$me-1];
-			return $mes;
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$options = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+	$me      = fecha2NMes($Fecha);
+	$mes     = $options[$me-1];
+	return $mes;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -544,18 +527,17 @@ function fecha2NombreMesCorto($Fecha){
 ************************************************************************/
 //Funcion
 function fecha2Ano($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			$dia = new DateTime($Fecha);
-			return $dia->format('Y');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	$dia = new DateTime($Fecha);
+	return $dia->format('Y');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -576,17 +558,16 @@ function fecha2Ano($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_gringa($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			return date_format(date_create($Fecha), 'F d Y');
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return date_format(date_create($Fecha), 'F d Y');
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -605,18 +586,16 @@ function Fecha_gringa($Fecha){
 ************************************************************************/
 //Funcion
 function Fecha_ultimo_dia_mes($Fecha){
-	//Se verifica que se recibe algo
-	if($Fecha!=''&&$Fecha!='0000-00-00'){
-		//valido la fecha
-		if(validaFecha($Fecha)){
-			//Ultimo dia de la fecha entregada
-			return date("Y-m-t", strtotime($Fecha));
-		}else{
-			return 'El dato ingresado no es una fecha ('.$Fecha.')';
-		}
-	}else{
-		return 'Sin Fecha';
-	}
+
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
+	return date("Y-m-t", strtotime($Fecha));
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -636,6 +615,13 @@ function Fecha_ultimo_dia_mes($Fecha){
 //Funcion
 function fullDate($Fecha){
 
+	/**********************/
+	//Validaciones
+	if($Fecha=='' OR $Fecha=='0000-00-00'){ return 'Sin Fecha';}
+	if(!validaFecha($Fecha)){               return 'El dato ingresado no es una fecha ('.$Fecha.')';}
+
+	/**********************/
+	//Si todo esta ok
 	// Establecer la zona horaria predeterminada a usar.
 	date_default_timezone_set('America/Santiago');
 	//Se formatea

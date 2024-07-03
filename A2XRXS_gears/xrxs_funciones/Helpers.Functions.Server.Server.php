@@ -19,7 +19,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	fecha_actual();
+* 	fecha_actual(); //devuelve 2024-07-01
 *
 *===========================    Parametros   ===========================
 * @return  Date
@@ -33,14 +33,14 @@ function fecha_actual(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Obtener Fecha Actual
+* Obtener Fecha Actual sin separadores
 *
 *===========================     Detalles    ===========================
-* Permite obtener la fecha actual de chile
+* Permite obtener la fecha actual de chile sin los separadores
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	fecha_actual();
+* 	fecha_actual_val(); //devuelve 20240701
 *
 *===========================    Parametros   ===========================
 * @return  Date
@@ -57,11 +57,11 @@ function fecha_actual_val(){
 * Obtener Hora Actual
 *
 *===========================     Detalles    ===========================
-* Permite obtener la hora actual de chile
+* Permite obtener la hora actual de chile en formato estandar
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	hora_actual();
+* 	hora_actual(); //devuelve 18:28:58
 *
 *===========================    Parametros   ===========================
 * @return  Time
@@ -78,11 +78,12 @@ function hora_actual(){
 * Obtener Hora Actual (alternativa)
 *
 *===========================     Detalles    ===========================
-* Permite obtener la hora actual de chile
+* Permite obtener la hora actual de chile utilizando guines como
+* separadores
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	hora_actual_val();
+* 	hora_actual_val(); //devuelve 18-28-58
 *
 *===========================    Parametros   ===========================
 * @return  Time
@@ -96,14 +97,14 @@ function hora_actual_val(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Obtener Dia Actual
+* Obtener Numero del Dia Actual
 *
 *===========================     Detalles    ===========================
 * Permite obtener el dia actual de chile, de 1 a 31 sin ceros
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	dia_actual();
+* 	dia_actual(); //devuelve 1 (para la fecha 2024-07-01)
 *
 *===========================    Parametros   ===========================
 * @return  Integer
@@ -117,14 +118,14 @@ function dia_actual(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Obtener Semana Actual
+* Obtener Numero de la Semana Actual
 *
 *===========================     Detalles    ===========================
-* Permite obtener la semana actual de chile
+* Permite obtener la semana actual de chile, de 1 a 56?
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	semana_actual();
+* 	semana_actual(); //devuelve 27 (para la fecha 2024-07-01)
 *
 *===========================    Parametros   ===========================
 * @return  Integer
@@ -138,14 +139,14 @@ function semana_actual(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Obtener Mes Actual
+* Obtener Numero del Mes Actual
 *
 *===========================     Detalles    ===========================
 * Permite obtener el mes actual de chile, de 1 a 12
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	mes_actual();
+* 	mes_actual(); //devuelve 7 (para la fecha 2024-07-01)
 *
 *===========================    Parametros   ===========================
 * @return  Integer
@@ -159,14 +160,14 @@ function mes_actual(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Obtener Año Actual
+* Obtener Numero del Año Actual
 *
 *===========================     Detalles    ===========================
 * Permite obtener el año actual de chile
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	ano_actual();
+* 	ano_actual(); //devuelve 2024 (para la fecha 2024-07-01)
 *
 *===========================    Parametros   ===========================
 * @return  Integer
