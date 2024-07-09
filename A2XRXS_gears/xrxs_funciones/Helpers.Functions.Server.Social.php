@@ -25,8 +25,8 @@ if( ! defined('XMBCXRXSKGC')) {
 * String   $Token        Token de la plataforma
 * String   $InstanceId   Instancia a utilizar
 * String   $Phone        Telefono a enviar el mensaje
-* String   $Body         mensaje
-* @return  Date
+* String   $Body         Mensaje
+* @return  String
 ************************************************************************/
 //Funcion
 function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
@@ -86,38 +86,6 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 		curl_close($ch);
 		return $result;
 
-
-		// Send a request
-		/*try {
-			$result = @file_get_contents($url, false, $options);
-			//Si hay errores
-			if ($result === FALSE) {
-				error_log("===============================================", 0);
-				error_log("myPhone:".$myPhone, 0);
-				error_log("Body:".$Body, 0);
-				error_log("InstanceId:".$InstanceId, 0);
-				error_log("Token:".$Token, 0);
-				error_log("url:".$url, 0);
-				error_log("Excepción capturada: No hay acceso a ".$url." para leer");
-				error_log("===============================================", 0);
-				return $json;
-			//Si no hay errores
-			} else {
-				//return $result;
-			}
-		//return $result;
-		} catch (Exception $e) {
-			error_log("===============================================", 0);
-			error_log("myPhone:".$myPhone, 0);
-			error_log("Body:".$Body, 0);
-			error_log("InstanceId:".$InstanceId, 0);
-			error_log("Token:".$Token, 0);
-			error_log("url:".$url, 0);
-			error_log("Excepción capturada:".$e->getMessage(), 0);
-			error_log("===============================================", 0);
-			return $e->getMessage();
-		}*/
-
 	//guardo el log
 	}else{
 		error_log("===============================================", 0);
@@ -130,7 +98,7 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Envio de mensajes a un grupo whatsapp
+* Envio de mensajes a un grupo whatsapp (No funciona)
 *
 *===========================     Detalles    ===========================
 * Permite el envio de mensajes a grupos de whatsapp a traves de chat-api
@@ -143,8 +111,8 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 * String   $Token        Token de la plataforma
 * String   $InstanceId   Instancia a utilizar
 * String   $Phone        Telefono a enviar el mensaje
-* String   $Body         mensaje
-* @return  Date
+* String   $Body         Mensaje
+* @return  String
 ************************************************************************/
 //Funcion
 function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
@@ -170,14 +138,6 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 		// Send a request
 		$result = file_get_contents($url, false, $options);
 
-		/*error_log("===============================================", 0);
-		error_log("Group:".$Group, 0);
-		error_log("InstanceId:".$InstanceId, 0);
-		error_log("Token:".$Token, 0);
-		error_log("url:".$url, 0);
-		error_log("result:".$result, 0);
-		error_log("===============================================", 0);*/
-
 		//return $result;
 	//guardo el log
 	}else{
@@ -191,27 +151,24 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Ob
+* Obtiene el contenido de un archivo
 *
 *===========================     Detalles    ===========================
-* Permite el envio de mensajes a grupos de whatsapp a traves de chat-api
+* Permite ver el contenido de un archivo, devuelve el fichero a un string
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	WhatsappGroupSendMessage('asdertcvbtrtr', '356644', 'groupTest', 'test');
+* 	file_contents('upload/archivo.txt');
 *
 *===========================    Parametros   ===========================
-* String   $Token        Token de la plataforma
-* String   $InstanceId   Instancia a utilizar
-* String   $Phone        Telefono a enviar el mensaje
-* String   $Body         mensaje
-* @return  Date
+* String   $Path       Ruta del archivo
+* @return  String
 ************************************************************************/
 //Funcion
-function file_contents($path) {
-	$str = @file_get_contents($path);
+function file_contents($Path) {
+	$str = @file_get_contents($Path);
 	if ($str === FALSE) {
-		throw new Exception("Cannot access '$path' to read contents.");
+		throw new Exception("Cannot access '$Path' to read contents.");
 	} else {
 		return $str;
 	}

@@ -15,25 +15,27 @@ if( ! defined('XMBCXRXSKGC')) {
 * Web Scraping
 *
 *===========================     Detalles    ===========================
-* Permite obtener contenido especifico de la web
+* Permite obtener contenido especifico de la web, en este caso imagenes google
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	fecha_actual();
+* 	getGoogleImage('gato', 5);
 *
 *===========================    Parametros   ===========================
-* @return  Date
+* String   $Query     Termino de busqueda
+* String   $max_img   Numero de imagenes a obtener
+* @return  HTML
 ************************************************************************/
 //Funcion
-function getGoogleImage($consulta, $max_img){
+function getGoogleImage($Query, $max_img){
 	//reemplazo los espacios vacios
-	$consulta = str_replace(' ', '+', $consulta);
+	$Query = str_replace(' ', '+', $Query);
 	//Se da permiso para el acceso remoto
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
 	if( ini_get('allow_url_fopen')){
 		//Dirección con la consulta a google image
-		$url = "https://www.google.com/search?q=".$consulta."&tbm=isch&source=hp&biw=1366&bih=636&ei=NWOAYIeGIpDJ1sQPjcYQ&oq=".$consulta."&gs_lcp=CgNpbWcQAzoCCAA6CAgAELEDEIMBOgUIABCxAzoECAAQE1CqHFjAlQFgo5gBaABwAHgAgAFiiAGTB5IBAjE1mAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ved=0ahUKEwjH9L_O8I_wAhWQpJUCHQ0jBAAQ4dUDCAY&uact=5";
+		$url = "https://www.google.com/search?q=".$Query."&tbm=isch&source=hp&biw=1366&bih=636&ei=NWOAYIeGIpDJ1sQPjcYQ&oq=".$Query."&gs_lcp=CgNpbWcQAzoCCAA6CAgAELEDEIMBOgUIABCxAzoECAAQE1CqHFjAlQFgo5gBaABwAHgAgAFiiAGTB5IBAjE1mAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img&ved=0ahUKEwjH9L_O8I_wAhWQpJUCHQ0jBAAQ4dUDCAY&uact=5";
 
 		//obtengo el contenido
 		$html = file_get_contents($url);
@@ -45,11 +47,10 @@ function getGoogleImage($consulta, $max_img){
 		//div contenedor
 		echo '
 		<style>
-		.getImgGoogle {clear: both;}
-		.getImgGoogle img {padding: 4px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;display: inline-block;max-width: 100%;height: auto;margin-right:5px;}
+			.getImgGoogle {clear: both;}
+			.getImgGoogle img {padding: 4px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;display: inline-block;max-width: 100%;height: auto;margin-right:5px;}
 		</style>
-		';
-		echo '<div class="getImgGoogle">';
+		<div class="getImgGoogle">';
 			//recorro
 			foreach($matches as $image1){
 				foreach($image1 as $image){
@@ -170,14 +171,14 @@ function getFavicon($url){
 * Obtener un indicador
 *
 *===========================     Detalles    ===========================
-* Permite obtener los indicadores
+* Permite obtener los indicadores desde el sitio del SII
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
 * 	indicadores();
 *
 *===========================    Parametros   ===========================
-* String   $url    Dirección web desde donde se obtendra el favicon
+* String   $type    Tipo de despliegue
 * @return  HTML
 ************************************************************************/
 //Funcion

@@ -27,6 +27,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * Integer  $type            Tipo de mensaje (define el color de este)
 * Integer  $icon            Icono a utilizar
 * Integer  $iconAnimation   Animacion del icono utilizado
+* String   $autoClose       Configuracion para el cierre automatico del div
 * String   $Text            Texto del mensaje (permite HTML)
 * @return  String
 ************************************************************************/

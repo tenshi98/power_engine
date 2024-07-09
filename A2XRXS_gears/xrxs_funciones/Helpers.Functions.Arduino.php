@@ -11,7 +11,7 @@ if( ! defined('XMBCXRXSKGC')) {
 /*                                                                                                                 */
 /*******************************************************************************************************************/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-function sim80x_dht($TipoShield, $rowdata) {
+function sim80x_dht($TipoShield, $rowData) {
 	//VARIABLES
 	$SensCant         = '';
 	$SensListDef      = '';
@@ -28,11 +28,11 @@ $saltoLinea = '
 
 	/*******************************************************************/
 	//si esta configurado para usar sensores, mostrar la cantidad de sensores
-	if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
-		$SensCant     = ' * Numero Sensores: '.$rowdata['cantSensores'].$saltoLinea;
+	if(isset($rowData['id_Sensores'])&&$rowData['id_Sensores']==1){
+		$SensCant     = ' * Numero Sensores: '.$rowData['cantSensores'].$saltoLinea;
 		/***********************************************/
 		//recorro la cantidad de sensores existentes
-		for ($i = 1; $i <= $rowdata['cantSensores']; $i++) {
+		for ($i = 1; $i <= $rowData['cantSensores']; $i++) {
 			$SensListDef   .= 'float s'.$i.';'.$saltoLinea;
 			$SensListPrint .= $saltoLinea.'	Serial.print("s'.$i.': ");';
 			$SensListPrint .= $saltoLinea.'	Serial.println(s'.$i.');';
@@ -41,7 +41,7 @@ $saltoLinea = '
 		}
 
 		//se divide el total de sensores en 2
-		$totSens  = ceil($rowdata['cantSensores']/2);
+		$totSens  = ceil($rowData['cantSensores']/2);
 		$initPort = 26;
 		$initSens = 1;
 		$SensDigPortDef = '//DHT Se definen instancias y puertos digitales (Por defecto se comienza con el puerto 26, favor modificar en caso de ser necesario)'.$saltoLinea;
@@ -74,20 +74,20 @@ $saltoLinea = '
 //////////////////////////////////////////////////////////////////////////////////////////////
 //Encabezado con información Basica
 $code = '
-/* Equipo '.$rowdata['nombre_equipo'].'
- * Creado por: '.$rowdata['nombre_usuario'].'
- * Fecha Creacion: '.Fecha_completa_alt($rowdata['Fecha']).'
+/* Equipo '.$rowData['nombre_equipo'].'
+ * Creado por: '.$rowData['nombre_usuario'].'
+ * Fecha Creacion: '.Fecha_completa_alt($rowData['Fecha']).'
  *
- * Version: '.$rowdata['Version'].'
- * Master '.$rowdata['Tab'].'
- * Placa: '.$rowdata['Dispositivo'].'
- * Comunicacion: '.$rowdata['Shield'].'
+ * Version: '.$rowData['Version'].'
+ * Master '.$rowData['Tab'].'
+ * Placa: '.$rowData['Dispositivo'].'
+ * Comunicacion: '.$rowData['Shield'].'
  * Datos Moviles:
- * Uso GPS: '.$rowdata['Geo'].'
- * Uso Sensores: '.$rowdata['Sensores'].$saltoLinea;
+ * Uso GPS: '.$rowData['Geo'].'
+ * Uso Sensores: '.$rowData['Sensores'].$saltoLinea;
 $code .= $SensCant;
 //Si hay observaciones relacionadas al script se incluyen
-$code .= ' * Obs: '.$rowdata['Observacion'].$saltoLinea.' */'.$saltoLinea;
+$code .= ' * Obs: '.$rowData['Observacion'].$saltoLinea.' */'.$saltoLinea;
 $code .= '#include "DHT.h"'.$saltoLinea;
 $code .= '#include <avr/wdt.h>'.$saltoLinea;
 //SIM 800
@@ -101,7 +101,7 @@ $code .= '#define TINY_GSM_RX_BUFFER 650'.$saltoLinea;
 $code .= '#include <TinyGsmClient.h>'.$saltoLinea;
 //Identificacion APN
 $code .= '
-const char apn[]      = "'.$rowdata['APN_direction'].'"; //Dirección APN
+const char apn[]      = "'.$rowData['APN_direction'].'"; //Dirección APN
 const char gprsUser[] = "";
 const char gprsPass[] = "";
 
@@ -112,14 +112,14 @@ const int  port = 80;
 
 //Variables Normales
 String datos, apagado, csq, cop;
-String id = "'.$rowdata['Identificador'].'";  //Identificador
+String id = "'.$rowData['Identificador'].'";  //Identificador
 int reboot=0;
 
 //Variables Globales'.$saltoLinea;
 //Si se esa utilizando sensores
 $code .= $SensListDef;
 $code .= $saltoLinea;
-$code .= '#define '.$TipoShield.' '.$rowdata['PuertoSerial'].$saltoLinea;
+$code .= '#define '.$TipoShield.' '.$rowData['PuertoSerial'].$saltoLinea;
 $code .= 'TinyGsm modem('.$TipoShield.');'.$saltoLinea;
 $code .= '#include <ArduinoHttpClient.h>'.$saltoLinea;
 $code .= 'TinyGsmClient client(modem);'.$saltoLinea;
@@ -140,17 +140,17 @@ void setup(){
 	Serial.println(modemInfo);';
 	$code .= $SensDigPortBegin;
 	$code .= '
-	pinMode('.$rowdata['pinMode'].', OUTPUT);
-	digitalWrite('.$rowdata['pinMode'].', LOW);
+	pinMode('.$rowData['pinMode'].', OUTPUT);
+	digitalWrite('.$rowData['pinMode'].', LOW);
 	delay(1000);
 }'.$saltoLinea;
 //si hay sensores configurados, se toma la medicion de estos
-if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
+if(isset($rowData['id_Sensores'])&&$rowData['id_Sensores']==1){
 	$code .= $saltoLinea.'void medicion(){';
-	$code .= $saltoLinea.'	digitalWrite('.$rowdata['pinMode'].', HIGH)';
+	$code .= $saltoLinea.'	digitalWrite('.$rowData['pinMode'].', HIGH)';
 	$code .= $SensListMed;
 	$code .= $saltoLinea.'	delay(500);';
-	$code .= $saltoLinea.'	digitalWrite('.$rowdata['pinMode'].', LOW);';
+	$code .= $saltoLinea.'	digitalWrite('.$rowData['pinMode'].', LOW);';
 	$code .= $saltoLinea.'}';
 }
 //se imprimen los datos por pantalla para las pruebas
@@ -169,18 +169,18 @@ void imp(){
 	Serial.println("************************************************************************************");
 }'.$saltoLinea;
 //si hay sensores configurados, se verifica para corregir las mediciones
-if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
+if(isset($rowData['id_Sensores'])&&$rowData['id_Sensores']==1){
 	$code .= $saltoLinea.'// Lee nuevamente errores de medicion';
 	$code .= $saltoLinea.'void NaN(){ ';
 	$code .= $saltoLinea.'	Serial.println("Revision Errores");';
 	$code .= $saltoLinea.'	for (int i = 0; i <= 2; i++) {';
-	$code .= $saltoLinea.'		digitalWrite('.$rowdata['pinMode'].', HIGH);';
+	$code .= $saltoLinea.'		digitalWrite('.$rowData['pinMode'].', HIGH);';
 	$code .= $saltoLinea.'		Serial.print("Ciclo: ");';
 	$code .= $saltoLinea.'		Serial.println(i);';
 	$code .= $saltoLinea.'		delay(2000);';
 	$code .= $saltoLinea.'		//Error DHT22';
 	$code .= $SensListError;
-	$code .= $saltoLinea.'		digitalWrite('.$rowdata['pinMode'].', LOW);';
+	$code .= $saltoLinea.'		digitalWrite('.$rowData['pinMode'].', LOW);';
 	$code .= $saltoLinea.'		delay(1000);';
 	$code .= $saltoLinea.'	}';
 	$code .= $SensListValMed;
@@ -192,10 +192,10 @@ $code .= $saltoLinea.'
 //Se arma la url
 void url() {';
 	//Get GSM
-	if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
+	if(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==1){
 		$code .= $saltoLinea.'	datos  = "/crosstech/ardu.php?id=";';
 	//AT envio
-	}elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
+	}elseif(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==2){
 		$code .= $saltoLinea.'	datos  = "AT+HTTPPARA=\"URL\",\http://webapp.simplytech.cl/crosstech/ardu.php?id=";';
 	}
 	$code .= '
@@ -205,17 +205,17 @@ void url() {';
 	datos += "&cop=";
 	datos += cop;
 	datos += "&ver=";
-	datos += "'.$rowdata['Version'].'";';
+	datos += "'.$rowData['Version'].'";';
 	$code .= $SensListSend;
 	//AT envio
-	if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
+	if(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==2){
 		$code .= $saltoLinea.'	datos +="\"";';
 	}
 	$code .= '
 }';
 
 //Get GSM
-if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
+if(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==1){
 $code .= $saltoLinea.'
 void GSMGET() {
 	apagado = "3";
@@ -258,7 +258,7 @@ void GSMGET() {
 	Serial.println(F("GPRS disconnected"));
 }';
 //AT envio
-}elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
+}elseif(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==2){
 $code .= $saltoLinea.'
 void envioAT(){
 	Serial.println(F("Enviando HTTP"));
@@ -269,7 +269,7 @@ void envioAT(){
 	Serial.println("");
 	'.$TipoShield.'.println(F("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\""));//setting the SAPBR, the connection type is using gprs
 	delay(100);
-	'.$TipoShield.'.println(AT+SAPBR=3,1,\"APN\",\"'.$rowdata['APN_direction'].'\");
+	'.$TipoShield.'.println(AT+SAPBR=3,1,\"APN\",\"'.$rowData['APN_direction'].'\");
 	delay(400);
 	'.$TipoShield.'.println(F("AT+SAPBR=1,1"));//setting the SAPBR, for detail you can refer to the AT command mamual
 	delay(200);
@@ -288,7 +288,7 @@ void envioAT(){
 
 $code .= $saltoLinea.'
 void loop(){';
-	if(isset($rowdata['id_Sensores'])&&$rowdata['id_Sensores']==1){
+	if(isset($rowData['id_Sensores'])&&$rowData['id_Sensores']==1){
 		$code .= $saltoLinea.'	medicion();';
 		$code .= $saltoLinea.'	NaN();';
 	}
@@ -296,10 +296,10 @@ void loop(){';
 	imp(); //Muestra los datos por pantalla (Comentar en produccion)
 	url(); //Genera la URL';
 	//Get GSM
-	if(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==1){
+	if(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==1){
 		$code .= $saltoLinea.'	GSMGET();';
 	//AT envio
-	}elseif(isset($rowdata['idFormaEnvio'])&&$rowdata['idFormaEnvio']==2){
+	}elseif(isset($rowData['idFormaEnvio'])&&$rowData['idFormaEnvio']==2){
 		$code .= $saltoLinea.'	envioAT();';
 	}
 	$code .= $saltoLinea.'
@@ -330,27 +330,27 @@ void loop(){';
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-function aaaa($rowdata) {
+function aaaa($rowData) {
 	$saltoLinea = '
 ';
 $SensCant = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////
 //Encabezado con información Basica
 $code = '
-/* Equipo '.$rowdata['nombre_equipo'].'
- * Creado por: '.$rowdata['nombre_usuario'].'
- * Fecha Creacion: '.Fecha_completa_alt($rowdata['Fecha']).'
+/* Equipo '.$rowData['nombre_equipo'].'
+ * Creado por: '.$rowData['nombre_usuario'].'
+ * Fecha Creacion: '.Fecha_completa_alt($rowData['Fecha']).'
  *
- * Version: '.$rowdata['Version'].'
- * Master '.$rowdata['Tab'].'
- * Placa: '.$rowdata['Dispositivo'].'
- * Comunicacion: '.$rowdata['Shield'].'
+ * Version: '.$rowData['Version'].'
+ * Master '.$rowData['Tab'].'
+ * Placa: '.$rowData['Dispositivo'].'
+ * Comunicacion: '.$rowData['Shield'].'
  * Datos Moviles:
- * Uso GPS: '.$rowdata['Geo'].'
- * Uso Sensores: '.$rowdata['Sensores'].$saltoLinea;
+ * Uso GPS: '.$rowData['Geo'].'
+ * Uso Sensores: '.$rowData['Sensores'].$saltoLinea;
 $code .= $SensCant;
 //Si hay observaciones relacionadas al script se incluyen
-$code .= ' * Obs: '.$rowdata['Observacion'].$saltoLinea.' */'.$saltoLinea;
+$code .= ' * Obs: '.$rowData['Observacion'].$saltoLinea.' */'.$saltoLinea;
 $code .= '
 #include <Bridge.h>
 #include <Console.h>
@@ -420,7 +420,7 @@ void volt(){
 	int x = 0;
 	Console.println(i);
 	while (x < 1000) {
-		if(micros() >= voltageLastSample + 1000 )  {
+		if(micros() >= voltageLastSample + 1000 ){
 			voltageSampleRead = (analogRead(A4)- 512)+ voltageOffset1;
 			voltageSampleSum = voltageSampleSum + sq(voltageSampleRead) ;
 			voltageSampleCount = voltageSampleCount + 1;

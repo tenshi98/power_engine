@@ -2818,7 +2818,7 @@ class HTML5_TreeBuilder {
                 /* An end tag whose tag name is one of: "caption", "table", "tbody",
                 "tfoot", "thead", "tr", "td", "th" */
                 } elseif ($token['type'] === HTML5_Tokenizer::ENDTAG &&
-                in_array($token['name'], array('caption', 'table', 'tbody', 'tfoot', 'thead', 'tr', 'td', 'th')))  {
+                in_array($token['name'], array('caption', 'table', 'tbody', 'tfoot', 'thead', 'tr', 'td', 'th'))){
                     /* Parse error. */
                     // parse error
 

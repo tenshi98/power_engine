@@ -19,7 +19,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea la hora
-* 	Hora_estandar('1:1');
+* 	Hora_estandar('1:1'); //devuelve 01:01
 *
 *===========================    Parametros   ===========================
 * Time     $Hora   Hora a formatear
@@ -47,7 +47,7 @@ function Hora_estandar($Hora){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea la hora
-* 	Hora_prog('1:1');
+* 	Hora_prog('1:1'); //devuelve 01:01:00
 *
 *===========================    Parametros   ===========================
 * Time     $Hora   Hora a formatear
@@ -75,7 +75,7 @@ function Hora_prog($Hora){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea la hora
-* 	Hora_archivos('1:1');
+* 	Hora_archivos('1:1'); //devuelve 010100
 *
 *===========================    Parametros   ===========================
 * Time     $Hora   Hora a formatear

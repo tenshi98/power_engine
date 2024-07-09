@@ -57,7 +57,7 @@ function cortar($texto, $cuantos){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	cortarRut('10294658-9');
+* 	cortarRut('10294658-9'); //devuelve 10294658
 *
 *===========================    Parametros   ===========================
 * String   $Rut    Rut a cortar
@@ -107,6 +107,8 @@ function palabra_largo($oracion,$largo){
 	//se verifica el largo
 	if (strlen($oracion) < $largo) {
 		return 'El dato ingresado debe tener al menos '.$largo.' caracteres';
+	}else{
+		return true;
 	}
 
 }
@@ -140,6 +142,8 @@ function palabra_corto($oracion,$largo){
 	//se verifica el corto
 	if (strlen($oracion) > $largo) {
 		return 'El dato ingresado debe tener no mas de '.$largo.' caracteres';
+	}else{
+		return true;
 	}
 
 }
@@ -160,6 +164,13 @@ function palabra_corto($oracion,$largo){
 ************************************************************************/
 //Funcion
 function limpiarString($texto){
+
+	/**********************/
+	//Validaciones
+	if(!isset($texto) OR $texto==''){  return 'No ha ingresado ningun dato';}
+
+	/**********************/
+	//Si todo esta ok
     //Limpieza caracteres normales
     $texto = preg_replace('([^A-Za-z0-9.])', ' ', $texto);
     //Se eliminan saltos de linea y pagina
@@ -184,7 +195,15 @@ function limpiarString($texto){
 ************************************************************************/
 //Funcion
 function espacio_guion($dato) {
+
+	/**********************/
+	//Validaciones
+	if(!isset($dato) OR $dato==''){  return 'No ha ingresado ningun dato';}
+
+	/**********************/
+	//Si todo esta ok
     return str_replace(' ', '_', $dato);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -203,13 +222,19 @@ function espacio_guion($dato) {
 ************************************************************************/
 //Funcion
 function texto_mail($dato) {
+
+	/**********************/
+	//Validaciones
+	if(!isset($dato) OR $dato==''){  return 'No ha ingresado ningun dato';}
+
+	/**********************/
+	//Si todo esta ok
     //Datos a cambiar
     $healthy = array("á", "é", "í", "ó", "ú", "ñ", "à", "è", "ò");
 	$yummy   = array("&aacute;", "&eacute;", "&iacute;", "&oacute;", "&uacute;", "&ntilde;", "&agrave;", "&egrave;", "&ograve;");
 
-	$new_dato = str_replace($healthy, $yummy, $dato);
+    return str_replace($healthy, $yummy, $dato);
 
-    return $new_dato;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -228,13 +253,19 @@ function texto_mail($dato) {
 ************************************************************************/
 //Funcion
 function DeSanitizar($dato) {
+
+	/**********************/
+	//Validaciones
+	if(!isset($dato) OR $dato==''){  return 'No ha ingresado ningun dato';}
+
+	/**********************/
+	//Si todo esta ok
     //Datos a cambiar
 	$healthy = array("&aacute;", "&eacute;", "&iacute;", "&oacute;", "&uacute;","&ntilde;", "&agrave;", "&egrave;", "&ograve;");
     $yummy   = array("á", "é", "í", "ó", "ú", "ñ", "à", "è", "ò");
 
-	$new_dato = str_replace($healthy, $yummy, $dato);
+    return str_replace($healthy, $yummy, $dato);
 
-    return $new_dato;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -252,57 +283,62 @@ function DeSanitizar($dato) {
 * @return  String
 ************************************************************************/
 function EstandarizarInput($Data){
+
+	/**********************/
+	//Validaciones
+	if(!isset($Data) OR $Data==''){  return 'No ha ingresado ningun dato';}
+
+	/**********************/
+	//Si todo esta ok
+	//Se eliminan saltos de linea y pagina
+	$Data = str_replace(array("\n", "\r"), '', $Data);
+	$Data = strip_tags($Data, '');
+
 	/******************************************/
-	//verifico si existe
-	if(isset($Data)&&$Data!=''){
+	//Elimino los acentos y reemplazo la ñ
+	$Data = texto_mail($Data);
 
-		//Se eliminan saltos de linea y pagina
-		$Data = str_replace(array("\n", "\r"), '', $Data);
-		$Data = strip_tags($Data, '');
+	/******************************************/
+	//Elimino las comillas simples y dobles
+	$Data = str_replace("'", '%27', $Data);
+	$Data = str_replace('"', '%22', $Data);
 
-		/******************************************/
-		//Elimino los acentos y reemplazo la ñ
-		$Data = texto_mail($Data);
-
-		/******************************************/
-		//Elimino las comillas simples y dobles
-		$Data = str_replace("'", '%27', $Data);
-		$Data = str_replace('"', '%22', $Data);
-
-		return $Data;
-	}
+	return $Data;
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* Cuenta si hay palabras malas u ofensivas
+* Base de datos con las palabras a censurar
 *
 *===========================     Detalles    ===========================
-* Cuenta si hay palabras malas u ofensivas que esten prohibidas por el
-* sistema
+* Base de datos con las palabras a censurar
 *===========================    Modo de uso  ===========================
 *
-* 	//se ejecuta operacion
-* 	contar_palabras_censuradas('Lorem ipsum dolor sit amet, consectetur');
+* 	//se verifica
+* 	EstandarizarInput("bla"bla'bla");
 *
 *===========================    Parametros   ===========================
-* String   $dato   Oracion a revisar
-* @return  Integer
+* String   $type   Tipo de base de datos
+* @return  Array
 ************************************************************************/
-//Funcion
-function contar_palabras_censuradas($oracion) {
+function bd_palabras_censuradas($type) {
 
-    //se definen las letras a reemplazar
-    $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
-    $modificadas  = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybya';
-    $cadena       = utf8_decode($oracion);
-    $cadena       = strtr($cadena, utf8_decode($originales), $modificadas);
-    $oracion      = utf8_encode($cadena);
-    //se cambian todas las letras a minusculas
-    $oracion      = strtolower($oracion);
+	/**********************/
+	//Validaciones
+	//se definen las opciones disponibles
+	$requerido_1 = array(1,2,3,4);
+	//verifico si el dato ingresado existe dentro de las opciones
+	if (!in_array($type, $requerido_1)) {
+		return false;
+	}
 
-    //Lista de palabras censuradas en ingles
-	$censuradas_1 = array('fuck','horny','aroused','hentai','slut','slag','boob','pussy','vagina',
+	/**********************/
+	//Si todo esta ok
+	switch ($type) {
+		/****************************************/
+		case 1:
+			//Lista de palabras censuradas en ingles
+			$censuradas = array('fuck','horny','aroused','hentai','slut','slag','boob','pussy','vagina',
 						'faggot','bugger','bastard','cunt','nigga','nigger','jerk','wanker',
 						'tosser','shit','rape','rapist','dick','cock','whore','bitch','asshole',
 						'twat','titt','piss','intercourse','sperm','spunk','testicle','milf',
@@ -310,8 +346,11 @@ function contar_palabras_censuradas($oracion) {
 						'prostitute','wtf','penis','ffs','pedo','hack','dumb','crap','fuck you',
 						'bullshit','damn','hell','ass','badass','son of a bitch','pissed off',
 						'dickhead','motherfucker','dumbass','tramp');
-	//Lista de palabras censuradas en español
-	$censuradas_2 = array('zorra', 'prostituta', 'cerda', 'mujer pública', 'mujer publica',
+			break;
+		/****************************************/
+		case 2:
+			//Lista de palabras censuradas en español
+			$censuradas = array('zorra', 'prostituta', 'cerda', 'mujer pública', 'mujer publica',
 						'fulana','bruja', 'mujerzuela', 'mujer fácil', 'mujer facil', 'cortesana',
 						'abanto', 'abrazafarolas', 'adufe', 'alcornoque', 'alfeñique', 'andurriasmo',
 						'arrastracueros', 'artaban', 'atarre', 'baboso', 'barrabas', 'barriobajero',
@@ -352,8 +391,11 @@ function contar_palabras_censuradas($oracion) {
 						'tontucio', 'tordo', 'tragaldabas', 'tuercebotas', 'tunante', 'zamacuco',
 						'zambombo', 'zampabollos', 'zamugo', 'zangano', 'zarrapastroso', 'zascandil',
 						'zopenco', 'zoquete', 'zote', 'zullenco', 'zurcefrenillos', 'mamon');
-	//Lista de palabras censuradas chilenas
-	$censuradas_3 = array('amermelao', 'antifoca', 'apitutaa', 'apitutada', 'apitutado', 'apitutao',
+			break;
+		/****************************************/
+		case 3:
+			//Lista de palabras censuradas chilenas
+			$censuradas = array('amermelao', 'antifoca', 'apitutaa', 'apitutada', 'apitutado', 'apitutao',
 						'apretao', 'atao', 'ataoso', 'bacan', 'bajon', 'bajoneao', 'bajonearse',
 						'barateli', 'barsa', 'barsuo', 'bolsera', 'bolsero', 'cachai', 'cachar',
 						'cacheteo', 'cacheton', 'cachetona', 'cacho', 'cagada', 'cagarla', 'cagarse',
@@ -379,8 +421,49 @@ function contar_palabras_censuradas($oracion) {
 						'gil', 'agilao', 'agila', 'sapo culiao', 'tragasables', 'jolaperra', 'maricon',
 						'maricona', 'perkin', 'longi', 'sacoweas', 'mermelao', 'weon', 'weona', 'pichula',
 						'tula', 'wueona', 'pija', 'marica');
-	//Lista de palabras inclusivas
-	$censuradas_4 = array('aliades', 'elles', 'cuerpa');
+			break;
+		/****************************************/
+		case 4:
+			//Lista de palabras inclusivas
+			$censuradas = array('aliades', 'elles', 'cuerpa');
+			break;
+	}
+
+	return $censuradas;
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Cuenta si hay palabras malas u ofensivas
+*
+*===========================     Detalles    ===========================
+* Cuenta si hay palabras malas u ofensivas que esten prohibidas por el
+* sistema
+*===========================    Modo de uso  ===========================
+*
+* 	//se ejecuta operacion
+* 	contar_palabras_censuradas('Lorem ipsum dolor sit amet, fuck'); //Devuelve 1
+*
+*===========================    Parametros   ===========================
+* String   $oracion   Oracion a revisar
+* @return  Integer
+************************************************************************/
+//Funcion
+function contar_palabras_censuradas($oracion) {
+
+    //se definen las letras a reemplazar
+    $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
+    $modificadas  = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybya';
+    $cadena       = utf8_decode($oracion);
+    $cadena       = strtr($cadena, utf8_decode($originales), $modificadas);
+    $oracion      = utf8_encode($cadena);
+    //se cambian todas las letras a minusculas
+    $oracion      = strtolower($oracion);
+	//bd con las palabras
+    $censuradas_1 = bd_palabras_censuradas(1);
+    $censuradas_2 = bd_palabras_censuradas(2);
+    $censuradas_3 = bd_palabras_censuradas(3);
+    $censuradas_4 = bd_palabras_censuradas(4);
 
 	//Contamos la partes
 	$partes_1   = count($censuradas_1);
@@ -418,7 +501,7 @@ function contar_palabras_censuradas($oracion) {
 		}
 	}
 
-	//Frase limpia de palabras prohibidas
+	//Numero de palabras prohibidas
 	return $contador;
 
 }
@@ -432,11 +515,11 @@ function contar_palabras_censuradas($oracion) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	filtrar_palabras_censuradas('Lorem ipsum dolor sit amet, consectetur');
+* 	filtrar_palabras_censuradas('Lorem ipsum dolor sit amet, fuck'); //Devuelve 'Lorem ipsum dolor sit amet, '
 *
 *===========================    Parametros   ===========================
-* String   $dato   Oracion a revisar
-* @return  Integer
+* String   $oracion   Oracion a revisar
+* @return  String
 ************************************************************************/
 //Funcion
 function filtrar_palabras_censuradas($oracion) {
@@ -449,87 +532,11 @@ function filtrar_palabras_censuradas($oracion) {
     $oracion      = utf8_encode($cadena);
     //se cambian todas las letras a minusculas
     $oracion      = strtolower($oracion);
-
-    //Lista de palabras censuradas en ingles
-	$censuradas_1 = array('fuck','horny','aroused','hentai','slut','slag','boob','pussy','vagina',
-						'faggot','bugger','bastard','cunt','nigga','nigger','jerk','wanker',
-						'tosser','shit','rape','rapist','dick','cock','whore','bitch','asshole',
-						'twat','titt','piss','intercourse','sperm','spunk','testicle','milf',
-						'retard','anus','dafuq','gay','lesbian','homo','homosexual','cum',
-						'prostitute','wtf','penis','ffs','pedo','hack','dumb','crap','fuck you',
-						'bullshit','damn','hell','ass','badass','son of a bitch','pissed off',
-						'dickhead','motherfucker','dumbass','tramp');
-	//Lista de palabras censuradas en español
-	$censuradas_2 = array('zorra', 'prostituta', 'cerda', 'mujer pública', 'mujer publica',
-						'fulana','bruja', 'mujerzuela', 'mujer fácil', 'mujer facil', 'cortesana',
-						'abanto', 'abrazafarolas', 'adufe', 'alcornoque', 'alfeñique', 'andurriasmo',
-						'arrastracueros', 'artaban', 'atarre', 'baboso', 'barrabas', 'barriobajero',
-						'bebecharcos', 'bellaco', 'belloto', 'berzotas', 'besugo', 'bobalicon',
-						'bocabuzon', 'bocachancla', 'bocallanta', 'boquimuelle', 'borrico',
-						'botarate', 'brasas', 'cabestro', 'cabezaalberca', 'cabezabuque',
-						'cachibache', 'cafre', 'cagalindes', 'cagarruta', 'calambuco',
-						'calamidad', 'calduo', 'calientahielos', 'calzamonas', 'cansalmas',
-						'cantamañanas', 'capullo', 'caracaballo', 'caracarton', 'caraculo',
-						'caraflema', 'carajaula', 'carajote', 'carapapa', 'carapijo', 'cazurro',
-						'cebollino', 'cenizo', 'cenutrio', 'ceporro', 'cernicalo', 'charran',
-						'chiquilicuatre', 'chirimbaina', 'chupacables', 'chupasangre', 'chupoptero',
-						'cierrabares', 'cipote', 'comebolsas', 'comechapas', 'comeflores',
-						'comestacas', 'cretino', 'cuerpoescombro', 'culopollo', 'descerebrado',
-						'desgarracalzas', 'dondiego', 'donnadie', 'echacantos', 'ejarramantas',
-						'energumeno', 'esbaratabailes', 'escolimoso', 'escornacabras', 'estulto',
-						'fanfosquero', 'fantoche', 'fariseo', 'filimincias', 'foligoso', 'fulastre',
-						'ganapan', 'ganapio', 'gandul', 'gañan', 'gaznapiro', 'gilipuertas',
-						'giraesquinas', 'gorrino', 'gorrumino', 'guitarro', 'gurriato', 'habahela',
-						'huelegateras', 'huevon', 'lamebotas', 'lamecharcos', 'lameculos', 'lameplatos',
-						'lechuguino', 'lerdo', 'letrin', 'lloramigas', 'lumbreras', 'maganto',
-						'majadero', 'malasangre', 'malasombra', 'malparido', 'mameluco', 'mamporrero',
-						'manegueta', 'mangarran', 'mangurrian', 'mastuerzo', 'matacandiles', 'meapilas',
-						'mendrugo', 'mentecato', 'mequetrefe', 'merluzo', 'metemuertos', 'metijaco',
-						'mindundi', 'morlaco', 'morroestufa', 'muerdesartenes', 'orate', 'ovejo',
-						'pagafantas', 'palurdo', 'pamplinas', 'panarra', 'panoli', 'papafrita',
-						'papanatas', 'papirote', 'pardillo', 'parguela', 'pasmarote', 'pasmasuegras',
-						'pataliebre', 'patan', 'pavitonto', 'pazguato', 'pecholata', 'pedorro',
-						'peinabombillas', 'peinaovejas', 'pelagallos', 'pelagambas', 'pelagatos',
-						'pelatigres', 'pelazarzas', 'pelele', 'pelma', 'percebe', 'perrocostra',
-						'perroflauta', 'peterete', 'petimetre', 'picapleitos', 'pichabrava',
-						'pillavispas', 'piltrafa', 'pinchauvas', 'pintamonas', 'piojoso', 'pitañoso',
-						'pitofloro', 'plomo', 'pocasluces', 'pollopera', 'quitahipos', 'rastrapajo',
-						'rebañasandias', 'revientabaules', 'rieleches', 'robaperas', 'sabandija',
-						'sacamuelas', 'sanguijuela', 'sinentraero', 'sinsustancia', 'sonajas',
-						'sonso', 'soplagaitas', 'soplaguindas', 'sosco', 'tagarote', 'tarado',
-						'tarugo', 'tiralevitas', 'tocapelotas', 'tocho', 'tolai', 'tontaco',
-						'tontucio', 'tordo', 'tragaldabas', 'tuercebotas', 'tunante', 'zamacuco',
-						'zambombo', 'zampabollos', 'zamugo', 'zangano', 'zarrapastroso', 'zascandil',
-						'zopenco', 'zoquete', 'zote', 'zullenco', 'zurcefrenillos', 'mamon');
-	//Lista de palabras censuradas chilenas
-	$censuradas_3 = array('amermelao', 'antifoca', 'apitutaa', 'apitutada', 'apitutado', 'apitutao',
-						'apretao', 'atao', 'ataoso', 'bacan', 'bajon', 'bajoneao', 'bajonearse',
-						'barateli', 'barsa', 'barsuo', 'bolsera', 'bolsero', 'cachai', 'cachar',
-						'cacheteo', 'cacheton', 'cachetona', 'cacho', 'cagada', 'cagarla', 'cagarse',
-						'cagaste', 'cahuin', 'cahuinera', 'caleta', 'charcha', 'charchas', 'chauchas',
-						'chorear', 'chorearse', 'chucha', 'chucha tu madre', 'chuche tu madre',
-						'chula', 'chuleteo', 'chulo', 'concha tu madre', 'conche tu madre', 'copete',
-						'copucha', 'copuchar', 'copuchenta', 'copuchento', 'corremano', 'correr mano',
-						'creerse la muerte', 'cresta', 'cuatico', 'cuevuo', 'cuica', 'cuico',
-						'dejar la cagada', 'dejar la crema', 'dejar la escoba', 'el descueve',
-						'engrupir', 'facha', 'facho', 'fleto', 'fome', 'funao', 'funar', 'hocicon',
-						'hocicona', 'hociconear', 'hueada', 'hueco', 'julepe', 'lacha', 'lacho',
-						'lanza', 'lanzazo', 'lesear', 'leseo', 'manoseo', 'ni ahi', 'ni cagando',
-						'nica', 'no estar ni ahi', 'paco', 'paja', 'pajaron', 'pajear', 'pajearse',
-						'pajera', 'pajero', 'pelotillehue', 'penca', 'pito', 'pucho', 'pulento',
-						'punga', 'puta', 'valer hongo', 'volao', 'volarse', 'agüevonao', 'agüevona',
-						'agüevonada', 'ahueonao', 'ahueona', 'ahueonada', 'awueonao', 'awueona',
-						'awueonada', 'güevon', 'güevona', 'güeon', 'güeona', 'güevada', 'guevon',
-						'guevona', 'gueon', 'guevada', 'gueona', 'huevon', 'huevona', 'huevonada',
-						'hueon', 'hueona', 'hueonada', 'huevada', 'hueveo', 'wueon', 'wuevada',
-						'wueveo', 'concha tu madre', 'conchetumare', 'conchatumare', 'conche tu mare',
-						'concha tu mare', 'conche tumare', 'concha tumare', 'conchesumare', 'conchasumare',
-						'conche su mare', 'concha su mare', 'conche sumare', 'concha sumare', 'culiao',
-						'gil', 'agilao', 'agila', 'sapo culiao', 'tragasables', 'jolaperra', 'maricon',
-						'maricona', 'perkin', 'longi', 'sacoweas', 'mermelao', 'weon', 'weona', 'pichula',
-						'tula', 'wueona', 'pija', 'marica');
-	//Lista de palabras inclusivas
-	$censuradas_4 = array('aliades', 'elles', 'cuerpa');
+	//bd con las palabras
+    $censuradas_1 = bd_palabras_censuradas(1);
+    $censuradas_2 = bd_palabras_censuradas(2);
+    $censuradas_3 = bd_palabras_censuradas(3);
+    $censuradas_4 = bd_palabras_censuradas(4);
 
 	//Contamos la partes
 	$partes_1   = count($censuradas_1);
@@ -578,22 +585,33 @@ function filtrar_palabras_censuradas($oracion) {
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	info_post_data(1,'dato' );
-* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
-* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-* 	info_post_data(4,'bla' );
+* 	super_title(1,1,1,'','dato' );
+* 	super_title(2,2,1,'','dato' );
+* 	super_title(3,3,1,'','dato' );
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
-* String   $Text            Texto del mensaje (permite HTML)
-* @return  String
+* Integer  $Type    Tipo de elemento
+* Integer  $Color   Color del elemento
+* Integer  $Align   Alineacion del elemento
+* String   $Style   Estilo extra del elemento
+* String   $Text    Texto del elemento
+* @return  HTML
 ************************************************************************/
 //Funcion
 function super_title($Type, $Color, $Align, $Style, $Text){
 
-	//Valido si los datos ingresados estan correctos
-	if (validarNumero($Type)&&validarNumero($Color)&&validarNumero($Align)){
+	/**********************/
+	//conteo
+	$nerrors = 0;
+	//Validaciones
+	if(!validarNumero($Type)){   $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Type');}
+	if(!validarNumero($Color)){  $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Color');}
+	if(!validarNumero($Align)){  $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Align');}
 
+	/**********************/
+	//Si todo esta ok
+	//Valido si los datos ingresados estan correctos
+	if ($nerrors==0){
 		/********************************************************/
 		//Definicion de errores
 		$errorn = 0;
@@ -648,21 +666,31 @@ function super_title($Type, $Color, $Align, $Style, $Text){
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	info_post_data(1,'dato' );
-* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
-* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-* 	info_post_data(4,'bla' );
+* 	divider_line(1,1,1);
+* 	divider_line(2,2,1);
+* 	divider_line(3,3,1);
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
-* String   $Text            Texto del mensaje (permite HTML)
-* @return  String
+* Integer  $Type         Tipo de elemento
+* Integer  $Color        Color del elemento
+* Integer  $InnerColor   Color interno del elemento
+* @return  HTML
 ************************************************************************/
 //Funcion
 function divider_line($Type, $Color, $InnerColor){
 
+	/**********************/
+	//conteo
+	$nerrors = 0;
+	//Validaciones
+	if(!validarNumero($Type)){        $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Type');}
+	if(!validarNumero($Color)){       $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Color');}
+	if(!validarNumero($InnerColor)){  $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $InnerColor');}
+
+	/**********************/
+	//Si todo esta ok
 	//Valido si los datos ingresados estan correctos
-	if (validarNumero($Type)&&validarNumero($Color)&&validarNumero($InnerColor)){
+	if ($nerrors==0){
 
 		/********************************************************/
 		//Definicion de errores
@@ -718,21 +746,29 @@ function divider_line($Type, $Color, $InnerColor){
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	info_post_data(1,'dato' );
-* 	info_post_data(2,'<strong>Dato:</strong>explicacion' );
-* 	info_post_data(3,'<strong>Dato 1:</strong>explicacion 1 <br/><strong>Dato 2:</strong>explicacion 2' );
-* 	info_post_data(4,'bla' );
+* 	hr_line(1,1);
+* 	hr_line(2,1);
+* 	hr_line(3,1);
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
-* String   $Text            Texto del mensaje (permite HTML)
-* @return  String
+* Integer  $Type    Tipo de elemento
+* Integer  $Color   Color del elemento
+* @return  HTML
 ************************************************************************/
 //Funcion
 function hr_line($Type, $Color){
 
+	/**********************/
+	//conteo
+	$nerrors = 0;
+	//Validaciones
+	if(!validarNumero($Type)){        $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Type');}
+	if(!validarNumero($Color)){       $nerrors++; alert_post_data(4,1,1,0, 'No ha ingresado un numero en $Color');}
+
+	/**********************/
+	//Si todo esta ok
 	//Valido si los datos ingresados estan correctos
-	if (validarNumero($Type)&&validarNumero($Color)){
+	if ($nerrors==0){
 
 		/********************************************************/
 		//Definicion de errores

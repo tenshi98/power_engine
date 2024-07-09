@@ -20,23 +20,23 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//transformar minutos
-* 	numero2horas(1.5);
+* 	numero2horas(1.5); //Devuelve 01:30:00
 *
 *===========================    Parametros   ===========================
 * Integer    $mins   Numero de minutos a transformar
 * @return    Time
 ************************************************************************/
 //Funcion
-function numero2horas($in) {
+function numero2horas($mins) {
 
 	/**********************/
 	//Validaciones
-	if (!validarNumero($in)){ return 'El dato ingresado no es un numero';}
+	if (!validarNumero($mins)){ return 'El dato ingresado no es un numero';}
 
 	/**********************/
 	//Si todo esta ok
-	$h = intval($in);
-	$m = round((((($in - $h) / 100.0) * 60.0) * 100), 0);
+	$h = intval($mins);
+	$m = round((((($mins - $h) / 100.0) * 60.0) * 100), 0);
 	if ($m == 60){$h++;$m = 0;}
 	$retval = sprintf("%02d:%02d:%02d", $h, $m, '00');
 	return $retval;
@@ -47,11 +47,11 @@ function numero2horas($in) {
 * Transforma minutos a horas
 *
 *===========================     Detalles    ===========================
-* Permite ingresar un numero (de minutos) y transformarlo en formato hora
+* Permite ingresar un numero entero (minutos) y transformarlo en formato hora
 *===========================    Modo de uso  ===========================
 *
 * 	//transformar minutos
-* 	minutos2horas(65);
+* 	minutos2horas(65); //Devuelve 01:05:00
 *
 *===========================    Parametros   ===========================
 * Integer    $mins   Numero de minutos a transformar
@@ -83,11 +83,11 @@ function minutos2horas($mins) {
 * Transforma segundos a horas
 *
 *===========================     Detalles    ===========================
-* Permite ingresar un numero (de segundos) y transformarlo en formato hora
+* Permite ingresar un numero entero (segundos) y transformarlo en formato hora
 *===========================    Modo de uso  ===========================
 *
 * 	//transformar segundos
-* 	segundos2horas(3600);
+* 	segundos2horas(3600); //Devuelve 01:00:00
 *
 *===========================    Parametros   ===========================
 * Integer    $segundos   Numero de segundos a transformar
@@ -116,7 +116,7 @@ function segundos2horas($segundos) {
 *===========================    Modo de uso  ===========================
 *
 * 	//transformar hora
-* 	horas2minutos('01:05:00');
+* 	horas2minutos('01:05:00'); //Devuelve 65
 *
 *===========================    Parametros   ===========================
 * Time       $horas   La hora en formato texto
@@ -151,7 +151,7 @@ function horas2minutos($horas) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se transforma la hora
-* 	horas2segundos('14:30:00');
+* 	horas2segundos('00:30:00'); //Devuelve 1800
 *
 *===========================    Parametros   ===========================
 * Time     $horas   La hora en formato texto
@@ -178,12 +178,12 @@ function horas2segundos($horas){
 * Transforma a numero decimal una hora
 *
 *===========================     Detalles    ===========================
-* Transforma las horas ingresadas a numeros con decimales, por
-* ejemplo 1:30 pasaria a 1.5 horas
+* Transforma las horas ingresadas a numeros con decimales
+*
 *===========================    Modo de uso  ===========================
 *
 * 	//se transforma la hora
-* 	horas2decimales('14:30:00');
+* 	horas2decimales('01:30:00'); //Devuelve 1.5
 *
 *===========================    Parametros   ===========================
 * Time     $horas   La hora en formato texto
@@ -216,11 +216,11 @@ function horas2decimales($horas){
 * Convetir mes abreviado a mes completo
 *
 *===========================     Detalles    ===========================
-* Muestra el mes completo en el navegador a partir de sus primeras 3 letras
+* Transforma al mes completo a partir de sus primeras 3 letras
 *===========================    Modo de uso  ===========================
 *
 * 	//se convierten los datos
-* 	Devolver_mes('Ene');
+* 	Devolver_mes('Ene'); //Devuelve Enero
 *
 *===========================    Parametros   ===========================
 * String    $mes    Mes con 3 letras
@@ -266,7 +266,7 @@ function Devolver_mes($mes){
 *===========================    Modo de uso  ===========================
 *
 * 	//se convierten los datos
-* 	numero_mes(1);
+* 	numero_mes(1); //Devuelve 01
 *
 *===========================    Parametros   ===========================
 * Integer    $numero   Numero a transformar (de 1 a 12)
@@ -297,7 +297,7 @@ function numero_mes($numero){
 *===========================    Modo de uso  ===========================
 *
 * 	//se convierten los datos
-* 	numero_dia(1);
+* 	numero_dia(1); //Devuelve 01
 *
 *===========================    Parametros   ===========================
 * Integer    $numero   Numero a transformar (de 1 a 31)
@@ -333,7 +333,7 @@ function numero_dia($numero){
 *===========================    Modo de uso  ===========================
 *
 * 	//se convierten los datos
-* 	numero_a_mes(1);
+* 	numero_a_mes(1); //Devuelve Enero
 *
 *===========================    Parametros   ===========================
 * Integer    $numero   Numero a transformar (de 1 a 12)
@@ -364,7 +364,7 @@ function numero_a_mes($numero){
 *===========================    Modo de uso  ===========================
 *
 * 	//se convierten los datos
-* 	numero_a_mes_corto(1);
+* 	numero_a_mes_corto(1); //Devuelve Ene
 *
 *===========================    Parametros   ===========================
 * Integer    $numero   Numero a transformar (de 1 a 12)
@@ -393,7 +393,7 @@ function numero_a_mes_corto($numero){
 *===========================    Modo de uso  ===========================
 *
 * 	//se convierten los datos
-* 	numero_nombreDia(3);
+* 	numero_nombreDia(3); //Devuelve Miercoles
 *
 *===========================    Parametros   ===========================
 * Integer   $numero   Numero a transformar (de 1 a 7)
@@ -434,7 +434,7 @@ function numero_nombreDia($numero){
 *===========================    Modo de uso  ===========================
 *
 * 	//se transforman los valores
-* 	porcentaje(0.65);
+* 	porcentaje(0.65); //Devuelve 65%
 *
 *===========================    Parametros   ===========================
 * Decimal    $valor   Decimal a transformar
@@ -470,7 +470,7 @@ function porcentaje($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se transforma los datos
-* 	numtoletras(1200);
+* 	numtoletras(1200); //Devuelve mil doscientos
 *
 *===========================    Parametros   ===========================
 * Integer  $monto   Valor a transformar en palabras
@@ -643,8 +643,7 @@ function numtoletras($monto){
 
 }
 //Sufijo del valor
-function subfijo($xx)
-{ // esta función regresa un subfijo para la cifra
+function subfijo($xx){ // esta función regresa un subfijo para la cifra
     $xx = trim($xx);
     $xstrlen = strlen($xx);
     if ($xstrlen == 1 || $xstrlen == 2 || $xstrlen == 3)
@@ -665,62 +664,6 @@ function subfijo($xx)
 /*                                              Funciones  Objetos                                                 */
 /*                                                                                                                 */
 /*******************************************************************************************************************/
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-/***********************************************************************
-* Transforma un objeto a un arreglo
-*
-*===========================     Detalles    ===========================
-* Transforma un objeto a un arreglo
-*===========================    Modo de uso  ===========================
-*
-* 	//se transforman los datos
-* 	$array = objectToArray($obj);
-*
-*===========================    Parametros   ===========================
-* Object    $object   Objeto a Transformar
-* @return   Array
-************************************************************************/
-//Funcion
-function objectToArray($object){
-    if (is_object($object)) {
-        return json_decode(json_encode($object), true);
-    } else {
-        throw new \Exception('Not an object');
-    }
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-/***********************************************************************
-* Transforma un arreglo a un objeto
-*
-*===========================     Detalles    ===========================
-* Transforma un arreglo a un objeto
-*===========================    Modo de uso  ===========================
-*
-* 	//se transforman los datos
-* 	$obj = arrayToObject($array);
-*
-*===========================    Parametros   ===========================
-* Array     $array   Arreglo a Transformar
-* @return   Object
-************************************************************************/
-//Funcion
-function arrayToObject(array $array = []){
-    if (!is_array($array)) {
-        throw new \Exception('Not an array');
-    }
-
-    $object = new \stdClass();
-    if (is_array($array) && count($array) > 0) {
-        foreach ($array as $name => $value) {
-            if (is_array($value)) {
-                $object->{$name} = arrayToObject($value);
-            } else {
-                $object->{$name} = $value;
-            }
-        }
-    }
-    return $object;
-}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
 * Transforma un arreglo a un texto

@@ -129,8 +129,8 @@ function generateServerSpecificHash(){
 * 	echo $encriptar . '<br>';
 *
 * 	// Desencriptas el id para verlo de manera original
-* 	$decriptar = encrypt_decrypt('decrypt',$encriptar);
-* 	echo $decriptar;
+* 	$desencriptar = encrypt_decrypt('decrypt',$encriptar);
+* 	echo $desencriptar;
 *
 * 	//salidas:
 * 	bnR6UTRVTHAzYWd1dWEvWVdpMGo4QT09 (corresponde a 5008)

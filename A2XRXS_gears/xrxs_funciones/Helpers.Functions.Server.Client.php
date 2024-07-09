@@ -288,13 +288,11 @@ function obtenerSistOperativo(){
 ************************************************************************/
 //Funcion
 function getEntorno(){
-
     //verifica la capa de desarrollo
 	$whitelist = array( 'localhost', '127.0.0.1', '::1' );
 	//si estoy en ambiente de desarrollo
 	if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) ){
 		return true;
-	////////////////////////////////////////////////////////////////////////////////
 	//si estoy en ambiente de produccion
 	}else{
 		return false;

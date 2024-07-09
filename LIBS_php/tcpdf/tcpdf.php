@@ -4857,7 +4857,7 @@ class TCPDF {
 	 * @see Annotation()
 	 */
 	protected function _putEmbeddedFiles() {
-		if ($this->pdfa_mode && $this->pdfa_version != 3)  {
+		if ($this->pdfa_mode && $this->pdfa_version != 3){
 			// embedded files are not allowed in PDF/A mode version 1 and 2
 			return;
 		}

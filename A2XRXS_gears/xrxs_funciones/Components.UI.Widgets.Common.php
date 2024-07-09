@@ -6,6 +6,22 @@ if( ! defined('XMBCXRXSKGC')) {
     die('No tienes acceso a esta carpeta o archivo (Access Code 1002-003).');
 }
 /*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 function preview_pdf($name, $route){
 
 	$input = '
@@ -19,7 +35,23 @@ function preview_pdf($name, $route){
 
 	return $input;
 
-}/*******************************************************************************************************************/
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //permite ver un preview de los documentos
 function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 
@@ -100,7 +132,22 @@ function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 		alert_post_data(4,2,2,0, $Alert_Text);
 	}
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //permite ver un preview de los documentos
 function preview_docs($Root, $File, $ExtraData){
 
@@ -433,7 +480,22 @@ function preview_docs($Root, $File, $ExtraData){
 	return $input;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //permite ver un preview de los documentos
 function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainSite, $EmpPath){
 
@@ -713,7 +775,22 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 	return $input;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra las imagenes animadas
 function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccion){
 
@@ -840,12 +917,42 @@ function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccio
 	//devolver dato
 	return $widget;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra el cuadro de dialogo
 function widget_avgrund(){
 	require_once '../LIBS_js/avgrund/avgrund.php';
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra un explorador de archivos personalizado
 function file_explorer($type, $conector, $emp_path, $id_emp, $prm){
 
@@ -863,7 +970,22 @@ function file_explorer($type, $conector, $emp_path, $id_emp, $prm){
 	//Imprimir dato
 	return $input;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra la ventana modal
 function widget_modal($width, $height){
 	echo "
@@ -888,17 +1010,62 @@ function widget_modal($width, $height){
 	</script>
 	";
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra la Burbuja de ayuda
 function widget_tooltipster(){
 	require_once '../LIBS_js/tooltipster/tooltipster.php';
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Ejecuta el validador de formularios
 function widget_validator(){
 	require_once '../LIBS_js/validator/form_validator.php';
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //se muestra información como planilla excel
 function widget_excel($identificador, $tabla, $extraconfig){
 
@@ -932,7 +1099,22 @@ function widget_excel($identificador, $tabla, $extraconfig){
 	//Imprimir dato
 	return $widget;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //se muestra el buscador dentro de una tabla
 function widget_sherlock($type, $colspan, $idTable){
 	//indica que tipo es
@@ -964,7 +1146,22 @@ function widget_sherlock($type, $colspan, $idTable){
 	//Imprimir dato
 	return $widget;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //se muestra el buscador dentro de una tabla
 function widget_table_filter($id_table){
 	//generacion del widget
@@ -977,7 +1174,22 @@ function widget_table_filter($id_table){
 	//Imprimir dato
 	return $widget;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //se muestra el visualizador de codigo fuente
 function widget_code_block($type, $code){
 
@@ -1025,7 +1237,22 @@ function widget_code_block($type, $code){
 
 	}
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra un explorador de archivos personalizado
 function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
 
@@ -1057,7 +1284,22 @@ function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
 	//Imprimir dato
 	return $input;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra los ultimos temblores
 function widget_sismologia(){
 
@@ -1164,7 +1406,22 @@ function widget_sismologia(){
 	}
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra los dias feriados del año
 function widget_feriados(){
 
@@ -1300,7 +1557,22 @@ function widget_feriados(){
 	}
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra los dias feriados del año
 function widget_radio_player(){
 	//radios
@@ -1512,7 +1784,22 @@ function widget_radio_player(){
 	return $input;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra los dias feriados del año
 function widget_youtube_player($link){
 
@@ -1535,7 +1822,22 @@ function widget_youtube_player($link){
 	//devuelvo cuerpo
 	return $input;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Muestra los dias feriados del año
 function widget_star_rating($max, $value, $text){
 	/********************************************************/
@@ -1574,11 +1876,5 @@ function widget_star_rating($max, $value, $text){
 		return $input;
 	}
 }
-
-
-
-
-/*******************************************************************************************************************/
-
 
 ?>

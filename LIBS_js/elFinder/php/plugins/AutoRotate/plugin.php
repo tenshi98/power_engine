@@ -135,7 +135,7 @@ class elFinderPluginAutoRotate extends elFinderPlugin
                     break;
             }
         }
-        if (!$degree)  {
+        if (!$degree){
             return false;
         }
         $opts = array(

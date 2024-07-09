@@ -21,7 +21,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	divHoras('14:00:00', 4);
+* 	divHoras('04:00:00', 4); //Devuelve 60
 *
 *===========================    Parametros   ===========================
 * Time     $hora        Hora ingresada
@@ -54,7 +54,7 @@ function divHoras($hora,$divisor) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	multHoras('14:00:00', 4);
+* 	multHoras('04:00:00', 4); //Devuelve '16:00:00'
 *
 *===========================    Parametros   ===========================
 * Time     $hora            Hora ingresada
@@ -92,7 +92,7 @@ function multHoras($hora,$multiplicador) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	restahoras('14:00:00', '07:00:00');
+* 	restahoras('14:00:00', '07:00:00'); //Devuelve '07:00:00'
 *
 *===========================    Parametros   ===========================
 * Time    $hora        Hora ingresada
@@ -149,7 +149,7 @@ function restahoras($hora, $horaresta){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	sumahoras('14:00:00', '07:00:00');
+* 	sumahoras('14:00:00', '07:00:00'); //Devuelve '21:00:00'
 *
 *===========================    Parametros   ===========================
 * Time     $hora        Hora ingresada
@@ -200,7 +200,7 @@ function sumahoras($hora,$horasuma){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	sumarDias('2019-01-02', 5);
+* 	sumarDias('2019-01-02', 5); //Devuelve '2019-01-07'
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha entregada
@@ -232,7 +232,7 @@ function sumarDias($Fecha,$nDias){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	restarDias('2019-01-02', 5);
+* 	restarDias('2019-01-07', 5); //Devuelve '2019-01-02'
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha entregada
@@ -260,15 +260,15 @@ function restarDias($Fecha,$nDias){
 * Ver años transcurridos entre fechas
 *
 *===========================     Detalles    ===========================
-* Permite ver el numero de los años transcurridos entre dos fechas entregadas
+* Permite ver el numero de los años y meses transcurridos a partir de una
+* fecha entregada y la fecha actual
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	obtener_edad('2019-01-02');
+* 	obtener_edad('2022-01-01'); //Devuelve 'dos años, 5 meses' (a la fecha '2024-05-01')
 *
 *===========================    Parametros   ===========================
-* Date     $fecha_i   Fecha de inicio
-* Date     $fecha_f   Fecha de termino
+* Date     $fecha_nacimiento   Fecha
 * @return  Integer
 ************************************************************************/
 //Funcion
@@ -295,7 +295,7 @@ function obtener_edad($fecha_nacimiento){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	dias_transcurridos('2019-01-02', '2019-02-02');
+* 	dias_transcurridos('2019-01-02', '2019-02-02'); //Devuelve 30
 *
 *===========================    Parametros   ===========================
 * Date     $fecha_i   Fecha de inicio
@@ -364,7 +364,7 @@ function horas_transcurridas($diaInicio, $diaTermino, $horaInicio, $horaTermino)
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	diferencia_meses('2019-01-02', '2019-02-02');
+* 	diferencia_meses('2019-01-02', '2019-02-02'); //Devuelve 1
 *
 *===========================    Parametros   ===========================
 * Date     $fechainicial   Fecha de inicio

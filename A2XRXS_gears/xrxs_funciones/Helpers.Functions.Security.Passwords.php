@@ -19,10 +19,10 @@ if( ! defined('XMBCXRXSKGC')) {
 * seleccionando el largo del password aleatorio
 *===========================    Modo de uso  ===========================
 * 	//Numerico:
-* 	genera_password(10,'numerico');
+* 	genera_password(10,'numerico'); //Devuelve 4466878
 *
 * 	//Alfanumerico:
-* 	genera_password(10,'alfanumerico');
+* 	genera_password(10,'alfanumerico'); //Devuelve 85jBdfG645
 *
 *===========================    Parametros   ===========================
 * Integer    $longitud   Largo de la password generada
@@ -32,7 +32,7 @@ if( ! defined('XMBCXRXSKGC')) {
 //Funcion
 function genera_password($longitud,$tipo){
 	//verifico si los datos estan bien entregados
-	if (validarNumero($longitud)&&($tipo=="alfanumerico" || $tipo=="numerico")){
+	if (validarNumero($longitud)&&($tipo=="alfanumerico" OR $tipo=="numerico")){
 
 		//selecciono el tipo de password
 		if ($tipo=="alfanumerico"){
@@ -60,7 +60,7 @@ function genera_password($longitud,$tipo){
 *===========================    Modo de uso  ===========================
 *
 * 	//generar una password
-* 	genera_password_unica();
+* 	genera_password_unica(); //Devuelve 20241007152055 (para la fecha 2024/10/07 15:20:55)
 *
 *===========================    Parametros   ===========================
 * @return    String

@@ -15,7 +15,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * Envio Correos
 *
 *===========================     Detalles    ===========================
-* Permite enviar correos a todos los usuarios
+* Permite enviar correos a traves del mismo servidor
 *===========================    Modo de uso  ===========================
 *
 * 	//Envio de correo
@@ -178,7 +178,7 @@ function tareas_envio_correo($De_correo, $De_nombre,
 * Envio Correos
 *
 *===========================     Detalles    ===========================
-* Permite enviar correos a todos los usuarios
+* Permite enviar correos a traves de un servidor SMTP externo
 *===========================    Modo de uso  ===========================
 *
 * 	//Envio de correo
@@ -209,6 +209,7 @@ function tareas_envio_correo($De_correo, $De_nombre,
 * String    $CopiaCarbonOculta  Correo Copia oculta
 * String    $Asunto             Asunto del correo
 * String    $CuerpoHTML         Cuerpo del correo, con tag html
+* String    $CuerpoNoHTML       Cuerpo del correo, sin tag html
 * String    $Adjuntos           Ruta del archivo adjunto
 * String    $lvl                Nivel
 ************************************************************************/
@@ -345,7 +346,7 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 * Envio Correos
 *
 *===========================     Detalles    ===========================
-* Permite enviar correos a todos los usuarios a traves de un servicio google
+* Permite enviar correos a traves del correo gmail
 *===========================    Modo de uso  ===========================
 *
 * 	//Envio de correo
@@ -521,8 +522,14 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 *	}
 *
 *===========================    Parametros   ===========================
-* String    $tarea    Dirección web con lo que se tiene que ejecutar
-*                     en el servidor, entregar URL completas
+* String    $title              Titulo de la notificacion
+* String    $message            Mensaje de la notificacion
+* String    $action             Pantalla a abrir en la app
+* String    $firebase_token     Token firebase
+* String    $firebase_api       Api firebase
+* String    $imageUrl           Imagen a mostrar
+* String    $actionDestination  Tarea a ejecutar en la app
+* @return   int
 ************************************************************************/
 //Funcion
 function envio_mensaje_push($title, $message, $action, $firebase_token, $firebase_api,
@@ -562,7 +569,7 @@ function envio_mensaje_push($title, $message, $action, $firebase_token, $firebas
 * Envio Correos
 *
 *===========================     Detalles    ===========================
-* Permite enviar correos a todos los usuarios
+* Permite enviar correos a traves del servicio sendingblue
 *===========================    Modo de uso  ===========================
 *
 * 	//Envio de correo

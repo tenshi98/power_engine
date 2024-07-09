@@ -22,7 +22,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Cantidades(1250.85,6);
+* 	Cantidades(1250.85, 6); //Devuelve 1.250,850000
 *
 *===========================    Parametros   ===========================
 * Decimal     $valor         Numero a formatear
@@ -56,7 +56,7 @@ function Cantidades($valor, $n_decimales){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	n_doc(25, 7);
+* 	n_doc(25, 7); //Devuelve 0000025
 *
 *===========================    Parametros   ===========================
 * Integer     $valor         Numero a formatear
@@ -90,7 +90,7 @@ function n_doc($valor, $n_ceros){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Valores(1500.85565,2);
+* 	Valores(1500.85565,2); //Devuelve $ 1.500,86
 *
 *===========================    Parametros   ===========================
 * Decimal     $valor         Numero a formatear
@@ -122,7 +122,7 @@ function Valores($valor, $n_decimales){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	valores_enteros(1500.85);
+* 	valores_enteros(1500.85); //Devuelve 1.501
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -152,7 +152,7 @@ function valores_enteros($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	valores_comparables(1500.85);
+* 	valores_comparables(1500.85); //Devuelve 1501
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a comparar
@@ -183,7 +183,7 @@ function valores_comparables($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	valores_truncados(1500.85);
+* 	valores_truncados(1500.85); //Devuelve 1500
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -218,7 +218,7 @@ function valores_truncados($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Cantidades_decimales_justos(1500.85);
+* 	Cantidades_decimales_justos(1500.85); //Devuelve 1.500,85
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -258,7 +258,7 @@ function Cantidades_decimales_justos($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Cantidades_decimales_justos_alt(1500.85);
+* 	Cantidades_decimales_justos_alt(1500.85); //Devuelve 1.500,85
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -292,7 +292,7 @@ function Cantidades_decimales_justos_alt($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	cantidades_excel(1500.85);
+* 	cantidades_excel(1500.85); //Devuelve 1500.85
 *
 *===========================    Parametros   ===========================
 * Decimal   $valor   Numero a formatear
@@ -348,10 +348,10 @@ function cantidades_google($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	formatPhone('+56911265984');
+* 	formatPhone('+56911265984'); //Devuelve +56 9 1126 5984
 *
 *===========================    Parametros   ===========================
-* Decimal   $valor   Numero a formatear
+* String    $Phone   Numero a formatear
 * @return   String
 ************************************************************************/
 //Funcion

@@ -43,7 +43,7 @@ function fecha_actual(){
 * 	fecha_actual_val(); //devuelve 20240701
 *
 *===========================    Parametros   ===========================
-* @return  Date
+* @return  String
 ************************************************************************/
 //Funcion
 function fecha_actual_val(){
@@ -78,7 +78,7 @@ function hora_actual(){
 * Obtener Hora Actual (alternativa)
 *
 *===========================     Detalles    ===========================
-* Permite obtener la hora actual de chile utilizando guines como
+* Permite obtener la hora actual de chile utilizando guiones como
 * separadores
 *===========================    Modo de uso  ===========================
 *
@@ -226,37 +226,29 @@ function ano_actual(){
 ************************************************************************/
 //Funcion
 function MeDir($dir,$subdirs){
-        /* Creamos un array con todos los nombres de directorios y
-        archivos contenidos dentro del directorio inicial */
-        $arr = scandir($dir);
+    /* Creamos un array con todos los nombres de directorios y  archivos contenidos dentro del directorio inicial */
+    $arr = scandir($dir);
 
-        /* establecemos que la variable $sizedir es igual a cero */
-        $sizedir = 0;
+    /* establecemos que la variable $sizedir es igual a cero */
+    $sizedir = 0;
 
-        /* YA NO Recorremos el array saltando los directorios . y .. */
-        for ($i=0; $i<count($arr); $i++)
-            {
-                /* Comprobamos que el archivo/directorio actual no sea "." ni ".." */
-              if ($arr[$i]!="." && $arr[$i]!="..")
-              	{
-	                /* Si es un directorio hacer..... */
-	                if (is_dir($dir ."/". $arr[$i]))
-	                    {
-	                        /* Establecemos que la variable $sizedir es igual
-	                        a ella misma m?s el valor devuelto por MeDir */
-	                        if (isset($subdirs)&&$subdirs==1) $sizedir += MeDir($dir . "/" . $arr[$i],1);
-	                    }
-	                /* Si es un archivo hacer ... */
-	                else
-	                    {
-	                        /* Establecemos que la variable $sizedir es igual
-	                        a ella misma m?s el tama?o del fichero $dir ."/". $arr[$i] */
-	                        $sizedir += filesize($dir ."/". $arr[$i]);
-	                    }
-               }
-            }
-        /* Devolvemos el valor total de $sizedir */
-        return $sizedir;
+    /* YA NO Recorremos el array saltando los directorios . y .. */
+    for ($i=0; $i<count($arr); $i++){
+        /* Comprobamos que el archivo/directorio actual no sea "." ni ".." */
+        if ($arr[$i]!="." && $arr[$i]!=".."){
+	        /* Si es un directorio hacer..... */
+	        if (is_dir($dir ."/". $arr[$i])){
+	            /* Establecemos que la variable $sizedir es igual a ella misma m?s el valor devuelto por MeDir */
+	            if (isset($subdirs)&&$subdirs==1) $sizedir += MeDir($dir . "/" . $arr[$i],1);
+	        /* Si es un archivo hacer ... */
+			}else{
+	            /* Establecemos que la variable $sizedir es igual a ella misma m?s el tama?o del fichero $dir ."/". $arr[$i] */
+	            $sizedir += filesize($dir ."/". $arr[$i]);
+	        }
+        }
+    }
+    /* Devolvemos el valor total de $sizedir */
+    return $sizedir;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -276,8 +268,9 @@ function MeDir($dir,$subdirs){
 ************************************************************************/
 //Funcion
 function obtenerUsoMemoriaServidor($getPercentage=true){
+	//Variables
     $memoryTotal = null;
-    $memoryFree = null;
+    $memoryFree  = null;
 
     if (stristr(PHP_OS, "win")) {
         // Get total physical memory (this is in bytes)
@@ -373,7 +366,7 @@ function getNiceFileSize($bytes, $binaryPrefix) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	getRootURL();
+* 	getRootURL(); //devuelve 'https://www.php.net' (para la direccion 'https://www.php.net/manual/es/function.file-get-contents.php')
 *
 *===========================    Parametros   ===========================
 * @return  String
@@ -402,7 +395,7 @@ function getRootURL(){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	getCurrentURL();
+* 	getCurrentURL(); //devuelve 'https://www.php.net/manual/es/function.file-get-contents.php' (para la direccion 'https://www.php.net/manual/es/function.file-get-contents.php')
 *
 *===========================    Parametros   ===========================
 * @return  String
@@ -477,6 +470,7 @@ function tareasServer($tarea){
 * 	uploadPHPError($error);
 *
 *===========================    Parametros   ===========================
+* int      $error   Tipo de error (0-8)
 * @return  String
 ************************************************************************/
 //Funcion
@@ -499,27 +493,29 @@ function uploadPHPError($error) {
 * Guardar log
 *
 *===========================     Detalles    ===========================
-* Permite guardar el log del correo correo ingresado
+* Permite guardar el log en un archivo especificado en la configuracion
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	log_response(1,$response, 'malvarez@mail.com' );//Email log
-* 	log_response(1,$response, 'malvarez@mail.com' );//Error SQL
-* 	log_response(1,$response, 'malvarez@mail.com' );//Log de Error log PHP
+* 	log_response(1,$response, 'malvarez@mail.com' ); //Email log
+* 	log_response(2,'', 'Error SQL' );                //Error SQL
+* 	log_response(3,'', 'Error PHP' );                //Log de Error log PHP
+* 	log_response(4,'', 'IP de hackeo' );             //Log de Hacking
 *
 *===========================    Parametros   ===========================
-* String  $response         Arreglo con la respuesta del correo (0-1)
-* String  $email            Email a utilizar
+* int     $TipoLog             Tipo de log (1-4)
+* String  $RespuestaServidor   Texto plano con formato html
+* String  $Data                Texto plano
 ************************************************************************/
 //Funcion
-function log_response($TipoCuerpo, $RespuestaServidor, $Data){
+function log_response($TipoLog, $RespuestaServidor, $Data){
 
 	//Definicion de errores
 	$errorn = 0;
 	//se definen las opciones disponibles
 	$tipos = array(1, 2, 3, 4);
 	//verifico si el dato ingresado existe dentro de las opciones
-	if (!in_array($TipoCuerpo, $tipos)) {
-		alert_post_data(4,1,1,0, 'La configuracion $TipoCuerpo ('.$TipoCuerpo.') entregada no esta dentro de las opciones');
+	if (!in_array($TipoLog, $tipos)) {
+		alert_post_data(4,1,1,0, 'La configuracion $TipoLog ('.$TipoLog.') entregada no esta dentro de las opciones');
 		$errorn++;
 	}
 	/********************************************************/
@@ -529,7 +525,7 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 		$noti = "";
 
 		///////////////////////////////////////////////////////////////////////////
-		switch ($TipoCuerpo) {
+		switch ($TipoLog) {
 			/**************************************************************/
 			//Email log
 			case 1:
@@ -551,7 +547,6 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 				//archivo de respaldo
 				$Archivo = '1_logs_sql_error.txt';
 				$noti = $Data." \n";
-
 				break;
 			/**************************************************************/
 			//Log de Error log PHP
@@ -593,16 +588,18 @@ function log_response($TipoCuerpo, $RespuestaServidor, $Data){
 * Guardar log
 *
 *===========================     Detalles    ===========================
-* Permite guardar el log del correo correo ingresado
+* Permite guardar el log de los errores de ejecucion de php
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	log_response(1,$response, 'malvarez@mail.com' );//Email log
-* 	log_response(1,$response, 'malvarez@mail.com' );//Error SQL
-* 	log_response(1,$response, 'malvarez@mail.com' );//Log de Error log PHP
+* 	php_error_log('Usuario', 'Transaccion', 'Tarea', 'ErrorCode', 'ErrorDescription', 'ErrorQuery');
 *
 *===========================    Parametros   ===========================
-* String  $response         Arreglo con la respuesta del correo (0-1)
-* String  $email            Email a utilizar
+* String  $Usuario             Usuario quien genero el error
+* String  $Transaccion         Transaccion donde se genero el error
+* String  $Tarea               Tarea donde se ejecuto el error
+* String  $ErrorCode           Codigo del error devuelta por la consulta
+* String  $ErrorDescription    Descripcion del error generado
+* String  $ErrorQuery          Consulta con el error
 ************************************************************************/
 //Funcion
 function php_error_log($Usuario, $Transaccion, $Tarea, $ErrorCode, $ErrorDescription, $ErrorQuery ){

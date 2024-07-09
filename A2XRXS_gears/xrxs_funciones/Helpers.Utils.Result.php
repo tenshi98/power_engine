@@ -11,7 +11,7 @@ if( ! defined('XMBCXRXSKGC')) {
 /*                                                                                                                 */
 /*******************************************************************************************************************/
 //solo si es administrador
-if($_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
+if(isset($_SESSION['usuario']['basic_data']['idTipoUsuario'])&&$_SESSION['usuario']['basic_data']['idTipoUsuario']==1){
 	//Se guarda la memoria final del sistema
 	$sis_mem_fin = memory_get_usage();
 

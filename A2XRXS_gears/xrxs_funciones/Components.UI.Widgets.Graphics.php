@@ -5,7 +5,22 @@
 if( ! defined('XMBCXRXSKGC')) {
     die('No tienes acceso a esta carpeta o archivo (Access Code 1002-004).');
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function GraphLinear_1($idDiv,
 						$titulo, $eje_x_titulo, $eje_y_titulo,
@@ -89,7 +104,22 @@ function GraphLinear_1($idDiv,
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion con Rango)
 function GraphLinear_2($idDiv,
 						$titulo, $eje_x_titulo, $eje_y_titulo,
@@ -168,7 +198,22 @@ function GraphLinear_2($idDiv,
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico de doble eje
 function GraphLinear_3($idDiv,
 						$titulo, $eje_x_titulo, $eje_y_titulo_1, $eje_y_titulo_2,
@@ -252,7 +297,22 @@ function GraphLinear_3($idDiv,
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function GraphBarr_1($idDiv,
 					$titulo, $eje_x_titulo, $eje_y_titulo,
@@ -360,7 +420,22 @@ function GraphBarr_1($idDiv,
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function GraphPie_1($idDiv,
 					$titulo,
@@ -437,7 +512,22 @@ function GraphPie_1($idDiv,
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function GraphBarrLat_1($idDiv,
 						$titulo, $eje_x_titulo, $eje_y_titulo,
@@ -539,7 +629,22 @@ function GraphBarrLat_1($idDiv,
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options){
 
@@ -609,7 +714,22 @@ function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options)
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function Chartist_Line_1($idDiv, $titulo, $eje_x_titulo, $eje_y_titulo, $xData, $yData){
 
@@ -632,7 +752,22 @@ function Chartist_Line_1($idDiv, $titulo, $eje_x_titulo, $eje_y_titulo, $xData, 
 	return $graph;
 
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Crea un grafico lineal (Seleccion Normal)
 function Chartjs_Line_1($idDiv, $titulo, $xData, $yData){
 

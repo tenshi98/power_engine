@@ -5,7 +5,22 @@
 if( ! defined('XMBCXRXSKGC')) {
     die('No tienes acceso a esta carpeta o archivo (Access Code 1002-005).');
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Despliega un mapa en base a los datos entregados
 function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $IDGoogle, $zoom_map, $MapTypeId){
 
@@ -159,7 +174,22 @@ function mapa_from_gps($Latitud, $Longitud, $Titulo, $SubTitulo, $Contenido, $ID
 
 	return $mapa;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Despliega un mapa en base a los datos entregados
 function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $MapTypeId){
 
@@ -334,7 +364,22 @@ function mapa_from_direccion($Ubicacion, $explanation, $IDGoogle, $zoom_map, $Ma
 
 	return $mapa;
 }
-/*******************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* 
+*
+*===========================     Detalles    ===========================
+* 
+*===========================    Modo de uso  ===========================
+*
+* 	//obtener extension
+* 	obtenerExtensionArchivo('nombre del archivo');
+*
+*===========================    Parametros   ===========================
+* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* @return  html
+************************************************************************/
+//Funcion
 //Despliega un mapa en base a los datos entregados
 function mapa_from_ubicacion_mixta($Ubicacion_1, $explanation_1,$Ubicacion_2, $explanation_2, $IDGoogle, $identificador){
 
