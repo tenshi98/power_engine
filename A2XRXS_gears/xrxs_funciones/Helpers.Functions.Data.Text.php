@@ -21,7 +21,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	cortar('Lorem ipsum dolor sit amet, consectetur', 10);
+* 	cortar('Lorem ipsum dolor sit amet, consectetur', 10); //Devuelve 'Lorem ipsu...'
 *
 *===========================    Parametros   ===========================
 * String   $texto     Texto a cortar
@@ -57,7 +57,7 @@ function cortar($texto, $cuantos){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	cortarRut('10294658-9'); //devuelve 10294658
+* 	cortarRut('10294658-9'); //Devuelve 10294658
 *
 *===========================    Parametros   ===========================
 * String   $Rut    Rut a cortar
@@ -87,7 +87,8 @@ function cortarRut($Rut){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	palabra_largo('Lorem ipsum dolor sit amet, consectetur', 10);
+* 	palabra_largo('Lorem', 10); //Devuelve 'El dato ingresado debe tener al menos 10 caracteres'
+* 	palabra_largo('Lorem ipsum dolor sit amet, consectetur', 10); //Devuelve 1
 *
 *===========================    Parametros   ===========================
 * String   $oracion   Palabra u oracion entregada
@@ -122,7 +123,8 @@ function palabra_largo($oracion,$largo){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	palabra_corto('Lorem ipsum dolor sit amet, consectetur', 10);
+* 	palabra_corto('Lorem ipsum dolor sit amet, consectetur', 10); //Devuelve 'El dato ingresado debe tener no mas de 10 caracteres'
+* 	palabra_corto('Lorem', 10); //Devuelve 1
 *
 *===========================    Parametros   ===========================
 * String   $oracion   Palabra u oracion entregada
@@ -156,7 +158,7 @@ function palabra_corto($oracion,$largo){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	limpiarString('Lorem ipsum\n dolor sit amet\n, consectetur\r');
+* 	limpiarString('Lorem ipsum\n dolor sit amet\n, consectetur\r'); //Devuelve 'Lorem ipsum dolor sit amet consectetur'
 *
 *===========================    Parametros   ===========================
 * String   $texto   Texto a limpiar
@@ -171,10 +173,12 @@ function limpiarString($texto){
 
 	/**********************/
 	//Si todo esta ok
-    //Limpieza caracteres normales
-    $texto = preg_replace('([^A-Za-z0-9.])', ' ', $texto);
     //Se eliminan saltos de linea y pagina
     $texto = str_replace(array("\n", "\r"), '', $texto);
+    $texto = str_replace('\n', '', $texto);
+    $texto = str_replace('\r', '', $texto);
+    //Limpieza caracteres normales
+    $texto = preg_replace('([^A-Za-z0-9.])', ' ', $texto);
     $texto = strip_tags($texto, '');
     return $texto;
 }
@@ -187,7 +191,7 @@ function limpiarString($texto){
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	espacio_guion('Lorem ipsum dolor sit amet, consectetur');
+* 	espacio_guion('Lorem ipsum dolor sit amet, consectetur'); //Devuelve 'Lorem_ipsum_dolor_sit_amet,_consectetur'
 *
 *===========================    Parametros   ===========================
 * String   $dato   Oracion a transformar
@@ -214,7 +218,7 @@ function espacio_guion($dato) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	texto_mail('Lorem ipsum dolor sit amet, consectetur');
+* 	texto_mail('Lorem ipsum dolor sit amet, consectetur'); //Devuelve 'Lorem ipsum dolor sit amet, consectetur'
 *
 *===========================    Parametros   ===========================
 * String   $dato   Oracion a transformar
@@ -245,7 +249,7 @@ function texto_mail($dato) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	DeSanitizar('Lorem ipsum dolor sit amet, consectetur');
+* 	DeSanitizar('Lorem ipsum dolor sit amet, consectetur'); //Devuelve 'Lorem ipsum dolor sit amet, consectetur'
 *
 *===========================    Parametros   ===========================
 * String   $dato   Oracion a transformar
@@ -276,7 +280,7 @@ function DeSanitizar($dato) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se verifica
-* 	EstandarizarInput("bla"bla'bla");
+* 	EstandarizarInput("bla"bla'bla"); //Devuelve 'bla%27bla%27bla'
 *
 *===========================    Parametros   ===========================
 * String   $string   Texto a estandarizar
@@ -315,7 +319,7 @@ function EstandarizarInput($Data){
 *===========================    Modo de uso  ===========================
 *
 * 	//se verifica
-* 	EstandarizarInput("bla"bla'bla");
+* 	bd_palabras_censuradas(1); //Devuelve el arreglo con palabras censuradas
 *
 *===========================    Parametros   ===========================
 * String   $type   Tipo de base de datos
@@ -442,7 +446,7 @@ function bd_palabras_censuradas($type) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	contar_palabras_censuradas('Lorem ipsum dolor sit amet, fuck'); //Devuelve 1
+* 	contar_palabras_censuradas('Lorem ipsum dolor sit amet, fuck d'); //Devuelve 1
 *
 *===========================    Parametros   ===========================
 * String   $oracion   Oracion a revisar
@@ -515,7 +519,7 @@ function contar_palabras_censuradas($oracion) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se ejecuta operacion
-* 	filtrar_palabras_censuradas('Lorem ipsum dolor sit amet, fuck'); //Devuelve 'Lorem ipsum dolor sit amet, '
+* 	filtrar_palabras_censuradas('Lorem ipsum dolor sit amet, fuck d'); //Devuelve 'lorem ipsum dolor sit amet, **** d'
 *
 *===========================    Parametros   ===========================
 * String   $oracion   Oracion a revisar
@@ -585,9 +589,9 @@ function filtrar_palabras_censuradas($oracion) {
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	super_title(1,1,1,'','dato' );
-* 	super_title(2,2,1,'','dato' );
-* 	super_title(3,3,1,'','dato' );
+* 	super_title(1,1,1,'','dato' ); //Devuelve HTML
+* 	super_title(2,2,1,'','dato' ); //Devuelve HTML
+* 	super_title(3,3,1,'','dato' ); //Devuelve HTML
 *
 *===========================    Parametros   ===========================
 * Integer  $Type    Tipo de elemento
@@ -666,9 +670,9 @@ function super_title($Type, $Color, $Align, $Style, $Text){
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	divider_line(1,1,1);
-* 	divider_line(2,2,1);
-* 	divider_line(3,3,1);
+* 	divider_line(1,1,1); //Devuelve HTML
+* 	divider_line(2,2,1); //Devuelve HTML
+* 	divider_line(3,3,1); //Devuelve HTML
 *
 *===========================    Parametros   ===========================
 * Integer  $Type         Tipo de elemento
@@ -746,9 +750,9 @@ function divider_line($Type, $Color, $InnerColor){
 * Permite generar un cuadro de alerta personalizado
 *===========================    Modo de uso  ===========================
 * 	//se imprime input
-* 	hr_line(1,1);
-* 	hr_line(2,1);
-* 	hr_line(3,1);
+* 	hr_line(1,1); //Devuelve HTML
+* 	hr_line(2,1); //Devuelve HTML
+* 	hr_line(3,1); //Devuelve HTML
 *
 *===========================    Parametros   ===========================
 * Integer  $Type    Tipo de elemento

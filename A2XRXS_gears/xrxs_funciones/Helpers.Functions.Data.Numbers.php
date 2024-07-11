@@ -122,7 +122,7 @@ function Valores($valor, $n_decimales){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	valores_enteros(1500.85); //Devuelve 1.501
+* 	valores_enteros(1500.85); //Devuelve 1501
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -218,7 +218,7 @@ function valores_truncados($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Cantidades_decimales_justos(1500.85); //Devuelve 1.500,85
+* 	Cantidades_decimales_justos(1500.85); //Devuelve 1500.85
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -258,7 +258,7 @@ function Cantidades_decimales_justos($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Cantidades_decimales_justos_alt(1500.85); //Devuelve 1.500,85
+* 	Cantidades_decimales_justos_alt(1500.85); //Devuelve 1,500.85
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -319,7 +319,7 @@ function cantidades_excel($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	cantidades_google(1500.85);
+* 	cantidades_google(1500.85); //Devuelve 1500.85
 *
 *===========================    Parametros   ===========================
 * Decimal   $valor   Numero a formatear

@@ -296,7 +296,7 @@ function preview_docs($Root, $File, $ExtraData){
 						visibility: hidden !important;
 					}
 				</style>
-				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/Legacy/gestion_modular/img/video-thumbnail.png" data-setup="{}">';
+				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/LIBS_js/video_player/img/video-thumbnail.png" data-setup="{}">';
 					switch ($Extension) {
 						case 'mp4':
 							$input .= '<source src="'.$RutaCompleta.'" type="video/mp4">';
@@ -663,7 +663,7 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 				}
 				</style>
 
-				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/Legacy/gestion_modular/img/video-thumbnail.png" data-setup="{}">';
+				<video id="video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="'.DB_SITE_REPO.'/LIBS_js/video_player/img/video-thumbnail.png" data-setup="{}">';
 					switch ($ext) {
 						case 'mp4':
 							$input .= '<source src="'.$site.'/'.$emp_path.'/'.$path.'" type="video/mp4">';

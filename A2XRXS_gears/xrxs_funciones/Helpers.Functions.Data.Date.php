@@ -20,7 +20,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_completa('2019-01-01'); //Devuelve enero 01 del 1900
+* 	Fecha_completa('2024-01-01'); //Devuelve enero 01 del 2024
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -56,7 +56,7 @@ function Fecha_completa($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_completa_alt('2019-01-01'); //Devuelve 01 de enero de 1900
+* 	Fecha_completa_alt('2024-01-01'); //Devuelve 01 de enero de 2024
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha    Fecha a Formatear
@@ -92,7 +92,7 @@ function Fecha_completa_alt($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Dia_Mes('2019-01-01'); //Devuelve 01 Enero
+* 	Dia_Mes('2024-01-01'); //Devuelve 01 Enero
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha    Fecha a Formatear
@@ -127,7 +127,7 @@ function Dia_Mes($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_estandar('2019-01-01'); //Devuelve 01-01-2019
+* 	Fecha_estandar('2024-01-01'); //Devuelve 01-01-2024
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha    Fecha a Formatear
@@ -156,7 +156,7 @@ function Fecha_estandar($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_estandar_c('2019-01-01'); //Devuelve 01-01-19
+* 	Fecha_estandar_c('2024-01-01'); //Devuelve 01-01-24
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -185,7 +185,7 @@ function Fecha_estandar_c($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_normalizada('2019-01-01'); //Devuelve 1900-01-01
+* 	Fecha_normalizada('2024-01-01'); //Devuelve 2024-01-01
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -214,7 +214,7 @@ function Fecha_normalizada($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_archivos('2019-01-01'); //Devuelve 19000101
+* 	Fecha_archivos('2024-01-01'); //Devuelve 20240101
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -243,7 +243,7 @@ function Fecha_archivos($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_mes_ano('2019-01-01'); //Devuelve Enero del 1900
+* 	Fecha_mes_ano('2024-01-01'); //Devuelve Enero del 2024
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -278,7 +278,7 @@ function Fecha_mes_ano($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene el numero del dia
-* 	fecha2NdiaMes('2019-01-02'); //Devuelve 2
+* 	fecha2NdiaMes('2024-01-02'); //Devuelve 2
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -308,7 +308,7 @@ function fecha2NdiaMes($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2NdiaMesCon0('2019-01-01'); //Devuelve 01
+* 	fecha2NdiaMesCon0('2024-01-01'); //Devuelve 01
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -338,7 +338,7 @@ function fecha2NdiaMesCon0($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2NDiaSemana('2019-01-01'); //Devuelve 5
+* 	fecha2NDiaSemana('2024-01-01'); //Devuelve 1
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -367,7 +367,7 @@ function fecha2NDiaSemana($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se transforma los datos
-* 	fecha2NombreDia('2019-01-02'); //Devuelve Martes
+* 	fecha2NombreDia('2024-01-02'); //Devuelve Martes
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -398,7 +398,7 @@ function fecha2NombreDia($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2NSemana('2019-01-01'); //Devuelve 1
+* 	fecha2NSemana('2024-01-01'); //Devuelve 01
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -427,7 +427,7 @@ function fecha2NSemana($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2NMes('2019-01-01'); //Devuelve 1
+* 	fecha2NMes('2024-01-01'); //Devuelve 1
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha  Fecha a Formatear
@@ -456,7 +456,7 @@ function fecha2NMes($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2NombreMes('2019-01-01'); //Devuelve Enero
+* 	fecha2NombreMes('2024-01-01'); //Devuelve Enero
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -488,7 +488,7 @@ function fecha2NombreMes($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2NombreMesCorto('2019-01-01'); //Devuelve Ene
+* 	fecha2NombreMesCorto('2024-01-01'); //Devuelve Ene
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -519,7 +519,7 @@ function fecha2NombreMesCorto($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	fecha2Ano('2019-01-01'); //Devuelve 2019
+* 	fecha2Ano('2024-01-01'); //Devuelve 2024
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -550,7 +550,7 @@ function fecha2Ano($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_gringa('2019-01-01');
+* 	Fecha_gringa('2024-01-01'); //Devuelve January 01 2024
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a Formatear
@@ -578,7 +578,7 @@ function Fecha_gringa($Fecha){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea fecha
-* 	Fecha_ultimo_dia_mes('2019-01-01'); //Devuelve '2019-01-31'
+* 	Fecha_ultimo_dia_mes('2024-01-01'); //Devuelve '2024-01-31'
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha a usar

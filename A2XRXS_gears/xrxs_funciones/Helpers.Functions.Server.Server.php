@@ -19,7 +19,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	fecha_actual(); //devuelve 2024-07-01
+* 	fecha_actual(); //devuelve la fecha actual con formato 2024-07-01
 *
 *===========================    Parametros   ===========================
 * @return  Date
@@ -40,7 +40,7 @@ function fecha_actual(){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	fecha_actual_val(); //devuelve 20240701
+* 	fecha_actual_val(); //devuelve la fecha actual con formato 20240701
 *
 *===========================    Parametros   ===========================
 * @return  String
@@ -61,7 +61,7 @@ function fecha_actual_val(){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	hora_actual(); //devuelve 18:28:58
+* 	hora_actual(); //devuelve la hora actual con formato 18:28:58
 *
 *===========================    Parametros   ===========================
 * @return  Time
@@ -83,7 +83,7 @@ function hora_actual(){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	hora_actual_val(); //devuelve 18-28-58
+* 	hora_actual_val(); //devuelve la hora actual con formato 18-28-58
 *
 *===========================    Parametros   ===========================
 * @return  Time

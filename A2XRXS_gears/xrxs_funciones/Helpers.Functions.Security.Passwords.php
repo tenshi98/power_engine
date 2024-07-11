@@ -19,10 +19,10 @@ if( ! defined('XMBCXRXSKGC')) {
 * seleccionando el largo del password aleatorio
 *===========================    Modo de uso  ===========================
 * 	//Numerico:
-* 	genera_password(10,'numerico'); //Devuelve 4466878
+* 	genera_password(10,'numerico'); //Devuelve valores numeros aleatoreos
 *
 * 	//Alfanumerico:
-* 	genera_password(10,'alfanumerico'); //Devuelve 85jBdfG645
+* 	genera_password(10,'alfanumerico'); //Devuelve valores alfanumerico aleatoreos
 *
 *===========================    Parametros   ===========================
 * Integer    $longitud   Largo de la password generada
@@ -84,7 +84,7 @@ function genera_password_unica(){
 *===========================    Modo de uso  ===========================
 *
 * 	//Caracteres Random
-* 	caracteresRandom(16, true, false, false);
+* 	caracteresRandom(16, true, false, false); //Devuelve valores aleatoreos
 *
 *===========================    Parametros   ===========================
 * integer    $longitud          Define el largo de la palabra generada

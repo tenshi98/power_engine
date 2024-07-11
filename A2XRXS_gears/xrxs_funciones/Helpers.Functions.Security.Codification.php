@@ -21,7 +21,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *
 * 	//se codifica texto
 * 	simpleEncode("php recipe");
-* 	simpleEncode("php recipe", "passkey");
+* 	simpleEncode("php recipe", "passkey"); //Devuelve 'lEKK57naUY4/VQ=='
 *
 *===========================    Parametros   ===========================
 * String   $string   Texto a transformar
@@ -64,7 +64,7 @@ function simpleEncode($simple_string, $passkey) {
 *
 * 	//se decodifica texto
 * 	simpleDecode("qcnVhqjKxpuilw==");
-* 	simpleDecode("qcnVhqjKxpuilw==", "passkey");
+* 	simpleDecode("lEKK57naUY4/VQ==", "passkey"); //Devuelve 'php recipe'
 *
 *===========================    Parametros   ===========================
 * String   $string   Texto a transformar
@@ -103,7 +103,7 @@ function simpleDecode($simple_string, $passkey) {
 *===========================    Modo de uso  ===========================
 *
 * 	//se genera codigo
-* 	generateServerSpecificHash();
+* 	generateServerSpecificHash(); //Devuelve '421aa90e079fa326b6494f812ad13e79'
 *
 *===========================    Parametros   ===========================
 * @return  String
@@ -168,7 +168,7 @@ function encrypt_decrypt($action, $string) :string {
 *===========================    Modo de uso  ===========================
 *
 * 	//se genera codigo
-* 	token_bin2hex(25);
+* 	token_bin2hex(25); //Devuelve valores aleatoreos
 *
 *===========================    Parametros   ===========================
 * String   $longitud  largo del codigo generado
