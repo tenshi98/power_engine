@@ -8,53 +8,77 @@ if( ! defined('XMBCXRXSKGC')) {
 /*******************************************************************************************************************/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Previsualiza el PDF
 *
 *===========================     Detalles    ===========================
-* 
+* Permite previsualizar un archivo PDF
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	preview_pdf('Pdf_viewer', 'upload/archivo.pdf');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $idDiv     Identificador del div
+* String   $Route     Ruta de acceso del archivo
 * @return  html
 ************************************************************************/
 //Funcion
-function preview_pdf($name, $route){
+function preview_pdf($idDiv, $Route){
 
+	/**********************/
+	//Validaciones
+	if(!isset($idDiv) OR $idDiv==''){  return alert_post_data(4,1,1,0,'No ha ingresado el identificador.');}
+	if(!isset($Route) OR $Route==''){  return alert_post_data(4,1,1,0,'No ha ingresado la Ruta de acceso del archivo.');}
+
+	/**********************/
+	//Si todo esta ok
 	$input = '
-		<div id="'.$name.'"></div>
-		<script src="'.DB_SITE_REPO.'/LIBS_js/PDFObject/pdfobject.js"></script>
-		<script>PDFObject.embed("'.$route.'", "#'.$name.'");</script>
-		<style>
-			.pdfobject-container { height: 500px;}
-			.pdfobject { border: 1px solid #666; }
-		</style>';
+	<div id="'.$idDiv.'"></div>
+	<script src="'.DB_SITE_REPO.'/LIBS_js/PDFObject/pdfobject.js"></script>
+	<script>PDFObject.embed("'.$Route.'", "#'.$idDiv.'");</script>
+	<style>
+		.pdfobject-container { height: 500px;}
+		.pdfobject { border: 1px solid #666; }
+	</style>';
 
+	/**********************/
+	//devuelvo
 	return $input;
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Descargar archivos
 *
 *===========================     Detalles    ===========================
-* 
+* permite descargar los documentos
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	download_docs($file_path, $file, $extensions, $mainSite, $EmpPath);
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $file_path    Carpeta contenedora
+* String   $file         Nombre del archivo
+* String   $extensions   Extension del archivo
+* String   $mainSite     Direccion root de la pagina
+* String   $EmpPath      Ruta hasta la carpeta contenedora
 * @return  html
 ************************************************************************/
 //Funcion
-//permite ver un preview de los documentos
+//
 function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 
+	/**********************/
+	//Validaciones
+	if(!isset($file_path) OR $file_path==''){    return alert_post_data(4,1,1,0,'No ha ingresado la Carpeta contenedora.');}
+	if(!isset($file) OR $file==''){              return alert_post_data(4,1,1,0,'No ha ingresado el Nombre del archivo.');}
+	if(!isset($extensions) OR $extensions==''){  return alert_post_data(4,1,1,0,'No ha ingresado la Extension del archivo.');}
+	if(!isset($mainSite) OR $mainSite==''){      return alert_post_data(4,1,1,0,'No ha ingresado la Direccion root de la pagina.');}
+	if(!isset($EmpPath) OR $EmpPath==''){        return alert_post_data(4,1,1,0,'No ha ingresado la Ruta hasta la carpeta contenedora.');}
+
+	/**********************/
+	//Si todo esta ok
 	/****************************************/
 	//Definicion de directorio y carpeta contenedora
 	$destination_path = '';
@@ -134,23 +158,33 @@ function download_docs($file_path, $file, $extensions, $mainSite, $EmpPath){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Previsualizacion de archivos
 *
 *===========================     Detalles    ===========================
-* 
+* Permite ver un preview de los documentos
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $Root       Ruta a la carpeta contenedora
+* String   $File       Nombre del archivo
+* String   $ExtraData  Informacion extra para los archivos kmz
 * @return  html
 ************************************************************************/
 //Funcion
-//permite ver un preview de los documentos
+//
 function preview_docs($Root, $File, $ExtraData){
 
+	/**********************/
+	//Validaciones
+	if(!isset($Root) OR $Root==''){             return alert_post_data(4,1,1,0,'No ha ingresado la Ruta a la carpeta contenedora.');}
+	if(!isset($File) OR $File==''){             return alert_post_data(4,1,1,0,'No ha ingresado el Nombre del archivo.');}
+	if(!isset($ExtraData) OR $ExtraData==''){   return alert_post_data(4,1,1,0,'No ha ingresado la Informacion extra para los archivos kmz.');}
+
+	/**********************/
+	//Si todo esta ok
 	/****************************************/
 	//se verifican las extensiones
 	$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
@@ -477,28 +511,48 @@ function preview_docs($Root, $File, $ExtraData){
 		}
 	}
 
+	/**********************/
+	//devuelvo
 	return $input;
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Previsualizacion de archivos
 *
 *===========================     Detalles    ===========================
-* 
+* Permite ver un preview de los documentos
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $Root         Ruta a la carpeta contenedora
+* String   $File         Nombre del archivo
+* String   $ExtraData    Informacion extra para los archivos kmz
+* String   $file_path    Carpeta contenedora
+* String   $extensions   Extension del archivo
+* String   $mainSite     Direccion root de la pagina
+* String   $EmpPath      Ruta hasta la carpeta contenedora
 * @return  html
 ************************************************************************/
 //Funcion
 //permite ver un preview de los documentos
 function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainSite, $EmpPath){
 
+	/**********************/
+	//Validaciones
+	if(!isset($Root) OR $Root==''){               return alert_post_data(4,1,1,0,'No ha ingresado la Ruta a la carpeta contenedora.');}
+	if(!isset($File) OR $File==''){               return alert_post_data(4,1,1,0,'No ha ingresado el Nombre del archivo.');}
+	if(!isset($ExtraData) OR $ExtraData==''){     return alert_post_data(4,1,1,0,'No ha ingresado la Informacion extra para los archivos kmz.');}
+	if(!isset($file_path) OR $file_path==''){     return alert_post_data(4,1,1,0,'No ha ingresado la Carpeta contenedora.');}
+	if(!isset($extensions) OR $extensions==''){   return alert_post_data(4,1,1,0,'No ha ingresado la Extension del archivo.');}
+	if(!isset($mainSite) OR $mainSite==''){       return alert_post_data(4,1,1,0,'No ha ingresado la Direccion root de la pagina.');}
+	if(!isset($EmpPath) OR $EmpPath==''){         return alert_post_data(4,1,1,0,'No ha ingresado la Ruta hasta la carpeta contenedora.');}
+
+	/**********************/
+	//Si todo esta ok
 	/****************************************/
 	//se verifican las extensiones
 	$exten  = 'JPG,jpg,jpeg,gif,png,bmp';           //Imagenes
@@ -600,7 +654,6 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 			//Si son archivos de video
 			case 'mp4'; case 'webm'; case 'ogv';
 				$input .= '
-
 				<link href="'.DB_SITE_REPO.'/LIBS_js/video_player/video-js.min.css" rel="stylesheet">
 				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/ie8/videojs-ie8.min.js"></script>
 				<script src="'.DB_SITE_REPO.'/LIBS_js/video_player/video.min.js"></script>
@@ -772,28 +825,43 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 		}
 	}
 
+	/**********************/
+	//devuelvo
 	return $input;
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Imagenes animadas
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra las imagenes animadas
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $tipoImagen     Tipo de imagen a mostrar
+* String   $site           Direccion raiz del sitio
+* String   $path           Ruta de la ubicacion de la carpeta contenedora
+* String   $content_folder Ruta de la ubicacion de la carpeta contenedora
+* String   $direccion      Nombre del archivo
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra las imagenes animadas
 function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccion){
 
+	/**********************/
+	//Validaciones
+	if(!isset($tipoImagen) OR $tipoImagen==''){          return alert_post_data(4,1,1,0,'No ha ingresado el identificador.');}
+	if(!isset($site) OR $site==''){                      return alert_post_data(4,1,1,0,'No ha ingresado el titulo.');}
+	if(!isset($path) OR $path==''){                      return alert_post_data(4,1,1,0,'No ha ingresado el titulo del eje x.');}
+	if(!isset($content_folder) OR $content_folder==''){  return alert_post_data(4,1,1,0,'No ha ingresado el titulo del eje y.');}
+	if(!isset($direccion) OR $direccion==''){            return alert_post_data(4,1,1,0,'No ha ingresado el arreglo de xData.');}
+
+	/**********************/
+	//Si todo esta ok
 	//cadena
 	$widget = '';
 	//se identifica el tipo de imagen
@@ -820,7 +888,7 @@ function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccio
 			$widget .= '<script src="'.$site.'/LIBS_js/prefixfree/prefixfree.min.js"></script>';
 			$widget .= '<script src="'.$site.'/LIBS_js/3d_cover/drum.js"></script>';
 			$widget .= '<script>
-					var textura = "'.$site.$path.'/'.$content_folder.'/'.$direccion.'";	
+					var textura = "'.$site.$path.'/'.$content_folder.'/'.$direccion.'";
 					document.getElementById("cover_prod").appendChild(createBarrel(textura));
 				</script>';
 			$widget .= '<style>#cover_prod {position: relative;perspective: 600px;perspective: 600px;text-align:center;width:100%;height:300px;}#cover_prod .threedee {position: absolute;left: 50%;top: 50%;transform-style: preserve-3d;transform-origin: 50% 50% 50%;backface-visibility: hidden;}#cover_prod .assembly {animation: spincover 30s linear infinite;}@keyframes spincover {to {transform: rotateY(360deg);}}</style>';
@@ -914,22 +982,23 @@ function widget_TipoImagen($tipoImagen, $site, $path, $content_folder, $direccio
 			$widget .= '<style>#cover_prod canvas{margin-top: 10px;background-color: #eeeeee;}#cover_prod{height:600px;}</style>';
 			break;
 	}
-	//devolver dato
+
+	/**********************/
+	//devuelvo
 	return $widget;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Ventana Popup emergente
 *
 *===========================     Detalles    ===========================
-* 
+* Permite mostrar una ventana emergente
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_avgrund();
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 * @return  html
 ************************************************************************/
 //Funcion
@@ -939,110 +1008,137 @@ function widget_avgrund(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Explorador de archivos
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra un explorador de archivos personalizado
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $type       Tipo de herramientas a mostrar
+* String   $conector   Configuracion interna de la libreria
+* String   $emp_path   Ruta a la carpeta contenedora
+* String   $id_emp     ID de la empresa
+* String   $prm        Nivel de permisos de acceso a los archivos
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra un explorador de archivos personalizado
 function file_explorer($type, $conector, $emp_path, $id_emp, $prm){
 
+	/**********************/
+	//Validaciones
+	if(!isset($type) OR $type==''){         return alert_post_data(4,1,1,0,'No ha ingresado el Tipo de herramientas a mostrar.');}
+	if(!isset($conector) OR $conector==''){ return alert_post_data(4,1,1,0,'No ha ingresado la Configuracion interna de la libreria.');}
+	if(!isset($emp_path) OR $emp_path==''){ return alert_post_data(4,1,1,0,'No ha ingresado la Ruta a la carpeta contenedora.');}
+	if(!isset($id_emp) OR $id_emp==''){     return alert_post_data(4,1,1,0,'No ha ingresado el ID de la empresa.');}
+	if(!isset($prm) OR $prm==''){           return alert_post_data(4,1,1,0,'No ha ingresado el Nivel de permisos de acceso a los archivos.');}
+
+	/**********************/
+	//Si todo esta ok
 	//generacion del input
 	$input = '
-		<style>
-			.iframe_elfinder{height: 700px;}
-			iframe{float:right;width: 100%;height: 100%;padding: 0;margin: 0;border:none;}
-		</style>
+	<style>
+		.iframe_elfinder{height: 700px;}
+		iframe{float:right;width: 100%;height: 100%;padding: 0;margin: 0;border:none;}
+	</style>
 
-		<div class="iframe_elfinder">
-			<iframe class="embed-responsive-item" src="'.DB_SITE_REPO.'/LIBS_js/elFinder/index.php?type='.$type.'&conector='.$conector.'&emp_path='.$emp_path.'&id_emp='.$id_emp.'&prm='.$prm.'" allowfullscreen></iframe>
-		</div>';
+	<div class="iframe_elfinder">
+		<iframe class="embed-responsive-item" src="'.DB_SITE_REPO.'/LIBS_js/elFinder/index.php?type='.$type.'&conector='.$conector.'&emp_path='.$emp_path.'&id_emp='.$id_emp.'&prm='.$prm.'" allowfullscreen></iframe>
+	</div>';
 
-	//Imprimir dato
+	/**********************/
+	//devuelvo
 	return $input;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Mostrar la ventana modal
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra la ventana modal
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $width     El ancho de la ventana
+* String   $height    El alto de la ventana
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra la ventana modal
+//
 function widget_modal($width, $height){
-	echo "
-	<script>
-		$(document).ready(function(){
-			//Examples of how to assign the Colorbox event to elements
-			$(\".iframe\").colorbox({iframe:true, width:\"".$width."%\", height:\"".$height."%\"});
-			$(\".callbacks\").colorbox({
-				onOpen:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onOpen: colorbox is about to open.'});},
-				onLoad:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onLoad: colorbox has started to load the targeted content.'});},
-				onComplete:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onComplete: colorbox has displayed the loaded content.'});},
-				onCleanup:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onCleanup: colorbox has begun the close process.'});},
-				onClosed:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onClosed: colorbox has completely closed.'});}
-			});
 
-			//Example of preserving a JavaScript event for inline calls.
-			$(\"#click\").click(function(){
-				$('#click').css({\"background-color\":\"#f00\", \"color\":\"#fff\", \"cursor\":\"inherit\"}).text(\"Open this window again and this message will still be here.\");
-				return false;
+	/**********************/
+	//Variables
+	$Count = 0;
+	//Validaciones
+	if(!isset($width) OR $width==''){   $Count++;  echo alert_post_data(4,1,1,0,'No ha ingresado el ancho de la ventana.');}
+	if(!isset($height) OR $height==''){ $Count++;  echo alert_post_data(4,1,1,0,'No ha ingresado el alto de la ventana.');}
+
+	/**********************/
+	//Si todo esta ok
+	if($Count==0){
+		$input = "
+		<script>
+			$(document).ready(function(){
+				//Examples of how to assign the Colorbox event to elements
+				$(\".iframe\").colorbox({iframe:true, width:\"".$width."%\", height:\"".$height."%\"});
+				$(\".callbacks\").colorbox({
+					onOpen:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onOpen: colorbox is about to open.'});},
+					onLoad:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onLoad: colorbox has started to load the targeted content.'});},
+					onComplete:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onComplete: colorbox has displayed the loaded content.'});},
+					onCleanup:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onCleanup: colorbox has begun the close process.'});},
+					onClosed:function(){ Swal.fire({icon: 'error',title: 'Oops...',text: 'onClosed: colorbox has completely closed.'});}
+				});
+
+				//Example of preserving a JavaScript event for inline calls.
+				$(\"#click\").click(function(){
+					$('#click').css({\"background-color\":\"#f00\", \"color\":\"#fff\", \"cursor\":\"inherit\"}).text(\"Open this window again and this message will still be here.\");
+					return false;
+				});
 			});
-		});
-	</script>
-	";
+		</script>";
+
+		/**********************/
+		//devuelvo
+		echo $input;
+	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Muestra la Burbuja de ayuda
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra la Burbuja de ayuda
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_tooltipster();
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra la Burbuja de ayuda
 function widget_tooltipster(){
 	require_once '../LIBS_js/tooltipster/tooltipster.php';
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Ejecuta el validador de formularios
 *
 *===========================     Detalles    ===========================
-* 
+* Ejecuta el validador de formularios
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_validator();
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 * @return  html
 ************************************************************************/
 //Funcion
@@ -1052,71 +1148,91 @@ function widget_validator(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* se muestra información como planilla excel
 *
 *===========================     Detalles    ===========================
-* 
+* se muestra información como planilla excel
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $identificador     Identificador
+* String   $tabla             Los valores a desplegar
+* String   $extraconfig       Opciones extras
 * @return  html
 ************************************************************************/
 //Funcion
-//se muestra información como planilla excel
 function widget_excel($identificador, $tabla, $extraconfig){
+
+	/**********************/
+	//Validaciones
+	if(!isset($identificador) OR $identificador==''){  return alert_post_data(4,1,1,0,'No ha ingresado el identificador.');}
+	if(!isset($tabla) OR $tabla==''){                  return alert_post_data(4,1,1,0,'No ha ingresado los valores a desplegar.');}
+
+	/**********************/
+	//Si todo esta ok
 
 	//generacion del widget
 	$widget = '
-		<link href="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.min.css" rel="stylesheet" />
-		<script src="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.toolbar.min.js"></script>
-		<script src="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.js"></script>
+	<link href="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.min.css" rel="stylesheet" />
+	<script src="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.toolbar.min.js"></script>
+	<script src="'.DB_SITE_REPO.'/LIBS_js/webdatarocks/webdatarocks.js"></script>
 
-		<div id="'.$identificador.'"></div>
+	<div id="'.$identificador.'"></div>
 
-		<script>
-			var tipsData = ['.$tabla.'];
-			var pivot = new WebDataRocks({
-				container: "#'.$identificador.'",
-				toolbar: true,
-				report: {
-					dataSource: {
-						data: tipsData
-					},
-					'.$extraconfig.'
+	<script>
+		var tipsData = ['.$tabla.'];
+		var pivot = new WebDataRocks({
+			container: "#'.$identificador.'",
+			toolbar: true,
+			report: {
+				dataSource: {
+					data: tipsData
 				},
-				global: {
-					// replace this path with the path to your own translated file
-					localization: "https://cdn.webdatarocks.com/loc/es.json"
-				}
-			});
-		</script>
-		';
+				'.$extraconfig.'
+			},
+			global: {
+				// replace this path with the path to your own translated file
+				localization: "https://cdn.webdatarocks.com/loc/es.json"
+			}
+		});
+	</script>';
 
-	//Imprimir dato
+	/**********************/
+	//devuelvo
 	return $widget;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* se muestra el buscador dentro de una tabla
 *
 *===========================     Detalles    ===========================
-* 
+* se muestra el buscador dentro de una tabla
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $type      Tipo de elemento html
+* String   $colspan   Columnas a abarcar
+* String   $idTable   Identificador de la tabla
 * @return  html
 ************************************************************************/
 //Funcion
-//se muestra el buscador dentro de una tabla
+//
 function widget_sherlock($type, $colspan, $idTable){
+
+	/**********************/
+	//Validaciones
+	if(!isset($type) OR $type==''){         return alert_post_data(4,1,1,0,'No ha ingresado el Tipo de elemento html.');}
+	if(!isset($colspan) OR $colspan==''){   return alert_post_data(4,1,1,0,'No ha ingresado las Columnas a abarcar.');}
+	if(!isset($idTable) OR $idTable==''){   return alert_post_data(4,1,1,0,'No ha ingresado el Identificador de la tabla.');}
+
+	/**********************/
+	//Si todo esta ok
 	//indica que tipo es
 	switch ($type) {
 		case 1: $html_obj = 'th'; break;
@@ -1140,30 +1256,36 @@ function widget_sherlock($type, $colspan, $idTable){
 				});
 			});
 		});
-	</script>
-	';
+	</script>';
 
-	//Imprimir dato
+	/**********************/
+	//devuelvo
 	return $widget;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* se muestra el buscador dentro de una tabla
 *
 *===========================     Detalles    ===========================
-* 
+* se muestra el buscador dentro de una tabla
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $id_table     Identificador de la tabla
 * @return  html
 ************************************************************************/
 //Funcion
-//se muestra el buscador dentro de una tabla
 function widget_table_filter($id_table){
+
+	/**********************/
+	//Validaciones
+	if(!isset($id_table) OR $id_table==''){  return alert_post_data(4,1,1,0,'No ha ingresado el identificador.');}
+
+	/**********************/
+	//Si todo esta ok
 	//generacion del widget
 	$widget = '
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -1171,138 +1293,146 @@ function widget_table_filter($id_table){
 	<script>jQuery(\'#'.$id_table.'\').ddTableFilter();</script>
 	';
 
-	//Imprimir dato
+	/**********************/
+	//devuelvo
 	return $widget;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* se muestra el visualizador de codigo fuente
 *
 *===========================     Detalles    ===========================
-* 
+* se muestra el visualizador de codigo fuente
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $type     Tipo de elemento
+* String   $code     Codigo a mostrar
 * @return  html
 ************************************************************************/
 //Funcion
-//se muestra el visualizador de codigo fuente
 function widget_code_block($type, $code){
 
-	/********************************************************/
+	/**********************/
 	//Definicion de errores
 	$errorn = 0;
 	//se definen las opciones disponibles
 	$tipos = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-	//verifico si el dato ingresado existe dentro de las opciones
-	if (!in_array($type, $tipos)) {
-		alert_post_data(4,1,1,0, 'La configuracion $type entregada en el codeblock no esta dentro de las opciones');
-		$errorn++;
-	}
-	/********************************************************/
-	//Ejecucion si no hay errores
-	if($errorn==0){
-		switch ($type) {
-			case 1:  $tittle = 'Codigo HTML';       $class  = 'language-markup';     break;//HTML Code Example
-			case 2:  $tittle = 'Codigo CSS';        $class  = 'language-css';        break;//CSS Code Example
-			case 3:  $tittle = 'Codigo JavaScript'; $class  = 'language-javascript'; break;//JavaScript Code Example
-			case 4:  $tittle = 'Codigo Python';     $class  = 'language-python';     break;//Python Code Example
-			case 5:  $tittle = 'Codigo PHP';        $class  = 'language-php';        break;//PHP Code Example
-			case 6:  $tittle = 'Codigo Handlebars'; $class  = 'language-handlebars'; break;//Handlebars Code Example
-			case 7:  $tittle = 'Codigo Git';        $class  = 'language-git';        break;//Git Code Example
-			case 8:  $tittle = 'Codigo Java';       $class  = 'language-java';       break;//JAVA Code Example
-			case 9:  $tittle = 'Codigo C Like';     $class  = 'language-clike';      break;//C Like Code Example
-			case 10: $tittle = 'Codigo C';          $class  = 'language-c';          break;//C Code Example
-			case 11: $tittle = 'Codigo CSharp';     $class  = 'language-csharp';     break;//CSharp Code Example
-			case 12: $tittle = 'Codigo SQL';        $class  = 'language-sql';        break;//SQL Code Example
-			case 13: $tittle = 'Codigo PLSQL';      $class  = 'language-plsql';      break;//PLSQL Code Example
-		}
-		//Limpieza
-		$code = str_replace('<','&lt;',$code);
-		$code = str_replace('>','&gt;',$code);
-		$code = str_replace('"','&quot;',$code);
-		$widget = '
-		<div class="code-block">
-			<h6>'.$tittle.'</h6>
-			<pre style="padding-top: 0px;"><code class="'.$class.'">'.$code.'</code></pre>
-		</div>
-		';
+	//Validaciones
+	if(!isset($type) OR $type==''){  return alert_post_data(4,1,1,0,'No ha ingresado el Tipo de elemento.');}
+	if(!isset($code) OR $code==''){  return alert_post_data(4,1,1,0,'No ha ingresado el Codigo a mostrar.');}
+	if (!in_array($type, $tipos)) {  return alert_post_data(4,1,1,0,'La configuracion $type entregada en el codeblock no esta dentro de las opciones');}
 
-		//Imprimir dato
-		return $widget;
-
+	/**********************/
+	//Si todo esta ok
+	switch ($type) {
+		case 1:  $tittle = 'Codigo HTML';       $class  = 'language-markup';     break;//HTML Code Example
+		case 2:  $tittle = 'Codigo CSS';        $class  = 'language-css';        break;//CSS Code Example
+		case 3:  $tittle = 'Codigo JavaScript'; $class  = 'language-javascript'; break;//JavaScript Code Example
+		case 4:  $tittle = 'Codigo Python';     $class  = 'language-python';     break;//Python Code Example
+		case 5:  $tittle = 'Codigo PHP';        $class  = 'language-php';        break;//PHP Code Example
+		case 6:  $tittle = 'Codigo Handlebars'; $class  = 'language-handlebars'; break;//Handlebars Code Example
+		case 7:  $tittle = 'Codigo Git';        $class  = 'language-git';        break;//Git Code Example
+		case 8:  $tittle = 'Codigo Java';       $class  = 'language-java';       break;//JAVA Code Example
+		case 9:  $tittle = 'Codigo C Like';     $class  = 'language-clike';      break;//C Like Code Example
+		case 10: $tittle = 'Codigo C';          $class  = 'language-c';          break;//C Code Example
+		case 11: $tittle = 'Codigo CSharp';     $class  = 'language-csharp';     break;//CSharp Code Example
+		case 12: $tittle = 'Codigo SQL';        $class  = 'language-sql';        break;//SQL Code Example
+		case 13: $tittle = 'Codigo PLSQL';      $class  = 'language-plsql';      break;//PLSQL Code Example
 	}
+	//Limpieza
+	$code = str_replace('<','&lt;',$code);
+	$code = str_replace('>','&gt;',$code);
+	$code = str_replace('"','&quot;',$code);
+	$widget = '
+	<div class="code-block">
+		<h6>'.$tittle.'</h6>
+		<pre style="padding-top: 0px;"><code class="'.$class.'">'.$code.'</code></pre>
+	</div>';
+
+	/**********************/
+	//devuelvo
+	return $widget;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Muestra un explorador de archivos personalizado
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra un explorador de archivos personalizado
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $URL          URL con el Feed de noticias
+* int      $MaxCount     Maximo de noticias a mostrar
+* int      $height       Altura del widget
+* bolean   $ShowDesc     Mostrar descripcion
+* bolean   $ShowPubDate  Mostrar fecha de publicacion
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra un explorador de archivos personalizado
 function widget_feed($URL, $MaxCount, $height, $ShowDesc, $ShowPubDate){
 
-	//opciones de configuracion
-	$opciones  = 'FeedUrl: \''.$URL.'\'';                //URL de los datos
-	$opciones .= ',MaxCount: '.$MaxCount;                //cantidad de post a mostrar
-	$opciones .= ',ShowDesc: '.$ShowDesc;                //Mostrar descripcion (true-false)
-	$opciones .= ',ShowPubDate: '.$ShowPubDate;          //mostrar fecha de publicacion (true-false)
-	//$opciones .= ',DescCharacterLimit: '.$DescCharLimit; //limitar caracteres
-	$opciones .= ',imgDirection: "'.DB_SITE_REPO.'/LIB_assets/img/loader.gif"';          //Dirección del loader
+	/**********************/
+	//Validaciones
+	if(!isset($URL) OR $URL==''){                  return alert_post_data(4,1,1,0,'No ha ingresado el identificador.');}
+	if(!isset($MaxCount) OR $MaxCount==''){        return alert_post_data(4,1,1,0,'No ha ingresado el titulo.');}
+	if(!isset($height) OR $height==''){            return alert_post_data(4,1,1,0,'No ha ingresado el titulo del eje x.');}
+	if(!isset($ShowDesc) OR $ShowDesc==''){        return alert_post_data(4,1,1,0,'No ha ingresado el titulo del eje y.');}
+	if(!isset($ShowPubDate) OR $ShowPubDate==''){  return alert_post_data(4,1,1,0,'No ha ingresado el arreglo de xData.');}
+	if(!validarNumero($MaxCount)){                 return alert_post_data(4,1,1,0,'El dato $MaxCount ingresado no es un numero');}
+	if(!validarNumero($height)){                   return alert_post_data(4,1,1,0,'El dato $height ingresado no es un numero');}
 
-	//despliegue
+	/**********************/
+	//Si todo esta ok
 	$input = '
 	<link href="'.DB_SITE_REPO.'/LIBS_js/atom_feed/css/FeedEk.css" rel="stylesheet" type="text/css" />
-
 	<div id="divRss" style="height:'.$height.'px;overflow:auto;"></div>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type="text/javascript" src="'.DB_SITE_REPO.'/LIBS_js/atom_feed/js/FeedEk.js?v2"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$(\'#divRss\').FeedEk({
-				'.$opciones.'
+			$(\'#divRss\').FeedEk({';
+				$input .= 'FeedUrl: \''.$URL.'\'';                                        //URL de los datos
+				$input .= ',MaxCount: '.$MaxCount;                                        //cantidad de post a mostrar
+				$input .= ',ShowDesc: '.$ShowDesc;                                        //Mostrar descripcion (true-false)
+				$input .= ',ShowPubDate: '.$ShowPubDate;                                  //Mostrar fecha de publicacion (true-false)
+				$input .= ',imgDirection: "'.DB_SITE_REPO.'/LIB_assets/img/loader.gif"';  //Dirección del loader
+				$input.= '
 			});
 		});
-	</script>
-	';
+	</script>';
 
-	//Imprimir dato
+	/**********************/
+	//devuelvo
 	return $input;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Muestra los ultimos temblores
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra los ultimos temblores
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_sismologia();
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra los ultimos temblores
 function widget_sismologia(){
 
+	/**********************/
+	//Si todo esta ok
 	//Se da permiso para el acceso remoto
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
@@ -1384,17 +1514,19 @@ function widget_sismologia(){
 
 			//genero cuerpo
 			$s_body = '
-				<div class="box">
-					<header>
-						<div class="icons"><i class="fa fa-map-o" aria-hidden="true"></i></div><h5>Últimos Sismos</h5>
-					</header>
-					<div class="external_page">
-						'.$sismologia.'
-					</div>
-				</div>';
+			<div class="box">
+				<header>
+					<div class="icons"><i class="fa fa-map-o" aria-hidden="true"></i></div><h5>Últimos Sismos</h5>
+				</header>
+				<div class="external_page">
+					'.$sismologia.'
+				</div>
+			</div>';
 
-			//devuelvo cuerpo
+			/**********************/
+			//devuelvo
 			return $s_body;
+
 		} catch (Exception $e) {
 			//echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 			return alert_post_data(4,1,1,0, 'No se obtuvieron datos');
@@ -1408,23 +1540,23 @@ function widget_sismologia(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Muestra los dias feriados del año
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra los dias feriados del año
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_feriados();
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra los dias feriados del año
 function widget_feriados(){
 
+	/**********************/
+	//Si todo esta ok
 	//Se da permiso para el acceso remoto
 	ini_set("allow_url_fopen", 1);
 	//se verifica si el permiso fue concedido
@@ -1535,16 +1667,17 @@ function widget_feriados(){
 
 			//genero cuerpo
 			$s_body = '
-				<div class="box">
-					<header>
-						<div class="icons"><i class="fa fa-birthday-cake" aria-hidden="true"></i></div><h5>Feriados de Chile</h5>
-					</header>
-					<div class="external_page">
-						'.$feriado.'
-					</div>
-				</div>';
+			<div class="box">
+				<header>
+					<div class="icons"><i class="fa fa-birthday-cake" aria-hidden="true"></i></div><h5>Feriados de Chile</h5>
+				</header>
+				<div class="external_page">
+					'.$feriado.'
+				</div>
+			</div>';
 
-			//devuelvo cuerpo
+			/**********************/
+			//devuelvo
 			return $s_body;
 		} catch (Exception $e) {
 			//echo 'Excepción capturada: ',  $e->getMessage(), "\n";
@@ -1559,21 +1692,19 @@ function widget_feriados(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Muestra los dias feriados del año
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra los dias feriados del año
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_radio_player();
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra los dias feriados del año
 function widget_radio_player(){
 	//radios
 	$arr = array();
@@ -1709,13 +1840,10 @@ function widget_radio_player(){
 	$input .='
 	<div id="main-wrapper">
 		<div class="player-wrapper">
-
 			<audio id="audio" class="mejs__player" controls="controls" src="">
 				Your browser does not support the audio format.
 			</audio>
-
 			<ul class="playlist custom-counter" id="list">';
-
 				foreach ($arr as $prod) {
 					$input .='
 					<li>
@@ -1725,16 +1853,14 @@ function widget_radio_player(){
 						</div>
 					</li>';
 				}
-
 			$input .='
 			</ul>
-
 		</div>
 	</div>';
 
 	//script
-	$input .='<script src="'.DB_SITE_REPO.'/LIBS_js/mejs-player-master/build/mediaelement-and-player.js"></script>';
 	$input .='
+	<script src="'.DB_SITE_REPO.'/LIBS_js/mejs-player-master/build/mediaelement-and-player.js"></script>
 	<script >
 		// Dynamic URL change
 		list.onclick = function(e) {
@@ -1749,9 +1875,8 @@ function widget_radio_player(){
 		  audio.load(); //call this to just preload the audio without playing
 		  audio.play(); //call this to play the song right away
 		};
-	 </script>';
-
-	$input .='<style>
+	 </script>
+	 <style>
 		/* Radio Player */
 		#main-wrapper{padding:30px 0;}
 		#main-wrapper .player-wrapper{border-radius: 5px;box-shadow: 0 0 8px -1px rgba(0, 0, 0, 0.25);background-image: -webkit-linear-gradient(315deg, #FF5572, #FF7555);background-image: linear-gradient(135deg, #FF5572, #FF7555);overflow: hidden;margin: 0 auto;max-width:100%;width: 100%;padding: 0;border-radius:0;}
@@ -1780,29 +1905,35 @@ function widget_radio_player(){
 		.mejs__horizontal-volume-total {background: rgb(41, 207, 84);height: 10px;top:14px;border-radius:0;}
 	</style>';
 
-	//devuelvo cuerpo
+	/**********************/
+	//devuelvo
 	return $input;
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Muestra los dias feriados del año
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra los dias feriados del año
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
-* 	obtenerExtensionArchivo('nombre del archivo');
+* 	//se ejecuta
+* 	widget_youtube_player('https://www.youtube.com/watch?v=BRTG2XRpFZ8');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $link     URL con el video
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra los dias feriados del año
 function widget_youtube_player($link){
 
+	/**********************/
+	//Validaciones
+	if(!isset($link) OR $link==''){  return alert_post_data(4,1,1,0,'No ha ingresado la URL con el video.');}
+
+	/**********************/
+	//Si todo esta ok
 	//Se genera recurso
 	$order   = 'https://www.youtube.com/watch?v=';
 	$replace = 'https://www.youtube.com/embed/';
@@ -1816,65 +1947,70 @@ function widget_youtube_player($link){
 	</style>
 	<div class="yt_container">
 		<iframe class="video" src="'.$newstr.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</div>
-	';
+	</div>';
 
-	//devuelvo cuerpo
+	/**********************/
+	//devuelvo
 	return $input;
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
-* 
+* Estrellas
 *
 *===========================     Detalles    ===========================
-* 
+* Muestra estrellas de evaluacion
 *===========================    Modo de uso  ===========================
 *
-* 	//obtener extension
+* 	//se ejecuta
 * 	obtenerExtensionArchivo('nombre del archivo');
 *
 *===========================    Parametros   ===========================
-* String   $nombreArchivo     Nombre del archivo a revisar, incluyendo la ruta
+* String   $max      Numero maximo de estrellas
+* String   $value    Valor actual
+* String   $text     Texto a mostrar en las estrellas
 * @return  html
 ************************************************************************/
 //Funcion
-//Muestra los dias feriados del año
 function widget_star_rating($max, $value, $text){
-	/********************************************************/
+
+	/**********************/
 	//Definicion de errores
 	$errorn = 0;
 	//se definen las opciones disponibles
 	$requerido = array(0, 1, 2, 3, 4, 5);
-	//verifico si el dato ingresado existe dentro de las opciones
-	if (!in_array($value, $requerido)) {
-		alert_post_data(4,1,1,0, 'La configuracion $value ('.$value.') entregada en <strong>widget_star_rating</strong> no esta dentro de las opciones');
-		$errorn++;
-	}
-	/********************************************************/
-	//Ejecucion si no hay errores
-	if($errorn==0){
-		//Genero el cuerpo
-		$input = '
-		<div class="d-flex justify-content-between align-items-center widget_star_rating">
-			<div class="ratings">';
-				//recorro las estrellas
-				for ($i = 1; $i <= $max; $i++) {
-					//verifico si esta marcado
-					if($i<=$value){
-						$input.= '<i class="fa fa-star rating-color"></i>';
-					}else{
-						$input.= '<i class="fa fa-star"></i>';
-					}
-				}
-				$input.= '
-			</div>
-			<h5 class="review-count">'.$text.'</h5>
-		</div>
-		';
+	//Validaciones
+	if(!isset($max) OR $max==''){        return alert_post_data(4,1,1,0,'No ha ingresado el Numero maximo de estrellas.');}
+	if(!isset($value) OR $value==''){    return alert_post_data(4,1,1,0,'No ha ingresado el Valor actual.');}
+	if(!isset($text) OR $text==''){      return alert_post_data(4,1,1,0,'No ha ingresado el Texto a mostrar en las estrellas.');}
+	if(!validarNumero($max)){            return alert_post_data(4,1,1,0,'El dato $max ingresado no es un numero');}
+	if(!validarNumero($value)){          return alert_post_data(4,1,1,0,'El dato $value ingresado no es un numero');}
+	if (!in_array($value, $requerido)) { return alert_post_data(4,1,1,0, 'La configuracion $value ('.$value.') entregada en <strong>widget_star_rating</strong> no esta dentro de las opciones');}
 
-		//devuelvo cuerpo
-		return $input;
-	}
+	/**********************/
+	//Si todo esta ok
+	//Genero el cuerpo
+	$input = '
+	<div class="d-flex justify-content-between align-items-center widget_star_rating">
+		<div class="ratings">';
+			//recorro las estrellas
+			for ($i = 1; $i <= $max; $i++) {
+				//verifico si esta marcado
+				if($i<=$value){
+					$input.= '<i class="fa fa-star rating-color"></i>';
+				}else{
+					$input.= '<i class="fa fa-star"></i>';
+				}
+			}
+			$input.= '
+		</div>
+		<h5 class="review-count">'.$text.'</h5>
+	</div>';
+
+	/**********************/
+	//devuelvo
+	return $input;
+
 }
 
 ?>
