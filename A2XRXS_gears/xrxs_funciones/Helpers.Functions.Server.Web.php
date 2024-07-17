@@ -175,7 +175,7 @@ function getFavicon($url){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	indicadores();
+* 	indicadores('vertical');
 *
 *===========================    Parametros   ===========================
 * String   $type    Tipo de despliegue

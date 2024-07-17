@@ -638,7 +638,6 @@ function envio_sendinblue($De_correo, $De_nombre,
 
 					//envio de los datos
 					$ch = curl_init();
-					//curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
 					curl_setopt($ch, CURLOPT_URL, 'https://api.brevo.com/v3/smtp/email');
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 					curl_setopt($ch, CURLOPT_POST, 1);

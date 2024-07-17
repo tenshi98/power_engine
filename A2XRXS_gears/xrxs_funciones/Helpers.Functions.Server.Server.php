@@ -467,7 +467,8 @@ function tareasServer($tarea){
 *===========================    Modo de uso  ===========================
 *
 * 	//se obtiene dato
-* 	uploadPHPError($error);
+* 	uploadPHPError($_FILES["Archivo"]["error"]); //obtener el error al
+*   subir el fichero con el nombre Archivo
 *
 *===========================    Parametros   ===========================
 * int      $error   Tipo de error (0-8)
