@@ -700,5 +700,35 @@ function indicesServer(){
 
 	return $object;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Permite eliminar la carpeta
+*
+*===========================     Detalles    ===========================
+* Permite eliminar una carpeta en especifico dentro del servidor
+*===========================    Modo de uso  ===========================
+* 	//elimino la carpeta en caso de existir
+* 	$structure = '/client_folder/client/tutor'; //carpeta
+* 	rrmdir($structure);
+*
+*===========================    Parametros   ===========================
+* String  $src         Arreglo con la respuesta del correo (0-1)
+************************************************************************/
+function rrmdir($src) {
+	$dir = opendir($src);
+	while(false !== ( $file = readdir($dir)) ) {
+		if (( $file != '.' ) && ( $file != '..' )) {
+			$full = $src . '/' . $file;
+			if ( is_dir($full) ) {
+				rrmdir($full);
+			}
+			else {
+				unlink($full);
+			}
+		}
+	}
+	closedir($dir);
+	rmdir($src);
+}
 
 ?>
