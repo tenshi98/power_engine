@@ -218,7 +218,7 @@ function valores_truncados($valor){
 *===========================    Modo de uso  ===========================
 *
 * 	//se formatea numero
-* 	Cantidades_decimales_justos(1500.85); //Devuelve 1500.85
+* 	Cantidades_decimales_justos(1500.85000); //Devuelve 1500.85
 *
 *===========================    Parametros   ===========================
 * Decimal  $valor   Numero a formatear
@@ -235,52 +235,13 @@ function Cantidades_decimales_justos($valor){
 
 	/**********************/
 	//Si todo esta ok
-	//valido si es un numero entero para eliminar el punto despues del valor
-	if (ctype_digit($valor)) {
-		return floatval(number_format($valor, 0, '.', ''));
-	}else{
-		$dec = strlen($valor) - strrpos($valor, '.') - 1;
-		return floatval(number_format($valor, $dec, '.', ''));
+	$dec = strlen($valor) - strrpos($valor, '.') - 1;
+	//Verifico si no hay mas de 6 decimales
+	if($dec>=6){
+		$dec = 6;
 	}
-
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-/***********************************************************************
-* Devuelve el valor con los decimales reales que tiene (version alternativa)
-*
-*===========================     Detalles    ===========================
-* Formatea el valor entregado de forma variable, esto quiere decir
-* que solo mostrara la cantidad de decimales reales que tenga un
-* valor decimal, si solo tiene 3 solo mostrara 3, si solo tiene 1
-* solo mostrara 1, no rellena los decimales necesarios con 0, en el
-* caso de ser un decimal infinito periodico, se limita a una
-* cantidad de 6 decimales
-*===========================    Modo de uso  ===========================
-*
-* 	//se formatea numero
-* 	Cantidades_decimales_justos_alt(1500.85); //Devuelve 1,500.85
-*
-*===========================    Parametros   ===========================
-* Decimal  $valor   Numero a formatear
-* @return  Decimal
-************************************************************************/
-//Funcion
-function Cantidades_decimales_justos_alt($valor){
-
-	/**********************/
-	//Validaciones
-	if($valor==''){             return '0';}
-	if($valor==0){              return 0;}
-	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
-
-	/**********************/
-	//Si todo esta ok
-	//valido si es un numero entero para eliminar el punto despues del valor
-	if (ctype_digit($valor)) {
-		return floatval(number_format($valor, 0, '.', ''));
-	}else{
-		return rtrim(number_format($valor,6,'.',','), ',0');
-	}
+	//devuelvo
+	return floatval(number_format($valor, $dec, '.', ''));
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
