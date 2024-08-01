@@ -29,7 +29,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  String
 ************************************************************************/
 //Funcion
-function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
+function WhatsappSendMessage(string $Token, string $InstanceId, string $Phone, string $Body){
 	/**************************************/
 	//Normalizo el mensaje
 	$saltoLinea = '
@@ -115,7 +115,7 @@ function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
 * @return  String
 ************************************************************************/
 //Funcion
-function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
+function WhatsappGroupSendMessage(string $Token, string $InstanceId, string $Group, string $Body){
 
 	/**************************************/
 	//verifico la existencia de datos
@@ -165,7 +165,7 @@ function WhatsappGroupSendMessage($Token, $InstanceId, $Group, $Body){
 * @return  String
 ************************************************************************/
 //Funcion
-function file_contents($Path) {
+function file_contents(string $Path) {
 	$str = @file_get_contents($Path);
 	if ($str === FALSE) {
 		throw new Exception("Cannot access '$Path' to read contents.");

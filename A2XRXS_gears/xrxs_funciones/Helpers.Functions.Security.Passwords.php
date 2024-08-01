@@ -25,12 +25,12 @@ if( ! defined('XMBCXRXSKGC')) {
 * 	genera_password(10,'alfanumerico'); //Devuelve valores alfanumerico aleatoreos
 *
 *===========================    Parametros   ===========================
-* Integer    $longitud   Largo de la password generada
+* int        $longitud   Largo de la password generada
 * String     $tipo       Tipo de password a generar
 * @return    String
 ************************************************************************/
 //Funcion
-function genera_password($longitud,$tipo){
+function genera_password(int $longitud,string $tipo){
 	//verifico si los datos estan bien entregados
 	if (validarNumero($longitud)&&($tipo=="alfanumerico" OR $tipo=="numerico")){
 
@@ -87,7 +87,7 @@ function genera_password_unica(){
 * 	caracteresRandom(16, true, false, false); //Devuelve valores aleatoreos
 *
 *===========================    Parametros   ===========================
-* integer    $longitud          Define el largo de la palabra generada
+* int        $longitud          Define el largo de la palabra generada
 * boolean    $lecturaAmigable   Remueve los caracteres similares a otro,
 *                               tales como O y 0, l y 1, etc(true - false)
 * boolean    $incluirSimbolos   Permite incluir simbolos en la palabra
@@ -99,7 +99,7 @@ function genera_password_unica(){
 * @return    String
 ************************************************************************/
 //Funcion
-function caracteresRandom($longitud = 16, $lecturaAmigable = true, $incluirSimbolos = false, $sinDuplicados = false){
+function caracteresRandom(int $longitud = 16, bool $lecturaAmigable = true, bool $incluirSimbolos = false, bool $sinDuplicados = false){
 
     $caracteres_legibles = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefhjkmnprstuvwxyz23456789';
     $caracteres_todos    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';

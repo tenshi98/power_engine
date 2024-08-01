@@ -25,11 +25,11 @@ if( ! defined('XMBCXRXSKGC')) {
 *
 *===========================    Parametros   ===========================
 * Time     $hora        Hora ingresada
-* Integer  $divisor     Divisor de la hora
+* int      $divisor     Divisor de la hora
 * @return  Integer
 ************************************************************************/
 //Funcion
-function divHoras($hora,$divisor) {
+function divHoras($hora,int $divisor) {
 
 	/**********************/
 	//Validaciones
@@ -58,11 +58,11 @@ function divHoras($hora,$divisor) {
 *
 *===========================    Parametros   ===========================
 * Time     $hora            Hora ingresada
-* Integer  $multiplicador   Multiplicador de la hora
+* int      $multiplicador   Multiplicador de la hora
 * @return  Time
 ************************************************************************/
 //Funcion
-function multHoras($hora,$multiplicador) {
+function multHoras($hora,int $multiplicador) {
 
 	/**********************/
 	//Validaciones
@@ -204,11 +204,11 @@ function sumahoras($hora,$horasuma){
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha entregada
-* Integer  $nDias   Cantidad de dias a sumar
+* int      $nDias   Cantidad de dias a sumar
 * @return  Date
 ************************************************************************/
 //Funcion
-function sumarDias($Fecha,$nDias){
+function sumarDias($Fecha,int $nDias){
 
 	/**********************/
 	//Validaciones
@@ -236,11 +236,11 @@ function sumarDias($Fecha,$nDias){
 *
 *===========================    Parametros   ===========================
 * Date     $Fecha   Fecha entregada
-* Integer  $nDias   Cantidad de dias a restar
+* int      $nDias   Cantidad de dias a restar
 * @return  Date
 ************************************************************************/
 //Funcion
-function restarDias($Fecha,$nDias){
+function restarDias($Fecha,int $nDias){
 
 	/**********************/
 	//Validaciones

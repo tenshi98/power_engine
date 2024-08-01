@@ -24,9 +24,9 @@ if( ! defined('XMBCXRXSKGC')) {
 * 	alert_post_data(4,3,0,0, 'bla' );
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
-* Integer  $icon            Icono a utilizar
-* Integer  $iconAnimation   Animacion del icono utilizado
+* int      $type            Tipo de mensaje (define el color de este)
+* int      $icon            Icono a utilizar
+* int      $iconAnimation   Animacion del icono utilizado
 * String   $autoClose       Configuracion para el cierre automatico del div
 * String   $Text            Texto del mensaje (permite HTML)
 * @return  String
@@ -151,7 +151,7 @@ function alert_post_data($type, $icon, $iconAnimation, $autoClose, $Text){
 * 	info_post_data(4,'bla' );
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
+* int      $type            Tipo de mensaje (define el color de este)
 * String   $Text            Texto del mensaje (permite HTML)
 * @return  String
 ************************************************************************/
@@ -200,7 +200,7 @@ function info_post_data($type, $Text){
 * 	info_post_data(4,'bla' );
 *
 *===========================    Parametros   ===========================
-* Integer  $type            Tipo de mensaje (define el color de este)
+* int      $type            Tipo de mensaje (define el color de este)
 * String   $Text            Texto del mensaje (permite HTML)
 * @return  String
 ************************************************************************/

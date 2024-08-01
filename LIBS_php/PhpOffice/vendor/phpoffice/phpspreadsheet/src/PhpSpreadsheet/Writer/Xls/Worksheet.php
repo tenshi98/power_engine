@@ -650,7 +650,7 @@ class Worksheet extends BIFFwriter
     /**
      * Write a double to the specified row and column (zero indexed).
      * An integer can be written as a double. Excel will display an
-     * integer. $format is optional.
+     * int    . $format is optional.
      *
      * Returns  0 : normal termination
      *         -2 : row or column out of range

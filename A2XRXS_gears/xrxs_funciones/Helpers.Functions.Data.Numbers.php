@@ -26,7 +26,7 @@ if( ! defined('XMBCXRXSKGC')) {
 *
 *===========================    Parametros   ===========================
 * Decimal     $valor         Numero a formatear
-* Integer     $n_decimales   Numero de decimales deseados
+* int         $n_decimales   Numero de decimales deseados
 * @return     String
 ************************************************************************/
 //Funcion
@@ -59,8 +59,8 @@ function Cantidades($valor, $n_decimales){
 * 	n_doc(25, 7); //Devuelve 0000025
 *
 *===========================    Parametros   ===========================
-* Integer     $valor         Numero a formatear
-* Integer     $n_ceros       Numero de ceros a la izquierda del valor
+* int         $valor         Numero a formatear
+* int         $n_ceros       Numero de ceros a la izquierda del valor
 * @return     String
 ************************************************************************/
 //Funcion
@@ -94,7 +94,7 @@ function n_doc($valor, $n_ceros){
 *
 *===========================    Parametros   ===========================
 * Decimal     $valor         Numero a formatear
-* Integer     $n_decimales   Numero de decimales deseados
+* int         $n_decimales   Numero de decimales deseados
 * @return     String
 ************************************************************************/
 //Funcion
@@ -237,9 +237,7 @@ function Cantidades_decimales_justos($valor){
 	//Si todo esta ok
 	$dec = strlen($valor) - strrpos($valor, '.') - 1;
 	//Verifico si no hay mas de 6 decimales
-	if($dec>=6){
-		$dec = 6;
-	}
+	if($dec>=6){$dec = 6;}
 	//devuelvo
 	return floatval(number_format($valor, $dec, '.', ''));
 

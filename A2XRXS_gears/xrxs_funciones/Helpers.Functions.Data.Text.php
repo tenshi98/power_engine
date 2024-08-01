@@ -25,11 +25,11 @@ if( ! defined('XMBCXRXSKGC')) {
 *
 *===========================    Parametros   ===========================
 * String   $texto     Texto a cortar
-* Integer  $cuantos   Cantidad de caracteres a mostrar antes de cortar
+* int      $cuantos   Cantidad de caracteres a mostrar antes de cortar
 * @return  String
 ************************************************************************/
 //Funcion
-function cortar($texto, $cuantos){
+function cortar(string $texto, int $cuantos){
 
 	/**********************/
 	//Validaciones
@@ -64,7 +64,7 @@ function cortar($texto, $cuantos){
 * @return  String
 ************************************************************************/
 //Funcion
-function cortarRut($Rut){
+function cortarRut(string $Rut){
 	//verifico si existe el guion
 	$var1 = substr_count($Rut, '-');
 	//se verifica el largo del texto
@@ -92,11 +92,11 @@ function cortarRut($Rut){
 *
 *===========================    Parametros   ===========================
 * String   $oracion   Palabra u oracion entregada
-* Integer  $largo     Cantidad de caracteres minimos a admitir
+* int      $largo     Cantidad de caracteres minimos a admitir
 * @return  String
 ************************************************************************/
 //Funcion
-function palabra_largo($oracion,$largo){
+function palabra_largo(string $oracion, int $largo){
 
 	/**********************/
 	//Validaciones
@@ -128,11 +128,11 @@ function palabra_largo($oracion,$largo){
 *
 *===========================    Parametros   ===========================
 * String   $oracion   Palabra u oracion entregada
-* Integer  $largo     Cantidad de caracteres maximo a admitir
+* int      $largo     Cantidad de caracteres maximo a admitir
 * @return  String
 ************************************************************************/
 //Funcion
-function palabra_corto($oracion,$largo){
+function palabra_corto(string $oracion, int $largo){
 
 	/**********************/
 	//Validaciones
@@ -165,7 +165,7 @@ function palabra_corto($oracion,$largo){
 * @return  String
 ************************************************************************/
 //Funcion
-function limpiarString($texto){
+function limpiarString(string $texto){
 
 	/**********************/
 	//Validaciones
@@ -198,7 +198,7 @@ function limpiarString($texto){
 * @return  String
 ************************************************************************/
 //Funcion
-function espacio_guion($dato) {
+function espacio_guion(string $dato) {
 
 	/**********************/
 	//Validaciones
@@ -225,7 +225,7 @@ function espacio_guion($dato) {
 * @return  String
 ************************************************************************/
 //Funcion
-function texto_mail($dato) {
+function texto_mail(string $dato) {
 
 	/**********************/
 	//Validaciones
@@ -256,7 +256,7 @@ function texto_mail($dato) {
 * @return  String
 ************************************************************************/
 //Funcion
-function DeSanitizar($dato) {
+function DeSanitizar(string $dato) {
 
 	/**********************/
 	//Validaciones
@@ -286,7 +286,7 @@ function DeSanitizar($dato) {
 * String   $string   Texto a estandarizar
 * @return  String
 ************************************************************************/
-function EstandarizarInput($Data){
+function EstandarizarInput(string $Data){
 
 	/**********************/
 	//Validaciones
@@ -322,10 +322,10 @@ function EstandarizarInput($Data){
 * 	bd_palabras_censuradas(1); //Devuelve el arreglo con palabras censuradas
 *
 *===========================    Parametros   ===========================
-* String   $type   Tipo de base de datos
+* int      $type   Tipo de base de datos
 * @return  Array
 ************************************************************************/
-function bd_palabras_censuradas($type) {
+function bd_palabras_censuradas(int $type) {
 
 	/**********************/
 	//Validaciones
@@ -453,7 +453,7 @@ function bd_palabras_censuradas($type) {
 * @return  Integer
 ************************************************************************/
 //Funcion
-function contar_palabras_censuradas($oracion) {
+function contar_palabras_censuradas(string $oracion) {
 
     //se definen las letras a reemplazar
     $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
@@ -526,7 +526,7 @@ function contar_palabras_censuradas($oracion) {
 * @return  String
 ************************************************************************/
 //Funcion
-function filtrar_palabras_censuradas($oracion) {
+function filtrar_palabras_censuradas(string $oracion) {
 
     //se definen las letras a reemplazar
     $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
@@ -594,15 +594,15 @@ function filtrar_palabras_censuradas($oracion) {
 * 	super_title(3,3,1,'','dato' ); //Devuelve HTML
 *
 *===========================    Parametros   ===========================
-* Integer  $Type    Tipo de elemento
-* Integer  $Color   Color del elemento
-* Integer  $Align   Alineacion del elemento
+* int      $Type    Tipo de elemento
+* int      $Color   Color del elemento
+* int      $Align   Alineacion del elemento
 * String   $Style   Estilo extra del elemento
 * String   $Text    Texto del elemento
 * @return  HTML
 ************************************************************************/
 //Funcion
-function super_title($Type, $Color, $Align, $Style, $Text){
+function super_title(int $Type, int $Color, int $Align, string $Style, string $Text){
 
 	/**********************/
 	//conteo
@@ -675,13 +675,13 @@ function super_title($Type, $Color, $Align, $Style, $Text){
 * 	divider_line(3,3,1); //Devuelve HTML
 *
 *===========================    Parametros   ===========================
-* Integer  $Type         Tipo de elemento
-* Integer  $Color        Color del elemento
-* Integer  $InnerColor   Color interno del elemento
+* int      $Type         Tipo de elemento
+* int      $Color        Color del elemento
+* int      $InnerColor   Color interno del elemento
 * @return  HTML
 ************************************************************************/
 //Funcion
-function divider_line($Type, $Color, $InnerColor){
+function divider_line(int $Type, int $Color, int $InnerColor){
 
 	/**********************/
 	//conteo
@@ -755,12 +755,12 @@ function divider_line($Type, $Color, $InnerColor){
 * 	hr_line(3,1); //Devuelve HTML
 *
 *===========================    Parametros   ===========================
-* Integer  $Type    Tipo de elemento
-* Integer  $Color   Color del elemento
+* int      $Type    Tipo de elemento
+* int      $Color   Color del elemento
 * @return  HTML
 ************************************************************************/
 //Funcion
-function hr_line($Type, $Color){
+function hr_line(int $Type, int $Color){
 
 	/**********************/
 	//conteo

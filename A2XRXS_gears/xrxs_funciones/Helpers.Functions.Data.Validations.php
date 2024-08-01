@@ -26,7 +26,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validarRut($Data) {
+function validarRut(string $Data) {
     //dato
 	/*$Rut = str_replace('.', '', $Data);
     //ejecuto
@@ -108,7 +108,7 @@ function validarRut($Data) {
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validarEmail($Data, $tempEmailAllowed = false){
+function validarEmail(string $Data, $tempEmailAllowed = false){
 	if(filter_var($Data,FILTER_VALIDATE_EMAIL)){
 		return true; //Valido
     }else{
@@ -159,7 +159,7 @@ function validarNumero($Data){
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function ValidarPatente($Data){
+function ValidarPatente(string $Data){
 	//elimino los posibles guones
 	$patente = str_replace("-","",$Data);
  	//caracteres admitidos
@@ -188,7 +188,7 @@ function ValidarPatente($Data){
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validarURL($Data){
+function validarURL(string $Data){
     return (bool) filter_var($Data, FILTER_VALIDATE_URL);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -259,11 +259,11 @@ function validaFecha($Data, $format = 'Y-m-d'){
 * 	validaEntero('16'); //Devuelve false
 *
 *===========================    Parametros   ===========================
-* Integer  $Data    Dato a validar
+* int      $Data    Dato a validar
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validaEntero($Data){
+function validaEntero(int $Data){
     //se verifica si es un numero lo que se recibe
 	if (is_numeric($Data)){
 		return(ctype_digit(strval($Data)));
@@ -306,12 +306,12 @@ function validaDispositivoMovil(){
 * 	validaPermisoUser($nivel_usuario, $nivel_requerido, $dbConn);
 *
 *===========================    Parametros   ===========================
-* Integer  $nivel_usuario    Nivel actual del usuario
-* Integer  $nivel_requerido  Nivel requerido para ver la transaccion
+* int      $nivel_usuario    Nivel actual del usuario
+* int      $nivel_requerido  Nivel requerido para ver la transaccion
 * Objeto   $dbConn           Conexion a la base de datos
 ************************************************************************/
 //Funcion
-function validaPermisoUser($nivel_usuario, $nivel_requerido, $dbConn){
+function validaPermisoUser(int $nivel_usuario, int $nivel_requerido, $dbConn){
 	//si el nivel de permiso del usuario es inferior al requerido
 	if($nivel_usuario<$nivel_requerido){
 

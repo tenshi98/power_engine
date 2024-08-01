@@ -51,15 +51,15 @@ if( ! defined('XMBCXRXSKGC')) {
 * String    $GmailPassword      Contraseña del Usuario de gmail
 ************************************************************************/
 //Funcion
-function tareas_envio_correo($De_correo, $De_nombre,
-                             $Hacia_correo, $Hacia_nombre,
-                             $CopiaCarbon, $CopiaCarbonOculta,
-                             $Asunto,
-                             $CuerpoHTML,$CuerpoNoHTML,
-                             $Adjuntos,
-                             $lvl,
-							 $GmailUsername,
-							 $GmailPassword){
+function tareas_envio_correo(string $De_correo, string $De_nombre,
+							string $Hacia_correo, string $Hacia_nombre,
+							string $CopiaCarbon, string $CopiaCarbonOculta,
+							string $Asunto,
+							string $CuerpoHTML,string $CuerpoNoHTML,
+							string $Adjuntos,
+							string $lvl,
+							string $GmailUsername,
+							string $GmailPassword){
 	//Variables
 	$error  = '';
 
@@ -214,13 +214,13 @@ function tareas_envio_correo($De_correo, $De_nombre,
 * String    $lvl                Nivel
 ************************************************************************/
 //Funcion
-function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_Host, $SMTP_Port, $SMTP_Secure, $De_nombre,
-								  $Hacia_correo, $Hacia_nombre,
-                            	  $CopiaCarbon, $CopiaCarbonOculta,
-                            	  $Asunto,
-                            	  $CuerpoHTML, $CuerpoNoHTML,
-                            	  $Adjuntos,
-                            	  $lvl){
+function tareas_envio_correo_smtp(string $SMTP_mailUsername, string $SMTP_mailPassword, string $SMTP_Host, string $SMTP_Port, string $SMTP_Secure, string $De_nombre,
+								string $Hacia_correo, string $Hacia_nombre,
+								string $CopiaCarbon, string $CopiaCarbonOculta,
+								string $Asunto,
+								string $CuerpoHTML, string $CuerpoNoHTML,
+								string $Adjuntos,
+								string $lvl){
 
 	//Variables
 	$error  = '';
@@ -379,13 +379,13 @@ function tareas_envio_correo_smtp($SMTP_mailUsername, $SMTP_mailPassword, $SMTP_
 * String    $lvl                Nivel
 ************************************************************************/
 //Funcion
-function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
-									$Hacia_correo, $Hacia_nombre,
-									$CopiaCarbon, $CopiaCarbonOculta,
-									$Asunto,
-									$CuerpoHTML,$CuerpoNoHTML,
-									$Adjuntos,
-									$lvl){
+function tareas_envio_correo_google(string $GmailUsername, string $GmailPassword, string $De_nombre,
+									string $Hacia_correo, string $Hacia_nombre,
+									string $CopiaCarbon, string $CopiaCarbonOculta,
+									string $Asunto,
+									string $CuerpoHTML, string $CuerpoNoHTML,
+									string $Adjuntos,
+									string $lvl){
 
 	//Variables
 	$error  = '';
@@ -532,8 +532,8 @@ function tareas_envio_correo_google($GmailUsername, $GmailPassword, $De_nombre,
 * @return   int
 ************************************************************************/
 //Funcion
-function envio_mensaje_push($title, $message, $action, $firebase_token, $firebase_api,
-                            $imageUrl, $actionDestination){
+function envio_mensaje_push(string $title, string $message, string $action, string $firebase_token, string $firebase_api,
+							string $imageUrl, string $actionDestination){
 
 	$url = 'https://fcm.googleapis.com/fcm/send';
 	$fields = array (
@@ -594,10 +594,10 @@ function envio_mensaje_push($title, $message, $action, $firebase_token, $firebas
 * String    $APIKEY             Contraseña
 ************************************************************************/
 //Funcion
-function envio_sendinblue($De_correo, $De_nombre,
-                          $Hacia_correo, $Hacia_nombre,
-                          $Asunto,$CuerpoHTML,
-						  $APIKEY){
+function envio_sendinblue(string $De_correo, string $De_nombre,
+						  string $Hacia_correo, string $Hacia_nombre,
+                          string $Asunto, string $CuerpoHTML,
+						  string $APIKEY){
 
 	//valido que exista correo
 	if(isset($De_correo, $Hacia_correo)&&$De_correo!=''&&$Hacia_correo!=''){

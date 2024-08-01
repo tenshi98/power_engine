@@ -24,12 +24,12 @@ if( ! defined('XMBCXRXSKGC')) {
 * 	simpleEncode("php recipe", "passkey"); //Devuelve 'lEKK57naUY4/VQ=='
 *
 *===========================    Parametros   ===========================
-* String   $string   Texto a transformar
-* String   $passkey  (Opcional)Palabra clave de codificacion
+* String   $simple_string   Texto a transformar
+* String   $passkey         (Opcional)Palabra clave de codificacion
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleEncode($simple_string, $passkey) {
+function simpleEncode(string $simple_string, string $passkey) {
     /**************************************/
     if (!$simple_string) {
         return false;
@@ -43,7 +43,7 @@ function simpleEncode($simple_string, $passkey) {
     /**************************************/
     //variables
     $ciphering     = "AES-128-CTR";// Store the cipher method
-    $iv_length     = openssl_cipher_iv_length($ciphering);// Use OpenSSl Encryption method
+    //$iv_length     = openssl_cipher_iv_length($ciphering);// Use OpenSSl Encryption method
     $options       = 0;
     $encryption_iv = '1234567891011121';// Non-NULL Initialization Vector for encryption
     // Use openssl_encrypt() function to encrypt the data
@@ -67,12 +67,12 @@ function simpleEncode($simple_string, $passkey) {
 * 	simpleDecode("lEKK57naUY4/VQ==", "passkey"); //Devuelve 'php recipe'
 *
 *===========================    Parametros   ===========================
-* String   $string   Texto a transformar
-* String   $passkey  (Opcional)Palabra clave de codificacion
+* String   $simple_string   Texto a transformar
+* String   $passkey         (Opcional)Palabra clave de codificacion
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleDecode($simple_string, $passkey) {
+function simpleDecode(string $simple_string, string $passkey) {
     if (!$simple_string) {
         return false;
     }
@@ -84,7 +84,7 @@ function simpleDecode($simple_string, $passkey) {
     /**************************************/
     //variables
     $ciphering     = "AES-128-CTR";// Store the cipher method
-    $iv_length     = openssl_cipher_iv_length($ciphering);// Use OpenSSl Encryption method
+    //$iv_length     = openssl_cipher_iv_length($ciphering);// Use OpenSSl Encryption method
     $options       = 0;
     $decryption_iv = '1234567891011121';// Non-NULL Initialization Vector for encryption
     // Use openssl_encrypt() function to encrypt the data
@@ -141,7 +141,7 @@ function generateServerSpecificHash(){
 * String   $passkey  (Opcional)Palabra clave de codificacion
 * @return  String
 ************************************************************************/
-function encrypt_decrypt($action, $string) :string {
+function encrypt_decrypt(string $action, string $string) :string {
 	$output         = false;
 	$encrypt_method = "AES-256-CBC";
 	$secret_key     = 'tu_clave_secreta';
@@ -171,11 +171,11 @@ function encrypt_decrypt($action, $string) :string {
 * 	token_bin2hex(25); //Devuelve valores aleatoreos
 *
 *===========================    Parametros   ===========================
-* String   $longitud  largo del codigo generado
+* int      $longitud  largo del codigo generado
 * @return  String
 ************************************************************************/
 //Funcion
-function token_bin2hex($longitud) {
+function token_bin2hex(int $longitud) {
 	$token = bin2hex(openssl_random_pseudo_bytes(($longitud - ($longitud % 2)) / 2));
 	return $token;
 }

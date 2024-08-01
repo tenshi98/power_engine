@@ -475,7 +475,7 @@ function tareasServer($tarea){
 * @return  String
 ************************************************************************/
 //Funcion
-function uploadPHPError($error) {
+function uploadPHPError(int $error) {
 	$PHPError = '';
 	switch ($error) {
 		case 0: $PHPError = "No hay error, el archivo se cargó con éxito"; break;
@@ -508,7 +508,7 @@ function uploadPHPError($error) {
 * String  $Data                Texto plano
 ************************************************************************/
 //Funcion
-function log_response($TipoLog, $RespuestaServidor, $Data){
+function log_response(int $TipoLog, string $RespuestaServidor, string $Data){
 
 	//Definicion de errores
 	$errorn = 0;
@@ -603,7 +603,7 @@ function log_response($TipoLog, $RespuestaServidor, $Data){
 * String  $ErrorQuery          Consulta con el error
 ************************************************************************/
 //Funcion
-function php_error_log($Usuario, $Transaccion, $Tarea, $ErrorCode, $ErrorDescription, $ErrorQuery ){
+function php_error_log(string $Usuario, string $Transaccion, string $Tarea, string $ErrorCode, string $ErrorDescription, string $ErrorQuery ){
 
 	/***************************************/
 	//Se escribe el log estandar
@@ -712,14 +712,17 @@ function indicesServer(){
 * 	rrmdir($structure);
 *
 *===========================    Parametros   ===========================
-* String  $src         Arreglo con la respuesta del correo (0-1)
+* String  $src         ruta de la carpeta
 ************************************************************************/
-function rrmdir($src) {
+function rrmdir(string $src) {
+	//se abre carpeta
 	$dir = opendir($src);
+	//se recorren los archivos al interior y se borran
 	while(false !== ( $file = readdir($dir)) ) {
 		if (( $file != '.' ) && ( $file != '..' )) {
 			$full = $src . '/' . $file;
 			if ( is_dir($full) ) {
+				//se agrega recursividad
 				rrmdir($full);
 			}
 			else {
@@ -727,7 +730,9 @@ function rrmdir($src) {
 			}
 		}
 	}
+	//se cierra carpeta
 	closedir($dir);
+	//se borra carpeta
 	rmdir($src);
 }
 

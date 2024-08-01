@@ -584,7 +584,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input($type,$placeholder,$name, $value, $required){
@@ -656,7 +656,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $icon          icono a utilizar(fontawesome)
 	* @return  String
 	************************************************************************/
@@ -731,7 +731,7 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $name       Nombre del identificador del Input
 	* String   $value      Valor por defecto, puede ser texto o valor
-	* Integer  $required   Si dato es obligatorio (1=no, 2=si)
+	* int      $required   Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_hidden($name, $value, $required){
@@ -799,7 +799,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_disabled($type,$placeholder,$name, $value, $required){
@@ -861,7 +861,7 @@ class Basic_Inputs{
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $extra_class   Permite ingresar estilos extras al input
 	* String   $style         Permite escribir directamente un estilo css
 	* String   $value         Valor por defecto, ingresar numeros enteros
@@ -939,7 +939,7 @@ class Basic_Inputs{
 	* String   $type          Tipo de input creado
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $extra_class   Permite ingresar estilos extras al input
 	* String   $style         Permite escribir directamente un estilo css
 	* String   $value         Valor por defecto, puede ser texto o valor
@@ -1011,7 +1011,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $style         Permite escribir directamente un estilo css
 	* @return  String
 	************************************************************************/
@@ -1082,8 +1082,8 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
-	* Integer  $value         Valor por defecto, debe ser un numero entero
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $value         Valor por defecto, debe ser un numero entero
 	* @return  String
 	************************************************************************/
 	public function input_date($placeholder, $name, $value, $required){
@@ -1172,7 +1172,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* Time     $value         Valor por defecto, debe tener formato hora
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_time($placeholder,$name, $value, $required){
@@ -1259,7 +1259,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* Time     $value         Valor por defecto, debe tener formato hora
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_time_popover($placeholder,$name, $value, $required){
@@ -1515,7 +1515,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* Decimal  $value         Valor por defecto, ingresar numeros enteros o decimales
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_number($placeholder,$name, $value, $required){
@@ -1589,7 +1589,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* Decimal  $value         Valor por defecto, ingresar numeros enteros o decimales
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_number_change($placeholder,$name, $value, $required,$OnChange){
@@ -1668,8 +1668,8 @@ class Basic_Inputs{
 	* Decimal  $min           Valor minimo posible
 	* Decimal  $max           Valor maximo posible
 	* Decimal  $step          Valor a aumentar o reducir
-	* Integer  $ndecimal      Numero de decimales a aceptar
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $ndecimal      Numero de decimales a aceptar
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_number_spinner($placeholder,$name, $value, $min, $max, $step, $ndecimal, $required){
@@ -1786,8 +1786,8 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $value         Valor por defecto, debe ser un numero entero
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $value         Valor por defecto, debe ser un numero entero
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_phone($placeholder,$name, $value, $required){
@@ -1870,8 +1870,8 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $value         Valor por defecto, debe ser un numero entero
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $value         Valor por defecto, debe ser un numero entero
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function form_input_fax($placeholder,$name, $value, $required){
@@ -1956,7 +1956,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function input_rut($placeholder,$name, $value, $required){
@@ -2048,7 +2048,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* @return  String
 	************************************************************************/
 	public function color_picker($placeholder,$name, $value, $required){
@@ -2193,7 +2193,7 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
 	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
@@ -2356,7 +2356,7 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
 	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
@@ -2551,7 +2551,7 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
 	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
@@ -2737,7 +2737,7 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
 	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
@@ -2876,8 +2876,8 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
-	* Integer  $value         Valor por defecto, debe ser un numero entero
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $value         Valor por defecto, debe ser un numero entero
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1a         Identificador de la base de datos
 	* String   $data2a         Texto a mostrar en la opción del input
 	* String   $table1        Tabla desde donde tomar los datos
@@ -3082,7 +3082,7 @@ class Basic_Inputs{
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
 	* String   $name          Nombre del identificador del Input
 	* String   $value         Valor por defecto, puede ser texto o valor
-	* Integer  $required      Si dato es obligatorio (1=no, 2=si)
+	* int      $required      Si dato es obligatorio (1=no, 2=si)
 	* String   $data1         Identificador de la base de datos
 	* String   $data2         Texto a mostrar en la opción del input
 	* String   $table         Tabla desde donde tomar los datos
@@ -3278,8 +3278,8 @@ class Basic_Inputs{
 	*===========================    Parametros   ===========================
 	* String   $placeholder1   Nombre o texto a mostrar en el navegador
 	* String   $name1          Nombre del identificador del Input
-	* Integer  $value1         Valor por defecto, debe ser un numero entero
-	* Integer  $required1      Si dato es obligatorio (1=no, 2=si)
+	* int      $value1         Valor por defecto, debe ser un numero entero
+	* int      $required1      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA1         Identificador de la base de datos
 	* String   $dataB1         Texto a mostrar en la opción del input
 	* String   $table1         Tabla desde donde tomar los datos
@@ -3287,8 +3287,8 @@ class Basic_Inputs{
 	* String   $extracomand1   Ordenamiento de los datos, si no hay nada ordena automatico
 	* String   $placeholder2   Nombre o texto a mostrar en el navegador
 	* String   $name2          Nombre del identificador del Input
-	* Integer  $value2         Valor por defecto, debe ser un numero entero
-	* Integer  $required2      Si dato es obligatorio (1=no, 2=si)
+	* int      $value2         Valor por defecto, debe ser un numero entero
+	* int      $required2      Si dato es obligatorio (1=no, 2=si)
 	* String   $dataA2         Identificador de la base de datos
 	* String   $dataB2         Texto a mostrar en la opción del input
 	* String   $table2         Tabla desde donde tomar los datos

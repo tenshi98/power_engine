@@ -609,7 +609,7 @@ function Fecha_ultimo_dia_mes($Fecha){
 * 	fullDate('2023-12-12 13:17:59');
 *
 *===========================    Parametros   ===========================
-* Integer   $Fecha   Fecha a transformar
+* int       $Fecha   Fecha a transformar
 * @return   String
 ************************************************************************/
 //Funcion

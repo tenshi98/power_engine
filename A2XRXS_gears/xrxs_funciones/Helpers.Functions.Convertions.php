@@ -23,7 +23,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * 	numero2horas(1.5); //Devuelve 01:30:00
 *
 *===========================    Parametros   ===========================
-* Integer    $mins   Numero de minutos a transformar
+* int        $mins   Numero de minutos a transformar
 * @return    Time
 ************************************************************************/
 //Funcion
@@ -54,7 +54,7 @@ function numero2horas($mins) {
 * 	minutos2horas(65); //Devuelve 01:05:00
 *
 *===========================    Parametros   ===========================
-* Integer    $mins   Numero de minutos a transformar
+* int        $mins   Numero de minutos a transformar
 * @return    Time
 ************************************************************************/
 //Funcion
@@ -90,7 +90,7 @@ function minutos2horas($mins) {
 * 	segundos2horas(3600); //Devuelve 01:00:00
 *
 *===========================    Parametros   ===========================
-* Integer    $segundos   Numero de segundos a transformar
+* int        $segundos   Numero de segundos a transformar
 * @return    Time
 ************************************************************************/
 //Funcion
@@ -269,7 +269,7 @@ function Devolver_mes($mes){
 * 	numero_mes(1); //Devuelve 01
 *
 *===========================    Parametros   ===========================
-* Integer    $numero   Numero a transformar (de 1 a 12)
+* int        $numero   Numero a transformar (de 1 a 12)
 * @return    String
 ************************************************************************/
 //Funcion
@@ -300,7 +300,7 @@ function numero_mes($numero){
 * 	numero_dia(1); //Devuelve 01
 *
 *===========================    Parametros   ===========================
-* Integer    $numero   Numero a transformar (de 1 a 31)
+* int        $numero   Numero a transformar (de 1 a 31)
 * @return    String
 ************************************************************************/
 //Funcion
@@ -336,7 +336,7 @@ function numero_dia($numero){
 * 	numero_a_mes(1); //Devuelve Enero
 *
 *===========================    Parametros   ===========================
-* Integer    $numero   Numero a transformar (de 1 a 12)
+* int        $numero   Numero a transformar (de 1 a 12)
 * @return    String
 ************************************************************************/
 //Funcion
@@ -367,7 +367,7 @@ function numero_a_mes($numero){
 * 	numero_a_mes_corto(1); //Devuelve Ene
 *
 *===========================    Parametros   ===========================
-* Integer    $numero   Numero a transformar (de 1 a 12)
+* int        $numero   Numero a transformar (de 1 a 12)
 * @return    String
 ************************************************************************/
 //Funcion
@@ -396,7 +396,7 @@ function numero_a_mes_corto($numero){
 * 	numero_nombreDia(3); //Devuelve Miercoles
 *
 *===========================    Parametros   ===========================
-* Integer   $numero   Numero a transformar (de 1 a 7)
+* int       $numero   Numero a transformar (de 1 a 7)
 * @return   String
 ************************************************************************/
 //Funcion
@@ -473,7 +473,7 @@ function porcentaje($valor){
 * 	numtoletras(1200); //Devuelve mil doscientos
 *
 *===========================    Parametros   ===========================
-* Integer  $monto   Valor a transformar en palabras
+* int      $monto   Valor a transformar en palabras
 * @return  String
 ************************************************************************/
 //Funcion

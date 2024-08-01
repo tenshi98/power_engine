@@ -25,7 +25,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * String   $string   Texto a verificar
 * @return  String
 ************************************************************************/
-function secure($Data) {
+function secure(string $Data) {
 
 	//Si el dato no es un numero
 	if (!is_numeric($Data)) {
@@ -102,7 +102,7 @@ function secure($Data) {
 * String   $string   Texto a Sanitizar
 * @return  String
 ************************************************************************/
-function SanitizarDatos($Data) {
+function SanitizarDatos(string $Data) {
 	// Loop through POST variables
 	foreach($Data as $input => $value) {
 		$Data[$input] = secure($value);
@@ -124,7 +124,7 @@ function SanitizarDatos($Data) {
 * String   $string   Texto a verificar
 * @return  String
 ************************************************************************/
-function anti_injection($sql){
+function anti_injection(string $sql){
     $sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "" ,$sql);
     $sql = trim($sql);
     $sql = strip_tags($sql);
