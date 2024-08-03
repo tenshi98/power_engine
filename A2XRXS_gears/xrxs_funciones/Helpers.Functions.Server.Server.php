@@ -475,7 +475,7 @@ function tareasServer($tarea){
 * @return  String
 ************************************************************************/
 //Funcion
-function uploadPHPError(int $error) {
+function uploadPHPError($error) {
 	$PHPError = '';
 	switch ($error) {
 		case 0: $PHPError = "No hay error, el archivo se cargó con éxito"; break;
@@ -508,7 +508,7 @@ function uploadPHPError(int $error) {
 * String  $Data                Texto plano
 ************************************************************************/
 //Funcion
-function log_response(int $TipoLog, string $RespuestaServidor, string $Data){
+function log_response($TipoLog, $RespuestaServidor, $Data){
 
 	//Definicion de errores
 	$errorn = 0;
@@ -603,7 +603,7 @@ function log_response(int $TipoLog, string $RespuestaServidor, string $Data){
 * String  $ErrorQuery          Consulta con el error
 ************************************************************************/
 //Funcion
-function php_error_log(string $Usuario, string $Transaccion, string $Tarea, string $ErrorCode, string $ErrorDescription, string $ErrorQuery ){
+function php_error_log($Usuario, $Transaccion, $Tarea, $ErrorCode, $ErrorDescription, $ErrorQuery ){
 
 	/***************************************/
 	//Se escribe el log estandar
@@ -714,7 +714,7 @@ function indicesServer(){
 *===========================    Parametros   ===========================
 * String  $src         ruta de la carpeta
 ************************************************************************/
-function rrmdir(string $src) {
+function rrmdir($src) {
 	//se abre carpeta
 	$dir = opendir($src);
 	//se recorren los archivos al interior y se borran

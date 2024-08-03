@@ -29,7 +29,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  String
 ************************************************************************/
 //Funcion
-function cortar(string $texto, int $cuantos){
+function cortar($texto, $cuantos){
 
 	/**********************/
 	//Validaciones
@@ -64,7 +64,7 @@ function cortar(string $texto, int $cuantos){
 * @return  String
 ************************************************************************/
 //Funcion
-function cortarRut(string $Rut){
+function cortarRut($Rut){
 	//verifico si existe el guion
 	$var1 = substr_count($Rut, '-');
 	//se verifica el largo del texto
@@ -96,7 +96,7 @@ function cortarRut(string $Rut){
 * @return  String
 ************************************************************************/
 //Funcion
-function palabra_largo(string $oracion, int $largo){
+function palabra_largo($oracion, $largo){
 
 	/**********************/
 	//Validaciones
@@ -132,7 +132,7 @@ function palabra_largo(string $oracion, int $largo){
 * @return  String
 ************************************************************************/
 //Funcion
-function palabra_corto(string $oracion, int $largo){
+function palabra_corto($oracion, $largo){
 
 	/**********************/
 	//Validaciones
@@ -165,7 +165,7 @@ function palabra_corto(string $oracion, int $largo){
 * @return  String
 ************************************************************************/
 //Funcion
-function limpiarString(string $texto){
+function limpiarString($texto){
 
 	/**********************/
 	//Validaciones
@@ -198,7 +198,7 @@ function limpiarString(string $texto){
 * @return  String
 ************************************************************************/
 //Funcion
-function espacio_guion(string $dato) {
+function espacio_guion($dato) {
 
 	/**********************/
 	//Validaciones
@@ -225,7 +225,7 @@ function espacio_guion(string $dato) {
 * @return  String
 ************************************************************************/
 //Funcion
-function texto_mail(string $dato) {
+function texto_mail($dato) {
 
 	/**********************/
 	//Validaciones
@@ -256,7 +256,7 @@ function texto_mail(string $dato) {
 * @return  String
 ************************************************************************/
 //Funcion
-function DeSanitizar(string $dato) {
+function DeSanitizar($dato) {
 
 	/**********************/
 	//Validaciones
@@ -286,7 +286,7 @@ function DeSanitizar(string $dato) {
 * String   $string   Texto a estandarizar
 * @return  String
 ************************************************************************/
-function EstandarizarInput(string $Data){
+function EstandarizarInput($Data){
 
 	/**********************/
 	//Validaciones
@@ -325,7 +325,7 @@ function EstandarizarInput(string $Data){
 * int      $type   Tipo de base de datos
 * @return  Array
 ************************************************************************/
-function bd_palabras_censuradas(int $type) {
+function bd_palabras_censuradas($type) {
 
 	/**********************/
 	//Validaciones
@@ -453,7 +453,7 @@ function bd_palabras_censuradas(int $type) {
 * @return  Integer
 ************************************************************************/
 //Funcion
-function contar_palabras_censuradas(string $oracion) {
+function contar_palabras_censuradas($oracion) {
 
     //se definen las letras a reemplazar
     $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
@@ -526,7 +526,7 @@ function contar_palabras_censuradas(string $oracion) {
 * @return  String
 ************************************************************************/
 //Funcion
-function filtrar_palabras_censuradas(string $oracion) {
+function filtrar_palabras_censuradas($oracion) {
 
     //se definen las letras a reemplazar
     $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
@@ -602,7 +602,7 @@ function filtrar_palabras_censuradas(string $oracion) {
 * @return  HTML
 ************************************************************************/
 //Funcion
-function super_title(int $Type, int $Color, int $Align, string $Style, string $Text){
+function super_title($Type, $Color, $Align, $Style, $Text){
 
 	/**********************/
 	//conteo
@@ -681,7 +681,7 @@ function super_title(int $Type, int $Color, int $Align, string $Style, string $T
 * @return  HTML
 ************************************************************************/
 //Funcion
-function divider_line(int $Type, int $Color, int $InnerColor){
+function divider_line($Type, $Color, $InnerColor){
 
 	/**********************/
 	//conteo
@@ -760,7 +760,7 @@ function divider_line(int $Type, int $Color, int $InnerColor){
 * @return  HTML
 ************************************************************************/
 //Funcion
-function hr_line(int $Type, int $Color){
+function hr_line($Type, $Color){
 
 	/**********************/
 	//conteo

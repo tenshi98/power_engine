@@ -279,7 +279,7 @@ function db_delete_data($showQuery, $table, $where, $dbConn, $Usuario, $Transacc
 * @return  Integer
 ************************************************************************/
 //Funcion
-function db_update_data (string $showQuery, string $data, string $table, string $where, $dbConn, string $Usuario, string $Transaccion, string $Tarea) {
+function db_update_data ($showQuery, $data, $table, $where, $dbConn, $Usuario, $Transaccion, $Tarea) {
 
 	/********************************************/
 	// Se actualizan los datos
@@ -349,7 +349,7 @@ function db_update_data (string $showQuery, string $data, string $table, string 
 * @return  Object
 ************************************************************************/
 //Funcion
-function db_select_array (string $showQuery, string $data, string $table, string $join, string $filter, string $orderby, $dbConn, string $Usuario, string $Transaccion, string $Tarea) {
+function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $dbConn, $Usuario, $Transaccion, $Tarea) {
 
 	if (isset($join)&&$join!='0'&&$join!=''){          $joined   = $join;                  }else{$joined   = '';}
 	if (isset($filter)&&$filter!='0'&&$filter!=''){    $where    = "WHERE ".$filter;       }else{$where    = '';}
@@ -428,7 +428,7 @@ function db_select_array (string $showQuery, string $data, string $table, string
 * @return  Object
 ************************************************************************/
 //Funcion
-function db_insert_data (string $showQuery, string $columns, string $data, string $table, $dbConn, string $Usuario, string $Transaccion, string $Tarea) {
+function db_insert_data ($showQuery, $columns, $data, $table, $dbConn, $Usuario, $Transaccion, $Tarea) {
 
 	// inserto los datos de registro en la db
 	$query  = "INSERT INTO `".$table."` (".$columns.") VALUES (".$data.")";

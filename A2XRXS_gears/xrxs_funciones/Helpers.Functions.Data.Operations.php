@@ -29,7 +29,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  Integer
 ************************************************************************/
 //Funcion
-function divHoras($hora,int $divisor) {
+function divHoras($hora,$divisor) {
 
 	/**********************/
 	//Validaciones
@@ -62,7 +62,7 @@ function divHoras($hora,int $divisor) {
 * @return  Time
 ************************************************************************/
 //Funcion
-function multHoras($hora,int $multiplicador) {
+function multHoras($hora,$multiplicador) {
 
 	/**********************/
 	//Validaciones
@@ -208,7 +208,7 @@ function sumahoras($hora,$horasuma){
 * @return  Date
 ************************************************************************/
 //Funcion
-function sumarDias($Fecha,int $nDias){
+function sumarDias($Fecha,$nDias){
 
 	/**********************/
 	//Validaciones
@@ -240,7 +240,7 @@ function sumarDias($Fecha,int $nDias){
 * @return  Date
 ************************************************************************/
 //Funcion
-function restarDias($Fecha,int $nDias){
+function restarDias($Fecha,$nDias){
 
 	/**********************/
 	//Validaciones

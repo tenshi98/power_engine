@@ -30,7 +30,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return    String
 ************************************************************************/
 //Funcion
-function genera_password(int $longitud,string $tipo){
+function genera_password($longitud,$tipo){
 	//verifico si los datos estan bien entregados
 	if (validarNumero($longitud)&&($tipo=="alfanumerico" OR $tipo=="numerico")){
 
@@ -99,7 +99,7 @@ function genera_password_unica(){
 * @return    String
 ************************************************************************/
 //Funcion
-function caracteresRandom(int $longitud = 16, bool $lecturaAmigable = true, bool $incluirSimbolos = false, bool $sinDuplicados = false){
+function caracteresRandom($longitud = 16, $lecturaAmigable = true, $incluirSimbolos = false, $sinDuplicados = false){
 
     $caracteres_legibles = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefhjkmnprstuvwxyz23456789';
     $caracteres_todos    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';

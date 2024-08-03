@@ -30,7 +30,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  Integer
 ************************************************************************/
 //Funcion
-function obtenerDistancia( float $latitude1, float $longitude1, float $latitude2, float $longitude2 ) {
+function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
 
     /**********************/
 	//Validaciones
@@ -174,7 +174,7 @@ class subpointLocation {
 * @return  Object
 ************************************************************************/
 //Funcion
-function getGeocodeData(string $address, string $ApiKey) {
+function getGeocodeData($address, $ApiKey) {
     /**********************/
 	//Validaciones
 	if(!isset($address) OR $address=''){ return 'No ha ingresado una direccion';}

@@ -29,7 +29,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleEncode(string $simple_string, string $passkey) {
+function simpleEncode($simple_string, $passkey) {
     /**************************************/
     if (!$simple_string) {
         return false;
@@ -72,7 +72,7 @@ function simpleEncode(string $simple_string, string $passkey) {
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleDecode(string $simple_string, string $passkey) {
+function simpleDecode($simple_string, $passkey) {
     if (!$simple_string) {
         return false;
     }
@@ -141,7 +141,7 @@ function generateServerSpecificHash(){
 * String   $passkey  (Opcional)Palabra clave de codificacion
 * @return  String
 ************************************************************************/
-function encrypt_decrypt(string $action, string $string) :string {
+function encrypt_decrypt($action, $string) :string {
 	$output         = false;
 	$encrypt_method = "AES-256-CBC";
 	$secret_key     = 'tu_clave_secreta';
@@ -175,7 +175,7 @@ function encrypt_decrypt(string $action, string $string) :string {
 * @return  String
 ************************************************************************/
 //Funcion
-function token_bin2hex(int $longitud) {
+function token_bin2hex($longitud) {
 	$token = bin2hex(openssl_random_pseudo_bytes(($longitud - ($longitud % 2)) / 2));
 	return $token;
 }

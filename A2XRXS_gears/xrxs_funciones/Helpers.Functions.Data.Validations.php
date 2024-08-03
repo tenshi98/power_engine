@@ -26,7 +26,7 @@ if( ! defined('XMBCXRXSKGC')) {
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validarRut(string $Data) {
+function validarRut($Data) {
     //dato
 	/*$Rut = str_replace('.', '', $Data);
     //ejecuto
@@ -108,7 +108,7 @@ function validarRut(string $Data) {
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validarEmail(string $Data, $tempEmailAllowed = false){
+function validarEmail($Data, $tempEmailAllowed = false){
 	if(filter_var($Data,FILTER_VALIDATE_EMAIL)){
 		return true; //Valido
     }else{
@@ -159,7 +159,7 @@ function validarNumero($Data){
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function ValidarPatente(string $Data){
+function ValidarPatente($Data){
 	//elimino los posibles guones
 	$patente = str_replace("-","",$Data);
  	//caracteres admitidos
@@ -188,7 +188,7 @@ function ValidarPatente(string $Data){
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validarURL(string $Data){
+function validarURL($Data){
     return (bool) filter_var($Data, FILTER_VALIDATE_URL);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -263,7 +263,7 @@ function validaFecha($Data, $format = 'Y-m-d'){
 * @return  Bolean
 ************************************************************************/
 //Funcion
-function validaEntero(int $Data){
+function validaEntero($Data){
     //se verifica si es un numero lo que se recibe
 	if (is_numeric($Data)){
 		return(ctype_digit(strval($Data)));
@@ -311,7 +311,7 @@ function validaDispositivoMovil(){
 * Objeto   $dbConn           Conexion a la base de datos
 ************************************************************************/
 //Funcion
-function validaPermisoUser(int $nivel_usuario, int $nivel_requerido, $dbConn){
+function validaPermisoUser($nivel_usuario, $nivel_requerido, $dbConn){
 	//si el nivel de permiso del usuario es inferior al requerido
 	if($nivel_usuario<$nivel_requerido){
 

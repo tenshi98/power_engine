@@ -182,7 +182,7 @@ function getFavicon($url){
 * @return  HTML
 ************************************************************************/
 //Funcion
-function indicadores(string $type){
+function indicadores($type){
 
 	/********************************************************/
 	//Definicion de errores
