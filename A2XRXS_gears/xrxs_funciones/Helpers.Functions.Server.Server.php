@@ -715,25 +715,30 @@ function indicesServer(){
 * String  $src         ruta de la carpeta
 ************************************************************************/
 function rrmdir($src) {
-	//se abre carpeta
-	$dir = opendir($src);
-	//se recorren los archivos al interior y se borran
-	while(false !== ( $file = readdir($dir)) ) {
-		if (( $file != '.' ) && ( $file != '..' )) {
-			$full = $src . '/' . $file;
-			if ( is_dir($full) ) {
-				//se agrega recursividad
-				rrmdir($full);
-			}
-			else {
-				unlink($full);
+	//pruebo si se puede hacer
+	try {
+		//se abre carpeta
+		$dir = opendir($src);
+		//se recorren los archivos al interior y se borran
+		while(false !== ( $file = readdir($dir)) ) {
+			if (( $file != '.' ) && ( $file != '..' )) {
+				$full = $src . '/' . $file;
+				if ( is_dir($full) ) {
+					//se agrega recursividad
+					rrmdir($full);
+				}
+				else {
+					unlink($full);
+				}
 			}
 		}
+		//se cierra carpeta
+		closedir($dir);
+		//se borra carpeta
+		rmdir($src);
+	} catch (Exception $e) {
+		//nada
 	}
-	//se cierra carpeta
-	closedir($dir);
-	//se borra carpeta
-	rmdir($src);
 }
 
 ?>
