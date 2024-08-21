@@ -181,7 +181,7 @@ function preview_docs($Root, $File, $ExtraData){
 	//Validaciones
 	if(!isset($Root) OR $Root==''){             return alert_post_data(4,1,1,0,'No ha ingresado la Ruta a la carpeta contenedora.');}
 	if(!isset($File) OR $File==''){             return alert_post_data(4,1,1,0,'No ha ingresado el Nombre del archivo.');}
-	if(!isset($ExtraData) OR $ExtraData==''){   return alert_post_data(4,1,1,0,'No ha ingresado la Informacion extra para los archivos kmz.');}
+	//if(!isset($ExtraData) OR $ExtraData==''){   return alert_post_data(4,1,1,0,'No ha ingresado la Informacion extra para los archivos kmz.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -545,10 +545,10 @@ function preview_docs2($Root, $File, $ExtraData, $file_path, $extensions, $mainS
 	//Validaciones
 	if(!isset($Root) OR $Root==''){               return alert_post_data(4,1,1,0,'No ha ingresado la Ruta a la carpeta contenedora.');}
 	if(!isset($File) OR $File==''){               return alert_post_data(4,1,1,0,'No ha ingresado el Nombre del archivo.');}
-	if(!isset($ExtraData) OR $ExtraData==''){     return alert_post_data(4,1,1,0,'No ha ingresado la Informacion extra para los archivos kmz.');}
+	//if(!isset($ExtraData) OR $ExtraData==''){     return alert_post_data(4,1,1,0,'No ha ingresado la Informacion extra para los archivos kmz.');}
 	if(!isset($file_path) OR $file_path==''){     return alert_post_data(4,1,1,0,'No ha ingresado la Carpeta contenedora.');}
-	if(!isset($extensions) OR $extensions==''){   return alert_post_data(4,1,1,0,'No ha ingresado la Extension del archivo.');}
-	if(!isset($mainSite) OR $mainSite==''){       return alert_post_data(4,1,1,0,'No ha ingresado la Direccion root de la pagina.');}
+	//if(!isset($extensions) OR $extensions==''){   return alert_post_data(4,1,1,0,'No ha ingresado la Extension del archivo.');}
+	//if(!isset($mainSite) OR $mainSite==''){       return alert_post_data(4,1,1,0,'No ha ingresado la Direccion root de la pagina.');}
 	if(!isset($EmpPath) OR $EmpPath==''){         return alert_post_data(4,1,1,0,'No ha ingresado la Ruta hasta la carpeta contenedora.');}
 
 	/**********************/
