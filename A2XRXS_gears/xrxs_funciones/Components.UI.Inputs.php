@@ -2188,7 +2188,7 @@ class Basic_Inputs{
 	*===========================    Modo de uso  ===========================
 	*
 	* 	//se imprime input
-	* 	$Form->select('Meses del año','idMeses', 1, 'idMes', 'Nombre', 'tabla_meses', '', '', $dbConn );
+	* 	$Form->select('Meses del año','idMeses', 1, 2, 'idMes', 'Nombre', 'tabla_meses', '', '', $dbConn );
 	*
 	*===========================    Parametros   ===========================
 	* String   $placeholder   Nombre o texto a mostrar en el navegador
