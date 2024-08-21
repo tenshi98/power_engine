@@ -72,10 +72,17 @@ function simpleEncode($simple_string, $passkey) {
 * @return  String
 ************************************************************************/
 //Funcion
-function simpleDecode($simple_string, $passkey) {
-    if (!$simple_string) {
-        return false;
-    }
+function simpleDecode($string, $passkey) {
+    /**************************************/
+    //verifico si hay que reemplazar algo
+    if (!$string) {return false;}
+    /**************************************/
+    //verifico si hay que reemplazar algo
+    $vowels1 = array(" ");
+    $vowels2 = array("+");
+    $simple_string = str_replace($vowels1, $vowels2, $string);
+    /**************************************/
+    //verifico la contraseña
     if (!isset($passkey) OR empty($passkey) OR $passkey=='') {
         $decryption_key = sha1('EnCRypT10nK#Y!RiSRNn');
     }else{
