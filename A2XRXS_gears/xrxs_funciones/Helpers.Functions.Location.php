@@ -41,9 +41,9 @@ function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
 
 	/**********************/
 	//Si todo esta ok
-    $latitude1 = floatval($latitude1);
+    $latitude1  = floatval($latitude1);
     $longitude1 = floatval($longitude1);
-    $latitude2 = floatval($latitude2);
+    $latitude2  = floatval($latitude2);
     $longitude2 = floatval($longitude2);
 
     //radio de la tierra
