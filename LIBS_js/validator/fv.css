@@ -44,7 +44,7 @@ input:focus, textarea:focus{ border-color:#AAA; }
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
 input[type=checkbox]{ width:auto; border:none; bottom:-1px; cursor:pointer; margin:2px 8px 0 0; position:relative; transform:scale(1.2); }
-button[type=submit]{ font-size:1.1em; padding:5px 25px; }
+button{ font-size:1.1em; padding:5px 25px; }
 
 /* Tooltips helpers */
 .field .tooltip{ float:left; top:2px; left:7px; position:relative; z-index:2; }
@@ -79,8 +79,8 @@ button[type=submit]{ font-size:1.1em; padding:5px 25px; }
 form fieldset{ clear:both; margin:0 0 10px 0; }
 form .field{ padding:5px 0; position:relative; height:2em; }
 form .field.fields{ height:auto; }
-	.field label, .field .label{ float:left; cursor:pointer; }
-		.field label span, .field .label{ float:left; width:160px; text-transform:capitalize; line-height:2em; }
+	.field label, .field .label{  cursor:pointer; }
+		.field label > span:first-child, .field .label{ float:left; width:160px; text-transform:capitalize; line-height:2em; }
 	.field input, .field textarea{ float:left; padding:3px 4px; width:210px; -webkit-transition:0.2s; -moz-transition:0.2s; transition:0.2s; }
 	.field input[type=checkbox]{ width:auto; }
 
@@ -101,7 +101,7 @@ form .field.fields{ height:auto; }
 
 	.bad input,
 	.bad select,
-	.bad textarea{ border:1px solid #CE5454; box-shadow:0 0 4px -2px #CE5454; position:relative; left:0; -moz-animation:.7s 1 shake linear; -webkit-animation:0.7s 1 shake linear; }
+	.bad textarea{ border:1px solid #CE5454; box-shadow:0 0 4px -2px #CE5454; position:relative; left:0; -moz-animation:.4s 1 shake ease; -webkit-animation:0.4s 1 shake ease; }
 
 
 /* mode2 - where the label's text is above the field and not next to it

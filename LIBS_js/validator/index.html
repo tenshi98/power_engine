@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="es-ES">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Total Form Validation</title>
@@ -16,13 +16,13 @@
 	<a class='btn github' href='https://github.com/yairEO/validator'>Github</a>
 	<div id='wrap'>
 		<div class='options'>
-			<label>
+		<!-- 	<label>
 				<input type='checkbox' id='vfields' />
 				Vertical orientation
-			</label>
+			</label> -->
 			<label>
-				<input type='checkbox' id='alerts' />
-				Disable alerts
+				<input type='checkbox' class='toggleValidationTooltips' />
+				Disable vlidation tooltips
 			</label>
 		</div>
 		<h1 title='how forms should be done.'>Forms: validation, styling &amp; semantics</h1>
@@ -45,13 +45,13 @@
 					<div class="field">
 						<label>
 							<span>Occupation</span>
-							<input class='optional' name="occupation" data-validate-length-range="5,20" type="text" />
+							<input class='optional' name="occupation" data-validate-length-range="5,15" type="text" />
 						</label>
 						<div class='tooltip help'>
 							<span>?</span>
 							<div class='content'>
 								<b></b>
-								<p>An optional field. This field is only validated when it has a value.<br /><em>Minimum 5 chars for this example.</em></p>
+								<p>An optional field. This field is only validated when it has a value.<br /><em>Minimum 5 chars, maximum 15</em></p>
 							</div>
 						</div>
                         <span class='extra'>(optional)</span>
@@ -60,7 +60,7 @@
 						<label>
 							<span>HTML5 Regex</span>
 							<!--<input required="required" type="text" pattern='\d+' />-->
-							<input type="text" data-validate-length-range="2,6" required="required" placeholder="eg. 123456"  pattern="alphanumeric" />
+							<input type="text" name="mySpecialInput" data-validate-length-range="2,6" required="required" placeholder="eg. 123456" pattern="alphanumeric"  data-validate-text-invalid='Please follow the pattern rules' />
 						</label>
 						<div class='tooltip help'>
 							<span>?</span>
@@ -74,6 +74,12 @@
 						<label>
 							<span>email</span>
 							<input name="email" class='email' required="required" type="email" />
+						</label>
+					</div>
+					<div class="field">
+						<label>
+							<span>Multiple emails</span>
+							<input name="email-multi" required="required" type="email" multiple />
 						</label>
 					</div>
 					<div class="field">
@@ -99,6 +105,19 @@
 						<label>
 							<span>Date</span>
 							<input class='date' type="date" name="date" required='required'>
+						</label>
+					</div>
+					<div class="field">
+						<label>
+							<span>Time</span>
+							<input class='time' type="time" name="time" required='required'>
+							<div class='tooltip help'>
+							<span>?</span>
+							<div class='content'>
+								<b></b>
+								<p>Format should be: XX:XX</p>
+							</div>
+						</div>
 						</label>
 					</div>
 					<div class="field">
@@ -136,7 +155,7 @@
 					<div class="field">
 						<label>
 							<span>Drop down selection</span>
-							<select class="required" name="dropdown">
+							<select required name="dropdown">
 								<option value="">-- please select --</option>
 								<option value="o1">Option 1</option>
 								<option value="o2">Option 2</option>
@@ -160,8 +179,17 @@
 
 					<div class="field">
 						<label>
-							<span>Checkboxe</span>
-							<label><input required="required" type="checkbox" />I agree</label>
+							<span>Checkbox</span>
+							<input required="required" type="checkbox" />
+							<span>I agree</span>
+						</label>
+					</div>
+
+					<div class="field">
+						<label>
+							<span>Checkbox</span>
+							<input type="checkbox" />
+							<span>Optional Checkbox</span>
 						</label>
 					</div>
 
@@ -207,7 +235,8 @@
 					</p>
 					<input name="somethingHidden" required="required" type="text" style='display:none' />
 				</fieldset>
-				<button id='send' type='submit'>Submit</button>
+				<button type='submit'>Submit</button>
+                <button type='reset'>Reset</button>
 			</form>
 		</section>
 	</div>
@@ -215,43 +244,30 @@
     <script src="multifield.js"></script>
     <script src="validator.js"></script>
 	<script>
-		// initialize the validator
-		var validator = new FormValidator();
+		// initialize a validator instance from the "FormValidator" constructor.
+        // A "<form>" element is optionally passed as an argument, but is not a must
+		var validator = new FormValidator({"events" : ['blur', 'paste', 'change']}, document.forms[0]);
 
-		// validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-		$('form')
-			.on('blur', 'input[required], input.optional, select.required', function(){
-				validator.checkField.call(validator, this)
-			})
-			.on('change', 'select.required', function(){
-				validator.checkField.call(validator, this)
-			})
-			.on('keypress', 'input[required][pattern]', function(){
-				validator.checkField.call(validator, this)
-			})
+		validator.texts.mySpecialInput = "wrong input" // custom error message for pattern mismatch
 
-		$('.multi.required')
-			.on('keyup blur', 'input', function(){
-				validator.checkField.call( validator, $(this).siblings('[required]')[0] );
-			});
-
-		// bind the validation to the form submit event
-		//$('#send').click('submit');//.prop('disabled', true);
-
-		$('form').submit(function(e){
+        // on form "submit" event
+		document.forms[0].onsubmit = function(e){
 			var submit = true,
-				validatorResult = validator.checkAll(this);
+					validatorResult = validator.checkAll(this);
 
+			console.log(validatorResult);
 			return !!validatorResult.valid;
-		});
+		}
 
-		/* FOR DEMO ONLY */
-		$('#vfields').change(function(){
-			$('form').toggleClass('mode2');
-		}).prop('checked',false);
+		// on form "reset" event
+		document.forms[0].onreset = function(e){
+				validator.reset();
+		}
 
-		$('#alerts').change(function(){
-			validator.defaults.alerts = (this.checked) ? false : true;
+        // stuff related ONLY for this demo page:
+		$('.toggleValidationTooltips').change(function(){
+			validator.settings.alerts = !this.checked;
+
 			if( this.checked )
 				$('form .alert').remove();
 		}).prop('checked',false);
