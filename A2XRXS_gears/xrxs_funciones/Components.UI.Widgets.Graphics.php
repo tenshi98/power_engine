@@ -100,7 +100,7 @@ function GraphLinear_1($idDiv,
 	if(!isset($lineColors) OR $lineColors==''){         return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con los colores de las lineas.');}
 	if(!isset($lineDash) OR $lineDash==''){             return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el tipo de linea.');}
 	if(!isset($lineWidth) OR $lineWidth==''){           return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el ancho de la linea.');}
-	if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
+	//if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -269,7 +269,7 @@ function GraphLinear_2($idDiv,
 	if(!isset($lineColors) OR $lineColors==''){         return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con los colores de las lineas.');}
 	if(!isset($lineDash) OR $lineDash==''){             return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el tipo de linea.');}
 	if(!isset($lineWidth) OR $lineWidth==''){           return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el ancho de la linea.');}
-	if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
+	//if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -382,7 +382,7 @@ function GraphLinear_3($idDiv,
 	if(!isset($xData_2) OR $xData_2==''){                 return alert_post_data(4,1,1,0,'No ha ingresado el arreglo de xData.');}
 	if(!isset($yData_2) OR $yData_2==''){                 return alert_post_data(4,1,1,0,'No ha ingresado el arreglo de yData.');}
 	if(!isset($name_2) OR $name_2==''){                   return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con los nombres de cada punto.');}
-	if(!isset($legendOptions) OR $legendOptions==''){     return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
+	//if(!isset($legendOptions) OR $legendOptions==''){     return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -532,8 +532,8 @@ function GraphBarr_1($idDiv,
 	if(!isset($hoverinfo) OR $hoverinfo==''){           return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con la Informacion de cada barra.');}
 	if(!isset($markerColor) OR $markerColor==''){       return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Color de cada barra.');}
 	if(!isset($markerLine) OR $markerLine==''){         return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Borde de cada barra.');}
-	if(!isset($type) OR $type==''){                     return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Tipos de barra.');}
-	if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
+	//if(!isset($type) OR $type==''){                     return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Tipos de barra.');}
+	//if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -668,8 +668,8 @@ function GraphPie_1($idDiv,
 	if(!isset($labels) OR $labels==''){                 return alert_post_data(4,1,1,0,'No ha ingresado los Textos de cada zona.');}
 	if(!isset($width) OR $width==''){                   return alert_post_data(4,1,1,0,'No ha ingresado el Ancho del grafico.');}
 	if(!isset($height) OR $height==''){                 return alert_post_data(4,1,1,0,'No ha ingresado el Alto del grafico.');}
-	if(!isset($dataOptions) OR $dataOptions==''){       return alert_post_data(4,1,1,0,'No ha ingresado las Opciones de visualizacion.');}
-	if(!isset($layoutOptions) OR $layoutOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las Opciones del grafico.');}
+	//if(!isset($dataOptions) OR $dataOptions==''){       return alert_post_data(4,1,1,0,'No ha ingresado las Opciones de visualizacion.');}
+	//if(!isset($layoutOptions) OR $layoutOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las Opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -802,8 +802,8 @@ function GraphBarrLat_1($idDiv,
 	if(!isset($hoverinfo) OR $hoverinfo==''){           return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con la Informacion de cada barra.');}
 	if(!isset($markerColor) OR $markerColor==''){       return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Color de cada barra.');}
 	if(!isset($markerLine) OR $markerLine==''){         return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Borde de cada barra.');}
-	if(!isset($type) OR $type==''){                     return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Tipos de barra.');}
-	if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
+	//if(!isset($type) OR $type==''){                     return alert_post_data(4,1,1,0,'No ha ingresado el arreglo con el Tipos de barra.');}
+	//if(!isset($legendOptions) OR $legendOptions==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
@@ -921,7 +921,7 @@ function GraphEmbudo_1($idDiv, $titulo, $xData, $yData,$width,$height, $Options)
 	if(!isset($yData) OR $yData==''){       return alert_post_data(4,1,1,0,'No ha ingresado el arreglo de yData.');}
 	if(!isset($width) OR $width==''){       return alert_post_data(4,1,1,0,'No ha ingresado el Ancho del grafico.');}
 	if(!isset($height) OR $height==''){     return alert_post_data(4,1,1,0,'No ha ingresado el Alto del grafico.');}
-	if(!isset($Options) OR $Options==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
+	//if(!isset($Options) OR $Options==''){   return alert_post_data(4,1,1,0,'No ha ingresado las opciones del grafico.');}
 
 	/**********************/
 	//Si todo esta ok
