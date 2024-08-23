@@ -27,14 +27,12 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function validarRut($Data) {
-    //dato
-	/*$Rut = str_replace('.', '', $Data);
-    //ejecuto
-	if (preg_match('/^(\d{1,9})-((\d|k|K){1})$/',$Rut,$d)) {
-        $s=1;$r=$d[1];for($m=0;$r!=0;$r/=10)$s=($s+$r%10*(9-$m++%6))%11;
-        return chr($s?$s+47:75)==strtoupper($d[2]);
-    }*/
+    /**********************/
+	//Validaciones
+	if($Data=='' OR $Data=='0'){ return true;}
 
+	/**********************/
+	//Si todo esta ok
 	//elimino el punto
 	$rut = str_replace('.', '', $Data);
 
@@ -88,8 +86,6 @@ function validarRut($Data) {
 		return false; //El RUT ingresado no es válido.
 	}
 
-
-
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
@@ -133,6 +129,12 @@ function validarEmail($Data, $tempEmailAllowed = false){
 ************************************************************************/
 //Funcion
 function validarNumero($Data){
+	/**********************/
+	//Validaciones
+	if($Data=='' OR $Data=='0'){ return true;}
+
+	/**********************/
+	//Si todo esta ok
 	//cambio la coma por puntos para evitar problemas con los decimales
 	$number = str_replace(',', '.', $Data);
 	//Verfica si es un numero
@@ -160,6 +162,12 @@ function validarNumero($Data){
 ************************************************************************/
 //Funcion
 function ValidarPatente($Data){
+	/**********************/
+	//Validaciones
+	if($Data=='' OR $Data=='0'){ return true;}
+
+	/**********************/
+	//Si todo esta ok
 	//elimino los posibles guones
 	$patente = str_replace("-","",$Data);
  	//caracteres admitidos

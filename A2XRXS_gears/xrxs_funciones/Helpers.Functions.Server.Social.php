@@ -30,6 +30,12 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function WhatsappSendMessage($Token, $InstanceId, $Phone, $Body){
+	/**********************/
+	//Validaciones
+	if($Body=='' OR $Body=='0'){ return false;}
+
+	/**********************/
+	//Si todo esta ok
 	/**************************************/
 	//Normalizo el mensaje
 	$saltoLinea = '

@@ -28,6 +28,12 @@ if( ! defined('XMBCXRXSKGC')) {
 ************************************************************************/
 //Funcion
 function getGoogleImage($Query, $max_img){
+	/**********************/
+	//Validaciones
+	if($Query=='' OR $Query=='0'){ echo '';}
+
+	/**********************/
+	//Si todo esta ok
 	//reemplazo los espacios vacios
 	$Query = str_replace(' ', '+', $Query);
 	//Se da permiso para el acceso remoto
