@@ -7074,7 +7074,7 @@ final class UTF8
       return '';
     }
 
-    $str = \utf8_encode($str);
+    $str = \mb_convert_encoding($str, 'UTF-8', 'ISO-8859-1');
 
     if (false === strpos($str, "\xC2")) {
       return $str;

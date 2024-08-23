@@ -455,12 +455,20 @@ function bd_palabras_censuradas($type) {
 //Funcion
 function contar_palabras_censuradas($oracion) {
 
+	/*
+utf8_decode($oracion);
+mb_convert_encoding($oracion, 'ISO-8859-1', 'UTF-8');
+
+utf8_encode($cadena);
+mb_convert_encoding($cadena, 'UTF-8', 'ISO-8859-1');
+	*/
+
     //se definen las letras a reemplazar
     $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
     $modificadas  = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybya';
-    $cadena       = utf8_decode($oracion);
-    $cadena       = strtr($cadena, utf8_decode($originales), $modificadas);
-    $oracion      = utf8_encode($cadena);
+    $cadena       = mb_convert_encoding($oracion, 'ISO-8859-1', 'UTF-8');
+    $cadena       = strtr($cadena, mb_convert_encoding($originales, 'ISO-8859-1', 'UTF-8'), $modificadas);
+    $oracion      = mb_convert_encoding($cadena, 'UTF-8', 'ISO-8859-1');
     //se cambian todas las letras a minusculas
     $oracion      = strtolower($oracion);
 	//bd con las palabras
@@ -528,12 +536,20 @@ function contar_palabras_censuradas($oracion) {
 //Funcion
 function filtrar_palabras_censuradas($oracion) {
 
+		/*
+utf8_decode($oracion);
+mb_convert_encoding($oracion, 'ISO-8859-1', 'UTF-8');
+
+utf8_encode($cadena);
+mb_convert_encoding($cadena, 'UTF-8', 'ISO-8859-1');
+	*/
+
     //se definen las letras a reemplazar
     $originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
     $modificadas  = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybya';
-    $cadena       = utf8_decode($oracion);
-    $cadena       = strtr($cadena, utf8_decode($originales), $modificadas);
-    $oracion      = utf8_encode($cadena);
+    $cadena       = mb_convert_encoding($oracion, 'ISO-8859-1', 'UTF-8');
+    $cadena       = strtr($cadena, mb_convert_encoding($originales, 'ISO-8859-1', 'UTF-8'), $modificadas);
+    $oracion      = mb_convert_encoding($cadena, 'UTF-8', 'ISO-8859-1');
     //se cambian todas las letras a minusculas
     $oracion      = strtolower($oracion);
 	//bd con las palabras

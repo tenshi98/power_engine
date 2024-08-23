@@ -33,9 +33,9 @@ function secure($Data) {
 		//se definen las letras a reemplazar
 		$originales   = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿª';
 		$modificadas  = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybya';
-		$cadena       = utf8_decode($Data);
-		$cadena       = strtr($cadena, utf8_decode($originales), $modificadas);
-		$Data         = utf8_encode($cadena);
+		$cadena       = mb_convert_encoding($Data, 'ISO-8859-1', 'UTF-8');
+		$cadena       = strtr($cadena, mb_convert_encoding($originales, 'ISO-8859-1', 'UTF-8'), $modificadas);
+		$Data         = mb_convert_encoding($cadena, 'UTF-8', 'ISO-8859-1');
 		//se cambian todas las letras a minusculas
 		$Data         = strtolower($Data);
 
