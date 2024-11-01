@@ -49,6 +49,11 @@ function simpleEncode($simple_string, $passkey) {
     // Use openssl_encrypt() function to encrypt the data
     $encryption    = openssl_encrypt($simple_string, $ciphering, $encryption_key, $options, $encryption_iv);
     /**************************************/
+    /**************************************/
+    //verifico si hay que reemplazar algo
+    $vowels1 = array("+");
+    $vowels2 = array("_");
+    $encryption = str_replace($vowels1, $vowels2, $encryption);
     //devuelvo
     return $encryption;
 }
@@ -77,6 +82,10 @@ function simpleDecode($string, $passkey) {
     //verifico si hay que reemplazar algo
     if (!$string) {return false;}
     /**************************************/
+    //verifico si hay que reemplazar algo
+    $vowels1 = array("_");
+    $vowels2 = array(" ");
+    $string = str_replace($vowels1, $vowels2, $string);
     //verifico si hay que reemplazar algo
     $vowels1 = array(" ");
     $vowels2 = array("+");
