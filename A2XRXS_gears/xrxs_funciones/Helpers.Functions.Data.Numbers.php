@@ -372,5 +372,37 @@ function formatPhone($Phone){
 	}
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
+* Antepone un 0 en caso de ser un numero inferior a 10
+*
+*===========================     Detalles    ===========================
+* Antepone un 0 en caso de ser un numero inferior a 10
+*===========================    Modo de uso  ===========================
+*
+* 	//se formatea numero
+* 	numberInit0(1); //Devuelve 01
+*
+*===========================    Parametros   ===========================
+* String    $number   Numero a formatear
+* @return   String
+************************************************************************/
+//Funcion
+function numberInit0($valor){
+
+	/**********************/
+	//Validaciones
+	if($valor==''){             return '0';}
+	if($valor==0){              return 0;}
+	if(!validarNumero($valor)){ return 'El dato ingresado no es un numero';}
+
+	/**********************/
+	//Si todo esta ok
+	if($valor<10){
+		return '0'.$valor;
+	}else{
+		return $valor;
+	}
+}
 
 ?>
