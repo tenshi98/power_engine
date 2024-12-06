@@ -288,6 +288,37 @@ function obtener_edad($fecha_nacimiento){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************
+* Muestra el numero de años entre fechas
+*
+*===========================     Detalles    ===========================
+* Permite ver el el numero de años transcurridos entre la fecha entregada y
+* la actual
+*===========================    Modo de uso  ===========================
+*
+* 	//se ejecuta operacion
+* 	obtener_numero_anos('2022-01-01'); //Devuelve '2' (a la fecha '2024-06-01')
+*
+*===========================    Parametros   ===========================
+* Date     $fecha_nacimiento   Fecha
+* @return  Integer
+************************************************************************/
+//Funcion
+function obtener_numero_anos($fecha_nacimiento){
+
+	/**********************/
+	//Validaciones
+	if(!validaFecha($fecha_nacimiento)){ return 'Las fechas ingresadas no tienen formato fecha';}
+
+	/**********************/
+	//Si todo esta ok
+	$nacimiento = new DateTime($fecha_nacimiento);
+    $ahora      = new DateTime(date("Y-m-d"));
+    $diferencia = $ahora->diff($nacimiento);
+    return $diferencia->format("%y");
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************
 * Ver dias transcurridos entre fechas
 *
 *===========================     Detalles    ===========================

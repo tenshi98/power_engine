@@ -1865,7 +1865,7 @@ class Basic_Form_Inputs{
 				<label class="control-label col-xs-12 col-sm-4 col-md-4 col-lg-4">'.$placeholder.'</label>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 field">
 					<div class="input-group bootstrap-timepicker">
-						<input placeholder="'.$placeholder.'" class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
+						<input placeholder="'.$placeholder.'" class="form-control timepicker-default '.$name.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.'>
 						<span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 					</div>
 				</div>
