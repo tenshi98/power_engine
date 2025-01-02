@@ -195,6 +195,7 @@ function preview_docs($Root, $File, $ExtraData){
 	$exten .= ',mp4,webm,ogv,mp2,mpeg,mpg,mov,avi'; //Video
 	$exten .= ',txt,rtf';                           //texto plano
 	$exten .= ',gz,gzip,7Z,zip,rar';                //Archivos Comprimidos
+	$exten .= ',kml,kmz';                           //Archivos de mapas
 
 	/****************************************/
 	//Se verifica si el archivo dado esta dentro de los permitidos
@@ -362,10 +363,11 @@ function preview_docs($Root, $File, $ExtraData){
 						$zip->extractTo($path);
 						$zip->close();
 					} else {
+						//nada
 					}
 
 					//indico el nombre del archivo a abrir
-					$FileUbic = 'upload/doc.kml';
+					$FileUbic = DB_SITE_MAIN.'/upload/doc.kml';
 
 				/**************************************/
 				}elseif($Extension=='kml'){

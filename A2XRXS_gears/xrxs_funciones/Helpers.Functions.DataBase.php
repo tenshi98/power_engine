@@ -106,6 +106,14 @@ function db_select_data ($showQuery, $data, $table, $join, $where, $dbConn, $Usu
 			}else{
 				//generar log
 				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+				//se guarda el error en el log
+				error_log('------------------------------------------------------------------------------');
+				error_log('Usuario: '.$Usuario);
+				error_log('Transaccion: '.$Transaccion);
+				error_log('Tarea: '.$Tarea);
+				error_log('Error en la base de datos: '.mysqli_errno($dbConn).': '.mysqli_error($dbConn));
+				error_log('Consulta: '.$query);
+				error_log('------------------------------------------------------------------------------');
 			}
 
 			//devuelvo error
@@ -180,6 +188,14 @@ function db_select_nrows ($showQuery, $data, $table, $join, $where, $dbConn, $Us
 			}else{
 				//generar log
 				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+				//se guarda el error en el log
+				error_log('------------------------------------------------------------------------------');
+				error_log('Usuario: '.$Usuario);
+				error_log('Transaccion: '.$Transaccion);
+				error_log('Tarea: '.$Tarea);
+				error_log('Error en la base de datos: '.mysqli_errno($dbConn).': '.mysqli_error($dbConn));
+				error_log('Consulta: '.$query);
+				error_log('------------------------------------------------------------------------------');
 			}
 
 			//devuelvo error
@@ -248,6 +264,14 @@ function db_delete_data($showQuery, $table, $where, $dbConn, $Usuario, $Transacc
 			}else{
 				//generar log
 				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+				//se guarda el error en el log
+				error_log('------------------------------------------------------------------------------');
+				error_log('Usuario: '.$Usuario);
+				error_log('Transaccion: '.$Transaccion);
+				error_log('Tarea: '.$Tarea);
+				error_log('Error en la base de datos: '.mysqli_errno($dbConn).': '.mysqli_error($dbConn));
+				error_log('Consulta: '.$query);
+				error_log('------------------------------------------------------------------------------');
 			}
 
 			//devuelvo error
@@ -318,6 +342,14 @@ function db_update_data ($showQuery, $data, $table, $where, $dbConn, $Usuario, $
 			}else{
 				//generar log
 				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+				//se guarda el error en el log
+				error_log('------------------------------------------------------------------------------');
+				error_log('Usuario: '.$Usuario);
+				error_log('Transaccion: '.$Transaccion);
+				error_log('Tarea: '.$Tarea);
+				error_log('Error en la base de datos: '.mysqli_errno($dbConn).': '.mysqli_error($dbConn));
+				error_log('Consulta: '.$query);
+				error_log('------------------------------------------------------------------------------');
 			}
 
 			//devuelvo error
@@ -397,6 +429,14 @@ function db_select_array ($showQuery, $data, $table, $join, $filter, $orderby, $
 			}else{
 				//generar log
 				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+				//se guarda el error en el log
+				error_log('------------------------------------------------------------------------------');
+				error_log('Usuario: '.$Usuario);
+				error_log('Transaccion: '.$Transaccion);
+				error_log('Tarea: '.$Tarea);
+				error_log('Error en la base de datos: '.mysqli_errno($dbConn).': '.mysqli_error($dbConn));
+				error_log('Consulta: '.$query);
+				error_log('------------------------------------------------------------------------------');
 			}
 
 			//devuelvo error
@@ -468,6 +508,14 @@ function db_insert_data ($showQuery, $columns, $data, $table, $dbConn, $Usuario,
 			}else{
 				//generar log
 				php_error_log($Usuario, $Transaccion, $Tarea, mysqli_errno($dbConn), mysqli_error($dbConn), $query );
+				//se guarda el error en el log
+				error_log('------------------------------------------------------------------------------');
+				error_log('Usuario: '.$Usuario);
+				error_log('Transaccion: '.$Transaccion);
+				error_log('Tarea: '.$Tarea);
+				error_log('Error en la base de datos: '.mysqli_errno($dbConn).': '.mysqli_error($dbConn));
+				error_log('Consulta: '.$query);
+				error_log('------------------------------------------------------------------------------');
 			}
 
 			//devuelvo error
