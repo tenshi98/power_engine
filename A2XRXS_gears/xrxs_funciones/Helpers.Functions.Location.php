@@ -34,10 +34,10 @@ function obtenerDistancia( $latitude1, $longitude1, $latitude2, $longitude2 ) {
 
     /**********************/
 	//Validaciones
-	if(!isset($latitude1) OR $latitude1=''){     return 'No ha ingresado la latitud de la ubicacion 1';}
-	if(!isset($longitude1) OR $longitude1=''){   return 'No ha ingresado la longitud de la ubicacion 1';}
-	if(!isset($latitude2) OR $latitude2=''){     return 'No ha ingresado la latitud de la ubicacion 2';}
-	if(!isset($longitude2) OR $longitude2=''){   return 'No ha ingresado la longitud de la ubicacion 2';}
+	if(!isset($latitude1) OR $latitude1==''){     return 'No ha ingresado la latitud de la ubicacion 1';}
+	if(!isset($longitude1) OR $longitude1==''){   return 'No ha ingresado la longitud de la ubicacion 1';}
+	if(!isset($latitude2) OR $latitude2==''){     return 'No ha ingresado la latitud de la ubicacion 2';}
+	if(!isset($longitude2) OR $longitude2==''){   return 'No ha ingresado la longitud de la ubicacion 2';}
 
 	/**********************/
 	//Si todo esta ok
@@ -182,8 +182,8 @@ class subpointLocation {
 function getGeocodeData($address, $ApiKey) {
     /**********************/
 	//Validaciones
-	if(!isset($address) OR $address=''){ return 'No ha ingresado una direccion';}
-	if(!isset($ApiKey) OR $ApiKey=''){   return 'No ha ingresado una ApiKey';}
+	if(!isset($address) OR $address==''){ return 'No ha ingresado una direccion';}
+	if(!isset($ApiKey) OR $ApiKey==''){   return 'No ha ingresado una ApiKey';}
 
 	/**********************/
 	//Si todo esta ok
