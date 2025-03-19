@@ -54,6 +54,10 @@ function simpleEncode($simple_string, $passkey) {
     $vowels1 = array("+");
     $vowels2 = array("_");
     $encryption = str_replace($vowels1, $vowels2, $encryption);
+    //verifico si hay que reemplazar algo
+    $vowels1 = array("/");
+    $vowels2 = array("k123k");
+    $encryption = str_replace($vowels1, $vowels2, $encryption);
     //devuelvo
     return $encryption;
 }
@@ -85,6 +89,10 @@ function simpleDecode($string, $passkey) {
     //verifico si hay que reemplazar algo
     $vowels1 = array("_");
     $vowels2 = array(" ");
+    $string = str_replace($vowels1, $vowels2, $string);
+    //verifico si hay que reemplazar algo
+    $vowels1 = array("k123k");
+    $vowels2 = array("/");
     $string = str_replace($vowels1, $vowels2, $string);
     //verifico si hay que reemplazar algo
     $vowels1 = array(" ");
