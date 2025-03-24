@@ -1536,7 +1536,8 @@ class Basic_Inputs{
 
 			/******************************************/
 			//Nuevo Nombre
-			$EXname = str_replace('[]', '', $name).'_'.rand(1, 999);
+			$EXname  = str_replace('[]', '', $name).'_'.rand(1, 999);
+			$EXname2 = str_replace('[]', '', $name);
 
 			/******************************************/
 			//Si existe un valor entregado
@@ -1563,7 +1564,7 @@ class Basic_Inputs{
 			$input ='
 			<div class="field" id="div_'.$EXname.'">
 				<div class="input-group bootstrap-timepicker">
-					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
+					<input placeholder="'.$placeholder.'"  class="form-control timepicker-default '.$EXname2.'" type="text" name="'.$name.'" id="'.$EXname.'" value="'.$valor.'" '.$requerido.' onkeydown="return soloNumeroRealRacional(event)"  >
 					<span class="input-group-addon add-on"><i class="fa fa-subscript" aria-hidden="true"></i></span>
 				</div>
 			</div>';
